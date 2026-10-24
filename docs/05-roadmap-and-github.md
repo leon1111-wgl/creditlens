@@ -53,7 +53,7 @@ profile-entry.md 是待加入个人主页 Featured project 的文案，不覆盖
 
 ## 当前连接与发布状态
 
-账号 leon1111-wgl 与仓库所有权已核实，公开仓库已创建。连接器读取可用，但创建文件返回 integration 403；后续发布使用已授权账号的可用路径，不能把读取权限等同于连接器写入成功。最终发布与 CI 状态以验收记录为准。
+账号 leon1111-wgl 与仓库所有权已核实，公开仓库已创建。连接器读取可用，但创建文件返回 integration 403；本机 Git 仍使用 Leon454323 的凭据，因此推送也被 GitHub 拒绝。已启动目标账号的 Git Credential Manager 登录流程，不读取或复制访问令牌。最终发布与 CI 状态以验收记录为准。
 
 提交遵守 AGENTS.md，使用核验后的用户身份，不添加 AI 作者或 Co-authored-by。
 

@@ -25,7 +25,8 @@
     "workflow": "created, two dispositions, submitted, independent simulated reviewer approved, audit viewed",
     "screenshot": "docs/images/review-workbench.png",
     "export": "button exercised; API tested; browser download file not independently located",
-    "desktop_layout": "not verified"
+    "desktop_layout": "1280px layout, case queue and source reference navigation verified",
+    "desktop_screenshot": "docs/images/review-desktop.png"
   },
   "remote_ci": "not run",
   "github_connection": {
@@ -34,7 +35,7 @@
     "push": true,
     "admin": true
   },
-  "github_publish": "repository created; connector write returned integration 403; source publication pending",
+  "github_publish": "repository created; connector integration write 403; Git old-account push denied; target Git Credential Manager device login pending",
   "version": "0.2.0",
   "official_financial_facts": 20,
   "source_linked_observed_factors": 5,

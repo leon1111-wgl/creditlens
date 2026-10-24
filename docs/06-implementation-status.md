@@ -23,9 +23,9 @@
 
 官方披露演示脚本生成 5 个事件，状态 reviewed、版本 5，事件链与快照一致。身份为 simulated-analyst / simulated-reviewer，不是银行真实用户验收。FinQA 页内检索 Recall@5 为 82.43%，全部标注证据召回 625/883；不是回答准确率。
 
-浏览器已在 482px 窄屏完成建案、两项核查说明、提交、切换复核员、确认和事件记录查看；点击了导出底稿。底稿内容及导出接口经 API 测试验证；未单独确认浏览器下载文件落盘。实测发现快速切换身份与异步提交存在竞争，已修复操作期间禁用身份切换，并在重新鉴权时清空旧数据视图。比较表已补单位列。宽屏布局、完整键盘操作和不同浏览器仍待验证。
+浏览器已在 482px 窄屏完成建案、两项核查说明、提交、切换复核员、确认和事件记录查看；点击了导出底稿。底稿内容及导出接口经 API 测试验证；未单独确认浏览器下载文件落盘。实测发现快速切换身份与异步提交存在竞争，已修复操作期间禁用身份切换，并在重新鉴权时清空旧数据视图。比较表已补单位列。另在 1280px 桌面视口检查了布局、案件队列、财务比较和来源跳转；完整键盘操作及不同浏览器仍待验证。
 
-[真实运行截图](images/review-workbench.png) · [工作流复现输出](../artifacts/workflow-demo.json) · [底稿](../artifacts/review-memo.md) · [机器可读验收摘要](../artifacts/verification-summary.json)
+[桌面截图](images/review-desktop.png) · [窄屏截图](images/review-workbench.png) · [工作流复现输出](../artifacts/workflow-demo.json) · [底稿](../artifacts/review-memo.md) · [机器可读验收摘要](../artifacts/verification-summary.json)
 
 ## 当前限制
 
