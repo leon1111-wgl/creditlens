@@ -1,9 +1,9 @@
 {
-  "id": "fb1d07a102e14ec5a58956f9c4745d25",
+  "id": "760ac9a945ef4e64bb9c39058f315321",
   "tenant": "demo",
   "revision": 5,
   "status": "reviewed",
-  "created_at": "2026-10-24T20:00:57.275265+00:00",
+  "created_at": "2026-10-24T22:07:22.377876+00:00",
   "created_by": "simulated-analyst",
   "pack": {
     "schema_version": 1,
@@ -299,7 +299,7 @@
   "pack_sha256": "c108699fe321af20c85de2fbd84a9c6358a0bae280a231a530b2b5bb4e7e3806",
   "source_status": "user_supplied",
   "analysis": {
-    "rule_version": "cash-debt-review-1",
+    "rule_version": "cash-debt-review-2",
     "as_of": "2025-08-01",
     "period_end": "2025-06-30",
     "metrics": [
@@ -604,6 +604,7 @@
     "blocking_count": 0,
     "limitations": [
       "Rules are illustrative and not fitted to lender outcomes.",
+      "Percentage cash-flow downside scenarios require a positive starting operating cash flow.",
       "A source hash identifies a capture; it does not certify the source or its availability at a historical time.",
       "No model inference, credit rating, PD or lending decision is produced by these calculations."
     ]
@@ -624,80 +625,85 @@
     "actor": "simulated-reviewer",
     "decision": "approve",
     "note": "自动化演示身份：确认规则计算和来源引用流程运行，尚未进行真实银行分析员与复核员验收。",
-    "at": "2026-10-24T20:00:57.296369+00:00"
+    "at": "2026-10-24T22:07:22.399308+00:00"
   },
   "submitted_by": "simulated-analyst",
   "events": [
     {
       "sequence": 1,
-      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "case_id": "760ac9a945ef4e64bb9c39058f315321",
       "tenant": "demo",
       "actor": "simulated-analyst",
       "role": "analyst",
       "action": "created",
       "note": "Source pack and rule output captured",
-      "created_at": "2026-10-24T20:00:57.275265+00:00",
+      "created_at": "2026-10-24T22:07:22.378876+00:00",
       "revision": 1,
-      "snapshot_sha256": "9ce8cba836a4c0b3f36392b21cbf5bf434989e2f153f6738b742ad1eb493acda",
+      "snapshot_sha256": "6fd24bf2d0318b1e045d8edcdea413bfe96c8f95e3ec4c6b172b7ce27f1912a3",
       "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-      "hash": "bdaed0ae365934da8ab73c53909b82a060178e85de3964b4a096c8fd2895fd2e"
+      "hash": "87aaba495e730197db806fb8e6c611b48cb808c3a6f8b84c23a9a4fefc144093"
     },
     {
       "sequence": 2,
-      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "case_id": "760ac9a945ef4e64bb9c39058f315321",
       "tenant": "demo",
       "actor": "simulated-analyst",
       "role": "analyst",
       "action": "disposition",
       "note": "演示记录：已核对官网表格，现金可用性、租赁和资本承诺需补充原文；本演示不作授信结论。",
-      "created_at": "2026-10-24T20:00:57.280528+00:00",
+      "created_at": "2026-10-24T22:07:22.383522+00:00",
       "revision": 2,
-      "snapshot_sha256": "a933243d3e487ace21f08c133b6d37dea592c7b3bdc10570b48beacd01ad2102",
-      "previous_hash": "bdaed0ae365934da8ab73c53909b82a060178e85de3964b4a096c8fd2895fd2e",
-      "hash": "927a6acb4f55d353fe56ce6bbe8af916c8514ac96c1bb396826197a4d3d812e2"
+      "snapshot_sha256": "eb7ea999548568c89811bc9316e030a8bf4a451569220f975b479e4ab1fc100c",
+      "previous_hash": "87aaba495e730197db806fb8e6c611b48cb808c3a6f8b84c23a9a4fefc144093",
+      "hash": "83e598fea6d3bda43976a043b83b84a05a85c1ca23e98bb32c90aa6b4493b9ee"
     },
     {
       "sequence": 3,
-      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "case_id": "760ac9a945ef4e64bb9c39058f315321",
       "tenant": "demo",
       "actor": "simulated-analyst",
       "role": "analyst",
       "action": "disposition",
       "note": "演示记录：已核对官网表格，现金可用性、租赁和资本承诺需补充原文；本演示不作授信结论。",
-      "created_at": "2026-10-24T20:00:57.286546+00:00",
+      "created_at": "2026-10-24T22:07:22.388557+00:00",
       "revision": 3,
-      "snapshot_sha256": "ddfea0e1effc4ec70d45701b8a04b28284fd045dd09c48cf1ca499ca11655bba",
-      "previous_hash": "927a6acb4f55d353fe56ce6bbe8af916c8514ac96c1bb396826197a4d3d812e2",
-      "hash": "92268d8ae05047a4095e47ca94f3716041f471ecacb7f35bdb5391bb237eb44b"
+      "snapshot_sha256": "5da75b15e3b305b6f89f86ffe9c0ccdb544d85198948b751a8ca3e66683c92d2",
+      "previous_hash": "83e598fea6d3bda43976a043b83b84a05a85c1ca23e98bb32c90aa6b4493b9ee",
+      "hash": "56ff76997dde821d35897bdc49060a1bfbe705481892c0a3be5cfbe3de6f1642"
     },
     {
       "sequence": 4,
-      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "case_id": "760ac9a945ef4e64bb9c39058f315321",
       "tenant": "demo",
       "actor": "simulated-analyst",
       "role": "analyst",
       "action": "submit",
       "note": "",
-      "created_at": "2026-10-24T20:00:57.291749+00:00",
+      "created_at": "2026-10-24T22:07:22.394139+00:00",
       "revision": 4,
-      "snapshot_sha256": "868bb3fbc0ef9f5ca24e76f3bafb8ec1c1cb2f617724ffe38acdac2d8cf487d9",
-      "previous_hash": "92268d8ae05047a4095e47ca94f3716041f471ecacb7f35bdb5391bb237eb44b",
-      "hash": "616c2819679bbab984695cc94929afe24e604ddb961bebf951d7b46b4d42b6c2"
+      "snapshot_sha256": "b8cc7083331a05c8a3ebac55d82b8402d22c571dfa338cd1f39daffc4e26aa7f",
+      "previous_hash": "56ff76997dde821d35897bdc49060a1bfbe705481892c0a3be5cfbe3de6f1642",
+      "hash": "cb36d5ab547a49774fcf5cc9f49e759b264bcd9de5d37a2dd51172d04673f3a6"
     },
     {
       "sequence": 5,
-      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "case_id": "760ac9a945ef4e64bb9c39058f315321",
       "tenant": "demo",
       "actor": "simulated-reviewer",
       "role": "reviewer",
       "action": "approve",
       "note": "自动化演示身份：确认规则计算和来源引用流程运行，尚未进行真实银行分析员与复核员验收。",
-      "created_at": "2026-10-24T20:00:57.297588+00:00",
+      "created_at": "2026-10-24T22:07:22.399832+00:00",
       "revision": 5,
-      "snapshot_sha256": "4233ed4713f29861a3e73fa4013e11b23f080a2b2f0eafa18dd4c7ace8c1dd5f",
-      "previous_hash": "616c2819679bbab984695cc94929afe24e604ddb961bebf951d7b46b4d42b6c2",
-      "hash": "df403876f332ff60c47ffac0219d450ae3a4a84a68b833da80c53a6e54adcc8b"
+      "snapshot_sha256": "4b5656aecee38a1b1aa4c0b452eab330944df44b94a4ccda62a6b550c2223068",
+      "previous_hash": "cb36d5ab547a49774fcf5cc9f49e759b264bcd9de5d37a2dd51172d04673f3a6",
+      "hash": "2002f08a1c5bb9b4c4f638730d5989d8aa07da0df513c286bead1111445df966"
     }
   ],
-  "event_integrity_valid": true
+  "event_integrity_valid": true,
+  "rule_status": {
+    "recorded": "cash-debt-review-2",
+    "current": "cash-debt-review-2",
+    "outdated": false
+  }
 }

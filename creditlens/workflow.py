@@ -12,7 +12,7 @@ import sqlite3
 import uuid
 
 from fastapi import HTTPException, Request
-from .diligence import CasePack, analyze_pack, digest
+from .diligence import CasePack, analyze_pack, digest, RULE_VERSION
 
 
 @dataclass(frozen=True)
@@ -137,7 +137,9 @@ class WorkflowService:
         with self.db() as db:
             data = self._load(db, case_id, actor)
             events = [json.loads(r[0]) for r in db.execute("SELECT payload FROM events WHERE case_id=? ORDER BY sequence", (case_id,))]
-        return {**data, "events": events, "event_integrity_valid": self.integrity(data, events)}
+        return {**data, "events": events, "event_integrity_valid": self.integrity(data, events),
+                "rule_status": {"recorded": data["analysis"].get("rule_version"), "current": RULE_VERSION,
+                                "outdated": data["analysis"].get("rule_version") != RULE_VERSION}}
 
     @staticmethod
     def integrity(data, events):
@@ -157,6 +159,8 @@ class WorkflowService:
             events = [json.loads(r[0]) for r in db.execute("SELECT payload FROM events WHERE case_id=? ORDER BY sequence", (case_id,))]
             if not self.integrity(data, events):
                 raise HTTPException(409, "Event or snapshot integrity failed; review actions are blocked")
+            if data["analysis"].get("rule_version") != RULE_VERSION:
+                raise HTTPException(409, "Recorded rules are outdated; create a new review case from the verified source pack")
             if data["revision"] != revision:
                 raise HTTPException(409, "Revision changed. Refresh before editing.")
             if action == "disposition":
@@ -202,6 +206,8 @@ def render_memo(data):
     lines = ["# " + clean(data["pack"]["company"]) + " 信用研究复核底稿", "",
              "状态：" + data["status"] + "；版本：" + str(data["revision"]),
              "截止日期：" + data["analysis"]["as_of"], "",
+             "计算规则：" + str(data["analysis"].get("rule_version", "unknown")) + "；当前规则：" + RULE_VERSION,
+             "旧规则历史底稿：请按当前规则重新建案核查。" if data["analysis"].get("rule_version") != RULE_VERSION else "规则版本检查：当前版本。", "",
              "本底稿由确定性规则生成；复核确认仅表示底稿检查完成，不表示授信审批或投资建议。", "",
              "## 指标与计算", "", "| 指标 | 值 | 单位 | 公式 | 事实引用 |", "|---|---:|---|---|---|"]
     for m in data["analysis"]["metrics"]:

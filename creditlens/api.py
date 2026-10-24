@@ -13,7 +13,8 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from .service import ResearchService
-from .diligence import CasePack
+from .diligence import CasePack, RULE_VERSION
+from . import __version__
 from .workflow import AccessControl, Actor, WorkflowService, render_memo
 from .planner import LocalPlanner
 
@@ -83,7 +84,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         application.state.workflow = WorkflowService(db_path.with_name("workflow.sqlite"))
         yield
 
-    application = FastAPI(title="CreditLens", version="0.2.0",
+    application = FastAPI(title="CreditLens", version=__version__,
                           description="Source-linked credit review workflow and benchmark laboratory.",
                           lifespan=lifespan)
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "localhost", "testserver"])
@@ -125,7 +126,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     @application.get("/health")
     def health():
         svc = application.state.service
-        return {"status": "ok", "version": "0.2.0", "cases": len(svc.cases) if svc else 0,
+        return {"status": "ok", "version": __version__, "rule_version": RULE_VERSION, "cases": len(svc.cases) if svc else 0,
                 "mode": "public_benchmark_local", "auth_mode": application.state.access.mode,
                 "dataset_sha256": svc.dataset_sha256 if svc else None}
 

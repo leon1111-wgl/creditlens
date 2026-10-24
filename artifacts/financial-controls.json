@@ -1,0 +1,523 @@
+{
+  "generated_at": "2026-10-24T22:07:22.046833+00:00",
+  "suite_version": "financial-controls-1",
+  "implementation_rule_version": "cash-debt-review-2",
+  "official_reference_pack_sha256": "c108699fe321af20c85de2fbd84a9c6358a0bae280a231a530b2b5bb4e7e3806",
+  "probes": 15,
+  "passed": 15,
+  "failed": 0,
+  "scope": "One official reference plus deliberate synthetic perturbations; no model inference or population-level accuracy estimate.",
+  "cases": [
+    {
+      "id": "official_reference",
+      "purpose": "Known source-linked arithmetic remains unchanged.",
+      "input_kind": "official_reference",
+      "input_sha256": "c108699fe321af20c85de2fbd84a9c6358a0bae280a231a530b2b5bb4e7e3806",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [],
+        "absent_comparisons": [],
+        "blocking": false
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [
+          "capex_intensity",
+          "cash_conversion",
+          "current_ratio",
+          "fcf",
+          "liquidity",
+          "stress_fcf"
+        ],
+        "comparison_metrics": [
+          "capex",
+          "cfo",
+          "current_assets",
+          "current_debt",
+          "current_liabilities",
+          "liquid_assets",
+          "long_debt",
+          "net_income",
+          "revenue",
+          "short_debt"
+        ],
+        "blocking_count": 0,
+        "issue_ids": [
+          "capex_pressure",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "missing_capex",
+      "purpose": "Missing data must not silently become zero.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "25789acbb67207e42aa475eec17806df2a3e888663083c9f4f25991f17b83789",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [
+          "fcf",
+          "stress_fcf"
+        ],
+        "absent_comparisons": [],
+        "blocking": true
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [
+          "cash_conversion",
+          "current_ratio",
+          "liquidity"
+        ],
+        "comparison_metrics": [
+          "cfo",
+          "current_assets",
+          "current_debt",
+          "current_liabilities",
+          "liquid_assets",
+          "long_debt",
+          "net_income",
+          "revenue",
+          "short_debt"
+        ],
+        "blocking_count": 1,
+        "issue_ids": [
+          "missing_capex",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "mixed_currency",
+      "purpose": "Do not subtract amounts denominated in different currencies.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "cd7783a2ada6c8a9fdba7697d78cbfc4284e21f3a467718960e1ca02346e5c44",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [
+          "fcf",
+          "stress_fcf"
+        ],
+        "absent_comparisons": [],
+        "blocking": true
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [
+          "cash_conversion",
+          "current_ratio",
+          "liquidity"
+        ],
+        "comparison_metrics": [
+          "cfo",
+          "current_assets",
+          "current_debt",
+          "current_liabilities",
+          "liquid_assets",
+          "long_debt",
+          "net_income",
+          "revenue",
+          "short_debt"
+        ],
+        "blocking_count": 3,
+        "issue_ids": [
+          "basis_fcf",
+          "basis_capex_intensity",
+          "basis_stress_fcf",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "mixed_period",
+      "purpose": "Do not subtract six-month spending from a full-year cash flow.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "78d0459407e7a0bbacbc81801d440e5bf72c9dcfd95c5be2613f8a15122f97c4",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [
+          "fcf",
+          "stress_fcf"
+        ],
+        "absent_comparisons": [],
+        "blocking": true
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [
+          "cash_conversion",
+          "current_ratio",
+          "liquidity"
+        ],
+        "comparison_metrics": [
+          "cfo",
+          "current_assets",
+          "current_debt",
+          "current_liabilities",
+          "liquid_assets",
+          "long_debt",
+          "net_income",
+          "revenue",
+          "short_debt"
+        ],
+        "blocking_count": 3,
+        "issue_ids": [
+          "basis_fcf",
+          "basis_capex_intensity",
+          "basis_stress_fcf",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "future_disclosure",
+      "purpose": "A report unavailable at the cutoff contributes no metrics.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "c108699fe321af20c85de2fbd84a9c6358a0bae280a231a530b2b5bb4e7e3806",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [
+          "liquidity",
+          "cash_conversion",
+          "fcf",
+          "capex_intensity",
+          "current_ratio",
+          "stress_fcf"
+        ],
+        "absent_comparisons": [],
+        "blocking": true
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [],
+        "comparison_metrics": [],
+        "blocking_count": 7,
+        "issue_ids": [
+          "no_evidence",
+          "missing_capex",
+          "missing_cfo",
+          "missing_current_debt",
+          "missing_liquid_assets",
+          "missing_net_income",
+          "missing_short_debt",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "conflicting_current",
+      "purpose": "An ambiguous current cash flow must not leak through the comparison table.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "b18fc6e0ff0c5ffca2b75ed725a341fb2ab5569525989c8c5f9e8eb2d5d055cf",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [
+          "fcf",
+          "stress_fcf"
+        ],
+        "absent_comparisons": [
+          "cfo"
+        ],
+        "blocking": true
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [
+          "current_ratio",
+          "liquidity"
+        ],
+        "comparison_metrics": [
+          "capex",
+          "current_assets",
+          "current_debt",
+          "current_liabilities",
+          "liquid_assets",
+          "long_debt",
+          "net_income",
+          "revenue",
+          "short_debt"
+        ],
+        "blocking_count": 2,
+        "issue_ids": [
+          "conflict_cfo",
+          "missing_cfo",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "conflicting_prior",
+      "purpose": "An ambiguous prior cash flow cannot produce a growth comparison.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "92ad6a8be055b197abd10934e8fe09f0bfe30de40caafffda0976f689346a54a",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [],
+        "absent_comparisons": [
+          "cfo"
+        ],
+        "blocking": false
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [
+          "capex_intensity",
+          "cash_conversion",
+          "current_ratio",
+          "fcf",
+          "liquidity",
+          "stress_fcf"
+        ],
+        "comparison_metrics": [
+          "capex",
+          "current_assets",
+          "current_debt",
+          "current_liabilities",
+          "liquid_assets",
+          "long_debt",
+          "net_income",
+          "revenue",
+          "short_debt"
+        ],
+        "blocking_count": 0,
+        "issue_ids": [
+          "capex_pressure",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "negative_cfo_stress",
+      "purpose": "A cash-flow downside percentage must not improve an already negative cash flow.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "08a50843f26f3bcc1ff802244373489b6ec24b2ef36240fb959f4b85ee1e5c2c",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [
+          "capex_intensity",
+          "stress_fcf"
+        ],
+        "absent_comparisons": [],
+        "blocking": true
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [
+          "cash_conversion",
+          "current_ratio",
+          "fcf",
+          "liquidity"
+        ],
+        "comparison_metrics": [
+          "capex",
+          "cfo",
+          "current_assets",
+          "current_debt",
+          "current_liabilities",
+          "liquid_assets",
+          "long_debt",
+          "net_income",
+          "revenue",
+          "short_debt"
+        ],
+        "blocking_count": 2,
+        "issue_ids": [
+          "undefined_capex_intensity",
+          "undefined_stress_fcf",
+          "cash_conversion_review",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "zero_cfo_stress",
+      "purpose": "A zero baseline does not define a useful percentage downside scenario.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "2dd917bf351e43833e5f6b56f32a6934ded97ad7a79d5576b72eb962f44e1935",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [
+          "capex_intensity",
+          "stress_fcf"
+        ],
+        "absent_comparisons": [],
+        "blocking": true
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [
+          "cash_conversion",
+          "current_ratio",
+          "fcf",
+          "liquidity"
+        ],
+        "comparison_metrics": [
+          "capex",
+          "cfo",
+          "current_assets",
+          "current_debt",
+          "current_liabilities",
+          "liquid_assets",
+          "long_debt",
+          "net_income",
+          "revenue",
+          "short_debt"
+        ],
+        "blocking_count": 2,
+        "issue_ids": [
+          "undefined_capex_intensity",
+          "undefined_stress_fcf",
+          "cash_conversion_review",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "negative_net_income",
+      "purpose": "A loss must not be described with the positive-profit cash conversion rule.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "f5ee6c53f9871f23f7e39e244826437407f8e2aa471506231c9ab2cee953ec60",
+      "passed": true,
+      "expected": {
+        "schema_rejection": false,
+        "absent_metrics": [
+          "cash_conversion"
+        ],
+        "absent_comparisons": [],
+        "blocking": true
+      },
+      "observed": {
+        "outcome": "analyzed",
+        "metric_ids": [
+          "capex_intensity",
+          "current_ratio",
+          "fcf",
+          "liquidity",
+          "stress_fcf"
+        ],
+        "comparison_metrics": [
+          "capex",
+          "cfo",
+          "current_assets",
+          "current_debt",
+          "current_liabilities",
+          "liquid_assets",
+          "long_debt",
+          "net_income",
+          "revenue",
+          "short_debt"
+        ],
+        "blocking_count": 1,
+        "issue_ids": [
+          "undefined_cash_conversion",
+          "capex_pressure",
+          "scope_review"
+        ]
+      }
+    },
+    {
+      "id": "raw_normalized_mismatch",
+      "purpose": "A normalized number must agree with its supplied displayed value.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "1ed281b4d0c1b84e51f3251a3da244bcfb190fea9fe07bc6ba9509dc15110647",
+      "passed": true,
+      "expected": {
+        "schema_rejection": true,
+        "absent_metrics": [],
+        "absent_comparisons": [],
+        "blocking": false
+      },
+      "observed": {
+        "outcome": "schema_rejected",
+        "errors": [
+          "value_error"
+        ]
+      }
+    },
+    {
+      "id": "malformed_grouping",
+      "purpose": "Broken OCR digit grouping must not be silently normalized.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "cb4892b8b899d256f9abf185916385e8fe5a69b98622ff514bd15d711fd05fef",
+      "passed": true,
+      "expected": {
+        "schema_rejection": true,
+        "absent_metrics": [],
+        "absent_comparisons": [],
+        "blocking": false
+      },
+      "observed": {
+        "outcome": "schema_rejected",
+        "errors": [
+          "value_error"
+        ]
+      }
+    },
+    {
+      "id": "wrong_sign_transform",
+      "purpose": "Absolute cash-outflow normalization cannot be applied to profit.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "1e2dbc0fcd727b946f75dd97b8e39b304b0ebe18e1d5a346c96fb30685c2cd34",
+      "passed": true,
+      "expected": {
+        "schema_rejection": true,
+        "absent_metrics": [],
+        "absent_comparisons": [],
+        "blocking": false
+      },
+      "observed": {
+        "outcome": "schema_rejected",
+        "errors": [
+          "value_error"
+        ]
+      }
+    },
+    {
+      "id": "unknown_source",
+      "purpose": "Every fact must reference a registered source.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "7a8129522fdb9446abca8335c7731c4982d0cfc0ac7dc6031ce838191e295990",
+      "passed": true,
+      "expected": {
+        "schema_rejection": true,
+        "absent_metrics": [],
+        "absent_comparisons": [],
+        "blocking": false
+      },
+      "observed": {
+        "outcome": "schema_rejected",
+        "errors": [
+          "value_error"
+        ]
+      }
+    },
+    {
+      "id": "impossible_publication",
+      "purpose": "The disclosed period cannot end after its source publication date.",
+      "input_kind": "synthetic_counterfactual",
+      "input_sha256": "76211ecc1b9fac04010fb7e695e17722bb0430d5d0ef80de579b6d89610f9e61",
+      "passed": true,
+      "expected": {
+        "schema_rejection": true,
+        "absent_metrics": [],
+        "absent_comparisons": [],
+        "blocking": false
+      },
+      "observed": {
+        "outcome": "schema_rejected",
+        "errors": [
+          "value_error"
+        ]
+      }
+    }
+  ]
+}

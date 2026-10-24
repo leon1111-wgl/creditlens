@@ -6,6 +6,30 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, model_validator
 import hashlib
 import json
+import re
+
+
+RULE_VERSION = "cash-debt-review-2"
+
+
+def displayed_amount(raw: str) -> Decimal:
+    """Parse the limited amount notation supported by the fact-pack contract.
+
+    This checks internal consistency, not the authenticity of the source document.
+    Ambiguous OCR, exponents, percent signs and broken comma grouping fail closed.
+    """
+    text = raw.strip()
+    if text.startswith(("$", "¥", "￥")):
+        text = text[1:].strip()
+    parenthesized = text.startswith("(") and text.endswith(")")
+    if parenthesized:
+        text = text[1:-1].strip()
+        if text.startswith(("-", "+")):
+            raise ValueError("A parenthesized amount must not also contain a sign")
+    if not re.fullmatch(r"[+-]?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?", text):
+        raise ValueError("Ambiguous displayed amount; verify the original cell")
+    value = Decimal(text.replace(",", ""))
+    return -value if parenthesized else value
 
 
 class StrictModel(BaseModel):
@@ -36,6 +60,13 @@ class Fact(StrictModel):
 
     @model_validator(mode="after")
     def valid_period(self):
+        original = displayed_amount(self.raw_value)
+        if self.transformation == "absolute_cash_outflow":
+            if self.metric != "capex":
+                raise ValueError("Absolute cash-outflow normalization is only supported for capex")
+            original = abs(original)
+        if original != self.value:
+            raise ValueError("Normalized value disagrees with the supplied displayed amount")
         flow = self.metric in {"cfo", "capex", "net_income", "revenue"}
         if flow != (self.period_start is not None):
             raise ValueError("Flow facts need a start date; balance-sheet facts are point-in-time")
@@ -75,6 +106,8 @@ def digest(value) -> str:
 
 def analyze_pack(pack: CasePack, as_of: date, stress_pct: int = 0) -> dict:
     """Fixed, disclosed rules; no learned risk score and no lender calibration."""
+    if type(stress_pct) is not int or not 0 <= stress_pct <= 80:
+        raise ValueError("stress_pct must be an integer between 0 and 80")
     sources = {s.id: s for s in pack.sources}
     available = [f for f in pack.facts if sources[f.source_id].published_at <= as_of]
     latest = max((f.period_end for f in available), default=None)
@@ -136,7 +169,7 @@ def analyze_pack(pack: CasePack, as_of: date, stress_pct: int = 0) -> dict:
     if stress_pct:
         add_metric("stress_fcf", "经营现金流压力情景", ["cfo", "capex"],
                    f"cfo * (1 - {stress_pct}/100) - capex",
-                   lambda c, x: c * (1 - Decimal(stress_pct) / 100) - x, "amount")
+                   lambda c, x: c * (1 - Decimal(stress_pct) / 100) - x if c > 0 else None, "amount")
     computed = {m["id"]: Decimal(m["value"]) for m in metrics}
     if computed.get("capex_intensity", Decimal(0)) > Decimal("0.4"):
         issue("capex_pressure", "资本开支占用较多经营现金流",
@@ -152,7 +185,7 @@ def analyze_pack(pack: CasePack, as_of: date, stress_pct: int = 0) -> dict:
           "本口径含现金、现金等价物和短期投资；债务覆盖不含全部租赁、担保、资本承诺和受限资金调整。公开披露不足以直接作授信决策。",
           [f for f in current if f.metric in {"liquid_assets", "short_debt", "current_debt"}])
     comparison = []
-    for f in current:
+    for f in usable.values():
         prior = [p for p in available if p.metric == f.metric and p.period_end < f.period_end]
         if not prior:
             continue
@@ -169,10 +202,11 @@ def analyze_pack(pack: CasePack, as_of: date, stress_pct: int = 0) -> dict:
                                "prior": str(p.value), "unit": f.unit,
                                "growth": str((f.value-p.value)/abs(p.value)) if p.value != 0 else None,
                                "fact_ids": [p.id, f.id]})
-    return {"rule_version": "cash-debt-review-1", "as_of": as_of.isoformat(),
+    return {"rule_version": RULE_VERSION, "as_of": as_of.isoformat(),
             "period_end": latest.isoformat() if latest else None, "metrics": metrics,
             "issues": issues, "comparison": comparison, "excluded_future_facts": len(pack.facts)-len(available),
             "stress_pct": stress_pct, "blocking_count": sum(i["severity"] == "blocking" for i in issues),
             "limitations": ["Rules are illustrative and not fitted to lender outcomes.",
+                            "Percentage cash-flow downside scenarios require a positive starting operating cash flow.",
                             "A source hash identifies a capture; it does not certify the source or its availability at a historical time.",
                             "No model inference, credit rating, PD or lending decision is produced by these calculations."]}

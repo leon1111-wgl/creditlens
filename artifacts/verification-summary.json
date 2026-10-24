@@ -3,7 +3,7 @@
   "timezone": "Asia/Shanghai",
   "python": "3.12.14",
   "unit_and_api_tests": {
-    "run": 48,
+    "run": 56,
     "failures": 0,
     "errors": 0
   },
@@ -11,9 +11,12 @@
   "local_markdown_file_links": "passed",
   "live_http_health": {
     "status": "ok",
+    "version": "0.2.1",
+    "rule_version": "cash-debt-review-2",
     "cases": 883,
-    "version": "0.2.0",
-    "auth_mode": "demo"
+    "mode": "public_benchmark_local",
+    "auth_mode": "demo",
+    "dataset_sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51"
   },
   "live_http_calculation": {
     "operation": "637 / 5.0",
@@ -26,7 +29,9 @@
     "screenshot": "docs/images/review-workbench.png",
     "export": "button exercised; API tested; browser download file not independently located",
     "desktop_layout": "1280px layout, case queue and source reference navigation verified",
-    "desktop_screenshot": "docs/images/review-desktop.png"
+    "desktop_screenshot": "docs/images/review-desktop.png",
+    "tested_version": "0.2.0",
+    "current_iteration": "JavaScript syntax checked only; new notices and disabled-state interactions not browser-tested"
   },
   "remote_ci": "not run",
   "github_connection": {
@@ -35,12 +40,32 @@
     "push": true,
     "admin": true
   },
-  "github_publish": "repository created; connector integration write 403; Git old-account push denied; target Git Credential Manager device login pending",
-  "version": "0.2.0",
+  "github_publish": "repository created but remote has no heads; connector integration write 403; local credential inventory only Leon454323; previous device login no longer running; no new auth started",
+  "version": "0.2.1",
   "official_financial_facts": 20,
   "source_linked_observed_factors": 5,
   "real_model_evaluation": "not run",
   "model_transport_tests": "passed with mock responses",
   "prediction_training": "not run; no outcome labels",
-  "docker": "not installed; image build and run unverified"
+  "docker": "not installed; image build and run unverified",
+  "rule_upgrade_http": {
+    "readable": true,
+    "mutation_status": 409,
+    "events_unchanged": true,
+    "memo_old_rule_notice": true
+  },
+  "current_official_case_http": {
+    "created": true,
+    "current_rule": true,
+    "event_integrity_valid": true,
+    "stress_fcf": "44378.6"
+  },
+  "financial_controls": {
+    "probes": 15,
+    "before_passed": 9,
+    "after_passed": 15,
+    "before_implementation": "03d55b4",
+    "after_rule_version": "cash-debt-review-2",
+    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 56 tests; not model accuracy"
+  }
 }

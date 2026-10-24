@@ -50,7 +50,7 @@ class FactTests(unittest.TestCase):
     def test_conflicting_fact_cannot_be_silently_selected(self):
         pack = copy.deepcopy(PACK)
         f = copy.deepcopy(next(f for f in pack["facts"] if f["id"] == "cfo-2025"))
-        f.update(id="conflicting-cfo", value="1")
+        f.update(id="conflicting-cfo", value="1", raw_value="1")
         pack["facts"].append(f)
         r = analyze_pack(CasePack.model_validate(pack), date(2025, 8, 1))
         self.assertIn("conflict_cfo", [i["id"] for i in r["issues"]])
@@ -61,6 +61,7 @@ class FactTests(unittest.TestCase):
         for f in pack["facts"]:
             if f["id"] in {"cfo-2025", "net_income-2025", "current_debt-2025"}:
                 f["value"] = "0"
+                f["raw_value"] = "0"
         r = analyze_pack(CasePack.model_validate(pack), date(2025, 8, 1))
         self.assertNotIn("liquidity", [i["id"] for i in r["metrics"]])
         self.assertNotIn("cash_conversion", [i["id"] for i in r["metrics"]])
