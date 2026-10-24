@@ -1,0 +1,703 @@
+{
+  "id": "fb1d07a102e14ec5a58956f9c4745d25",
+  "tenant": "demo",
+  "revision": 5,
+  "status": "reviewed",
+  "created_at": "2026-10-24T20:00:57.275265+00:00",
+  "created_by": "simulated-analyst",
+  "pack": {
+    "schema_version": 1,
+    "entity_id": "MSFT",
+    "company": "Microsoft Corporation",
+    "title": "FY2025 现金流与债务复核",
+    "sources": [
+      {
+        "id": "msft-fy25-balance-sheets",
+        "title": "Microsoft FY25 Q4 / balance-sheets",
+        "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/balance-sheets",
+        "published_at": "2025-07-30",
+        "sha256": "1f915adbdcbc36f265f59ecce7a2f7cccf842204023dbdd694648aa7bab1e886"
+      },
+      {
+        "id": "msft-fy25-cash-flows",
+        "title": "Microsoft FY25 Q4 / cash-flows",
+        "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/cash-flows",
+        "published_at": "2025-07-30",
+        "sha256": "163848f1431c763ca94e7e517b23e68aa48acf1b4b80f376d59c24a0951582c3"
+      },
+      {
+        "id": "msft-fy25-income-statements",
+        "title": "Microsoft FY25 Q4 / income-statements",
+        "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/income-statements",
+        "published_at": "2025-07-30",
+        "sha256": "54a83af8f066c7a23b5b836f1cf501e8e656c7f6a3d7286156baaf4017806b0e"
+      }
+    ],
+    "facts": [
+      {
+        "id": "liquid_assets-2025",
+        "metric": "liquid_assets",
+        "label": "现金、现金等价物与短期投资",
+        "value": "94565",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:CashCashEquivalentsAndShortTermInvestments / FY2025",
+        "raw_value": "94,565",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "liquid_assets-2024",
+        "metric": "liquid_assets",
+        "label": "现金、现金等价物与短期投资",
+        "value": "75543",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:CashCashEquivalentsAndShortTermInvestments / FY2024",
+        "raw_value": "75,543",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "current_assets-2025",
+        "metric": "current_assets",
+        "label": "流动资产",
+        "value": "191131",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:AssetsCurrent / FY2025",
+        "raw_value": "191,131",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "current_assets-2024",
+        "metric": "current_assets",
+        "label": "流动资产",
+        "value": "159734",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:AssetsCurrent / FY2024",
+        "raw_value": "159,734",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "short_debt-2025",
+        "metric": "short_debt",
+        "label": "短期债务",
+        "value": "0",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:CommercialPaper / FY2025",
+        "raw_value": "0",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "short_debt-2024",
+        "metric": "short_debt",
+        "label": "短期债务",
+        "value": "6693",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:CommercialPaper / FY2024",
+        "raw_value": "6,693",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "current_debt-2025",
+        "metric": "current_debt",
+        "label": "一年内到期长期债务",
+        "value": "2999",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:LongTermDebtCurrent / FY2025",
+        "raw_value": "2,999",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "current_debt-2024",
+        "metric": "current_debt",
+        "label": "一年内到期长期债务",
+        "value": "2249",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:LongTermDebtCurrent / FY2024",
+        "raw_value": "2,249",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "current_liabilities-2025",
+        "metric": "current_liabilities",
+        "label": "流动负债",
+        "value": "141218",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:LiabilitiesCurrent / FY2025",
+        "raw_value": "141,218",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "current_liabilities-2024",
+        "metric": "current_liabilities",
+        "label": "流动负债",
+        "value": "125286",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:LiabilitiesCurrent / FY2024",
+        "raw_value": "125,286",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "long_debt-2025",
+        "metric": "long_debt",
+        "label": "长期债务",
+        "value": "40152",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:LongTermDebtNoncurrent / FY2025",
+        "raw_value": "40,152",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "long_debt-2024",
+        "metric": "long_debt",
+        "label": "长期债务",
+        "value": "42688",
+        "unit": "USD_million",
+        "period_start": null,
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-balance-sheets",
+        "locator": "us-gaap:LongTermDebtNoncurrent / FY2024",
+        "raw_value": "42,688",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "net_income-2025",
+        "metric": "net_income",
+        "label": "净利润",
+        "value": "101832",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-cash-flows",
+        "locator": "us-gaap:NetIncomeLoss / FY2025",
+        "raw_value": "$ 101,832",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "net_income-2024",
+        "metric": "net_income",
+        "label": "净利润",
+        "value": "88136",
+        "unit": "USD_million",
+        "period_start": "2023-07-01",
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-cash-flows",
+        "locator": "us-gaap:NetIncomeLoss / FY2024",
+        "raw_value": "$ 88,136",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "cfo-2025",
+        "metric": "cfo",
+        "label": "经营活动现金流",
+        "value": "136162",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-cash-flows",
+        "locator": "us-gaap:NetCashProvidedByUsedInOperatingActivities / FY2025",
+        "raw_value": "136,162",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "cfo-2024",
+        "metric": "cfo",
+        "label": "经营活动现金流",
+        "value": "118548",
+        "unit": "USD_million",
+        "period_start": "2023-07-01",
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-cash-flows",
+        "locator": "us-gaap:NetCashProvidedByUsedInOperatingActivities / FY2024",
+        "raw_value": "118,548",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "capex-2025",
+        "metric": "capex",
+        "label": "固定资产购建现金流出",
+        "value": "64551",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-cash-flows",
+        "locator": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment / FY2025",
+        "raw_value": "(64,551)",
+        "transformation": "absolute_cash_outflow"
+      },
+      {
+        "id": "capex-2024",
+        "metric": "capex",
+        "label": "固定资产购建现金流出",
+        "value": "44477",
+        "unit": "USD_million",
+        "period_start": "2023-07-01",
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-cash-flows",
+        "locator": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment / FY2024",
+        "raw_value": "(44,477)",
+        "transformation": "absolute_cash_outflow"
+      },
+      {
+        "id": "revenue-2025",
+        "metric": "revenue",
+        "label": "营业收入",
+        "value": "281724",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-income-statements",
+        "locator": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax / FY2025",
+        "raw_value": "281,724",
+        "transformation": "displayed_magnitude"
+      },
+      {
+        "id": "revenue-2024",
+        "metric": "revenue",
+        "label": "营业收入",
+        "value": "245122",
+        "unit": "USD_million",
+        "period_start": "2023-07-01",
+        "period_end": "2024-06-30",
+        "source_id": "msft-fy25-income-statements",
+        "locator": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax / FY2024",
+        "raw_value": "245,122",
+        "transformation": "displayed_magnitude"
+      }
+    ]
+  },
+  "pack_sha256": "c108699fe321af20c85de2fbd84a9c6358a0bae280a231a530b2b5bb4e7e3806",
+  "source_status": "user_supplied",
+  "analysis": {
+    "rule_version": "cash-debt-review-1",
+    "as_of": "2025-08-01",
+    "period_end": "2025-06-30",
+    "metrics": [
+      {
+        "id": "liquidity",
+        "title": "流动资金 / 短期债务",
+        "value": "31.53217739246415471823941314",
+        "kind": "ratio",
+        "unit": "ratio",
+        "formula": "liquid_assets / (short_debt + current_debt)",
+        "fact_ids": [
+          "liquid_assets-2025",
+          "short_debt-2025",
+          "current_debt-2025"
+        ],
+        "operands": [
+          {
+            "id": "liquid_assets-2025",
+            "value": "94565",
+            "unit": "USD_million"
+          },
+          {
+            "id": "short_debt-2025",
+            "value": "0",
+            "unit": "USD_million"
+          },
+          {
+            "id": "current_debt-2025",
+            "value": "2999",
+            "unit": "USD_million"
+          }
+        ]
+      },
+      {
+        "id": "cash_conversion",
+        "title": "经营现金流 / 净利润",
+        "value": "1.337123890329169612695419907",
+        "kind": "ratio",
+        "unit": "ratio",
+        "formula": "cfo / net_income",
+        "fact_ids": [
+          "cfo-2025",
+          "net_income-2025"
+        ],
+        "operands": [
+          {
+            "id": "cfo-2025",
+            "value": "136162",
+            "unit": "USD_million"
+          },
+          {
+            "id": "net_income-2025",
+            "value": "101832",
+            "unit": "USD_million"
+          }
+        ]
+      },
+      {
+        "id": "fcf",
+        "title": "自由现金流（简化口径）",
+        "value": "71611",
+        "kind": "amount",
+        "unit": "USD_million",
+        "formula": "cfo - capex",
+        "fact_ids": [
+          "cfo-2025",
+          "capex-2025"
+        ],
+        "operands": [
+          {
+            "id": "cfo-2025",
+            "value": "136162",
+            "unit": "USD_million"
+          },
+          {
+            "id": "capex-2025",
+            "value": "64551",
+            "unit": "USD_million"
+          }
+        ]
+      },
+      {
+        "id": "capex_intensity",
+        "title": "资本开支 / 经营现金流",
+        "value": "0.4740749988983710580044358925",
+        "kind": "ratio",
+        "unit": "ratio",
+        "formula": "capex / cfo",
+        "fact_ids": [
+          "capex-2025",
+          "cfo-2025"
+        ],
+        "operands": [
+          {
+            "id": "capex-2025",
+            "value": "64551",
+            "unit": "USD_million"
+          },
+          {
+            "id": "cfo-2025",
+            "value": "136162",
+            "unit": "USD_million"
+          }
+        ]
+      },
+      {
+        "id": "current_ratio",
+        "title": "流动比率",
+        "value": "1.353446444504241668909062584",
+        "kind": "ratio",
+        "unit": "ratio",
+        "formula": "current_assets / current_liabilities",
+        "fact_ids": [
+          "current_assets-2025",
+          "current_liabilities-2025"
+        ],
+        "operands": [
+          {
+            "id": "current_assets-2025",
+            "value": "191131",
+            "unit": "USD_million"
+          },
+          {
+            "id": "current_liabilities-2025",
+            "value": "141218",
+            "unit": "USD_million"
+          }
+        ]
+      },
+      {
+        "id": "stress_fcf",
+        "title": "经营现金流压力情景",
+        "value": "44378.6",
+        "kind": "amount",
+        "unit": "USD_million",
+        "formula": "cfo * (1 - 20/100) - capex",
+        "fact_ids": [
+          "cfo-2025",
+          "capex-2025"
+        ],
+        "operands": [
+          {
+            "id": "cfo-2025",
+            "value": "136162",
+            "unit": "USD_million"
+          },
+          {
+            "id": "capex-2025",
+            "value": "64551",
+            "unit": "USD_million"
+          }
+        ]
+      }
+    ],
+    "issues": [
+      {
+        "id": "capex_pressure",
+        "title": "资本开支占用较多经营现金流",
+        "detail": "资本开支 / 经营现金流超过演示规则 40%。需核查项目承诺、后续开支和融资安排；这不是违约判断。",
+        "fact_ids": [
+          "capex-2025",
+          "cfo-2025"
+        ],
+        "severity": "review"
+      },
+      {
+        "id": "scope_review",
+        "title": "债务与现金可用性仍需人工确认",
+        "detail": "本口径含现金、现金等价物和短期投资；债务覆盖不含全部租赁、担保、资本承诺和受限资金调整。公开披露不足以直接作授信决策。",
+        "fact_ids": [
+          "liquid_assets-2025",
+          "short_debt-2025",
+          "current_debt-2025"
+        ],
+        "severity": "review"
+      }
+    ],
+    "comparison": [
+      {
+        "metric": "liquid_assets",
+        "label": "现金、现金等价物与短期投资",
+        "current": "94565",
+        "prior": "75543",
+        "unit": "USD_million",
+        "growth": "0.2518036085408310498656394371",
+        "fact_ids": [
+          "liquid_assets-2024",
+          "liquid_assets-2025"
+        ]
+      },
+      {
+        "metric": "current_assets",
+        "label": "流动资产",
+        "current": "191131",
+        "prior": "159734",
+        "unit": "USD_million",
+        "growth": "0.1965580277210863059836978978",
+        "fact_ids": [
+          "current_assets-2024",
+          "current_assets-2025"
+        ]
+      },
+      {
+        "metric": "short_debt",
+        "label": "短期债务",
+        "current": "0",
+        "prior": "6693",
+        "unit": "USD_million",
+        "growth": "-1",
+        "fact_ids": [
+          "short_debt-2024",
+          "short_debt-2025"
+        ]
+      },
+      {
+        "metric": "current_debt",
+        "label": "一年内到期长期债务",
+        "current": "2999",
+        "prior": "2249",
+        "unit": "USD_million",
+        "growth": "0.3334815473543797243219208537",
+        "fact_ids": [
+          "current_debt-2024",
+          "current_debt-2025"
+        ]
+      },
+      {
+        "metric": "current_liabilities",
+        "label": "流动负债",
+        "current": "141218",
+        "prior": "125286",
+        "unit": "USD_million",
+        "growth": "0.1271650463738965247513688680",
+        "fact_ids": [
+          "current_liabilities-2024",
+          "current_liabilities-2025"
+        ]
+      },
+      {
+        "metric": "long_debt",
+        "label": "长期债务",
+        "current": "40152",
+        "prior": "42688",
+        "unit": "USD_million",
+        "growth": "-0.05940779610194902548725637181",
+        "fact_ids": [
+          "long_debt-2024",
+          "long_debt-2025"
+        ]
+      },
+      {
+        "metric": "net_income",
+        "label": "净利润",
+        "current": "101832",
+        "prior": "88136",
+        "unit": "USD_million",
+        "growth": "0.1553962058636652446219478987",
+        "fact_ids": [
+          "net_income-2024",
+          "net_income-2025"
+        ]
+      },
+      {
+        "metric": "cfo",
+        "label": "经营活动现金流",
+        "current": "136162",
+        "prior": "118548",
+        "unit": "USD_million",
+        "growth": "0.1485811654350980193676822890",
+        "fact_ids": [
+          "cfo-2024",
+          "cfo-2025"
+        ]
+      },
+      {
+        "metric": "capex",
+        "label": "固定资产购建现金流出",
+        "current": "64551",
+        "prior": "44477",
+        "unit": "USD_million",
+        "growth": "0.4513343975537918474717269600",
+        "fact_ids": [
+          "capex-2024",
+          "capex-2025"
+        ]
+      },
+      {
+        "metric": "revenue",
+        "label": "营业收入",
+        "current": "281724",
+        "prior": "245122",
+        "unit": "USD_million",
+        "growth": "0.1493215623240671991906071262",
+        "fact_ids": [
+          "revenue-2024",
+          "revenue-2025"
+        ]
+      }
+    ],
+    "excluded_future_facts": 0,
+    "stress_pct": 20,
+    "blocking_count": 0,
+    "limitations": [
+      "Rules are illustrative and not fitted to lender outcomes.",
+      "A source hash identifies a capture; it does not certify the source or its availability at a historical time.",
+      "No model inference, credit rating, PD or lending decision is produced by these calculations."
+    ]
+  },
+  "dispositions": {
+    "capex_pressure": {
+      "status": "accepted_limitation",
+      "note": "演示记录：已核对官网表格，现金可用性、租赁和资本承诺需补充原文；本演示不作授信结论。",
+      "actor": "simulated-analyst"
+    },
+    "scope_review": {
+      "status": "accepted_limitation",
+      "note": "演示记录：已核对官网表格，现金可用性、租赁和资本承诺需补充原文；本演示不作授信结论。",
+      "actor": "simulated-analyst"
+    }
+  },
+  "review": {
+    "actor": "simulated-reviewer",
+    "decision": "approve",
+    "note": "自动化演示身份：确认规则计算和来源引用流程运行，尚未进行真实银行分析员与复核员验收。",
+    "at": "2026-10-24T20:00:57.296369+00:00"
+  },
+  "submitted_by": "simulated-analyst",
+  "events": [
+    {
+      "sequence": 1,
+      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "tenant": "demo",
+      "actor": "simulated-analyst",
+      "role": "analyst",
+      "action": "created",
+      "note": "Source pack and rule output captured",
+      "created_at": "2026-10-24T20:00:57.275265+00:00",
+      "revision": 1,
+      "snapshot_sha256": "9ce8cba836a4c0b3f36392b21cbf5bf434989e2f153f6738b742ad1eb493acda",
+      "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "bdaed0ae365934da8ab73c53909b82a060178e85de3964b4a096c8fd2895fd2e"
+    },
+    {
+      "sequence": 2,
+      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "tenant": "demo",
+      "actor": "simulated-analyst",
+      "role": "analyst",
+      "action": "disposition",
+      "note": "演示记录：已核对官网表格，现金可用性、租赁和资本承诺需补充原文；本演示不作授信结论。",
+      "created_at": "2026-10-24T20:00:57.280528+00:00",
+      "revision": 2,
+      "snapshot_sha256": "a933243d3e487ace21f08c133b6d37dea592c7b3bdc10570b48beacd01ad2102",
+      "previous_hash": "bdaed0ae365934da8ab73c53909b82a060178e85de3964b4a096c8fd2895fd2e",
+      "hash": "927a6acb4f55d353fe56ce6bbe8af916c8514ac96c1bb396826197a4d3d812e2"
+    },
+    {
+      "sequence": 3,
+      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "tenant": "demo",
+      "actor": "simulated-analyst",
+      "role": "analyst",
+      "action": "disposition",
+      "note": "演示记录：已核对官网表格，现金可用性、租赁和资本承诺需补充原文；本演示不作授信结论。",
+      "created_at": "2026-10-24T20:00:57.286546+00:00",
+      "revision": 3,
+      "snapshot_sha256": "ddfea0e1effc4ec70d45701b8a04b28284fd045dd09c48cf1ca499ca11655bba",
+      "previous_hash": "927a6acb4f55d353fe56ce6bbe8af916c8514ac96c1bb396826197a4d3d812e2",
+      "hash": "92268d8ae05047a4095e47ca94f3716041f471ecacb7f35bdb5391bb237eb44b"
+    },
+    {
+      "sequence": 4,
+      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "tenant": "demo",
+      "actor": "simulated-analyst",
+      "role": "analyst",
+      "action": "submit",
+      "note": "",
+      "created_at": "2026-10-24T20:00:57.291749+00:00",
+      "revision": 4,
+      "snapshot_sha256": "868bb3fbc0ef9f5ca24e76f3bafb8ec1c1cb2f617724ffe38acdac2d8cf487d9",
+      "previous_hash": "92268d8ae05047a4095e47ca94f3716041f471ecacb7f35bdb5391bb237eb44b",
+      "hash": "616c2819679bbab984695cc94929afe24e604ddb961bebf951d7b46b4d42b6c2"
+    },
+    {
+      "sequence": 5,
+      "case_id": "fb1d07a102e14ec5a58956f9c4745d25",
+      "tenant": "demo",
+      "actor": "simulated-reviewer",
+      "role": "reviewer",
+      "action": "approve",
+      "note": "自动化演示身份：确认规则计算和来源引用流程运行，尚未进行真实银行分析员与复核员验收。",
+      "created_at": "2026-10-24T20:00:57.297588+00:00",
+      "revision": 5,
+      "snapshot_sha256": "4233ed4713f29861a3e73fa4013e11b23f080a2b2f0eafa18dd4c7ace8c1dd5f",
+      "previous_hash": "616c2819679bbab984695cc94929afe24e604ddb961bebf951d7b46b4d42b6c2",
+      "hash": "df403876f332ff60c47ffac0219d450ae3a4a84a68b833da80c53a6e54adcc8b"
+    }
+  ],
+  "event_integrity_valid": true
+}

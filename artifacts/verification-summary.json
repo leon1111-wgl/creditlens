@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-25",
+  "timezone": "Asia/Shanghai",
+  "python": "3.12.14",
+  "unit_and_api_tests": {
+    "run": 48,
+    "failures": 0,
+    "errors": 0
+  },
+  "javascript_syntax_check": "passed with node --check",
+  "local_markdown_file_links": "passed",
+  "live_http_health": {
+    "status": "ok",
+    "cases": 883,
+    "version": "0.2.0",
+    "auth_mode": "demo"
+  },
+  "live_http_calculation": {
+    "operation": "637 / 5.0",
+    "value": "127.4",
+    "formula_author": "analyst"
+  },
+  "browser_visual_and_interaction_qa": {
+    "viewport_width": 482,
+    "workflow": "created, two dispositions, submitted, independent simulated reviewer approved, audit viewed",
+    "screenshot": "docs/images/review-workbench.png",
+    "export": "button exercised; API tested; browser download file not independently located",
+    "desktop_layout": "not verified"
+  },
+  "remote_ci": "not run",
+  "github_connection": {
+    "verified_account": "leon1111-wgl",
+    "verified_repository": "leon1111-wgl/leon1111-wgl",
+    "push": true,
+    "admin": true
+  },
+  "github_publish": "repository created; connector write returned integration 403; source publication pending",
+  "version": "0.2.0",
+  "official_financial_facts": 20,
+  "source_linked_observed_factors": 5,
+  "real_model_evaluation": "not run",
+  "model_transport_tests": "passed with mock responses",
+  "prediction_training": "not run; no outcome labels",
+  "docker": "not installed; image build and run unverified"
+}

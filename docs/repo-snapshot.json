@@ -1,0 +1,123 @@
+{
+  "retrieved_date": "2026-10-25",
+  "timezone": "Asia/Shanghai",
+  "source": "GitHub REST repositories endpoint via connected GitHub tool",
+  "repositories": [
+    {
+      "name": "langchain-ai/langgraph",
+      "stars": 43832,
+      "license": "MIT",
+      "pushed_at": "2026-10-24T03:42:31Z",
+      "branch": "main",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "archived": false
+    },
+    {
+      "name": "infiniflow/ragflow",
+      "stars": 92807,
+      "license": "Apache-2.0",
+      "pushed_at": "2026-10-24T13:12:19Z",
+      "branch": "main",
+      "url": "https://github.com/infiniflow/ragflow",
+      "archived": false
+    },
+    {
+      "name": "microsoft/graphrag",
+      "stars": 36433,
+      "license": "MIT",
+      "pushed_at": "2026-10-20T15:24:08Z",
+      "branch": "main",
+      "url": "https://github.com/microsoft/graphrag",
+      "archived": false
+    },
+    {
+      "name": "AI4Finance-Foundation/FinRobot",
+      "stars": 8294,
+      "license": "Apache-2.0",
+      "pushed_at": "2026-10-24T13:58:26Z",
+      "branch": "master",
+      "url": "https://github.com/AI4Finance-Foundation/FinRobot",
+      "archived": false
+    },
+    {
+      "name": "vllm-project/vllm",
+      "stars": 95324,
+      "license": "Apache-2.0",
+      "pushed_at": "2026-10-24T16:44:19Z",
+      "branch": "main",
+      "url": "https://github.com/vllm-project/vllm",
+      "archived": false
+    },
+    {
+      "name": "docling-project/docling",
+      "stars": 69507,
+      "license": "MIT",
+      "pushed_at": "2026-10-23T16:01:55Z",
+      "branch": "main",
+      "url": "https://github.com/docling-project/docling",
+      "archived": false
+    },
+    {
+      "name": "langfuse/langfuse",
+      "stars": 36351,
+      "license": "NOASSERTION",
+      "pushed_at": "2026-10-24T14:59:16Z",
+      "branch": "main",
+      "url": "https://github.com/langfuse/langfuse",
+      "archived": false
+    },
+    {
+      "name": "QwenLM/Qwen3",
+      "stars": 27682,
+      "pushed_at": "2026-01-09T03:05:47Z",
+      "branch": "main",
+      "url": "https://github.com/QwenLM/Qwen3",
+      "archived": false
+    },
+    {
+      "name": "opendatalab/MinerU",
+      "stars": 82417,
+      "license": "NOASSERTION",
+      "pushed_at": "2026-10-23T18:49:38Z",
+      "branch": "master",
+      "url": "https://github.com/opendatalab/MinerU",
+      "archived": false
+    },
+    {
+      "name": "hiyouga/LlamaFactory",
+      "stars": 75710,
+      "license": "Apache-2.0",
+      "pushed_at": "2026-10-21T07:23:24Z",
+      "branch": "main",
+      "url": "https://github.com/hiyouga/LlamaFactory",
+      "archived": false
+    },
+    {
+      "name": "verl-project/verl",
+      "stars": 24001,
+      "license": "Apache-2.0",
+      "pushed_at": "2026-10-23T14:35:07Z",
+      "branch": "main",
+      "url": "https://github.com/verl-project/verl",
+      "archived": false
+    },
+    {
+      "name": "huggingface/trl",
+      "stars": 19596,
+      "license": "Apache-2.0",
+      "pushed_at": "2026-10-24T08:35:36Z",
+      "branch": "main",
+      "url": "https://github.com/huggingface/trl",
+      "archived": false
+    },
+    {
+      "name": "AI4Finance-Foundation/FinGPT",
+      "stars": 21456,
+      "license": "MIT",
+      "pushed_at": "2026-09-23T01:59:08Z",
+      "branch": "master",
+      "url": "https://github.com/AI4Finance-Foundation/FinGPT",
+      "archived": false
+    }
+  ]
+}

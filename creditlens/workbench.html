@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CreditLens · 金融证据工作台</title>
+<style>
+:root{font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:#172e36;background:#f3f6f7;font-synthesis:none;--accent:#086f69;--line:#d7e1e3}
+*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}a{color:var(--accent)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-size:23px;font-weight:750;letter-spacing:-.7px}.brand span{font-weight:400;font-size:14px;color:#546b74;margin-left:15px}
+header nav{display:flex;gap:24px;font-size:14px}
+main{max-width:1440px;margin:auto;padding:30px 32px}.intro{display:flex;gap:36px;justify-content:space-between;margin-bottom:28px;align-items:center}
+h1{font-size:30px;letter-spacing:-1px;margin:0 0 10px}h2{font-size:18px;margin:0 0 18px}p{line-height:1.7}
+.muted{color:#526a72;font-size:14px}.intro p{margin:0;max-width:740px}.stamp{font-size:13px;border-left:3px solid var(--accent);padding-left:16px;white-space:nowrap}
+.layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:26px}.panel{background:white;border:1px solid var(--line);border-radius:8px;padding:22px}
+label{display:block;font-size:13px;font-weight:650;margin:18px 0 7px}input,select,textarea{width:100%;padding:10px 12px;border:1px solid #93a9af;border-radius:4px;background:#fff;color:#172e36}
+textarea{min-height:110px;resize:vertical}button{background:var(--accent);color:white;border:0;border-radius:4px;padding:11px 16px;cursor:pointer;font-weight:600}
+button:disabled{opacity:.5;cursor:not-allowed}button.secondary{background:#e9f1f1;color:#164d4b}button:focus-visible,a:focus-visible{outline:3px solid #a55c12;outline-offset:3px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:2px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.status{min-height:26px;font-size:14px;color:#365b64;margin:16px 0}
+.error{color:#9a2f23}.result-head{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:8px}
+.result-head h2{margin:0}.evidence{border-bottom:1px solid var(--line);padding:20px 0}.evidence:last-child{border:0}
+.ev-meta{font-size:12px;display:flex;justify-content:space-between;gap:12px;color:#526a72}.evidence p{font-size:14px;overflow-wrap:anywhere;margin:10px 0}
+code{font-family:Consolas,monospace;font-size:12px}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;margin-top:10px;font-size:13px}td,th{padding:9px;text-align:left;border:1px solid var(--line);white-space:normal}
+th{background:#f4f7f7;font-weight:500}.calc{margin-top:24px}.calc-fields{display:grid;grid-template-columns:1fr 110px 1fr;gap:12px}.number{font-size:34px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:700}
+.notice{border-left:3px solid #a9691b;padding:8px 12px;background:#fcf8f0;font-size:13px;line-height:1.7;margin-top:18px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:#f4f7f7;padding:12px}
+.empty{padding:48px 16px;color:#526a72;text-align:center}.section-note{font-size:12px;color:#526a72;margin-top:8px}footer{padding:30px 0 0;font-size:12px;color:#526a72}
+@media(max-width:900px){header{padding:18px;flex-wrap:wrap}main{padding:22px 16px}.layout{grid-template-columns:1fr}.intro{display:block}.stamp{margin-top:18px}.calc-fields{grid-template-columns:1fr}.brand span{display:block;margin:5px 0 0}h1{font-size:26px}}
+</style></head>
+<body>
+<header><div class="brand">CreditLens<span>金融证据工作台</span></div><nav><a href="/docs">API 文档</a><a href="https://github.com/czyssrs/FinQA" target="_blank" rel="noreferrer">数据来源</a></nav></header>
+<main>
+<div class="intro"><div><h1>从财报证据开始，逐步核验计算。</h1><p class="muted">选择公开财务问题，检索原始段落与表格，再引用单元格完成可复算的分析。当前为真实数据上的检索与计算基线。</p></div><div class="stamp" id="health">正在连接本地服务</div></div>
+<div class="layout">
+<aside class="panel"><h2>研究任务</h2><label for="filter">查找公司或问题</label><input id="filter" placeholder="例如 V/2008 或 payment">
+<div class="actions"><button id="search-cases" class="secondary">查找题目</button></div>
+<label for="cases">公开数据案例</label><select id="cases"></select>
+<label for="question">待核验问题</label><textarea id="question"></textarea>
+<label for="asof">信息截止日期（可选）</label><input id="asof" type="date">
+<div class="section-note">严格时点模式会排除公告日期未知的材料。FinQA 未提供原始公告时间。</div>
+<div class="actions"><button id="run">检索证据</button><button id="export" class="secondary" disabled>导出 JSON</button></div>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+<div class="notice">当前不调用大模型，也不自动生成授信意见。计算公式、单位和金融含义由分析人员复核。</div>
+</aside>
+<div>
+<section class="panel"><div class="result-head"><h2>来源与证据</h2><span class="muted" id="result-meta">等待检索</span></div><div id="evidence"><div class="empty">选择任务后开始检索。<br>证据将保留报告定位和内容哈希。</div></div></section>
+<section class="panel calc"><h2>确定性计算</h2><p class="muted">从已检索的表格中选择输入，服务端重新读取单元格并计算。</p>
+<div class="calc-fields"><div><label for="left">输入 A</label><select id="left" disabled></select></div><div><label for="op">运算</label><select id="op"><option value="divide">除以</option><option value="subtract">减去</option><option value="add">加上</option><option value="multiply">乘以</option></select></div><div><label for="right">输入 B</label><select id="right" disabled></select></div></div>
+<div class="actions"><button id="calculate" disabled>复算选中单元格</button></div><div id="calculation" aria-live="polite"></div>
+</section>
+</div></div>
+<footer>FinQA 公开开发集 · 证据定位为数据集段落或表格行 · 本地研究原型，尚未接入生产身份认证与权限系统</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let cases=[],report=null,activeRequest=null,busy=false;
+const text=(tag,value,cls)=>{const e=document.createElement(tag);e.textContent=value;if(cls)e.className=cls;return e};
+async function json(url,options){const response=await fetch(url,options);const data=await response.json();if(!response.ok)throw Error(typeof data.detail==="string"?data.detail:"请求无效，请检查输入");return data}
+function status(message,error=false){$("status").textContent=message;$("status").className="status"+(error?" error":"")}
+function lock(value){busy=value;for(const id of ["run","search-cases","cases","question","asof","filter"])$(id).disabled=value;$("calculate").disabled=value||!report||!$("left").options.length}
+function clearReport(){report=null;activeRequest=null;$("export").disabled=true;$("calculate").disabled=true;$("calculation").replaceChildren();for(const id of ["left","right"]){$(id).replaceChildren();$(id).disabled=true}}
+async function loadCases(){try{lock(true);cases=await json("/api/cases?q="+encodeURIComponent($("filter").value)+"&limit=100");$("cases").replaceChildren();for(const c of cases){const o=text("option",c.id);o.value=c.id;$("cases").append(o)}$("question").value=cases[0]?.question||"";clearReport();$("evidence").replaceChildren(text("div",cases.length?"已载入题目，可开始检索。":"未找到匹配题目。","empty"));status(cases.length?"找到 "+cases.length+" 个案例":"请调整查询词");}catch(e){status(e.message,true)}finally{lock(false)}}
+function render(data){
+report=data;$("export").disabled=false;$("result-meta").textContent=data.retrieval.hits.length+" 条证据 · 待人工复核";
+$("evidence").replaceChildren();for(const id of ["left","right"]){$(id).replaceChildren();$(id).disabled=false}
+if(!data.retrieval.hits.length)$("evidence").append(text("div","证据不足。指定截止日期时，未能证明公告时间的材料会被排除。","empty"));
+for(const hit of data.retrieval.hits){
+const e=hit.evidence,div=text("article","","evidence"),meta=text("div","","ev-meta");
+meta.append(text("code",e.id),text("span",e.kind==="table"?"表格行":"原文段落"));div.append(meta,text("p",e.text));
+if(e.cells.length){const wrap=text("div","","table-wrap"),table=document.createElement("table"),tr=document.createElement("tr");e.cells.forEach((v,i)=>{const td=text(i?"td":"th",v);tr.append(td);if(i){for(const id of ["left","right"]){const o=text("option",e.id+" / 列 "+i+" · "+v);o.value="cell:"+e.id+":"+i;$(id).append(o)}}});table.append(tr);wrap.append(table);div.append(wrap)}
+const link=text("a","查看数据集来源");link.href=e.source_url;link.target="_blank";link.rel="noreferrer";
+div.append(text("p",e.locator,"muted"),link);const d=document.createElement("details");d.append(text("summary","内容校验 SHA-256"),text("pre",e.sha256));div.append(d);$("evidence").append(div);
+}
+$("calculate").disabled=!$("left").options.length;
+const values=Array.from($("left").options).map(o=>o.value);
+if(values.includes("cell:table_3:1"))$("left").value="cell:table_3:1";
+if(values.includes("cell:table_3:3"))$("right").value="cell:table_3:3";
+$("calculation").replaceChildren();
+if(data.calculation){$("calculation").append(text("p",data.calculation.value,"number"),text("p","算术已复算；公式与单位仍需人工复核。","muted"),text("pre",JSON.stringify(data.calculation.trace,null,2)))}
+}
+$("cases").addEventListener("change",()=>{$("question").value=cases.find(c=>c.id===$("cases").value)?.question||"";clearReport();$("evidence").replaceChildren(text("div","任务已变更，请重新检索。","empty"));$("result-meta").textContent="等待检索";status("")});
+$("search-cases").onclick=loadCases;
+for(const id of ["question","asof"]){$(id).addEventListener("input",()=>{clearReport();$("evidence").replaceChildren(text("div","查询条件已改变，请重新检索。","empty"));$("result-meta").textContent="等待检索";status("")})}
+$("run").onclick=async()=>{clearReport();try{lock(true);status("正在检索…");$("evidence").replaceChildren(text("div","正在检索原始材料…","empty"));const body={case_id:$("cases").value,question:$("question").value,k:5,as_of:$("asof").value||null};const data=await json("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});activeRequest=body;render(data);status(data.retrieval.hits.length?"检索完成。请核对证据与问题是否匹配。":"没有满足条件的证据。");}catch(e){$("evidence").replaceChildren(text("div","检索失败，请检查输入后重试。","empty"));status(e.message,true)}finally{lock(false)}};
+$("calculate").onclick=async()=>{if(!activeRequest)return;try{lock(true);status("正在复算…");const body={...activeRequest,steps:[{op:$("op").value,left:$("left").value,right:$("right").value}]};const data=await json("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});render(data);status("复算完成，已记录来源和计算步骤。");}catch(e){$("calculation").replaceChildren(text("p",e.message,"error"));status("计算未完成",true)}finally{lock(false)}};
+$("export").onclick=()=>{if(!report)return;const a=document.createElement("a"),url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:"application/json"}));a.href=url;a.download="creditlens-"+report.id+".json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+json("/health").then(d=>{$("health").textContent=d.cases+" 道公开题目 · 本地服务";loadCases()}).catch(e=>{status("本地服务不可用："+e.message,true);$("health").textContent="服务未连接";$("run").disabled=true});
+</script></body></html>

@@ -1,0 +1,35 @@
+{
+  "retrieved_at": "2026-10-24T19:53:14.380491+00:00",
+  "publication_date_source": "https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/press-release-webcast",
+  "pack_sha256": "5f3e8fc47dddfbe29904ba7082dc9e08751b62d6c65e51957064eca17c6556b8",
+  "facts": 20,
+  "sources": [
+    {
+      "id": "msft-fy25-balance-sheets",
+      "title": "Microsoft FY25 Q4 / balance-sheets",
+      "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/balance-sheets",
+      "published_at": "2025-07-30",
+      "sha256": "1f915adbdcbc36f265f59ecce7a2f7cccf842204023dbdd694648aa7bab1e886"
+    },
+    {
+      "id": "msft-fy25-cash-flows",
+      "title": "Microsoft FY25 Q4 / cash-flows",
+      "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/cash-flows",
+      "published_at": "2025-07-30",
+      "sha256": "163848f1431c763ca94e7e517b23e68aa48acf1b4b80f376d59c24a0951582c3"
+    },
+    {
+      "id": "msft-fy25-income-statements",
+      "title": "Microsoft FY25 Q4 / income-statements",
+      "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/income-statements",
+      "published_at": "2025-07-30",
+      "sha256": "54a83af8f066c7a23b5b836f1cf501e8e656c7f6a3d7286156baaf4017806b0e"
+    }
+  ],
+  "limitations": [
+    "Historical FY2025 case, not the latest financial position.",
+    "Current website capture is not a frozen historical web archive.",
+    "FY2024 comparison is as disclosed in the FY2025 release.",
+    "Financial facts only; full reports remain with their publisher."
+  ]
+}

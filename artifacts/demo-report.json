@@ -1,0 +1,148 @@
+{
+  "id": "67deca49491d4acda5e84251734f84a9",
+  "created_at": "2026-10-24T18:47:57.154910+00:00",
+  "case_id": "V/2008/page_17.pdf-1",
+  "question": "what is the average payment volume per transaction for american express?",
+  "as_of": null,
+  "status": "needs_review",
+  "mode": "evidence_and_arithmetic",
+  "dataset_sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+  "source_url": "https://github.com/czyssrs/FinQA/blob/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+  "retrieval": {
+    "method": "within_page_bm25",
+    "k": 5,
+    "hits": [
+      {
+        "evidence": {
+          "id": "text_55",
+          "case_id": "V/2008/page_17.pdf-1",
+          "locator": "V/2008/page_17.pdf#text_55",
+          "kind": "text",
+          "text": "american express and discover include business from third-party issuers .",
+          "source_url": "https://github.com/czyssrs/FinQA/blob/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+          "report_ref": "V/2008/page_17.pdf",
+          "cells": [],
+          "published_at": null,
+          "tenant_id": "public",
+          "sha256": "2d35c8ffa60eec530ddcaed13c7cd10e5c5b33adda3f21b3d36b261d42709c45"
+        },
+        "score": 5.468208729264355
+      },
+      {
+        "evidence": {
+          "id": "table_3",
+          "case_id": "V/2008/page_17.pdf-1",
+          "locator": "V/2008/page_17.pdf#table_3",
+          "kind": "table",
+          "text": "american express | payments volume ( billions ): 637 | total volume ( billions ): 647 | total transactions ( billions ): 5.0 | cards ( millions ): 86",
+          "source_url": "https://github.com/czyssrs/FinQA/blob/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+          "report_ref": "V/2008/page_17.pdf",
+          "cells": [
+            "american express",
+            "637",
+            "647",
+            "5.0",
+            "86"
+          ],
+          "published_at": null,
+          "tenant_id": "public",
+          "sha256": "df1d81f7ac3b9d3f339f0edb8fae63a8aa40a877fc53af45e10b397b82430c28"
+        },
+        "score": 5.29754094482766
+      },
+      {
+        "evidence": {
+          "id": "text_57",
+          "case_id": "V/2008/page_17.pdf-1",
+          "locator": "V/2008/page_17.pdf#text_57",
+          "kind": "text",
+          "text": "jcb total transaction figures are estimates .",
+          "source_url": "https://github.com/czyssrs/FinQA/blob/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+          "report_ref": "V/2008/page_17.pdf",
+          "cells": [],
+          "published_at": null,
+          "tenant_id": "public",
+          "sha256": "ceacf9834b0a1e6de861f9a18969f9f6458ea3c8755da32fa29a354e9b5224db"
+        },
+        "score": 2.870941223735651
+      },
+      {
+        "evidence": {
+          "id": "text_64",
+          "case_id": "V/2008/page_17.pdf-1",
+          "locator": "V/2008/page_17.pdf#text_64",
+          "kind": "text",
+          "text": "clearing is the process of delivering final transaction data from an acquirer to an issuer for posting to the cardholder 2019s account , the calculation of certain fees and charges that apply to the issuer and acquirer involved in the transaction , and the conversion of transaction amounts to the .",
+          "source_url": "https://github.com/czyssrs/FinQA/blob/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+          "report_ref": "V/2008/page_17.pdf",
+          "cells": [],
+          "published_at": null,
+          "tenant_id": "public",
+          "sha256": "dccf4acc7d657ba1ad5dc24e2b2150903ef418d5c393d9a9de8781ffe3e6f6c7"
+        },
+        "score": 2.4996832877095723
+      },
+      {
+        "evidence": {
+          "id": "text_0",
+          "case_id": "V/2008/page_17.pdf-1",
+          "locator": "V/2008/page_17.pdf#text_0",
+          "kind": "text",
+          "text": "largest operators of open-loop and closed-loop retail electronic payments networks the largest operators of open-loop and closed-loop retail electronic payments networks are visa , mastercard , american express , discover , jcb and diners club .",
+          "source_url": "https://github.com/czyssrs/FinQA/blob/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+          "report_ref": "V/2008/page_17.pdf",
+          "cells": [],
+          "published_at": null,
+          "tenant_id": "public",
+          "sha256": "a8d768f3bdf7213d13ae801cd195b1ce4135c4dbf76bf146b7dcc67a6edcd7d4"
+        },
+        "score": 2.416973685293545
+      }
+    ]
+  },
+  "calculation": {
+    "value": "127.4",
+    "trace": [
+      {
+        "step": 0,
+        "op": "divide",
+        "left": "cell:table_3:1",
+        "right": "cell:table_3:3",
+        "left_value": "637",
+        "right_value": "5.0",
+        "result": "127.4"
+      }
+    ],
+    "citations": [
+      {
+        "id": "table_3",
+        "case_id": "V/2008/page_17.pdf-1",
+        "locator": "V/2008/page_17.pdf#table_3",
+        "kind": "table",
+        "text": "american express | payments volume ( billions ): 637 | total volume ( billions ): 647 | total transactions ( billions ): 5.0 | cards ( millions ): 86",
+        "source_url": "https://github.com/czyssrs/FinQA/blob/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+        "report_ref": "V/2008/page_17.pdf",
+        "cells": [
+          "american express",
+          "637",
+          "647",
+          "5.0",
+          "86"
+        ],
+        "published_at": null,
+        "tenant_id": "public",
+        "sha256": "df1d81f7ac3b9d3f339f0edb8fae63a8aa40a877fc53af45e10b397b82430c28"
+      }
+    ],
+    "verification": "arithmetic_recomputed",
+    "limitations": [
+      "Formula selection and financial units require analyst review."
+    ]
+  },
+  "review_notes": [
+    "No language model was called. No automated credit opinion is generated.",
+    "Original publication dates are not supplied by this benchmark; strict as-of queries exclude undated blocks.",
+    "Citations locate benchmark blocks, not verified original-PDF coordinates."
+  ],
+  "demo_note": "Analyst-authored formula. Both source columns are in billions; arithmetic is 637 / 5.0."
+}

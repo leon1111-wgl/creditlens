@@ -1,0 +1,12 @@
+{
+  "dataset": "FinQA",
+  "split": "dev",
+  "records": 883,
+  "source_url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+  "revision": "0f16e2867befa6840783e58be38c9efb9229d742",
+  "git_blob_sha1": "970f239f591c782b17df420c0d343b780737f3da",
+  "sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+  "verified_at": "2026-10-24T18:37:20.161644+00:00",
+  "license_note": "Upstream repo MIT; underlying company filings may have separate rights.",
+  "use": "Local research evaluation; gold fields are excluded from runtime ingestion."
+}
