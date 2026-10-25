@@ -1,0 +1,71 @@
+{
+  "version": "0.9.0",
+  "date": "2026-10-25",
+  "tests": {
+    "run": 326,
+    "passed": 325,
+    "skipped": 1,
+    "skip_reason": "Windows file symlink privilege"
+  },
+  "financial_controls": {
+    "run": 15,
+    "passed": 15,
+    "included_in_tests": true
+  },
+  "freeze_commit": "5d347e5",
+  "initial_pre_inference_failure": "473a699",
+  "actual_ocr_pages": 2,
+  "actual_ocr_calls": 2,
+  "result": {
+    "line": {
+      "consistent": 10,
+      "conflict": 0,
+      "insufficient": 4
+    },
+    "word": {
+      "consistent": 12,
+      "conflict": 0,
+      "insufficient": 2
+    },
+    "date": {
+      "consistent": 12,
+      "conflict": 0,
+      "insufficient": 2
+    },
+    "facts": 14,
+    "distinct_pages": 2,
+    "distinct_documents": 1,
+    "distinct_date_groups": 4,
+    "date_group_status": {
+      "consistent": 4,
+      "conflict": 0,
+      "insufficient": 0
+    },
+    "date_association_applied": 0,
+    "non_year_unchanged": true
+  },
+  "raw_files_verified": 7,
+  "public_parent_lines": 35,
+  "full_ocr_lines": 316,
+  "browser": {
+    "desktop": [
+      1366,
+      1000
+    ],
+    "narrow": [
+      497,
+      900
+    ],
+    "narrow_body_width": 482,
+    "table_container": 448,
+    "wide_table": 570,
+    "export_equals_api": true,
+    "mode_switch": true,
+    "credential_change_clears": true,
+    "amount_and_period_image_positions": true
+  },
+  "previous_frozen_artifacts_unchanged": 31,
+  "gpu_training": false,
+  "paid_service_used": false,
+  "scope": "Known-location check on one issuer after freezing references and rules, not blind extraction accuracy, user efficiency or production validation."
+}

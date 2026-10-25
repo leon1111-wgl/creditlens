@@ -20,7 +20,7 @@ CreditLens 正在建设一个面向投研和风险团队的研究平台：把财
 
 [文档实验页新版界面](docs/images/document-experiments-enterprise-desktop.png)：Times New Roman 与宋体排版，白灰蓝工作台；[改版记录](docs/iterations/2026-10-25-12.md)。
 
-新增 [新公司文档核对](docs/17-new-issuer-transfer.md)：查看 NVIDIA 材料中的数字、年份和原页，区分参考坐标错误与核对规则不足，并保留每次实验。[日期关联对照](docs/18-date-association.md) 可以按共同表头查看受影响数据，比较规则修改前后的依据。此前的 [字词与退化对照](docs/iterations/2026-10-25-11.md)、[季度研究页面](docs/iterations/2026-10-25-09.md) 继续可用。
+新增 [AMD 固定规则检查](docs/19-issuer-evaluation.md)：先固定参考和规则，再让模型看另一家公司的财报；不确定的货币符号与金额保留待查。页面可以切换 AMD 与 NVIDIA，追查原页并导出。此前的 [新公司文档核对](docs/17-new-issuer-transfer.md)：查看 NVIDIA 材料中的数字、年份和原页，区分参考坐标错误与核对规则不足，并保留每次实验。[日期关联对照](docs/18-date-association.md) 可以按共同表头查看受影响数据，比较规则修改前后的依据。此前的 [字词与退化对照](docs/iterations/2026-10-25-11.md)、[季度研究页面](docs/iterations/2026-10-25-09.md) 继续可用。
 
 ## 数据是否实时，需要服务器吗
 
@@ -86,7 +86,7 @@ python scripts/evaluate_document_ai.py --download --local-dir .run/document-ai
 
 打开 [文档实验对照](http://127.0.0.1:8765/experiments)，无需模型或原页即可查看已保存的字词／行级与图像退化实验、展开失败原因、导出对照。完整重跑默认写入独立的 `.run/reproductions/`，不会替换页面展示的记录或已有原页。使用 `scripts/check_document_reproduction.py` 比较候选与冻结实验的逐字段证据；完整命令、差异说明与发布边界见[安全复现说明](docs/16-experiment-reproduction.md)。
 
-打开 [新公司文档核对](http://127.0.0.1:8765/transfer)，可查看 NVIDIA 的已保存诊断记录、筛选待检查项、展开证据并导出。页面保留原年份不足的结果，并提供完整日期关联后的对照；按共同表头查看受影响数据、切换原页日期和金额位置、导出依据。这是已观察材料的诊断，未变成盲测成绩。原页准备见[实验说明](docs/17-new-issuer-transfer.md)，新规则重算见[日期关联](docs/18-date-association.md)。
+打开 [新公司文档核对](http://127.0.0.1:8765/transfer)，默认查看 AMD 固定规则后的检查记录，也可切换 NVIDIA 的已保存开发诊断，筛选待检查项、展开证据并导出。AMD 来源与复现见[本轮说明](docs/19-issuer-evaluation.md)。页面保留原年份不足的结果，并提供完整日期关联后的对照；按共同表头查看受影响数据、切换原页日期和金额位置、导出依据。这是已观察材料的诊断，未变成盲测成绩。原页准备见[实验说明](docs/17-new-issuer-transfer.md)，新规则重算见[日期关联](docs/18-date-association.md)。
 
 需要 FinQA 实验室时执行 `python scripts/download_data.py`，下载后重启服务并访问 `/lab`。
 
@@ -129,8 +129,9 @@ python scripts/evaluate_retrieval.py  # 需要先下载 FinQA
 
 | 验证 | 当前结果 |
 |---|---|
-| 核心、API、权限、并发、时点、季度数据、视觉核对与模型接口测试 | 285 项运行：284 通过，1 项平台权限跳过 |
+| 核心、API、权限、并发、时点、季度数据、视觉核对与模型接口测试 | 326 项运行：325 通过，1 项平台权限跳过 |
 | 财务控制回归场景 | 15/15 通过；1 个官方参考、14 个人工修改副本，不是模型准确率 |
+| 固定规则后的 AMD 检查 | 两页14项：行级10一致4不足；字词／日期规则12一致2不足，日期新关联应用0次；非盲抽取准确率 |
 | 官方 PDF 开发样例核对 | 微软 20 项与 HTML 一致；苹果 22 项与登记参考一致，均非盲测或真实性验证 |
 | 官方披露工作流复现 | 5 个事件，独立模拟身份，事件校验通过 |
 | FinQA dev 页内 BM25，883 题 | Macro evidence Recall@5 = 82.43% |
@@ -186,6 +187,7 @@ FastAPI、Pydantic、Decimal、SQLite 构成模块化单体。上图是已经实
 | [运行与模型接口](docs/07-operation-and-model.md) | 身份配置、API、状态存储与模型调用 |
 | [文档智能、因子与治理研究](docs/08-document-ai-and-governance.md) | 政策与论文证据、可检验的研究假设 |
 | [真实 OCR 实验与复现](docs/13-document-ai-experiment.md) | 图像输入、核对规则、模型版本、失败案例与原页展示 |
+| [固定规则后的新发行人检查](docs/19-issuer-evaluation.md) | AMD参考预检、来源事件区分、冻结运行与失败解释 |
 | [日期关联与新旧规则对照](docs/18-date-association.md) | 表头分组、日期与列归属、非年份保护和完整 OCR 核验 |
 | [新公司诊断与参考修正](docs/17-new-issuer-transfer.md) | NVIDIA 来源、可见页坐标、失效记录、同一 OCR 重评分及工作台 |
 | [权威数据登记](docs/09-data-register.md) | 来源优先级、许可与适用性 |
