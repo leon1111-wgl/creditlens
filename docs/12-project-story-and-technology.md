@@ -1,6 +1,6 @@
 # CreditLens：项目用途、企业需求与技术实现
 
-更新：2026-10-25。功能与运行依据见[当前状态](06-implementation-status.md)，简历可用稿见[项目与面试讲解](14-resume-and-interview.md)。
+更新：2026-10-25。功能与运行依据见[当前状态](06-implementation-status.md)。
 
 ## CreditLens 是什么
 
@@ -28,7 +28,7 @@
 
 CreditLens围绕这段工作设计：让材料容易找到，让计算保持同一口径，让不确定的地方有明确去向。研究员负责提出问题和解释，程序负责核对可以写成规则的条件，复核员检查提交时那一版材料。未来加入预测和因子，也要回答它在什么数据、什么时期有效，不能只展示一条好看的曲线。
 
-需求来自岗位材料、官方产品和公开研究资料，现阶段尚无客户访谈或机构部署效果。具体依据见[岗位与业务调研](01-product-and-career.md)和[企业研究任务设计](research/2026-10-25-enterprise-research-design.md)。
+需求来自岗位材料、官方产品和公开研究资料，现阶段尚无客户访谈或机构部署效果。具体依据见[岗位与业务调研](01-product-requirements.md)和[企业研究任务设计](research/2026-10-25-enterprise-research-design.md)。
 
 ## 一项研究怎样在团队里走完
 

@@ -84,7 +84,7 @@ v0.6 wheel 已构建并确认包含文档页面与新 Python 模块；独立安�
 
 本地 168 项测试全部通过（包含 15 个控制场景）。主开发与独立顾问分别复算原始 OCR 的 42 项字词事实和 80 项退化结果。桌面 1280px 与窄屏 497px（内容 482px）完成筛选、父行展开、密钥输入清空旧结果和导出；浏览器实际 JSON 与 HTTP 响应一致。测试不代表通用识别准确率、真实扫描鲁棒性或机构上线。完整键盘、跨浏览器与故障注入仍待验证。
 
-[完整简历材料](14-resume-and-interview.md) · [并行机制](15-parallel-iteration.md) · [桌面实验页](images/document-experiments-desktop.png) · [窄屏证据](images/document-experiments-narrow.png)。任务频率已改为每 15 分钟复核，已有任务继续而不重复开工。没有新增费用或租卡需求。
+[并行机制](15-parallel-iteration.md) · [桌面实验页](images/document-experiments-desktop.png) · [窄屏证据](images/document-experiments-narrow.png)。任务频率已改为每 15 分钟复核，已有任务继续而不重复开工。没有新增费用或租卡需求。
 
 v0.7 wheel 已构建，并确认包含五个页面及新增实验模块；仍须从仓库根目录运行，独立安装的数据分发未验收。
 
@@ -118,7 +118,7 @@ v0.8 实现提交 `c736b2240cb4d8a443cfae71b4e02bb3232b44c9` 与三个并行分�
 
 已验证285项测试运行、284通过、1项Windows文件符号链接权限跳过；15个财务控制场景另跑全过。七个本地原始文件核验后，整页与公开片段的新结果经父行索引映射逐字段相同；21份相关旧文件不变。桌面与窄屏、表头筛选、原页定位切换、访问密钥清空、实际JSON导出均检查。完整证据见[本轮验收](../artifacts/date-diagnostic-verification.json)与[复现说明](18-date-association.md)。未新增训练、实时数据或线上部署。
 
-v0.8.1 实现提交 `9e1ad7d024a319c921dd3d06e049c5061fe03532` 已发布；[远端 CI](https://github.com/leon1111-wgl/creditlens/actions/runs/40176005378) 通过。Linux 同为285项运行、284通过、1项Windows Junction场景跳过，文件符号链接场景实际运行；15个财务控制、编译、文档链接及六页脚本语法检查通过。三条并行分支已同步实现，主页提交 `1adeb4e4c6008ca5e2e44813888976f6292bda57` 已发布，主页与简历说明经目标账号连接读回核验。提交保持核验的 leon1111-wgl 身份；应用仍只在本机运行。
+v0.8.1 实现提交 `9e1ad7d024a319c921dd3d06e049c5061fe03532` 已发布；[远端 CI](https://github.com/leon1111-wgl/creditlens/actions/runs/40176005378) 通过。Linux 同为285项运行、284通过、1项Windows Junction场景跳过，文件符号链接场景实际运行；15个财务控制、编译、文档链接及六页脚本语法检查通过。三条并行分支已同步实现，主页提交 `1adeb4e4c6008ca5e2e44813888976f6292bda57` 已发布，主页说明经目标账号连接读回核验。提交保持核验的 leon1111-wgl 身份；应用仍只在本机运行。
 
 ## v0.9.0：固定规则后换公司检查
 
@@ -126,7 +126,7 @@ v0.8.1 实现提交 `9e1ad7d024a319c921dd3d06e049c5061fe03532` 已发布；[远�
 
 本地326项测试运行、325通过、1项文件符号链接权限跳过；15项财务控制、编译检查通过。新增只读API、哈希绑定图片、预览保护、实验切换、字段与表头筛选；桌面／窄屏和实际导出已验证。已知申报事件不等于当前IR PDF的历史存在证明，AMD仅用于文档检查，不进入信用案件或历史预测。当前无新增训练或费用。
 
-实现 `1e10ade` 已发布，远端 [CI 40178340407](https://github.com/leon1111-wgl/creditlens/actions/runs/40178340407) 通过326项运行／325通过，Linux跳过Windows Junction用例。主页同步至 `9511ead`。求职材料新增港大公开课题参照和在校研究背景稿，具体课题参与及反馈不由公开搜索推定。
+实现 `1e10ade` 已发布，远端 [CI 40178340407](https://github.com/leon1111-wgl/creditlens/actions/runs/40178340407) 通过326项运行／325通过，Linux跳过Windows Junction用例。主页同步至 `9511ead`。
 
 ## v0.9.0 展示与研究设计更新
 

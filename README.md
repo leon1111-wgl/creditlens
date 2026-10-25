@@ -16,7 +16,7 @@ CreditLens 给投研和风险团队做三件事：查到财务指标并回到原
 
 [项目做什么、企业为什么需要、技术如何实现](docs/12-project-story-and-technology.md) · [独立调研建议](docs/research/README.md)
 
-[简历项目描述与技术讲解](docs/14-resume-and-interview.md) · [并行迭代与验收规则](docs/15-parallel-iteration.md)
+[并行迭代与验收规则](docs/15-parallel-iteration.md)
 
 [工作台新版界面](docs/images/workspace-palette-desktop.png)：六个业务页面统一为 Times New Roman 与宋体排版、浅灰导航和蓝色操作按钮；[本轮记录](docs/iterations/2026-10-25-17.md)。
 
@@ -199,7 +199,7 @@ FastAPI、Pydantic、Decimal、SQLite 构成模块化单体。上图是已经实
 | 文档 | 解决的问题 |
 |---|---|
 | [通俗制作报告](docs/iterations/README.md) | 每轮为何做、做了什么、怎样验证 |
-| [岗位与企业问题](docs/01-product-and-career.md) | 10 份岗位映射、目标用户与求职路线 |
+| [产品需求与企业问题](docs/01-product-requirements.md) | 目标用户、企业问题与公开需求依据 |
 | [开源与论文](docs/02-open-source-and-papers.md) | 13 个开源项目、首轮 15 项研究与基准 |
 | [架构与数据](docs/03-architecture-and-data.md) | 当前实现与完整目标的区别 |
 | [实验与 A100](docs/04-experiments-and-compute.md) | 同预算基线、消融、租卡启动条件 |
