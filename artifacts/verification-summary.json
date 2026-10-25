@@ -3,7 +3,7 @@
   "timezone": "Asia/Shanghai",
   "python": "3.12.14",
   "unit_and_api_tests": {
-    "run": 113,
+    "run": 134,
     "failures": 0,
     "errors": 0
   },
@@ -11,7 +11,7 @@
   "local_markdown_file_links": "passed",
   "live_http_health": {
     "status": "ok",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "rule_version": "cash-debt-review-3",
     "cases": 883,
     "mode": "public_benchmark_local",
@@ -41,10 +41,10 @@
     "admin": true
   },
   "github_publish": "Published project main and profile entry to leon1111-wgl after user completed local Git Credential Manager authorization. Earlier connector write failure has not been independently retested.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "official_financial_facts": 42,
   "source_linked_observed_factors": 5,
-  "real_model_evaluation": "not run",
+  "real_model_evaluation": "CPU OCR known-location cross-check executed; LLM/VLM quality, training and forecasting not run",
   "model_transport_tests": "passed with mock responses",
   "prediction_training": "not run; no outcome labels",
   "docker": "not installed; image build and run unverified",
@@ -68,7 +68,7 @@
     "after_passed": 15,
     "before_implementation": "03d55b4",
     "after_rule_version": "cash-debt-review-2",
-    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 113 tests; not model accuracy",
+    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 134 tests; not model accuracy",
     "latest_verified_rule_version": "cash-debt-review-3"
   },
   "pdf_evidence": {
@@ -256,6 +256,69 @@
       "remote_story_and_profile": "verified through target GitHub connector",
       "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
       "scope": "Repository and profile published; application runs locally, not a hosted production service."
+    }
+  },
+  "iteration10": {
+    "version": "0.6.0",
+    "date": "2026-10-25",
+    "route": "/documents",
+    "is_live_data": false,
+    "new_tests": 21,
+    "total_tests": 134,
+    "report": "artifacts/document-ai-report.json",
+    "summary": {
+      "consistent": 39,
+      "conflict": 0,
+      "insufficient": 3
+    },
+    "pages": 6,
+    "known_location_facts": 42,
+    "scope": "Image-only full-page OCR followed by known-location financial-field checks on development examples. Not blind extraction accuracy or authenticity.",
+    "real_inference": "RapidOCR 3.10.0 / PP-OCRv6 small / ONNX Runtime 1.31.0 CPU",
+    "raw_ocr_hashes_and_full_page_recalculation": "verified against all six local OCR outputs",
+    "gpu_used": false,
+    "training": "not run",
+    "paid_api": "not used",
+    "browser_qa": {
+      "desktop_viewport": 1280,
+      "narrow_viewport": 497,
+      "narrow_content_width": 482,
+      "verified": [
+        "company and fact switching",
+        "insufficient evidence filter",
+        "empty filter removes previous image",
+        "whole-page and region view",
+        "split header and section fields",
+        "download JSON equals API"
+      ],
+      "screenshots": [
+        "docs/images/document-ai-desktop.png",
+        "docs/images/document-ai-narrow.png"
+      ],
+      "not_verified": [
+        "full keyboard flow",
+        "cross browser",
+        "network fault injection"
+      ]
+    },
+    "advisory": {
+      "branch": "research/advisory",
+      "commit": "ad6cafd70e50bc8b68d1f5ef4b93347caccb1522",
+      "report": "docs/research/2026-10-25-advisory-02.md",
+      "fixed_findings": [
+        "threshold not propagated",
+        "report not bound to source facts and recomputed counts",
+        "duplicate OCR observations lost during validation"
+      ]
+    },
+    "wheel": {
+      "built": true,
+      "documents_html_included": true,
+      "standalone_install_runtime": "not verified; run from repository root"
+    },
+    "publication": {
+      "status": "pending",
+      "remote_ci": "pending"
     }
   }
 }

@@ -1,0 +1,20 @@
+# Optional local CPU image recognition; not imported by the web service.
+-r requirements-pdf.lock
+rapidocr==3.10.0
+onnxruntime==1.31.0
+numpy==2.5.4
+opencv-python-headless==5.0.0.93
+omegaconf==2.4.0
+pyclipper==1.4.0
+Shapely==2.2.0
+PyYAML==6.0.3
+six==1.17.0
+tqdm==4.70.1
+requests==2.34.2
+colorlog==6.12.0
+colorama==0.4.6
+flatbuffers==25.12.19
+packaging==26.3
+protobuf==7.36.2
+urllib3==2.8.0
+charset-normalizer==3.5.2

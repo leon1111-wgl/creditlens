@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Query, Request, Depends, Header
-from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse
+from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse, Response
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -19,6 +19,7 @@ from .workflow import AccessControl, Actor, WorkflowService, render_memo
 from .planner import LocalPlanner
 from .temporal import TemporalPack
 from .research import research_view
+from .visual_store import VisualStore, VisualArtifactError
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -132,6 +133,28 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     @application.get("/research", include_in_schema=False)
     def research():
         return FileResponse(ROOT / "creditlens/research.html")
+
+    @application.get("/documents", include_in_schema=False)
+    def document_workspace():
+        return FileResponse(ROOT / "creditlens/documents.html")
+
+    @application.get("/api/documents")
+    def document_evidence(identity: Actor = Depends(actor)):
+        try:
+            return VisualStore(ROOT).view()
+        except FileNotFoundError as exc:
+            raise HTTPException(503, str(exc)) from exc
+        except VisualArtifactError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @application.get("/api/documents/{document_id}/pages/{page}.png")
+    def document_image(document_id: str, page: int, identity: Actor = Depends(actor)):
+        try:
+            return Response(VisualStore(ROOT).image(document_id, page), media_type="image/png")
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except VisualArtifactError as exc:
+            raise HTTPException(409, str(exc)) from exc
 
     @application.get("/api/research/quarters")
     def research_quarters(identity: Actor = Depends(actor), as_of: date = date(2025, 7, 31),
