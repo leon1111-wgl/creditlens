@@ -10,6 +10,7 @@ from creditlens.diligence import Fact, Source, StrictModel, digest
 
 
 METRICS = ("cfo", "capex", "net_income")
+TEMPORAL_RULE_VERSION = "calendar-quarter-2"
 
 
 def month_start(start: date, offset: int) -> date:
@@ -115,8 +116,11 @@ def quarterly_snapshot(pack: TemporalPack, as_of: date) -> dict:
     evidence_payload = {"facts": [f.model_dump(mode="json") for f in visible],
                         "sources": [s.model_dump(mode="json") for s in sources.values()]}
     return {"entity_id": pack.entity_id, "as_of": as_of.isoformat(),
+            "rule_version": TEMPORAL_RULE_VERSION,
             "availability_policy": "publication_date_plus_one_calendar_day",
-            "snapshot_sha256": digest(evidence_payload), "quarters": rows,
+            "snapshot_sha256": digest({"entity_id": pack.entity_id, "as_of": as_of.isoformat(),
+                                       "fiscal_year_start": pack.fiscal_year_start.isoformat(), **evidence_payload}),
+            "quarters": rows,
             "evidence": evidence_payload, "usable_for_prediction_training": False,
             "limitations": ["Current website captures do not establish historical vintage integrity.",
                             "Derived values need restatement and scope review; no automatic approval.",

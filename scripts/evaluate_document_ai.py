@@ -1,0 +1,125 @@
+"""Run real CPU OCR on full official PDF pages, then cross-check known facts.
+
+No reference values, labels or boxes are supplied to the OCR model. Page
+selection and subsequent comparisons use existing development annotations.
+Raw PDFs, full OCR text and page images remain local and are not published.
+"""
+from collections import Counter
+from datetime import datetime, timezone
+import argparse
+import hashlib
+from importlib.metadata import version
+import json
+from pathlib import Path
+import platform
+import sys
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from creditlens.diligence import CasePack, digest
+from creditlens.visual import OcrPage, VISUAL_RULE_VERSION, crosscheck_fact
+from scripts.build_pdf_pack import verified_pdf
+
+DOCUMENTS = {"msft": "msft-fy2025-pdf.json", "aapl": "aapl-fy2025-pdf.json"}
+
+
+def write_json(path, payload):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
+
+
+def run(*, download=False, output=ROOT/"artifacts/document-ai-report.json", local_dir=ROOT/".run/document-ai"):
+    import pypdfium2 as pdfium
+    import rapidocr
+    from rapidocr import RapidOCR, EngineType, ModelType, OCRVersion
+    profile = json.loads((ROOT/"configs/document-ai.json").read_text(encoding="utf-8"))
+    params = {"EngineConfig.onnxruntime.intra_op_num_threads": profile["intra_op_num_threads"],
+              "EngineConfig.onnxruntime.inter_op_num_threads": profile["inter_op_num_threads"],
+              "EngineConfig.onnxruntime.use_cuda": False, "EngineConfig.onnxruntime.use_dml": False,
+              "Global.text_score": 0.0, "Global.use_cls": False,
+              "Det.limit_side_len": profile["det_limit_side_len"]}
+    for model in profile["models"]:
+        path = Path(rapidocr.__file__).parent/"models"/model["filename"]
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != model["sha256"]:
+            raise ValueError("Installed OCR weight does not match pinned profile: "+model["filename"])
+        for key, val in {"model_path": str(path), "engine_type": EngineType.ONNXRUNTIME,
+                         "ocr_version": OCRVersion.PPOCRV6, "model_type": ModelType.SMALL}.items():
+            params[model["stage"]+"."+key] = val
+    engine = RapidOCR(params=params)
+    report = {"schema_version": 1, "generated_at": datetime.now(timezone.utc).isoformat(),
+              "rule_version": VISUAL_RULE_VERSION, "profile": profile, "profile_sha256": digest(profile),
+              "environment": {"python": platform.python_version(), "os": platform.system(),
+                              "packages": {name: version(name) for name in ["rapidocr", "onnxruntime", "numpy", "pypdfium2", "Pillow"]}},
+              "scope": "Known financial-fact regions, after full-page image-only OCR; development examples, not blind extraction accuracy or authenticity.",
+              "documents": []}
+    for doc_id, pack_file in DOCUMENTS.items():
+        pack = CasePack.model_validate_json((ROOT/"data/examples"/pack_file).read_text(encoding="utf-8"))
+        source = pack.sources[0]
+        pdf_path = ROOT/"data/raw"/f"{doc_id}-fy2025-10k.pdf"
+        receipt = verified_pdf(pdf_path, download, url=str(source.url), sha256=source.sha256)
+        document = {"id": doc_id, "company": pack.company, "source": source.model_dump(mode="json"),
+                    "retrieved_at": receipt["retrieved_at"], "pack_sha256": digest(pack.model_dump(mode="json")),
+                    "pages": [], "facts": []}
+        directory = local_dir/doc_id
+        directory.mkdir(parents=True, exist_ok=True)
+        with pdfium.PdfDocument(pdf_path) as pdf:
+            for page_number in sorted({f.pdf_location.page for f in pack.facts}):
+                page = pdf[page_number-1]
+                try:
+                    if page.get_rotation() != 0:
+                        raise ValueError("Rotated pages require a separate profile")
+                    width, height = page.get_width(), page.get_height()
+                    bitmap = page.render(scale=profile["render_scale"])
+                    try:
+                        image = bitmap.to_pil().copy()
+                    finally:
+                        bitmap.close()
+                finally:
+                    page.close()
+                image_path = directory/f"page-{page_number}.png"
+                image.save(image_path)
+                # Full unannotated image only. Do not pass known facts or crop boxes.
+                started = time.perf_counter()
+                result = engine(str(image_path))
+                elapsed = time.perf_counter()-started
+                observations = []
+                if result.boxes is not None:
+                    for text, score, quad in zip(result.txts, result.scores, result.boxes):
+                        observations.append({"text": text, "confidence": float(score), "bbox": {
+                            "x0": max(0, float(quad[:, 0].min())*width/image.width),
+                            "top": max(0, float(quad[:, 1].min())*height/image.height),
+                            "x1": min(width, float(quad[:, 0].max())*width/image.width),
+                            "bottom": min(height, float(quad[:, 1].max())*height/image.height)}})
+                ocr = OcrPage(page=page_number, width=width, height=height, spans=observations)
+                write_json(directory/f"ocr-{page_number}.json", ocr.model_dump(mode="json"))
+                document["pages"].append({"page": page_number, "width": width, "height": height,
+                                          "image_width": image.width, "image_height": image.height,
+                                          "image_sha256": hashlib.sha256(image_path.read_bytes()).hexdigest(),
+                                          "ocr_sha256": digest(ocr.model_dump(mode="json")),
+                                          "ocr_lines": len(observations), "elapsed_seconds": round(elapsed, 4)})
+                # Compare only after full-page recognition has completed.
+                document["facts"] += [crosscheck_fact(f, ocr, min_confidence=profile["min_confidence"])
+                                      for f in pack.facts if f.pdf_location.page == page_number]
+                print(json.dumps({"document": doc_id, "page": page_number, "ocr_lines": len(observations),
+                                  "seconds": round(elapsed, 3)}), flush=True)
+        counts = Counter(f["status"] for f in document["facts"])
+        document["summary"] = {state: counts[state] for state in ["consistent", "conflict", "insufficient"]}
+        report["documents"].append(document)
+    # Record actual active providers, not only requested configuration.
+    report["environment"]["providers"] = {
+        "detection": engine.text_det.session.session.get_providers(),
+        "recognition": engine.text_rec.session.session.get_providers()}
+    totals = Counter(f["status"] for d in report["documents"] for f in d["facts"])
+    report["summary"] = {state: totals[state] for state in ["consistent", "conflict", "insufficient"]}
+    write_json(output, report)
+    print(json.dumps({"summary": report["summary"], "output": str(output)}), flush=True)
+    return report
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--download", action="store_true", help="Download only registered official PDFs if missing")
+    parser.add_argument("--output", type=Path, default=ROOT/"artifacts/document-ai-report.json")
+    args = parser.parse_args()
+    run(download=args.download, output=args.output)

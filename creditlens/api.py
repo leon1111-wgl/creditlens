@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Query, Request, Depends, Header
-from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse
+from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse, Response
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -17,6 +17,10 @@ from .diligence import CasePack, RULE_VERSION
 from . import __version__
 from .workflow import AccessControl, Actor, WorkflowService, render_memo
 from .planner import LocalPlanner
+from .temporal import TemporalPack
+from .research import research_view
+from .visual_store import VisualStore, VisualArtifactError
+from .experiments import experiment_view
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -89,7 +93,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         yield
 
     application = FastAPI(title="CreditLens", version=__version__,
-                          description="Source-linked credit review workflow and benchmark laboratory.",
+                          description="Financial research workbench, source-linked review and benchmark laboratory.",
                           lifespan=lifespan)
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "localhost", "testserver"])
 
@@ -126,6 +130,53 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     @application.get("/lab", include_in_schema=False)
     def lab():
         return FileResponse(ROOT / "creditlens/workbench.html")
+
+    @application.get("/research", include_in_schema=False)
+    def research():
+        return FileResponse(ROOT / "creditlens/research.html")
+
+    @application.get("/documents", include_in_schema=False)
+    def document_workspace():
+        return FileResponse(ROOT / "creditlens/documents.html")
+
+    @application.get("/experiments", include_in_schema=False)
+    def experiment_workspace():
+        return FileResponse(ROOT / "creditlens/experiments.html")
+
+    @application.get("/api/experiments")
+    def experiment_records(identity: Actor = Depends(actor)):
+        try:
+            return experiment_view(ROOT)
+        except FileNotFoundError as exc:
+            raise HTTPException(503, "Frozen experiment files are unavailable") from exc
+        except VisualArtifactError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @application.get("/api/documents")
+    def document_evidence(identity: Actor = Depends(actor)):
+        try:
+            return VisualStore(ROOT).view()
+        except FileNotFoundError as exc:
+            raise HTTPException(503, str(exc)) from exc
+        except VisualArtifactError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @application.get("/api/documents/{document_id}/pages/{page}.png")
+    def document_image(document_id: str, page: int, identity: Actor = Depends(actor)):
+        try:
+            return Response(VisualStore(ROOT).image(document_id, page), media_type="image/png")
+        except FileNotFoundError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except VisualArtifactError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @application.get("/api/research/quarters")
+    def research_quarters(identity: Actor = Depends(actor), as_of: date = date(2025, 7, 31),
+                          dataset: Literal["msft-fy2025"] = "msft-fy2025"):
+        # Registered public examples only. No user path, private case or tenant data.
+        pack = TemporalPack.model_validate_json(
+            (ROOT / "data/examples/msft-fy2025-temporal.json").read_text(encoding="utf-8"))
+        return research_view(pack, as_of)
 
     @application.get("/health")
     def health():

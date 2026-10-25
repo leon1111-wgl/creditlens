@@ -45,6 +45,12 @@ CREDITLENS_STATE_DIR 默认 data/，保存 audit.sqlite 和 workflow.sqlite。�
 
 [Dockerfile](../Dockerfile) 提供非 root 用户、状态目录与健康检查。当前环境无 Docker，**尚未构建或运行验证**。候选命令：`docker build -t creditlens .`，`docker run --rm -p 127.0.0.1:8765:8765 creditlens`。持久卷需允许 UID 10001 写入；上线前补测构建、持久化和恢复。
 
+## 季度研究页面与接口
+
+`/research` 提供只读季度研究。`GET /api/research/quarters?dataset=msft-fy2025&as_of=2025-01-30` 沿用既有身份控制；API-key 模式需要 Bearer key，未授权返回 401。只有登记的公开样例，未知数据集与非法日期返回 422；不接受本地路径，也不读取或修改私有案件。授权租户共享公开样例，不代表可以跨租户访问私有数据。
+
+图表、依据与 JSON 导出使用同一响应；日期或密钥变化后隐藏旧结果并丢弃旧异步响应。密钥只用于当前页面，不持久保存。季度规则为 `calendar-quarter-2`，信用复核规则不变。输入指纹绑定实体、财年、截止日和可见证据，不证明历史版本或计算正确性。
+
 ## 本地模型规划器
 
 核心工作流不依赖模型。creditlens/planner.py 面向兼容 chat-completions / JSON Schema 的本地服务，例如 vLLM [structured outputs](https://docs.vllm.ai/en/latest/features/structured_outputs/)，具体版本兼容性需实测。
@@ -53,7 +59,7 @@ CREDITLENS_STATE_DIR 默认 data/，保存 audit.sqlite 和 workflow.sqlite。�
 
 模型只能提出计算或证据不足；最多 12 步加减乘除。执行器重读原单元格，拒绝未召回来源、错误引用和任意代码；限制上下文、响应体积和时长。只接受 loopback HTTP，关闭环境代理与重定向。约束限制工具权限，不证明公式语义或金融判断正确。
 
-模拟传输测试覆盖合法计划、虚构引用、非法操作、未来证据排除、坏响应和远程地址拒绝。**尚无真实模型推理分数或吞吐结果**。下一阶段固定模型 revision、提示词、工具预算和数据，比较规则、普通 RAG、受限工具基线，再决定是否微调。
+模拟传输测试覆盖合法计划、虚构引用、非法操作、未来证据排除、坏响应和远程地址拒绝。**此语言模型接口尚无真实推理分数或吞吐结果；OCR 实验见下方**。下一阶段固定模型 revision、提示词、工具预算和数据，比较规则、普通 RAG、受限工具基线，再决定是否微调。
 
 ## PDF 证据重建
 
@@ -66,3 +72,11 @@ Fact 可带 `pdf_location`，保存 1 起算页码、页面尺寸及金额/行�
 苹果重建命令为 `python scripts/build_apple_pack.py --download --render-dir .run/pdf-preview`，使用相同可选依赖。`pdf_location.section` 记录同名行的分区起止标题和框；行必须位于该分区内。页码为物理页，locator 另记印刷页码。
 
 `cash_equivalents` 与 `short_investments` 可替代 `liquid_assets` 合计输入，必须同时有效、同日同单位且不与合计并存，公式引用保留四个源事实。`fiscal_calendar=week_52_53` 显式启用周历检查；相隔 364／371 天的期末可比较，流量还须完整 52／53 周且期间长度相当。未知日历不自动推断，53 周与 52 周流量不直接输出未经调整的同比。
+
+## 文档视觉核对（v0.6）
+
+`/documents` 提供只读界面；`GET /api/documents` 返回校验后的运行记录，`GET /api/documents/{document_id}/pages/{page}.png` 返回本地登记页图。API-key 模式下两个 API 都验证身份，允许 viewer；页面图片通过带请求头的 fetch 获取，不把密钥写进 URL。当前仅支持同一组公开微软、苹果案例，不是私有租户文档上传服务。
+
+记录缺失返回 503，结构、引用或配置不一致返回 409；未知／缺失本地图片返回 404，图片哈希不一致返回 409。服务不因 HTTP 请求下载文档或启动 OCR。读取时对照当前事实包重算所有检查及统计；模型输出、参考和管理员权限仍有明确可信边界，不等于防伪鉴定。
+
+安装可选 `requirements-ocr.lock`，执行 `python scripts/evaluate_document_ai.py --download` 可在 CPU 重跑。完整原页和 OCR 文本留在本地，仓库中保存必要观察与运行记录。详细配置、依赖、许可和失败结果见 [实验说明](13-document-ai-experiment.md)。

@@ -1,8 +1,9 @@
 {
   "entity_id": "MSFT",
   "as_of": "2025-07-31",
+  "rule_version": "calendar-quarter-2",
   "availability_policy": "publication_date_plus_one_calendar_day",
-  "snapshot_sha256": "2928ab27d41ab336f78d5fbf88f7c6a21f20ae6d8549f8fb032abebec5874445",
+  "snapshot_sha256": "e5c5598eab02c42f8c57f8af3dced813ad9854c141ba94716767eb21a5a1c972",
   "quarters": [
     {
       "quarter": 1,

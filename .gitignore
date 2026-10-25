@@ -13,6 +13,9 @@ build/
 dist/
 artifacts/workbench-syntax.js
 artifacts/review-syntax.js
+artifacts/research-syntax.js
+artifacts/documents-syntax.js
+artifacts/experiments-syntax.js
 artifacts/service.pid
 artifacts/service-v02.pid
 .run/

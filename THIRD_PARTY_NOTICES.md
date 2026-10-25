@@ -36,3 +36,9 @@ The offline document adapter uses pypdfium2/PDFium and Pillow through installed 
 ## Apple public disclosures
 
 The Apple example uses limited numerical facts and locating labels from the FY2025 Form 10-K, accession 0000320193-25-000079, filed 2025-10-31. The PDF and filing HTML URLs, retrieved hashes, dates, page positions and a developer-transcribed reference are registered in data/examples/aapl-pdf-provenance.json. Full source documents and rendered source pages are excluded. Apple retains rights to the underlying material; the repository MIT license does not relicense it. This project is not affiliated with or endorsed by Apple, and this historical development case is not a current credit or investment recommendation.
+
+## Optional OCR inference
+
+RapidOCR 3.10.0 and the selected PP-OCRv6 small ONNX detection/recognition artifacts are attributed to the RapidOCR maintainers and upstream PaddleOCR contributors respectively. The code and the listed model artifacts are covered by Apache-2.0 under their upstream notices; model coverage is documented at https://rapidai.github.io/RapidOCRDocs/main/model_licenses/ and code at https://github.com/RapidAI/RapidOCR/blob/main/LICENSE. Exact artifact hashes and source URLs are recorded in configs/document-ai.json. This project does not redistribute the weights or claim their model results as its own algorithmic contribution.
+
+ONNX Runtime, OpenCV, NumPy and the other optional dependencies retain their own licenses. Installed package notices must be preserved when redistributing those packages; requirements-ocr.lock records the tested versions. The software license does not grant rights to the underlying issuer PDFs. Full rendered source pages and full OCR outputs remain local; the public report and UI screenshots retain only limited evidence excerpts needed to explain the cross-check. No affiliation with or endorsement by the issuers or model authors is implied.
