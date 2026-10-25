@@ -1,0 +1,3893 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-25T05:57:58.423354+00:00",
+  "experiment": "synthetic_coordinate_preserving_stress",
+  "suite_version": "visual-robustness-1",
+  "rule_version": "visual-evidence-1",
+  "config": {
+    "schema_version": 1,
+    "suite_version": "visual-robustness-1",
+    "frozen_before_inference": true,
+    "selection_reason": "Fixed before the first stress run: Microsoft cash-flow page includes signed amounts and known merged cells; Apple balance-sheet page includes split headers and financial sections. Development pages, not a representative sample.",
+    "source_report_sha256": "ff3d101f408813710c98bd12b5d7b3a2d7dd70840d0eaaccc1beec62af58aef7",
+    "source_profile_sha256": "1643c3bc11a0b01ed7efe5c0167634ce3aaa755fd69d5bda9bdc5be07d6576c4",
+    "pages": [
+      {
+        "document_id": "msft",
+        "page": 53,
+        "image_sha256": "d33368ebe49f7876e54df1e7aad0687844e037d414f442de15ad3326aa96f24f",
+        "pack_sha256": "bd776c972631cbc6ff6e0cba585cdab2c32d875d21e950ae43987ffc6a033850"
+      },
+      {
+        "document_id": "aapl",
+        "page": 34,
+        "image_sha256": "9b6e4beaf4a678baa07f015d2e11ed49d8bee455e649cb7596d9e1949c682c39",
+        "pack_sha256": "e26e93213bd8041fdd93b228749a468ce241952e673776cb5fa37ad11f2fec43"
+      }
+    ],
+    "variants": [
+      {
+        "id": "clean",
+        "operation": "identity",
+        "radius": null,
+        "factor": null,
+        "quality": null
+      },
+      {
+        "id": "blur_0_7",
+        "operation": "gaussian_blur",
+        "radius": 0.7,
+        "factor": null,
+        "quality": null
+      },
+      {
+        "id": "contrast_0_65",
+        "operation": "contrast",
+        "radius": null,
+        "factor": 0.65,
+        "quality": null
+      },
+      {
+        "id": "jpeg_60",
+        "operation": "jpeg",
+        "radius": null,
+        "factor": null,
+        "quality": 60
+      }
+    ]
+  },
+  "config_sha256": "5e67806275c4c88f388180d573791fd9527fc057a002ec6197ed54bc7c64f501",
+  "profile": {
+    "profile_version": "full-page-ocr-crosscheck-1",
+    "render_scale": 2,
+    "min_confidence": 0.9,
+    "engine": "onnxruntime",
+    "execution_provider": "CPUExecutionProvider",
+    "intra_op_num_threads": 4,
+    "inter_op_num_threads": 1,
+    "det_limit_side_len": 1280,
+    "use_cls": false,
+    "model_license": "Apache-2.0",
+    "model_license_source": "https://rapidai.github.io/RapidOCRDocs/main/model_licenses/",
+    "models": [
+      {
+        "stage": "Det",
+        "filename": "PP-OCRv6_det_small.onnx",
+        "sha256": "090f04abcd9d9a7498bc4ebf677e4cb9bdce1fe4197ddb7e529f1ef44e1ff94f",
+        "source_url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv6/det/PP-OCRv6_det_small.onnx"
+      },
+      {
+        "stage": "Rec",
+        "filename": "PP-OCRv6_rec_small.onnx",
+        "sha256": "6f327246b50388f3c176ae304bd95767ea6dc0c9ae92153ef8cbe210b3c14884",
+        "source_url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv6/rec/PP-OCRv6_rec_small.onnx"
+      }
+    ]
+  },
+  "profile_sha256": "1643c3bc11a0b01ed7efe5c0167634ce3aaa755fd69d5bda9bdc5be07d6576c4",
+  "environment": {
+    "python": "3.12.14",
+    "os": "Windows",
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.0",
+      "numpy": "2.5.4",
+      "Pillow": "13.0.0"
+    },
+    "providers": {
+      "detection": [
+        "CPUExecutionProvider"
+      ],
+      "recognition": [
+        "CPUExecutionProvider"
+      ]
+    }
+  },
+  "scope": "Fixed known-location development facts on two issuer pages. Synthetic degradations, not real scans or unseen-layout accuracy.",
+  "documents": [
+    {
+      "id": "msft",
+      "company": "Microsoft Corporation",
+      "page": 53,
+      "source": {
+        "id": "msft-fy25-10k-pdf",
+        "title": "Microsoft FY2025 Form 10-K / official PDF",
+        "url": "https://microsoft.gcs-web.com/static-files/9640e86d-a99f-4502-934d-1d3c883fa786",
+        "published_at": "2025-07-30",
+        "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+      },
+      "pack_sha256": "bd776c972631cbc6ff6e0cba585cdab2c32d875d21e950ae43987ffc6a033850",
+      "source_image_sha256": "d33368ebe49f7876e54df1e7aad0687844e037d414f442de15ad3326aa96f24f",
+      "width": 594.9599609375,
+      "height": 841.9199829101562,
+      "image_width": 1190,
+      "image_height": 1684,
+      "registered_fact_ids": [
+        "cfo-2025",
+        "cfo-2024",
+        "capex-2025",
+        "capex-2024",
+        "net_income-2025",
+        "net_income-2024"
+      ],
+      "conditions": [
+        {
+          "id": "clean",
+          "synthetic_degradation": false,
+          "transform": {
+            "id": "clean",
+            "operation": "identity"
+          },
+          "image_sha256": "d33368ebe49f7876e54df1e7aad0687844e037d414f442de15ad3326aa96f24f",
+          "ocr_sha256": "c0bc9eb4710e4fd508433e4670acf66c96cf070dce50f05df38eb7fe8606e4bf",
+          "ocr_lines": 155,
+          "elapsed_seconds": 2.5606,
+          "summary": {
+            "consistent": 4,
+            "conflict": 0,
+            "insufficient": 2
+          },
+          "compared_with_clean": {
+            "fact_count": 6,
+            "transitions": {
+              "consistent_to_consistent": 4,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 0,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 2
+            },
+            "status_changed": 0,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 0
+          },
+          "facts": [
+            {
+              "fact_id": "cfo-2025",
+              "label": "经营活动现金流",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "cfo-2024",
+              "label": "经营活动现金流",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "capex-2025",
+              "label": "固定资产购建现金流出",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "capex-2024",
+              "label": "固定资产购建现金流出",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "net_income-2025",
+              "label": "净利润",
+              "page": 53,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "101,832",
+                  "region": {
+                    "x0": 396.345,
+                    "top": 116.535,
+                    "x1": 427.703,
+                    "bottom": 124.534
+                  },
+                  "observations": [
+                    {
+                      "text": "101,832 $",
+                      "confidence": 0.94422,
+                      "bbox": {
+                        "x0": 393.9734867384454,
+                        "top": 114.48911881616733,
+                        "x1": 445.9699875262605,
+                        "bottom": 125.48807346226201
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "net_income-2024",
+              "label": "净利润",
+              "page": 53,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "88,136",
+                  "region": {
+                    "x0": 473.238,
+                    "top": 116.535,
+                    "x1": 499.971,
+                    "bottom": 124.372
+                  },
+                  "observations": [
+                    {
+                      "text": "88,136 $",
+                      "confidence": 0.97544,
+                      "bbox": {
+                        "x0": 470.9683052127101,
+                        "top": 114.48911881616733,
+                        "x1": 518.4651088169643,
+                        "bottom": 125.48807346226201
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            }
+          ],
+          "compared_with_saved_baseline": {
+            "fact_count": 6,
+            "transitions": {
+              "consistent_to_consistent": 4,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 0,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 2
+            },
+            "status_changed": 0,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 0
+          }
+        },
+        {
+          "id": "blur_0_7",
+          "synthetic_degradation": true,
+          "transform": {
+            "id": "blur_0_7",
+            "operation": "gaussian_blur",
+            "radius": 0.7
+          },
+          "image_sha256": "ec7cd33bf2c31028dadd2d77cfb08f164903d9bb1b928d8813f80022a3d048cc",
+          "ocr_sha256": "2a81ed56c7163e0338c61e69a58a4be9ed1d89c6b431edf03e77721e72797ac9",
+          "ocr_lines": 156,
+          "elapsed_seconds": 2.4145,
+          "summary": {
+            "consistent": 4,
+            "conflict": 0,
+            "insufficient": 2
+          },
+          "compared_with_clean": {
+            "fact_count": 6,
+            "transitions": {
+              "consistent_to_consistent": 4,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 0,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 2
+            },
+            "status_changed": 0,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 0
+          },
+          "facts": [
+            {
+              "fact_id": "cfo-2025",
+              "label": "经营活动现金流",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "cfo-2024",
+              "label": "经营活动现金流",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "capex-2025",
+              "label": "固定资产购建现金流出",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "capex-2024",
+              "label": "固定资产购建现金流出",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "net_income-2025",
+              "label": "净利润",
+              "page": 53,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "101,832",
+                  "region": {
+                    "x0": 396.345,
+                    "top": 116.535,
+                    "x1": 427.703,
+                    "bottom": 124.534
+                  },
+                  "observations": [
+                    {
+                      "text": "101,832 $",
+                      "confidence": 0.96554,
+                      "bbox": {
+                        "x0": 392.9735540309874,
+                        "top": 112.98926136442715,
+                        "x1": 446.4699538799895,
+                        "bottom": 126.4879784300888
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "net_income-2024",
+              "label": "净利润",
+              "page": 53,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "88,136",
+                  "region": {
+                    "x0": 473.238,
+                    "top": 116.535,
+                    "x1": 499.971,
+                    "bottom": 124.372
+                  },
+                  "observations": [
+                    {
+                      "text": "88,136 $",
+                      "confidence": 0.97723,
+                      "bbox": {
+                        "x0": 470.4683388589811,
+                        "top": 113.48921384834054,
+                        "x1": 518.9650751706932,
+                        "bottom": 125.9880259461754
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast_0_65",
+          "synthetic_degradation": true,
+          "transform": {
+            "id": "contrast_0_65",
+            "operation": "contrast",
+            "factor": 0.65
+          },
+          "image_sha256": "dfbacaac46a70ea7dedbf3d13c21203c3e94a848c5cb94dbd8122a54f3c2bddf",
+          "ocr_sha256": "2fa95e73a684bcb5e7830e32eb8e7c6252ddbae79979c7336573f573181b5ab6",
+          "ocr_lines": 156,
+          "elapsed_seconds": 2.1724,
+          "summary": {
+            "consistent": 4,
+            "conflict": 0,
+            "insufficient": 2
+          },
+          "compared_with_clean": {
+            "fact_count": 6,
+            "transitions": {
+              "consistent_to_consistent": 4,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 0,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 2
+            },
+            "status_changed": 0,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 0
+          },
+          "facts": [
+            {
+              "fact_id": "cfo-2025",
+              "label": "经营活动现金流",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "cfo-2024",
+              "label": "经营活动现金流",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "capex-2025",
+              "label": "固定资产购建现金流出",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "capex-2024",
+              "label": "固定资产购建现金流出",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "net_income-2025",
+              "label": "净利润",
+              "page": 53,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "101,832",
+                  "region": {
+                    "x0": 396.345,
+                    "top": 116.535,
+                    "x1": 427.703,
+                    "bottom": 124.534
+                  },
+                  "observations": [
+                    {
+                      "text": "101,832 $",
+                      "confidence": 0.96929,
+                      "bbox": {
+                        "x0": 393.4735203847164,
+                        "top": 113.48921384834054,
+                        "x1": 445.9699875262605,
+                        "bottom": 125.9880259461754
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "net_income-2024",
+              "label": "净利润",
+              "page": 53,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "88,136",
+                  "region": {
+                    "x0": 473.238,
+                    "top": 116.535,
+                    "x1": 499.971,
+                    "bottom": 124.372
+                  },
+                  "observations": [
+                    {
+                      "text": "88,136 $",
+                      "confidence": 0.97547,
+                      "bbox": {
+                        "x0": 470.4683388589811,
+                        "top": 113.48921384834054,
+                        "x1": 518.9650751706932,
+                        "bottom": 126.4879784300888
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "jpeg_60",
+          "synthetic_degradation": true,
+          "transform": {
+            "id": "jpeg_60",
+            "operation": "jpeg",
+            "quality": 60
+          },
+          "image_sha256": "ac7e906d478353c2ccaa44a94876768d8dbd9042f309b8079f883571ca85d37e",
+          "ocr_sha256": "0b1ee8e8bef53f5e71a7f37caf9fabe97da4079f0ed2fffc696baba85880b934",
+          "ocr_lines": 156,
+          "elapsed_seconds": 2.4013,
+          "summary": {
+            "consistent": 4,
+            "conflict": 0,
+            "insufficient": 2
+          },
+          "compared_with_clean": {
+            "fact_count": 6,
+            "transitions": {
+              "consistent_to_consistent": 4,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 0,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 2
+            },
+            "status_changed": 0,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 0
+          },
+          "facts": [
+            {
+              "fact_id": "cfo-2025",
+              "label": "经营活动现金流",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "cfo-2024",
+              "label": "经营活动现金流",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "capex-2025",
+              "label": "固定资产购建现金流出",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "capex-2024",
+              "label": "固定资产购建现金流出",
+              "page": 53,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "net_income-2025",
+              "label": "净利润",
+              "page": 53,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "101,832",
+                  "region": {
+                    "x0": 396.345,
+                    "top": 116.535,
+                    "x1": 427.703,
+                    "bottom": 124.534
+                  },
+                  "observations": [
+                    {
+                      "text": "101,832 $",
+                      "confidence": 0.98465,
+                      "bbox": {
+                        "x0": 393.9734867384454,
+                        "top": 114.48911881616733,
+                        "x1": 445.9699875262605,
+                        "bottom": 125.48807346226201
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "net_income-2024",
+              "label": "净利润",
+              "page": 53,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "88,136",
+                  "region": {
+                    "x0": 473.238,
+                    "top": 116.535,
+                    "x1": 499.971,
+                    "bottom": 124.372
+                  },
+                  "observations": [
+                    {
+                      "text": "88,136 $",
+                      "confidence": 0.98666,
+                      "bbox": {
+                        "x0": 470.9683052127101,
+                        "top": 114.48911881616733,
+                        "x1": 518.4651088169643,
+                        "bottom": 125.48807346226201
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aapl",
+      "company": "Apple Inc.",
+      "page": 34,
+      "source": {
+        "id": "aapl-fy25-10k-pdf",
+        "title": "Apple FY2025 Form 10-K / official PDF",
+        "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+        "published_at": "2025-10-31",
+        "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+      },
+      "pack_sha256": "e26e93213bd8041fdd93b228749a468ce241952e673776cb5fa37ad11f2fec43",
+      "source_image_sha256": "9b6e4beaf4a678baa07f015d2e11ed49d8bee455e649cb7596d9e1949c682c39",
+      "width": 612.0,
+      "height": 792.0,
+      "image_width": 1224,
+      "image_height": 1584,
+      "registered_fact_ids": [
+        "cash_equivalents-2025",
+        "cash_equivalents-2024",
+        "short_investments-2025",
+        "short_investments-2024",
+        "short_debt-2025",
+        "short_debt-2024",
+        "current_debt-2025",
+        "current_debt-2024",
+        "long_debt-2025",
+        "long_debt-2024",
+        "current_assets-2025",
+        "current_assets-2024",
+        "current_liabilities-2025",
+        "current_liabilities-2024"
+      ],
+      "conditions": [
+        {
+          "id": "clean",
+          "synthetic_degradation": false,
+          "transform": {
+            "id": "clean",
+            "operation": "identity"
+          },
+          "image_sha256": "9b6e4beaf4a678baa07f015d2e11ed49d8bee455e649cb7596d9e1949c682c39",
+          "ocr_sha256": "1177fe9fe856389d210bf22756de60073f8fb20acf374bd1da6f4654ea098548",
+          "ocr_lines": 105,
+          "elapsed_seconds": 1.8499,
+          "summary": {
+            "consistent": 13,
+            "conflict": 0,
+            "insufficient": 1
+          },
+          "compared_with_clean": {
+            "fact_count": 14,
+            "transitions": {
+              "consistent_to_consistent": 13,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 0,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 1
+            },
+            "status_changed": 0,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 0
+          },
+          "facts": [
+            {
+              "fact_id": "cash_equivalents-2025",
+              "label": "现金及现金等价物",
+              "page": 34,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "35,934",
+                  "region": {
+                    "x0": 458.069,
+                    "top": 152.603,
+                    "x1": 484.988,
+                    "bottom": 160.334
+                  },
+                  "observations": [
+                    {
+                      "text": "35,934 $",
+                      "confidence": 0.9249,
+                      "bbox": {
+                        "x0": 453.5,
+                        "top": 147.5,
+                        "x1": 505.0,
+                        "bottom": 164.0
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "cash_equivalents-2024",
+              "label": "现金及现金等价物",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_investments-2025",
+              "label": "流动有价证券",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_investments-2024",
+              "label": "流动有价证券",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_debt-2025",
+              "label": "短期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_debt-2024",
+              "label": "短期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_debt-2025",
+              "label": "一年内到期长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_debt-2024",
+              "label": "一年内到期长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "long_debt-2025",
+              "label": "长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "long_debt-2024",
+              "label": "长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_assets-2025",
+              "label": "流动资产",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_assets-2024",
+              "label": "流动资产",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_liabilities-2025",
+              "label": "流动负债",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_liabilities-2024",
+              "label": "流动负债",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            }
+          ],
+          "compared_with_saved_baseline": {
+            "fact_count": 14,
+            "transitions": {
+              "consistent_to_consistent": 13,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 0,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 1
+            },
+            "status_changed": 0,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 0
+          }
+        },
+        {
+          "id": "blur_0_7",
+          "synthetic_degradation": true,
+          "transform": {
+            "id": "blur_0_7",
+            "operation": "gaussian_blur",
+            "radius": 0.7
+          },
+          "image_sha256": "f75ebc7886756e45be973d5268f25784e34c0589ba402e93dae213ecba1b0026",
+          "ocr_sha256": "b06ef810b08368de86dc92e68c6a4212609fdbacc3cb26bf256d4fb637071823",
+          "ocr_lines": 106,
+          "elapsed_seconds": 1.7922,
+          "summary": {
+            "consistent": 14,
+            "conflict": 0,
+            "insufficient": 0
+          },
+          "compared_with_clean": {
+            "fact_count": 14,
+            "transitions": {
+              "consistent_to_consistent": 13,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 1,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 0
+            },
+            "status_changed": 1,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 1
+          },
+          "facts": [
+            {
+              "fact_id": "cash_equivalents-2025",
+              "label": "现金及现金等价物",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "cash_equivalents-2024",
+              "label": "现金及现金等价物",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_investments-2025",
+              "label": "流动有价证券",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_investments-2024",
+              "label": "流动有价证券",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_debt-2025",
+              "label": "短期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_debt-2024",
+              "label": "短期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_debt-2025",
+              "label": "一年内到期长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_debt-2024",
+              "label": "一年内到期长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "long_debt-2025",
+              "label": "长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "long_debt-2024",
+              "label": "长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_assets-2025",
+              "label": "流动资产",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_assets-2024",
+              "label": "流动资产",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_liabilities-2025",
+              "label": "流动负债",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_liabilities-2024",
+              "label": "流动负债",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast_0_65",
+          "synthetic_degradation": true,
+          "transform": {
+            "id": "contrast_0_65",
+            "operation": "contrast",
+            "factor": 0.65
+          },
+          "image_sha256": "811df61b7168c8369dac3aa2111c7e2af51e89546cac55affba1d2747dfc3015",
+          "ocr_sha256": "380f41afdfacd26df97e521fbaf3b70273d5925f116b18f309e236c7e8e7cc59",
+          "ocr_lines": 107,
+          "elapsed_seconds": 1.7882,
+          "summary": {
+            "consistent": 14,
+            "conflict": 0,
+            "insufficient": 0
+          },
+          "compared_with_clean": {
+            "fact_count": 14,
+            "transitions": {
+              "consistent_to_consistent": 13,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 1,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 0
+            },
+            "status_changed": 1,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 1
+          },
+          "facts": [
+            {
+              "fact_id": "cash_equivalents-2025",
+              "label": "现金及现金等价物",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "cash_equivalents-2024",
+              "label": "现金及现金等价物",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_investments-2025",
+              "label": "流动有价证券",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_investments-2024",
+              "label": "流动有价证券",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_debt-2025",
+              "label": "短期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_debt-2024",
+              "label": "短期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_debt-2025",
+              "label": "一年内到期长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_debt-2024",
+              "label": "一年内到期长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "long_debt-2025",
+              "label": "长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "long_debt-2024",
+              "label": "长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_assets-2025",
+              "label": "流动资产",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_assets-2024",
+              "label": "流动资产",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_liabilities-2025",
+              "label": "流动负债",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_liabilities-2024",
+              "label": "流动负债",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "jpeg_60",
+          "synthetic_degradation": true,
+          "transform": {
+            "id": "jpeg_60",
+            "operation": "jpeg",
+            "quality": 60
+          },
+          "image_sha256": "4a67e430ef43fa1d1ee7c2bcd84c1cd470ee571a0f62258860f335b24e7f72dd",
+          "ocr_sha256": "6eea1c392dc6b4a12e186ecd0fbcecdedfd8dfc55f6fbb4324e301b0c299a916",
+          "ocr_lines": 105,
+          "elapsed_seconds": 1.7296,
+          "summary": {
+            "consistent": 13,
+            "conflict": 0,
+            "insufficient": 1
+          },
+          "compared_with_clean": {
+            "fact_count": 14,
+            "transitions": {
+              "consistent_to_consistent": 13,
+              "consistent_to_conflict": 0,
+              "consistent_to_insufficient": 0,
+              "conflict_to_consistent": 0,
+              "conflict_to_conflict": 0,
+              "conflict_to_insufficient": 0,
+              "insufficient_to_consistent": 0,
+              "insufficient_to_conflict": 0,
+              "insufficient_to_insufficient": 1
+            },
+            "status_changed": 0,
+            "consistent_to_nonconsistent": 0,
+            "nonconsistent_to_consistent": 0
+          },
+          "facts": [
+            {
+              "fact_id": "cash_equivalents-2025",
+              "label": "现金及现金等价物",
+              "page": 34,
+              "status": "insufficient",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "insufficient",
+                  "reason": "merged_or_misaligned_region",
+                  "expected": "35,934",
+                  "region": {
+                    "x0": 458.069,
+                    "top": 152.603,
+                    "x1": 484.988,
+                    "bottom": 160.334
+                  },
+                  "observations": [
+                    {
+                      "text": "35,934 $",
+                      "confidence": 0.942,
+                      "bbox": {
+                        "x0": 453.5,
+                        "top": 147.5,
+                        "x1": 505.5,
+                        "bottom": 163.5
+                      }
+                    }
+                  ]
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "cash_equivalents-2024",
+              "label": "现金及现金等价物",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_investments-2025",
+              "label": "流动有价证券",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_investments-2024",
+              "label": "流动有价证券",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_debt-2025",
+              "label": "短期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "short_debt-2024",
+              "label": "短期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_debt-2025",
+              "label": "一年内到期长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_debt-2024",
+              "label": "一年内到期长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "long_debt-2025",
+              "label": "长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "long_debt-2024",
+              "label": "长期债务",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_start",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "section_end",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_assets-2025",
+              "label": "流动资产",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_assets-2024",
+              "label": "流动资产",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_liabilities-2025",
+              "label": "流动负债",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            },
+            {
+              "fact_id": "current_liabilities-2024",
+              "label": "流动负债",
+              "page": 34,
+              "status": "consistent",
+              "automatic_approval": false,
+              "checks": [
+                {
+                  "field": "amount",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "year",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "period",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "unit",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                },
+                {
+                  "field": "row_label",
+                  "status": "consistent",
+                  "reason": "same_displayed_content"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary_by_variant": [
+    {
+      "id": "clean",
+      "fact_count": 20,
+      "summary": {
+        "consistent": 17,
+        "conflict": 0,
+        "insufficient": 3
+      },
+      "transitions_from_clean": {
+        "consistent_to_consistent": 17,
+        "consistent_to_conflict": 0,
+        "consistent_to_insufficient": 0,
+        "conflict_to_consistent": 0,
+        "conflict_to_conflict": 0,
+        "conflict_to_insufficient": 0,
+        "insufficient_to_consistent": 0,
+        "insufficient_to_conflict": 0,
+        "insufficient_to_insufficient": 3
+      }
+    },
+    {
+      "id": "blur_0_7",
+      "fact_count": 20,
+      "summary": {
+        "consistent": 18,
+        "conflict": 0,
+        "insufficient": 2
+      },
+      "transitions_from_clean": {
+        "consistent_to_consistent": 17,
+        "consistent_to_conflict": 0,
+        "consistent_to_insufficient": 0,
+        "conflict_to_consistent": 0,
+        "conflict_to_conflict": 0,
+        "conflict_to_insufficient": 0,
+        "insufficient_to_consistent": 1,
+        "insufficient_to_conflict": 0,
+        "insufficient_to_insufficient": 2
+      }
+    },
+    {
+      "id": "contrast_0_65",
+      "fact_count": 20,
+      "summary": {
+        "consistent": 18,
+        "conflict": 0,
+        "insufficient": 2
+      },
+      "transitions_from_clean": {
+        "consistent_to_consistent": 17,
+        "consistent_to_conflict": 0,
+        "consistent_to_insufficient": 0,
+        "conflict_to_consistent": 0,
+        "conflict_to_conflict": 0,
+        "conflict_to_insufficient": 0,
+        "insufficient_to_consistent": 1,
+        "insufficient_to_conflict": 0,
+        "insufficient_to_insufficient": 2
+      }
+    },
+    {
+      "id": "jpeg_60",
+      "fact_count": 20,
+      "summary": {
+        "consistent": 17,
+        "conflict": 0,
+        "insufficient": 3
+      },
+      "transitions_from_clean": {
+        "consistent_to_consistent": 17,
+        "consistent_to_conflict": 0,
+        "consistent_to_insufficient": 0,
+        "conflict_to_consistent": 0,
+        "conflict_to_conflict": 0,
+        "conflict_to_insufficient": 0,
+        "insufficient_to_consistent": 0,
+        "insufficient_to_conflict": 0,
+        "insufficient_to_insufficient": 3
+      }
+    }
+  ]
+}

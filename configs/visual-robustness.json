@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "suite_version": "visual-robustness-1",
+  "frozen_before_inference": true,
+  "selection_reason": "Fixed before the first stress run: Microsoft cash-flow page includes signed amounts and known merged cells; Apple balance-sheet page includes split headers and financial sections. Development pages, not a representative sample.",
+  "source_report_sha256": "ff3d101f408813710c98bd12b5d7b3a2d7dd70840d0eaaccc1beec62af58aef7",
+  "source_profile_sha256": "1643c3bc11a0b01ed7efe5c0167634ce3aaa755fd69d5bda9bdc5be07d6576c4",
+  "pages": [
+    {
+      "document_id": "msft",
+      "page": 53,
+      "image_sha256": "d33368ebe49f7876e54df1e7aad0687844e037d414f442de15ad3326aa96f24f",
+      "pack_sha256": "bd776c972631cbc6ff6e0cba585cdab2c32d875d21e950ae43987ffc6a033850"
+    },
+    {
+      "document_id": "aapl",
+      "page": 34,
+      "image_sha256": "9b6e4beaf4a678baa07f015d2e11ed49d8bee455e649cb7596d9e1949c682c39",
+      "pack_sha256": "e26e93213bd8041fdd93b228749a468ce241952e673776cb5fa37ad11f2fec43"
+    }
+  ],
+  "variants": [
+    {
+      "id": "clean",
+      "operation": "identity"
+    },
+    {
+      "id": "blur_0_7",
+      "operation": "gaussian_blur",
+      "radius": 0.7
+    },
+    {
+      "id": "contrast_0_65",
+      "operation": "contrast",
+      "factor": 0.65
+    },
+    {
+      "id": "jpeg_60",
+      "operation": "jpeg",
+      "quality": 60
+    }
+  ]
+}

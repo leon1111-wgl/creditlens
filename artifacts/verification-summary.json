@@ -3,15 +3,16 @@
   "timezone": "Asia/Shanghai",
   "python": "3.12.14",
   "unit_and_api_tests": {
-    "run": 134,
+    "run": 168,
     "failures": 0,
-    "errors": 0
+    "errors": 0,
+    "skipped": 0
   },
   "javascript_syntax_check": "passed with node --check",
   "local_markdown_file_links": "passed",
   "live_http_health": {
     "status": "ok",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "rule_version": "cash-debt-review-3",
     "cases": 883,
     "mode": "public_benchmark_local",
@@ -327,6 +328,56 @@
       "remote_report_and_profile": "verified through target GitHub connector",
       "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
       "scope": "Repository, research branch and profile published; application remains local, not a hosted production service."
+    }
+  },
+  "document_experiments_v07": {
+    "scope": "Known-location development comparison, synthetic degradations; no generalization accuracy claim",
+    "word_facts_reproduced_from_local_full_outputs": 42,
+    "stress_fact_conditions_reproduced_from_local_full_outputs": 80,
+    "word_summary": {
+      "consistent": 42,
+      "conflict": 0,
+      "insufficient": 0
+    },
+    "line_baseline": {
+      "consistent": 39,
+      "conflict": 0,
+      "insufficient": 3
+    },
+    "software_tests_added": 34,
+    "browser": {
+      "desktop_width": 1280,
+      "narrow_width": 497,
+      "narrow_content_width": 482,
+      "checked": [
+        "company and fact filters",
+        "image condition change",
+        "parent line expansion",
+        "API-key edit clears data and disables export",
+        "actual JSON download equals HTTP payload"
+      ],
+      "screenshots": [
+        "docs/images/document-experiments-desktop.png",
+        "docs/images/document-experiments-narrow.png"
+      ]
+    },
+    "not_tested": [
+      "cross browser",
+      "complete keyboard flow",
+      "network fault injection",
+      "production load"
+    ],
+    "training_or_paid_api": false,
+    "publication": {
+      "implementation_commit": "440d1820157c70ed7076a15b15451d126a2f9123",
+      "ci_url": "https://github.com/leon1111-wgl/creditlens/actions/runs/40168483852",
+      "ci": "success",
+      "profile_commit": "743bc2a",
+      "feature_branches_published": [
+        "feature/document-ai-words",
+        "feature/visual-robustness"
+      ],
+      "research_branch": "research/advisory"
     }
   }
 }
