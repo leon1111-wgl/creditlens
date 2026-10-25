@@ -23,6 +23,7 @@ jobs:
       - run: python scripts/verify_explanation_export.py artifacts/explanation-review-returned-demo.json
       - run: python scripts/replay_research_scenarios.py
       - run: python scripts/evaluate_currency_diagnostic.py
+      - run: python scripts/evaluate_evidence_guard.py
       - run: python scripts/evaluate_research_acceptance.py
       - run: python scripts/evaluate_company_attribution.py
       - run: python -m compileall -q creditlens scripts
