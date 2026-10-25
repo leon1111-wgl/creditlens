@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "files": {
+    "artifacts/document-transfer-report.json": "e470eb3318762da5e79f4042b58357fc0ed56c841f8904ba83991ee0c5f89aae",
+    "configs/document-transfer.json": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1"
+  },
+  "scope": "Observed diagnostic rescoring after invalid v1 reference; same complete OCR, no fresh inference or blind generalization score."
+}

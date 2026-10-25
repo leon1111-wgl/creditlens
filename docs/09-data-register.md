@@ -51,6 +51,14 @@ FinQA：[作者仓库](https://github.com/czyssrs/FinQA)、[EMNLP 论文](https:
 
 ## 图像识别模型与衍生材料（2026-10-25）
 
+### NVIDIA 新公司诊断参考
+
+NVIDIA FY2025 官方年度 PDF 取物理第 146、148 页，登记 16 个事实与两个 52 周财年。底层 10-K 提交日为 2025-02-26，当前包装 PDF 的首发日期未知；往年列是当前文件的比较值。独立数据合同明确 `point_in_time_eligible=false`，不进入信用案件、历史因子或预测训练。来源 URL、原 PDF 哈希、获取时间、日期限制及规则冻结见[当前清单](../configs/document-transfer.json)。
+
+初次参考的可见区域原点换算错误已如实保留；修正版仅作已观察材料诊断，不能列为盲测。完整 PDF、页图和完整 OCR 不发布，最小财务证据保留原始材料权利。详见[参考建立与更正](research/2026-10-25-transfer-reference.md)、[实验说明](17-new-issuer-transfer.md)及[第三方说明](../THIRD_PARTY_NOTICES.md)。
+
+### 微软与苹果原实验
+
 v0.6 复用上述两个官方 PDF 的原始文件、公告日、财务期间及哈希，来源未更换。新增 [配置登记](../configs/document-ai.json) 和 [运行记录](../artifacts/document-ai-report.json)：RapidOCR 3.10.0，PP-OCRv6 small 检测／识别权重，SHA-256、制品 URL、Apache-2.0 模型归属声明、实际 CPU provider、包版本和渲染尺寸。
 
 完整无标记页图、完整 OCR 结果保存在本地 .run/document-ai/；公开记录只保留必要字段观察与原页坐标。39 项一致、3 项不足是已有开发事实的核对结果，不是盲测或通用识别准确率。原始材料权利与模型许可独立，见 [第三方说明](../THIRD_PARTY_NOTICES.md)。后续新公司或扫描件必须另登记和标注，不把合成退化数据冒充真实材料。
