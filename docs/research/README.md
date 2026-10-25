@@ -42,3 +42,5 @@
 第23轮新增：[证据与离线契约](explanation-evidence-contract.md)、[独立交接状态机](explanation-review-workflow.md)、[第十四份独立审查](advisory-14.md)。实际操作与结果见[功能说明](../26-explanation-review.md)和[制作记录](../iterations/2026-10-25-23.md)。
 
 第26轮新增：[第十七份独立审查](advisory-17.md)，检查整组输入、持久化、历史导出及UI失败重试；对应[材料准备](../29-document-preparation.md)和[制作报告](../iterations/2026-10-26-26.md)。
+
+第27轮新增：[当前登记适用性](preparation-applicability.md)与[第十八份独立审查](advisory-18.md)。历史内部一致、当前材料是否匹配、实际内容是否正确分别处理，对应[功能](../30-preparation-history-and-registration.md)和[制作报告](../iterations/2026-10-26-27.md)。
