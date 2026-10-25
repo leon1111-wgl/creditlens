@@ -1,0 +1,203 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>跨页证据 · CreditLens</title><style>
+/* Original local workbench styling, inspired by enterprise workspace layouts.
+   No Tencent or Feishu component library or brand assets are bundled. */
+:root {
+  color-scheme: light;
+  --font: "Times New Roman", "Songti SC", SimSun, "Noto Serif CJK SC", serif;
+  --text: #1f2329;
+  --muted: #5f6773;
+  --line: #dfe3e8;
+  --soft: #f7f8fa;
+  --blue: #2856a6;
+  --radius: 4px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--text); background: #fff; font: 15px/1.6 var(--font); }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+.app { min-height: 100dvh; display: grid; grid-template-columns: 190px minmax(0, 1fr); }
+.sidebar { position: sticky; top: 0; height: 100dvh; overflow-y: auto; background: var(--soft); border-right: 1px solid var(--line); padding: 22px 12px; display: flex; flex-direction: column; }
+.brand { display: block; padding: 0 12px; color: var(--text); font-size: 25px; font-weight: 700; line-height: 1.2; }
+.sidebar-caption { margin: 5px 12px 30px; color: var(--muted); font-size: 12px; }
+.nav-label { color: var(--muted); font-size: 12px; margin: 0 12px 8px; }
+.workspace-nav { display: grid; gap: 5px; }
+.workspace-nav a { padding: 9px 12px; color: #414751; border-radius: var(--radius); font-size: 14px; }
+.workspace-nav a:hover { background: #eceef2; text-decoration: none; }
+.workspace-nav a[aria-current="page"] { color: var(--blue); background: #eaf0fa; font-weight: 700; }
+.sidebar-foot { margin: auto 12px 0; padding-top: 24px; color: var(--muted); font-size: 12px; }
+.workspace { min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); padding: 0 28px; display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); }
+.topbar strong { color: #424852; font-weight: 400; }
+main { max-width: 1440px; margin: auto; padding: 25px 28px 40px; }
+h1 { margin: 0; font-size: 24px; line-height: 1.4; font-weight: 700; }
+h2 { margin: 0; font-size: 18px; line-height: 1.45; font-weight: 700; }
+h3 { margin: 0 0 7px; font-size: 16px; line-height: 1.5; }
+p { margin: 7px 0; }
+.intro { color: var(--muted); margin: 6px 0 0; font-size: 14px; }
+.muted, small { color: var(--muted); }
+small { font-size: 13px; }
+.bar { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; margin: 18px 0 12px; }
+label { display: flex; flex-direction: column; gap: 5px; color: #424852; font-size: 13px; }
+input, select, button { min-height: 34px; border: 1px solid #c8cdd5; border-radius: var(--radius); background: #fff; color: var(--text); padding: 5px 10px; max-width: 100%; }
+input { width: 260px; }
+input::placeholder { color: #69717d; font-size: 13px; }
+select { min-width: 125px; }
+button { padding: 5px 15px; cursor: pointer; white-space: nowrap; }
+button:hover { border-color: var(--blue); color: var(--blue); background: #f2f5fa; }
+button.primary { color: #fff; background: var(--blue); border-color: var(--blue); }
+button.primary:hover { background: #20478c; }
+button:disabled { background: #f4f5f7; border-color: #e0e3e8; color: #858b95; cursor: default; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.toolbar .export { margin-left: auto; }
+#status { margin: 0 0 15px; min-height: 21px; font-size: 13px; }
+.notice { padding: 10px 12px; margin: 0 0 22px; border: 1px solid #e1e6f0; background: #f8faff; color: #525c6d; font-size: 13px; }
+.notice strong { color: #414b5a; font-weight: 400; margin-right: 7px; }
+.overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; padding-bottom: 24px; }
+.overview article { min-width: 0; }
+.overview .muted { font-size: 13px; margin: 5px 0 12px; }
+.overview .table-note { margin: 10px 0 0; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+#controlRows td { vertical-align: top; }
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: middle; }
+th { background: var(--soft); font-size: 13px; color: #555d68; font-weight: 400; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+tr:last-child td { border-bottom: 0; }
+.count { font-variant-numeric: tabular-nums; font-size: 17px; font-weight: 400; }
+.section { border-top: 1px solid var(--line); padding: 23px 0; scroll-margin-top: 18px; }
+.tag { display: inline-block; padding: 0 6px; border-radius: 3px; font-size: 12px; line-height: 22px; color: #246244; background: #eff7f2; white-space: nowrap; vertical-align: middle; }
+.tag.insufficient { color: #825614; background: #fff5df; }
+.tag.conflict { color: #a5271a; background: #fff0ee; }
+.detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; margin-top: 16px; }
+.detail > section { min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); }
+.detail h3 { padding: 10px 14px; background: var(--soft); border-bottom: 1px solid var(--line); margin: 0; font-size: 15px; }
+.field { padding: 12px 14px; border-bottom: 1px solid #eceef2; }
+.field:last-child { border-bottom: 0; }
+.field strong { font-size: 14px; margin-right: 5px; }
+.field p { font-size: 15px; }
+.raw { white-space: pre-wrap; overflow-wrap: anywhere; }
+.mono { font-family: var(--font); font-size: 13px; overflow-wrap: anywhere; }
+details { margin-top: 8px; }
+summary { cursor: pointer; color: var(--blue); font-size: 13px; }
+.field details p { font-size: 13px; }
+#stressRows > details { padding: 8px 0; }
+#stressRows summary { font-size: 14px; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.source-section { border-top: 1px solid var(--line); padding: 17px 0; }
+.source-section > summary { font-size: 15px; color: var(--text); }
+.source-section p { font-size: 13px; }
+.footer { margin: 4px 0 0; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+[hidden] { display: none !important; }
+@media (min-width: 1600px) { main { padding-left: 42px; padding-right: 42px; } }
+@media (max-width: 1024px) { .app { grid-template-columns: 164px minmax(0, 1fr); } main { padding: 22px; } .overview { gap: 20px; } th,td { padding: 8px; } }
+@media (max-width: 760px) {
+  .app { display: block; }
+  .sidebar { position: static; height: auto; padding: 12px 16px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .brand { padding: 0; font-size: 23px; }
+  .sidebar-caption, .nav-label, .sidebar-foot { display: none; }
+  .workspace-nav { display: flex; gap: 4px; margin-top: 9px; overflow-x: auto; }
+  .workspace-nav a { font-size: 13px; white-space: nowrap; padding: 8px 10px; border-radius: 3px 3px 0 0; }
+  .topbar { display: none; }
+  main { padding: 20px 16px 30px; }
+  h1 { font-size: 22px; }
+  .overview, .detail { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .overview { padding-bottom: 22px; }
+  .bar { gap: 10px; }
+  .bar label { flex: 1 1 150px; min-width: 0; }
+  .toolbar label { flex: 1 1 100%; }
+  input, select { width: 100%; }
+  .toolbar .export { margin-left: 0; }
+  .notice { margin-bottom: 20px; }
+  .count { font-size: 16px; }
+}
+
+.evidence-table td { text-align:left; }
+.evidence-table button { min-height:28px; padding:2px 9px; font-size:13px; }
+.source-meta { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:8px 24px; margin:15px 0; font-size:13px; }
+.preview { position:relative; background:#f7f8fa; border:1px solid var(--line); overflow:hidden; }
+.preview img { display:block; width:100%; height:auto; }
+.preview .box { position:absolute; border:2px solid #2856a6; pointer-events:none; background:#2155cc0b; }
+.preview-caption { font-size:13px; }
+@media(max-width:760px) { .source-meta { grid-template-columns:1fr; } .evidence-table { min-width:570px; } }
+
+/* Shared workspace palette: restrained neutral surfaces and blue actions.
+   Native CSS, inspired by office workspaces; no external design-system package. */
+:root{--font:"Times New Roman","Songti SC",SimSun,"Noto Serif CJK SC",serif;--text:#1f2329;--ink:#1f2329;--muted:#5f6773;--line:#dfe3e8;--soft:#f5f6f8;--blue:#2856a6;--green:#2856a6;--accent:#2856a6;--bg:#f5f6f8;--amber:#8a6118;--red:#a5362d;font-family:var(--font);color:var(--text);background:var(--bg)}
+body{font:15px/1.6 var(--font);color:var(--text);background:var(--bg)}
+h1,h2,h3,.brand,.logo,.number,.fact-value,.metric .number,.empty h2{font-family:var(--font)}
+h1{font-size:24px;line-height:1.4;letter-spacing:0}h2{font-size:18px}h3{font-size:15px}
+button,input,select,textarea{font-family:var(--font)}
+input,select,textarea{color:var(--text);border-color:#aeb7c4}
+a{color:var(--blue);text-underline-offset:3px}
+button.primary,.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20478c;border-color:#20478c;color:#fff}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.panel,.controls{border-radius:4px}.brand,.logo{font-weight:700}
+.tag.consistent{background:#edf6f0;color:#28734e}.tag.insufficient,.tag.warn,.tag.derived_requires_review{background:#fff5e4;color:#8a6118}
+.tag.conflict,.tag.danger,.tag.blocked{background:#fcefee;color:#a5362d}
+.tag.missing{background:#f0f2f5;color:#5f6773}
+.notice{border-radius:3px}.empty{background:#f5f6f8}
+@media(max-width:700px){h1{font-size:22px}h2{font-size:18px}}
+
+.workspace{background:white}.sidebar{background:#f0f2f5}.notice{background:#f2f5fa}
+
+button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
+
+.prep-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;margin-top:24px}.prep-queue button{display:block;width:100%;text-align:left;margin-bottom:8px}.prep-queue small{display:block;color:var(--muted)}textarea{width:100%;min-height:170px;resize:vertical;font:12px/1.5 Consolas,monospace;border:1px solid var(--line);border-radius:4px;padding:12px;background:#fafbfc}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 Consolas,monospace}td{vertical-align:top}.attempts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.section{margin-bottom:18px}#result{border-top:1px solid var(--line);padding-top:18px}@media(max-width:850px){.prep-grid{grid-template-columns:1fr}.toolbar{flex-wrap:wrap}.prep-queue{max-height:190px;overflow:auto}}
+
+.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}.choices label{min-width:0}.choices select{width:100%;min-width:0}.evidence-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:20px}.evidence-list article{min-width:0;border-top:2px solid #dfe3e8;padding:12px 0}.evidence-list p{font-size:14px;overflow-wrap:anywhere}.formula{font-size:24px;margin:12px 0}.check-table td{text-align:left;vertical-align:top}.preview-wrap{max-width:850px;margin:16px 0}.box.amount{border-color:#2856a6}.box.year{border-color:#995e17;background:transparent}.box.unit{border-color:#737b87;background:transparent}#preview[hidden]{display:none}#preview img{min-height:0}.footnote{font-size:13px;color:var(--muted)}@media(max-width:900px){.evidence-list{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.formula{font-size:21px}}
+</style></head><body><div class="app"><aside class="sidebar"><a class="brand" href="/">CreditLens</a><p class="sidebar-caption">金融证据工作台</p><p class="nav-label">研究与验证</p><nav class="workspace-nav" aria-label="主导航"><a href="/">信用复核</a><a href="/tasks">研究任务</a><a href="/research">季度研究</a><a href="/documents">原页核对</a><a href="/cross-page" aria-current="page">跨页证据</a><a href="/experiments">文档实验</a><a href="/transfer">新公司核对</a><a href="/document-preparation">材料准备</a></nav><p class="sidebar-foot">先核对来源与口径<br>再计算和解释</p></aside><div class="workspace"><header class="topbar">财务研究 / 跨页证据</header><main><h1>经营现金流与营业收入</h1><p class="intro">把收入页、现金流页和合并范围附注放在一起，检查依据齐不齐、口径是否匹配，再计算比例。</p>
+<div class="bar"><label>访问密钥<input id="key" type="password" autocomplete="off" placeholder="本地演示可留空"></label><label>本地演示身份<select id="role"><option value="analyst">分析员</option><option value="viewer">只读查看</option></select></label><button id="refresh">载入材料</button></div><p id="status" role="status" aria-live="polite">正在载入…</p>
+<section id="workspace" hidden><div class="bar"><label>研究任务<select id="task"></select></label><button id="defaults">使用本任务登记依据</button></div><p id="taskMeta" class="muted"></p>
+<div class="choices"><label>经营现金流净额<select id="cfo"></select></label><label>营业收入<select id="revenue"></select></label><label>合并范围附注<select id="consolidation_scope"></select></label></div>
+<div id="cards" class="evidence-list"></div>
+<section id="preview" class="preview-wrap" hidden><h2 id="previewTitle"></h2><p id="previewNote" class="muted"></p><div id="pageFrame" class="preview"></div><button id="closePreview">收起原页</button></section>
+<div class="bar"><button id="check" class="primary">检查依据并计算</button><button id="export" disabled>导出本次检查</button></div><p id="resultStatus" role="status">尚未检查。改选后需要重新检查。</p>
+<section id="result" hidden><h2 id="resultTitle"></h2><p id="formula" class="formula"></p><p id="resultNote" class="muted"></p><details id="checkDetails"><summary id="checkSummary">查看口径检查</summary><div class="scroll"><table class="check-table"><thead><tr><th>检查项</th><th>结果</th><th>说明</th></tr></thead><tbody id="checks"></tbody></table></div></details><details><summary>查看来源绑定、精度和验证范围</summary><pre id="raw"></pre></details></section>
+<p class="footnote">这是同份报告中不同报表的多页关联，尚不支持自动拼接跨页续表。使用既有官方披露参考及原页，独立人工确认待完成；没有在此页运行新识别模型。</p><div class="notice">比例为经营现金流净额 ÷ 营业收入，不是销售回款率或利润率，也不能单独解释经营变化。两家公司各自列示，不作同行排名；检查不会写入研究底稿或继承既有审批。</div></section></main></div></div><script>
+const $=id=>document.getElementById(id),roles=['cfo','revenue','consolidation_scope'];
+let epoch=0,imageEpoch=0,catalog=null,catalogSha=null,resultRaw=null,imageUrl=null;
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function headers(){const h={'X-Demo-Role':$('role').value};if($('key').value)h.Authorization='Bearer '+$('key').value;return h;}
+function clearImage(){imageEpoch++;if(imageUrl){URL.revokeObjectURL(imageUrl);imageUrl=null;}$('pageFrame').replaceChildren();$('preview').hidden=true;$('previewTitle').textContent='';$('previewNote').textContent='';}
+function clearResult(message='选择已改变，请重新检查。'){resultRaw=null;$('export').disabled=true;$('result').hidden=true;$('checks').replaceChildren();$('checkSummary').textContent='查看口径检查';$('checkDetails').open=false;for(const id of ['resultTitle','formula','resultNote','raw'])$(id).textContent='';$('resultStatus').textContent=message;}
+function reset(){epoch++;clearImage();clearResult('身份已改变，请重新载入。');catalog=null;catalogSha=null;$('workspace').hidden=true;$('task').replaceChildren();$('taskMeta').textContent='';$('cards').replaceChildren();for(const role of roles)$(role).replaceChildren();$('status').textContent='身份已改变，请重新载入。';$('check').disabled=true;}
+function currentTask(){return catalog?.tasks.find(t=>t.id===$('task').value);}
+function selection(){return roles.map(role=>$(role).value).filter(Boolean);}
+function handleEdit(){epoch++;clearImage();clearResult();$('check').disabled=false;renderCards();}
+function chooseDefaults(){const task=currentTask();if(!task)return;for(const role of roles)$(role).value=task.required_role_ids[role];handleEdit();}
+function changeTask(){const task=currentTask();if(!task)return;$('taskMeta').textContent=task.issuer_id+' · '+task.period.start+' 至 '+task.period.end+' · 同份FY2025报告列示 · 单位：百万美元';chooseDefaults();}
+function sourceLink(card){const link=el('a','打开官方文件 · 第 '+card.location.page+' 页');try{const u=new URL(card.source.url);if(u.protocol!=='https:')return el('span','来源链接不可用');u.hash='page='+card.location.page;link.href=u.toString();link.target='_blank';link.rel='noopener noreferrer';return link;}catch{return el('span','来源链接不可用');}}
+function renderCards(){
+ $('cards').replaceChildren();const names={cfo:'经营现金流净额',revenue:'营业收入',consolidation_scope:'合并范围'};
+ for(const role of roles){const card=catalog.cards.find(c=>c.id===$(role).value),article=el('article');article.append(el('h3',names[role]));
+  if(!card){article.append(el('p','尚未选择依据。','muted'));$('cards').append(article);continue;}
+  article.append(el('p',card.issuer_id+' · FY'+card.year+' · 物理第 '+card.location.page+' 页'),el('p',card.label));
+  if(role!=='consolidation_scope')article.append(el('p','原表：'+card.raw_value+' · '+(card.unit==='USD_million'?'百万美元':card.unit)),el('p',card.period.start+' 至 '+card.period.end,'muted'));
+  article.append(sourceLink(card));const detail=el('details'),sum=el('summary','定位与参考范围');detail.append(sum,el('p',card.location.locator),el('p',card.provenance.reference_method),el('p','独立人工确认：待完成；原图识别质量：未在本任务重新验证。','muted'));article.append(detail);
+  if(role!=='consolidation_scope'){const button=el('button','查看金额所在页');button.onclick=()=>showPage(card);article.append(button);}else article.append(el('p','附注仅登记页码和短定位依据，没有细粒度框。','muted'));
+  $('cards').append(article);
+ }
+}
+async function request(url,options={}){const response=await fetch(url,{...options,headers:{...headers(),...(options.headers||{})},cache:'no-store'});const raw=await response.text();if(!response.ok){const messages={401:'请填写有效访问密钥。',403:'当前身份无访问权限。',404:'登记任务或证据不存在。',409:'材料登记已变化或不可用，请重新载入。',422:'选择内容未通过格式检查。'};throw Error(messages[response.status]||'检查暂时失败，请重试。');}return {value:JSON.parse(raw),raw};}
+async function loadCatalog(){const g=++epoch;clearImage();clearResult('尚未检查。');catalog=null;catalogSha=null;$('workspace').hidden=true;$('cards').replaceChildren();$('status').textContent='正在载入登记材料…';
+ try{const data=await request('/api/cross-page-evidence');if(g!==epoch)return;catalog=data.value.catalog;catalogSha=data.value.catalog_sha256;$('task').replaceChildren();for(const task of catalog.tasks){const option=el('option',task.issuer_id+' · FY'+task.year);option.value=task.id;$('task').append(option);}for(const role of roles){$(role).replaceChildren();const empty=el('option','不选择 / 缺少依据');empty.value='';$(role).append(empty);for(const card of catalog.cards.filter(c=>c.role===role)){const option=el('option',card.issuer_id+' · FY'+card.year+' · 第'+card.location.page+'页');option.value=card.id;$(role).append(option);}}$('workspace').hidden=false;changeTask();$('status').textContent='登记材料已载入；选择依据后检查。';}
+ catch(error){if(g!==epoch)return;$('status').textContent=error.message;$('workspace').hidden=true;}
+}
+async function check(){const task=currentTask();if(!task)return;const g=++epoch;clearImage();clearResult('正在检查依据与计算口径…');$('check').disabled=true;const payload={task_id:task.id,selected_ids:selection(),expected_catalog_sha256:catalogSha};
+ try{const data=await request('/api/cross-page-evidence/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(g!==epoch)return;const r=data.value.result;resultRaw=data.raw;$('export').disabled=false;$('result').hidden=false;$('resultTitle').textContent=r.status==='computed'?'依据齐全，可以复算':'依据不足或不匹配，暂不计算';$('resultStatus').textContent='本次选择已检查；结果不会自动写入研究任务。';
+  if(r.calculation){const c=r.calculation;$('formula').textContent=c.inputs.cfo.normalized_value+' ÷ '+c.inputs.revenue.normalized_value+' × 100 = '+c.result.value+'%';$('resultNote').textContent=c.interpretation+' 结果保留'+c.decimal_places+'位小数。';}else{$('formula').textContent='未生成比例';$('resultNote').textContent='请根据下面的检查说明补充或更换依据，不以零代替缺失材料。';}
+  const failures=r.checks.filter(item=>!item.passed);$('checkSummary').textContent='查看 '+r.checks.length+' 项检查 · '+failures.length+' 项需处理';$('checkDetails').open=failures.length>0;
+  const labels={unique_selection:'重复选择',known_selection:'登记身份',required_roles:'必需证据',registered_selection:'任务绑定',catalog_requirements:'参考是否齐全',current_mode:'材料模式',ended_period:'期间结束',supported_scope:'采用口径',issuer:'主体',report:'报告版本',period:'财务期间',scope:'报表范围',availability:'资料日期',scope_reference:'范围附注',unit:'币种与单位',value_state:'披露状态',location:'原页定位',amount:'原始数字',different_statement_pages:'报表页关系',positive_revenue:'计算分母'};
+  for(const item of r.checks){const row=el('tr'),label=labels[item.id]||labels[item.id.split(':').at(-1)]||'证据关联';row.append(el('td',label),el('td',item.passed?'通过':'待处理'),el('td',item.message));$('checks').append(row);}$('raw').textContent=JSON.stringify(data.value,null,2);
+ }catch(error){if(g!==epoch)return;clearResult(error.message);}finally{if(g===epoch)$('check').disabled=false;}
+}
+async function showPage(card){clearImage();const g=epoch,i=imageEpoch;$('preview').hidden=false;$('previewTitle').textContent=card.issuer_id+' · 第 '+card.location.page+' 页';$('previewNote').textContent='正在读取本地已登记原页…';
+ try{const response=await fetch('/api/cross-page-evidence/cards/'+encodeURIComponent(card.id)+'/page.png?expected_catalog_sha256='+catalogSha,{headers:headers(),cache:'no-store'});if(!response.ok)throw Error(response.status===404?'本地没有可用页图，请使用官方文件链接；不会自动下载。':'原页读取或版本校验失败，请重新载入材料。');const blob=await response.blob();if(g!==epoch||i!==imageEpoch)return;imageUrl=URL.createObjectURL(blob);const img=el('img');img.alt=card.issuer_id+'原报告第'+card.location.page+'页';img.onerror=()=>{if(g!==epoch||i!==imageEpoch)return;$('pageFrame').replaceChildren();if(imageUrl){URL.revokeObjectURL(imageUrl);imageUrl=null;}$('previewNote').textContent='本地页图无法显示，请使用官方文件链接。';};img.src=imageUrl;$('pageFrame').append(img);const location=card.location;for(const [field,kind] of [['amount_bbox','amount'],['year_bbox','year'],['unit_bbox','unit']]){const box=location[field];if(!box)continue;const overlay=el('span',undefined,'box '+kind);overlay.style.left=100*box.x0/location.page_width+'%';overlay.style.top=100*box.top/location.page_height+'%';overlay.style.width=100*(box.x1-box.x0)/location.page_width+'%';overlay.style.height=100*(box.bottom-box.top)/location.page_height+'%';overlay.title={amount:'金额',year:'年份',unit:'单位'}[kind];$('pageFrame').append(overlay);}$('previewNote').textContent='蓝框：金额；棕框：年份；灰框：单位。框来自既有参考定位，未在本任务重新运行OCR。';}
+ catch(error){if(g!==epoch||i!==imageEpoch)return;$('pageFrame').replaceChildren();$('previewNote').textContent=error.message;}
+}
+function download(){if(!resultRaw)return;const url=URL.createObjectURL(new Blob([resultRaw],{type:'application/json'}));const link=el('a');link.href=url;link.download='creditlens-cross-page-check.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$('refresh').onclick=loadCatalog;$('task').onchange=changeTask;for(const role of roles)$(role).onchange=handleEdit;$('defaults').onclick=chooseDefaults;$('check').onclick=check;$('export').onclick=download;$('closePreview').onclick=clearImage;$('role').onchange=reset;$('key').oninput=reset;
+loadCatalog();
+</script></body></html>

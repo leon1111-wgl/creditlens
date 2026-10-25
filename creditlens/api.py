@@ -29,6 +29,7 @@ from .evidence_guard_store import evidence_guard_snapshot
 from .input_store import input_snapshot
 from .batch_attempt_store import BatchAttemptStore
 from .preparation_routes import install_preparation_routes
+from .cross_page_routes import install_cross_page_routes
 from .research_materials import build_material_bundle, MaterialsError
 from .research_acceptance import (
     build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
@@ -141,6 +142,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         return application.state.access.resolve(request)
 
     install_preparation_routes(application, actor, ROOT)
+    install_cross_page_routes(application, actor, ROOT)
 
     def laboratory():
         if application.state.access.mode != "demo":
