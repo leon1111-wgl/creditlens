@@ -36,7 +36,7 @@
     "tested_version": "0.2.0",
     "current_iteration": "Legacy full-flow screenshots belong to 0.2.0; see pdf_evidence.browser_qa for 0.3.0 evidence UI checks."
   },
-  "remote_ci": "v0.8.0 pending publication; earlier release CI retained below",
+  "remote_ci": "success",
   "github_connection": {
     "verified_account": "leon1111-wgl",
     "verified_repository": "leon1111-wgl/leon1111-wgl",
@@ -491,6 +491,32 @@
     "attempts": "artifacts/document-transfer-attempts.json",
     "geometry": "artifacts/document-geometry-verification.json",
     "scope": "Observed diagnostic reference correction; not a held-out or model improvement result",
-    "gpu_or_paid_api_or_training": false
+    "gpu_or_paid_api_or_training": false,
+    "publication": {
+      "status": "published",
+      "implementation_commit": "c736b2240cb4d8a443cfae71b4e02bb3232b44c9",
+      "profile_commit": "a99687c08733177599a8160cd6614c8867b247bd",
+      "ci_run_url": "https://github.com/leon1111-wgl/creditlens/actions/runs/40174269948",
+      "ci_conclusion": "success",
+      "remote_tests": {
+        "run": 244,
+        "passed": 243,
+        "skipped": 1,
+        "skip_reason": "Linux skips Windows Junction regression; file symlink regression executed."
+      },
+      "remote_financial_controls": {
+        "probes": 15,
+        "passed": 15
+      },
+      "branches": [
+        "feature/document-ai-words",
+        "feature/visual-robustness",
+        "research/advisory"
+      ],
+      "remote_guide_and_profile_read_back": true,
+      "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
+      "scope": "Repository and profile entry; locally running application, no hosted or financial-institution deployment."
+    },
+    "cli_entrypoint_reproduction": "Exact report equality excluding scoring timestamp; preserved OCR, no new inference."
   }
 }
