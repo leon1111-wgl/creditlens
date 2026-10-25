@@ -7,6 +7,8 @@ from fastapi.responses import FileResponse
 from starlette.concurrency import run_in_threadpool
 
 from .preparation_examples import preparation_examples
+from .preparation_verifier import PreparationVerificationError, verify_preparation_export
+from .preparation_applicability import assess_preparation_applicability
 from .workflow import Actor
 
 
@@ -68,3 +70,16 @@ def install_preparation_routes(app, actor, root:Path):
         result=app.state.batch_attempts.export(task_id,identity,attempt_id)
         raw=json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False)
         return Response(raw,media_type='application/json',headers={'Content-Disposition':'attachment; filename="creditlens-preparation-attempt.json"'})
+
+    @app.get('/api/document-preparation/tasks/{task_id}/applicability')
+    def applicability(task_id:str,attempt_id:str|None=None,identity:Actor=Depends(actor)):
+        # Authorize and load the immutable history before reading current metadata.
+        snapshot=app.state.batch_attempts.export(task_id,identity,attempt_id)
+        try:
+            verified=verify_preparation_export(snapshot)
+        except PreparationVerificationError as exc:
+            code='preparation_history_unsupported' if exc.code=='unsupported_version' else 'preparation_history_invalid'
+            raise HTTPException(409,{'code':code,'reason':exc.code}) from exc
+        return {'schema_version':1,'verification':verified,
+                'applicability':assess_preparation_applicability(root,verified),
+                'historical_export_changed':False,'queryable':False,'automatic_approval':False}
