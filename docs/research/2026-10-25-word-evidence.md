@@ -66,7 +66,7 @@
 ```bash
 python -m pip install -r requirements-ocr.lock
 # 没有本地页图时才运行；另存重跑结果，保留公开冻结基线。
-python scripts/evaluate_document_ai.py --download --output .run/regenerated-document-ai-report.json
+python scripts/evaluate_document_ai.py --download
 python scripts/evaluate_word_evidence.py
 python -m unittest tests.test_word_evidence -v
 ```
@@ -80,3 +80,5 @@ python -m unittest tests.test_word_evidence -v
 42/42 表示这批已知开发事实满足当前核对规则，**不是通用多模态准确率，也不是 100% 财报抽取准确率**。位置和字段事先已知，这三项失败也用于设计方法；没有盲测公司、独立双人标注、真实扫描件、跨页续表、图表或新 VLM 评测。OCR 与文本层来自同一份披露，不能鉴定财报真伪。当前没有真实错误样本的检出率或误放行率。
 
 本分支交付模型实验、证据规则、回归和报告；界面接入由主分支完成，不在这里宣称已上线。下一轮应冻结未见公司／报告保留集，并分别检查错数字放行、拒绝覆盖和符号失败。真实授权扫描件与合成图像退化分开报告；若更复杂表格仍失败，再比较结构解析或视觉模型。季度、因子与预测可以复用证据，但本轮没有新增预测标签、收益实验或模型训练。
+
+当前复现入口在第 13 轮改为默认输出到 `.run/reproductions/`；上文旧本地路径和运行时间保留历史记录。重跑不会覆盖这里的公开实验，三个脚本的顺序与逐字段对照见[安全复现说明](../16-experiment-reproduction.md)。
