@@ -35,6 +35,8 @@
 
 ### 可以建立的研究联系
 
+完整出处、技术联系与背景稿见[港大相关课题调研](research/2026-10-25-hku-research-context.md)。其中区分已发表论文、研究目标、历史产业案例和本人经历，不把项目目录当作完成效果证明。
+
 港大金融科技研究目录列有 **TabGPT**，研究异构金融表格的表示和泛化；另有**企业数字足迹的经济应用**，摘要披露了行业数据伙伴合作。它们分别说明财务表格建模和多源信息研究是实际研究主题，目录里的目标和项目方效果不属于 CreditLens 的成果。[官方课题目录](https://fintechacademy.hkubs.hku.hk/research-projects/)
 
 更明确的历史产学案例是港大数据科学实验室与 **ImpactInvest** 于2021年开展的金融AI合作，将新闻、价格及环境因素联系起来，用可视化帮助研究人员查找关联信息。可借鉴其“多源信息难查找”的问题定义，不能将对方的合作、数据、预测模型或反馈写成本人的经历。[校方项目介绍](https://saasweb.hku.hk/datasci/files/Using%20AI%20on%20the%20Ontology.pdf)
@@ -115,6 +117,7 @@ flowchart LR
 | 独立复核与权限 | [workflow.py](../creditlens/workflow.py)、[API](../creditlens/api.py)、[工作流测试](../tests/test_workflow.py) | 模拟用户与本地演示；无银行生产验收 |
 | 日期规则与完整输入复核 | [日期规则](../creditlens/date_evidence.py)、[报告重算](../creditlens/date_diagnostic.py)、[原始输入核验](../scripts/verify_date_raw.py)、[本轮验收](../artifacts/date-diagnostic-verification.json) | 仅已观察NVIDIA的4个表头、16项事实；非年份字段保持不变，原失败仍保留 |
 | 冻结规则后的新发行人评估 | [评估契约](../creditlens/issuer_evaluation.py)、[运行记录](../artifacts/issuer-evaluation-report.json)、[完整核验](../artifacts/issuer-raw-verification.json) | AMD两页14项；12一致2不足，日期新关联0次；观察后成为开发材料 |
+| v0.9远端回归 | [CI 40178340407](https://github.com/leon1111-wgl/creditlens/actions/runs/40178340407) | Linux326项运行、325通过、1项Windows Junction跳过；不代表模型准确率 |
 | 软件测试与 CI | [验收摘要](../artifacts/verification-summary.json)、[v0.8 本地验收](../artifacts/document-transfer-verification.json) | 当前本地 326 项运行、325 通过、1 项 Windows 文件符号链接权限跳过；15 个控制场景已包含其中。[v0.8.1 远端 CI](https://github.com/leon1111-wgl/creditlens/actions/runs/40176005378) 为285项运行、284通过，Linux跳过Windows Junction场景，文件符号链接场景实际运行 |
 | 新公司诊断与参考治理 | [冻结与复算](../creditlens/document_transfer.py)、[保存 OCR 重评分](../scripts/rescore_document_transfer.py)、[几何核验](../artifacts/document-geometry-verification.json)、[首次失效台账](../artifacts/document-transfer-attempts.json) | 一份 NVIDIA 材料、16 项已观察事实；金额一致但年份不足，不构成盲测成绩 |
 | 安全复现与证据对照 | [路径保护](../creditlens/experiment_paths.py)、[对照器](../creditlens/reproduction.py)、[真实重跑核验](../artifacts/reproduction-verification.json) | 同一开发材料；公开证据对照与完整 OCR 复算分别记录；不证明新公司泛化 |
