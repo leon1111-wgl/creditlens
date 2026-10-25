@@ -53,7 +53,7 @@ profile-entry.md 是待加入个人主页 Featured project 的文案，不覆盖
 
 ## 当前连接与发布状态
 
-账号 leon1111-wgl 与仓库所有权已核实，公开仓库已创建。连接器读取可用，但创建文件返回 integration 403；本机 Git 仍使用 Leon454323 的凭据，因此推送也被 GitHub 拒绝。上一轮已发起目标账号的 Git Credential Manager 登录；本轮检查只发现旧账号凭据，先前登录流程已不再运行。没有重新发起无人处理的登录，也不读取或复制访问令牌。最终发布与 CI 状态以验收记录为准。
+2026-10-25 用户完成本机 Git Credential Manager 的 leon1111-wgl 授权，项目 main 与个人主页入口均已成功推送。项目实现提交为 68a55a5，主页条目提交为 7ab6263；项目 [首次远端测试](https://github.com/leon1111-wgl/creditlens/actions/runs/40156855333) 已通过。Git 提交作者与提交者均为已核验的用户身份，没有新增 AI 工具署名。先前连接器写入 403 属于历史故障，不再阻塞本机 Git 发布；不据此声称连接器写权限也已修复。后续推送仍核对目标仓库、分支与提交身份，不使用强制推送覆盖远端修改。
 
 提交遵守 AGENTS.md，使用核验后的用户身份，不添加 AI 作者或 Co-authored-by。
 
