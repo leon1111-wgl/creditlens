@@ -191,7 +191,15 @@
     "scope": "Existing workbench remains v0.4.0; added independent research CLI. No new browser or production acceptance."
   },
   "iteration07_publication": {
-    "status": "pending",
-    "previous_ci": "publication.verified_ci_commit refers to the prior v0.4 implementation, not this iteration"
+    "status": "published",
+    "implementation_commit": "22168b0fc947eec8ef8257b367b5a1feeb5e69be",
+    "profile_commit": "d13f771f35b8c781461d4a519c28f170a8ee08ce",
+    "ci_conclusion": "success",
+    "ci_run_url": "https://github.com/leon1111-wgl/creditlens/actions/runs/40160831746",
+    "verified_ci_commit": "22168b0fc947eec8ef8257b367b5a1feeb5e69be",
+    "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
+    "remote_readme_and_profile": "verified using the target GitHub connector",
+    "automation": "existing heartbeat updated to expanded research scope; ACTIVE every two hours; UTF-8 verified",
+    "scope": "Repository, profile and research scripts published; not a hosted app or full research platform deployment."
   }
 }
