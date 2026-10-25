@@ -561,6 +561,36 @@
       "date_association_applied": 16,
       "non_year_unchanged": true
     },
-    "scope": "Observed development diagnostic; no new model inference or blind score"
+    "scope": "Observed development diagnostic; no new model inference or blind score",
+    "ci": {
+      "run_id": 40176005378,
+      "job_id": 121116709683,
+      "url": "https://github.com/leon1111-wgl/creditlens/actions/runs/40176005378",
+      "head": "9e1ad7d024a319c921dd3d06e049c5061fe03532",
+      "status": "success",
+      "platform": "Linux",
+      "tests": {
+        "run": 285,
+        "passed": 284,
+        "skipped": 1,
+        "skip_reason": "Windows Junction test skipped; file symlink test ran"
+      },
+      "controls": {
+        "total": 15,
+        "passed": 15
+      },
+      "compile": "passed",
+      "markdown_links": "passed",
+      "six_page_js_syntax": "passed"
+    },
+    "publication": {
+      "profile_commit": "1adeb4e4c6008ca5e2e44813888976f6292bda57",
+      "implementation_commit": "9e1ad7d024a319c921dd3d06e049c5061fe03532",
+      "branch_trees_equal_to_implementation": true,
+      "profile_and_resume_read_back": true,
+      "author": "leon1111-wgl",
+      "committer": "leon1111-wgl",
+      "application_deployment": "local only"
+    }
   }
 }
