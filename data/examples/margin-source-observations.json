@@ -1,0 +1,2665 @@
+{
+  "schema_version": 1,
+  "id": "msft-aapl-gross-margin-fy2025-comparatives-v1",
+  "registered_at": "2026-10-26",
+  "provenance": {
+    "reference_method": "ai_assisted_transcription_from_rendered_page",
+    "independent_human_confirmation": "pending",
+    "human_gold": false,
+    "source_count": 2,
+    "fact_count": 28,
+    "raw_pdf_downloaded_this_round": false,
+    "ocr_rerun_this_round": false,
+    "location_method": "Existing OCR parent span; approximate locator may include an adjacent currency symbol. Complete numeric literals were visually transcribed by AI, not automatically reconstructed or independently human confirmed."
+  },
+  "documents": [
+    {
+      "id": "msft",
+      "issuer_id": "MSFT",
+      "company": "Microsoft Corporation",
+      "pack_path": "data/examples/msft-fy2025-pdf.json",
+      "pack_canonical_sha256": "bd776c972631cbc6ff6e0cba585cdab2c32d875d21e950ae43987ffc6a033850",
+      "source": {
+        "id": "msft-fy25-10k-pdf",
+        "title": "Microsoft FY2025 Form 10-K / official PDF",
+        "url": "https://microsoft.gcs-web.com/static-files/9640e86d-a99f-4502-934d-1d3c883fa786",
+        "published_at": "2025-07-30",
+        "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+        "pdf_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+        "unit": "USD_million"
+      },
+      "pages": [
+        {
+          "page": 50,
+          "width": 594.9599609375,
+          "height": 841.9199829101562,
+          "image_sha256": "80296ebecd3d61aae584ec85ad3b5c7876b9ffd6634f739bc02134e9668f6ffa",
+          "ocr_sha256": "809cc0d649c232bf189b84dc67077f58ae0a41abc8d0ed19b99286570ae95da1"
+        }
+      ],
+      "scope_evidence": {
+        "page": 55,
+        "registry": "creditlens/research_materials.py",
+        "meaning": "Consolidation is inherited from the existing source registry; operations partition is unknown. No new independent human confirmation."
+      },
+      "periods": [
+        {
+          "year": 2025,
+          "start": "2024-07-01",
+          "end": "2025-06-30",
+          "days": 365,
+          "fiscal_calendar": "calendar_year",
+          "unit": "USD_million",
+          "classification_id": "msft_income_statement_product_service",
+          "classification_definition": "Microsoft Corporation FY2025 consolidated income statement product/service revenue classifications; FY2024 comparative column from the same report. Not operating segments.",
+          "categories": [
+            {
+              "id": "products",
+              "label": "Product",
+              "definition": "Microsoft Corporation: Product, as presented in this FY2025 statement and its FY2024 comparative."
+            },
+            {
+              "id": "services",
+              "label": "Service and other",
+              "definition": "Microsoft Corporation: Service and other, as presented in this FY2025 statement and its FY2024 comparative."
+            }
+          ]
+        },
+        {
+          "year": 2024,
+          "start": "2023-07-01",
+          "end": "2024-06-30",
+          "days": 366,
+          "fiscal_calendar": "calendar_year",
+          "unit": "USD_million",
+          "classification_id": "msft_income_statement_product_service",
+          "classification_definition": "Microsoft Corporation FY2025 consolidated income statement product/service revenue classifications; FY2024 comparative column from the same report. Not operating segments.",
+          "categories": [
+            {
+              "id": "products",
+              "label": "Product",
+              "definition": "Microsoft Corporation: Product, as presented in this FY2025 statement and its FY2024 comparative."
+            },
+            {
+              "id": "services",
+              "label": "Service and other",
+              "definition": "Microsoft Corporation: Service and other, as presented in this FY2025 statement and its FY2024 comparative."
+            }
+          ]
+        }
+      ],
+      "facts": [
+        {
+          "id": "msft-2025-revenue-products",
+          "year": 2025,
+          "role": "revenue",
+          "category": "products",
+          "label": "Product",
+          "raw_value": "63,946",
+          "normalized_value": "63946",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-07-01",
+            "end": "2025-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / revenue / Product / FY2025",
+          "amount_bbox": {
+            "x0": 397.97321756827733,
+            "top": 134.4872181727031,
+            "x1": 446.4699538799895,
+            "bottom": 146.98603027053798
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 10,
+            "text": "Product",
+            "bbox": {
+              "x0": 20.998586856617646,
+              "top": 133.48731320487633,
+              "x1": 57.99609703256303,
+              "bottom": 145.98612530271117
+            },
+            "confidence": 0.99998
+          },
+          "amount_parent": {
+            "span_index": 12,
+            "text": "63,946 $",
+            "bbox": {
+              "x0": 397.97321756827733,
+              "top": 134.4872181727031,
+              "x1": 446.4699538799895,
+              "bottom": 146.98603027053798
+            },
+            "confidence": 0.96242
+          },
+          "year_locator": {
+            "span_index": 6,
+            "text": "2025",
+            "bbox": {
+              "x0": 410.4723764115021,
+              "top": 113.48921384834054,
+              "x1": 430.97099691439075,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2025-revenue-services",
+          "year": 2025,
+          "role": "revenue",
+          "category": "services",
+          "label": "Service and other",
+          "raw_value": "217,778",
+          "normalized_value": "217778",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-07-01",
+            "end": "2025-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / revenue / Service and other / FY2025",
+          "amount_bbox": {
+            "x0": 392.9735540309874,
+            "top": 143.9863153670576,
+            "x1": 430.47103056066175,
+            "bottom": 156.98507994880586
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 15,
+            "text": "Service and other",
+            "bbox": {
+              "x0": 21.49855321034664,
+              "top": 143.9863153670576,
+              "x1": 96.99347262342437,
+              "bottom": 156.48512746489246
+            },
+            "confidence": 0.99399
+          },
+          "amount_parent": {
+            "span_index": 16,
+            "text": "217,778",
+            "bbox": {
+              "x0": 392.9735540309874,
+              "top": 143.9863153670576,
+              "x1": 430.47103056066175,
+              "bottom": 156.98507994880586
+            },
+            "confidence": 0.99998
+          },
+          "year_locator": {
+            "span_index": 6,
+            "text": "2025",
+            "bbox": {
+              "x0": 410.4723764115021,
+              "top": 113.48921384834054,
+              "x1": 430.97099691439075,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2025-revenue-total",
+          "year": 2025,
+          "role": "revenue",
+          "category": "total",
+          "label": "Total revenue",
+          "raw_value": "281,724",
+          "normalized_value": "281724",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-07-01",
+            "end": "2025-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / revenue / Total revenue / FY2025",
+          "amount_bbox": {
+            "x0": 392.4735876772584,
+            "top": 157.98498491663264,
+            "x1": 430.97099691439075,
+            "bottom": 172.48360695012107
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 19,
+            "text": "Total revenue",
+            "bbox": {
+              "x0": 28.49808216255252,
+              "top": 158.48493740054604,
+              "x1": 88.49404461003151,
+              "bottom": 171.9836544662077
+            },
+            "confidence": 0.96259
+          },
+          "amount_parent": {
+            "span_index": 20,
+            "text": "281,724",
+            "bbox": {
+              "x0": 392.4735876772584,
+              "top": 157.98498491663264,
+              "x1": 430.97099691439075,
+              "bottom": 172.48360695012107
+            },
+            "confidence": 0.9999
+          },
+          "year_locator": {
+            "span_index": 6,
+            "text": "2025",
+            "bbox": {
+              "x0": 410.4723764115021,
+              "top": 113.48921384834054,
+              "x1": 430.97099691439075,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2025-cost-products",
+          "year": 2025,
+          "role": "cost",
+          "category": "products",
+          "label": "Product",
+          "raw_value": "13,501",
+          "normalized_value": "13501",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-07-01",
+            "end": "2025-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / cost / Product / FY2025",
+          "amount_bbox": {
+            "x0": 397.97321756827733,
+            "top": 183.48256159621576,
+            "x1": 430.47103056066175,
+            "bottom": 196.9812786618774
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 24,
+            "text": "Product",
+            "bbox": {
+              "x0": 21.99851956407563,
+              "top": 184.48246656404254,
+              "x1": 57.496130678834035,
+              "bottom": 195.98137369405063
+            },
+            "confidence": 0.99998
+          },
+          "amount_parent": {
+            "span_index": 25,
+            "text": "13,501",
+            "bbox": {
+              "x0": 397.97321756827733,
+              "top": 183.48256159621576,
+              "x1": 430.47103056066175,
+              "bottom": 196.9812786618774
+            },
+            "confidence": 0.99998
+          },
+          "year_locator": {
+            "span_index": 6,
+            "text": "2025",
+            "bbox": {
+              "x0": 410.4723764115021,
+              "top": 113.48921384834054,
+              "x1": 430.97099691439075,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2025-cost-services",
+          "year": 2025,
+          "role": "cost",
+          "category": "services",
+          "label": "Service and other",
+          "raw_value": "74,330",
+          "normalized_value": "74330",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-07-01",
+            "end": "2025-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / cost / Service and other / FY2025",
+          "amount_bbox": {
+            "x0": 397.4732512145483,
+            "top": 192.98165879057026,
+            "x1": 430.97099691439075,
+            "bottom": 207.4802808240587
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 28,
+            "text": "Service and other",
+            "bbox": {
+              "x0": 22.498485917804622,
+              "top": 194.98146872622382,
+              "x1": 96.49350626969537,
+              "bottom": 205.9804233723185
+            },
+            "confidence": 0.99996
+          },
+          "amount_parent": {
+            "span_index": 29,
+            "text": "74,330",
+            "bbox": {
+              "x0": 397.4732512145483,
+              "top": 192.98165879057026,
+              "x1": 430.97099691439075,
+              "bottom": 207.4802808240587
+            },
+            "confidence": 0.99995
+          },
+          "year_locator": {
+            "span_index": 6,
+            "text": "2025",
+            "bbox": {
+              "x0": 410.4723764115021,
+              "top": 113.48921384834054,
+              "x1": 430.97099691439075,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2025-cost-total",
+          "year": 2025,
+          "role": "cost",
+          "category": "total",
+          "label": "Total cost of revenue",
+          "raw_value": "87,831",
+          "normalized_value": "87831",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-07-01",
+            "end": "2025-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / cost / Total cost of revenue / FY2025",
+          "amount_bbox": {
+            "x0": 397.4732512145483,
+            "top": 207.4802808240587,
+            "x1": 430.47103056066175,
+            "bottom": 222.47885534146053
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 32,
+            "text": "Total cost of revenue",
+            "bbox": {
+              "x0": 28.998048516281514,
+              "top": 207.9802333079721,
+              "x1": 116.99212677258403,
+              "bottom": 221.47895037363375
+            },
+            "confidence": 0.99983
+          },
+          "amount_parent": {
+            "span_index": 33,
+            "text": "87,831",
+            "bbox": {
+              "x0": 397.4732512145483,
+              "top": 207.4802808240587,
+              "x1": 430.47103056066175,
+              "bottom": 222.47885534146053
+            },
+            "confidence": 0.99996
+          },
+          "year_locator": {
+            "span_index": 6,
+            "text": "2025",
+            "bbox": {
+              "x0": 410.4723764115021,
+              "top": 113.48921384834054,
+              "x1": 430.97099691439075,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2025-gross_profit-total",
+          "year": 2025,
+          "role": "gross_profit",
+          "category": "total",
+          "label": "Gross margin",
+          "raw_value": "193,893",
+          "normalized_value": "193893",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-07-01",
+            "end": "2025-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / gross_profit / Gross margin / FY2025",
+          "amount_bbox": {
+            "x0": 392.9735540309874,
+            "top": 222.47885534146053,
+            "x1": 430.97099691439075,
+            "bottom": 236.97747737494896
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 36,
+            "text": "Gross margin",
+            "bbox": {
+              "x0": 28.49808216255252,
+              "top": 222.97880782537393,
+              "x1": 86.99414554884454,
+              "bottom": 236.97747737494896
+            },
+            "confidence": 0.97808
+          },
+          "amount_parent": {
+            "span_index": 37,
+            "text": "193,893",
+            "bbox": {
+              "x0": 392.9735540309874,
+              "top": 222.47885534146053,
+              "x1": 430.97099691439075,
+              "bottom": 236.97747737494896
+            },
+            "confidence": 0.99998
+          },
+          "year_locator": {
+            "span_index": 6,
+            "text": "2025",
+            "bbox": {
+              "x0": 410.4723764115021,
+              "top": 113.48921384834054,
+              "x1": 430.97099691439075,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2024-revenue-products",
+          "year": 2024,
+          "role": "revenue",
+          "category": "products",
+          "label": "Product",
+          "raw_value": "64,773",
+          "normalized_value": "64773",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-07-01",
+            "end": "2024-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / revenue / Product / FY2024",
+          "amount_bbox": {
+            "x0": 468.96843979779413,
+            "top": 132.98736072096293,
+            "x1": 518.9650751706932,
+            "bottom": 146.98603027053798
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 10,
+            "text": "Product",
+            "bbox": {
+              "x0": 20.998586856617646,
+              "top": 133.48731320487633,
+              "x1": 57.99609703256303,
+              "bottom": 145.98612530271117
+            },
+            "confidence": 0.99998
+          },
+          "amount_parent": {
+            "span_index": 13,
+            "text": "64,773 $",
+            "bbox": {
+              "x0": 468.96843979779413,
+              "top": 132.98736072096293,
+              "x1": 518.9650751706932,
+              "bottom": 146.98603027053798
+            },
+            "confidence": 0.97556
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2024",
+            "bbox": {
+              "x0": 482.4675313484769,
+              "top": 113.48921384834054,
+              "x1": 502.96615185136557,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2024-revenue-services",
+          "year": 2024,
+          "role": "revenue",
+          "category": "services",
+          "label": "Service and other",
+          "raw_value": "180,349",
+          "normalized_value": "180349",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-07-01",
+            "end": "2024-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / revenue / Service and other / FY2024",
+          "amount_bbox": {
+            "x0": 465.4686753216912,
+            "top": 142.9864103992308,
+            "x1": 502.46618549763656,
+            "bottom": 157.48503243271927
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 15,
+            "text": "Service and other",
+            "bbox": {
+              "x0": 21.49855321034664,
+              "top": 143.9863153670576,
+              "x1": 96.99347262342437,
+              "bottom": 156.48512746489246
+            },
+            "confidence": 0.99399
+          },
+          "amount_parent": {
+            "span_index": 17,
+            "text": "180,349",
+            "bbox": {
+              "x0": 465.4686753216912,
+              "top": 142.9864103992308,
+              "x1": 502.46618549763656,
+              "bottom": 157.48503243271927
+            },
+            "confidence": 0.99997
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2024",
+            "bbox": {
+              "x0": 482.4675313484769,
+              "top": 113.48921384834054,
+              "x1": 502.96615185136557,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2024-revenue-total",
+          "year": 2024,
+          "role": "revenue",
+          "category": "total",
+          "label": "Total revenue",
+          "raw_value": "245,122",
+          "normalized_value": "245122",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-07-01",
+            "end": "2024-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / revenue / Total revenue / FY2024",
+          "amount_bbox": {
+            "x0": 464.9687089679622,
+            "top": 157.98498491663264,
+            "x1": 502.96615185136557,
+            "bottom": 172.48360695012107
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 19,
+            "text": "Total revenue",
+            "bbox": {
+              "x0": 28.49808216255252,
+              "top": 158.48493740054604,
+              "x1": 88.49404461003151,
+              "bottom": 171.9836544662077
+            },
+            "confidence": 0.96259
+          },
+          "amount_parent": {
+            "span_index": 21,
+            "text": "245,122",
+            "bbox": {
+              "x0": 464.9687089679622,
+              "top": 157.98498491663264,
+              "x1": 502.96615185136557,
+              "bottom": 172.48360695012107
+            },
+            "confidence": 0.99993
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2024",
+            "bbox": {
+              "x0": 482.4675313484769,
+              "top": 113.48921384834054,
+              "x1": 502.96615185136557,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2024-cost-products",
+          "year": 2024,
+          "role": "cost",
+          "category": "products",
+          "label": "Product",
+          "raw_value": "15,272",
+          "normalized_value": "15272",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-07-01",
+            "end": "2024-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / cost / Product / FY2024",
+          "amount_bbox": {
+            "x0": 470.4683388589811,
+            "top": 183.48256159621576,
+            "x1": 502.96615185136557,
+            "bottom": 196.481326177964
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 24,
+            "text": "Product",
+            "bbox": {
+              "x0": 21.99851956407563,
+              "top": 184.48246656404254,
+              "x1": 57.496130678834035,
+              "bottom": 195.98137369405063
+            },
+            "confidence": 0.99998
+          },
+          "amount_parent": {
+            "span_index": 26,
+            "text": "15,272",
+            "bbox": {
+              "x0": 470.4683388589811,
+              "top": 183.48256159621576,
+              "x1": 502.96615185136557,
+              "bottom": 196.481326177964
+            },
+            "confidence": 0.99997
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2024",
+            "bbox": {
+              "x0": 482.4675313484769,
+              "top": 113.48921384834054,
+              "x1": 502.96615185136557,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2024-cost-services",
+          "year": 2024,
+          "role": "cost",
+          "category": "services",
+          "label": "Service and other",
+          "raw_value": "58,842",
+          "normalized_value": "58842",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-07-01",
+            "end": "2024-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / cost / Service and other / FY2024",
+          "amount_bbox": {
+            "x0": 469.9683725052521,
+            "top": 193.98156375839704,
+            "x1": 502.96615185136557,
+            "bottom": 206.9803283401453
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 28,
+            "text": "Service and other",
+            "bbox": {
+              "x0": 22.498485917804622,
+              "top": 194.98146872622382,
+              "x1": 96.49350626969537,
+              "bottom": 205.9804233723185
+            },
+            "confidence": 0.99996
+          },
+          "amount_parent": {
+            "span_index": 30,
+            "text": "58,842",
+            "bbox": {
+              "x0": 469.9683725052521,
+              "top": 193.98156375839704,
+              "x1": 502.96615185136557,
+              "bottom": 206.9803283401453
+            },
+            "confidence": 0.99996
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2024",
+            "bbox": {
+              "x0": 482.4675313484769,
+              "top": 113.48921384834054,
+              "x1": 502.96615185136557,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2024-cost-total",
+          "year": 2024,
+          "role": "cost",
+          "category": "total",
+          "label": "Total cost of revenue",
+          "raw_value": "74,114",
+          "normalized_value": "74114",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-07-01",
+            "end": "2024-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / cost / Total cost of revenue / FY2024",
+          "amount_bbox": {
+            "x0": 469.4684061515231,
+            "top": 207.4802808240587,
+            "x1": 502.96615185136557,
+            "bottom": 222.47885534146053
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 32,
+            "text": "Total cost of revenue",
+            "bbox": {
+              "x0": 28.998048516281514,
+              "top": 207.9802333079721,
+              "x1": 116.99212677258403,
+              "bottom": 221.47895037363375
+            },
+            "confidence": 0.99983
+          },
+          "amount_parent": {
+            "span_index": 34,
+            "text": "74,114",
+            "bbox": {
+              "x0": 469.4684061515231,
+              "top": 207.4802808240587,
+              "x1": 502.96615185136557,
+              "bottom": 222.47885534146053
+            },
+            "confidence": 0.99995
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2024",
+            "bbox": {
+              "x0": 482.4675313484769,
+              "top": 113.48921384834054,
+              "x1": 502.96615185136557,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "msft-2024-gross_profit-total",
+          "year": 2024,
+          "role": "gross_profit",
+          "category": "total",
+          "label": "Gross margin",
+          "raw_value": "171,008",
+          "normalized_value": "171008",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-07-01",
+            "end": "2024-06-30"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "msft-fy25-10k-pdf",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 50,
+          "locator": "PDF p.50 / gross_profit / Gross margin / FY2024",
+          "amount_bbox": {
+            "x0": 465.96864167542014,
+            "top": 223.4787603092873,
+            "x1": 502.46618549763656,
+            "bottom": 236.47752489103559
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 36,
+            "text": "Gross margin",
+            "bbox": {
+              "x0": 28.49808216255252,
+              "top": 222.97880782537393,
+              "x1": 86.99414554884454,
+              "bottom": 236.97747737494896
+            },
+            "confidence": 0.97808
+          },
+          "amount_parent": {
+            "span_index": 38,
+            "text": "171,008",
+            "bbox": {
+              "x0": 465.96864167542014,
+              "top": 223.4787603092873,
+              "x1": 502.46618549763656,
+              "bottom": 236.47752489103559
+            },
+            "confidence": 0.99998
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2024",
+            "bbox": {
+              "x0": 482.4675313484769,
+              "top": 113.48921384834054,
+              "x1": 502.96615185136557,
+              "bottom": 125.48807346226201
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "Year Ended June 30,",
+            "bbox": {
+              "x0": 13.999057904411766,
+              "top": 112.98926136442715,
+              "x1": 83.4943810727416,
+              "bottom": 124.98812097834862
+            },
+            "confidence": 0.97456
+          },
+          "unit_locator": {
+            "span_index": 4,
+            "text": "(In millions, except per share amounts)",
+            "bbox": {
+              "x0": 14.998990611869749,
+              "top": 101.99030671833246,
+              "x1": 142.99037716649158,
+              "bottom": 112.48930888051375
+            },
+            "confidence": 0.9865
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        }
+      ]
+    },
+    {
+      "id": "aapl",
+      "issuer_id": "AAPL",
+      "company": "Apple Inc.",
+      "pack_path": "data/examples/aapl-fy2025-pdf.json",
+      "pack_canonical_sha256": "e26e93213bd8041fdd93b228749a468ce241952e673776cb5fa37ad11f2fec43",
+      "source": {
+        "id": "aapl-fy25-10k-pdf",
+        "title": "Apple FY2025 Form 10-K / official PDF",
+        "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+        "published_at": "2025-10-31",
+        "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+        "pdf_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+        "unit": "USD_million"
+      },
+      "pages": [
+        {
+          "page": 32,
+          "width": 612.0,
+          "height": 792.0,
+          "image_sha256": "abe2728a1398afc64db24fa56e11c3ac38330674c3faa419fe1ba2b385a1e2bc",
+          "ocr_sha256": "4b3ecb6cfc99feda6d92928a0f2af382f74e6929e125a9e8640fe8a100012e29"
+        }
+      ],
+      "scope_evidence": {
+        "page": 37,
+        "registry": "creditlens/research_materials.py",
+        "meaning": "Consolidation is inherited from the existing source registry; operations partition is unknown. No new independent human confirmation."
+      },
+      "periods": [
+        {
+          "year": 2025,
+          "start": "2024-09-29",
+          "end": "2025-09-27",
+          "days": 364,
+          "fiscal_calendar": "week_52_53",
+          "unit": "USD_million",
+          "classification_id": "aapl_income_statement_product_service",
+          "classification_definition": "Apple Inc. FY2025 consolidated income statement product/service revenue classifications; FY2024 comparative column from the same report. Not operating segments.",
+          "categories": [
+            {
+              "id": "products",
+              "label": "Products",
+              "definition": "Apple Inc.: Products, as presented in this FY2025 statement and its FY2024 comparative."
+            },
+            {
+              "id": "services",
+              "label": "Services",
+              "definition": "Apple Inc.: Services, as presented in this FY2025 statement and its FY2024 comparative."
+            }
+          ]
+        },
+        {
+          "year": 2024,
+          "start": "2023-10-01",
+          "end": "2024-09-28",
+          "days": 364,
+          "fiscal_calendar": "week_52_53",
+          "unit": "USD_million",
+          "classification_id": "aapl_income_statement_product_service",
+          "classification_definition": "Apple Inc. FY2025 consolidated income statement product/service revenue classifications; FY2024 comparative column from the same report. Not operating segments.",
+          "categories": [
+            {
+              "id": "products",
+              "label": "Products",
+              "definition": "Apple Inc.: Products, as presented in this FY2025 statement and its FY2024 comparative."
+            },
+            {
+              "id": "services",
+              "label": "Services",
+              "definition": "Apple Inc.: Services, as presented in this FY2025 statement and its FY2024 comparative."
+            }
+          ]
+        }
+      ],
+      "facts": [
+        {
+          "id": "aapl-2025-revenue-products",
+          "year": 2025,
+          "role": "revenue",
+          "category": "products",
+          "label": "Products",
+          "raw_value": "307,003",
+          "normalized_value": "307003",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-09-29",
+            "end": "2025-09-27"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / revenue / Products / FY2025",
+          "amount_bbox": {
+            "x0": 383.5,
+            "top": 145.0,
+            "x1": 441.0,
+            "bottom": 163.5
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 11,
+            "text": "Products",
+            "bbox": {
+              "x0": 55.0,
+              "top": 146.5,
+              "x1": 98.0,
+              "bottom": 162.0
+            },
+            "confidence": 0.99996
+          },
+          "amount_parent": {
+            "span_index": 13,
+            "text": "307,003 $",
+            "bbox": {
+              "x0": 383.5,
+              "top": 145.0,
+              "x1": 441.0,
+              "bottom": 163.5
+            },
+            "confidence": 0.93975
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2025",
+            "bbox": {
+              "x0": 378.5,
+              "top": 119.5,
+              "x1": 404.0,
+              "bottom": 133.5
+            },
+            "confidence": 0.99998
+          },
+          "date_locator": {
+            "span_index": 4,
+            "text": "September 27,",
+            "bbox": {
+              "x0": 361.0,
+              "top": 110.5,
+              "x1": 422.0,
+              "bottom": 124.5
+            },
+            "confidence": 0.99863
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2025-revenue-services",
+          "year": 2025,
+          "role": "revenue",
+          "category": "services",
+          "label": "Services",
+          "raw_value": "109,158",
+          "normalized_value": "109158",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-09-29",
+            "end": "2025-09-27"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / revenue / Services / FY2025",
+          "amount_bbox": {
+            "x0": 385.0,
+            "top": 161.0,
+            "x1": 424.0,
+            "bottom": 176.0
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 16,
+            "text": "Services",
+            "bbox": {
+              "x0": 55.0,
+              "top": 160.5,
+              "x1": 98.0,
+              "bottom": 177.0
+            },
+            "confidence": 0.99997
+          },
+          "amount_parent": {
+            "span_index": 17,
+            "text": "109,158",
+            "bbox": {
+              "x0": 385.0,
+              "top": 161.0,
+              "x1": 424.0,
+              "bottom": 176.0
+            },
+            "confidence": 0.99998
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2025",
+            "bbox": {
+              "x0": 378.5,
+              "top": 119.5,
+              "x1": 404.0,
+              "bottom": 133.5
+            },
+            "confidence": 0.99998
+          },
+          "date_locator": {
+            "span_index": 4,
+            "text": "September 27,",
+            "bbox": {
+              "x0": 361.0,
+              "top": 110.5,
+              "x1": 422.0,
+              "bottom": 124.5
+            },
+            "confidence": 0.99863
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2025-revenue-total",
+          "year": 2025,
+          "role": "revenue",
+          "category": "total",
+          "label": "Total net sales",
+          "raw_value": "416,161",
+          "normalized_value": "416161",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-09-29",
+            "end": "2025-09-27"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / revenue / Total net sales / FY2025",
+          "amount_bbox": {
+            "x0": 384.0,
+            "top": 173.5,
+            "x1": 424.5,
+            "bottom": 190.5
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 20,
+            "text": "Total net sales",
+            "bbox": {
+              "x0": 66.5,
+              "top": 175.0,
+              "x1": 131.0,
+              "bottom": 190.0
+            },
+            "confidence": 0.99998
+          },
+          "amount_parent": {
+            "span_index": 21,
+            "text": "416,161",
+            "bbox": {
+              "x0": 384.0,
+              "top": 173.5,
+              "x1": 424.5,
+              "bottom": 190.5
+            },
+            "confidence": 0.99996
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2025",
+            "bbox": {
+              "x0": 378.5,
+              "top": 119.5,
+              "x1": 404.0,
+              "bottom": 133.5
+            },
+            "confidence": 0.99998
+          },
+          "date_locator": {
+            "span_index": 4,
+            "text": "September 27,",
+            "bbox": {
+              "x0": 361.0,
+              "top": 110.5,
+              "x1": 422.0,
+              "bottom": 124.5
+            },
+            "confidence": 0.99863
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2025-cost-products",
+          "year": 2025,
+          "role": "cost",
+          "category": "products",
+          "label": "Products",
+          "raw_value": "194,116",
+          "normalized_value": "194116",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-09-29",
+            "end": "2025-09-27"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / cost / Products / FY2025",
+          "amount_bbox": {
+            "x0": 384.5,
+            "top": 217.5,
+            "x1": 425.0,
+            "bottom": 234.0
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 25,
+            "text": "Products",
+            "bbox": {
+              "x0": 55.5,
+              "top": 218.0,
+              "x1": 98.5,
+              "bottom": 233.0
+            },
+            "confidence": 0.99996
+          },
+          "amount_parent": {
+            "span_index": 26,
+            "text": "194,116",
+            "bbox": {
+              "x0": 384.5,
+              "top": 217.5,
+              "x1": 425.0,
+              "bottom": 234.0
+            },
+            "confidence": 0.99996
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2025",
+            "bbox": {
+              "x0": 378.5,
+              "top": 119.5,
+              "x1": 404.0,
+              "bottom": 133.5
+            },
+            "confidence": 0.99998
+          },
+          "date_locator": {
+            "span_index": 4,
+            "text": "September 27,",
+            "bbox": {
+              "x0": 361.0,
+              "top": 110.5,
+              "x1": 422.0,
+              "bottom": 124.5
+            },
+            "confidence": 0.99863
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2025-cost-services",
+          "year": 2025,
+          "role": "cost",
+          "category": "services",
+          "label": "Services",
+          "raw_value": "26,844",
+          "normalized_value": "26844",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-09-29",
+            "end": "2025-09-27"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / cost / Services / FY2025",
+          "amount_bbox": {
+            "x0": 388.5,
+            "top": 232.0,
+            "x1": 425.0,
+            "bottom": 248.0
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 29,
+            "text": "Services",
+            "bbox": {
+              "x0": 55.5,
+              "top": 232.5,
+              "x1": 97.5,
+              "bottom": 247.5
+            },
+            "confidence": 0.99991
+          },
+          "amount_parent": {
+            "span_index": 30,
+            "text": "26,844",
+            "bbox": {
+              "x0": 388.5,
+              "top": 232.0,
+              "x1": 425.0,
+              "bottom": 248.0
+            },
+            "confidence": 0.99994
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2025",
+            "bbox": {
+              "x0": 378.5,
+              "top": 119.5,
+              "x1": 404.0,
+              "bottom": 133.5
+            },
+            "confidence": 0.99998
+          },
+          "date_locator": {
+            "span_index": 4,
+            "text": "September 27,",
+            "bbox": {
+              "x0": 361.0,
+              "top": 110.5,
+              "x1": 422.0,
+              "bottom": 124.5
+            },
+            "confidence": 0.99863
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2025-cost-total",
+          "year": 2025,
+          "role": "cost",
+          "category": "total",
+          "label": "Total cost of sales",
+          "raw_value": "220,960",
+          "normalized_value": "220960",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-09-29",
+            "end": "2025-09-27"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / cost / Total cost of sales / FY2025",
+          "amount_bbox": {
+            "x0": 384.0,
+            "top": 245.0,
+            "x1": 425.0,
+            "bottom": 262.0
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 33,
+            "text": "Total cost of sales",
+            "bbox": {
+              "x0": 67.0,
+              "top": 247.0,
+              "x1": 145.0,
+              "bottom": 261.5
+            },
+            "confidence": 0.99997
+          },
+          "amount_parent": {
+            "span_index": 34,
+            "text": "220,960",
+            "bbox": {
+              "x0": 384.0,
+              "top": 245.0,
+              "x1": 425.0,
+              "bottom": 262.0
+            },
+            "confidence": 0.95247
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2025",
+            "bbox": {
+              "x0": 378.5,
+              "top": 119.5,
+              "x1": 404.0,
+              "bottom": 133.5
+            },
+            "confidence": 0.99998
+          },
+          "date_locator": {
+            "span_index": 4,
+            "text": "September 27,",
+            "bbox": {
+              "x0": 361.0,
+              "top": 110.5,
+              "x1": 422.0,
+              "bottom": 124.5
+            },
+            "confidence": 0.99863
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2025-gross_profit-total",
+          "year": 2025,
+          "role": "gross_profit",
+          "category": "total",
+          "label": "Gross margin",
+          "raw_value": "195,201",
+          "normalized_value": "195201",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2024-09-29",
+            "end": "2025-09-27"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / gross_profit / Gross margin / FY2025",
+          "amount_bbox": {
+            "x0": 384.5,
+            "top": 259.5,
+            "x1": 424.5,
+            "bottom": 276.0
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 37,
+            "text": "Gross margin",
+            "bbox": {
+              "x0": 85.0,
+              "top": 261.5,
+              "x1": 145.0,
+              "bottom": 276.0
+            },
+            "confidence": 0.99559
+          },
+          "amount_parent": {
+            "span_index": 38,
+            "text": "195,201",
+            "bbox": {
+              "x0": 384.5,
+              "top": 259.5,
+              "x1": 424.5,
+              "bottom": 276.0
+            },
+            "confidence": 0.99997
+          },
+          "year_locator": {
+            "span_index": 7,
+            "text": "2025",
+            "bbox": {
+              "x0": 378.5,
+              "top": 119.5,
+              "x1": 404.0,
+              "bottom": 133.5
+            },
+            "confidence": 0.99998
+          },
+          "date_locator": {
+            "span_index": 4,
+            "text": "September 27,",
+            "bbox": {
+              "x0": 361.0,
+              "top": 110.5,
+              "x1": 422.0,
+              "bottom": 124.5
+            },
+            "confidence": 0.99863
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2024-revenue-products",
+          "year": 2024,
+          "role": "revenue",
+          "category": "products",
+          "label": "Products",
+          "raw_value": "294,866",
+          "normalized_value": "294866",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-10-01",
+            "end": "2024-09-28"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / revenue / Products / FY2024",
+          "amount_bbox": {
+            "x0": 453.0,
+            "top": 146.0,
+            "x1": 509.5,
+            "bottom": 163.0
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 11,
+            "text": "Products",
+            "bbox": {
+              "x0": 55.0,
+              "top": 146.5,
+              "x1": 98.0,
+              "bottom": 162.0
+            },
+            "confidence": 0.99996
+          },
+          "amount_parent": {
+            "span_index": 14,
+            "text": "294,866 $",
+            "bbox": {
+              "x0": 453.0,
+              "top": 146.0,
+              "x1": 509.5,
+              "bottom": 163.0
+            },
+            "confidence": 0.98903
+          },
+          "year_locator": {
+            "span_index": 8,
+            "text": "2024",
+            "bbox": {
+              "x0": 447.5,
+              "top": 119.5,
+              "x1": 473.5,
+              "bottom": 133.5
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "September 28,",
+            "bbox": {
+              "x0": 430.0,
+              "top": 110.5,
+              "x1": 491.5,
+              "bottom": 124.5
+            },
+            "confidence": 0.97174
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2024-revenue-services",
+          "year": 2024,
+          "role": "revenue",
+          "category": "services",
+          "label": "Services",
+          "raw_value": "96,169",
+          "normalized_value": "96169",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-10-01",
+            "end": "2024-09-28"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / revenue / Services / FY2024",
+          "amount_bbox": {
+            "x0": 458.0,
+            "top": 161.0,
+            "x1": 493.5,
+            "bottom": 176.5
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 16,
+            "text": "Services",
+            "bbox": {
+              "x0": 55.0,
+              "top": 160.5,
+              "x1": 98.0,
+              "bottom": 177.0
+            },
+            "confidence": 0.99997
+          },
+          "amount_parent": {
+            "span_index": 18,
+            "text": "96,169",
+            "bbox": {
+              "x0": 458.0,
+              "top": 161.0,
+              "x1": 493.5,
+              "bottom": 176.5
+            },
+            "confidence": 0.99994
+          },
+          "year_locator": {
+            "span_index": 8,
+            "text": "2024",
+            "bbox": {
+              "x0": 447.5,
+              "top": 119.5,
+              "x1": 473.5,
+              "bottom": 133.5
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "September 28,",
+            "bbox": {
+              "x0": 430.0,
+              "top": 110.5,
+              "x1": 491.5,
+              "bottom": 124.5
+            },
+            "confidence": 0.97174
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2024-revenue-total",
+          "year": 2024,
+          "role": "revenue",
+          "category": "total",
+          "label": "Total net sales",
+          "raw_value": "391,035",
+          "normalized_value": "391035",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-10-01",
+            "end": "2024-09-28"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / revenue / Total net sales / FY2024",
+          "amount_bbox": {
+            "x0": 453.5,
+            "top": 175.0,
+            "x1": 493.5,
+            "bottom": 190.5
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 20,
+            "text": "Total net sales",
+            "bbox": {
+              "x0": 66.5,
+              "top": 175.0,
+              "x1": 131.0,
+              "bottom": 190.0
+            },
+            "confidence": 0.99998
+          },
+          "amount_parent": {
+            "span_index": 22,
+            "text": "391,035",
+            "bbox": {
+              "x0": 453.5,
+              "top": 175.0,
+              "x1": 493.5,
+              "bottom": 190.5
+            },
+            "confidence": 0.99996
+          },
+          "year_locator": {
+            "span_index": 8,
+            "text": "2024",
+            "bbox": {
+              "x0": 447.5,
+              "top": 119.5,
+              "x1": 473.5,
+              "bottom": 133.5
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "September 28,",
+            "bbox": {
+              "x0": 430.0,
+              "top": 110.5,
+              "x1": 491.5,
+              "bottom": 124.5
+            },
+            "confidence": 0.97174
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2024-cost-products",
+          "year": 2024,
+          "role": "cost",
+          "category": "products",
+          "label": "Products",
+          "raw_value": "185,233",
+          "normalized_value": "185233",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-10-01",
+            "end": "2024-09-28"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / cost / Products / FY2024",
+          "amount_bbox": {
+            "x0": 453.5,
+            "top": 217.5,
+            "x1": 493.5,
+            "bottom": 234.0
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 25,
+            "text": "Products",
+            "bbox": {
+              "x0": 55.5,
+              "top": 218.0,
+              "x1": 98.5,
+              "bottom": 233.0
+            },
+            "confidence": 0.99996
+          },
+          "amount_parent": {
+            "span_index": 27,
+            "text": "185,233",
+            "bbox": {
+              "x0": 453.5,
+              "top": 217.5,
+              "x1": 493.5,
+              "bottom": 234.0
+            },
+            "confidence": 0.99998
+          },
+          "year_locator": {
+            "span_index": 8,
+            "text": "2024",
+            "bbox": {
+              "x0": 447.5,
+              "top": 119.5,
+              "x1": 473.5,
+              "bottom": 133.5
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "September 28,",
+            "bbox": {
+              "x0": 430.0,
+              "top": 110.5,
+              "x1": 491.5,
+              "bottom": 124.5
+            },
+            "confidence": 0.97174
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2024-cost-services",
+          "year": 2024,
+          "role": "cost",
+          "category": "services",
+          "label": "Services",
+          "raw_value": "25,119",
+          "normalized_value": "25119",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-10-01",
+            "end": "2024-09-28"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / cost / Services / FY2024",
+          "amount_bbox": {
+            "x0": 457.5,
+            "top": 232.0,
+            "x1": 494.0,
+            "bottom": 248.0
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 29,
+            "text": "Services",
+            "bbox": {
+              "x0": 55.5,
+              "top": 232.5,
+              "x1": 97.5,
+              "bottom": 247.5
+            },
+            "confidence": 0.99991
+          },
+          "amount_parent": {
+            "span_index": 31,
+            "text": "25,119",
+            "bbox": {
+              "x0": 457.5,
+              "top": 232.0,
+              "x1": 494.0,
+              "bottom": 248.0
+            },
+            "confidence": 0.99993
+          },
+          "year_locator": {
+            "span_index": 8,
+            "text": "2024",
+            "bbox": {
+              "x0": 447.5,
+              "top": 119.5,
+              "x1": 473.5,
+              "bottom": 133.5
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "September 28,",
+            "bbox": {
+              "x0": 430.0,
+              "top": 110.5,
+              "x1": 491.5,
+              "bottom": 124.5
+            },
+            "confidence": 0.97174
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2024-cost-total",
+          "year": 2024,
+          "role": "cost",
+          "category": "total",
+          "label": "Total cost of sales",
+          "raw_value": "210,352",
+          "normalized_value": "210352",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-10-01",
+            "end": "2024-09-28"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / cost / Total cost of sales / FY2024",
+          "amount_bbox": {
+            "x0": 453.5,
+            "top": 246.0,
+            "x1": 494.0,
+            "bottom": 261.5
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 33,
+            "text": "Total cost of sales",
+            "bbox": {
+              "x0": 67.0,
+              "top": 247.0,
+              "x1": 145.0,
+              "bottom": 261.5
+            },
+            "confidence": 0.99997
+          },
+          "amount_parent": {
+            "span_index": 35,
+            "text": "210,352",
+            "bbox": {
+              "x0": 453.5,
+              "top": 246.0,
+              "x1": 494.0,
+              "bottom": 261.5
+            },
+            "confidence": 0.99995
+          },
+          "year_locator": {
+            "span_index": 8,
+            "text": "2024",
+            "bbox": {
+              "x0": 447.5,
+              "top": 119.5,
+              "x1": 473.5,
+              "bottom": 133.5
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "September 28,",
+            "bbox": {
+              "x0": 430.0,
+              "top": 110.5,
+              "x1": 491.5,
+              "bottom": 124.5
+            },
+            "confidence": 0.97174
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        },
+        {
+          "id": "aapl-2024-gross_profit-total",
+          "year": 2024,
+          "role": "gross_profit",
+          "category": "total",
+          "label": "Gross margin",
+          "raw_value": "180,683",
+          "normalized_value": "180683",
+          "value_status": "reported",
+          "unit": "USD_million",
+          "period": {
+            "start": "2023-10-01",
+            "end": "2024-09-28"
+          },
+          "statement_scope": {
+            "consolidation": "consolidated",
+            "statement_basis": "as_reported_statement_total",
+            "operations_partition": "unknown"
+          },
+          "source_id": "aapl-fy25-10k-pdf",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 32,
+          "locator": "PDF p.32 / gross_profit / Gross margin / FY2024",
+          "amount_bbox": {
+            "x0": 453.5,
+            "top": 260.0,
+            "x1": 494.5,
+            "bottom": 276.5
+          },
+          "bbox_role": "approximate_locator",
+          "row_label": {
+            "span_index": 37,
+            "text": "Gross margin",
+            "bbox": {
+              "x0": 85.0,
+              "top": 261.5,
+              "x1": 145.0,
+              "bottom": 276.0
+            },
+            "confidence": 0.99559
+          },
+          "amount_parent": {
+            "span_index": 39,
+            "text": "180,683",
+            "bbox": {
+              "x0": 453.5,
+              "top": 260.0,
+              "x1": 494.5,
+              "bottom": 276.5
+            },
+            "confidence": 0.99995
+          },
+          "year_locator": {
+            "span_index": 8,
+            "text": "2024",
+            "bbox": {
+              "x0": 447.5,
+              "top": 119.5,
+              "x1": 473.5,
+              "bottom": 133.5
+            },
+            "confidence": 0.99999
+          },
+          "date_locator": {
+            "span_index": 5,
+            "text": "September 28,",
+            "bbox": {
+              "x0": 430.0,
+              "top": 110.5,
+              "x1": 491.5,
+              "bottom": 124.5
+            },
+            "confidence": 0.97174
+          },
+          "unit_locator": {
+            "span_index": 2,
+            "text": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+            "bbox": {
+              "x0": 113.0,
+              "top": 70.0,
+              "x1": 499.0,
+              "bottom": 84.0
+            },
+            "confidence": 0.99052
+          },
+          "reference_method": "ai_assisted_transcription_from_rendered_page",
+          "independent_human_confirmation": "pending",
+          "human_gold": false
+        }
+      ]
+    }
+  ]
+}
