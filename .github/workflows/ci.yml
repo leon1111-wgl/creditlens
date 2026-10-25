@@ -28,6 +28,7 @@ jobs:
       - run: python scripts/replay_document_preparation.py
       - run: python scripts/evaluate_preparation_history.py
       - run: python scripts/evaluate_cross_page_evidence.py
+      - run: python scripts/evaluate_table_lookup.py --verify-saved
       - run: python scripts/verify_preparation_export.py artifacts/document-preparation-replay.json --attempt-index 2 --check-current
       - run: python scripts/evaluate_research_acceptance.py
       - run: python scripts/evaluate_company_attribution.py
@@ -36,6 +37,7 @@ jobs:
       - run: node scripts/check_preparation_write_intent.js
       - run: node scripts/check_preparation_current_view.js
       - run: node scripts/check_cross_page_state.js
+      - run: node scripts/check_table_lookup_state.js
       - name: Check browser JavaScript syntax
         run: |
           node --check artifacts/workbench-syntax.js
@@ -48,3 +50,4 @@ jobs:
           node --check artifacts/explanation-reviews-syntax.js
           node --check artifacts/preparation-syntax.js
           node --check artifacts/cross-page-syntax.js
+          node --check artifacts/table-lookup-syntax.js
