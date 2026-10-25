@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-25",
+  "version": "0.15.0",
+  "scope": "Public official facts with simulated analyst and reviewer actions; not production or independent causal verification",
+  "software_tests": {
+    "run": 626,
+    "passed": 624,
+    "skipped": 2,
+    "skip_reason": "Existing Windows symlink privileges",
+    "duration_seconds": 50.917,
+    "new_tests": 51
+  },
+  "browser": {
+    "base_url": "http://127.0.0.1:8767",
+    "parent_task_id": "031a121e0b6649259f9c74bf0e851b23",
+    "attachment_id": "92b5be284c6a4648a3c265beea4b56a3",
+    "final_status": "reviewed",
+    "final_revision": 7,
+    "submitted_snapshots": 2,
+    "events": [
+      "create",
+      "update",
+      "submit",
+      "return",
+      "update",
+      "submit",
+      "approve"
+    ],
+    "download_matches_api": true,
+    "download": {
+      "bytes": 252198,
+      "sha256": "0da679c29d79a7fb1006e8ed1b66eae7a441fd5e96c50aa23043d328e3933f56"
+    },
+    "returned_export_unchanged": true,
+    "returned_export": {
+      "bytes": 252106,
+      "sha256": "61a25550e33ecc1278cc797d4faec7d2e7e0ed6f2bb15fcea57b63c905708c0c"
+    },
+    "console_errors_or_warnings": [],
+    "desktop": {
+      "viewport_width": 1280,
+      "viewport_height": 1100,
+      "document_width": 1265,
+      "panel_width": 989
+    },
+    "narrow": {
+      "viewport_width": 497,
+      "viewport_height": 900,
+      "document_width": 482,
+      "panel_width": 450,
+      "table_width": 382
+    }
+  },
+  "old_parent_unchanged": true,
+  "old_parent": {
+    "parent_export": {
+      "bytes": 239354,
+      "sha256": "48d2b15b618dd419b2ff19fe923dbfe7cf7f827082228e9129d2f92b95bb3e8f"
+    },
+    "parent_acceptance": {
+      "bytes": 85136,
+      "sha256": "e5d29bab142a69556ae311bcf16683a20912b5d25724871762fcfb6fb0b46c3b"
+    }
+  },
+  "prior_tracked_data_and_results": {
+    "count": 89,
+    "changed": [],
+    "comparison_base": "e221dd54ab134d8ad29f5ef05ad701d80306bf76",
+    "line_endings_normalized": true
+  },
+  "offline_exports": {
+    "explanation-review-demo.json": {
+      "ok": true,
+      "attachment_id": "92b5be284c6a4648a3c265beea4b56a3",
+      "snapshot_id": "cb07c55eeebf4c52b18b194cfd7fc278",
+      "content_sha256": "76241c24734ccc0f1f2df751c89e303d6c5b6d142c64e79a6c1a3e536a954adc",
+      "evidence_sha256": "1f31b94c3386e568e3d342a833db4f6d0620d68ecbe9c657ac33938ce004df3e",
+      "parent": {
+        "parent_export_sha256": "7f053f942852b73097bb06eb1b205a36e3ae6629492e155006319cc60c0a55bc",
+        "review_actor": "demo-reviewer",
+        "review_revision": 7,
+        "snapshot_id": "baca8e0c59954bbc961cc6697a786be4",
+        "snapshot_revision": 6,
+        "snapshot_sha256": "cb256e437eac5fa31882402ad2eea57ed8e6c809ac87c37d9d393ffca4d3e970",
+        "task_id": "031a121e0b6649259f9c74bf0e851b23",
+        "task_revision": 7,
+        "tenant_id": "public-demo"
+      },
+      "review_count": 1,
+      "decision_counts": {
+        "adopt_as_company_statement": 1,
+        "rejected": 0,
+        "needs_evidence": 0
+      },
+      "support_scope": "company_statement_only",
+      "independently_verified": false,
+      "automatic_approval": false,
+      "scope": "Unsigned internal consistency and recorded role separation only; no signature, source authenticity or principal identity verification"
+    },
+    "explanation-review-returned-demo.json": {
+      "ok": true,
+      "attachment_id": "92b5be284c6a4648a3c265beea4b56a3",
+      "snapshot_id": "039d1abbe9d8495887c7263eca43109a",
+      "content_sha256": "f0618ae60babde675d82f84b638306e842eeb6521709452bb0a81dfd705fd69d",
+      "evidence_sha256": "1f31b94c3386e568e3d342a833db4f6d0620d68ecbe9c657ac33938ce004df3e",
+      "parent": {
+        "parent_export_sha256": "7f053f942852b73097bb06eb1b205a36e3ae6629492e155006319cc60c0a55bc",
+        "review_actor": "demo-reviewer",
+        "review_revision": 7,
+        "snapshot_id": "baca8e0c59954bbc961cc6697a786be4",
+        "snapshot_revision": 6,
+        "snapshot_sha256": "cb256e437eac5fa31882402ad2eea57ed8e6c809ac87c37d9d393ffca4d3e970",
+        "task_id": "031a121e0b6649259f9c74bf0e851b23",
+        "task_revision": 7,
+        "tenant_id": "public-demo"
+      },
+      "review_count": 1,
+      "decision_counts": {
+        "adopt_as_company_statement": 0,
+        "rejected": 0,
+        "needs_evidence": 1
+      },
+      "support_scope": "company_statement_only",
+      "independently_verified": false,
+      "automatic_approval": false,
+      "scope": "Unsigned internal consistency and recorded role separation only; no signature, source authenticity or principal identity verification"
+    }
+  },
+  "raw_pdf_downloads": 0,
+  "ocr_runs": 0,
+  "paid_calls": 0,
+  "training_runs": 0
+}
