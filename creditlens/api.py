@@ -23,6 +23,7 @@ from .visual_store import VisualStore, VisualArtifactError
 from .experiments import experiment_view
 from .transfer_store import transfer_snapshot, transfer_image
 from .date_store import date_snapshot
+from .issuer_store import issuer_snapshot, issuer_image
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -166,6 +167,26 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
             raise HTTPException(503, "Date diagnostic files are unavailable") from exc
         except (ValueError, KeyError, TypeError) as exc:
             raise HTTPException(409, "Date diagnostic failed validation") from exc
+
+    @application.get("/api/issuer-evaluation")
+    def issuer_records(identity: Actor = Depends(actor)):
+        try:
+            return issuer_snapshot(ROOT)
+        except FileNotFoundError as exc:
+            raise HTTPException(503, "Issuer evaluation files are unavailable") from exc
+        except (ValueError, KeyError, TypeError) as exc:
+            raise HTTPException(409, "Issuer evaluation failed validation") from exc
+
+    @application.get("/api/issuer-evaluation/{document_id}/pages/{page}.png")
+    def issuer_page(document_id: str, page: int,
+                    expected_sha256: str = Query(pattern=r"^[0-9a-f]{64}$"),
+                    identity: Actor = Depends(actor)):
+        try:
+            return Response(issuer_image(ROOT, document_id, page, expected_sha256=expected_sha256), media_type="image/png")
+        except FileNotFoundError as exc:
+            raise HTTPException(404, "Registered issuer image is unavailable") from exc
+        except (ValueError, KeyError, TypeError) as exc:
+            raise HTTPException(409, "Issuer image failed validation") from exc
 
     @application.get("/api/document-transfer/{document_id}/pages/{page}.png")
     def transfer_page(document_id: str, page: int,
