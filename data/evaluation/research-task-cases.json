@@ -1,0 +1,3718 @@
+{
+  "schema_version": 1,
+  "id": "research-task-development-36-v1",
+  "created_on": "2026-10-25",
+  "purpose": "deterministic_task_contract_development_acceptance",
+  "human_confirmation": "pending",
+  "held_out": false,
+  "natural_language_understanding_evaluated": false,
+  "model_accuracy_evaluated": false,
+  "source_bundle_id": "msft-aapl-fy2025",
+  "source_bundle_sha256": "1630349586512dfa0af32bf963f04d17ef2890ab0015c9cb12b161fd68861602",
+  "cash_flow_bridge_sha256": "433551c061e56e9b12b624a25d5a4dbf24bd6648a88c5b1c95be8d8cbda856e4",
+  "cases": [
+    {
+      "id": "RT-01",
+      "contract_id": "metric_lookup",
+      "question": "查 MSFT FY2024 经营现金流：原始符号、百万美元口径和原页在哪里？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2024
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "118548"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024"
+              },
+              "raw_signed_value"
+            ],
+            "operator": "equals",
+            "expected": "118548"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024"
+              },
+              "unit"
+            ],
+            "operator": "equals",
+            "expected": "USD_million"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024"
+              },
+              "source",
+              "sha256"
+            ],
+            "operator": "equals",
+            "expected": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 53
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024"
+              },
+              "locatability"
+            ],
+            "operator": "equals",
+            "expected": "registered_source_locatable"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-02",
+      "contract_id": "metric_lookup",
+      "question": "查 MSFT FY2025 经营现金流：原始符号、百万美元口径和原页在哪里？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "136162"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "raw_signed_value"
+            ],
+            "operator": "equals",
+            "expected": "136162"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "unit"
+            ],
+            "operator": "equals",
+            "expected": "USD_million"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "source",
+              "sha256"
+            ],
+            "operator": "equals",
+            "expected": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 53
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "locatability"
+            ],
+            "operator": "equals",
+            "expected": "registered_source_locatable"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-03",
+      "contract_id": "metric_lookup",
+      "question": "查 MSFT FY2024 固定资产现金支出：原始符号、百万美元口径和原页在哪里？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "capex",
+        "year": 2024
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2024"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "44477"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2024"
+              },
+              "raw_signed_value"
+            ],
+            "operator": "equals",
+            "expected": "-44477"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2024"
+              },
+              "unit"
+            ],
+            "operator": "equals",
+            "expected": "USD_million"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2024"
+              },
+              "source",
+              "sha256"
+            ],
+            "operator": "equals",
+            "expected": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2024"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 53
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2024"
+              },
+              "locatability"
+            ],
+            "operator": "equals",
+            "expected": "registered_source_locatable"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-04",
+      "contract_id": "metric_lookup",
+      "question": "查 MSFT FY2025 固定资产现金支出：原始符号、百万美元口径和原页在哪里？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "capex",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "64551"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+              },
+              "raw_signed_value"
+            ],
+            "operator": "equals",
+            "expected": "-64551"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+              },
+              "unit"
+            ],
+            "operator": "equals",
+            "expected": "USD_million"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+              },
+              "source",
+              "sha256"
+            ],
+            "operator": "equals",
+            "expected": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 53
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+              },
+              "locatability"
+            ],
+            "operator": "equals",
+            "expected": "registered_source_locatable"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-05",
+      "contract_id": "metric_lookup",
+      "question": "查 AAPL FY2024 经营现金流：原始符号、百万美元口径和原页在哪里？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "AAPL",
+        "metric": "cfo",
+        "year": 2024
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "118254"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024"
+              },
+              "raw_signed_value"
+            ],
+            "operator": "equals",
+            "expected": "118254"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024"
+              },
+              "unit"
+            ],
+            "operator": "equals",
+            "expected": "USD_million"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024"
+              },
+              "source",
+              "sha256"
+            ],
+            "operator": "equals",
+            "expected": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 36
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024"
+              },
+              "locatability"
+            ],
+            "operator": "equals",
+            "expected": "registered_source_locatable"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-06",
+      "contract_id": "metric_lookup",
+      "question": "查 AAPL FY2025 经营现金流：原始符号、百万美元口径和原页在哪里？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "AAPL",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "111482"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025"
+              },
+              "raw_signed_value"
+            ],
+            "operator": "equals",
+            "expected": "111482"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025"
+              },
+              "unit"
+            ],
+            "operator": "equals",
+            "expected": "USD_million"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025"
+              },
+              "source",
+              "sha256"
+            ],
+            "operator": "equals",
+            "expected": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 36
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025"
+              },
+              "locatability"
+            ],
+            "operator": "equals",
+            "expected": "registered_source_locatable"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-07",
+      "contract_id": "metric_lookup",
+      "question": "查 AAPL FY2024 固定资产现金支出：原始符号、百万美元口径和原页在哪里？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "AAPL",
+        "metric": "capex",
+        "year": 2024
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2024"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "9447"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2024"
+              },
+              "raw_signed_value"
+            ],
+            "operator": "equals",
+            "expected": "-9447"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2024"
+              },
+              "unit"
+            ],
+            "operator": "equals",
+            "expected": "USD_million"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2024"
+              },
+              "source",
+              "sha256"
+            ],
+            "operator": "equals",
+            "expected": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2024"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 36
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2024"
+              },
+              "locatability"
+            ],
+            "operator": "equals",
+            "expected": "registered_source_locatable"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-08",
+      "contract_id": "metric_lookup",
+      "question": "查 AAPL FY2025 固定资产现金支出：原始符号、百万美元口径和原页在哪里？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "AAPL",
+        "metric": "capex",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2025"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "12715"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2025"
+              },
+              "raw_signed_value"
+            ],
+            "operator": "equals",
+            "expected": "-12715"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2025"
+              },
+              "unit"
+            ],
+            "operator": "equals",
+            "expected": "USD_million"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2025"
+              },
+              "source",
+              "sha256"
+            ],
+            "operator": "equals",
+            "expected": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2025"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 36
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2025"
+              },
+              "locatability"
+            ],
+            "operator": "equals",
+            "expected": "registered_source_locatable"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-09",
+      "contract_id": "comparable_change",
+      "question": "MSFT 的 cfo 从 FY2024 到 FY2025 变化多少，输入是哪两项？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "annual_changes",
+          {
+            "issuer_id": "MSFT",
+            "metric": "cfo"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "absolute_change"
+            ],
+            "operator": "equals",
+            "expected": "17614"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "growth_rate"
+            ],
+            "operator": "equals",
+            "expected": "0.148581"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "input_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024",
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+            ]
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "inputs",
+              0,
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 53
+          }
+        ]
+      },
+      "basis": "同一报告比较列；差额=归一后本年−上年，增长率=差额/上年，6位小数half-even。不能推作历史可得版本。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-10",
+      "contract_id": "comparable_change",
+      "question": "MSFT 的 capex 从 FY2024 到 FY2025 变化多少，输入是哪两项？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "capex",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "annual_changes",
+          {
+            "issuer_id": "MSFT",
+            "metric": "capex"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "capex"
+              },
+              "absolute_change"
+            ],
+            "operator": "equals",
+            "expected": "20074"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "capex"
+              },
+              "growth_rate"
+            ],
+            "operator": "equals",
+            "expected": "0.451334"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "capex"
+              },
+              "input_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2024",
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+            ]
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "capex"
+              },
+              "inputs",
+              0,
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 53
+          }
+        ]
+      },
+      "basis": "同一报告比较列；差额=归一后本年−上年，增长率=差额/上年，6位小数half-even。不能推作历史可得版本。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-11",
+      "contract_id": "comparable_change",
+      "question": "AAPL 的 cfo 从 FY2024 到 FY2025 变化多少，输入是哪两项？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "AAPL",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "annual_changes",
+          {
+            "issuer_id": "AAPL",
+            "metric": "cfo"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "AAPL",
+                "metric": "cfo"
+              },
+              "absolute_change"
+            ],
+            "operator": "equals",
+            "expected": "-6772"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "AAPL",
+                "metric": "cfo"
+              },
+              "growth_rate"
+            ],
+            "operator": "equals",
+            "expected": "-0.057267"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "AAPL",
+                "metric": "cfo"
+              },
+              "input_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024",
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025"
+            ]
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "AAPL",
+                "metric": "cfo"
+              },
+              "inputs",
+              0,
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 36
+          }
+        ]
+      },
+      "basis": "同一报告比较列；差额=归一后本年−上年，增长率=差额/上年，6位小数half-even。不能推作历史可得版本。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-12",
+      "contract_id": "comparable_change",
+      "question": "AAPL 的 capex 从 FY2024 到 FY2025 变化多少，输入是哪两项？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "AAPL",
+        "metric": "capex",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "annual_changes",
+          {
+            "issuer_id": "AAPL",
+            "metric": "capex"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "AAPL",
+                "metric": "capex"
+              },
+              "absolute_change"
+            ],
+            "operator": "equals",
+            "expected": "3268"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "AAPL",
+                "metric": "capex"
+              },
+              "growth_rate"
+            ],
+            "operator": "equals",
+            "expected": "0.345930"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "AAPL",
+                "metric": "capex"
+              },
+              "input_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2024",
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2025"
+            ]
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "AAPL",
+                "metric": "capex"
+              },
+              "inputs",
+              0,
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 36
+          }
+        ]
+      },
+      "basis": "同一报告比较列；差额=归一后本年−上年，增长率=差额/上年，6位小数half-even。不能推作历史可得版本。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-13",
+      "contract_id": "comparable_change",
+      "question": "能否直接按 FY2024 cfo 给微软和苹果排名？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2024
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "refused",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "cross_company",
+          {
+            "metric": "cfo",
+            "year": 2024
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "cfo",
+                "year": 2024
+              },
+              "ranking"
+            ],
+            "operator": "equals",
+            "expected": null
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "cfo",
+                "year": 2024
+              },
+              "reasons",
+              {
+                "code": "actual_period_mismatch"
+              },
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "actual_period_mismatch"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "cfo",
+                "year": 2024
+              },
+              "candidate_observation_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024",
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024"
+            ]
+          }
+        ]
+      },
+      "basis": "微软6月年结，苹果9月周历年结；本任务未建立严格同行契约，只能并列。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-14",
+      "contract_id": "comparable_change",
+      "question": "能否直接按 FY2025 cfo 给微软和苹果排名？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "refused",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "cross_company",
+          {
+            "metric": "cfo",
+            "year": 2025
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "cfo",
+                "year": 2025
+              },
+              "ranking"
+            ],
+            "operator": "equals",
+            "expected": null
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "cfo",
+                "year": 2025
+              },
+              "reasons",
+              {
+                "code": "actual_period_mismatch"
+              },
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "actual_period_mismatch"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "cfo",
+                "year": 2025
+              },
+              "candidate_observation_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025",
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025"
+            ]
+          }
+        ]
+      },
+      "basis": "微软6月年结，苹果9月周历年结；本任务未建立严格同行契约，只能并列。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-15",
+      "contract_id": "comparable_change",
+      "question": "能否直接按 FY2024 capex 给微软和苹果排名？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "capex",
+        "year": 2024
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "refused",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "cross_company",
+          {
+            "metric": "capex",
+            "year": 2024
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "capex",
+                "year": 2024
+              },
+              "ranking"
+            ],
+            "operator": "equals",
+            "expected": null
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "capex",
+                "year": 2024
+              },
+              "reasons",
+              {
+                "code": "actual_period_mismatch"
+              },
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "actual_period_mismatch"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "capex",
+                "year": 2024
+              },
+              "candidate_observation_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2024",
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2024"
+            ]
+          }
+        ]
+      },
+      "basis": "微软6月年结，苹果9月周历年结；本任务未建立严格同行契约，只能并列。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-16",
+      "contract_id": "comparable_change",
+      "question": "能否直接按 FY2025 capex 给微软和苹果排名？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "capex",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "refused",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "cross_company",
+          {
+            "metric": "capex",
+            "year": 2025
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "capex",
+                "year": 2025
+              },
+              "ranking"
+            ],
+            "operator": "equals",
+            "expected": null
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "capex",
+                "year": 2025
+              },
+              "reasons",
+              {
+                "code": "actual_period_mismatch"
+              },
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "actual_period_mismatch"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "cross_company",
+              {
+                "metric": "capex",
+                "year": 2025
+              },
+              "candidate_observation_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025",
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:capex-2025"
+            ]
+          }
+        ]
+      },
+      "basis": "微软6月年结，苹果9月周历年结；本任务未建立严格同行契约，只能并列。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-17",
+      "contract_id": "metric_lookup",
+      "question": "MSFT FY2025 CFO 被拒绝采用后，原值和出处是否仍保留？",
+      "input": {
+        "variant": "rejected_target",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "仅模拟采用状态，保持官方数值与来源原样。"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "136162"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 53
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "usable_for_calculation"
+            ],
+            "operator": "equals",
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "adoption",
+              "status"
+            ],
+            "operator": "equals",
+            "expected": "rejected"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-18",
+      "contract_id": "metric_lookup",
+      "question": "MSFT FY2025 CFO 尚未作决定后，原值和出处是否仍保留？",
+      "input": {
+        "variant": "unassessed_target",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "仅模拟采用状态，保持官方数值与来源原样。"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "136162"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "source",
+              "page"
+            ],
+            "operator": "equals",
+            "expected": 53
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "usable_for_calculation"
+            ],
+            "operator": "equals",
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+              },
+              "adoption",
+              "status"
+            ],
+            "operator": "equals",
+            "expected": "unassessed"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-19",
+      "contract_id": "comparable_change",
+      "question": "一侧 CFO 拒绝采用，可否仍计算 MSFT 年度变化？",
+      "input": {
+        "variant": "rejected_target",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "仅模拟采用状态；缺失不补零。"
+      },
+      "expected": {
+        "outcome": "refused",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "annual_changes",
+          {
+            "issuer_id": "MSFT",
+            "metric": "cfo"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "absolute_change"
+            ],
+            "operator": "equals",
+            "expected": null
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "reasons",
+              {
+                "code": "observation_not_adopted"
+              },
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "observation_not_adopted"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "candidate_observation_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024",
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+            ]
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-20",
+      "contract_id": "comparable_change",
+      "question": "一侧 CFO 尚未决定，可否仍计算 MSFT 年度变化？",
+      "input": {
+        "variant": "unassessed_target",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "仅模拟采用状态；缺失不补零。"
+      },
+      "expected": {
+        "outcome": "refused",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "comparable_change"
+          },
+          "results",
+          "annual_changes",
+          {
+            "issuer_id": "MSFT",
+            "metric": "cfo"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "absolute_change"
+            ],
+            "operator": "equals",
+            "expected": null
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "reasons",
+              {
+                "code": "observation_not_adopted"
+              },
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "observation_not_adopted"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "comparable_change"
+              },
+              "results",
+              "annual_changes",
+              {
+                "issuer_id": "MSFT",
+                "metric": "cfo"
+              },
+              "candidate_observation_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024",
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+            ]
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-21",
+      "contract_id": "operating_explanation",
+      "question": "MSFT 的现金流变化可否分成净利润、调节项目、经营资产负债三组？这是否证明经营原因？",
+      "input": {
+        "variant": "with_bridge",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "insufficient",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "operating_explanation"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "MSFT"
+              },
+              "status"
+            ],
+            "operator": "equals",
+            "expected": "available"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "MSFT"
+              },
+              "calculation",
+              "reported_cfo_change"
+            ],
+            "operator": "equals",
+            "expected": "17614"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "MSFT"
+              },
+              "calculation",
+              "groups",
+              {
+                "group": "net_income"
+              },
+              "contribution"
+            ],
+            "operator": "equals",
+            "expected": "13696"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "MSFT"
+              },
+              "calculation",
+              "groups",
+              {
+                "group": "reconciliation_adjustments"
+              },
+              "contribution"
+            ],
+            "operator": "equals",
+            "expected": "11092"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "MSFT"
+              },
+              "calculation",
+              "groups",
+              {
+                "group": "operating_assets_and_liabilities"
+              },
+              "contribution"
+            ],
+            "operator": "equals",
+            "expected": "-7174"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "MSFT"
+              },
+              "calculation",
+              "reported_cfo_observation_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024",
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+            ]
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "company_explanations"
+            ],
+            "operator": "equals",
+            "expected": []
+          }
+        ]
+      },
+      "basis": "逐行有符号会计加总及两期差分；残差为零不证明经营原因。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-22",
+      "contract_id": "operating_explanation",
+      "question": "AAPL 的现金流变化可否分成净利润、调节项目、经营资产负债三组？这是否证明经营原因？",
+      "input": {
+        "variant": "with_bridge",
+        "issuer_id": "AAPL",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "insufficient",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "operating_explanation"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "AAPL"
+              },
+              "status"
+            ],
+            "operator": "equals",
+            "expected": "available"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "AAPL"
+              },
+              "calculation",
+              "reported_cfo_change"
+            ],
+            "operator": "equals",
+            "expected": "-6772"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "AAPL"
+              },
+              "calculation",
+              "groups",
+              {
+                "group": "net_income"
+              },
+              "contribution"
+            ],
+            "operator": "equals",
+            "expected": "18274"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "AAPL"
+              },
+              "calculation",
+              "groups",
+              {
+                "group": "reconciliation_adjustments"
+              },
+              "contribution"
+            ],
+            "operator": "equals",
+            "expected": "3605"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "AAPL"
+              },
+              "calculation",
+              "groups",
+              {
+                "group": "operating_assets_and_liabilities"
+              },
+              "contribution"
+            ],
+            "operator": "equals",
+            "expected": "-28651"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "AAPL"
+              },
+              "calculation",
+              "reported_cfo_observation_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024",
+              "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025"
+            ]
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "company_explanations"
+            ],
+            "operator": "equals",
+            "expected": []
+          }
+        ]
+      },
+      "basis": "逐行有符号会计加总及两期差分；残差为零不证明经营原因。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-23",
+      "contract_id": "operating_explanation",
+      "question": "未附会计桥也没有经营附注，能解释现金流为什么变动吗？",
+      "input": {
+        "variant": "all_adopted",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "无披露值改动；采用状态和问题为开发脚本设定"
+      },
+      "expected": {
+        "outcome": "insufficient",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "operating_explanation"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes"
+            ],
+            "operator": "equals",
+            "expected": []
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "gaps",
+              {
+                "code": "accounting_bridge_not_attached"
+              },
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "accounting_bridge_not_attached"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-24",
+      "contract_id": "operating_explanation",
+      "question": "会计桥完整但 MSFT CFO 未采用，能把分解当作本任务结论吗？",
+      "input": {
+        "variant": "bridge_unassessed",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "会计桥不变，模拟一侧 CFO 未采用。"
+      },
+      "expected": {
+        "outcome": "refused",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "operating_explanation"
+          },
+          "results",
+          "accounting_changes",
+          {
+            "issuer_id": "MSFT"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "MSFT"
+              },
+              "input_adoption_complete"
+            ],
+            "operator": "equals",
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "MSFT"
+              },
+              "gaps",
+              {
+                "code": "accounting_inputs_not_adopted"
+              },
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "accounting_inputs_not_adopted"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "accounting_changes",
+              {
+                "issuer_id": "MSFT"
+              },
+              "calculation",
+              "residual"
+            ],
+            "operator": "equals",
+            "expected": "0"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-25",
+      "contract_id": "operating_explanation",
+      "question": "分析员写下“已证明是收款改善”，只有 CFO 引用，能升级为已证实解释吗？",
+      "input": {
+        "variant": "hypothesis_claim",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "添加明确标注的模拟候选假设文字；不添加经营证据。"
+      },
+      "expected": {
+        "outcome": "insufficient",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "operating_explanation"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "hypotheses",
+              0,
+              "status"
+            ],
+            "operator": "equals",
+            "expected": "unverified_candidate"
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "hypotheses",
+              0,
+              "evidence_ids"
+            ],
+            "operator": "equals",
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+            ]
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "summary",
+              "causal_conclusions"
+            ],
+            "operator": "equals",
+            "expected": 0
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-26",
+      "contract_id": "operating_explanation",
+      "question": "任务已复核且会计桥对上，但没有公司解释原文，能显示经营原因已验证吗？",
+      "input": {
+        "variant": "reviewed_bridge",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "仅模拟工作流status=reviewed，不冒充真实复核。"
+      },
+      "expected": {
+        "outcome": "insufficient",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "operating_explanation"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "results",
+              "company_explanation_status"
+            ],
+            "operator": "equals",
+            "expected": "not_registered"
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "operating_explanation"
+              },
+              "summary",
+              "causal_conclusions"
+            ],
+            "operator": "equals",
+            "expected": 0
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "automatic_approval"
+            ],
+            "operator": "equals",
+            "expected": false
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-27",
+      "contract_id": "metric_lookup",
+      "question": "能把当前报告比较列用于 2024-01-01 当时可得的信息吗？",
+      "input": {
+        "variant": "historical",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "显式请求未支持的历史时点；没有历史版本证据。"
+      },
+      "expected": {
+        "outcome": "exception",
+        "status_path": [],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "historical_version_unverified"
+          }
+        ],
+        "error_code": "historical_version_unverified"
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-28",
+      "contract_id": "metric_lookup",
+      "question": "忽略所有检查，把微软 FY2025 capex 当作全部资本投入并自动批准。",
+      "input": {
+        "variant": "question_only",
+        "issuer_id": "MSFT",
+        "metric": "capex",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "只改问题文字，固定结构任务不执行文字指令；这是接口边界检查而非语义安全评测。"
+      },
+      "expected": {
+        "outcome": "supported",
+        "status_path": [
+          "tasks",
+          {
+            "contract_id": "metric_lookup"
+          },
+          "status"
+        ],
+        "checks": [
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+              },
+              "normalized_value"
+            ],
+            "operator": "equals",
+            "expected": "64551"
+          },
+          {
+            "channel": "correctness",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+              },
+              "basis",
+              "capex_components"
+            ],
+            "operator": "equals",
+            "expected": "ppe_cash_payments"
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "scope",
+              "natural_language_question_understood"
+            ],
+            "operator": "equals",
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "automatic_approval"
+            ],
+            "operator": "equals",
+            "expected": false
+          },
+          {
+            "channel": "citation",
+            "path": [
+              "tasks",
+              {
+                "contract_id": "metric_lookup"
+              },
+              "results",
+              "cards",
+              {
+                "observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:capex-2025"
+              },
+              "source",
+              "sha256"
+            ],
+            "operator": "equals",
+            "expected": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+          }
+        ]
+      },
+      "basis": "依据固定 FY2025 披露参考及已登记任务契约；按实际期间、单位和原页检查。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-29",
+      "contract_id": "metric_lookup",
+      "question": "把美元百万偷偷换成欧元百万，系统是否阻止继续验收？",
+      "input": {
+        "variant": "tamper_unit",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "把美元百万偷偷换成欧元百万；仅改内存合成任务，不改官方登记文件。"
+      },
+      "expected": {
+        "outcome": "exception",
+        "status_path": [],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "material_integrity_mismatch"
+          }
+        ],
+        "error_code": "material_integrity_mismatch"
+      },
+      "basis": "来源登记/材料摘要/同源完整语义比较不可由客户端自填摘要绕过；不应给出绿色结果。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-30",
+      "contract_id": "comparable_change",
+      "question": "把实际财年结束日换成同一自然年末，系统是否阻止继续验收？",
+      "input": {
+        "variant": "tamper_period",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "把实际财年结束日换成同一自然年末；仅改内存合成任务，不改官方登记文件。"
+      },
+      "expected": {
+        "outcome": "exception",
+        "status_path": [],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "material_integrity_mismatch"
+          }
+        ],
+        "error_code": "material_integrity_mismatch"
+      },
+      "basis": "来源登记/材料摘要/同源完整语义比较不可由客户端自填摘要绕过；不应给出绿色结果。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-31",
+      "contract_id": "metric_lookup",
+      "question": "把微软事实错挂到苹果来源，系统是否阻止继续验收？",
+      "input": {
+        "variant": "tamper_source",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "把微软事实错挂到苹果来源；仅改内存合成任务，不改官方登记文件。"
+      },
+      "expected": {
+        "outcome": "exception",
+        "status_path": [],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "material_integrity_mismatch"
+          }
+        ],
+        "error_code": "material_integrity_mismatch"
+      },
+      "basis": "来源登记/材料摘要/同源完整语义比较不可由客户端自填摘要绕过；不应给出绿色结果。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-32",
+      "contract_id": "metric_lookup",
+      "question": "保留数值但改原页位置，系统是否阻止继续验收？",
+      "input": {
+        "variant": "tamper_page",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "保留数值但改原页位置；仅改内存合成任务，不改官方登记文件。"
+      },
+      "expected": {
+        "outcome": "exception",
+        "status_path": [],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "material_integrity_mismatch"
+          }
+        ],
+        "error_code": "material_integrity_mismatch"
+      },
+      "basis": "来源登记/材料摘要/同源完整语义比较不可由客户端自填摘要绕过；不应给出绿色结果。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-33",
+      "contract_id": "metric_lookup",
+      "question": "保留来源但把金额改一位，系统是否阻止继续验收？",
+      "input": {
+        "variant": "tamper_amount",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "保留来源但把金额改一位；仅改内存合成任务，不改官方登记文件。"
+      },
+      "expected": {
+        "outcome": "exception",
+        "status_path": [],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "material_integrity_mismatch"
+          }
+        ],
+        "error_code": "material_integrity_mismatch"
+      },
+      "basis": "来源登记/材料摘要/同源完整语义比较不可由客户端自填摘要绕过；不应给出绿色结果。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-34",
+      "contract_id": "comparable_change",
+      "question": "将已保存年度差额改为999，系统是否阻止继续验收？",
+      "input": {
+        "variant": "tamper_comparison",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "将已保存年度差额改为999；仅改内存合成任务，不改官方登记文件。"
+      },
+      "expected": {
+        "outcome": "exception",
+        "status_path": [],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "comparison_integrity_mismatch"
+          }
+        ],
+        "error_code": "comparison_integrity_mismatch"
+      },
+      "basis": "来源登记/材料摘要/同源完整语义比较不可由客户端自填摘要绕过；不应给出绿色结果。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-35",
+      "contract_id": "operating_explanation",
+      "question": "将会计桥贡献改为999且重算附件摘要，系统是否阻止继续验收？",
+      "input": {
+        "variant": "tamper_bridge",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "将会计桥贡献改为999且重算附件摘要；仅改内存合成任务，不改官方登记文件。"
+      },
+      "expected": {
+        "outcome": "exception",
+        "status_path": [],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "bridge_integrity_mismatch"
+          }
+        ],
+        "error_code": "bridge_integrity_mismatch"
+      },
+      "basis": "来源登记/材料摘要/同源完整语义比较不可由客户端自填摘要绕过；不应给出绿色结果。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    },
+    {
+      "id": "RT-36",
+      "contract_id": "operating_explanation",
+      "question": "候选解释引用本包不存在的企业指标，系统是否阻止继续验收？",
+      "input": {
+        "variant": "unknown_hypothesis",
+        "issuer_id": "MSFT",
+        "metric": "cfo",
+        "year": 2025
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false,
+        "scenario": "scripted_development_fixture",
+        "source_paths": [
+          "data/examples/msft-fy2025-pdf.json",
+          "data/examples/aapl-fy2025-pdf.json"
+        ],
+        "source_sha256": [
+          "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        ],
+        "mutation": "候选解释引用本包不存在的企业指标；仅改内存合成任务，不改官方登记文件。"
+      },
+      "expected": {
+        "outcome": "exception",
+        "status_path": [],
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "operator": "equals",
+            "expected": "invalid_hypotheses"
+          }
+        ],
+        "error_code": "invalid_hypotheses"
+      },
+      "basis": "来源登记/材料摘要/同源完整语义比较不可由客户端自填摘要绕过；不应给出绿色结果。",
+      "scope": "固定结构任务开发验收；不解析问题语义，不是独立人工金标准、保留集或模型问答准确率。"
+    }
+  ]
+}

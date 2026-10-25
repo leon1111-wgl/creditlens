@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-25",
+  "scope": "actual_local_browser_and_current_task_api",
+  "roles_are_simulated": true,
+  "download": {
+    "bytes": 85136,
+    "sha256": "e5d29bab142a69556ae311bcf16683a20912b5d25724871762fcfb6fb0b46c3b",
+    "exactly_matches_api": true
+  },
+  "checks": {
+    "reviewed_task_still_requires_explanation_evidence": true,
+    "registered_cards": 8,
+    "computed_annual_pairs": 4,
+    "no_cross_company_ranking": true,
+    "actual_period_and_leap_year_warning_visible": true,
+    "unadopted_draft_comparison_blocked": true,
+    "dirty_draft_clears_results_and_disables_download": true,
+    "saved_new_revision_rechecked": true,
+    "identity_change_clears_results": true,
+    "viewer_can_read_assessment": true
+  },
+  "desktop": {
+    "viewport": [
+      1280,
+      1100
+    ],
+    "screenshot": "docs/images/research-acceptance-desktop.png"
+  },
+  "narrow": {
+    "viewport": [
+      497,
+      900
+    ],
+    "document_scroll_width": 482,
+    "panel_width": 450,
+    "screenshot": "docs/images/research-acceptance-narrow.png"
+  },
+  "limitations": [
+    "Not an independent human gold evaluation.",
+    "No language-model answer generation or semantic entailment evaluation.",
+    "Manual browser checks do not exhaust all browsers, races or accessibility behavior."
+  ]
+}

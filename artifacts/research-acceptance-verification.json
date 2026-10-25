@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-25",
+  "release": "0.13.0",
+  "tests": {
+    "run": 535,
+    "passed": 533,
+    "skipped": 2,
+    "duration_seconds": 42.862,
+    "skips": "Windows file/directory symbolic-link privileges; other path and alias protections tested"
+  },
+  "development_suite": {
+    "cases": 36,
+    "passed": 36,
+    "registered_material_cases": 19,
+    "synthetic_controls": 17,
+    "human_confirmed": 0,
+    "natural_language_understanding_evaluated": false,
+    "model_accuracy_evaluated": false,
+    "outcomes": {
+      "supported": 15,
+      "insufficient": 5,
+      "refused": 7,
+      "exception": 9,
+      "unrecognized": 0
+    },
+    "channels": {
+      "correctness": {
+        "cases": 18,
+        "checks": 47,
+        "passed_checks": 47,
+        "failed_checks": 0,
+        "passed_cases": 18
+      },
+      "citation": {
+        "cases": 24,
+        "checks": 44,
+        "passed_checks": 44,
+        "failed_checks": 0,
+        "passed_cases": 24
+      },
+      "refusal": {
+        "cases": 24,
+        "checks": 38,
+        "passed_checks": 38,
+        "failed_checks": 0,
+        "passed_cases": 24
+      }
+    },
+    "full_report_replayed": true
+  },
+  "report": {
+    "path": "artifacts/research-acceptance-development-report.json",
+    "bytes": 97610,
+    "sha256": "e0dc0154f45ff6acd4b9a847654533118d1ce451a8ade5cfe6014cce6521c1dc"
+  },
+  "ui_record": "artifacts/research-acceptance-ui-verification.json",
+  "previous_artifacts": {
+    "baseline_commit": "37d7144a59a74ea45f122595e4ad62171be8790b",
+    "unchanged_tracked_files": 73,
+    "changed": []
+  },
+  "paid_api_calls": 0,
+  "training_runs": 0,
+  "large_data_downloads": 0,
+  "limitations": [
+    "Only fixed registered task types, not arbitrary question answering.",
+    "Company explanation and independent corroboration are not registered.",
+    "Human-independent gold evaluation and generic ingestion recovery remain planned."
+  ]
+}
