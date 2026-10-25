@@ -22,3 +22,9 @@ artifacts/explanation-reviews-syntax.js
 artifacts/service.pid
 artifacts/service-v02.pid
 .run/
+
+# Personal preparation material stays outside the public repository.
+/docs/14-resume-and-interview.md
+/private/
+/.private/
+/local-notes/
