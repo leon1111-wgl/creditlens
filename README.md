@@ -18,6 +18,8 @@ CreditLens 正在建设一个面向投研和风险团队的研究平台：把财
 
 [简历项目描述与技术讲解](docs/14-resume-and-interview.md) · [并行迭代与验收规则](docs/15-parallel-iteration.md)
 
+[文档实验页新版界面](docs/images/document-experiments-enterprise-desktop.png)：Times New Roman 与宋体排版，白灰蓝工作台；[改版记录](docs/iterations/2026-10-25-12.md)。
+
 本轮新增 [字词定位与图像退化对照](docs/iterations/2026-10-25-11.md)，并已完成简历技术材料与多分支迭代机制；此前的 [季度研究页面](docs/iterations/2026-10-25-09.md) 继续可用。
 
 ## 数据是否实时，需要服务器吗
