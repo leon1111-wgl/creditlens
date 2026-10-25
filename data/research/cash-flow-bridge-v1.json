@@ -1,0 +1,4205 @@
+{
+  "schema_version": 1,
+  "id": "msft-aapl-cfo-bridge-fy2025",
+  "title": "微软/苹果经营现金流会计调节资料，非严格同行基准",
+  "material_mode": "current_verified_materials",
+  "source_versions": [
+    {
+      "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "issuer_id": "MSFT",
+      "source_id": "msft-fy25-10k-pdf",
+      "title": "Microsoft FY2025 Form 10-K / official PDF",
+      "url": "https://microsoft.gcs-web.com/static-files/9640e86d-a99f-4502-934d-1d3c883fa786",
+      "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "published_at": "2025-07-30",
+      "retrieved_at": "2026-10-25T00:03:14.474587+00:00",
+      "filing_metadata_url": "https://microsoft.gcs-web.com/node/33951",
+      "document_pages": 158,
+      "cash_flow_page": 53,
+      "printed_page": 53,
+      "license": "Public issuer filing; no general redistribution grant. Original PDF, page images and full extracted text stay local.",
+      "server_trusted": true,
+      "registered_source_hash_verified": true,
+      "raw_pdf_rehashed": false,
+      "build_pdf_sha256_verified": true,
+      "historical_version_verified": false
+    },
+    {
+      "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "issuer_id": "AAPL",
+      "source_id": "aapl-fy25-10k-pdf",
+      "title": "Apple FY2025 Form 10-K / official PDF",
+      "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+      "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "published_at": "2025-10-31",
+      "retrieved_at": "2026-10-25T02:10:21.933073+00:00",
+      "filing_metadata_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/0000320193-25-000079-index.htm",
+      "document_pages": 80,
+      "cash_flow_page": 36,
+      "printed_page": 33,
+      "license": "Public issuer filing; no general redistribution grant. Original PDF, page images and full extracted text stay local.",
+      "server_trusted": true,
+      "registered_source_hash_verified": true,
+      "raw_pdf_rehashed": false,
+      "build_pdf_sha256_verified": true,
+      "historical_version_verified": false
+    }
+  ],
+  "statements": [
+    {
+      "id": "MSFT:cfo-bridge:2024",
+      "issuer_id": "MSFT",
+      "company": "Microsoft Corporation",
+      "year": 2024,
+      "period": {
+        "start": "2023-07-01",
+        "end": "2024-06-30",
+        "days": 366,
+        "fiscal_calendar": "calendar_year",
+        "kind": "annual"
+      },
+      "unit": "USD_million",
+      "scope": "reported_consolidated_statement_total",
+      "basis": {
+        "consolidation_scope": "consolidated",
+        "operations_scope": "reported_consolidated_statement_total",
+        "operations_partition": "unknown",
+        "capex_components": "not_applicable",
+        "measurement_basis": "as_presented_in_FY2025_cash_flow_statement",
+        "definition": "Net cash from operations",
+        "scope_evidence": [
+          {
+            "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "consolidation_scope",
+            "value": "consolidated",
+            "page": 55,
+            "quote": "The consolidated financial statements include the accounts of Microsoft Corporation and its subsidiaries.",
+            "note": "Note 1 合并基础；同页说明 FY2024 分部比较信息重列不影响合并现金流量表。此处只比较 FY2025 报告所列原行总额。"
+          },
+          {
+            "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "operations_scope",
+            "value": "reported_consolidated_statement_total",
+            "page": 53,
+            "quote": "Net cash from operations",
+            "note": "合并现金流量表中该行的报表列示总额；不额外认定仅持续经营，也不推断未披露的经营分解。"
+          },
+          {
+            "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "capex_components",
+            "value": "not_applicable",
+            "page": 53,
+            "quote": "Net cash from operations",
+            "note": "该行不是资本开支。"
+          }
+        ]
+      },
+      "source_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "reported_cfo_observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024",
+      "total_fact_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-cfo-2024",
+      "expected_row_keys": [
+        "net_income",
+        "depreciation_amortization_other",
+        "stock_compensation",
+        "investment_derivative_losses",
+        "deferred_income_taxes",
+        "accounts_receivable",
+        "inventories",
+        "other_current_assets",
+        "other_long_term_assets",
+        "accounts_payable",
+        "unearned_revenue",
+        "income_taxes",
+        "other_current_liabilities",
+        "other_long_term_liabilities"
+      ],
+      "facts": [
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-net_income-2024",
+          "row_key": "net_income",
+          "role": "net_income",
+          "label": "净利润",
+          "label_en": "Net income",
+          "raw_value": "88,136",
+          "signed_value": "88136",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 473.238,
+            "top": 116.535,
+            "x1": 499.971,
+            "bottom": 124.372
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 473.238,
+              "top": 116.535,
+              "x1": 499.971,
+              "bottom": 124.372
+            },
+            "row_label": "Net income",
+            "row_label_bbox": {
+              "x0": 17.094,
+              "top": 116.562,
+              "x1": 61.542,
+              "bottom": 123.203
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Operations",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 16.797,
+                "top": 106.329,
+                "x1": 63.469,
+                "bottom": 114.742
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-depreciation_amortization_other-2024",
+          "row_key": "depreciation_amortization_other",
+          "role": "reconciliation_adjustments",
+          "label": "折旧、摊销及其他调节",
+          "label_en": "Depreciation, amortization, and other",
+          "raw_value": "22,287",
+          "signed_value": "22287",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 473.13,
+            "top": 136.785,
+            "x1": 499.98,
+            "bottom": 144.622
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 473.13,
+              "top": 136.785,
+              "x1": 499.98,
+              "bottom": 144.622
+            },
+            "row_label": "Depreciation, amortization, and other",
+            "row_label_bbox": {
+              "x0": 25.056,
+              "top": 136.812,
+              "x1": 172.013,
+              "bottom": 145.135
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to net cash from operations:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 16.411,
+                "top": 126.579,
+                "x1": 274.151,
+                "bottom": 135.109
+              },
+              "end_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-stock_compensation-2024",
+          "row_key": "stock_compensation",
+          "role": "reconciliation_adjustments",
+          "label": "股份支付费用",
+          "label_en": "Stock-based compensation expense",
+          "raw_value": "10,734",
+          "signed_value": "10734",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 473.849,
+            "top": 146.91,
+            "x1": 499.953,
+            "bottom": 154.747
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 473.849,
+              "top": 146.91,
+              "x1": 499.953,
+              "bottom": 154.747
+            },
+            "row_label": "Stock-based compensation expense",
+            "row_label_bbox": {
+              "x0": 24.768,
+              "top": 146.829,
+              "x1": 169.027,
+              "bottom": 155.26
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to net cash from operations:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 16.411,
+                "top": 126.579,
+                "x1": 274.151,
+                "bottom": 135.109
+              },
+              "end_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-investment_derivative_losses-2024",
+          "row_key": "investment_derivative_losses",
+          "role": "reconciliation_adjustments",
+          "label": "投资及衍生工具确认净损失",
+          "label_en": "Net recognized losses on investments and derivatives",
+          "raw_value": "305",
+          "signed_value": "305",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 485.745,
+            "top": 157.035,
+            "x1": 500.016,
+            "bottom": 163.712
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 485.745,
+              "top": 157.035,
+              "x1": 500.016,
+              "bottom": 163.712
+            },
+            "row_label": "Net recognized losses on investments and derivatives",
+            "row_label_bbox": {
+              "x0": 25.047,
+              "top": 157.062,
+              "x1": 238.54,
+              "bottom": 165.484
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to net cash from operations:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 16.411,
+                "top": 126.579,
+                "x1": 274.151,
+                "bottom": 135.109
+              },
+              "end_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-deferred_income_taxes-2024",
+          "row_key": "deferred_income_taxes",
+          "role": "reconciliation_adjustments",
+          "label": "递延所得税",
+          "label_en": "Deferred income taxes",
+          "raw_value": "(4,738)",
+          "signed_value": "-4738",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 475.421,
+            "top": 167.079,
+            "x1": 503.047,
+            "bottom": 175.609
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 475.421,
+              "top": 167.079,
+              "x1": 503.047,
+              "bottom": 175.609
+            },
+            "row_label": "Deferred income taxes",
+            "row_label_bbox": {
+              "x0": 25.056,
+              "top": 167.079,
+              "x1": 114.518,
+              "bottom": 173.828
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to net cash from operations:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 16.411,
+                "top": 126.579,
+                "x1": 274.151,
+                "bottom": 135.109
+              },
+              "end_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-accounts_receivable-2024",
+          "row_key": "accounts_receivable",
+          "role": "operating_assets_and_liabilities",
+          "label": "应收账款变动",
+          "label_en": "Accounts receivable",
+          "raw_value": "(7,191)",
+          "signed_value": "-7191",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 475.421,
+            "top": 187.329,
+            "x1": 503.047,
+            "bottom": 195.859
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 475.421,
+              "top": 187.329,
+              "x1": 503.047,
+              "bottom": 195.859
+            },
+            "row_label": "Accounts receivable",
+            "row_label_bbox": {
+              "x0": 31.482,
+              "top": 187.437,
+              "x1": 111.624,
+              "bottom": 194.078
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-inventories-2024",
+          "row_key": "inventories",
+          "role": "operating_assets_and_liabilities",
+          "label": "存货变动",
+          "label_en": "Inventories",
+          "raw_value": "1,284",
+          "signed_value": "1284",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 478.849,
+            "top": 197.535,
+            "x1": 499.949,
+            "bottom": 205.372
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 478.849,
+              "top": 197.535,
+              "x1": 499.949,
+              "bottom": 205.372
+            },
+            "row_label": "Inventories",
+            "row_label_bbox": {
+              "x0": 32.319,
+              "top": 197.562,
+              "x1": 75.139,
+              "bottom": 204.203
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-other_current_assets-2024",
+          "row_key": "other_current_assets",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他流动资产变动",
+          "label_en": "Other current assets",
+          "raw_value": "(1,648)",
+          "signed_value": "-1648",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 475.421,
+            "top": 207.579,
+            "x1": 503.047,
+            "bottom": 216.109
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 475.421,
+              "top": 207.579,
+              "x1": 503.047,
+              "bottom": 216.109
+            },
+            "row_label": "Other current assets",
+            "row_label_bbox": {
+              "x0": 31.914,
+              "top": 207.57,
+              "x1": 112.632,
+              "bottom": 214.328
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-other_long_term_assets-2024",
+          "row_key": "other_long_term_assets",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他长期资产变动",
+          "label_en": "Other long-term assets",
+          "raw_value": "(6,817)",
+          "signed_value": "-6817",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 475.421,
+            "top": 217.704,
+            "x1": 503.047,
+            "bottom": 226.234
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 475.421,
+              "top": 217.704,
+              "x1": 503.047,
+              "bottom": 226.234
+            },
+            "row_label": "Other long-term assets",
+            "row_label_bbox": {
+              "x0": 31.914,
+              "top": 217.695,
+              "x1": 122.63,
+              "bottom": 226.234
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-accounts_payable-2024",
+          "row_key": "accounts_payable",
+          "role": "operating_assets_and_liabilities",
+          "label": "应付账款变动",
+          "label_en": "Accounts payable",
+          "raw_value": "3,545",
+          "signed_value": "3545",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 478.246,
+            "top": 227.91,
+            "x1": 500.021,
+            "bottom": 235.747
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 478.246,
+              "top": 227.91,
+              "x1": 500.021,
+              "bottom": 235.747
+            },
+            "row_label": "Accounts payable",
+            "row_label_bbox": {
+              "x0": 31.482,
+              "top": 227.937,
+              "x1": 102.131,
+              "bottom": 236.359
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-unearned_revenue-2024",
+          "row_key": "unearned_revenue",
+          "role": "operating_assets_and_liabilities",
+          "label": "未赚取收入变动",
+          "label_en": "Unearned revenue",
+          "raw_value": "5,348",
+          "signed_value": "5348",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 478.246,
+            "top": 238.035,
+            "x1": 499.985,
+            "bottom": 245.872
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 478.246,
+              "top": 238.035,
+              "x1": 499.985,
+              "bottom": 245.872
+            },
+            "row_label": "Unearned revenue",
+            "row_label_bbox": {
+              "x0": 32.193,
+              "top": 238.062,
+              "x1": 105.637,
+              "bottom": 244.703
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-income_taxes-2024",
+          "row_key": "income_taxes",
+          "role": "operating_assets_and_liabilities",
+          "label": "所得税相关资产负债变动",
+          "label_en": "Income taxes",
+          "raw_value": "1,687",
+          "signed_value": "1687",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 478.849,
+            "top": 248.16,
+            "x1": 499.976,
+            "bottom": 255.997
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 478.849,
+              "top": 248.16,
+              "x1": 499.976,
+              "bottom": 255.997
+            },
+            "row_label": "Income taxes",
+            "row_label_bbox": {
+              "x0": 32.319,
+              "top": 248.187,
+              "x1": 84.636,
+              "bottom": 254.828
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-other_current_liabilities-2024",
+          "row_key": "other_current_liabilities",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他流动负债变动",
+          "label_en": "Other current liabilities",
+          "raw_value": "4,867",
+          "signed_value": "4867",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 477.985,
+            "top": 258.285,
+            "x1": 499.976,
+            "bottom": 266.122
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 477.985,
+              "top": 258.285,
+              "x1": 499.976,
+              "bottom": 266.122
+            },
+            "row_label": "Other current liabilities",
+            "row_label_bbox": {
+              "x0": 31.914,
+              "top": 258.195,
+              "x1": 120.631,
+              "bottom": 264.953
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-other_long_term_liabilities-2024",
+          "row_key": "other_long_term_liabilities",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他长期负债变动",
+          "label_en": "Other long-term liabilities",
+          "raw_value": "749",
+          "signed_value": "749",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 485.79,
+            "top": 268.41,
+            "x1": 499.98,
+            "bottom": 275.078
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 485.79,
+              "top": 268.41,
+              "x1": 499.98,
+              "bottom": 275.078
+            },
+            "row_label": "Other long-term liabilities",
+            "row_label_bbox": {
+              "x0": 31.914,
+              "top": 268.32,
+              "x1": 130.629,
+              "bottom": 276.859
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-cfo-2024",
+          "row_key": "cfo",
+          "role": "cfo_total",
+          "label": "经营现金流合计",
+          "label_en": "Net cash from operations",
+          "raw_value": "118,548",
+          "signed_value": "118548",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 468.84,
+            "top": 283.258,
+            "x1": 499.982,
+            "bottom": 291.095
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 468.84,
+              "top": 283.258,
+              "x1": 499.982,
+              "bottom": 291.095
+            },
+            "row_label": "Net cash from operations",
+            "row_label_bbox": {
+              "x0": 39.949,
+              "top": 283.177,
+              "x1": 139.423,
+              "bottom": 291.608
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 485.536,
+              "top": 96.575,
+              "x1": 500.224,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Operations",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 16.797,
+                "top": 106.329,
+                "x1": 63.469,
+                "bottom": 114.742
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "MSFT:cfo-bridge:2025",
+      "issuer_id": "MSFT",
+      "company": "Microsoft Corporation",
+      "year": 2025,
+      "period": {
+        "start": "2024-07-01",
+        "end": "2025-06-30",
+        "days": 365,
+        "fiscal_calendar": "calendar_year",
+        "kind": "annual"
+      },
+      "unit": "USD_million",
+      "scope": "reported_consolidated_statement_total",
+      "basis": {
+        "consolidation_scope": "consolidated",
+        "operations_scope": "reported_consolidated_statement_total",
+        "operations_partition": "unknown",
+        "capex_components": "not_applicable",
+        "measurement_basis": "as_presented_in_FY2025_cash_flow_statement",
+        "definition": "Net cash from operations",
+        "scope_evidence": [
+          {
+            "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "consolidation_scope",
+            "value": "consolidated",
+            "page": 55,
+            "quote": "The consolidated financial statements include the accounts of Microsoft Corporation and its subsidiaries.",
+            "note": "Note 1 合并基础；同页说明 FY2024 分部比较信息重列不影响合并现金流量表。此处只比较 FY2025 报告所列原行总额。"
+          },
+          {
+            "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "operations_scope",
+            "value": "reported_consolidated_statement_total",
+            "page": 53,
+            "quote": "Net cash from operations",
+            "note": "合并现金流量表中该行的报表列示总额；不额外认定仅持续经营，也不推断未披露的经营分解。"
+          },
+          {
+            "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "capex_components",
+            "value": "not_applicable",
+            "page": 53,
+            "quote": "Net cash from operations",
+            "note": "该行不是资本开支。"
+          }
+        ]
+      },
+      "source_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "reported_cfo_observation_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025",
+      "total_fact_id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-cfo-2025",
+      "expected_row_keys": [
+        "net_income",
+        "depreciation_amortization_other",
+        "stock_compensation",
+        "investment_derivative_losses",
+        "deferred_income_taxes",
+        "accounts_receivable",
+        "inventories",
+        "other_current_assets",
+        "other_long_term_assets",
+        "accounts_payable",
+        "unearned_revenue",
+        "income_taxes",
+        "other_current_liabilities",
+        "other_long_term_liabilities"
+      ],
+      "facts": [
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-net_income-2025",
+          "row_key": "net_income",
+          "role": "net_income",
+          "label": "净利润",
+          "label_en": "Net income",
+          "raw_value": "101,832",
+          "signed_value": "101832",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 396.345,
+            "top": 116.535,
+            "x1": 427.703,
+            "bottom": 124.534
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 396.345,
+              "top": 116.535,
+              "x1": 427.703,
+              "bottom": 124.534
+            },
+            "row_label": "Net income",
+            "row_label_bbox": {
+              "x0": 17.094,
+              "top": 116.562,
+              "x1": 61.542,
+              "bottom": 123.203
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Operations",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 16.797,
+                "top": 106.329,
+                "x1": 63.469,
+                "bottom": 114.742
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-depreciation_amortization_other-2025",
+          "row_key": "depreciation_amortization_other",
+          "role": "reconciliation_adjustments",
+          "label": "折旧、摊销及其他调节",
+          "label_en": "Depreciation, amortization, and other",
+          "raw_value": "34,153",
+          "signed_value": "34153",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 400.986,
+            "top": 136.785,
+            "x1": 427.773,
+            "bottom": 144.784
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 400.986,
+              "top": 136.785,
+              "x1": 427.773,
+              "bottom": 144.784
+            },
+            "row_label": "Depreciation, amortization, and other",
+            "row_label_bbox": {
+              "x0": 25.056,
+              "top": 136.812,
+              "x1": 172.013,
+              "bottom": 145.135
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to net cash from operations:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 16.411,
+                "top": 126.579,
+                "x1": 274.151,
+                "bottom": 135.109
+              },
+              "end_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-stock_compensation-2025",
+          "row_key": "stock_compensation",
+          "role": "reconciliation_adjustments",
+          "label": "股份支付费用",
+          "label_en": "Stock-based compensation expense",
+          "raw_value": "11,974",
+          "signed_value": "11974",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 401.355,
+            "top": 146.91,
+            "x1": 427.953,
+            "bottom": 154.909
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 401.355,
+              "top": 146.91,
+              "x1": 427.953,
+              "bottom": 154.909
+            },
+            "row_label": "Stock-based compensation expense",
+            "row_label_bbox": {
+              "x0": 24.768,
+              "top": 146.829,
+              "x1": 169.027,
+              "bottom": 155.26
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to net cash from operations:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 16.411,
+                "top": 126.579,
+                "x1": 274.151,
+                "bottom": 135.109
+              },
+              "end_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-investment_derivative_losses-2025",
+          "row_key": "investment_derivative_losses",
+          "role": "reconciliation_adjustments",
+          "label": "投资及衍生工具确认净损失",
+          "label_en": "Net recognized losses on investments and derivatives",
+          "raw_value": "609",
+          "signed_value": "609",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 413.52,
+            "top": 157.035,
+            "x1": 427.737,
+            "bottom": 163.712
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 413.52,
+              "top": 157.035,
+              "x1": 427.737,
+              "bottom": 163.712
+            },
+            "row_label": "Net recognized losses on investments and derivatives",
+            "row_label_bbox": {
+              "x0": 25.047,
+              "top": 157.062,
+              "x1": 238.54,
+              "bottom": 165.484
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to net cash from operations:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 16.411,
+                "top": 126.579,
+                "x1": 274.151,
+                "bottom": 135.109
+              },
+              "end_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-deferred_income_taxes-2025",
+          "row_key": "deferred_income_taxes",
+          "role": "reconciliation_adjustments",
+          "label": "递延所得税",
+          "label_en": "Deferred income taxes",
+          "raw_value": "(7,056)",
+          "signed_value": "-7056",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 403.116,
+            "top": 167.079,
+            "x1": 430.678,
+            "bottom": 175.609
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 403.116,
+              "top": 167.079,
+              "x1": 430.678,
+              "bottom": 175.609
+            },
+            "row_label": "Deferred income taxes",
+            "row_label_bbox": {
+              "x0": 25.056,
+              "top": 167.079,
+              "x1": 114.518,
+              "bottom": 173.828
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to net cash from operations:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 16.411,
+                "top": 126.579,
+                "x1": 274.151,
+                "bottom": 135.109
+              },
+              "end_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-accounts_receivable-2025",
+          "row_key": "accounts_receivable",
+          "role": "operating_assets_and_liabilities",
+          "label": "应收账款变动",
+          "label_en": "Accounts receivable",
+          "raw_value": "(10,581)",
+          "signed_value": "-10581",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 398.116,
+            "top": 187.329,
+            "x1": 430.678,
+            "bottom": 195.859
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 398.116,
+              "top": 187.329,
+              "x1": 430.678,
+              "bottom": 195.859
+            },
+            "row_label": "Accounts receivable",
+            "row_label_bbox": {
+              "x0": 31.482,
+              "top": 187.437,
+              "x1": 111.624,
+              "bottom": 194.078
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-inventories-2025",
+          "row_key": "inventories",
+          "role": "operating_assets_and_liabilities",
+          "label": "存货变动",
+          "label_en": "Inventories",
+          "raw_value": "309",
+          "signed_value": "309",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 413.484,
+            "top": 197.535,
+            "x1": 427.737,
+            "bottom": 204.212
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 413.484,
+              "top": 197.535,
+              "x1": 427.737,
+              "bottom": 204.212
+            },
+            "row_label": "Inventories",
+            "row_label_bbox": {
+              "x0": 32.319,
+              "top": 197.562,
+              "x1": 75.139,
+              "bottom": 204.203
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-other_current_assets-2025",
+          "row_key": "other_current_assets",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他流动资产变动",
+          "label_en": "Other current assets",
+          "raw_value": "(3,044)",
+          "signed_value": "-3044",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 403.116,
+            "top": 207.579,
+            "x1": 430.678,
+            "bottom": 216.109
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 403.116,
+              "top": 207.579,
+              "x1": 430.678,
+              "bottom": 216.109
+            },
+            "row_label": "Other current assets",
+            "row_label_bbox": {
+              "x0": 31.914,
+              "top": 207.57,
+              "x1": 112.632,
+              "bottom": 214.328
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-other_long_term_assets-2025",
+          "row_key": "other_long_term_assets",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他长期资产变动",
+          "label_en": "Other long-term assets",
+          "raw_value": "(2,950)",
+          "signed_value": "-2950",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 403.116,
+            "top": 217.704,
+            "x1": 430.678,
+            "bottom": 226.234
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 403.116,
+              "top": 217.704,
+              "x1": 430.678,
+              "bottom": 226.234
+            },
+            "row_label": "Other long-term assets",
+            "row_label_bbox": {
+              "x0": 31.914,
+              "top": 217.695,
+              "x1": 122.63,
+              "bottom": 226.234
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-accounts_payable-2025",
+          "row_key": "accounts_payable",
+          "role": "operating_assets_and_liabilities",
+          "label": "应付账款变动",
+          "label_en": "Accounts payable",
+          "raw_value": "569",
+          "signed_value": "569",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 413.538,
+            "top": 227.91,
+            "x1": 427.737,
+            "bottom": 234.587
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 413.538,
+              "top": 227.91,
+              "x1": 427.737,
+              "bottom": 234.587
+            },
+            "row_label": "Accounts payable",
+            "row_label_bbox": {
+              "x0": 31.482,
+              "top": 227.937,
+              "x1": 102.131,
+              "bottom": 236.359
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-unearned_revenue-2025",
+          "row_key": "unearned_revenue",
+          "role": "operating_assets_and_liabilities",
+          "label": "未赚取收入变动",
+          "label_en": "Unearned revenue",
+          "raw_value": "5,438",
+          "signed_value": "5438",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 406.039,
+            "top": 238.035,
+            "x1": 427.751,
+            "bottom": 246.034
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 406.039,
+              "top": 238.035,
+              "x1": 427.751,
+              "bottom": 246.034
+            },
+            "row_label": "Unearned revenue",
+            "row_label_bbox": {
+              "x0": 32.193,
+              "top": 238.062,
+              "x1": 105.637,
+              "bottom": 244.703
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-income_taxes-2025",
+          "row_key": "income_taxes",
+          "role": "operating_assets_and_liabilities",
+          "label": "所得税相关资产负债变动",
+          "label_en": "Income taxes",
+          "raw_value": "(38)",
+          "signed_value": "-38",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 415.624,
+            "top": 248.079,
+            "x1": 430.678,
+            "bottom": 256.609
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 415.624,
+              "top": 248.079,
+              "x1": 430.678,
+              "bottom": 256.609
+            },
+            "row_label": "Income taxes",
+            "row_label_bbox": {
+              "x0": 32.319,
+              "top": 248.187,
+              "x1": 84.636,
+              "bottom": 254.828
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-other_current_liabilities-2025",
+          "row_key": "other_current_liabilities",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他流动负债变动",
+          "label_en": "Other current liabilities",
+          "raw_value": "5,922",
+          "signed_value": "5922",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 406.039,
+            "top": 258.285,
+            "x1": 427.706,
+            "bottom": 266.284
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 406.039,
+              "top": 258.285,
+              "x1": 427.706,
+              "bottom": 266.284
+            },
+            "row_label": "Other current liabilities",
+            "row_label_bbox": {
+              "x0": 31.914,
+              "top": 258.195,
+              "x1": 120.631,
+              "bottom": 264.953
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-other_long_term_liabilities-2025",
+          "row_key": "other_long_term_liabilities",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他长期负债变动",
+          "label_en": "Other long-term liabilities",
+          "raw_value": "(975)",
+          "signed_value": "-975",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 410.614,
+            "top": 268.329,
+            "x1": 430.678,
+            "bottom": 276.859
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 410.614,
+              "top": 268.329,
+              "x1": 430.678,
+              "bottom": 276.859
+            },
+            "row_label": "Other long-term liabilities",
+            "row_label_bbox": {
+              "x0": 31.914,
+              "top": 268.32,
+              "x1": 130.629,
+              "bottom": 276.859
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 24.813,
+                "top": 177.204,
+                "x1": 194.111,
+                "bottom": 185.734
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        },
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cf-bridge-cfo-2025",
+          "row_key": "cfo",
+          "role": "cfo_total",
+          "label": "经营现金流合计",
+          "label_en": "Net cash from operations",
+          "raw_value": "136,162",
+          "signed_value": "136162",
+          "source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "page": 53,
+          "bbox": {
+            "x0": 396.345,
+            "top": 283.258,
+            "x1": 427.703,
+            "bottom": 291.257
+          },
+          "location": {
+            "page": 53,
+            "page_width": 594.9599609375,
+            "page_height": 841.9199829101562,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 396.345,
+              "top": 283.258,
+              "x1": 427.703,
+              "bottom": 291.257
+            },
+            "row_label": "Net cash from operations",
+            "row_label_bbox": {
+              "x0": 39.949,
+              "top": 283.177,
+              "x1": 139.423,
+              "bottom": 291.608
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 413.311,
+              "top": 96.575,
+              "x1": 427.951,
+              "bottom": 101.576
+            },
+            "period_header": "Year Ended June 30,",
+            "period_bbox": {
+              "x0": 16.4,
+              "top": 96.575,
+              "x1": 81.875,
+              "bottom": 102.575
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 16.751,
+              "top": 84.365,
+              "x1": 53.869,
+              "bottom": 90.764
+            },
+            "parser_version": "positioned-financial-table-1",
+            "section": {
+              "start_label": "Operations",
+              "end_label": "Financing",
+              "start_bbox": {
+                "x0": 16.797,
+                "top": 106.329,
+                "x1": 63.469,
+                "bottom": 114.742
+              },
+              "end_bbox": {
+                "x0": 17.076,
+                "top": 298.136,
+                "x1": 58.32,
+                "bottom": 306.558
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "AAPL:cfo-bridge:2024",
+      "issuer_id": "AAPL",
+      "company": "Apple Inc.",
+      "year": 2024,
+      "period": {
+        "start": "2023-10-01",
+        "end": "2024-09-28",
+        "days": 364,
+        "fiscal_calendar": "week_52_53",
+        "kind": "annual"
+      },
+      "unit": "USD_million",
+      "scope": "reported_consolidated_statement_total",
+      "basis": {
+        "consolidation_scope": "consolidated",
+        "operations_scope": "reported_consolidated_statement_total",
+        "operations_partition": "unknown",
+        "capex_components": "not_applicable",
+        "measurement_basis": "as_presented_in_FY2025_cash_flow_statement",
+        "definition": "Cash generated by operating activities",
+        "scope_evidence": [
+          {
+            "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "consolidation_scope",
+            "value": "consolidated",
+            "page": 37,
+            "quote": "The consolidated financial statements include the accounts of Apple Inc. and its wholly owned subsidiaries.",
+            "note": "Note 1 合并基础；物理第 24、37 页说明 FY2025/FY2024 均为 52 周。此处只比较 FY2025 报告所列原行总额。"
+          },
+          {
+            "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "operations_scope",
+            "value": "reported_consolidated_statement_total",
+            "page": 36,
+            "quote": "Cash generated by operating activities",
+            "note": "合并现金流量表中该行的报表列示总额；不额外认定仅持续经营，也不推断未披露的经营分解。"
+          },
+          {
+            "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "capex_components",
+            "value": "not_applicable",
+            "page": 36,
+            "quote": "Cash generated by operating activities",
+            "note": "该行不是资本开支。"
+          }
+        ]
+      },
+      "source_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "reported_cfo_observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2024",
+      "total_fact_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-cfo-2024",
+      "expected_row_keys": [
+        "net_income",
+        "depreciation_amortization",
+        "share_compensation",
+        "other_adjustments",
+        "accounts_receivable",
+        "vendor_nontrade_receivables",
+        "inventories",
+        "other_assets",
+        "accounts_payable",
+        "other_liabilities"
+      ],
+      "facts": [
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-net_income-2024",
+          "row_key": "net_income",
+          "role": "net_income",
+          "label": "净利润",
+          "label_en": "Net income",
+          "raw_value": "93,736",
+          "signed_value": "93736",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 464.311,
+            "top": 180.7,
+            "x1": 489.624,
+            "bottom": 188.001
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 464.311,
+              "top": 180.7,
+              "x1": 489.624,
+              "bottom": 188.001
+            },
+            "row_label": "Net income",
+            "row_label_bbox": {
+              "x0": 61.776,
+              "top": 180.054,
+              "x1": 103.775,
+              "bottom": 186.369
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Operating activities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 52.462,
+                "top": 166.152,
+                "x1": 126.029,
+                "bottom": 174.372
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-depreciation_amortization-2024",
+          "row_key": "depreciation_amortization",
+          "role": "reconciliation_adjustments",
+          "label": "折旧及摊销",
+          "label_en": "Depreciation and amortization",
+          "raw_value": "11,445",
+          "signed_value": "11445",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 464.812,
+            "top": 209.2,
+            "x1": 489.59,
+            "bottom": 216.501
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 464.812,
+              "top": 209.2,
+              "x1": 489.59,
+              "bottom": 216.501
+            },
+            "row_label": "Depreciation and amortization",
+            "row_label_bbox": {
+              "x0": 70.818,
+              "top": 208.554,
+              "x1": 182.483,
+              "bottom": 216.501
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to cash generated by operating activities:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 61.249,
+                "top": 194.304,
+                "x1": 353.768,
+                "bottom": 202.362
+              },
+              "end_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-share_compensation-2024",
+          "row_key": "share_compensation",
+          "role": "reconciliation_adjustments",
+          "label": "股份支付费用",
+          "label_en": "Share-based compensation expense",
+          "raw_value": "11,688",
+          "signed_value": "11688",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 464.812,
+            "top": 223.45,
+            "x1": 489.615,
+            "bottom": 230.751
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 464.812,
+              "top": 223.45,
+              "x1": 489.615,
+              "bottom": 230.751
+            },
+            "row_label": "Share-based compensation expense",
+            "row_label_bbox": {
+              "x0": 70.546,
+              "top": 222.642,
+              "x1": 208.212,
+              "bottom": 230.751
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to cash generated by operating activities:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 61.249,
+                "top": 194.304,
+                "x1": 353.768,
+                "bottom": 202.362
+              },
+              "end_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-other_adjustments-2024",
+          "row_key": "other_adjustments",
+          "role": "reconciliation_adjustments",
+          "label": "其他净利润调节项",
+          "label_en": "Other",
+          "raw_value": "(2,266)",
+          "signed_value": "-2266",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 466.427,
+            "top": 237.436,
+            "x1": 492.199,
+            "bottom": 245.511
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 466.427,
+              "top": 237.436,
+              "x1": 492.199,
+              "bottom": 245.511
+            },
+            "row_label": "Other",
+            "row_label_bbox": {
+              "x0": 70.461,
+              "top": 236.892,
+              "x1": 91.38,
+              "bottom": 243.403
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to cash generated by operating activities:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 61.249,
+                "top": 194.304,
+                "x1": 353.768,
+                "bottom": 202.362
+              },
+              "end_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-accounts_receivable-2024",
+          "row_key": "accounts_receivable",
+          "role": "operating_assets_and_liabilities",
+          "label": "应收账款净额变动",
+          "label_en": "Accounts receivable, net",
+          "raw_value": "(3,788)",
+          "signed_value": "-3788",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 466.427,
+            "top": 265.936,
+            "x1": 492.199,
+            "bottom": 274.011
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 466.427,
+              "top": 265.936,
+              "x1": 492.199,
+              "bottom": 274.011
+            },
+            "row_label": "Accounts receivable, net",
+            "row_label_bbox": {
+              "x0": 70.249,
+              "top": 265.554,
+              "x1": 162.542,
+              "bottom": 272.991
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-vendor_nontrade_receivables-2024",
+          "row_key": "vendor_nontrade_receivables",
+          "role": "operating_assets_and_liabilities",
+          "label": "供应商非贸易应收款变动",
+          "label_en": "Vendor non-trade receivables",
+          "raw_value": "(1,356)",
+          "signed_value": "-1356",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 466.427,
+            "top": 280.186,
+            "x1": 492.199,
+            "bottom": 288.261
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 466.427,
+              "top": 280.186,
+              "x1": 492.199,
+              "bottom": 288.261
+            },
+            "row_label": "Vendor non-trade receivables",
+            "row_label_bbox": {
+              "x0": 70.3,
+              "top": 279.804,
+              "x1": 181.31,
+              "bottom": 286.119
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-inventories-2024",
+          "row_key": "inventories",
+          "role": "operating_assets_and_liabilities",
+          "label": "存货变动",
+          "label_en": "Inventories",
+          "raw_value": "(1,046)",
+          "signed_value": "-1046",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 466.427,
+            "top": 294.436,
+            "x1": 492.199,
+            "bottom": 302.511
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 466.427,
+              "top": 294.436,
+              "x1": 492.199,
+              "bottom": 302.511
+            },
+            "row_label": "Inventories",
+            "row_label_bbox": {
+              "x0": 70.903,
+              "top": 294.053,
+              "x1": 111.397,
+              "bottom": 300.369
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-other_assets-2024",
+          "row_key": "other_assets",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他流动及非流动资产变动",
+          "label_en": "Other current and non-current assets",
+          "raw_value": "(11,731)",
+          "signed_value": "-11731",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 461.701,
+            "top": 308.686,
+            "x1": 492.199,
+            "bottom": 316.761
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 461.701,
+              "top": 308.686,
+              "x1": 492.199,
+              "bottom": 316.761
+            },
+            "row_label": "Other current and non-current assets",
+            "row_label_bbox": {
+              "x0": 70.461,
+              "top": 308.142,
+              "x1": 209.19,
+              "bottom": 314.653
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-accounts_payable-2024",
+          "row_key": "accounts_payable",
+          "role": "operating_assets_and_liabilities",
+          "label": "应付账款变动",
+          "label_en": "Accounts payable",
+          "raw_value": "6,020",
+          "signed_value": "6020",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 469.003,
+            "top": 323.2,
+            "x1": 489.632,
+            "bottom": 330.501
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 469.003,
+              "top": 323.2,
+              "x1": 489.632,
+              "bottom": 330.501
+            },
+            "row_label": "Accounts payable",
+            "row_label_bbox": {
+              "x0": 70.249,
+              "top": 322.553,
+              "x1": 136.872,
+              "bottom": 330.56
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-other_liabilities-2024",
+          "row_key": "other_liabilities",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他流动及非流动负债变动",
+          "label_en": "Other current and non-current liabilities",
+          "raw_value": "15,552",
+          "signed_value": "15552",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 464.812,
+            "top": 337.45,
+            "x1": 489.53,
+            "bottom": 344.751
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 464.812,
+              "top": 337.45,
+              "x1": 489.53,
+              "bottom": 344.751
+            },
+            "row_label": "Other current and non-current liabilities",
+            "row_label_bbox": {
+              "x0": 70.461,
+              "top": 336.642,
+              "x1": 216.738,
+              "bottom": 343.153
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-cfo-2024",
+          "row_key": "cfo",
+          "role": "cfo_total",
+          "label": "经营现金流合计",
+          "label_en": "Cash generated by operating activities",
+          "raw_value": "118,254",
+          "signed_value": "118254",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 460.095,
+            "top": 351.7,
+            "x1": 489.674,
+            "bottom": 359.001
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 460.095,
+              "top": 351.7,
+              "x1": 489.674,
+              "bottom": 359.001
+            },
+            "row_label": "Cash generated by operating activities",
+            "row_label_bbox": {
+              "x0": 82.504,
+              "top": 351.402,
+              "x1": 226.392,
+              "bottom": 359.622
+            },
+            "year": 2024,
+            "year_bbox": {
+              "x0": 452.198,
+              "top": 115.132,
+              "x1": 469.518,
+              "bottom": 121.044
+            },
+            "period_header": "September 28, 2024",
+            "period_bbox": {
+              "x0": 433.882,
+              "top": 106.116,
+              "x1": 487.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Operating activities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 52.462,
+                "top": 166.152,
+                "x1": 126.029,
+                "bottom": 174.372
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "AAPL:cfo-bridge:2025",
+      "issuer_id": "AAPL",
+      "company": "Apple Inc.",
+      "year": 2025,
+      "period": {
+        "start": "2024-09-29",
+        "end": "2025-09-27",
+        "days": 364,
+        "fiscal_calendar": "week_52_53",
+        "kind": "annual"
+      },
+      "unit": "USD_million",
+      "scope": "reported_consolidated_statement_total",
+      "basis": {
+        "consolidation_scope": "consolidated",
+        "operations_scope": "reported_consolidated_statement_total",
+        "operations_partition": "unknown",
+        "capex_components": "not_applicable",
+        "measurement_basis": "as_presented_in_FY2025_cash_flow_statement",
+        "definition": "Cash generated by operating activities",
+        "scope_evidence": [
+          {
+            "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "consolidation_scope",
+            "value": "consolidated",
+            "page": 37,
+            "quote": "The consolidated financial statements include the accounts of Apple Inc. and its wholly owned subsidiaries.",
+            "note": "Note 1 合并基础；物理第 24、37 页说明 FY2025/FY2024 均为 52 周。此处只比较 FY2025 报告所列原行总额。"
+          },
+          {
+            "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "operations_scope",
+            "value": "reported_consolidated_statement_total",
+            "page": 36,
+            "quote": "Cash generated by operating activities",
+            "note": "合并现金流量表中该行的报表列示总额；不额外认定仅持续经营，也不推断未披露的经营分解。"
+          },
+          {
+            "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+            "verification": "manual_source_review_2026-10-25",
+            "field": "capex_components",
+            "value": "not_applicable",
+            "page": 36,
+            "quote": "Cash generated by operating activities",
+            "note": "该行不是资本开支。"
+          }
+        ]
+      },
+      "source_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "reported_cfo_observation_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cfo-2025",
+      "total_fact_id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-cfo-2025",
+      "expected_row_keys": [
+        "net_income",
+        "depreciation_amortization",
+        "share_compensation",
+        "other_adjustments",
+        "accounts_receivable",
+        "vendor_nontrade_receivables",
+        "inventories",
+        "other_assets",
+        "accounts_payable",
+        "other_liabilities"
+      ],
+      "facts": [
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-net_income-2025",
+          "row_key": "net_income",
+          "role": "net_income",
+          "label": "净利润",
+          "label_en": "Net income",
+          "raw_value": "112,010",
+          "signed_value": "112010",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 391.095,
+            "top": 180.7,
+            "x1": 420.641,
+            "bottom": 188.001
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 391.095,
+              "top": 180.7,
+              "x1": 420.641,
+              "bottom": 188.001
+            },
+            "row_label": "Net income",
+            "row_label_bbox": {
+              "x0": 61.776,
+              "top": 180.054,
+              "x1": 103.775,
+              "bottom": 186.369
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Operating activities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 52.462,
+                "top": 166.152,
+                "x1": 126.029,
+                "bottom": 174.372
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-depreciation_amortization-2025",
+          "row_key": "depreciation_amortization",
+          "role": "reconciliation_adjustments",
+          "label": "折旧及摊销",
+          "label_en": "Depreciation and amortization",
+          "raw_value": "11,698",
+          "signed_value": "11698",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 395.812,
+            "top": 209.2,
+            "x1": 420.615,
+            "bottom": 216.501
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 395.812,
+              "top": 209.2,
+              "x1": 420.615,
+              "bottom": 216.501
+            },
+            "row_label": "Depreciation and amortization",
+            "row_label_bbox": {
+              "x0": 70.818,
+              "top": 208.554,
+              "x1": 182.483,
+              "bottom": 216.501
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to cash generated by operating activities:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 61.249,
+                "top": 194.304,
+                "x1": 353.768,
+                "bottom": 202.362
+              },
+              "end_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-share_compensation-2025",
+          "row_key": "share_compensation",
+          "role": "reconciliation_adjustments",
+          "label": "股份支付费用",
+          "label_en": "Share-based compensation expense",
+          "raw_value": "12,863",
+          "signed_value": "12863",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 395.812,
+            "top": 223.45,
+            "x1": 420.658,
+            "bottom": 230.751
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 395.812,
+              "top": 223.45,
+              "x1": 420.658,
+              "bottom": 230.751
+            },
+            "row_label": "Share-based compensation expense",
+            "row_label_bbox": {
+              "x0": 70.546,
+              "top": 222.642,
+              "x1": 208.212,
+              "bottom": 230.751
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to cash generated by operating activities:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 61.249,
+                "top": 194.304,
+                "x1": 353.768,
+                "bottom": 202.362
+              },
+              "end_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-other_adjustments-2025",
+          "row_key": "other_adjustments",
+          "role": "reconciliation_adjustments",
+          "label": "其他净利润调节项",
+          "label_en": "Other",
+          "raw_value": "(89)",
+          "signed_value": "-89",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 409.225,
+            "top": 237.436,
+            "x1": 423.182,
+            "bottom": 245.511
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 409.225,
+              "top": 237.436,
+              "x1": 423.182,
+              "bottom": 245.511
+            },
+            "row_label": "Other",
+            "row_label_bbox": {
+              "x0": 70.461,
+              "top": 236.892,
+              "x1": 91.38,
+              "bottom": 243.403
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Adjustments to reconcile net income to cash generated by operating activities:",
+              "end_label": "Changes in operating assets and liabilities:",
+              "start_bbox": {
+                "x0": 61.249,
+                "top": 194.304,
+                "x1": 353.768,
+                "bottom": 202.362
+              },
+              "end_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-accounts_receivable-2025",
+          "row_key": "accounts_receivable",
+          "role": "operating_assets_and_liabilities",
+          "label": "应收账款净额变动",
+          "label_en": "Accounts receivable, net",
+          "raw_value": "(6,682)",
+          "signed_value": "-6682",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 397.427,
+            "top": 265.936,
+            "x1": 423.199,
+            "bottom": 274.011
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 397.427,
+              "top": 265.936,
+              "x1": 423.199,
+              "bottom": 274.011
+            },
+            "row_label": "Accounts receivable, net",
+            "row_label_bbox": {
+              "x0": 70.249,
+              "top": 265.554,
+              "x1": 162.542,
+              "bottom": 272.991
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-vendor_nontrade_receivables-2025",
+          "row_key": "vendor_nontrade_receivables",
+          "role": "operating_assets_and_liabilities",
+          "label": "供应商非贸易应收款变动",
+          "label_en": "Vendor non-trade receivables",
+          "raw_value": "(347)",
+          "signed_value": "-347",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 404.508,
+            "top": 280.186,
+            "x1": 423.19,
+            "bottom": 288.261
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 404.508,
+              "top": 280.186,
+              "x1": 423.19,
+              "bottom": 288.261
+            },
+            "row_label": "Vendor non-trade receivables",
+            "row_label_bbox": {
+              "x0": 70.3,
+              "top": 279.804,
+              "x1": 181.31,
+              "bottom": 286.119
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-inventories-2025",
+          "row_key": "inventories",
+          "role": "operating_assets_and_liabilities",
+          "label": "存货变动",
+          "label_en": "Inventories",
+          "raw_value": "1,400",
+          "signed_value": "1400",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 400.538,
+            "top": 294.7,
+            "x1": 420.632,
+            "bottom": 302.001
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 400.538,
+              "top": 294.7,
+              "x1": 420.632,
+              "bottom": 302.001
+            },
+            "row_label": "Inventories",
+            "row_label_bbox": {
+              "x0": 70.903,
+              "top": 294.053,
+              "x1": 111.397,
+              "bottom": 300.369
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-other_assets-2025",
+          "row_key": "other_assets",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他流动及非流动资产变动",
+          "label_en": "Other current and non-current assets",
+          "raw_value": "(9,197)",
+          "signed_value": "-9197",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 397.427,
+            "top": 308.686,
+            "x1": 423.199,
+            "bottom": 316.761
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 397.427,
+              "top": 308.686,
+              "x1": 423.199,
+              "bottom": 316.761
+            },
+            "row_label": "Other current and non-current assets",
+            "row_label_bbox": {
+              "x0": 70.461,
+              "top": 308.142,
+              "x1": 209.19,
+              "bottom": 314.653
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-accounts_payable-2025",
+          "row_key": "accounts_payable",
+          "role": "operating_assets_and_liabilities",
+          "label": "应付账款变动",
+          "label_en": "Accounts payable",
+          "raw_value": "902",
+          "signed_value": "902",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 407.117,
+            "top": 323.2,
+            "x1": 420.521,
+            "bottom": 329.413
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 407.117,
+              "top": 323.2,
+              "x1": 420.521,
+              "bottom": 329.413
+            },
+            "row_label": "Accounts payable",
+            "row_label_bbox": {
+              "x0": 70.249,
+              "top": 322.553,
+              "x1": 136.872,
+              "bottom": 330.56
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-other_liabilities-2025",
+          "row_key": "other_liabilities",
+          "role": "operating_assets_and_liabilities",
+          "label": "其他流动及非流动负债变动",
+          "label_en": "Other current and non-current liabilities",
+          "raw_value": "(11,076)",
+          "signed_value": "-11076",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 392.701,
+            "top": 337.186,
+            "x1": 423.199,
+            "bottom": 345.261
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 392.701,
+              "top": 337.186,
+              "x1": 423.199,
+              "bottom": 345.261
+            },
+            "row_label": "Other current and non-current liabilities",
+            "row_label_bbox": {
+              "x0": 70.461,
+              "top": 336.642,
+              "x1": 216.738,
+              "bottom": 343.153
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Changes in operating assets and liabilities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 61.504,
+                "top": 251.142,
+                "x1": 221.491,
+                "bottom": 259.362
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de:cf-bridge-cfo-2025",
+          "row_key": "cfo",
+          "role": "cfo_total",
+          "label": "经营现金流合计",
+          "label_en": "Cash generated by operating activities",
+          "raw_value": "111,482",
+          "signed_value": "111482",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "page": 36,
+          "bbox": {
+            "x0": 391.095,
+            "top": 351.7,
+            "x1": 420.539,
+            "bottom": 359.001
+          },
+          "location": {
+            "page": 36,
+            "page_width": 612.0,
+            "page_height": 792.0,
+            "coordinate_system": "pdf_points_top_left",
+            "amount_bbox": {
+              "x0": 391.095,
+              "top": 351.7,
+              "x1": 420.539,
+              "bottom": 359.001
+            },
+            "row_label": "Cash generated by operating activities",
+            "row_label_bbox": {
+              "x0": 82.504,
+              "top": 351.402,
+              "x1": 226.392,
+              "bottom": 359.622
+            },
+            "year": 2025,
+            "year_bbox": {
+              "x0": 383.198,
+              "top": 115.132,
+              "x1": 400.438,
+              "bottom": 121.044
+            },
+            "period_header": "September 27, 2025",
+            "period_bbox": {
+              "x0": 364.882,
+              "top": 106.116,
+              "x1": 418.69,
+              "bottom": 121.044
+            },
+            "unit_header": "(In millions)",
+            "unit_bbox": {
+              "x0": 283.642,
+              "top": 73.114,
+              "x1": 328.417,
+              "bottom": 81.664
+            },
+            "parser_version": "stacked-period-financial-table-1",
+            "section": {
+              "start_label": "Operating activities:",
+              "end_label": "Investing activities:",
+              "start_bbox": {
+                "x0": 52.462,
+                "top": 166.152,
+                "x1": 126.029,
+                "bottom": 174.372
+              },
+              "end_bbox": {
+                "x0": 52.903,
+                "top": 380.064,
+                "x1": 122.722,
+                "bottom": 388.122
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "固定 FY2025 官方报告及其 FY2024 比较列，非实时数据；未证明当前 PDF 字节在历史报告日已可得。",
+    "分组沿用现金流表原有分区：净利润调节项并非全为非现金，经营资产负债变化并非全为狭义营运资本。",
+    "这是有符号金额的会计分解；项目变动不是经验证的经济原因、风险因果或预测。",
+    "仅报表列示合并经营现金流总额，持续/终止经营细分未知；不补造该分解。",
+    "微软和苹果财年结束日期、日历及经营结构不同；不据此跨公司排名。",
+    "构建时核对原 PDF 字节和完整分区；运行时只验证冻结 JSON 与旧 CFO 登记，不重新读取 PDF，也不鉴定真实性。"
+  ],
+  "contract": {
+    "version": "registered-cash-flow-reconciliation-1",
+    "formula": "net_income + reconciliation_adjustments + operating_assets_and_liabilities = cfo_total",
+    "grouping": "original_cash_flow_statement_sections; adjustments_are_not_all_noncash; asset_liability_changes_are_not_all_working_capital",
+    "sign_policy": "as_displayed_signed_decimal; parentheses_are_negative; no_absolute_value",
+    "total_excluded_from_components": true,
+    "prediction": false,
+    "causal_explanation": false,
+    "automatic_approval": false,
+    "runtime_raw_pdf_rehashed": false
+  }
+}
