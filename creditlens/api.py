@@ -26,6 +26,7 @@ from .date_store import date_snapshot
 from .issuer_store import issuer_snapshot, issuer_image
 from .currency_store import currency_snapshot
 from .evidence_guard_store import evidence_guard_snapshot
+from .input_store import input_snapshot
 from .research_materials import build_material_bundle, MaterialsError
 from .research_acceptance import (
     build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
@@ -328,6 +329,15 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
             raise HTTPException(503, "Evidence guard files are unavailable") from exc
         except (ValueError, KeyError, TypeError) as exc:
             raise HTTPException(409, "Evidence guard failed validation") from exc
+
+    @application.get("/api/document-input-checks")
+    def input_records(identity: Actor = Depends(actor)):
+        try:
+            return input_snapshot(ROOT)
+        except FileNotFoundError as exc:
+            raise HTTPException(503, "Input diagnostic files are unavailable") from exc
+        except (ValueError, KeyError, TypeError) as exc:
+            raise HTTPException(409, "Input diagnostic failed validation") from exc
 
     @application.get("/api/issuer-evaluation/{document_id}/pages/{page}.png")
     def issuer_page(document_id: str, page: int,

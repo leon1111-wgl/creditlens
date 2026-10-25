@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "actual_local_browser_and_http_verification",
+  "health": {
+    "status": "ok",
+    "version": "0.17.0",
+    "rule_version": "cash-debt-review-3",
+    "cases": 0,
+    "mode": "public_benchmark_local",
+    "auth_mode": "demo",
+    "dataset_sha256": null
+  },
+  "browser": {
+    "input_rows": 25,
+    "asset_controls": 2,
+    "key_change_clears_rows": true,
+    "key_change_disables_export": true,
+    "reload_after_clear": true,
+    "console_error_count": 0,
+    "narrow_viewport_tested": false
+  },
+  "download": {
+    "exact_http_bytes": true,
+    "sha256": "b2bcf7f7f9ff10d4c65b62ae53b1597833de2bbb5848c101893413b3e8dc7390",
+    "bytes": 22670,
+    "no_store": true
+  },
+  "previous_api_bytes_unchanged": {
+    "/api/currency-diagnostic": {
+      "bytes": 878461,
+      "sha256": "ea3de8366426b976282c375789ba70c4b2f4400df0352beaa0c659287e57def2"
+    },
+    "/api/issuer-evaluation": {
+      "bytes": 197549,
+      "sha256": "9ea41867c33ae4c19d376c5c72c66764957430ef1a3d51a9f439b7fe58eb6ed3"
+    },
+    "/api/evidence-guard": {
+      "bytes": 1301589,
+      "sha256": "c6a091d3bc51f2285733e70f5ab23bc905d188d36f8f7bc093636d50ee11b61f"
+    }
+  },
+  "frozen_file_count": 96,
+  "frozen_files_unchanged": true,
+  "new_model_inference": false,
+  "original_pdf_or_image_read": false
+}
