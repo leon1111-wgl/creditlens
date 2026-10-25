@@ -17,3 +17,9 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: python scripts/evaluate_controls.py
       - run: python -m compileall -q creditlens scripts
+      - run: python scripts/check_artifacts.py
+      - name: Check browser JavaScript syntax
+        run: |
+          node --check artifacts/workbench-syntax.js
+          node --check artifacts/review-syntax.js
+          node --check artifacts/research-syntax.js

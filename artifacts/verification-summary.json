@@ -3,7 +3,7 @@
   "timezone": "Asia/Shanghai",
   "python": "3.12.14",
   "unit_and_api_tests": {
-    "run": 103,
+    "run": 113,
     "failures": 0,
     "errors": 0
   },
@@ -11,7 +11,7 @@
   "local_markdown_file_links": "passed",
   "live_http_health": {
     "status": "ok",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "rule_version": "cash-debt-review-3",
     "cases": 883,
     "mode": "public_benchmark_local",
@@ -41,7 +41,7 @@
     "admin": true
   },
   "github_publish": "Published project main and profile entry to leon1111-wgl after user completed local Git Credential Manager authorization. Earlier connector write failure has not been independently retested.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "official_financial_facts": 42,
   "source_linked_observed_factors": 5,
   "real_model_evaluation": "not run",
@@ -68,7 +68,7 @@
     "after_passed": 15,
     "before_implementation": "03d55b4",
     "after_rule_version": "cash-debt-review-2",
-    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 103 tests; not model accuracy",
+    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 113 tests; not model accuracy",
     "latest_verified_rule_version": "cash-debt-review-3"
   },
   "pdf_evidence": {
@@ -201,5 +201,51 @@
     "remote_readme_and_profile": "verified using the target GitHub connector",
     "automation": "existing heartbeat updated to expanded research scope; ACTIVE every two hours; UTF-8 verified",
     "scope": "Repository, profile and research scripts published; not a hosted app or full research platform deployment."
+  },
+  "iteration09": {
+    "version": "0.5.0",
+    "date": "2026-10-25",
+    "research_route": "/research",
+    "public_dataset": "msft-fy2025",
+    "is_live": false,
+    "quarterly_rule_version": "calendar-quarter-2",
+    "new_tests": 10,
+    "total_tests": 113,
+    "browser_qa": {
+      "desktop_viewport": 1280,
+      "narrow_viewport": 497,
+      "narrow_content_width": 482,
+      "verified": [
+        "publication-day empty state",
+        "half-year visibility",
+        "date edit hides old results",
+        "metric switch and Q4 candidate evidence",
+        "browser JSON download matches same-date API"
+      ],
+      "download_as_of": "2025-01-30",
+      "download_matches_api": true,
+      "screenshots": [
+        "docs/images/quarterly-research-desktop.png",
+        "docs/images/quarterly-research-narrow.png"
+      ],
+      "not_verified": [
+        "network fault injection",
+        "full keyboard flow",
+        "cross-browser coverage"
+      ]
+    },
+    "independent_advisory": {
+      "branch": "research/advisory",
+      "commit": "d2344fe51a5f1485a704a26aa37b763acbb19ff2",
+      "report": "docs/research/2026-10-25-advisory-01.md",
+      "code_review_finding": "research.html missing from package resources; fixed"
+    },
+    "wheel": {
+      "built": true,
+      "research_html_included": true,
+      "standalone_install_runtime": "not verified; run from repository root"
+    },
+    "model_training": "not run",
+    "remote_ci": "pending publication"
   }
 }

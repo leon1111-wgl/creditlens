@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>季度研究 · CreditLens</title>
+<style>
+:root{--ink:#173b35;--muted:#5e6e68;--line:#dce2dc;--green:#176b54;--amber:#915317;--bg:#f6f7f5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI","Microsoft YaHei",sans-serif}a{color:var(--green);text-underline-offset:4px}button,input,select{font:inherit}button,input,select{border:1px solid #aebdb5;border-radius:5px;padding:9px 12px;background:white;color:var(--ink)}button{cursor:pointer}button.primary{background:var(--green);color:white;border-color:var(--green)}button:disabled{opacity:.48;cursor:default}:focus-visible{outline:3px solid #b57026;outline-offset:3px}[hidden]{display:none!important}.top{border-bottom:1px solid var(--line);background:white}.nav{max-width:1280px;margin:auto;padding:18px 28px;display:flex;justify-content:space-between;gap:16px;align-items:center}.brand{font-size:22px;font-weight:750;text-decoration:none}.nav-links{display:flex;gap:20px;flex-wrap:wrap}main{max-width:1280px;margin:auto;padding:32px 28px 56px}h1{font-size:34px;line-height:1.3;margin:4px 0 12px;letter-spacing:-.8px}h2{font-size:21px;margin:0 0 6px}h3{font-size:16px;margin:0 0 8px}p{margin:8px 0}.eyebrow{font-size:12px;letter-spacing:1.4px;color:var(--muted)}.muted,.sub{color:var(--muted)}.sub{font-size:13px}.intro{max-width:760px}.banner{padding:12px 16px;background:#edf1eb;border-left:3px solid var(--green);margin:20px 0}.controls,.panel{background:white;border:1px solid var(--line);border-radius:7px;padding:22px}.fields{display:flex;gap:16px;align-items:end;flex-wrap:wrap}label{display:grid;gap:5px;font-size:13px;font-weight:600}input[type=date]{min-width:168px}.presets{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:16px}.presets button{font-size:12px;padding:5px 9px}.status{min-height:28px;padding-top:12px;font-size:13px;color:var(--muted)}.status.error{color:#a33830}.workspace{margin-top:26px}.snapshot-head{display:flex;justify-content:space-between;align-items:start;gap:16px;margin-bottom:16px}.quality{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 22px}.tag{display:inline-block;padding:3px 9px;border-radius:4px;font-size:12px;background:#edf3ef;color:var(--green)}.tag.derived_requires_review{background:#fff0dd;color:var(--amber)}.tag.missing{background:#eff0ef;color:#626b66}.tag.blocked{background:#faeae8;color:#a33830}.columns{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,1fr);gap:20px;align-items:start}.panel-top{display:flex;justify-content:space-between;gap:16px;align-items:start;flex-wrap:wrap}.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;margin:16px 0}.legend span:before{content:"";display:inline-block;width:11px;height:11px;background:var(--green);margin-right:7px}.legend .estimate:before{background:#fff4e4;border:1px dashed var(--amber)}.chart svg{display:block;width:100%;height:auto;max-height:290px}.chart g[role=button]{cursor:pointer}.chart g[role=button]:focus{outline:2px solid #b57026}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px}th,td{padding:12px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{color:var(--muted);font-weight:500}td.numeric{text-align:right;font-variant-numeric:tabular-nums}tr.selected{background:#f0f6f2}.inspect{padding:4px 8px;font-size:12px}.evidence{scroll-margin-top:16px}.evidence-grid{display:grid;grid-template-columns:76px minmax(0,1fr);gap:8px;font-size:13px;margin:16px 0}.evidence-grid dt{color:var(--muted)}.evidence-grid dd{margin:0;overflow-wrap:anywhere}.notice{background:#fff5e8;color:#805022;border-left:3px solid #bd8238;padding:10px 12px;font-size:13px;margin:14px 0}.fact{padding:15px 0;border-top:1px solid var(--line);font-size:13px;overflow-wrap:anywhere}.fact h3{font-size:14px}.fact p{margin:4px 0}.fact a{display:inline-block;margin-top:5px}details{font-size:12px;color:var(--muted);margin-top:16px}summary{cursor:pointer}code{font-size:12px;overflow-wrap:anywhere}ul{padding-left:20px}.limits{margin-top:20px;font-size:13px;color:var(--muted)}.empty{padding:18px;background:#f3f4f1;border-radius:4px}.foot{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;font-size:12px;color:var(--muted)}@media(max-width:860px){.columns{grid-template-columns:1fr}}@media(max-width:560px){.nav{padding:14px 18px;align-items:start;flex-direction:column}.nav-links{gap:16px;font-size:13px}main{padding:24px 16px}h1{font-size:28px}.controls,.panel{padding:16px}.fields{gap:12px}.fields label{flex:1;min-width:150px}.fields select,.fields input{width:100%;min-width:0}.fields #load{width:100%}.snapshot-head{flex-direction:column}.snapshot-head button{width:100%}.panel-top{gap:10px}.panel-top label{width:100%}.chart svg{min-height:180px}.quality{gap:5px}}
+</style>
+</head>
+<body>
+<header class="top"><nav class="nav" aria-label="主导航"><a class="brand" href="/">CreditLens</a><div class="nav-links"><a href="/">信用复核工作台</a><a href="/lab">问答实验室</a><a href="/docs">API 文档</a></div></nav></header>
+<main>
+<div class="intro"><p class="eyebrow">COMPANY RESEARCH / 公司研究</p><h1>把经营变化，放回当时的资料里看。</h1><p class="muted">查看每季现金流、资本开支和利润。点开一个数字，核对它来自哪份披露，是直接报告的，还是需要复核的计算结果。</p></div>
+<div class="banner"><strong>官方历史样例</strong> · 当前支持微软 FY2025。数据不会自动更新；此页不提供实时行情或模型预测。</div>
+<section class="controls" aria-label="研究条件"><div class="fields">
+<label>研究对象<select id="company"><option value="msft-fy2025">微软 · FY2025</option></select></label>
+<label>研究截止日<input id="asof" type="date" value="2025-07-31" required min="1900-01-01" max="2100-12-31"></label>
+<label id="key-label" hidden>访问密钥<input id="key" type="password" autocomplete="off" placeholder="仅保存在当前页面"></label>
+<button id="load" class="primary" type="button" disabled>载入研究</button>
+</div><div class="presets"><span class="sub">试一试：</span><button type="button" data-date="2024-10-30">首次公告当天</button><button type="button" data-date="2025-01-30">看到上半年</button><button type="button" data-date="2025-07-31">看到全年</button></div>
+<div id="status" class="status" role="status" aria-live="polite">正在连接本地服务…</div></section>
+<section id="workspace" class="workspace" hidden aria-label="研究结果">
+<div class="snapshot-head"><div><h2 id="snapshot-title"></h2><p class="sub" id="freshness"></p><p class="sub">只按已登记的公告日期筛选；仅有日期时，保守地从公告次日纳入。</p></div><button id="export" type="button" disabled>导出当前研究快照 ↓</button></div>
+<div id="quality" class="quality" aria-label="全部三个指标的数据状态"></div>
+<div class="columns"><section class="panel"><div class="panel-top"><div><h2>季度变化</h2><p class="sub">财年：2024-07-01 — 2025-06-30</p></div><label>查看指标<select id="metric"><option value="cfo">经营现金流</option><option value="capex">固定资产现金支出</option><option value="net_income">净利润</option></select></label></div>
+<div class="legend"><span>直接披露</span><span class="estimate">计算待复核</span></div><p class="sub" id="chart-unit"></p><div id="chart" class="chart"></div><p id="chart-note" class="sub"></p>
+<div class="table-wrap"><table><caption class="sub">选择“查看依据”追查原始数据</caption><thead><tr><th scope="col">季度</th><th scope="col">金额</th><th scope="col">状态</th><th scope="col">依据</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+<section id="evidence-panel" class="panel evidence" aria-label="所选季度的依据"><h2 id="evidence-title">原始依据</h2><div id="evidence"></div></section></div>
+<section class="panel limits"><h3>这份结果能说明什么</h3><p>它帮助核对这个历史样例中的数字与计算。网页是后来抓取的当前版本，尚未验证完整的首次披露与修订链；按日期筛选不等于已经恢复历史真实版本。</p><p>缺失保持缺失，推导值持续标为待复核。当前数据未获准用于预测训练；一家公司一个财年，也不足以证明季节规律、因子有效性或投资收益。</p><details><summary>查看快照指纹与计算版本</summary><p id="versions"></p><code id="fingerprint"></code><p>指纹绑定公司、财年、截止日与可见原始证据，用于识别输入快照；不是结果正确性、历史版本或防篡改保证。导出保留本页使用的全部快照与状态。</p></details></section>
+</section><footer class="foot">CreditLens · 多模态金融研究与风险分析平台 / v0.5 · 本地研究演示</footer>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const labels = {reported:'直接披露',derived_requires_review:'计算待复核',missing:'缺失',blocked:'已阻断'};
+const metrics = {cfo:'经营现金流',capex:'固定资产现金支出',net_income:'净利润'};
+const checks = {ambiguous_versions:'存在多个版本，尚不能选择。',incompatible_unit_or_basis:'单位或口径不一致，停止计算。',quarter_vs_cumulative_mismatch:'单季值与累计差分不一致，停止计算。',cumulative_difference_matches:'单季值与累计差分相符；不代表已完成历史修订核查。',not_applicable_first_quarter:'第一季度无需用前期累计数相减。',cumulative_check_unavailable:'缺少完整累计数，暂不能做累计差分核对。',negative_derived_capex:'现金支出累计差分为负，需核查口径与版本。',cross_disclosure_restatement_review_required:'由跨期披露相减得到，仍需核对修订及合并范围。',missing_quarter_or_cumulative_operand:'没有可用单季值，或缺少累计差分所需数据。'};
+let current=null, controller=null, generation=0, selectedQuarter=1, authMode='demo', ready=false;
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function unitText(unit){return unit==='USD_million'?'百万美元':unit||'未定';}
+function amount(value){return value===null?'—':new Intl.NumberFormat('zh-CN',{maximumFractionDigits:6}).format(Number(value));}
+function status(text,error=false){$('status').textContent=text;$('status').className='status'+(error?' error':'');}
+function clearResult(message){generation++;controller?.abort();controller=null;current=null;$('workspace').hidden=true;$('export').disabled=true;$('load').disabled=!ready;status(message);}
+function badge(state){return el('span',labels[state]||state,'tag '+state);}
+function pair(dl,label,value){dl.append(el('dt',label),el('dd',value));}
+async function load(){
+ if(!ready||!$('asof').reportValidity())return;
+ clearResult('正在载入…');const token=generation;controller=new AbortController();$('load').disabled=true;
+ const headers=authMode==='api_key'?{Authorization:'Bearer '+$('key').value.trim()}:{'X-Demo-Role':'viewer'};
+ try{
+  const query=new URLSearchParams({as_of:$('asof').value,dataset:$('company').value});
+  const response=await fetch('/api/research/quarters?'+query,{headers,signal:controller.signal,cache:'no-store'});
+  if(!response.ok)throw new Error(response.status===401?'访问密钥无效或缺失，请检查后重新载入。':'暂时无法载入研究（HTTP '+response.status+'），请重试。');
+  const result=await response.json();if(token!==generation)return;
+  current=result;selectedQuarter=1;render();$('workspace').hidden=false;$('export').disabled=false;
+  status('已载入截至 '+result.snapshot.as_of+' 的历史样例。导出与图表使用同一份快照。');
+ }catch(error){if(token!==generation||error.name==='AbortError')return;status(error.message||'连接失败，请重试。',true);}
+ finally{if(token===generation){$('load').disabled=false;controller=null;}}
+}
+function render(){
+ if(!current)return;
+ const snap=current.snapshot;
+ $('snapshot-title').textContent='微软 FY2025 · 截至 '+snap.as_of;
+ $('freshness').textContent='纳入的最近公告：'+(current.freshness.latest_visible_publication||'暂无')+' · 当前抓取版本，非历史归档';
+ $('quality').replaceChildren();for(const [state,count] of Object.entries(current.quality)){$('quality').append(el('span',labels[state]+' '+count+' 项','tag '+state));}
+ $('versions').textContent='应用 '+current.application_version+' / 计算规则 '+snap.rule_version;
+ $('fingerprint').textContent=snap.snapshot_sha256;
+ renderMetric();
+}
+function renderMetric(){
+ if(!current)return;
+ const rows=current.snapshot.quarters.filter(r=>r.metric===$('metric').value);
+ const units=[...new Set(rows.filter(r=>r.value!==null).map(r=>r.unit))];
+ $('chart-unit').textContent='金额单位：'+(units.length===1?unitText(units[0]):'无可用数值');
+ $('chart-note').textContent='空缺不按 0 绘制；虚线柱为计算待复核值。点击柱形或下表查看依据。';
+ $('rows').replaceChildren();
+ for(const row of rows){
+  const tr=el('tr',undefined,row.quarter===selectedQuarter?'selected':'');
+  tr.append(el('td','Q'+row.quarter),el('td',amount(row.value),'numeric'));
+  const state=el('td');state.append(badge(row.status));const action=el('td');const button=el('button','查看依据','inspect');
+  button.type='button';button.setAttribute('aria-label','查看 Q'+row.quarter+' '+metrics[row.metric]+'的依据');button.addEventListener('click',()=>selectQuarter(row.quarter));action.append(button);tr.append(state,action);$('rows').append(tr);
+ }
+ renderChart(rows,units);renderEvidence(rows.find(r=>r.quarter===selectedQuarter));
+}
+function svgNode(tag,attrs,text){const node=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v]of Object.entries(attrs))node.setAttribute(k,String(v));if(text!==undefined)node.textContent=text;return node;}
+function renderChart(rows,units){
+ const host=$('chart');host.replaceChildren();
+ if(units.length>1){host.append(el('p','单位不一致，暂不绘图。','empty'));return;}
+ if(!rows.some(r=>r.value!==null)){host.append(el('p','此截止日下，没有可绘制的数值。可在下表查看缺失或阻断原因。','empty'));return;}
+ const values=rows.filter(r=>r.value!==null).map(r=>Number(r.value));
+ const min=Math.min(0,...values),max=Math.max(0,...values),span=(max-min)||1;
+ const y=value=>35+(max-value)/span*160,baseline=y(0);
+ const svg=svgNode('svg',{viewBox:'0 0 560 250',role:'group','aria-label':metrics[$('metric').value]+'，单位'+unitText(units[0])});
+ svg.append(svgNode('line',{x1:20,x2:540,y1:baseline,y2:baseline,stroke:'#b6c3bb'}));
+ rows.forEach((row,i)=>{
+  const x=40+i*135,group=svgNode('g',{role:'button',tabindex:0,'aria-label':'Q'+row.quarter+'，'+(row.value===null?'无可用数值':amount(row.value)+' '+unitText(row.unit))+'，'+labels[row.status],'aria-pressed':row.quarter===selectedQuarter});
+  group.append(svgNode('rect',{x:x-8,y:12,width:108,height:230,rx:4,fill:row.quarter===selectedQuarter?'#f0f6f2':'transparent'}));
+  if(row.value!==null){const value=Number(row.value),derived=row.status==='derived_requires_review',top=Math.min(y(value),baseline);
+   group.append(svgNode('rect',{x,y:top,width:78,height:Math.max(Math.abs(baseline-y(value)),1),fill:derived?'#fff0dd':'#176b54',stroke:derived?'#915317':'#176b54','stroke-dasharray':derived?'5 4':'none'}));
+   group.append(svgNode('text',{x:x+39,y:value>=0?top-8:Math.max(y(value),baseline)+18,'text-anchor':'middle',fill:'#173b35','font-size':13},amount(row.value)));
+  }else group.append(svgNode('text',{x:x+39,y:130,'text-anchor':'middle',fill:'#64716e','font-size':13},labels[row.status]));
+  group.append(svgNode('text',{x:x+39,y:237,'text-anchor':'middle',fill:'#173b35','font-size':13},'Q'+row.quarter));
+  group.addEventListener('click',()=>selectQuarter(row.quarter));group.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();selectQuarter(row.quarter);}});svg.append(group);
+ });host.append(svg);
+}
+function selectQuarter(quarter){selectedQuarter=quarter;renderMetric();}
+function renderEvidence(row){
+ const host=$('evidence');host.replaceChildren();$('evidence-title').textContent='Q'+row.quarter+' · '+metrics[row.metric];host.append(badge(row.status));
+ const dl=el('dl',undefined,'evidence-grid');pair(dl,'金额',row.value===null?'无可用数值':amount(row.value)+' '+unitText(row.unit));pair(dl,'财务期间',row.period_start+' — '+row.period_end);pair(dl,'可用日期',row.available_from||'尚不适用');host.append(dl);
+ if(row.status==='derived_requires_review')host.append(el('p','全年累计数减去前九个月得到的候选值。尚未经过独立复核，不作为直接披露或训练真值。','notice'));
+ const checkList=el('ul',undefined,'sub');for(const check of row.checks)checkList.append(el('li',checks[check]||check));host.append(checkList);
+ if(row.formula){host.append(el('h3','取值／计算方式'),el('code',row.formula));}
+ const evidence=current.snapshot.evidence;
+ const facts=new Map(evidence.facts.map(f=>[f.id,f])),sources=new Map(evidence.sources.map(s=>[s.id,s]));
+ if(!row.fact_ids.length){host.append(el('p','此截止日没有可用于本季度的原始依据。','empty'));return;}
+ host.append(el('p','以下原始数据用于取值、计算或一致性核对：','sub'));
+ for(const id of row.fact_ids){const fact=facts.get(id);if(!fact)continue;const source=sources.get(fact.source_id);const block=el('article',undefined,'fact');
+  block.append(el('h3',fact.label+' · '+fact.raw_value));block.append(el('p','期间：'+fact.period_start+' — '+fact.period_end));block.append(el('p','归一值：'+fact.value+' '+unitText(fact.unit)+'；口径：'+fact.basis_id));
+  block.append(el('p','原文位置：'+fact.locator));
+  if(source){block.append(el('p','公告：'+source.published_at+'；抓取：'+source.retrieved_at));
+   try{const url=new URL(source.url);if(['https:','http:'].includes(url.protocol)){const link=el('a',source.title+' ↗');link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';block.append(link);}}catch{}
+   const details=el('details');details.append(el('summary','来源文件指纹'),el('code',source.sha256));block.append(details);
+  }host.append(block);
+ }
+}
+$('load').addEventListener('click',load);
+for(const id of ['asof','key','company'])$(id).addEventListener('input',()=>clearResult('研究条件或身份已改变，请重新载入。'));
+$('metric').addEventListener('change',renderMetric);
+for(const button of document.querySelectorAll('[data-date]'))button.addEventListener('click',()=>{$('asof').value=button.dataset.date;load();});
+$('export').addEventListener('click',()=>{if(!current)return;const blob=new Blob([JSON.stringify(current,null,2)],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='creditlens-'+current.snapshot.entity_id+'-'+current.snapshot.as_of+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+(async()=>{try{const response=await fetch('/health',{cache:'no-store'});if(!response.ok)throw new Error();const health=await response.json();authMode=health.auth_mode;ready=true;$('load').disabled=false;$('key-label').hidden=authMode!=='api_key';if(authMode==='api_key')status('请输入访问密钥，再载入公开历史样例。');else await load();}catch{status('服务连接失败，请刷新页面重试。',true);}})();
+</script>
+</body>
+</html>

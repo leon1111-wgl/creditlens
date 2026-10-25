@@ -45,6 +45,12 @@ CREDITLENS_STATE_DIR 默认 data/，保存 audit.sqlite 和 workflow.sqlite。�
 
 [Dockerfile](../Dockerfile) 提供非 root 用户、状态目录与健康检查。当前环境无 Docker，**尚未构建或运行验证**。候选命令：`docker build -t creditlens .`，`docker run --rm -p 127.0.0.1:8765:8765 creditlens`。持久卷需允许 UID 10001 写入；上线前补测构建、持久化和恢复。
 
+## 季度研究页面与接口
+
+`/research` 提供只读季度研究。`GET /api/research/quarters?dataset=msft-fy2025&as_of=2025-01-30` 沿用既有身份控制；API-key 模式需要 Bearer key，未授权返回 401。只有登记的公开样例，未知数据集与非法日期返回 422；不接受本地路径，也不读取或修改私有案件。授权租户共享公开样例，不代表可以跨租户访问私有数据。
+
+图表、依据与 JSON 导出使用同一响应；日期或密钥变化后隐藏旧结果并丢弃旧异步响应。密钥只用于当前页面，不持久保存。季度规则为 `calendar-quarter-2`，信用复核规则不变。输入指纹绑定实体、财年、截止日和可见证据，不证明历史版本或计算正确性。
+
 ## 本地模型规划器
 
 核心工作流不依赖模型。creditlens/planner.py 面向兼容 chat-completions / JSON Schema 的本地服务，例如 vLLM [structured outputs](https://docs.vllm.ai/en/latest/features/structured_outputs/)，具体版本兼容性需实测。
