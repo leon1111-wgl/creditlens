@@ -24,3 +24,9 @@
 - [港大相关课题与求职背景](2026-10-25-hku-research-context.md)：核验金融表格、OCR错误传递、具名产业案例与时序关系研究，区分公开参照、本人经历和本项目成果。
 
 - [研究材料契约与比较](2026-10-25-research-materials.md) · [完整提交快照](2026-10-25-research-handoff.md)
+
+- [经营现金流来源与提取](2026-10-25-cash-flow-sources.md) · [逐行会计分解](2026-10-25-cash-flow-bridge.md) · [独立来源与兼容审查](2026-10-25-advisory-10.md)
+
+- [公开事实驱动的模拟业务场景](2026-10-25-research-scenarios.md) · [场景合理性与叙述审查](2026-10-25-scenario-advisory.md)
+
+- [原始数据按需恢复与本地存储](2026-10-25-remote-data.md)
