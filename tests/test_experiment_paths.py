@@ -111,6 +111,11 @@ class ExperimentPathTests(unittest.TestCase):
             validate_experiment_paths(self.root, self.output, preview)
         paths = validate_experiment_paths(self.root, self.output, preview, allow_registered_preview=True)
         self.assertEqual(paths.local_dir, preview.resolve())
+        transfer = self.root/".run/document-transfer"
+        with self.assertRaisesRegex(ValueError, "registered transfer evidence"):
+            validate_experiment_paths(self.root, transfer/"raw/nvda/page-146.png", self.local)
+        with self.assertRaisesRegex(ValueError, "registered transfer evidence"):
+            validate_experiment_paths(self.root, self.output, transfer/"raw", allow_registered_preview=True)
 
     def test_input_directories_and_outputs_cannot_overlap_or_alias(self):
         source = self.root/".run/inputs"
@@ -189,7 +194,9 @@ class ExperimentPathTests(unittest.TestCase):
                 raise AssertionError("Imaging/OCR import happened before path validation")
             return actual_import(name, *args, **kwargs)
         for runner in (baseline, words, stress):
-            for output, local in [(self.frozen, self.local), (self.output, self.root/"data/raw-ocr")]:
+            for output, local in [(self.frozen, self.local), (self.output, self.root/"data/raw-ocr"),
+                                  (self.root/".run/document-transfer/raw/nvda/page-146.png", self.local),
+                                  (self.output, self.root/".run/document-transfer/raw")]:
                 with self.subTest(runner=runner.__name__, output=output), \
                      patch.object(runner, "ROOT", self.root), \
                      patch("builtins.__import__", side_effect=no_ocr), \
