@@ -44,3 +44,5 @@
 第26轮新增：[第十七份独立审查](advisory-17.md)，检查整组输入、持久化、历史导出及UI失败重试；对应[材料准备](../29-document-preparation.md)和[制作报告](../iterations/2026-10-26-26.md)。
 
 第27轮新增：[当前登记适用性](preparation-applicability.md)与[第十八份独立审查](advisory-18.md)。历史内部一致、当前材料是否匹配、实际内容是否正确分别处理，对应[功能](../30-preparation-history-and-registration.md)和[制作报告](../iterations/2026-10-26-27.md)。
+
+第28轮新增：[跨页证据契约](cross-page-evidence-contract.md)、[登记材料与开发控制](cross-page-materials.md)、[第十九份独立审查](advisory-19.md)。把收入、CFO及范围短锚关联起来，仍与跨页续表解析分开，见[功能](../31-cross-page-evidence.md)和[制作报告](../iterations/2026-10-26-28.md)。
