@@ -29,6 +29,7 @@ jobs:
       - run: python scripts/evaluate_preparation_history.py
       - run: python scripts/evaluate_cross_page_evidence.py
       - run: python scripts/evaluate_table_lookup.py --verify-saved
+      - run: python scripts/evaluate_word_table_lookup.py --verify-saved
       - run: python scripts/verify_preparation_export.py artifacts/document-preparation-replay.json --attempt-index 2 --check-current
       - run: python scripts/evaluate_research_acceptance.py
       - run: python scripts/evaluate_company_attribution.py

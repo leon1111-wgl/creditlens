@@ -48,7 +48,7 @@ CreditLens 给投研和风险团队做三件事：查到财务指标并回到原
 
 新增[跨页财务证据](docs/31-cross-page-evidence.md)：把收入页、现金流页和附注放到一项检查中，先核对公司、期间与范围，再计算经营现金流净额占收入的比例。选错年份或缺依据会明确拒算，结果可以连同来源导出。[实际界面](docs/images/cross-page-evidence-desktop.png) · [本轮记录](docs/iterations/2026-10-26-28.md)。
 
-新增[按行名与年份取数](docs/32-table-lookup.md)：让程序先从整页识别结果中找候选，再与参考答案核对。文字顺序与版面行列使用同一批材料，取错、歧义和不足分别保留，不用已有参考位置挑答案。[本轮记录](docs/iterations/2026-10-26-29.md)。
+[按行名与年份取数](docs/32-table-lookup.md)：程序先找候选，再与参考核对。新增[整行与词级对照](docs/33-word-table-lookup.md)，查看细分位置后哪些结果改变、为什么停下，并保留父行和原词。现有材料上词级方法没有增加匹配，原整行实验继续作为默认入口。[实际界面](docs/images/word-table-lookup-desktop.png) · [本轮记录](docs/iterations/2026-10-26-30.md)。
 
 ## 数据是否实时，需要服务器吗
 
