@@ -20,6 +20,7 @@ artifacts/transfer-syntax.js
 artifacts/tasks-syntax.js
 artifacts/explanation-reviews-syntax.js
 artifacts/preparation-syntax.js
+artifacts/cross-page-syntax.js
 artifacts/service.pid
 artifacts/service-v02.pid
 .run/
