@@ -31,6 +31,7 @@ jobs:
       - run: python scripts/evaluate_table_lookup.py --verify-saved
       - run: python scripts/evaluate_word_table_lookup.py --verify-saved
       - run: python scripts/evaluate_margin_bridge.py --verify-saved
+      - run: python scripts/run_margin_claims.py --verify-saved
       - run: python scripts/replay_reference_review.py
       - run: python scripts/verify_preparation_export.py artifacts/document-preparation-replay.json --attempt-index 2 --check-current
       - run: python scripts/evaluate_research_acceptance.py
@@ -43,6 +44,7 @@ jobs:
       - run: node scripts/check_table_lookup_state.js
       - run: node scripts/check_reference_review_state.js
       - run: node scripts/check_margin_bridge_state.js
+      - run: node scripts/check_margin_claim_state.js
       - name: Check browser JavaScript syntax
         run: |
           node --check artifacts/workbench-syntax.js
