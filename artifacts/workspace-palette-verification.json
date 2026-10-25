@@ -1,0 +1,209 @@
+{
+  "schema_version": "workspace-palette-verification-1",
+  "verified_on": "2026-10-25",
+  "baseline_commit": "0a2611dfc9b25f2c3590cad53b89a982074dbfa8",
+  "scope": "Presentation and research documentation only; no model run or financial rules changed",
+  "static_javascript_checks": [
+    {
+      "page": "review",
+      "javascript_identical": true,
+      "javascript_identical_except_color_literals": true,
+      "html_sha256": "4fe69de9ad5b9597123700e2242c2783a2f67b0a85466ca6f09eb082c3070ce7"
+    },
+    {
+      "page": "workbench",
+      "javascript_identical": true,
+      "javascript_identical_except_color_literals": true,
+      "html_sha256": "2b6bab8e7e3fa41f15d37c103ad65039f6fd7044d4547fe10db298f30a296cd8"
+    },
+    {
+      "page": "research",
+      "javascript_identical": false,
+      "javascript_identical_except_color_literals": true,
+      "html_sha256": "f3863c82ad4501d7482c66327397aefe0f94fa21c472fbb7546d30c75659af48"
+    },
+    {
+      "page": "documents",
+      "javascript_identical": true,
+      "javascript_identical_except_color_literals": true,
+      "html_sha256": "cc655367630b4e3e2cd2313e962ce58d9ce17cb24409efec7b7b6f7ff8571b39"
+    },
+    {
+      "page": "experiments",
+      "javascript_identical": true,
+      "javascript_identical_except_color_literals": true,
+      "html_sha256": "17d7942a4b5fc9aaa4a0f4316034b9dce200b91f46245e8e548d08a0799f97d4"
+    },
+    {
+      "page": "transfer",
+      "javascript_identical": true,
+      "javascript_identical_except_color_literals": true,
+      "html_sha256": "0cba2ca3750012a60d46a947577746c2cfbb60ef9b09923a8a803bf6b7ee28f8"
+    }
+  ],
+  "selected_color_contrast": [
+    {
+      "name": "primary",
+      "foreground": "#ffffff",
+      "background": "#2856a6",
+      "ratio": 7.07
+    },
+    {
+      "name": "body",
+      "foreground": "#1f2329",
+      "background": "#f5f6f8",
+      "ratio": 14.59
+    },
+    {
+      "name": "muted",
+      "foreground": "#5f6773",
+      "background": "#f5f6f8",
+      "ratio": 5.29
+    },
+    {
+      "name": "consistent",
+      "foreground": "#28734e",
+      "background": "#edf6f0",
+      "ratio": 5.21
+    },
+    {
+      "name": "insufficient",
+      "foreground": "#8a6118",
+      "background": "#fff5e4",
+      "ratio": 5.11
+    },
+    {
+      "name": "conflict",
+      "foreground": "#a5362d",
+      "background": "#fcefee",
+      "ratio": 5.91
+    }
+  ],
+  "desktop_dom_observations": [
+    {
+      "cssRules": 150,
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "24px",
+      "path": "/",
+      "scroll": 1351,
+      "viewport": 1366,
+      "width": 1351
+    },
+    {
+      "cssRules": 95,
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "24px",
+      "path": "/research",
+      "scroll": 1351,
+      "viewport": 1366,
+      "width": 1351
+    },
+    {
+      "cssRules": 82,
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "24px",
+      "path": "/documents",
+      "scroll": 1351,
+      "viewport": 1366,
+      "width": 1351
+    },
+    {
+      "cssRules": 106,
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "24px",
+      "path": "/experiments",
+      "scroll": 1351,
+      "viewport": 1366,
+      "width": 1351
+    },
+    {
+      "cssRules": 114,
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "24px",
+      "path": "/transfer",
+      "scroll": 1351,
+      "viewport": 1366,
+      "width": 1351
+    },
+    {
+      "cssRules": 74,
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "24px",
+      "path": "/lab",
+      "scroll": 1351,
+      "viewport": 1366,
+      "width": 1351
+    }
+  ],
+  "narrow_dom_observations": [
+    {
+      "path": "/",
+      "viewport": 497,
+      "width": 482,
+      "scroll": 482,
+      "h1": "22px",
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif"
+    },
+    {
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "22px",
+      "path": "/research",
+      "primary": "rgb(40, 86, 166)",
+      "scroll": 482,
+      "viewport": 497,
+      "width": 482
+    },
+    {
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "22px",
+      "path": "/documents",
+      "primary": "rgb(40, 86, 166)",
+      "scroll": 482,
+      "viewport": 497,
+      "width": 482
+    },
+    {
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "22px",
+      "path": "/experiments",
+      "primary": "rgb(40, 86, 166)",
+      "scroll": 482,
+      "viewport": 497,
+      "width": 482
+    },
+    {
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "22px",
+      "path": "/transfer",
+      "primary": "rgb(40, 86, 166)",
+      "scroll": 482,
+      "viewport": 497,
+      "width": 482
+    },
+    {
+      "font": "\"Times New Roman\", \"Songti SC\", SimSun, \"Noto Serif CJK SC\", serif",
+      "h1": "22px",
+      "path": "/lab",
+      "primary": null,
+      "scroll": 482,
+      "viewport": 497,
+      "width": 482
+    }
+  ],
+  "interaction_checks": [
+    "Quarterly Q4 evidence opened",
+    "FinQA evidence search returned passages and table inputs",
+    "Review evidence/audit/overview tabs switched; no workflow action submitted",
+    "Disabled lab buttons rendered neutral gray"
+  ],
+  "screenshots": [
+    "docs/images/workspace-palette-desktop.png",
+    "docs/images/workspace-palette-narrow.png"
+  ],
+  "limitations": [
+    "Current in-app browser only",
+    "Selected colors, not complete accessibility certification",
+    "Cross-company workflow and external model methods remain design candidates",
+    "Existing v0.9.0 test count is not a new model evaluation result"
+  ]
+}

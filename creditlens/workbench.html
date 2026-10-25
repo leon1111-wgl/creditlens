@@ -3,29 +3,52 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CreditLens · 金融证据工作台</title>
 <style>
-:root{font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:#172e36;background:#f3f6f7;font-synthesis:none;--accent:#086f69;--line:#d7e1e3}
+:root{font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:#1f2329;background:#f5f6f8;font-synthesis:none;--accent:#2856a6;--line:#dfe3e8}
 *{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}a{color:var(--accent)}
 header{background:#fff;border-bottom:1px solid var(--line);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;gap:20px}
-.brand{font-size:23px;font-weight:750;letter-spacing:-.7px}.brand span{font-weight:400;font-size:14px;color:#546b74;margin-left:15px}
+.brand{font-size:23px;font-weight:750;letter-spacing:-.7px}.brand span{font-weight:400;font-size:14px;color:#5f6773;margin-left:15px}
 header nav{display:flex;gap:24px;font-size:14px}
 main{max-width:1440px;margin:auto;padding:30px 32px}.intro{display:flex;gap:36px;justify-content:space-between;margin-bottom:28px;align-items:center}
 h1{font-size:30px;letter-spacing:-1px;margin:0 0 10px}h2{font-size:18px;margin:0 0 18px}p{line-height:1.7}
-.muted{color:#526a72;font-size:14px}.intro p{margin:0;max-width:740px}.stamp{font-size:13px;border-left:3px solid var(--accent);padding-left:16px;white-space:nowrap}
+.muted{color:#5f6773;font-size:14px}.intro p{margin:0;max-width:740px}.stamp{font-size:13px;border-left:3px solid var(--accent);padding-left:16px;white-space:nowrap}
 .layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:26px}.panel{background:white;border:1px solid var(--line);border-radius:8px;padding:22px}
-label{display:block;font-size:13px;font-weight:650;margin:18px 0 7px}input,select,textarea{width:100%;padding:10px 12px;border:1px solid #93a9af;border-radius:4px;background:#fff;color:#172e36}
+label{display:block;font-size:13px;font-weight:650;margin:18px 0 7px}input,select,textarea{width:100%;padding:10px 12px;border:1px solid #aeb7c4;border-radius:4px;background:#fff;color:#1f2329}
 textarea{min-height:110px;resize:vertical}button{background:var(--accent);color:white;border:0;border-radius:4px;padding:11px 16px;cursor:pointer;font-weight:600}
-button:disabled{opacity:.5;cursor:not-allowed}button.secondary{background:#e9f1f1;color:#164d4b}button:focus-visible,a:focus-visible{outline:3px solid #a55c12;outline-offset:3px}
+button:disabled{opacity:.5;cursor:not-allowed}button.secondary{background:#edf1f7;color:#2856a6}button:focus-visible,a:focus-visible{outline:3px solid #2856a6;outline-offset:3px}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:2px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.status{min-height:26px;font-size:14px;color:#365b64;margin:16px 0}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.status{min-height:26px;font-size:14px;color:#5f6773;margin:16px 0}
 .error{color:#9a2f23}.result-head{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:8px}
 .result-head h2{margin:0}.evidence{border-bottom:1px solid var(--line);padding:20px 0}.evidence:last-child{border:0}
-.ev-meta{font-size:12px;display:flex;justify-content:space-between;gap:12px;color:#526a72}.evidence p{font-size:14px;overflow-wrap:anywhere;margin:10px 0}
+.ev-meta{font-size:12px;display:flex;justify-content:space-between;gap:12px;color:#5f6773}.evidence p{font-size:14px;overflow-wrap:anywhere;margin:10px 0}
 code{font-family:Consolas,monospace;font-size:12px}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;margin-top:10px;font-size:13px}td,th{padding:9px;text-align:left;border:1px solid var(--line);white-space:normal}
-th{background:#f4f7f7;font-weight:500}.calc{margin-top:24px}.calc-fields{display:grid;grid-template-columns:1fr 110px 1fr;gap:12px}.number{font-size:34px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:700}
+th{background:#f5f6f8;font-weight:500}.calc{margin-top:24px}.calc-fields{display:grid;grid-template-columns:1fr 110px 1fr;gap:12px}.number{font-size:34px;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:700}
 .notice{border-left:3px solid #a9691b;padding:8px 12px;background:#fcf8f0;font-size:13px;line-height:1.7;margin-top:18px}
-pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:#f4f7f7;padding:12px}
-.empty{padding:48px 16px;color:#526a72;text-align:center}.section-note{font-size:12px;color:#526a72;margin-top:8px}footer{padding:30px 0 0;font-size:12px;color:#526a72}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:#f5f6f8;padding:12px}
+.empty{padding:48px 16px;color:#5f6773;text-align:center}.section-note{font-size:12px;color:#5f6773;margin-top:8px}footer{padding:30px 0 0;font-size:12px;color:#5f6773}
 @media(max-width:900px){header{padding:18px;flex-wrap:wrap}main{padding:22px 16px}.layout{grid-template-columns:1fr}.intro{display:block}.stamp{margin-top:18px}.calc-fields{grid-template-columns:1fr}.brand span{display:block;margin:5px 0 0}h1{font-size:26px}}
+
+/* Shared workspace palette: restrained neutral surfaces and blue actions.
+   Native CSS, inspired by office workspaces; no external design-system package. */
+:root{--font:"Times New Roman","Songti SC",SimSun,"Noto Serif CJK SC",serif;--text:#1f2329;--ink:#1f2329;--muted:#5f6773;--line:#dfe3e8;--soft:#f5f6f8;--blue:#2856a6;--green:#2856a6;--accent:#2856a6;--bg:#f5f6f8;--amber:#8a6118;--red:#a5362d;font-family:var(--font);color:var(--text);background:var(--bg)}
+body{font:15px/1.6 var(--font);color:var(--text);background:var(--bg)}
+h1,h2,h3,.brand,.logo,.number,.fact-value,.metric .number,.empty h2{font-family:var(--font)}
+h1{font-size:24px;line-height:1.4;letter-spacing:0}h2{font-size:18px}h3{font-size:15px}
+button,input,select,textarea{font-family:var(--font)}
+input,select,textarea{color:var(--text);border-color:#aeb7c4}
+a{color:var(--blue);text-underline-offset:3px}
+button.primary,.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20478c;border-color:#20478c;color:#fff}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.panel,.controls{border-radius:4px}.brand,.logo{font-weight:700}
+.tag.consistent{background:#edf6f0;color:#28734e}.tag.insufficient,.tag.warn,.tag.derived_requires_review{background:#fff5e4;color:#8a6118}
+.tag.conflict,.tag.danger,.tag.blocked{background:#fcefee;color:#a5362d}
+.tag.missing{background:#f0f2f5;color:#5f6773}
+.notice{border-radius:3px}.empty{background:#f5f6f8}
+@media(max-width:700px){h1{font-size:22px}h2{font-size:18px}}
+
+button.secondary{background:#edf1f7;color:var(--blue)}.brand{color:var(--text)}
+
+button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
 </style></head>
 <body>
 <header><div class="brand">CreditLens<span>金融证据工作台</span></div><nav><a href="/docs">API 文档</a><a href="https://github.com/czyssrs/FinQA" target="_blank" rel="noreferrer">数据来源</a></nav></header>
