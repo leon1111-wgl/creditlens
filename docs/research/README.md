@@ -50,3 +50,5 @@
 第29轮新增：[整页取数契约](table-lookup-contract.md)、[两方法对照实验](table-lookup-experiment.md)、[第二十份独立审查](advisory-20.md)。参考金额与位置不进入选择接口，真实材料与合成控制分别统计，见[功能](../32-table-lookup.md)和[制作记录](../iterations/2026-10-26-29.md)。
 
 第30轮新增：[词级取数契约](word-table-lookup-contract.md)、[同输入对照实验](word-table-lookup-experiment.md)、[第二十一份独立审查](advisory-21.md)。父行和原词同时保留，42登记与40不同输入分开，4项回退完整公开；见[功能](../33-word-table-lookup.md)和[制作记录](../iterations/2026-10-26-30.md)。
+
+第31轮新增：[参考契约](reference-review-contract.md)、[核对存储与复演](reference-review-workflow.md)、[第二十二份独立审查](advisory-22.md)。实现分别提交、第三身份复核、历史冻结与失败恢复，当前40组已观察问题只作流程开发，不升级为独立基准；见[功能](../34-reference-review.md)。
