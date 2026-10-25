@@ -2,7 +2,7 @@
   "schema_version": 1,
   "suite_version": "issuer-evaluation-1",
   "experiment_id": "amd-fy2025-fixed-rules-1",
-  "frozen_at": "2026-10-25T08:38:46.883756+00:00",
+  "frozen_at": "2026-10-25T08:40:01.184758+00:00",
   "selection_reason": "AMD was selected before AMD OCR inspection as another semiconductor issuer with a 52-week fiscal calendar. Fixed inventory: seven metrics for FY2025/FY2024 on physical pages 74 and 76. Continuing CFO and capex are scoped separately from overall net income. Two-line date headers and all recognition failures remain scored; FY2023 and discontinued capex were excluded by the declared task, not OCR performance.",
   "reference_status": "single_annotator_development_reference",
   "file_hash_basis": "python_utf8_lf_other_raw",
@@ -22,7 +22,7 @@
     "creditlens/visual.py": "be7f4159eb910150201fdd6dd6e36991dedfcee95ff8b44d5f1757bf4be0f012",
     "creditlens/word_evidence.py": "76633f531075aff716d49e6a85fcf427c31c27b7fa5a4d8e5da34ac3d88bd4e3",
     "scripts/evaluate_document_transfer.py": "855c44176b3bd1aa010d54adfba3bdfa35112f1d902f9fa37c404bdacdfbd410",
-    "scripts/evaluate_issuer.py": "e9f74b765e33ae508bcefa6cd395743993073fcfa4ec00a52c04fa3f9a7f6863",
+    "scripts/evaluate_issuer.py": "fcb768225b7226488088f04b894f0092d12597118b0cfb2fe6c4a9f8d1b785df",
     "scripts/evaluate_visual_robustness.py": "999a1647616208f9b5ff5e9285fd7ce37755be35bea225f216849cde247f09be",
     "scripts/evaluate_word_evidence.py": "39c41b0a9ae012bb3110e0e17eb769102a19e6f77df636275d3c0bd6f36a0961"
   },

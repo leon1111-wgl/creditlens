@@ -132,6 +132,23 @@ class IssuerEvaluationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             issuer.IssuerPack.model_validate(changed)
 
+    def test_lazy_models_load_and_reject_gpu_before_any_image(self):
+        engine = Mock(text_det=None, text_rec=None)
+        detector, recognizer = Mock(), Mock()
+        detector.session.session.get_providers.return_value = ["CPUExecutionProvider"]
+        recognizer.session.session.get_providers.return_value = ["CPUExecutionProvider"]
+        engine._load_det_model.side_effect = lambda: setattr(engine, "text_det", detector)
+        engine._load_rec_model.side_effect = lambda: setattr(engine, "text_rec", recognizer)
+        self.assertEqual(runner.load_cpu_models(engine), {
+            "detection": ["CPUExecutionProvider"], "recognition": ["CPUExecutionProvider"]})
+        engine._load_det_model.assert_called_once()
+        engine._load_rec_model.assert_called_once()
+        engine.assert_not_called()
+        recognizer.session.session.get_providers.return_value = ["CUDAExecutionProvider", "CPUExecutionProvider"]
+        with self.assertRaisesRegex(ValueError, "only CPU"):
+            runner.load_cpu_models(engine)
+        engine.assert_not_called()
+
     def test_all_executed_dependencies_and_reference_builder_are_frozen(self):
         for relative in ("creditlens/date_evidence.py", "creditlens/issuer_evaluation.py", "scripts/evaluate_issuer.py",
                          "scripts/evaluate_document_transfer.py", "configs/document-ai.json", "scripts/build_test_reference.py"):
