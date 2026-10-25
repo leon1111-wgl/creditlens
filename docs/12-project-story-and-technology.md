@@ -50,6 +50,8 @@ CreditLens围绕这段工作设计：让材料容易找到，让计算保持同�
 
 遇到美元符号和金额合成一个识别词时，会检查完整文字、父行和所属列，再决定能否采用这段识别证据；附近还有币种前缀、负号或其他数字就继续保留待查。旧失败和人工反例都能展开查看，不靠删字符让数字通过。[金额符号核对](23-currency-evidence.md)
 
+对已经判为一致的金额也执行 Evidence Integrity 检查：数字相同但币种不同、字词挂在错误父行、旁边的负号没有词框，都应留下问题。同父行拆开的符号与数字必须有完整归属关系，不能靠删除前缀匹配答案。页面并列保留原判定与新增检查；检查通过也不会自动批准财务事实。[实现与开发控制](27-evidence-integrity.md)
+
 当前运行过微软、苹果、NVIDIA与AMD材料，包含真实失败和规则修正记录；范围仍是固定材料、已知位置核对。后续准备加入版面解析和视觉文档检索，参考 **ColPali（ICLR 2025）** 的页面多向量表示与 Late Interaction，比较它与OCR加文本检索找资料的效果。检索负责找到页面，金额是否读准另行核验。[现有实验](13-document-ai-experiment.md) · [新公司检查](19-issuer-evaluation.md) · [ColPali论文](https://proceedings.iclr.cc/paper_files/paper/2025/file/99e9e141aafc314f76b0ca3dd66898b3-Paper-Conference.pdf)
 
 ### 用对数字：口径写进数据，计算交给程序
