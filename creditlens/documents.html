@@ -23,7 +23,7 @@ button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20
 
 button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
 </style></head><body>
-<header class="top"><nav aria-label="主导航"><a class="brand" href="/">CreditLens</a><div><a href="/tasks">研究任务</a><a href="/table-lookup">表格取数</a><a href="/experiments">实验对照</a><a href="/research">季度研究</a><a href="/cross-page">跨页证据</a><a href="/">信用复核</a><a href="/docs">API 文档</a></div></nav></header>
+<header class="top"><nav aria-label="主导航"><a class="brand" href="/">CreditLens</a><div><a href="/tasks">研究任务</a><a href="/table-lookup">表格取数</a><a href="/experiments">实验对照</a><a href="/research">季度研究</a><a href="/cross-page">跨页证据</a><a href="/">信用复核</a><a href="/docs">API 文档</a></div><a href="/margin">毛利率变化</a></nav></header>
 <main><p class="eyebrow">DOCUMENT INTELLIGENCE / 文档智能</p><h1>同一个数字，从文字和图像各查一遍。</h1><p class="muted">PDF 文本层提取一份，OCR 看整页图片再识别一份。对照金额、年份、期间、单位和行标签，留下差异，方便逐项核查。</p>
 <div class="banner"><strong>真实 OCR 运行记录</strong> · 官方历史财报的已知位置核对。不是通用抽取准确率，也不鉴定材料真伪；一致的结果仍需人工判断。</div>
 <section class="panel"><div class="controls"><label>官方文档<select id="document"><option value="msft">微软 FY2025 年报</option><option value="aapl">苹果 FY2025 年报</option></select></label><label id="key-label" hidden>访问密钥<input id="key" type="password" autocomplete="off" placeholder="只用于当前页面"></label><button id="load" class="primary" disabled>载入核对记录</button><button id="export" disabled>导出核对记录 ↓</button></div><div id="status" role="status" aria-live="polite" class="status">正在连接本地服务…</div></section>
