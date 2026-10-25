@@ -1,6 +1,6 @@
 # 让图片识别与财报文本互相核对
 
-日期：2026-10-25。版本：v0.6.0。此实验已在 Windows / Python 3.12.14 本机运行。
+日期：2026-10-25。原实验版本：v0.6.0。此实验已在 Windows / Python 3.12.14 本机运行。第 13 轮更新复现路径与保护机制，下面的模型结果仍是原始记录。
 
 ## 能帮分析员做什么
 
@@ -66,10 +66,12 @@
 
 ```bash
 python -m pip install -r requirements-ocr.lock
-python scripts/evaluate_document_ai.py --download
+python scripts/evaluate_document_ai.py --download --local-dir .run/document-ai
 python -m unittest tests.test_visual -v
 python -m uvicorn creditlens.api:app --host 127.0.0.1 --port 8765
 ```
+
+上面的命令显式准备网页原页，报告进入 `.run/reproductions/document-ai-report.json`，不覆盖冻结报告。若只研究模型，去掉 `--local-dir`，页图和 OCR 也会进入独立复现目录。三组实验和逐字段对照见[安全复现说明](16-experiment-reproduction.md)。
 
 打开 `http://127.0.0.1:8765/documents`。模型、原始 PDF、完整 OCR JSON 和整页 PNG 保留在本机；公开仓库只有必要的财务片段、来源、定位、配置和结果。使用其他系统或包版本需要重新验证，不能承诺逐字节相同。
 

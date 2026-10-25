@@ -53,7 +53,7 @@ JPEG 的 PNG 容器保留了压缩后的像素变化。没有旋转、缩放、�
 在已按基线说明准备依赖与模型的仓库里，可先生成本地原始页图，再运行实验：
 
 ```powershell
-python scripts/evaluate_document_ai.py --download --output .run/regenerated-document-ai-report.json
+python scripts/evaluate_document_ai.py --download
 python scripts/evaluate_visual_robustness.py
 python -m unittest tests.test_visual_robustness -v
 ```
@@ -75,3 +75,5 @@ D:/acl-xwf/creditlens/.venv/Scripts/python.exe scripts/evaluate_visual_robustnes
 当前尚未验证：真实扫描噪声、拍摄透视、旋转、复杂图表、新发行人和未见版式。既有参考事实经过开发适配，没有双人独立标注；共用表头的字段也不构成独立样本。本轮不能估计漏错率、误放行率、模型校准或真实业务节省时间。
 
 下一轮应先准备未用于调规则的新文档与人工标注，固定更广的退化矩阵，并检查错误参考是否会被错误放行；真实扫描件要另列来源与许可。细粒度字词框可作为另一条受控对照，但不能混入本次行级规则的结果。当前实验用现成 CPU 预训练模型即可完成，仍不需要租 A100。
+
+当前复现入口在第 13 轮改为默认输出到 `.run/reproductions/`；上文旧本地路径和运行时间保留历史记录。重跑不会覆盖这里的公开实验，三个脚本的顺序与逐字段对照见[安全复现说明](../16-experiment-reproduction.md)。
