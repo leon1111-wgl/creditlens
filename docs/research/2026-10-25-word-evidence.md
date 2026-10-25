@@ -65,8 +65,8 @@
 
 ```bash
 python -m pip install -r requirements-ocr.lock
-# 没有本地页图时才先执行原实验；该命令会重建原报告，复现请使用独立工作目录。
-python scripts/evaluate_document_ai.py --download
+# 没有本地页图时才运行；另存重跑结果，保留公开冻结基线。
+python scripts/evaluate_document_ai.py --download --output .run/regenerated-document-ai-report.json
 python scripts/evaluate_word_evidence.py
 python -m unittest tests.test_word_evidence -v
 ```
