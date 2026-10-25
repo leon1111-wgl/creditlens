@@ -34,6 +34,7 @@ from .table_lookup_routes import install_table_lookup_routes
 from .word_table_routes import install_word_table_routes
 from .reference_review_store import ReferenceReviewStore
 from .reference_routes import install_reference_routes
+from .margin_routes import install_margin_routes
 from .research_materials import build_material_bundle, MaterialsError
 from .research_acceptance import (
     build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
@@ -151,6 +152,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     install_table_lookup_routes(application, actor, ROOT)
     install_word_table_routes(application, actor, ROOT)
     install_reference_routes(application, actor, ROOT)
+    install_margin_routes(application, actor, ROOT)
 
     def laboratory():
         if application.state.access.mode != "demo":

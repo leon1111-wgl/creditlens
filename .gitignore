@@ -32,3 +32,4 @@ artifacts/service-v02.pid
 /local-notes/
 artifacts/table-lookup-syntax.js
 artifacts/reference-review-syntax.js
+artifacts/margin-syntax.js
