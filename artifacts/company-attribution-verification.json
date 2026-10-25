@@ -1,0 +1,93 @@
+{
+  "checked_at": "2026-10-25T12:44:36.380331+00:00",
+  "version": "0.14.0",
+  "unit_and_api": {
+    "run": 575,
+    "passed": 573,
+    "skipped": 2,
+    "skip_reason": "Existing Windows file/directory symlink permissions",
+    "duration_seconds": 45.394
+  },
+  "development_controls": {
+    "cases": 23,
+    "passed": 23,
+    "failed": 0,
+    "validation_errors": 12,
+    "unexpected_runtime_errors": 0,
+    "channels": {
+      "numeric_alignment": {
+        "cases": 5,
+        "checks": 18,
+        "passed_checks": 18,
+        "failed_checks": 0
+      },
+      "attribution_scope": {
+        "cases": 4,
+        "checks": 9,
+        "passed_checks": 9,
+        "failed_checks": 0
+      },
+      "refusal": {
+        "cases": 19,
+        "checks": 28,
+        "passed_checks": 28,
+        "failed_checks": 0
+      },
+      "version_binding": {
+        "cases": 4,
+        "checks": 9,
+        "passed_checks": 9,
+        "failed_checks": 0
+      }
+    },
+    "independently_human_confirmed_cases": 0,
+    "by_provenance": {
+      "registered_material_case": 5,
+      "synthetic_control": 18
+    }
+  },
+  "report_full_replay": true,
+  "old_protected_files": {
+    "base_commit": "0ebc5a75af4a2211dae1c260eb5c2998412738d2",
+    "count": 78,
+    "changed": []
+  },
+  "runtime": {
+    "preview_port": 8766,
+    "version": "0.14.0",
+    "old_port_preserved": 8765,
+    "restart_attempt": "blocked_by_automatic_approval_no_specific_reason_returned",
+    "paid_api_calls": 0,
+    "new_ocr_runs": 0,
+    "training_runs": 0,
+    "large_files_retained": false
+  },
+  "source_catalog_sha256": "16e5435d1d906011d74639c1ee75160e933afcb8c158584e6739b396d4bf3a33",
+  "browser_record": "artifacts/company-attribution-ui-verification.json",
+  "historical_bytes_equal": {
+    "export": {
+      "bytes": 239354,
+      "sha256": "48d2b15b618dd419b2ff19fe923dbfe7cf7f827082228e9129d2f92b95bb3e8f",
+      "byte_equal": true
+    },
+    "acceptance": {
+      "bytes": 85136,
+      "sha256": "e5d29bab142a69556ae311bcf16683a20912b5d25724871762fcfb6fb0b46c3b",
+      "byte_equal": true
+    }
+  },
+  "claim_boundaries": {
+    "company_statement_independently_verified": false,
+    "human_gold_annotations": 0,
+    "supplement_in_old_snapshot": false,
+    "live_source_refresh": false,
+    "production_deployment": false
+  },
+  "static_checks": {
+    "compileall": true,
+    "local_markdown_links": true,
+    "javascript_syntax_pages": 7,
+    "git_diff_check": true,
+    "published_v1_v2_exports_verify": true
+  }
+}
