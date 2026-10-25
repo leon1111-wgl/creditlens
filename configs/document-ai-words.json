@@ -1,0 +1,32 @@
+{
+  "profile_version": "full-page-ocr-words-ablation-1",
+  "render_scale": 2,
+  "min_confidence": 0.9,
+  "engine": "onnxruntime",
+  "execution_provider": "CPUExecutionProvider",
+  "intra_op_num_threads": 4,
+  "inter_op_num_threads": 1,
+  "det_limit_side_len": 1280,
+  "use_cls": false,
+  "model_license": "Apache-2.0",
+  "model_license_source": "https://rapidai.github.io/RapidOCRDocs/main/model_licenses/",
+  "models": [
+    {
+      "stage": "Det",
+      "filename": "PP-OCRv6_det_small.onnx",
+      "sha256": "090f04abcd9d9a7498bc4ebf677e4cb9bdce1fe4197ddb7e529f1ef44e1ff94f",
+      "source_url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv6/det/PP-OCRv6_det_small.onnx"
+    },
+    {
+      "stage": "Rec",
+      "filename": "PP-OCRv6_rec_small.onnx",
+      "sha256": "6f327246b50388f3c176ae304bd95767ea6dc0c9ae92153ef8cbe210b3c14884",
+      "source_url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv6/rec/PP-OCRv6_rec_small.onnx"
+    }
+  ],
+  "return_word_box": true,
+  "return_single_char_box": false,
+  "confidence_basis": "parent_line_score",
+  "word_rule_version": "word-evidence-1",
+  "sign_gap_points": 8.0
+}
