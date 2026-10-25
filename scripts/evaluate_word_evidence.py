@@ -19,12 +19,14 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from creditlens.diligence import CasePack, digest
+from creditlens.experiment_paths import default_local_dir, default_report_path, validate_experiment_paths, validate_write_path
 from creditlens.visual import OcrSpan, crosscheck_fact
 from creditlens.visual_store import REGISTERED_PACKS, VisualStore
 from creditlens.word_evidence import SIGN_GAP_POINTS, WORD_RULE_VERSION, WordLine, WordPage, crosscheck_word_fact
 
 
 def write_json(path: Path, value):
+    path = validate_write_path(ROOT, path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
 
@@ -59,8 +61,12 @@ def counts(facts):
     return {key: counter[key] for key in ("consistent", "conflict", "insufficient")}
 
 
-def run(*, image_root=ROOT/".run/document-ai", local_dir=ROOT/".run/document-ai-words",
-        output=ROOT/"artifacts/document-ai-word-report.json"):
+def run(*, image_root=None, local_dir=None, output=None):
+    image_root = Path(image_root) if image_root is not None else default_local_dir(ROOT, "document-ai")
+    paths = validate_experiment_paths(ROOT, output if output is not None else default_report_path(ROOT, "document-ai-words"),
+                                      local_dir if local_dir is not None else default_local_dir(ROOT, "document-ai-words"),
+                                      read_only_dirs=(image_root,))
+    output, local_dir = paths.output, paths.local_dir
     import rapidocr
     from rapidocr import RapidOCR, EngineType, ModelType, OCRVersion
     from PIL import Image
@@ -170,8 +176,8 @@ def run(*, image_root=ROOT/".run/document-ai", local_dir=ROOT/".run/document-ai-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--image-root", type=Path, default=ROOT/".run/document-ai")
-    parser.add_argument("--local-dir", type=Path, default=ROOT/".run/document-ai-words")
-    parser.add_argument("--output", type=Path, default=ROOT/"artifacts/document-ai-word-report.json")
+    parser.add_argument("--image-root", type=Path, default=default_local_dir(ROOT, "document-ai"))
+    parser.add_argument("--local-dir", type=Path, default=default_local_dir(ROOT, "document-ai-words"))
+    parser.add_argument("--output", type=Path, default=default_report_path(ROOT, "document-ai-words"))
     args = parser.parse_args()
     run(image_root=args.image_root, local_dir=args.local_dir, output=args.output)
