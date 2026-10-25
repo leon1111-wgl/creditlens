@@ -1,0 +1,385 @@
+{
+  "date": "2026-10-25",
+  "version": "0.7.1",
+  "frozen_files_unchanged": 7,
+  "existing_preview_images_unchanged": 6,
+  "experiments_api_equal": true,
+  "documents_api_available": true,
+  "preview_http_hashes_match": 6,
+  "full_output_recalculation": {
+    "line_facts": 42,
+    "word_facts": 42,
+    "stress_fact_conditions": 80,
+    "raw_outputs": 20,
+    "candidate_images": 14
+  },
+  "line_summary": {
+    "consistent": 39,
+    "conflict": 0,
+    "insufficient": 3
+  },
+  "word_summary": {
+    "consistent": 42,
+    "conflict": 0,
+    "insufficient": 0
+  },
+  "stress_summary_by_variant": [
+    {
+      "id": "clean",
+      "summary": {
+        "consistent": 17,
+        "conflict": 0,
+        "insufficient": 3
+      }
+    },
+    {
+      "id": "blur_0_7",
+      "summary": {
+        "consistent": 18,
+        "conflict": 0,
+        "insufficient": 2
+      }
+    },
+    {
+      "id": "contrast_0_65",
+      "summary": {
+        "consistent": 18,
+        "conflict": 0,
+        "insufficient": 2
+      }
+    },
+    {
+      "id": "jpeg_60",
+      "summary": {
+        "consistent": 17,
+        "conflict": 0,
+        "insufficient": 3
+      }
+    }
+  ],
+  "candidate_report_sha256": {
+    "document-ai-report.json": "708fa898ac6728328ae955513c3df2c7a51627053f69e94d54ebb64b5e955ebd",
+    "document-ai-word-report.json": "a3ffcb5ba8a2cb3dcd9e34a56c84ca6fe95586a5442651e4ed811bd69b1858a8",
+    "visual-robustness-report.json": "c8a060893a238ac14a75b6afd25dc2717c83b6784bf801a33f92ca2159aa335b"
+  },
+  "scope": "Same known-location development cases; no new held-out data, training or generalization claim.",
+  "comparison": {
+    "schema_version": 1,
+    "status": "matched",
+    "read_only": true,
+    "validation_scope": {
+      "checked": [
+        "reviewed release manifest and registered sources",
+        "candidate profile and complete identity sets",
+        "published line observations rechecked by current line rules",
+        "word/stress reference bindings, field structure and recomputed summaries",
+        "all published fact fields including observations, parent lines and guards",
+        "declared OCR digests compared separately from run metadata"
+      ],
+      "not_checked": [
+        "complete original OCR/WordPage bytes and their declared digests",
+        "source/variant image bytes or the claimed inference execution/provider",
+        "unpublished consistent stress-field observations",
+        "unseen-document accuracy or performance reproduction"
+      ],
+      "matched_means": "The same published report evidence and decisions; runtime metadata may differ. Not proof of identical algorithms, execution, performance or complete raw OCR."
+    },
+    "reports": {
+      "line": {
+        "status": "matched",
+        "candidate_file_sha256": "708fa898ac6728328ae955513c3df2c7a51627053f69e94d54ebb64b5e955ebd",
+        "semantic_changes": [],
+        "semantic_change_count": 0,
+        "evidence_changes": [],
+        "evidence_change_count": 0,
+        "run_metadata_changes": [
+          {
+            "path": "aapl.pages.32.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "651a32983eb1646e4afbca9522bbcdd5df0ee7864c2e59112a2ea43ec3ffcb9a",
+            "candidate_sha256": "b73e722a87096dc9f6bc686632e1c998bd0600eb225eccf70c91f53cfe4c50d8",
+            "before": 1.6291,
+            "after": 1.5341
+          },
+          {
+            "path": "aapl.pages.34.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "0ed711009a28aabc4082cb6f58ac892a8ca66137d4698ddb016d3a51e162fe0e",
+            "candidate_sha256": "2674ac23cba60b7d640fd46df2c852636a81dad1c5caab07b1233bea2a2c5af9",
+            "before": 1.6729,
+            "after": 1.6299
+          },
+          {
+            "path": "aapl.pages.36.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "e2b1281c782c4a7cc173772e396ddb32d69b6d0cad03ccf6ff26795e38451bab",
+            "candidate_sha256": "d1d6e8c34c7985e07da38f2aa712cc1a5f278a7cc1a5d128b17d92c26eb72318",
+            "before": 2.223,
+            "after": 1.9358
+          },
+          {
+            "path": "generated_at",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "b874ed05fdbcf9251e731a21435374e1f4192299977f26969fe60102c1a70aa5",
+            "candidate_sha256": "b205242aa81093837ebd84d77e2d65f04ecb1be308d786ae840e0dce8c1b3e55",
+            "before": "2026-10-25T05:28:43.052914+00:00",
+            "after": "2026-10-25T06:49:05.547879+00:00"
+          },
+          {
+            "path": "msft.pages.50.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "c3bdfd0deacd65bbb204f9f24ad80b6c0631fd77983795c32c9c1920f18908a9",
+            "candidate_sha256": "a2b5abf98618220cf6bca477e26e2bead1306bc82b18d2625359bff9253b9f69",
+            "before": 1.9273,
+            "after": 2.0214
+          },
+          {
+            "path": "msft.pages.52.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "28f6fc882d7320c9d70bb526b6b49f7d888ecf14bfc783f619b69708b6e72e8b",
+            "candidate_sha256": "475e93ceb56f7cd71b6b5a05d17078f802d202e0e281f8d08207120d9d18d2a9",
+            "before": 2.0538,
+            "after": 1.8843
+          },
+          {
+            "path": "msft.pages.53.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "d0dad0a5f5a5b09debb9bfef781d351acabfa2cb81177cf7ab5a32e3b07f4dd4",
+            "candidate_sha256": "416b5715bb07863b4cf609bde4f93988500b698f604ce6621bc11d57520b80d3",
+            "before": 2.3698,
+            "after": 2.2271
+          }
+        ],
+        "run_metadata_change_count": 7,
+        "status_changes": [],
+        "published_evidence_equal": true
+      },
+      "word": {
+        "status": "matched",
+        "candidate_file_sha256": "a3ffcb5ba8a2cb3dcd9e34a56c84ca6fe95586a5442651e4ed811bd69b1858a8",
+        "semantic_changes": [],
+        "semantic_change_count": 0,
+        "evidence_changes": [],
+        "evidence_change_count": 0,
+        "run_metadata_changes": [
+          {
+            "path": "aapl.pages.32.word_inference_elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "49a37ae6f12819487d038774f216b20a3296d2d270267652451336e38c9af8d7",
+            "candidate_sha256": "0a383e1f312d3699faf074c12f31e11b32031db8f7f843ba0a7e0a0cb3eee126",
+            "before": 1.6486,
+            "after": 1.6842
+          },
+          {
+            "path": "aapl.pages.34.word_inference_elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "1a9b4949e99ed7c7de5002016d892f546850f5ce28f2206c977d4bebbd29e8e5",
+            "candidate_sha256": "1fabb2d8951fbdbc908cfc2fa936ee549c14a3cd489e968f3a5238f66e1afb66",
+            "before": 1.7179,
+            "after": 1.5506
+          },
+          {
+            "path": "aapl.pages.36.word_inference_elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "40c98df4fc9b7425ddcd5b7d067fe4fcda8d0a095e284820be5a13531548ffdb",
+            "candidate_sha256": "893bb334b848973011d385e74677118b9247a2714fdbfbb8ffb3f273e311a60b",
+            "before": 2.2121,
+            "after": 1.9163
+          },
+          {
+            "path": "generated_at",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "a1f377ab7abd14e29ec8cfe4bdc2057f1175f2d4646f937fbf4c64a60e53aa63",
+            "candidate_sha256": "7a7ebb23d4d093c3429c49e7a83a1b19e0bff1bfddb4ae0d3fc8cced8b250e0b",
+            "before": "2026-10-25T06:05:36.302446+00:00",
+            "after": "2026-10-25T06:49:29.453191+00:00"
+          },
+          {
+            "path": "implementation_sha256.scripts/evaluate_word_evidence.py",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "837fb6cfc5fe71da96e5fd347e8f818c2cffaf5ad138c7fee05fe89f63272ba9",
+            "candidate_sha256": "f5f6fae4b3a50ee1c3c721a4ce6a4f31f7202c99040605c6cf69fec3b2cd0244",
+            "before": "23f25a07952168d42a02ec21bb74541d6394d55b9d3f3c51a95ffdfe03968af0",
+            "after": "39c41b0a9ae012bb3110e0e17eb769102a19e6f77df636275d3c0bd6f36a0961"
+          },
+          {
+            "path": "msft.pages.50.word_inference_elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "1974e4f329e194350591c708d72e39ce79f2d427ecf4c096869f2cfcdbfd8e4f",
+            "candidate_sha256": "71fb53f913a6e08cecbdeebd7a0b61544a6b2cd86dcde2e6dae74dff3d3f2536",
+            "before": 1.9404,
+            "after": 1.9289
+          },
+          {
+            "path": "msft.pages.52.word_inference_elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "784608cf38abb763da03c79d61563f89810762c699b9cd3f7cbf36f06e8bac8e",
+            "candidate_sha256": "54a4693f3d203d7208055f20671e17e46a130eda9ec315b36348df456f58086b",
+            "before": 2.1852,
+            "after": 1.7697
+          },
+          {
+            "path": "msft.pages.53.word_inference_elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "2567ca45330d13c0a0b91b0d61abb0d432fbbddf2357e2b020397dca0fc5ef25",
+            "candidate_sha256": "37f2a37eb837584c4ea7b11e560bbe8779cf9627581858d882cc11d0c95fa44b",
+            "before": 2.3591,
+            "after": 2.1109
+          }
+        ],
+        "run_metadata_change_count": 8,
+        "status_changes": [],
+        "published_evidence_equal": true
+      },
+      "stress": {
+        "status": "matched",
+        "candidate_file_sha256": "c8a060893a238ac14a75b6afd25dc2717c83b6784bf801a33f92ca2159aa335b",
+        "semantic_changes": [],
+        "semantic_change_count": 0,
+        "evidence_changes": [],
+        "evidence_change_count": 0,
+        "run_metadata_changes": [
+          {
+            "path": "aapl:34.conditions.blur_0_7.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "19c0914f1921f1bee2eed79f4ebbbedf591f584f1a6e3b8613bfd16c15991149",
+            "candidate_sha256": "c0e4fe19be3cb921d5f5ab22517e97be423b7e5f34896aae57bdb5046893c6c0",
+            "before": 1.7922,
+            "after": 1.4934
+          },
+          {
+            "path": "aapl:34.conditions.clean.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "81ec5680ab4289cfed9b9e1ca03e25c701fef87ee02fd3b1353e896dd3e2c82a",
+            "candidate_sha256": "3c7fe7a1420b0ce0ccf8a2cdf18cacc9a51c17feed0879ea4d801aff928325bd",
+            "before": 1.8499,
+            "after": 1.6759
+          },
+          {
+            "path": "aapl:34.conditions.contrast_0_65.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "a15dd6a6fb41e99be7253348a66768119e207b559273fc4c058d04ff62a3ac0f",
+            "candidate_sha256": "c61fb591b4fb3eff85d9829178f121f24475cec70271205edb298c0cfb51b234",
+            "before": 1.7882,
+            "after": 1.5657
+          },
+          {
+            "path": "aapl:34.conditions.jpeg_60.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "d5bf335857ec7279c87890a0d6ddd6918bf4fa12b08af5662727e540901d8d15",
+            "candidate_sha256": "f9cee1315fba434d9db81971177ff04f2d7ca33fdf761d6d2a610c1185c95dc1",
+            "before": 1.7296,
+            "after": 1.5113
+          },
+          {
+            "path": "generated_at",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "2bc33117fcdf39fa1d62dd142a0e2e7dc736c07252c9737e3e7a8e5559be6417",
+            "candidate_sha256": "85e59635a43c7227dcb587055767cfd8f0eb2875ba432ec7d07546094950a231",
+            "before": "2026-10-25T05:57:58.423354+00:00",
+            "after": "2026-10-25T06:49:51.119966+00:00"
+          },
+          {
+            "path": "msft:53.conditions.blur_0_7.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "56a0ab74638465586fef767912368436e96f18eaa769651c7c2e322db8a21fe6",
+            "candidate_sha256": "19f401a923c58263b9e840825a7aed8da0b04536fe2be9a97330ca336fa6b74a",
+            "before": 2.4145,
+            "after": 2.2292
+          },
+          {
+            "path": "msft:53.conditions.clean.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "59882ebf79dc9787a4ee032bc67918b6b826b0ad4224cd077edef38bf2710bab",
+            "candidate_sha256": "302c25555143cd7bbf37065c2aeac9e98ec460200084361c8b80a301ebd08e53",
+            "before": 2.5606,
+            "after": 2.4419
+          },
+          {
+            "path": "msft:53.conditions.contrast_0_65.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "eac38a2ca25297eae19614ba6ec381dd8fa31f6ead468d9c242cbcb6ffc44d52",
+            "candidate_sha256": "e94eac977cc4e17a55e938914501e0f7617fa3b4c6a46033af6475e726691a37",
+            "before": 2.1724,
+            "after": 1.8567
+          },
+          {
+            "path": "msft:53.conditions.jpeg_60.elapsed_seconds",
+            "baseline_present": true,
+            "candidate_present": true,
+            "baseline_sha256": "736eb9d4adc9a6cce333ddcb9f5b14408709de987c4aecb5c327a07298a174ba",
+            "candidate_sha256": "0b4eaad2c9a96c13dcad7c671434ac09fa3533db7420d6deaacc99be8218ccad",
+            "before": 2.4013,
+            "after": 2.0954
+          }
+        ],
+        "run_metadata_change_count": 9,
+        "status_changes": [],
+        "published_evidence_equal": true
+      }
+    },
+    "release_manifest_canonical_sha256": "67eb2ca46ef8d53b9bdc22e565480d657bfc01dd4857f2043b0a32fe5defdba6"
+  },
+  "independent_review": {
+    "branch": "research/advisory",
+    "report": "docs/research/2026-10-25-advisory-04.md",
+    "full_outputs_rechecked": true,
+    "new_model_run": false
+  },
+  "unit_tests": {
+    "run": 197,
+    "passed": 196,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "skip_reason": "Windows file symlink creation permission unavailable; directory Junction and hard-link checks ran."
+  },
+  "inference": {
+    "provider": "CPUExecutionProvider",
+    "training": false,
+    "paid_api": false,
+    "gpu": false
+  },
+  "publication": {
+    "status": "published",
+    "remote_ci": "success",
+    "implementation_commit": "7d8bcd6c0e52f4f9e6e25da25e68790640b1989f",
+    "ci_run_url": "https://github.com/leon1111-wgl/creditlens/actions/runs/40170784484",
+    "remote_tests": {
+      "run": 197,
+      "passed": 196,
+      "skipped": 1,
+      "skip_reason": "Windows Junction test not applicable on Linux; file symlink test executed."
+    },
+    "feature_branches_published": [
+      "feature/document-ai-words",
+      "feature/visual-robustness"
+    ],
+    "research_branch_published": "research/advisory",
+    "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
+    "scope": "Repository publication only; application runs locally."
+  }
+}

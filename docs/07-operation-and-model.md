@@ -79,4 +79,4 @@ Fact 可带 `pdf_location`，保存 1 起算页码、页面尺寸及金额/行�
 
 记录缺失返回 503，结构、引用或配置不一致返回 409；未知／缺失本地图片返回 404，图片哈希不一致返回 409。服务不因 HTTP 请求下载文档或启动 OCR。读取时对照当前事实包重算所有检查及统计；模型输出、参考和管理员权限仍有明确可信边界，不等于防伪鉴定。
 
-安装可选 `requirements-ocr.lock`，执行 `python scripts/evaluate_document_ai.py --download` 可在 CPU 重跑。完整原页和 OCR 文本留在本地，仓库中保存必要观察与运行记录。详细配置、依赖、许可和失败结果见 [实验说明](13-document-ai-experiment.md)。
+安装可选 `requirements-ocr.lock`，执行 `python scripts/evaluate_document_ai.py --download` 可在 CPU 重跑到独立 `.run/reproductions/`。需要为网页准备原页时显式加 `--local-dir .run/document-ai`；记录不会覆盖公开冻结报告，完整流程见[安全复现说明](16-experiment-reproduction.md)。完整原页和 OCR 文本留在本地，仓库中保存必要观察与运行记录。详细配置、依赖、许可和失败结果见 [实验说明](13-document-ai-experiment.md)。

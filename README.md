@@ -79,12 +79,12 @@ python scripts/build_apple_pack.py --download --render-dir .run/pdf-preview
 
 ```bash
 python -m pip install -r requirements-ocr.lock
-python scripts/evaluate_document_ai.py --download --output .run/regenerated-document-ai-report.json
+python scripts/evaluate_document_ai.py --download --local-dir .run/document-ai
 ```
 
 该命令仅下载已登记的官方 PDF（缺失时），使用本地预训练 OCR 权重在 CPU 上识别无标记整页图像，再核对已有事实。首次安装依赖需要联网，正式识别不调用云 API。配置、模型哈希与运行记录见 [实验说明](docs/13-document-ai-experiment.md)；原始 PDF、完整 OCR 和整页图片不进入 Git。页面读取保存结果，点击“载入”不会重新运行模型。
 
-打开 [文档实验对照](http://127.0.0.1:8765/experiments)，无需模型或原页即可查看已保存的字词／行级与图像退化实验、展开失败原因、导出对照。重跑使用 `scripts/evaluate_word_evidence.py` 和 `scripts/evaluate_visual_robustness.py`；它们保留原始基线。新输出须经过完整核验后更新 `configs/experiment-artifacts.json` 的文件 SHA-256 清单，页面才会接受；不要只为消除校验错误更新清单。
+打开 [文档实验对照](http://127.0.0.1:8765/experiments)，无需模型或原页即可查看已保存的字词／行级与图像退化实验、展开失败原因、导出对照。完整重跑默认写入独立的 `.run/reproductions/`，不会替换页面展示的记录或已有原页。使用 `scripts/check_document_reproduction.py` 比较候选与冻结实验的逐字段证据；完整命令、差异说明与发布边界见[安全复现说明](docs/16-experiment-reproduction.md)。
 
 需要 FinQA 实验室时执行 `python scripts/download_data.py`，下载后重启服务并访问 `/lab`。
 
@@ -127,7 +127,7 @@ python scripts/evaluate_retrieval.py  # 需要先下载 FinQA
 
 | 验证 | 当前结果 |
 |---|---|
-| 核心、API、权限、并发、时点、季度数据、视觉核对与模型接口测试 | 168 项通过 |
+| 核心、API、权限、并发、时点、季度数据、视觉核对与模型接口测试 | 197 项运行：196 通过，1 项平台权限跳过 |
 | 财务控制回归场景 | 15/15 通过；1 个官方参考、14 个人工修改副本，不是模型准确率 |
 | 官方 PDF 开发样例核对 | 微软 20 项与 HTML 一致；苹果 22 项与登记参考一致，均非盲测或真实性验证 |
 | 官方披露工作流复现 | 5 个事件，独立模拟身份，事件校验通过 |
@@ -138,7 +138,7 @@ python scripts/evaluate_retrieval.py  # 需要先下载 FinQA
 | 合成图像退化 | 两页四档共 80 项条件结果；原图/JPEG 各 17 一致、3 不足，模糊/低对比度各 18/2；非真实扫描集 |
 | 真实 LLM/VLM 问答、SFT/DPO、金融预测 | 尚未执行 |
 
-第 7 轮新增 [平台方向与季度数据模块](docs/iterations/2026-10-25-07.md)，含 17 项数据与解析测试。此前的 [第二家公司与口径修正](docs/iterations/2026-10-25-04.md)、苹果 [22 项参考核对](artifacts/aapl-pdf-crosscheck.json) 和微软 [20 项跨格式核对](artifacts/pdf-crosscheck.json) 保留原记录，均为开发验证。15 个财务控制场景包含在 168 项测试中。以下截图属于 v0.3；开头概览保留自 v0.2。
+第 7 轮新增 [平台方向与季度数据模块](docs/iterations/2026-10-25-07.md)，含 17 项数据与解析测试。此前的 [第二家公司与口径修正](docs/iterations/2026-10-25-04.md)、苹果 [22 项参考核对](artifacts/aapl-pdf-crosscheck.json) 和微软 [20 项跨格式核对](artifacts/pdf-crosscheck.json) 保留原记录，均为开发验证。15 个财务控制场景已包含在软件测试中。v0.7.1 新增安全复现与逐项对照，Windows 本地跳过的是文件符号链接权限场景，目录 Junction 与硬链接已实际检查，见 [第 13 轮](docs/iterations/2026-10-25-13.md)。以下截图属于 v0.3；开头概览保留自 v0.2。
 
 <details>
 <summary>查看 PDF 原页证据台账</summary>

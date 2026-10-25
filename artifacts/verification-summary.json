@@ -3,16 +3,18 @@
   "timezone": "Asia/Shanghai",
   "python": "3.12.14",
   "unit_and_api_tests": {
-    "run": 168,
+    "run": 197,
+    "passed": 196,
     "failures": 0,
     "errors": 0,
-    "skipped": 0
+    "skipped": 1,
+    "skip_reason": "Windows file symlink creation permission unavailable; directory Junction and hard-link checks ran."
   },
   "javascript_syntax_check": "passed with node --check",
   "local_markdown_file_links": "passed",
   "live_http_health": {
     "status": "ok",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "rule_version": "cash-debt-review-3",
     "cases": 883,
     "mode": "public_benchmark_local",
@@ -42,7 +44,7 @@
     "admin": true
   },
   "github_publish": "Published project main and profile entry to leon1111-wgl after user completed local Git Credential Manager authorization. Earlier connector write failure has not been independently retested.",
-  "version": "0.6.0",
+  "version": "0.7.1",
   "official_financial_facts": 42,
   "source_linked_observed_factors": 5,
   "real_model_evaluation": "CPU OCR known-location cross-check executed; LLM/VLM quality, training and forecasting not run",
@@ -69,7 +71,7 @@
     "after_passed": 15,
     "before_implementation": "03d55b4",
     "after_rule_version": "cash-debt-review-2",
-    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 134 tests; not model accuracy",
+    "scope": "1 official reference and 14 synthetic counterfactuals; included in software regression tests; not model accuracy",
     "latest_verified_rule_version": "cash-debt-review-3"
   },
   "pdf_evidence": {
@@ -378,6 +380,38 @@
         "feature/visual-robustness"
       ],
       "research_branch": "research/advisory"
+    }
+  },
+  "reproduction_v071": {
+    "report": "artifacts/reproduction-verification.json",
+    "guide": "docs/16-experiment-reproduction.md",
+    "candidate_reports": "matched",
+    "frozen_files_unchanged": 7,
+    "existing_preview_images_unchanged": 6,
+    "raw_outputs_rechecked": 20,
+    "candidate_images_rechecked": 14,
+    "reviewed_fact_results": 164,
+    "local_tests_run": 197,
+    "local_tests_passed": 196,
+    "local_tests_skipped": 1,
+    "publication": {
+      "status": "published",
+      "remote_ci": "success",
+      "implementation_commit": "7d8bcd6c0e52f4f9e6e25da25e68790640b1989f",
+      "ci_run_url": "https://github.com/leon1111-wgl/creditlens/actions/runs/40170784484",
+      "remote_tests": {
+        "run": 197,
+        "passed": 196,
+        "skipped": 1,
+        "skip_reason": "Windows Junction test not applicable on Linux; file symlink test executed."
+      },
+      "feature_branches_published": [
+        "feature/document-ai-words",
+        "feature/visual-robustness"
+      ],
+      "research_branch_published": "research/advisory",
+      "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
+      "scope": "Repository publication only; application runs locally."
     }
   }
 }
