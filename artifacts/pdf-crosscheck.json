@@ -1,0 +1,152 @@
+{
+  "compared": 20,
+  "matched": 20,
+  "missing_pdf_fact_ids": [],
+  "checks": [
+    {
+      "fact_id": "revenue-2025",
+      "pdf_value": "281724",
+      "html_value": "281724",
+      "page": 50,
+      "matched": true
+    },
+    {
+      "fact_id": "revenue-2024",
+      "pdf_value": "245122",
+      "html_value": "245122",
+      "page": 50,
+      "matched": true
+    },
+    {
+      "fact_id": "liquid_assets-2025",
+      "pdf_value": "94565",
+      "html_value": "94565",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "liquid_assets-2024",
+      "pdf_value": "75543",
+      "html_value": "75543",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "short_debt-2025",
+      "pdf_value": "0",
+      "html_value": "0",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "short_debt-2024",
+      "pdf_value": "6693",
+      "html_value": "6693",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "current_debt-2025",
+      "pdf_value": "2999",
+      "html_value": "2999",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "current_debt-2024",
+      "pdf_value": "2249",
+      "html_value": "2249",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "long_debt-2025",
+      "pdf_value": "40152",
+      "html_value": "40152",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "long_debt-2024",
+      "pdf_value": "42688",
+      "html_value": "42688",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "current_assets-2025",
+      "pdf_value": "191131",
+      "html_value": "191131",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "current_assets-2024",
+      "pdf_value": "159734",
+      "html_value": "159734",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "current_liabilities-2025",
+      "pdf_value": "141218",
+      "html_value": "141218",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "current_liabilities-2024",
+      "pdf_value": "125286",
+      "html_value": "125286",
+      "page": 52,
+      "matched": true
+    },
+    {
+      "fact_id": "cfo-2025",
+      "pdf_value": "136162",
+      "html_value": "136162",
+      "page": 53,
+      "matched": true
+    },
+    {
+      "fact_id": "cfo-2024",
+      "pdf_value": "118548",
+      "html_value": "118548",
+      "page": 53,
+      "matched": true
+    },
+    {
+      "fact_id": "capex-2025",
+      "pdf_value": "64551",
+      "html_value": "64551",
+      "page": 53,
+      "matched": true
+    },
+    {
+      "fact_id": "capex-2024",
+      "pdf_value": "44477",
+      "html_value": "44477",
+      "page": 53,
+      "matched": true
+    },
+    {
+      "fact_id": "net_income-2025",
+      "pdf_value": "101832",
+      "html_value": "101832",
+      "page": 53,
+      "matched": true
+    },
+    {
+      "fact_id": "net_income-2024",
+      "pdf_value": "88136",
+      "html_value": "88136",
+      "page": 53,
+      "matched": true
+    }
+  ],
+  "generated_at": "2026-10-25T00:09:49.060830+00:00",
+  "parser_version": "positioned-financial-table-1",
+  "pdf_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+  "html_pack_sha256": "c108699fe321af20c85de2fbd84a9c6358a0bae280a231a530b2b5bb4e7e3806",
+  "scope": "Same issuer and reporting period across two official formats; not independent truth or general PDF accuracy."
+}

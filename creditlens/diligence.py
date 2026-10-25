@@ -36,6 +36,43 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class PdfBox(StrictModel):
+    x0: float = Field(ge=0, allow_inf_nan=False)
+    top: float = Field(ge=0, allow_inf_nan=False)
+    x1: float = Field(gt=0, allow_inf_nan=False)
+    bottom: float = Field(gt=0, allow_inf_nan=False)
+
+    @model_validator(mode="after")
+    def ordered(self):
+        if self.x0 >= self.x1 or self.top >= self.bottom:
+            raise ValueError("Empty or reversed PDF box")
+        return self
+
+
+class PdfLocation(StrictModel):
+    page: int = Field(ge=1, le=20000)
+    page_width: float = Field(gt=0, le=20000, allow_inf_nan=False)
+    page_height: float = Field(gt=0, le=20000, allow_inf_nan=False)
+    coordinate_system: Literal["pdf_points_top_left"]
+    amount_bbox: PdfBox
+    row_label: str = Field(min_length=1, max_length=300)
+    row_label_bbox: PdfBox
+    year: int = Field(ge=1900, le=2200)
+    year_bbox: PdfBox
+    period_header: str = Field(min_length=1, max_length=100)
+    period_bbox: PdfBox
+    unit_header: str = Field(min_length=1, max_length=100)
+    unit_bbox: PdfBox
+    parser_version: str = Field(min_length=1, max_length=100)
+
+    @model_validator(mode="after")
+    def within_page(self):
+        for region in (self.amount_bbox, self.row_label_bbox, self.year_bbox, self.period_bbox, self.unit_bbox):
+            if region.x1 > self.page_width or region.bottom > self.page_height:
+                raise ValueError("PDF evidence box is outside the page")
+        return self
+
+
 class Source(StrictModel):
     id: str = Field(pattern=r"^[a-zA-Z0-9_-]{1,100}$")
     title: str = Field(min_length=1, max_length=300)
@@ -57,9 +94,12 @@ class Fact(StrictModel):
     locator: str = Field(min_length=1, max_length=300)
     raw_value: str = Field(min_length=1, max_length=100)
     transformation: Literal["displayed_magnitude", "absolute_cash_outflow"] = "displayed_magnitude"
+    pdf_location: PdfLocation | None = Field(default=None, exclude_if=lambda v: v is None)
 
     @model_validator(mode="after")
     def valid_period(self):
+        if self.pdf_location is not None and self.pdf_location.year != self.period_end.year:
+            raise ValueError("PDF year column disagrees with the fact period")
         original = displayed_amount(self.raw_value)
         if self.transformation == "absolute_cash_outflow":
             if self.metric != "capex":

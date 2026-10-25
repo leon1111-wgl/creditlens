@@ -15,7 +15,7 @@ The benchmark is from **FinQA: A Dataset of Numerical Reasoning over Financial D
 
 ## Microsoft public disclosures
 
-The example fact pack contains limited numerical facts and labels derived from Microsoft's official FY2025 Q4 investor-relations tables, disclosed on 2025-07-30. URLs, retrieval dates, source hashes and concept locators are recorded. Full HTML is excluded. Source materials retain their own rights and are not relicensed under this repository's MIT license. This project is not affiliated with or endorsed by Microsoft. The case is historical, not a current investment or credit recommendation.
+The example fact pack contains limited numerical facts and labels derived from Microsoft's official FY2025 Q4 investor-relations tables, disclosed on 2025-07-30. URLs, retrieval dates, source hashes and concept locators are recorded. The additional PDF example uses three financial-statement pages from the official FY2025 Form 10-K at https://microsoft.gcs-web.com/node/33951. Minimal numerical facts, row labels and locations are retained; full HTML, PDF and rendered source pages are excluded. Source materials retain their own rights and are not relicensed under this repository's MIT license. This project is not affiliated with or endorsed by Microsoft. The case is historical, not a current investment or credit recommendation.
 
 ## Software
 
@@ -26,3 +26,7 @@ BM25, Decimal arithmetic and source-grounded retrieval are established methods, 
 ## Research materials
 
 The planning documents summarize and link public papers, official repositories and institutional publications. They do not redistribute full papers, proprietary analyst reports, licensed market databases or internal bank data.
+
+## Optional PDF tools
+
+The offline document adapter uses pypdfium2/PDFium and Pillow through installed packages, without vendoring their source or binaries. Versions are pinned in requirements-pdf.lock. Their licenses and required bundled notices remain with those packages: https://pypdfium2.readthedocs.io/en/stable/readme.html#licensing and https://github.com/python-pillow/Pillow/blob/main/LICENSE. A reader installing these dependencies must retain the relevant upstream notices when redistributing them.

@@ -1,6 +1,6 @@
 # 运行、身份与本地模型接口
 
-适用版本：v0.2.1，2026-10-25。当前验证范围是本机单进程原型；下述配置不等于完成金融机构生产部署验收。
+适用版本：v0.3，2026-10-25。当前验证范围是本机单进程原型；下述配置不等于完成金融机构生产部署验收。
 
 ## 运行模式
 
@@ -18,12 +18,13 @@
 |---|---|
 | GET /health、GET /api/session | 服务状态及已验证身份 |
 | GET /api/reviews | 当前工作区案件 |
-| POST /api/reviews/example | 从官方微软事实包建案 |
+| POST /api/reviews/example | 从官方微软 HTML 事实包建案 |
+| POST /api/reviews/example-pdf | 从官方微软固定 PDF 定位包建案，沿用相同角色与租户约束 |
 | POST /api/reviews | 严格 schema 导入事实包 |
 | GET /api/reviews/{id} | 事实、计算、处置、事件与完整性 |
 | POST /api/reviews/{id}/actions | disposition / submit / approve / return |
 | GET /api/reviews/{id}/memo | Markdown 底稿 |
-| GET /api/example-pack | 事实包模板 |
+| GET /api/example-pack?format=html 或 pdf | 事实包模板；只接受声明的格式，不按用户路径读文件 |
 
 创建必须带 Idempotency-Key；同工作区同键同内容返回原案，不同内容返回 409。修改需带 revision；同一版本的并发写只有一个成功。待核查项需要至少 10 字依据，阻断性数据问题不能人工豁免。
 
@@ -52,3 +53,11 @@ CREDITLENS_STATE_DIR 默认 data/，保存 audit.sqlite 和 workflow.sqlite。�
 模型只能提出计算或证据不足；最多 12 步加减乘除。执行器重读原单元格，拒绝未召回来源、错误引用和任意代码；限制上下文、响应体积和时长。只接受 loopback HTTP，关闭环境代理与重定向。约束限制工具权限，不证明公式语义或金融判断正确。
 
 模拟传输测试覆盖合法计划、虚构引用、非法操作、未来证据排除、坏响应和远程地址拒绝。**尚无真实模型推理分数或吞吐结果**。下一阶段固定模型 revision、提示词、工具预算和数据，比较规则、普通 RAG、受限工具基线，再决定是否微调。
+
+## PDF 证据重建
+
+工作台与核心测试无需 PDF 库。重新提取时安装 `requirements-pdf.lock`，运行 `python scripts/build_pdf_pack.py --download --render-dir .run/pdf-preview`。仅下载登记的官方 URL，最多 30 MB，先校验固定 SHA-256；文件改变时停止。没有通用文件上传/在线 PDF 解析接口，PDFium 只在离线脚本中单进程使用。
+
+Fact 可带 `pdf_location`，保存 1 起算页码、页面尺寸及金额/行标签/年份/期间/单位坐标，原点在左上角、单位为 PDF point。坐标须在页面内，年份须与事实期间一致。未提供定位时不序列化空字段，旧 HTML 包哈希保持不变。这个契约仅校验结构；用户输入的坐标不自动证明原页或来源真实。
+
+样例来源状态 `official_pdf_source_specific_adapter` 仅由内置案例接口设置。普通导入仍为 `user_supplied`。浏览器链接携带 `#page=`，原站查看器是否支持跳页需由实际查看器决定；系统不提供受限原始文档的公开托管。

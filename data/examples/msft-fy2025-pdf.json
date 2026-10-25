@@ -1,0 +1,1097 @@
+{
+  "schema_version": 1,
+  "entity_id": "MSFT",
+  "company": "Microsoft Corporation",
+  "title": "FY2025 PDF 原页证据复核",
+  "sources": [
+    {
+      "id": "msft-fy25-10k-pdf",
+      "title": "Microsoft FY2025 Form 10-K / official PDF",
+      "url": "https://microsoft.gcs-web.com/static-files/9640e86d-a99f-4502-934d-1d3c883fa786",
+      "published_at": "2025-07-30",
+      "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+    }
+  ],
+  "facts": [
+    {
+      "id": "revenue-2025",
+      "metric": "revenue",
+      "label": "营业收入",
+      "value": "281724",
+      "unit": "USD_million",
+      "period_start": "2024-07-01",
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.50 / Total revenue / FY2025",
+      "raw_value": "281,724",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 50,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 395.859,
+          "top": 161.758,
+          "x1": 427.946,
+          "bottom": 169.757
+        },
+        "row_label": "Total revenue",
+        "row_label_bbox": {
+          "x0": 31.689,
+          "top": 161.785,
+          "x1": 86.124,
+          "bottom": 168.425
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 413.311,
+          "top": 116.825,
+          "x1": 427.951,
+          "bottom": 121.826
+        },
+        "period_header": "Year Ended June 30,",
+        "period_bbox": {
+          "x0": 16.4,
+          "top": 116.825,
+          "x1": 81.875,
+          "bottom": 122.825
+        },
+        "unit_header": "(In millions, except per share amounts)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 104.611,
+          "x1": 141.201,
+          "bottom": 111.01
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "revenue-2024",
+      "metric": "revenue",
+      "label": "营业收入",
+      "value": "245122",
+      "unit": "USD_million",
+      "period_start": "2023-07-01",
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.50 / Total revenue / FY2024",
+      "raw_value": "245,122",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 50,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 468.12,
+          "top": 161.758,
+          "x1": 499.901,
+          "bottom": 169.595
+        },
+        "row_label": "Total revenue",
+        "row_label_bbox": {
+          "x0": 31.689,
+          "top": 161.785,
+          "x1": 86.124,
+          "bottom": 168.425
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 116.825,
+          "x1": 500.224,
+          "bottom": 121.826
+        },
+        "period_header": "Year Ended June 30,",
+        "period_bbox": {
+          "x0": 16.4,
+          "top": 116.825,
+          "x1": 81.875,
+          "bottom": 122.825
+        },
+        "unit_header": "(In millions, except per share amounts)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 104.611,
+          "x1": 141.201,
+          "bottom": 111.01
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "liquid_assets-2025",
+      "metric": "liquid_assets",
+      "label": "现金、现金等价物与短期投资",
+      "value": "94565",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Total cash, cash equivalents, and short-term investments / FY2025",
+      "raw_value": "94,565",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 473.157,
+          "top": 151.633,
+          "x1": 500.115,
+          "bottom": 159.632
+        },
+        "row_label": "Total cash, cash equivalents, and short-term investments",
+        "row_label_bbox": {
+          "x0": 34.895,
+          "top": 151.66,
+          "x1": 261.855,
+          "bottom": 159.983
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 96.575,
+          "x1": 500.176,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "liquid_assets-2024",
+      "metric": "liquid_assets",
+      "label": "现金、现金等价物与短期投资",
+      "value": "75543",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Total cash, cash equivalents, and short-term investments / FY2024",
+      "raw_value": "75,543",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 545.517,
+          "top": 151.633,
+          "x1": 572.205,
+          "bottom": 159.47
+        },
+        "row_label": "Total cash, cash equivalents, and short-term investments",
+        "row_label_bbox": {
+          "x0": 34.895,
+          "top": 151.66,
+          "x1": 261.855,
+          "bottom": 159.983
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 557.76,
+          "top": 96.575,
+          "x1": 572.448,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "short_debt-2025",
+      "metric": "short_debt",
+      "label": "短期债务",
+      "value": "0",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Short-term debt / FY2025",
+      "raw_value": "0",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 495.754,
+          "top": 318.356,
+          "x1": 499.938,
+          "bottom": 325.023
+        },
+        "row_label": "Short-term debt",
+        "row_label_bbox": {
+          "x0": 26.445,
+          "top": 318.275,
+          "x1": 88.48,
+          "bottom": 325.023
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 96.575,
+          "x1": 500.176,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "short_debt-2024",
+      "metric": "short_debt",
+      "label": "短期债务",
+      "value": "6693",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Short-term debt / FY2024",
+      "raw_value": "6,693",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 550.435,
+          "top": 318.356,
+          "x1": 572.201,
+          "bottom": 326.193
+        },
+        "row_label": "Short-term debt",
+        "row_label_bbox": {
+          "x0": 26.445,
+          "top": 318.275,
+          "x1": 88.48,
+          "bottom": 325.023
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 557.76,
+          "top": 96.575,
+          "x1": 572.448,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "current_debt-2025",
+      "metric": "current_debt",
+      "label": "一年内到期长期债务",
+      "value": "2999",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Current portion of long-term debt / FY2025",
+      "raw_value": "2,999",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 478.093,
+          "top": 328.481,
+          "x1": 499.967,
+          "bottom": 336.48
+        },
+        "row_label": "Current portion of long-term debt",
+        "row_label_bbox": {
+          "x0": 26.49,
+          "top": 328.4,
+          "x1": 156.494,
+          "bottom": 336.929
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 96.575,
+          "x1": 500.176,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "current_debt-2024",
+      "metric": "current_debt",
+      "label": "一年内到期长期债务",
+      "value": "2249",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Current portion of long-term debt / FY2024",
+      "raw_value": "2,249",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 550.354,
+          "top": 328.481,
+          "x1": 572.21,
+          "bottom": 336.318
+        },
+        "row_label": "Current portion of long-term debt",
+        "row_label_bbox": {
+          "x0": 26.49,
+          "top": 328.4,
+          "x1": 156.494,
+          "bottom": 336.929
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 557.76,
+          "top": 96.575,
+          "x1": 572.448,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "long_debt-2025",
+      "metric": "long_debt",
+      "label": "长期债务",
+      "value": "40152",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Long-term debt / FY2025",
+      "raw_value": "40,152",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 473.04,
+          "top": 393.957,
+          "x1": 499.935,
+          "bottom": 401.956
+        },
+        "row_label": "Long-term debt",
+        "row_label_bbox": {
+          "x0": 17.057,
+          "top": 393.984,
+          "x1": 77.351,
+          "bottom": 402.406
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 96.575,
+          "x1": 500.176,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "long_debt-2024",
+      "metric": "long_debt",
+      "label": "长期债务",
+      "value": "42688",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Long-term debt / FY2024",
+      "raw_value": "42,688",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 545.211,
+          "top": 393.957,
+          "x1": 572.214,
+          "bottom": 401.794
+        },
+        "row_label": "Long-term debt",
+        "row_label_bbox": {
+          "x0": 17.057,
+          "top": 393.984,
+          "x1": 77.351,
+          "bottom": 402.406
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 557.76,
+          "top": 96.575,
+          "x1": 572.448,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "current_assets-2025",
+      "metric": "current_assets",
+      "label": "流动资产",
+      "value": "191131",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Total current assets / FY2025",
+      "raw_value": "191,131",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 468.57,
+          "top": 196.856,
+          "x1": 498.921,
+          "bottom": 204.855
+        },
+        "row_label": "Total current assets",
+        "row_label_bbox": {
+          "x0": 34.895,
+          "top": 196.883,
+          "x1": 113.338,
+          "bottom": 203.523
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 96.575,
+          "x1": 500.176,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "current_assets-2024",
+      "metric": "current_assets",
+      "label": "流动资产",
+      "value": "159734",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Total current assets / FY2024",
+      "raw_value": "159,734",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 541.065,
+          "top": 196.856,
+          "x1": 572.171,
+          "bottom": 204.693
+        },
+        "row_label": "Total current assets",
+        "row_label_bbox": {
+          "x0": 34.895,
+          "top": 196.883,
+          "x1": 113.338,
+          "bottom": 203.523
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 557.76,
+          "top": 96.575,
+          "x1": 572.448,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "current_liabilities-2025",
+      "metric": "current_liabilities",
+      "label": "流动负债",
+      "value": "141218",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Total current liabilities / FY2025",
+      "raw_value": "141,218",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 468.57,
+          "top": 383.832,
+          "x1": 499.973,
+          "bottom": 391.831
+        },
+        "row_label": "Total current liabilities",
+        "row_label_bbox": {
+          "x0": 34.895,
+          "top": 383.859,
+          "x1": 121.338,
+          "bottom": 390.499
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 96.575,
+          "x1": 500.176,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "current_liabilities-2024",
+      "metric": "current_liabilities",
+      "label": "流动负债",
+      "value": "125286",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.52 / Total current liabilities / FY2024",
+      "raw_value": "125,286",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 52,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 541.065,
+          "top": 383.832,
+          "x1": 572.189,
+          "bottom": 391.669
+        },
+        "row_label": "Total current liabilities",
+        "row_label_bbox": {
+          "x0": 34.895,
+          "top": 383.859,
+          "x1": 121.338,
+          "bottom": 390.499
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 557.76,
+          "top": 96.575,
+          "x1": 572.448,
+          "bottom": 101.576
+        },
+        "period_header": "June 30,",
+        "period_bbox": {
+          "x0": 16.515,
+          "top": 96.575,
+          "x1": 42.907,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.361,
+          "x1": 53.869,
+          "bottom": 90.76
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "cfo-2025",
+      "metric": "cfo",
+      "label": "经营活动现金流",
+      "value": "136162",
+      "unit": "USD_million",
+      "period_start": "2024-07-01",
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.53 / Net cash from operations / FY2025",
+      "raw_value": "136,162",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 53,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 396.345,
+          "top": 283.258,
+          "x1": 427.703,
+          "bottom": 291.257
+        },
+        "row_label": "Net cash from operations",
+        "row_label_bbox": {
+          "x0": 39.949,
+          "top": 283.177,
+          "x1": 139.423,
+          "bottom": 291.608
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 413.311,
+          "top": 96.575,
+          "x1": 427.951,
+          "bottom": 101.576
+        },
+        "period_header": "Year Ended June 30,",
+        "period_bbox": {
+          "x0": 16.4,
+          "top": 96.575,
+          "x1": 81.875,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.365,
+          "x1": 53.869,
+          "bottom": 90.764
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "cfo-2024",
+      "metric": "cfo",
+      "label": "经营活动现金流",
+      "value": "118548",
+      "unit": "USD_million",
+      "period_start": "2023-07-01",
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.53 / Net cash from operations / FY2024",
+      "raw_value": "118,548",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 53,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 468.84,
+          "top": 283.258,
+          "x1": 499.982,
+          "bottom": 291.095
+        },
+        "row_label": "Net cash from operations",
+        "row_label_bbox": {
+          "x0": 39.949,
+          "top": 283.177,
+          "x1": 139.423,
+          "bottom": 291.608
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 96.575,
+          "x1": 500.224,
+          "bottom": 101.576
+        },
+        "period_header": "Year Ended June 30,",
+        "period_bbox": {
+          "x0": 16.4,
+          "top": 96.575,
+          "x1": 81.875,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.365,
+          "x1": 53.869,
+          "bottom": 90.764
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "capex-2025",
+      "metric": "capex",
+      "label": "固定资产购建现金流出",
+      "value": "64551",
+      "unit": "USD_million",
+      "period_start": "2024-07-01",
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.53 / Additions to property and equipment / FY2025",
+      "raw_value": "(64,551)",
+      "transformation": "absolute_cash_outflow",
+      "pdf_location": {
+        "page": 53,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 398.116,
+          "top": 408.728,
+          "x1": 430.678,
+          "bottom": 417.258
+        },
+        "row_label": "Additions to property and equipment",
+        "row_label_bbox": {
+          "x0": 16.411,
+          "top": 408.836,
+          "x1": 160.886,
+          "bottom": 417.258
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 413.311,
+          "top": 96.575,
+          "x1": 427.951,
+          "bottom": 101.576
+        },
+        "period_header": "Year Ended June 30,",
+        "period_bbox": {
+          "x0": 16.4,
+          "top": 96.575,
+          "x1": 81.875,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.365,
+          "x1": 53.869,
+          "bottom": 90.764
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "capex-2024",
+      "metric": "capex",
+      "label": "固定资产购建现金流出",
+      "value": "44477",
+      "unit": "USD_million",
+      "period_start": "2023-07-01",
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.53 / Additions to property and equipment / FY2024",
+      "raw_value": "(44,477)",
+      "transformation": "absolute_cash_outflow",
+      "pdf_location": {
+        "page": 53,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 470.422,
+          "top": 408.728,
+          "x1": 503.047,
+          "bottom": 417.258
+        },
+        "row_label": "Additions to property and equipment",
+        "row_label_bbox": {
+          "x0": 16.411,
+          "top": 408.836,
+          "x1": 160.886,
+          "bottom": 417.258
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 96.575,
+          "x1": 500.224,
+          "bottom": 101.576
+        },
+        "period_header": "Year Ended June 30,",
+        "period_bbox": {
+          "x0": 16.4,
+          "top": 96.575,
+          "x1": 81.875,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.365,
+          "x1": 53.869,
+          "bottom": 90.764
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "net_income-2025",
+      "metric": "net_income",
+      "label": "净利润",
+      "value": "101832",
+      "unit": "USD_million",
+      "period_start": "2024-07-01",
+      "period_end": "2025-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.53 / Net income / FY2025",
+      "raw_value": "101,832",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 53,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 396.345,
+          "top": 116.535,
+          "x1": 427.703,
+          "bottom": 124.534
+        },
+        "row_label": "Net income",
+        "row_label_bbox": {
+          "x0": 17.094,
+          "top": 116.562,
+          "x1": 61.542,
+          "bottom": 123.203
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 413.311,
+          "top": 96.575,
+          "x1": 427.951,
+          "bottom": 101.576
+        },
+        "period_header": "Year Ended June 30,",
+        "period_bbox": {
+          "x0": 16.4,
+          "top": 96.575,
+          "x1": 81.875,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.365,
+          "x1": 53.869,
+          "bottom": 90.764
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    },
+    {
+      "id": "net_income-2024",
+      "metric": "net_income",
+      "label": "净利润",
+      "value": "88136",
+      "unit": "USD_million",
+      "period_start": "2023-07-01",
+      "period_end": "2024-06-30",
+      "source_id": "msft-fy25-10k-pdf",
+      "locator": "PDF p.53 / Net income / FY2024",
+      "raw_value": "88,136",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 53,
+        "page_width": 594.9599609375,
+        "page_height": 841.9199829101562,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 473.238,
+          "top": 116.535,
+          "x1": 499.971,
+          "bottom": 124.372
+        },
+        "row_label": "Net income",
+        "row_label_bbox": {
+          "x0": 17.094,
+          "top": 116.562,
+          "x1": 61.542,
+          "bottom": 123.203
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 485.536,
+          "top": 96.575,
+          "x1": 500.224,
+          "bottom": 101.576
+        },
+        "period_header": "Year Ended June 30,",
+        "period_bbox": {
+          "x0": 16.4,
+          "top": 96.575,
+          "x1": 81.875,
+          "bottom": 102.575
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 16.751,
+          "top": 84.365,
+          "x1": 53.869,
+          "bottom": 90.764
+        },
+        "parser_version": "positioned-financial-table-1"
+      }
+    }
+  ]
+}

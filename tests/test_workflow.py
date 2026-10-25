@@ -216,6 +216,22 @@ class WorkflowTests(unittest.TestCase):
             with TestClient(create_app(self.root/"missing.json", self.root/"another.sqlite", auth_mode="api_key", principals=[])):
                 pass
 
+    def test_pdf_example_keeps_authorized_workflow_and_memo_evidence(self):
+        result = self.client.post("/api/reviews/example-pdf", headers=self.headers(), json={})
+        self.assertEqual(result.status_code, 200)
+        case = result.json()
+        self.assertEqual(case["source_status"], "official_pdf_source_specific_adapter")
+        self.assertEqual(len(case["pack"]["facts"]), 20)
+        memo = self.client.get("/api/reviews/"+case["id"]+"/memo", headers=self.headers()).text
+        self.assertIn("PDF 原页定位", memo)
+        self.assertIn("Net cash from operations", memo)
+        self.assertEqual(self.client.get("/api/reviews/"+case["id"], headers=self.headers("b-key")).status_code, 404)
+
+    def test_pdf_example_denies_viewer_and_undeclared_format(self):
+        self.assertEqual(self.client.post("/api/reviews/example-pdf", headers=self.headers("v-key"), json={}).status_code, 403)
+        self.assertEqual(self.client.get("/api/example-pack?format=../../secrets", headers=self.headers()).status_code, 422)
+        self.assertEqual(self.client.get("/api/example-pack?format=pdf", headers=self.headers("v-key")).status_code, 200)
+
 
 if __name__ == "__main__":
     unittest.main()

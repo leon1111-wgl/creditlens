@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "creditlens"
-version = "0.2.1"
+version = "0.3.0"
 description = "Source-linked credit review workflows, bounded model plans and reproducible financial evaluation"
 requires-python = ">=3.11"
 dependencies = ["fastapi==0.162.0", "uvicorn==0.54.0", "httpx==0.28.1"]

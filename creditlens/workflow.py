@@ -219,6 +219,15 @@ def render_memo(data):
     lines += ["## 来源", ""]
     for s in data["pack"]["sources"]:
         lines += ["- " + clean(s["title"]) + "：" + str(s["url"]), "  披露日：" + s["published_at"] + "；采集 SHA256：" + s["sha256"]]
+    located = [f for f in data["pack"]["facts"] if f.get("pdf_location")]
+    if located:
+        lines += ["", "## PDF 原页定位", "", "坐标为页面左上角起算的 PDF point；定位与一致性检查不证明真实性。", "",
+                  "| 事实 | 原始显示值 | 页码 | 金额框 x0, top, x1, bottom | 年份 | 行标签 |", "|---|---|---:|---|---:|---|"]
+        for f in located:
+            loc = f["pdf_location"]
+            coords = ", ".join(str(loc["amount_bbox"][k]) for k in ("x0", "top", "x1", "bottom"))
+            lines.append("| " + " | ".join(clean(v) for v in (f["id"], f["raw_value"], loc["page"], coords,
+                                                               loc["year"], loc["row_label"])) + " |")
     lines += ["", "数据包 SHA256：" + data["pack_sha256"], "",
               "事件哈希链检查：" + str(data.get("event_integrity_valid", "not_checked")),
               "本地哈希链不抵御拥有数据库修改权限的管理员重新计算整个链。", ""]

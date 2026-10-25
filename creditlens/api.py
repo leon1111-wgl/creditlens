@@ -140,8 +140,9 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         return application.state.workflow.list(identity)
 
     @application.get("/api/example-pack")
-    def example_pack(identity: Actor = Depends(actor)):
-        return json.loads((ROOT / "data/examples/msft-fy2025.json").read_text(encoding="utf-8"))
+    def example_pack(identity: Actor = Depends(actor), format: Literal["html", "pdf"] = "html"):
+        filename = "msft-fy2025-pdf.json" if format == "pdf" else "msft-fy2025.json"
+        return json.loads((ROOT / "data/examples" / filename).read_text(encoding="utf-8"))
 
     @application.post("/api/reviews/example")
     def example_review(body: ExampleRequest, identity: Actor = Depends(actor),
@@ -149,6 +150,13 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         pack = CasePack.model_validate_json((ROOT / "data/examples/msft-fy2025.json").read_text(encoding="utf-8"))
         return application.state.workflow.create(identity, pack, body.as_of, body.stress_pct, request_key,
                                                  "official_tables_source_specific_adapter")
+
+    @application.post("/api/reviews/example-pdf")
+    def pdf_example_review(body: ExampleRequest, identity: Actor = Depends(actor),
+                           request_key: str = Header(alias="Idempotency-Key", min_length=8, max_length=100)):
+        pack = CasePack.model_validate_json((ROOT / "data/examples/msft-fy2025-pdf.json").read_text(encoding="utf-8"))
+        return application.state.workflow.create(identity, pack, body.as_of, body.stress_pct, request_key,
+                                                 "official_pdf_source_specific_adapter")
 
     @application.post("/api/reviews")
     def create_review(body: CreateReview, identity: Actor = Depends(actor),

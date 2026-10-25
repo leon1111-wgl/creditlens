@@ -3,7 +3,7 @@
   "timezone": "Asia/Shanghai",
   "python": "3.12.14",
   "unit_and_api_tests": {
-    "run": 56,
+    "run": 70,
     "failures": 0,
     "errors": 0
   },
@@ -11,7 +11,7 @@
   "local_markdown_file_links": "passed",
   "live_http_health": {
     "status": "ok",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "rule_version": "cash-debt-review-2",
     "cases": 883,
     "mode": "public_benchmark_local",
@@ -31,7 +31,7 @@
     "desktop_layout": "1280px layout, case queue and source reference navigation verified",
     "desktop_screenshot": "docs/images/review-desktop.png",
     "tested_version": "0.2.0",
-    "current_iteration": "JavaScript syntax checked only; new notices and disabled-state interactions not browser-tested"
+    "current_iteration": "Legacy full-flow screenshots belong to 0.2.0; see pdf_evidence.browser_qa for 0.3.0 evidence UI checks."
   },
   "remote_ci": "not run",
   "github_connection": {
@@ -41,7 +41,7 @@
     "admin": true
   },
   "github_publish": "repository created but remote has no heads; connector integration write 403; local credential inventory only Leon454323; previous device login no longer running; no new auth started",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "official_financial_facts": 20,
   "source_linked_observed_factors": 5,
   "real_model_evaluation": "not run",
@@ -52,13 +52,15 @@
     "readable": true,
     "mutation_status": 409,
     "events_unchanged": true,
-    "memo_old_rule_notice": true
+    "memo_old_rule_notice": true,
+    "tested_version": "0.2.1"
   },
   "current_official_case_http": {
     "created": true,
     "current_rule": true,
     "event_integrity_valid": true,
-    "stress_fcf": "44378.6"
+    "stress_fcf": "44378.6",
+    "tested_version": "0.2.1"
   },
   "financial_controls": {
     "probes": 15,
@@ -66,6 +68,36 @@
     "after_passed": 15,
     "before_implementation": "03d55b4",
     "after_rule_version": "cash-debt-review-2",
-    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 56 tests; not model accuracy"
+    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 70 tests; not model accuracy"
+  },
+  "pdf_evidence": {
+    "official_reference_documents": 1,
+    "pages_used": [
+      50,
+      52,
+      53
+    ],
+    "located_facts": 20,
+    "cross_format_matched": 20,
+    "scope": "Pinned layout; same issuer and reporting period. Not generic extraction accuracy or authenticity.",
+    "rendered_pages_reviewed": [
+      50,
+      52,
+      53
+    ],
+    "live_http": {
+      "facts_with_location": 20,
+      "event_integrity_valid": true,
+      "memo_contains_locations": true,
+      "status": "draft"
+    },
+    "browser_qa": {
+      "desktop_viewport": 1280,
+      "narrow_viewport": 497,
+      "narrow_content_width": 482,
+      "verified": "PDF source selection, case creation, evidence table, coordinate disclosure, link target",
+      "not_verified": "remote PDF viewer anchor navigation, full approval flow on PDF example",
+      "screenshot": "docs/images/pdf-evidence-workbench.png"
+    }
   }
 }
