@@ -1,0 +1,2220 @@
+{
+  "schema_version": 1,
+  "version": "document-input-diagnostic-1",
+  "generated_at": "2026-10-25T15:45:51.762805+00:00",
+  "scope": {
+    "controls": "fixed_synthetic_development_inputs",
+    "independent_human_gold_count": 0,
+    "model_inference_performed": false,
+    "original_raw_ocr_checked": false,
+    "pdf_image_bytes_verified": false,
+    "old_runners_changed": false,
+    "financial_facts_approved": false
+  },
+  "implementation": {
+    "creditlens/ocr_input.py": "beb49eb1b579520cee65727861c079a7fd48fbb18c33aad3cdd070134e040304",
+    "creditlens/asset_preflight.py": "1476d2def312f136697e6ad578e15e7cc73c8ec8ead9b5a65bc8883469d44bf6",
+    "creditlens/document_input.py": "c852a5b23638a70541e44d320dfa3796a5728894c56a4862a4fcc3437883c358",
+    "creditlens/input_controls.py": "f3937a31a479030765950c9c1cca09d2f72267ed83d6f0627469471f426b1170",
+    "creditlens/input_diagnostic.py": "df4c529b9b9fd9c53314aa88be42ad05fbca9cbc246b817b6e1343ddfb5344de",
+    "scripts/preflight_document_input.py": "a0216b8be764d449e497be322317d1aa6dc643e24f32d44a7a1c02120b7164f1",
+    "scripts/evaluate_document_inputs.py": "d7454ddd837d6283e21028fee4f97fdb863e7501561bcfdf4855385d837310c2"
+  },
+  "inventory": {
+    "schema_version": 1,
+    "rule_version": "transfer-asset-preflight-1",
+    "status": "passed",
+    "experiment_id": "nvda-fy2025-transfer-v2-diagnostic",
+    "manifest_sha256": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1",
+    "counts": {
+      "documents": 1,
+      "unique_pdf_assets": 1,
+      "unique_reference_packs": 1,
+      "unique_source_pages": 2,
+      "unique_page_images": 2,
+      "unique_fact_evidence": 16,
+      "unique_issuers": 1
+    },
+    "documents": [
+      {
+        "id": "nvda-fy2025",
+        "entity_id": "NVDA",
+        "source_id": "nvda-fy25-annual-wrapper",
+        "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+        "pack_path": "data/examples/nvda-fy2025-transfer-v2.json",
+        "pack_sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c",
+        "pack_canonical_sha256": "5dd6f7622cbd5794b7daab5ec4944360bb4c73c658ed5d96ca5b04fb22b80d67",
+        "pages": [
+          {
+            "page": 146,
+            "width": 594.0,
+            "height": 774.0,
+            "image_width": 1188,
+            "image_height": 1548,
+            "image_sha256": "a6aee665d7282ca28edda84ed0516c6ce8869b1557f367dc78c3a3967f4548e2",
+            "fact_ids": [
+              "cash_equivalents-2025",
+              "cash_equivalents-2024",
+              "short_investments-2025",
+              "short_investments-2024",
+              "current_assets-2025",
+              "current_assets-2024",
+              "current_liabilities-2025",
+              "current_liabilities-2024",
+              "long_debt-2025",
+              "long_debt-2024"
+            ],
+            "source_page_id": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:page:146",
+            "facts": [
+              {
+                "fact_id": "cash_equivalents-2025",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:cash_equivalents-2025",
+                "cell_identity_sha256": "25e28c3902bcb239fcf840e2105410b7a73f5635d750b30f768081bc2d9e7aa6"
+              },
+              {
+                "fact_id": "cash_equivalents-2024",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:cash_equivalents-2024",
+                "cell_identity_sha256": "ae143ae73088a5503c2ba119994d62459fe4658c47bae06d65e7c7331e50c48f"
+              },
+              {
+                "fact_id": "short_investments-2025",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:short_investments-2025",
+                "cell_identity_sha256": "641d814bbb54af008ba654a35c604c87ebb14c0d73dc4322f19bf60e23bd1d3c"
+              },
+              {
+                "fact_id": "short_investments-2024",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:short_investments-2024",
+                "cell_identity_sha256": "75eeb1d0e39336e984ec5b85bcd6707acd9d9ad6643bde8781d19931e132b796"
+              },
+              {
+                "fact_id": "current_assets-2025",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:current_assets-2025",
+                "cell_identity_sha256": "11bdf8673fee8cd449114b6296df8f3b4a5d6918a4f3739e92649a8bd8fb8c8c"
+              },
+              {
+                "fact_id": "current_assets-2024",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:current_assets-2024",
+                "cell_identity_sha256": "f4dcebef72fe4822d8fb7f5e7c26a5f5fee363eb472e200bd64a9023de2f6b46"
+              },
+              {
+                "fact_id": "current_liabilities-2025",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:current_liabilities-2025",
+                "cell_identity_sha256": "ce8db1d96acf731724705bac824ad0c0abb465ca62d1b559513a4cb102ddf120"
+              },
+              {
+                "fact_id": "current_liabilities-2024",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:current_liabilities-2024",
+                "cell_identity_sha256": "dd38e9e58f082573e08f4747f241ead7aaba61fa63027f5aebfb081ac1681613"
+              },
+              {
+                "fact_id": "long_debt-2025",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:long_debt-2025",
+                "cell_identity_sha256": "44f96d7fff811e8af1a2edfa8f51143f0924a18cbf01e7eeaad728fdbac061cd"
+              },
+              {
+                "fact_id": "long_debt-2024",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:long_debt-2024",
+                "cell_identity_sha256": "1fdd05d8cc2fa4dba33de5e9b20f5645959b69078a02e7e9ebe3976aa8a6bdc7"
+              }
+            ]
+          },
+          {
+            "page": 148,
+            "width": 594.0,
+            "height": 774.0,
+            "image_width": 1188,
+            "image_height": 1548,
+            "image_sha256": "f6b047ec1755dd4f16932286d424f260c8a8872a18354db021b0a63a9e77273f",
+            "fact_ids": [
+              "cfo-2025",
+              "cfo-2024",
+              "net_income-2025",
+              "net_income-2024",
+              "capex-2025",
+              "capex-2024"
+            ],
+            "source_page_id": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:page:148",
+            "facts": [
+              {
+                "fact_id": "cfo-2025",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:cfo-2025",
+                "cell_identity_sha256": "a86f939ba9b5adb59ce4744bd00387eba48157f942c4771e73b80f84f82d9ca5"
+              },
+              {
+                "fact_id": "cfo-2024",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:cfo-2024",
+                "cell_identity_sha256": "979e276717a0398331a196038e476740fbb72d9be040eb59321647c1c921dae0"
+              },
+              {
+                "fact_id": "net_income-2025",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:net_income-2025",
+                "cell_identity_sha256": "8987244b84c3b7bdd2b80ea5d6b895be918664ec47b16ca61bf87f7439e926ac"
+              },
+              {
+                "fact_id": "net_income-2024",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:net_income-2024",
+                "cell_identity_sha256": "a40fecba16a2216a8329a931fa6dc8de4416ad8a7e9f80b6231cb6e6ca983432"
+              },
+              {
+                "fact_id": "capex-2025",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:capex-2025",
+                "cell_identity_sha256": "70eb07274e7ec9a483f29b389771edf3976e3a4f836fe15b34f05da91b26dae8"
+              },
+              {
+                "fact_id": "capex-2024",
+                "global_fact_id": "NVDA:757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc:capex-2024",
+                "cell_identity_sha256": "b77dd8b52c29c4fc6f32ec215b30867cc780a25550b6ef8e235e246c4f62f580"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "same_page_content_groups": [],
+    "validation": {
+      "mode": "registered_manifest_and_packs",
+      "registered_files_checked": true,
+      "strict_json_checked": true,
+      "pack_bytes_checked": true,
+      "path_aliases_checked": true,
+      "pdf_bytes_checked": false
+    },
+    "limitations": [
+      "PDF and page-image hashes are registered identities; original bytes and document authenticity were not checked.",
+      "Parsed-only inspection cannot verify disk bytes or caller-supplied resolved-path claims.",
+      "Distinct PDF versions of one issuer are separate assets, not independent issuers or evidence of generalization.",
+      "Unique issuers count registered entity_id values, not verified entity resolution. Shared registered image hashes do not establish independent page content.",
+      "Unique fact evidence means unique registered amount-cell locations within each PDF version, not completeness or independent corroboration of financial evidence.",
+      "Equal monetary values on distinct registered cells are not duplicates."
+    ]
+  },
+  "raw_controls": [
+    {
+      "id": "normal",
+      "title": "正常矩形",
+      "provenance": "synthetic",
+      "expected_accepted": true,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1,
+          "empty": false
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "rotated",
+      "title": "合法旋转四边形",
+      "provenance": "synthetic",
+      "expected_accepted": true,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                25
+              ],
+              [
+                38,
+                35
+              ],
+              [
+                18,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    25
+                  ],
+                  [
+                    38,
+                    35
+                  ],
+                  [
+                    18,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1,
+          "empty": false
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "reverse",
+      "title": "合法反向顶点顺序",
+      "provenance": "synthetic",
+      "expected_accepted": true,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                30
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                20,
+                20
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1,
+          "empty": false
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "explicit_empty",
+      "title": "明确空输出",
+      "provenance": "synthetic",
+      "expected_accepted": true,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [],
+          "txts": [],
+          "scores": [],
+          "word_results": []
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 0,
+          "words": 0
+        }
+      },
+      "current": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 0,
+          "words": 0,
+          "empty": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "all_none",
+      "title": "四字段全空",
+      "provenance": "synthetic",
+      "expected_accepted": true,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": null,
+          "txts": null,
+          "scores": null,
+          "word_results": null
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 0,
+          "words": 0
+        }
+      },
+      "current": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 0,
+          "words": 0,
+          "empty": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "engine_empty",
+      "title": "已核验引擎空输出结构",
+      "provenance": "synthetic",
+      "expected_accepted": true,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": null,
+          "txts": null,
+          "scores": null,
+          "word_results": [
+            [
+              "",
+              1.0,
+              null
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 0,
+          "words": 0
+        }
+      },
+      "current": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 0,
+          "words": 0,
+          "empty": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "nan_corner",
+      "title": "第三角含非有限数",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                {
+                  "synthetic_nonfinite": "NaN"
+                },
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "nonfinite_number",
+          "path": "result.boxes[0][2][0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "inf_corner",
+      "title": "角点含无穷大",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                {
+                  "synthetic_nonfinite": "Infinity"
+                }
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "nonfinite_number",
+          "path": "result.boxes[0][2][1]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "bool_corner",
+      "title": "角点是布尔值",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                true,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "invalid_type",
+          "path": "result.boxes[0][2][0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "string_corner",
+      "title": "角点是数字字符串",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                "40",
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "invalid_type",
+          "path": "result.boxes[0][2][0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "negative_corner",
+      "title": "角点越出左边界",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                -1,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "coordinate_out_of_bounds",
+          "path": "result.boxes[0][0][0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "outside_corner",
+      "title": "角点越出图像",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                101,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "coordinate_out_of_bounds",
+          "path": "result.boxes[0][2][0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "zero_area",
+      "title": "四角退化成直线",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                30,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                50,
+                20
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": false,
+        "error": {
+          "code": "unreadable_or_invalid_input",
+          "path": "$",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "self_intersecting_quad",
+          "path": "result.boxes[0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "self_crossing",
+      "title": "顶点连线自交",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "self_intersecting_quad",
+          "path": "result.boxes[0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "concave",
+      "title": "不支持的凹四边形",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                25,
+                25
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "nonconvex_quad",
+          "path": "result.boxes[0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "missing_corner",
+      "title": "少一个角点",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": false,
+        "error": {
+          "code": "unreadable_or_invalid_input",
+          "path": "$",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "invalid_shape",
+          "path": "result.boxes[0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "word_nan",
+      "title": "字词框含非有限数",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    {
+                      "synthetic_nonfinite": "NaN"
+                    },
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 1
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "nonfinite_number",
+          "path": "result.word_results[0][0][2][2][0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "score_inf",
+      "title": "识别分数含无穷大",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            {
+              "synthetic_nonfinite": "Infinity"
+            }
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": false,
+        "error": {
+          "code": "unreadable_or_invalid_input",
+          "path": "$",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "nonfinite_number",
+          "path": "result.scores[0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "score_range",
+      "title": "识别分数越界",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            1.2
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": false,
+        "error": {
+          "code": "unreadable_or_invalid_input",
+          "path": "$",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "out_of_range",
+          "path": "result.scores[0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "text_type",
+      "title": "文字字段类型错误",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            100
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": false,
+        "error": {
+          "code": "unreadable_or_invalid_input",
+          "path": "$",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "invalid_type",
+          "path": "result.txts[0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "line_count",
+      "title": "行数组长度不一致",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": false,
+        "error": {
+          "code": "unreadable_or_invalid_input",
+          "path": "$",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "line_length_mismatch",
+          "path": "result",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "missing_words",
+      "title": "有文字行但词数组未知",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            null
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 1,
+          "words": 0
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "missing_word_mapping",
+          "path": "result.word_results[0]",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "orphan_text",
+      "title": "没有框却残留文字",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 100,
+        "image_height": 100,
+        "result": {
+          "boxes": null,
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "lines": 0,
+          "words": 0
+        }
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "invalid_empty_output",
+          "path": "result",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "zero_dimension",
+      "title": "图像宽度为零",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": 0,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": false,
+        "error": {
+          "code": "unreadable_or_invalid_input",
+          "path": "$",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "out_of_range",
+          "path": "image_width",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    },
+    {
+      "id": "bool_dimension",
+      "title": "图像宽度是布尔值",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "input": {
+        "schema_version": 1,
+        "page": 1,
+        "width": 100,
+        "height": 100,
+        "image_width": true,
+        "image_height": 100,
+        "result": {
+          "boxes": [
+            [
+              [
+                20,
+                20
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                40,
+                30
+              ],
+              [
+                20,
+                30
+              ]
+            ]
+          ],
+          "txts": [
+            "100"
+          ],
+          "scores": [
+            0.99
+          ],
+          "word_results": [
+            [
+              [
+                "100",
+                0.99,
+                [
+                  [
+                    20,
+                    20
+                  ],
+                  [
+                    40,
+                    20
+                  ],
+                  [
+                    40,
+                    30
+                  ],
+                  [
+                    20,
+                    30
+                  ]
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      "legacy": {
+        "accepted": false,
+        "error": {
+          "code": "unreadable_or_invalid_input",
+          "path": "$",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "invalid_type",
+          "path": "image_width",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    }
+  ],
+  "asset_controls": [
+    {
+      "id": "registered_inventory",
+      "title": "当前登记清单",
+      "provenance": "registered_metadata",
+      "expected_accepted": true,
+      "current": {
+        "accepted": true,
+        "error": null,
+        "summary": {
+          "documents": 1,
+          "unique_pdf_assets": 1,
+          "unique_reference_packs": 1,
+          "unique_source_pages": 2,
+          "unique_page_images": 2,
+          "unique_fact_evidence": 16,
+          "unique_issuers": 1
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "duplicate_source_alias",
+      "title": "同一PDF换编号重复登记",
+      "provenance": "synthetic",
+      "expected_accepted": false,
+      "current": {
+        "accepted": false,
+        "error": {
+          "code": "duplicate_pdf_content",
+          "path": "documents[1].pdf.sha256",
+          "stage": "input_preflight"
+        },
+        "summary": null
+      },
+      "passed": true
+    }
+  ],
+  "summary": {
+    "raw_cases": 25,
+    "raw_passed": 25,
+    "raw_expected_accept": 6,
+    "raw_expected_reject": 19,
+    "legacy_accepted_negative_inputs": 11,
+    "asset_cases": 2,
+    "asset_passed": 2
+  }
+}
