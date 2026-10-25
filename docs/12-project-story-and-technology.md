@@ -115,3 +115,9 @@ CreditLens围绕这段工作设计：让材料容易找到，让计算保持同�
 文献与开源参考截至2026-10-25已核验的正式论文和作者仓库，包括[ColPali](https://github.com/illuin-tech/colpali)、[Time-MoE](https://github.com/Time-MoE/Time-MoE)、[AlphaForge](https://github.com/DulyHao/AlphaForge)、[RD-Agent](https://github.com/microsoft/RD-Agent)和[Qlib](https://github.com/microsoft/qlib)。目前没有完成这些方法在本项目同任务上的全文复现或效果对照。ColPali仓库已注明旧 `colpali-engine` 路径弃用，真正接入时需要重新核对实现版本和模型许可。
 
 社交媒体和GitHub分享用于发现问题与方法，技术承诺以原始资料和实际运行为准。开发每小时触发复核，不代表产品数据实时刷新；新公告更新通常也不需要重新训练模型。
+
+## 材料没处理完时，下一位同事能接着做
+
+一份材料可能缺页，也可能某页的识别结果损坏。材料准备页先把登记页放在一起检查，明确指出缺哪一页、哪个字段有问题。每次修正单独留一条记录，旧失败仍可查看和导出；重复提交同一请求不会多建一条，过期修改会被拦住。
+
+后端用批次校验、SQLite事务、Idempotency Key和CAS修订检查保存处理过程，只持久化诊断摘要及来源绑定。当前解决的是已登记材料的准备与交接，页面不接收PDF上传，也不会因为页数齐全就认定表格读对或允许财务结论入库。[功能与验收](29-document-preparation.md)

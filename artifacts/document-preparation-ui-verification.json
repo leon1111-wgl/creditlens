@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "actual_browser_flow_with_synthetic_inputs",
+  "provenance": "synthetic",
+  "task_id": "6d029dfab1b54065b5b1cd8730ba75d6",
+  "attempt_states": [
+    "blocked",
+    "blocked",
+    "prepared_not_indexed"
+  ],
+  "current_revision": 3,
+  "browser": {
+    "reload_restores_record": true,
+    "historical_attempt_selected": true,
+    "historical_view_keeps_current_revision": true,
+    "identity_change_clears_visible_and_hidden_data": true,
+    "viewer_writes_disabled_from_server_role": true,
+    "console_errors": 0,
+    "narrow_viewport_verified": false
+  },
+  "downloads": [
+    {
+      "revision": 1,
+      "status": "blocked",
+      "bytes": 5046,
+      "sha256": "10258c10b178f42860710071c48e2ff163101f6cce4809ad7b221138af39d7c3",
+      "matches_http_bytes": true
+    },
+    {
+      "revision": 3,
+      "status": "prepared_not_indexed",
+      "bytes": 5568,
+      "sha256": "5751edf198a29663487a7cd9e5d7f70acdb8f1928acf9fccc84e1f87a0ad8f63",
+      "matches_http_bytes": true
+    }
+  ],
+  "previous_apis_unchanged": {
+    "/api/currency-diagnostic": {
+      "bytes": 878461,
+      "sha256": "ea3de8366426b976282c375789ba70c4b2f4400df0352beaa0c659287e57def2"
+    },
+    "/api/issuer-evaluation": {
+      "bytes": 197549,
+      "sha256": "9ea41867c33ae4c19d376c5c72c66764957430ef1a3d51a9f439b7fe58eb6ed3"
+    },
+    "/api/evidence-guard": {
+      "bytes": 1301589,
+      "sha256": "c6a091d3bc51f2285733e70f5ab23bc905d188d36f8f7bc093636d50ee11b61f"
+    },
+    "/api/document-input-checks": {
+      "bytes": 22670,
+      "sha256": "b2bcf7f7f9ff10d4c65b62ae53b1597833de2bbb5848c101893413b3e8dc7390"
+    }
+  },
+  "frozen_files_unchanged": 100,
+  "source_bytes_read": false,
+  "model_inference_performed": false,
+  "cross_page_tables_understood": false
+}

@@ -1,0 +1,171 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>材料准备 · CreditLens</title><style>
+/* Original local workbench styling, inspired by enterprise workspace layouts.
+   No Tencent or Feishu component library or brand assets are bundled. */
+:root {
+  color-scheme: light;
+  --font: "Times New Roman", "Songti SC", SimSun, "Noto Serif CJK SC", serif;
+  --text: #1f2329;
+  --muted: #5f6773;
+  --line: #dfe3e8;
+  --soft: #f7f8fa;
+  --blue: #2856a6;
+  --radius: 4px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--text); background: #fff; font: 15px/1.6 var(--font); }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+.app { min-height: 100dvh; display: grid; grid-template-columns: 190px minmax(0, 1fr); }
+.sidebar { position: sticky; top: 0; height: 100dvh; overflow-y: auto; background: var(--soft); border-right: 1px solid var(--line); padding: 22px 12px; display: flex; flex-direction: column; }
+.brand { display: block; padding: 0 12px; color: var(--text); font-size: 25px; font-weight: 700; line-height: 1.2; }
+.sidebar-caption { margin: 5px 12px 30px; color: var(--muted); font-size: 12px; }
+.nav-label { color: var(--muted); font-size: 12px; margin: 0 12px 8px; }
+.workspace-nav { display: grid; gap: 5px; }
+.workspace-nav a { padding: 9px 12px; color: #414751; border-radius: var(--radius); font-size: 14px; }
+.workspace-nav a:hover { background: #eceef2; text-decoration: none; }
+.workspace-nav a[aria-current="page"] { color: var(--blue); background: #eaf0fa; font-weight: 700; }
+.sidebar-foot { margin: auto 12px 0; padding-top: 24px; color: var(--muted); font-size: 12px; }
+.workspace { min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); padding: 0 28px; display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); }
+.topbar strong { color: #424852; font-weight: 400; }
+main { max-width: 1440px; margin: auto; padding: 25px 28px 40px; }
+h1 { margin: 0; font-size: 24px; line-height: 1.4; font-weight: 700; }
+h2 { margin: 0; font-size: 18px; line-height: 1.45; font-weight: 700; }
+h3 { margin: 0 0 7px; font-size: 16px; line-height: 1.5; }
+p { margin: 7px 0; }
+.intro { color: var(--muted); margin: 6px 0 0; font-size: 14px; }
+.muted, small { color: var(--muted); }
+small { font-size: 13px; }
+.bar { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; margin: 18px 0 12px; }
+label { display: flex; flex-direction: column; gap: 5px; color: #424852; font-size: 13px; }
+input, select, button { min-height: 34px; border: 1px solid #c8cdd5; border-radius: var(--radius); background: #fff; color: var(--text); padding: 5px 10px; max-width: 100%; }
+input { width: 260px; }
+input::placeholder { color: #69717d; font-size: 13px; }
+select { min-width: 125px; }
+button { padding: 5px 15px; cursor: pointer; white-space: nowrap; }
+button:hover { border-color: var(--blue); color: var(--blue); background: #f2f5fa; }
+button.primary { color: #fff; background: var(--blue); border-color: var(--blue); }
+button.primary:hover { background: #20478c; }
+button:disabled { background: #f4f5f7; border-color: #e0e3e8; color: #858b95; cursor: default; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.toolbar .export { margin-left: auto; }
+#status { margin: 0 0 15px; min-height: 21px; font-size: 13px; }
+.notice { padding: 10px 12px; margin: 0 0 22px; border: 1px solid #e1e6f0; background: #f8faff; color: #525c6d; font-size: 13px; }
+.notice strong { color: #414b5a; font-weight: 400; margin-right: 7px; }
+.overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; padding-bottom: 24px; }
+.overview article { min-width: 0; }
+.overview .muted { font-size: 13px; margin: 5px 0 12px; }
+.overview .table-note { margin: 10px 0 0; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+#controlRows td { vertical-align: top; }
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: middle; }
+th { background: var(--soft); font-size: 13px; color: #555d68; font-weight: 400; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+tr:last-child td { border-bottom: 0; }
+.count { font-variant-numeric: tabular-nums; font-size: 17px; font-weight: 400; }
+.section { border-top: 1px solid var(--line); padding: 23px 0; scroll-margin-top: 18px; }
+.tag { display: inline-block; padding: 0 6px; border-radius: 3px; font-size: 12px; line-height: 22px; color: #246244; background: #eff7f2; white-space: nowrap; vertical-align: middle; }
+.tag.insufficient { color: #825614; background: #fff5df; }
+.tag.conflict { color: #a5271a; background: #fff0ee; }
+.detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; margin-top: 16px; }
+.detail > section { min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); }
+.detail h3 { padding: 10px 14px; background: var(--soft); border-bottom: 1px solid var(--line); margin: 0; font-size: 15px; }
+.field { padding: 12px 14px; border-bottom: 1px solid #eceef2; }
+.field:last-child { border-bottom: 0; }
+.field strong { font-size: 14px; margin-right: 5px; }
+.field p { font-size: 15px; }
+.raw { white-space: pre-wrap; overflow-wrap: anywhere; }
+.mono { font-family: var(--font); font-size: 13px; overflow-wrap: anywhere; }
+details { margin-top: 8px; }
+summary { cursor: pointer; color: var(--blue); font-size: 13px; }
+.field details p { font-size: 13px; }
+#stressRows > details { padding: 8px 0; }
+#stressRows summary { font-size: 14px; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.source-section { border-top: 1px solid var(--line); padding: 17px 0; }
+.source-section > summary { font-size: 15px; color: var(--text); }
+.source-section p { font-size: 13px; }
+.footer { margin: 4px 0 0; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+[hidden] { display: none !important; }
+@media (min-width: 1600px) { main { padding-left: 42px; padding-right: 42px; } }
+@media (max-width: 1024px) { .app { grid-template-columns: 164px minmax(0, 1fr); } main { padding: 22px; } .overview { gap: 20px; } th,td { padding: 8px; } }
+@media (max-width: 760px) {
+  .app { display: block; }
+  .sidebar { position: static; height: auto; padding: 12px 16px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .brand { padding: 0; font-size: 23px; }
+  .sidebar-caption, .nav-label, .sidebar-foot { display: none; }
+  .workspace-nav { display: flex; gap: 4px; margin-top: 9px; overflow-x: auto; }
+  .workspace-nav a { font-size: 13px; white-space: nowrap; padding: 8px 10px; border-radius: 3px 3px 0 0; }
+  .topbar { display: none; }
+  main { padding: 20px 16px 30px; }
+  h1 { font-size: 22px; }
+  .overview, .detail { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .overview { padding-bottom: 22px; }
+  .bar { gap: 10px; }
+  .bar label { flex: 1 1 150px; min-width: 0; }
+  .toolbar label { flex: 1 1 100%; }
+  input, select { width: 100%; }
+  .toolbar .export { margin-left: 0; }
+  .notice { margin-bottom: 20px; }
+  .count { font-size: 16px; }
+}
+
+.evidence-table td { text-align:left; }
+.evidence-table button { min-height:28px; padding:2px 9px; font-size:13px; }
+.source-meta { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:8px 24px; margin:15px 0; font-size:13px; }
+.preview { position:relative; background:#f7f8fa; border:1px solid var(--line); overflow:hidden; }
+.preview img { display:block; width:100%; height:auto; }
+.preview .box { position:absolute; border:2px solid #2856a6; pointer-events:none; background:#2155cc0b; }
+.preview-caption { font-size:13px; }
+@media(max-width:760px) { .source-meta { grid-template-columns:1fr; } .evidence-table { min-width:570px; } }
+
+/* Shared workspace palette: restrained neutral surfaces and blue actions.
+   Native CSS, inspired by office workspaces; no external design-system package. */
+:root{--font:"Times New Roman","Songti SC",SimSun,"Noto Serif CJK SC",serif;--text:#1f2329;--ink:#1f2329;--muted:#5f6773;--line:#dfe3e8;--soft:#f5f6f8;--blue:#2856a6;--green:#2856a6;--accent:#2856a6;--bg:#f5f6f8;--amber:#8a6118;--red:#a5362d;font-family:var(--font);color:var(--text);background:var(--bg)}
+body{font:15px/1.6 var(--font);color:var(--text);background:var(--bg)}
+h1,h2,h3,.brand,.logo,.number,.fact-value,.metric .number,.empty h2{font-family:var(--font)}
+h1{font-size:24px;line-height:1.4;letter-spacing:0}h2{font-size:18px}h3{font-size:15px}
+button,input,select,textarea{font-family:var(--font)}
+input,select,textarea{color:var(--text);border-color:#aeb7c4}
+a{color:var(--blue);text-underline-offset:3px}
+button.primary,.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20478c;border-color:#20478c;color:#fff}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.panel,.controls{border-radius:4px}.brand,.logo{font-weight:700}
+.tag.consistent{background:#edf6f0;color:#28734e}.tag.insufficient,.tag.warn,.tag.derived_requires_review{background:#fff5e4;color:#8a6118}
+.tag.conflict,.tag.danger,.tag.blocked{background:#fcefee;color:#a5362d}
+.tag.missing{background:#f0f2f5;color:#5f6773}
+.notice{border-radius:3px}.empty{background:#f5f6f8}
+@media(max-width:700px){h1{font-size:22px}h2{font-size:18px}}
+
+.workspace{background:white}.sidebar{background:#f0f2f5}.notice{background:#f2f5fa}
+
+button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
+
+.prep-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;margin-top:24px}.prep-queue button{display:block;width:100%;text-align:left;margin-bottom:8px}.prep-queue small{display:block;color:var(--muted)}textarea{width:100%;min-height:170px;resize:vertical;font:12px/1.5 Consolas,monospace;border:1px solid var(--line);border-radius:4px;padding:12px;background:#fafbfc}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 Consolas,monospace}td{vertical-align:top}.attempts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.section{margin-bottom:18px}#result{border-top:1px solid var(--line);padding-top:18px}@media(max-width:850px){.prep-grid{grid-template-columns:1fr}.toolbar{flex-wrap:wrap}.prep-queue{max-height:190px;overflow:auto}}
+</style></head><body><div class="app"><aside class="sidebar"><a class="brand" href="/">CreditLens</a><p class="sidebar-caption">金融证据工作台</p><p class="nav-label">研究与验证</p><nav class="workspace-nav" aria-label="主导航"><a href="/">信用复核</a><a href="/tasks">研究任务</a><a href="/research">季度研究</a><a href="/documents">原页核对</a><a href="/experiments">文档实验</a><a href="/transfer">新公司核对</a><a href="/document-preparation" aria-current="page">材料准备</a></nav><p class="sidebar-foot">保存检查过程<br>准备通过仍需核对内容</p></aside><div class="workspace"><header class="topbar">材料处理 / 准备记录</header><main><h1>材料准备记录</h1><p class="lead">先确认登记页是否齐全，逐页检查输入，再把失败和修正过程留给下一位处理人。</p>
+<div class="bar toolbar"><label>访问密钥<input id="key" aria-label="访问密钥" type="password" autocomplete="off" placeholder="本地演示可留空"></label><label>本地演示身份<select id="role" aria-label="本地演示身份"><option value="analyst">分析员</option><option value="viewer">只读查看</option><option value="reviewer">复核员（只读）</option></select></label><button id="refresh" class="primary">载入记录</button></div><p id="status" role="status" aria-live="polite">正在载入…</p><p class="muted">API-key模式按服务端身份授权。这里接收已登记页的OCR JSON，不提供PDF上传或自动识别；页集齐全也不等于整份报告完整。</p>
+<div class="prep-grid"><aside><h2>准备任务</h2><p class="muted">选择记录查看每次尝试。</p><div id="queue" class="prep-queue"></div></aside><section><div class="section"><h2>提交或修正页面</h2><p id="exampleNote" class="muted">演示输入使用虚构的SAMPLE文字和坐标，只借用公开登记的页码与尺寸。</p><div class="bar"><button id="missing">缺一页样例</button><button id="damaged">坐标错误样例</button><button id="complete">完整样例</button></div><details id="editor"><summary>查看／编辑本次输入JSON</summary><label for="payload">原始页面输入（不会写入诊断数据库）</label><textarea id="payload" spellcheck="false"></textarea></details><p id="draftStatus" class="muted">先选择样例或输入JSON。已保存记录不会随编辑改变。</p><div class="bar"><button id="create" class="primary">新建准备记录</button><button id="retry" disabled>提交修正版</button></div></div>
+<section id="result" hidden><h2 id="jobTitle"></h2><p id="jobMeta" class="muted"></p><div id="attempts" class="attempts"></div><p id="attemptStatus" role="status"></p><div id="coverage" class="notice"></div><div class="scroll"><table><thead><tr><th>提交位置</th><th>物理页</th><th>准备结果</th><th>文字行／词</th><th>问题字段</th></tr></thead><tbody id="pages"></tbody></table></div><div id="errors"></div><p class="muted">诊断历史已保存，原始OCR正文未写入数据库。财务内容尚未入库、未进入搜索、未经批准；识别是否正确仍要核对原文。</p><button id="export" disabled>导出本次尝试</button><details><summary>来源绑定与验证范围</summary><pre id="scope"></pre></details></section></section></div></main></div></div>
+<script>
+const $=id=>document.getElementById(id),base='/api/document-preparation';let generation=0,task=null,exportRaw=null,examples=null,writeIntent=null,busy=false,viewEpoch=0,attemptEpoch=0,refreshEpoch=0,canWrite=false;
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function headers(){const h={'X-Demo-Role':$('role').value};if($('key').value)h.Authorization='Bearer '+$('key').value;return h;}
+function controls(){ $('retry').disabled=busy||!canWrite||!task||task.status!=='blocked';$('create').disabled=busy||!canWrite;$('refresh').disabled=busy;for(const k of ['missing','damaged','complete'])$(k).disabled=busy||!examples; }
+function reset(){generation++;viewEpoch++;attemptEpoch++;refreshEpoch++;task=null;exportRaw=null;examples=null;writeIntent=null;busy=false;canWrite=false;$('queue').replaceChildren();$('pages').replaceChildren();$('attempts').replaceChildren();$('errors').replaceChildren();$('scope').textContent='';$('payload').value='';$('result').hidden=true;$('export').disabled=true;$('draftStatus').textContent='身份已变更，请重新载入。';for(const id of ['jobTitle','jobMeta','attemptStatus','coverage','exampleNote'])$(id).textContent='';controls();}
+async function request(path,options={}){const r=await fetch(path==='/api/session'?path:base+path,{cache:'no-store',...options,headers:{...headers(),...(options.headers||{})}});const raw=await r.text();if(!r.ok){let message='操作未完成';if(r.status===401)message='身份无效，请检查访问密钥。';else if(r.status===403)message='当前身份只能查看，不能提交。';else if(r.status===404)message='记录不存在或不属于当前工作区。';else if(r.status===409)message='版本、幂等请求或材料已经变化，请重新载入后核对。';else if(r.status===413)message='输入超过当前请求大小限制。';else if(r.status===422)message='输入格式不符合约定，请检查JSON、字段和版本。';else if(r.status===503)message='本地记录暂时不可用，请稍后重试。';throw Error(message);}return{raw,value:JSON.parse(raw)};}
+async function refresh(){const g=generation,f=++refreshEpoch;$('status').textContent='正在读取准备记录…';
+const [listing,samples,session]=await Promise.allSettled([request('/tasks'),request('/examples'),request('/api/session')]);if(g!==generation||f!==refreshEpoch)return;canWrite=session.status==='fulfilled'&&session.value.value.role==='analyst';
+if(listing.status==='fulfilled'){const value=listing.value.value,items=Array.isArray(value)?value:value.tasks;$('queue').replaceChildren(...items.map(x=>{const b=el('button',x.document_id+' · '+(x.status==='blocked'?'待修正':'准备通过'));b.append(el('small','版本 '+x.revision+' · '+x.id.slice(0,8)));b.onclick=()=>openTask(x.id);return b;}));if(!items.length)$('queue').append(el('p','暂无准备记录。','muted'));$('status').textContent='已载入当前工作区记录。';}else{$('queue').replaceChildren();$('status').textContent=listing.reason.message;}
+if(!$("payload").value)$("draftStatus").textContent=canWrite?"先选择样例或输入JSON。已保存记录不会随编辑改变。":"当前身份只读，可以查看和导出已保存的尝试。";
+if(samples.status==='fulfilled'){examples=samples.value.value.examples;$('exampleNote').textContent='登记页：'+samples.value.value.expected_pages.join('、')+'。样例中的SAMPLE文字和坐标为合成输入，没有运行识别模型。';}else{examples=null;$('exampleNote').textContent='当前材料登记未能载入，样例暂停。已保存的历史仍可独立查看。';}controls();return listing.status==='fulfilled'&&session.status==='fulfilled';}
+function clearAttempt(){attemptEpoch++;exportRaw=null;$('export').disabled=true;for(const id of ['pages','errors'])$(id).replaceChildren();for(const id of ['coverage','scope'])$(id).textContent='';$('attemptStatus').textContent='正在载入本次尝试…';}
+function renderTask(value){clearAttempt();task=value;$('result').hidden=false;$('jobTitle').textContent=value.document_id+' · '+(value.status==='blocked'?'待修正':'准备通过，等待内容核对');$('jobMeta').textContent='任务 '+value.id+' · 当前版本 '+value.revision+' · '+(value.provenance==='synthetic'?'合成输入':'调用方声明的模型输出');$('attempts').replaceChildren(...value.attempts.map(a=>{const b=el('button','第 '+a.revision+' 次尝试');b.onclick=()=>loadAttempt(a.id);return b;}));controls();}
+async function openTask(id){if(busy)return;const g=generation,v=++viewEpoch;clearAttempt();task=null;$('jobTitle').textContent='正在载入任务…';$('jobMeta').textContent='';$('attempts').replaceChildren();controls();try{const r=await request('/tasks/'+encodeURIComponent(id));if(g!==generation||v!==viewEpoch)return;renderTask(r.value);await loadAttempt(r.value.latest_attempt.id);}catch(e){if(g===generation)$('status').textContent=e.message;}}
+async function loadAttempt(id){const g=generation,taskId=task.id;clearAttempt();const aEpoch=attemptEpoch;try{const r=await request('/tasks/'+encodeURIComponent(taskId)+'/export?attempt_id='+encodeURIComponent(id));if(g!==generation||task?.id!==taskId||aEpoch!==attemptEpoch)return false;const a=r.value.attempt,report=a.report;exportRaw=r.raw;$('export').disabled=false;$('attemptStatus').textContent='正在查看第 '+a.revision+' 次尝试：'+(report.status==='blocked'?'待修正':'结构与登记页集检查通过')+'。';$('coverage').textContent='登记 '+report.expected_pages.length+' 页；本次提交 '+report.summary.submitted_page_count+' 页。缺页：'+(report.missing_pages.join('、')||'无')+'；重复页：'+(report.duplicate_pages.join('、')||'无')+'；额外页：'+(report.unexpected_pages.join('、')||'无')+'。';$('pages').replaceChildren(...report.page_results.map(p=>{const tr=el('tr');tr.append(el('td',String(p.input_index+1)),el('td',p.page===null?'未知':String(p.page)),el('td',p.status==='prepared_not_indexed'?'可继续核对':'待修正'),el('td',p.summary?p.summary.lines+' / '+p.summary.words:'—'),el('td',p.errors.map(e=>e.code+' · '+e.path).join('; ')||'—','mono'));return tr;}));$('errors').replaceChildren(...report.errors.map(e=>el('p',e.code+' · '+e.path,'mono')));$('scope').textContent=JSON.stringify({material_binding:report.material_binding,versions:report.versions,scope:report.scope,queryable:report.queryable,automatic_approval:report.automatic_approval},null,2);return true;}catch(e){if(g===generation&&task?.id===taskId&&aEpoch===attemptEpoch)$('status').textContent='尝试记录读取失败：'+e.message;return false;}}
+function sample(kind){if(!examples){$('status').textContent='请先载入记录。';return;}$('payload').value=JSON.stringify(examples[kind],null,2);writeIntent=null;$('draftStatus').textContent='已载入'+({missing:'缺一页',damaged:'坐标错误',complete:'完整'})[kind]+'的合成输入。提交后会保存新的诊断尝试。';}
+async function save(retry){if(busy||!canWrite)return;const g=generation;let payload;try{payload=JSON.parse($('payload').value);}catch{$('status').textContent='请先填写有效的JSON输入。';return;}const path=retry?'/tasks/'+encodeURIComponent(task.id)+'/retry':'/tasks',raw=retry?'{"revision":'+task.revision+',"payload":'+$('payload').value+'}':$('payload').value,signature=JSON.stringify([path,$('payload').value]);if(!writeIntent||writeIntent.signature!==signature)writeIntent={signature,key:crypto.randomUUID(),body:raw};busy=true;controls();$('status').textContent='正在检查并保存本次尝试…';try{const r=await request(path,{method:'POST',headers:{'Content-Type':'application/json','Idempotency-Key':writeIntent.key},body:writeIntent.body});if(g!==generation)return;const latest=await request('/tasks/'+encodeURIComponent(r.value.id));if(g!==generation)return;renderTask(latest.value);const loaded=await loadAttempt(r.value.latest_attempt.id);if(!loaded){if(g===generation)$('status').textContent='本次尝试已保存，但结果暂未读回。可重新提交同一输入以读取原记录，或载入记录后查看。';return;}const listed=await refresh();if(g===generation)writeIntent=null;if(g===generation&&listed)$('status').textContent='本次尝试已保存。失败记录仍可查看和导出。';}catch(e){if(g===generation)$('status').textContent=e.message;}finally{if(g===generation){busy=false;controls();}}}
+$('key').oninput=$('role').onchange=()=>{reset();$('status').textContent='身份已变更，请重新载入。';};$('refresh').onclick=refresh;$('missing').onclick=()=>sample('missing');$('damaged').onclick=()=>sample('damaged');$('complete').onclick=()=>sample('complete');$('payload').oninput=()=>{writeIntent=null;$('draftStatus').textContent='输入已修改；已保存的诊断不随编辑变化，提交后才生成新尝试。';};$('create').onclick=()=>save(false);$('retry').onclick=()=>save(true);$('export').onclick=()=>{if(!exportRaw)return;const url=URL.createObjectURL(new Blob([exportRaw],{type:'application/json'})),a=el('a');a.href=url;a.download='creditlens-preparation-attempt.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};controls();refresh();
+</script></body></html>
