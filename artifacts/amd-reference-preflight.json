@@ -1,0 +1,100 @@
+{
+  "operation": "pre_ocr_reference_check",
+  "ocr_read_or_executed": false,
+  "reference_status": "project_prepared_reference_with_separate_agent_review_not_independent_human_annotation",
+  "source_sha256": "c7dac911d91ed1b38afa3fbf3b3408cbd0c105d1c820a4b6fa15f553e2892187",
+  "facts": [
+    {
+      "fact_id": "cash_equivalents-2025",
+      "page": 74,
+      "raw_value": "5,539",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "cash_equivalents-2024",
+      "page": 74,
+      "raw_value": "3,787",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "current_assets-2025",
+      "page": 74,
+      "raw_value": "26,947",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "current_assets-2024",
+      "page": 74,
+      "raw_value": "19,049",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "current_liabilities-2025",
+      "page": 74,
+      "raw_value": "9,455",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "current_liabilities-2024",
+      "page": 74,
+      "raw_value": "7,281",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "long_debt-2025",
+      "page": 74,
+      "raw_value": "2,348",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "long_debt-2024",
+      "page": 74,
+      "raw_value": "1,721",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "cfo-2025",
+      "page": 76,
+      "raw_value": "6,493",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "cfo-2024",
+      "page": 76,
+      "raw_value": "3,041",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "net_income-2025",
+      "page": 76,
+      "raw_value": "4,335",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "net_income-2024",
+      "page": 76,
+      "raw_value": "1,641",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "capex-2025",
+      "page": 76,
+      "raw_value": "(974)",
+      "bounded_pdf_text_matches": true
+    },
+    {
+      "fact_id": "capex-2024",
+      "page": 76,
+      "raw_value": "(636)",
+      "bounded_pdf_text_matches": true
+    }
+  ],
+  "reference_regions": 78,
+  "corners": 156,
+  "max_pixel_rounding_difference": 0.5,
+  "pages_visually_checked": [
+    74,
+    76
+  ],
+  "scope": "Amount transcription and PDF native geometry only; not model quality, exact historical availability or source authenticity."
+}

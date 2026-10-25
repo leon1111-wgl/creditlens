@@ -1,0 +1,109 @@
+{
+  "initial_freeze_commit": "473a699",
+  "initial_manifest_sha256": "894652bcb1d1eefb00eb96df3910d29b90c994d1f0f8ca625579477c5e07283a",
+  "initial_manifest": {
+    "schema_version": 1,
+    "suite_version": "issuer-evaluation-1",
+    "experiment_id": "amd-fy2025-fixed-rules-1",
+    "frozen_at": "2026-10-25T08:38:46.883756+00:00",
+    "selection_reason": "AMD was selected before AMD OCR inspection as another semiconductor issuer with a 52-week fiscal calendar. Fixed inventory: seven metrics for FY2025/FY2024 on physical pages 74 and 76. Continuing CFO and capex are scoped separately from overall net income. Two-line date headers and all recognition failures remain scored; FY2023 and discontinued capex were excluded by the declared task, not OCR performance.",
+    "reference_status": "single_annotator_development_reference",
+    "file_hash_basis": "python_utf8_lf_other_raw",
+    "rule_versions": {
+      "line": "visual-evidence-1",
+      "word": "word-evidence-1",
+      "date": "date-evidence-1"
+    },
+    "files": {
+      "configs/document-ai-words.json": "a25df7532ff3ef9a530b005dd601ea0210ab1c183b5a85bec51aed0f4dab2777",
+      "configs/document-ai.json": "df289fe53e585bfb51d68ecfc514c53f40c9a3837815156392e9ba94ad78b9aa",
+      "creditlens/date_evidence.py": "e37533429586a8f61da7e2ae2b7ae78c6ba8730e7f3b0a66c19bc08bcba4f601",
+      "creditlens/diligence.py": "e9793aa3caea937b8daf38fb8527bcdc0114d4216c2285ac930e6da39abc2561",
+      "creditlens/document_transfer.py": "e99bffd63831209b69d4eea7ac90b287669644986b0b8ac2ed992a2cf8d5a3c9",
+      "creditlens/experiment_paths.py": "50aef7e60d3f99ac00838780332f63ab15caf1af641fd7561bde7901477c9456",
+      "creditlens/issuer_evaluation.py": "55a3aaaa9a7ddedefc072d9a9e781564ce38ea842fb8fb969ed1f29442f34012",
+      "creditlens/visual.py": "be7f4159eb910150201fdd6dd6e36991dedfcee95ff8b44d5f1757bf4be0f012",
+      "creditlens/word_evidence.py": "76633f531075aff716d49e6a85fcf427c31c27b7fa5a4d8e5da34ac3d88bd4e3",
+      "scripts/evaluate_document_transfer.py": "855c44176b3bd1aa010d54adfba3bdfa35112f1d902f9fa37c404bdacdfbd410",
+      "scripts/evaluate_issuer.py": "e9f74b765e33ae508bcefa6cd395743993073fcfa4ec00a52c04fa3f9a7f6863",
+      "scripts/evaluate_visual_robustness.py": "999a1647616208f9b5ff5e9285fd7ce37755be35bea225f216849cde247f09be",
+      "scripts/evaluate_word_evidence.py": "39c41b0a9ae012bb3110e0e17eb769102a19e6f77df636275d3c0bd6f36a0961"
+    },
+    "reference_files": {
+      "scripts/build_amd_reference.py": "04fd020024d02e5e10e22bbd74bb93ad310e426bc75f09950b8f0e3a91ff2b5d",
+      "creditlens/document.py": "d3569bcf0dc0115234ce2fcd0676ff788bb9c7053618ad79f52b82f3b6d80481"
+    },
+    "execution_packages": {
+      "Pillow": "13.0.0",
+      "numpy": "2.5.4",
+      "onnxruntime": "1.31.0",
+      "pydantic": "2.14.1",
+      "pypdfium2": "5.14.0",
+      "rapidocr": "3.10.0"
+    },
+    "render": {
+      "engine": "pypdfium2",
+      "version": "5.14.0",
+      "pillow_version": "13.0.0",
+      "scale": 2.0,
+      "rotation": 0,
+      "image_format": "PNG"
+    },
+    "documents": [
+      {
+        "id": "amd-fy2025",
+        "pack_path": "data/examples/amd-fy2025-evaluation.json",
+        "pack_sha256": "b5fa537e4c25eae55fba775adbe0730ce0daa9e1f7c8aa60e340143c7b429db1",
+        "pdf": {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0001193125-26-129106/0001193125-26-129106.pdf",
+          "sha256": "c7dac911d91ed1b38afa3fbf3b3408cbd0c105d1c820a4b6fa15f553e2892187",
+          "filename": "amd-fy2025-annual.pdf",
+          "allowed_hosts": [
+            "ir.amd.com"
+          ]
+        },
+        "pages": [
+          {
+            "page": 74,
+            "width": 594.0,
+            "height": 774.0,
+            "image_width": 1188,
+            "image_height": 1548,
+            "image_sha256": "83bb47d9e27fc2c84f6dd9d23baa72b08aabbc04533d206472ab4cac437aaec3",
+            "fact_ids": [
+              "cash_equivalents-2025",
+              "cash_equivalents-2024",
+              "current_assets-2025",
+              "current_assets-2024",
+              "current_liabilities-2025",
+              "current_liabilities-2024",
+              "long_debt-2025",
+              "long_debt-2024"
+            ]
+          },
+          {
+            "page": 76,
+            "width": 594.0,
+            "height": 774.0,
+            "image_width": 1188,
+            "image_height": 1548,
+            "image_sha256": "a007af0a6dac14cede0c28215a2239958cf61be94434005d0cd02c7c4083aa52",
+            "fact_ids": [
+              "cfo-2025",
+              "cfo-2024",
+              "net_income-2025",
+              "net_income-2024",
+              "capex-2025",
+              "capex-2024"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "error": "AttributeError: 'NoneType' object has no attribute 'session'",
+  "stage": "provider_preflight_before_render_or_recognition",
+  "image_renders": 0,
+  "ocr_calls": 0,
+  "correction": "Explicitly initialize RapidOCR 3.10 lazy detection/recognition models and verify CPU providers before inference. Reference, scoring rules, model weights and execution package versions unchanged."
+}
