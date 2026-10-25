@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "attempts": [
+    {
+      "experiment_id": "nvda-fy2025-transfer-v1",
+      "status": "invalid_reference",
+      "frozen_commit": "297ea58ba24400d9a68580995ecbf287a9076ae5",
+      "manifest_sha256": "8e4f1afe8f027b1afd6c90477ea5fde450db688b63a4fbfb1e07fa3070beb1f0",
+      "reference_pack_sha256": "5911a70e85b7855172abafa8fdd7324baa3653dd8e615ade3fd268af0be5ed59",
+      "report_sha256": "98b6485b1443bc470801dc40d2c7d6224a6a133097b31af053e64ede78a7c3e4",
+      "execution_summary": {
+        "line": {
+          "consistent": 0,
+          "conflict": 2,
+          "insufficient": 14
+        },
+        "word": {
+          "consistent": 0,
+          "conflict": 0,
+          "insufficient": 16
+        }
+      },
+      "eligible_for_model_quality_metrics": false,
+      "reason": "PDF text canvas coordinates were not translated to the visible MediaBox/CropBox intersection. Reference boxes were shifted +9,-9 points on both pages; scores are invalid as model quality. Raw inference is preserved for corrected-reference diagnostic rescoring.",
+      "raw_ocr_location": ".run/reproductions/document-transfer/",
+      "source_reference_path_at_commit": "data/examples/nvda-fy2025-transfer.json",
+      "source_manifest_path_at_commit": "configs/document-transfer.json",
+      "report_path": "artifacts/document-transfer-v1-invalid-report.json",
+      "manifest_archive_path": "configs/document-transfer-v1-invalid.json"
+    }
+  ]
+}
