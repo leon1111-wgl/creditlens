@@ -29,6 +29,7 @@ from .research_materials import build_material_bundle, MaterialsError
 from .research_acceptance import (
     build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
 )
+from .company_attribution import build_company_attribution, CompanyAttributionError
 from .research_task_store import (
     ResearchTaskStore, ResearchTaskCreate, ResearchTaskUpdate, ResearchTaskAction,
 )
@@ -178,6 +179,18 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         except ResearchAcceptanceError as exc:
             raise HTTPException(409, {"code": exc.code, "message": str(exc),
                                       "recovery": "保留已有底稿；核查材料或规则变更后建立新任务，不覆盖旧快照。"}) from exc
+
+    @application.get("/api/research/tasks/{task_id}/company-attribution")
+    def company_attribution(task_id: str, revision: int = Query(ge=1),
+                            identity: Actor = Depends(actor)):
+        task = application.state.research_tasks.get(task_id, identity)
+        if task["revision"] != revision:
+            raise HTTPException(409, "任务版本已变化，请刷新后重新查看公司解释。")
+        try:
+            return build_company_attribution(task)
+        except (CompanyAttributionError, ResearchAcceptanceError) as exc:
+            raise HTTPException(409, {"code": exc.code, "message": str(exc),
+                                      "recovery": "保留已有底稿；核查解释来源和任务版本后重试，新材料不会写入旧快照。"}) from exc
 
     @application.post("/api/research/tasks", status_code=201)
     def create_research_task(payload: ResearchTaskCreate, identity: Actor = Depends(actor),
