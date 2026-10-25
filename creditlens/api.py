@@ -26,6 +26,9 @@ from .date_store import date_snapshot
 from .issuer_store import issuer_snapshot, issuer_image
 from .currency_store import currency_snapshot
 from .research_materials import build_material_bundle, MaterialsError
+from .research_acceptance import (
+    build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
+)
 from .research_task_store import (
     ResearchTaskStore, ResearchTaskCreate, ResearchTaskUpdate, ResearchTaskAction,
 )
@@ -159,6 +162,22 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     @application.get("/api/research/tasks")
     def research_tasks(identity: Actor = Depends(actor)):
         return application.state.research_tasks.list(identity)
+
+    @application.get("/api/research/task-contracts")
+    def research_task_contracts(identity: Actor = Depends(actor)):
+        return task_contract_catalog()
+
+    @application.get("/api/research/tasks/{task_id}/acceptance")
+    def research_task_acceptance(task_id: str, revision: int = Query(ge=1),
+                                identity: Actor = Depends(actor)):
+        task = application.state.research_tasks.get(task_id, identity)
+        if task["revision"] != revision:
+            raise HTTPException(409, "任务版本已变化，请刷新后重新检查。")
+        try:
+            return build_task_acceptance(task)
+        except ResearchAcceptanceError as exc:
+            raise HTTPException(409, {"code": exc.code, "message": str(exc),
+                                      "recovery": "保留已有底稿；核查材料或规则变更后建立新任务，不覆盖旧快照。"}) from exc
 
     @application.post("/api/research/tasks", status_code=201)
     def create_research_task(payload: ResearchTaskCreate, identity: Actor = Depends(actor),
