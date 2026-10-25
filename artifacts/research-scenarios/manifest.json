@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "id": "official-data-synthetic-research-scenarios-1",
+  "scenario_seed_sha256": "cdb9830d9ce7863118b5bddf2148be175f39e279b99d9386d79a6d47b421ef8d",
+  "provenance": {
+    "business_scenarios": "synthetic",
+    "actors_and_teams": "fictional_role_descriptions",
+    "workflow_events": "programmatic_replay_of_public_store_interfaces",
+    "financial_facts": "official_registered_materials_resolved_at_replay; no synthetic financial values",
+    "bundle_id": "msft-aapl-fy2025",
+    "cash_flow_source_dataset_id": "msft-aapl-cfo-bridge-fy2025",
+    "material_mode": "current_verified_materials",
+    "real_client_or_university_collaboration": false,
+    "measured_customer_outcome": false,
+    "scope": "模拟企业研究流程；不代表真实客户、客户访谈、大学合作、生产部署或审批业绩。"
+  },
+  "actors": {
+    "tenant_id": "synthetic-research-team",
+    "analyst": {
+      "user_id": "synthetic-research-analyst",
+      "role": "analyst",
+      "description": "模拟研究团队的资料分析员"
+    },
+    "reviewer": {
+      "user_id": "synthetic-independent-reviewer",
+      "role": "reviewer",
+      "description": "模拟团队中未参与编写的独立复核员"
+    }
+  },
+  "replay_method": "ResearchTaskStore.create/update/act/export; simulated principals; no SQL state mutation",
+  "reproducibility": "Scenario actions, references and expected outcomes are deterministic; UUIDs/timestamps and exported bytes are not fixed",
+  "artifacts": [
+    {
+      "scenario_id": "profit-cash-flow-handoff",
+      "title": "利润增加，经营现金流却下降：先交接能核对的结论",
+      "synthetic": true,
+      "task_id": "5166b16a83b945a29a8e24d1d6602bce",
+      "tenant_id": "synthetic-research-team",
+      "store_version": "research-handoff-2",
+      "outcome": {
+        "status": "reviewed",
+        "blocked_comparisons": [],
+        "direction_diagnostic": {
+          "issuer_id": "AAPL",
+          "net_income_change": "18274",
+          "cfo_change": "-6772",
+          "unit": "USD_million",
+          "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "scope": "Observed accounting movement; no causal conclusion"
+        },
+        "cross_company_ranking": null,
+        "automatic_approval": false
+      },
+      "snapshot_id": "1bad80a6ae874d1dbcead0be296108ac",
+      "snapshot_sha256": "36792c6b04f1002d8a8cde2e4cc50feb4bf405bf65a78379e040d96613ed7ae9",
+      "snapshots": [
+        {
+          "id": "1bad80a6ae874d1dbcead0be296108ac",
+          "sha256": "36792c6b04f1002d8a8cde2e4cc50feb4bf405bf65a78379e040d96613ed7ae9",
+          "created_at": "2026-10-25T10:53:30.267240+00:00",
+          "submitted_by": "synthetic-research-analyst",
+          "revision": 3,
+          "export_path": "profit-cash-flow-handoff.json",
+          "file_sha256": "086021d722c9a295924724482ab2633146de35cf4714cc4292d69a885bae2eba",
+          "export_consistency_checked": true,
+          "latest": true,
+          "review_decision": "approve"
+        }
+      ],
+      "events": [
+        {
+          "action": "create",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.219245+00:00",
+          "note": "Registered current materials captured; historical availability is unverified",
+          "revision": 1,
+          "role": "analyst",
+          "sequence": 1,
+          "snapshot_id": null,
+          "snapshot_sha256": null,
+          "status": "draft"
+        },
+        {
+          "action": "update",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.236234+00:00",
+          "note": "Decisions, associated hypotheses and material coverage updated",
+          "revision": 2,
+          "role": "analyst",
+          "sequence": 2,
+          "snapshot_id": null,
+          "snapshot_sha256": null,
+          "status": "draft"
+        },
+        {
+          "action": "submit",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.271470+00:00",
+          "note": "模拟分析员提交来源、方向差异、会计分解与待补问题，请独立复核。",
+          "revision": 3,
+          "role": "analyst",
+          "sequence": 3,
+          "snapshot_id": "1bad80a6ae874d1dbcead0be296108ac",
+          "snapshot_sha256": "36792c6b04f1002d8a8cde2e4cc50feb4bf405bf65a78379e040d96613ed7ae9",
+          "status": "in_review"
+        },
+        {
+          "sequence": 4,
+          "revision": 4,
+          "at": "2026-10-25T10:53:30.290017+00:00",
+          "actor": "synthetic-independent-reviewer",
+          "role": "reviewer",
+          "action": "approve",
+          "note": "模拟独立复核确认资料和会计分解可以交接；原因仍待验证。本状态只确认底稿，不是投资、授信或付款批准。",
+          "status": "reviewed",
+          "snapshot_id": "1bad80a6ae874d1dbcead0be296108ac",
+          "snapshot_sha256": "36792c6b04f1002d8a8cde2e4cc50feb4bf405bf65a78379e040d96613ed7ae9"
+        }
+      ],
+      "financial_source_versions": [
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "issuer_id": "MSFT",
+          "url": "https://microsoft.gcs-web.com/static-files/9640e86d-a99f-4502-934d-1d3c883fa786",
+          "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "issuer_id": "AAPL",
+          "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+          "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        }
+      ]
+    },
+    {
+      "scenario_id": "scope-correction-resubmission",
+      "title": "把同一财年标签当成同一期间：退回修改后重新交接",
+      "synthetic": true,
+      "task_id": "fec02e0e27ff47e4bd10f07335230a78",
+      "tenant_id": "synthetic-research-team",
+      "store_version": "research-handoff-2",
+      "outcome": {
+        "status": "reviewed",
+        "blocked_comparisons": [],
+        "direction_diagnostic": null,
+        "cross_company_ranking": null,
+        "automatic_approval": false
+      },
+      "snapshot_id": "63f3732b847c4aa68ba5c64eb09786f6",
+      "snapshot_sha256": "a8e48a30a6c8f78aa9a74542812637d69fa5b2424b073d6a2178fb0b82d125c2",
+      "snapshots": [
+        {
+          "id": "df4ccb6b933e425ab78c6c4cf6a16ede",
+          "sha256": "decd3f43e098e46919669b4ed62e05357e67859465ee900e0794f51d2a40859e",
+          "created_at": "2026-10-25T10:53:30.403548+00:00",
+          "submitted_by": "synthetic-research-analyst",
+          "revision": 3,
+          "export_path": "history/scope-correction-resubmission-snapshot-1.json",
+          "file_sha256": "2c8379ff964026b0271a9a8bd9e7adf3c656ab295736a5986ae777093147e218",
+          "export_consistency_checked": true,
+          "latest": false,
+          "review_decision": "return"
+        },
+        {
+          "id": "63f3732b847c4aa68ba5c64eb09786f6",
+          "sha256": "a8e48a30a6c8f78aa9a74542812637d69fa5b2424b073d6a2178fb0b82d125c2",
+          "created_at": "2026-10-25T10:53:30.486153+00:00",
+          "submitted_by": "synthetic-research-analyst",
+          "revision": 6,
+          "export_path": "scope-correction-resubmission.json",
+          "file_sha256": "b3dcf80bfef4b82fa1f034364589a8077a57f852c7306867f9b3ea589947d3b1",
+          "export_consistency_checked": true,
+          "latest": true,
+          "review_decision": "approve"
+        }
+      ],
+      "events": [
+        {
+          "action": "create",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.352946+00:00",
+          "note": "Registered current materials captured; historical availability is unverified",
+          "revision": 1,
+          "role": "analyst",
+          "sequence": 1,
+          "snapshot_id": null,
+          "snapshot_sha256": null,
+          "status": "draft"
+        },
+        {
+          "action": "update",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.370444+00:00",
+          "note": "Decisions, associated hypotheses and material coverage updated",
+          "revision": 2,
+          "role": "analyst",
+          "sequence": 2,
+          "snapshot_id": null,
+          "snapshot_sha256": null,
+          "status": "draft"
+        },
+        {
+          "action": "submit",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.408330+00:00",
+          "note": "模拟提交含待判断排名用途的初稿。",
+          "revision": 3,
+          "role": "analyst",
+          "sequence": 3,
+          "snapshot_id": "df4ccb6b933e425ab78c6c4cf6a16ede",
+          "snapshot_sha256": "decd3f43e098e46919669b4ed62e05357e67859465ee900e0794f51d2a40859e",
+          "status": "in_review"
+        },
+        {
+          "action": "return",
+          "actor": "synthetic-independent-reviewer",
+          "at": "2026-10-25T10:53:30.430638+00:00",
+          "note": "退回文字用途：两家公司实际年末、周历和业务结构不同，不是严格同行；系统从未给出有效排名。请删除排名解释并补足局限后重交。",
+          "revision": 4,
+          "role": "reviewer",
+          "sequence": 4,
+          "snapshot_id": "df4ccb6b933e425ab78c6c4cf6a16ede",
+          "snapshot_sha256": "decd3f43e098e46919669b4ed62e05357e67859465ee900e0794f51d2a40859e",
+          "status": "returned"
+        },
+        {
+          "action": "update",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.450698+00:00",
+          "note": "Decisions, associated hypotheses and material coverage updated",
+          "revision": 5,
+          "role": "analyst",
+          "sequence": 5,
+          "snapshot_id": "df4ccb6b933e425ab78c6c4cf6a16ede",
+          "snapshot_sha256": "decd3f43e098e46919669b4ed62e05357e67859465ee900e0794f51d2a40859e",
+          "status": "returned"
+        },
+        {
+          "action": "submit",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.491472+00:00",
+          "note": "修订稿补充实际期间、指标范围和不排名边界；请基于新快照复核。",
+          "revision": 6,
+          "role": "analyst",
+          "sequence": 6,
+          "snapshot_id": "63f3732b847c4aa68ba5c64eb09786f6",
+          "snapshot_sha256": "a8e48a30a6c8f78aa9a74542812637d69fa5b2424b073d6a2178fb0b82d125c2",
+          "status": "in_review"
+        },
+        {
+          "sequence": 7,
+          "revision": 7,
+          "at": "2026-10-25T10:53:30.517903+00:00",
+          "actor": "synthetic-independent-reviewer",
+          "role": "reviewer",
+          "action": "approve",
+          "note": "确认修订稿已落实退回意见，可以按限定范围交接。旧退回快照保留，不改写第一次审阅记录。",
+          "status": "reviewed",
+          "snapshot_id": "63f3732b847c4aa68ba5c64eb09786f6",
+          "snapshot_sha256": "a8e48a30a6c8f78aa9a74542812637d69fa5b2424b073d6a2178fb0b82d125c2"
+        }
+      ],
+      "financial_source_versions": [
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "issuer_id": "MSFT",
+          "url": "https://microsoft.gcs-web.com/static-files/9640e86d-a99f-4502-934d-1d3c883fa786",
+          "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "issuer_id": "AAPL",
+          "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+          "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        }
+      ]
+    },
+    {
+      "scenario_id": "insufficient-capital-scope",
+      "title": "只有固定资产现金支出，还不能回答全部资本投入",
+      "synthetic": true,
+      "task_id": "b0a94a8865c344de852476a6e32e97d0",
+      "tenant_id": "synthetic-research-team",
+      "store_version": "research-handoff-1",
+      "outcome": {
+        "status": "returned",
+        "blocked_comparisons": [
+          "AAPL.capex"
+        ],
+        "direction_diagnostic": null,
+        "cross_company_ranking": null,
+        "automatic_approval": false
+      },
+      "snapshot_id": "175b4fc4781241e08575f48ae47b7eee",
+      "snapshot_sha256": "df39a2e78fc9dacb3bda419b68b98342593838bb97bc45bd1bdd4ec8f65447aa",
+      "snapshots": [
+        {
+          "id": "175b4fc4781241e08575f48ae47b7eee",
+          "sha256": "df39a2e78fc9dacb3bda419b68b98342593838bb97bc45bd1bdd4ec8f65447aa",
+          "created_at": "2026-10-25T10:53:30.604854+00:00",
+          "submitted_by": "synthetic-research-analyst",
+          "revision": 3,
+          "export_path": "insufficient-capital-scope.json",
+          "file_sha256": "24c4f96d55e90b975922305489215d25591c25dd8ac6d853feb3d5f7c9a1fb9e",
+          "export_consistency_checked": true,
+          "latest": true,
+          "review_decision": "return"
+        }
+      ],
+      "events": [
+        {
+          "action": "create",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.584434+00:00",
+          "note": "Registered current materials captured; historical availability is unverified",
+          "revision": 1,
+          "role": "analyst",
+          "sequence": 1,
+          "snapshot_id": null,
+          "snapshot_sha256": null,
+          "status": "draft"
+        },
+        {
+          "action": "update",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.593847+00:00",
+          "note": "Decisions, associated hypotheses and material coverage updated",
+          "revision": 2,
+          "role": "analyst",
+          "sequence": 2,
+          "snapshot_id": null,
+          "snapshot_sha256": null,
+          "status": "draft"
+        },
+        {
+          "action": "submit",
+          "actor": "synthetic-research-analyst",
+          "at": "2026-10-25T10:53:30.605991+00:00",
+          "note": "提交缺口记录，请复核研究用途拒绝和后续待补清单。",
+          "revision": 3,
+          "role": "analyst",
+          "sequence": 3,
+          "snapshot_id": "175b4fc4781241e08575f48ae47b7eee",
+          "snapshot_sha256": "df39a2e78fc9dacb3bda419b68b98342593838bb97bc45bd1bdd4ec8f65447aa",
+          "status": "in_review"
+        },
+        {
+          "sequence": 4,
+          "revision": 4,
+          "at": "2026-10-25T10:53:30.612786+00:00",
+          "actor": "synthetic-independent-reviewer",
+          "role": "reviewer",
+          "action": "return",
+          "note": "保留待补并退回：当前证据不能覆盖全部资本投入，相关比较仍阻断。待补足并明确口径后另行修订提交，不将退回写成批准。",
+          "status": "returned",
+          "snapshot_id": "175b4fc4781241e08575f48ae47b7eee",
+          "snapshot_sha256": "df39a2e78fc9dacb3bda419b68b98342593838bb97bc45bd1bdd4ec8f65447aa"
+        }
+      ],
+      "financial_source_versions": [
+        {
+          "id": "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+          "issuer_id": "MSFT",
+          "url": "https://microsoft.gcs-web.com/static-files/9640e86d-a99f-4502-934d-1d3c883fa786",
+          "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e"
+        },
+        {
+          "id": "AAPL:3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "issuer_id": "AAPL",
+          "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+          "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+        }
+      ]
+    }
+  ],
+  "expected_return_is_successful_replay": true,
+  "automatic_approval": false,
+  "database_published": false,
+  "scope": "Synthetic business workflow over registered public facts; unsigned exports, no real human review or production claim"
+}

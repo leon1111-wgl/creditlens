@@ -262,7 +262,8 @@ class ResearchTaskStoreTests(unittest.TestCase):
         self.assert_http(422, self.store.update, task["id"], self.analyst, 1, [{**self.decisions()[0], "note": "  "}], [], "")
 
     def test_models_are_public_and_reject_unsupported_actions(self):
-        self.assertEqual(ResearchTaskCreate.model_validate(self.payload).model_dump(mode="json"), self.payload)
+        self.assertEqual(ResearchTaskCreate.model_validate(self.payload).model_dump(mode="json"),
+                         dict(self.payload, include_cash_flow_bridge=False))
         self.assertEqual(ResearchTaskUpdate(revision=1, decisions=[], hypotheses=[], coverage_note="").revision, 1)
         for action in ("delete", "reopen", "auto_approve"):
             with self.assertRaises(ValidationError):

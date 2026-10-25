@@ -88,3 +88,7 @@ python scripts/build_temporal_pack.py --download
 ```
 
 [可读输出](../artifacts/quarterly-snapshot.md) / [含证据和公式的输出](../artifacts/quarterly-snapshot.json) / [来源登记](../data/examples/msft-temporal-provenance.json)。仅有日期而没有公告时刻，所以新模块保守地从公告次日开放数据。当前网页抓取不是历史归档；跨披露差分即使算术正确，也需要核对修订和合并范围。尚不支持周历季度、自动修订选择、模型填补或预测训练。第 9 轮已接入只读 `/research` 页面，可按日期看趋势、追查原始依据并导出同一快照，仍是单公司历史样例。下一步按 [独立顾问建议](research/2026-10-25-advisory-01.md) 补多公司历史版本与修订链。
+
+## 研究任务的数据基础接续
+
+第19轮把[经营现金流会计分解](21-cash-flow-bridge.md)接入跨公司研究：先用完整原表解释金额怎样组成，再明确经济原因需要哪些附注。观察事实、精确计算与人工解释继续分别记录；这为后续多模态证据和预测特征提供来源基础，不等于已验证预测或因子效果。

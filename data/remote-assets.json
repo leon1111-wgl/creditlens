@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "policy": "Original assets are fetched only on explicit request. This index does not grant redistribution or training rights. Do not upload restricted PDFs or full OCR to this repository.",
+  "assets": [
+    {
+      "id": "msft-fy2025",
+      "title": "Microsoft FY2025 official Form 10-K PDF",
+      "kind": "pdf",
+      "url": "https://microsoft.gcs-web.com/static-files/9640e86d-a99f-4502-934d-1d3c883fa786",
+      "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "filename": "msft-fy2025-10k.pdf",
+      "max_bytes": 30000000,
+      "allowed_hosts": ["microsoft.gcs-web.com"],
+      "provenance": "data/examples/msft-fy2025-pdf.json; scripts/build_pdf_pack.py",
+      "license_note": "Issuer-owned disclosure; no open redistribution license verified. Retrieve from the issuer for permitted research, keep the full PDF private and check rights separately for training or commercial reuse."
+    },
+    {
+      "id": "aapl-fy2025",
+      "title": "Apple FY2025 official Form 10-K PDF",
+      "kind": "pdf",
+      "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+      "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "filename": "aapl-fy2025-10k.pdf",
+      "max_bytes": 30000000,
+      "allowed_hosts": ["s2.q4cdn.com"],
+      "provenance": "data/examples/aapl-fy2025-pdf.json",
+      "license_note": "Issuer-owned disclosure; no open redistribution license verified. Public access is not blanket permission to republish the PDF or use it for training."
+    },
+    {
+      "id": "nvda-fy2025",
+      "title": "NVIDIA FY2025 official annual-report wrapper",
+      "kind": "pdf",
+      "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/annual/NVIDIA-2025-Annual-Report.pdf",
+      "sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+      "filename": "nvda-fy2025-annual.pdf",
+      "max_bytes": 60000000,
+      "allowed_hosts": ["s201.q4cdn.com"],
+      "provenance": "configs/document-transfer.json; underlying filing date is not this wrapper's byte-publication date",
+      "license_note": "No open redistribution license verified. Keep full PDF private; current wrapper bytes have no verified historical publication date."
+    },
+    {
+      "id": "amd-fy2025",
+      "title": "AMD FY2025 official IR annual-report PDF",
+      "kind": "pdf",
+      "url": "https://ir.amd.com/financial-information/sec-filings/content/0001193125-26-129106/0001193125-26-129106.pdf",
+      "sha256": "c7dac911d91ed1b38afa3fbf3b3408cbd0c105d1c820a4b6fa15f553e2892187",
+      "filename": "amd-fy2025-annual.pdf",
+      "max_bytes": 10000000,
+      "allowed_hosts": ["ir.amd.com"],
+      "provenance": "configs/issuer-evaluation.json; exact IR bytes differ from the SEC annual-report attachment",
+      "license_note": "No open redistribution license verified. Keep full PDF private; the filing event does not establish historical availability of these exact bytes."
+    },
+    {
+      "id": "finqa-dev",
+      "title": "FinQA development split at the registered Git revision",
+      "kind": "finqa_json",
+      "url": "https://raw.githubusercontent.com/czyssrs/FinQA/0f16e2867befa6840783e58be38c9efb9229d742/dataset/dev.json",
+      "sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+      "filename": "finqa-dev.json",
+      "max_bytes": 20000000,
+      "allowed_hosts": ["raw.githubusercontent.com"],
+      "records": 883,
+      "revision": "0f16e2867befa6840783e58be38c9efb9229d742",
+      "git_blob_sha1": "970f239f591c782b17df420c0d343b780737f3da",
+      "provenance": "data/manifest.json; scripts/download_data.py",
+      "license_note": "Upstream repository MIT; underlying company filings may have separate rights. Prefer the pinned upstream file rather than mirroring it. Gold fields are for evaluation and must remain excluded from runtime ingestion."
+    }
+  ]
+}

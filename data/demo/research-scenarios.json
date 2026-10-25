@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "id": "official-data-synthetic-research-scenarios-1",
+  "provenance": {
+    "business_scenarios": "synthetic",
+    "actors_and_teams": "fictional_role_descriptions",
+    "workflow_events": "programmatic_replay_of_public_store_interfaces",
+    "financial_facts": "official_registered_materials_resolved_at_replay; no synthetic financial values",
+    "bundle_id": "msft-aapl-fy2025",
+    "cash_flow_source_dataset_id": "msft-aapl-cfo-bridge-fy2025",
+    "material_mode": "current_verified_materials",
+    "real_client_or_university_collaboration": false,
+    "measured_customer_outcome": false,
+    "scope": "模拟企业研究流程；不代表真实客户、客户访谈、大学合作、生产部署或审批业绩。"
+  },
+  "actors": {
+    "tenant_id": "synthetic-research-team",
+    "analyst": {"user_id": "synthetic-research-analyst", "role": "analyst", "description": "模拟研究团队的资料分析员"},
+    "reviewer": {"user_id": "synthetic-independent-reviewer", "role": "reviewer", "description": "模拟团队中未参与编写的独立复核员"}
+  },
+  "scenarios": [
+    {
+      "id": "profit-cash-flow-handoff",
+      "title": "利润增加，经营现金流却下降：先交接能核对的结论",
+      "synthetic": true,
+      "user_question": "【模拟业务】苹果 FY2025 净利润增加，但经营现金流为什么下降？请先交接可核对的会计分解，说明哪些原因还需要补证据。",
+      "selection_reason": "模拟企业研究团队的年度资料复核任务。选择已登记苹果和微软官方报告，苹果为本次问题主体；微软仅保留为跨公司材料样例，不称严格同行。",
+      "include_cash_flow_bridge": true,
+      "business_rationale": "研究员需要把利润与现金流的方向差异拆回原表，复核人要能分清会计贡献和经营原因。该需求是演示设计推断，未经客户访谈验证。",
+      "steps": [
+        {
+          "action": "update",
+          "adoption_note": "在各自报告的合并经营现金流及固定资产现金支出原行范围内采用；保留真实期间，不跨公司排名。",
+          "decision_overrides": [],
+          "hypotheses": [{"id": "cash-conversion-drivers", "text": "经营资产负债变化可能需要结合税款、结算和回款明细进一步解释。", "evidence_refs": ["AAPL.cfo.2024", "AAPL.cfo.2025"], "status": "pending", "note": "这是待研究的问题。现金流调节表能核对贡献，不能单凭加总确认税务政策、回款节奏或业务因果。"}],
+          "coverage_note": "模拟研究交接：苹果净利润与经营现金流的方向差异可由官方调节表确认。只确认报表金额和会计贡献；原因假设保留待补。固定 FY2025 版本不是实时数据，两家公司财年不同且不是严格同行。",
+          "bridge_review_note": "已核对四期原表的完整有符号调节行和零残差；苹果净利润增加、CFO减少是观察结果，逐行变化是会计贡献，不代表已证实经营原因。"
+        },
+        {"action": "submit", "note": "模拟分析员提交来源、方向差异、会计分解与待补问题，请独立复核。"},
+        {"action": "approve", "note": "模拟独立复核确认资料和会计分解可以交接；原因仍待验证。本状态只确认底稿，不是投资、授信或付款批准。"}
+      ],
+      "expected": {"status": "reviewed", "snapshot_count": 1, "review_decisions": ["approve"], "blocked_comparisons": [], "cash_flow_direction_check": "AAPL_net_income_up_cfo_down"}
+    },
+    {
+      "id": "scope-correction-resubmission",
+      "title": "把同一财年标签当成同一期间：退回修改后重新交接",
+      "synthetic": true,
+      "user_question": "【模拟业务】这两家公司都标 FY2025，能否直接比较现金流表现并给出优劣排名？",
+      "selection_reason": "模拟研究初稿的口径误用演示。材料真实，但拟议的比较用途有问题；系统始终只并列展示，由独立复核纠正文字解释。",
+      "include_cash_flow_bridge": true,
+      "business_rationale": "汇报材料可能把财年标签、业务结构和指标定义混为一谈。演示需要保留问题初稿及修改稿，便于复核人看到修正是否落实；不是声称真实客户发生过此事。",
+      "steps": [
+        {
+          "action": "update",
+          "adoption_note": "原披露金额可用于各自公司年度描述；对跨公司排名的用途尚未建立可比口径。",
+          "decision_overrides": [],
+          "hypotheses": [{"id": "ranking-proposal", "text": "拟仅依据同为 FY2025 的标签，对两家公司现金流表现给出优劣排名。", "evidence_refs": ["MSFT.cfo.2025", "AAPL.cfo.2025"], "status": "not_assessed", "note": "刻意保留的模拟初稿范围错误；不是系统已算出的排名，也不是有效结论。"}],
+          "coverage_note": "模拟问题初稿：已读取原披露金额，但仍拟将同一财年标签用于跨公司排名。系统只给并列数据，这一文字用途需要复核员判断。",
+          "bridge_review_note": "各自会计调节已核对；原表加总一致并不能建立跨公司经济口径可比性。"
+        },
+        {"action": "submit", "note": "模拟提交含待判断排名用途的初稿。"},
+        {"action": "return", "note": "退回文字用途：两家公司实际年末、周历和业务结构不同，不是严格同行；系统从未给出有效排名。请删除排名解释并补足局限后重交。"},
+        {
+          "action": "update",
+          "adoption_note": "仅采用各公司原表范围和实际期间内的数据，允许企业内年际描述，不用于跨公司排名。",
+          "decision_overrides": [],
+          "hypotheses": [{"id": "ranking-proposal", "text": "若将来需要跨公司比较，应先建立同行筛选和同期口径，再另立研究任务。", "evidence_refs": ["MSFT.cfo.2025", "AAPL.cfo.2025"], "status": "not_assessed", "note": "本底稿撤回排名用途；保留未来研究所需条件，不以修订文本证明可比性。"}],
+          "coverage_note": "已按模拟退回意见修正：微软截至六月末，苹果截至九月末并采用周历财年；两者不是本任务建立的严格同行。只交接公司内变化和并列资料，不排名、不年化，不将固定资料当作历史可得或实时数据。",
+          "bridge_review_note": "逐公司保留净利润、净利润调节项及经营资产负债变化的会计贡献；不将不同公司的调节项目混算，不作因果判断。"
+        },
+        {"action": "submit", "note": "修订稿补充实际期间、指标范围和不排名边界；请基于新快照复核。"},
+        {"action": "approve", "note": "确认修订稿已落实退回意见，可以按限定范围交接。旧退回快照保留，不改写第一次审阅记录。"}
+      ],
+      "expected": {"status": "reviewed", "snapshot_count": 2, "review_decisions": ["return", "approve"], "blocked_comparisons": [], "cash_flow_direction_check": null}
+    },
+    {
+      "id": "insufficient-capital-scope",
+      "title": "只有固定资产现金支出，还不能回答全部资本投入",
+      "synthetic": true,
+      "user_question": "【模拟业务】能否用苹果 FY2025 固定资产现金支出这一行代表当年全部资本投入，为后续预算比较准备研究依据？",
+      "selection_reason": "模拟企业预算研究的材料适用性检查。选用已登记官方事实，但需要的经济范围比当前原表行更宽；拒绝该用途，不判定披露数值失真。",
+      "include_cash_flow_bridge": false,
+      "business_rationale": "研究任务常有真实数据却缺合适口径。拒绝某项用于特定问题并记录待补，比把不完整指标当作全貌更便于后续交接；该情节为模拟设计。",
+      "steps": [
+        {
+          "action": "update",
+          "adoption_note": "仅按已登记原表定义采用其余观察，不据此推断全部资本投入。",
+          "decision_overrides": [{"reference": "AAPL.capex.2025", "decision": "rejected", "note": "研究用途拒绝：该行只覆盖固定资产现金支出，不能独自代表全部资本投入。保留官方原值，不把材料不足称为数值虚假。"}],
+          "hypotheses": [{"id": "full-investment-scope", "text": "全部资本投入是否还需计入非现金租赁新增、无形资产及其他投入？", "evidence_refs": ["AAPL.capex.2024", "AAPL.capex.2025"], "status": "not_assessed", "note": "待明确研究定义并补充相关附注、非现金投资明细及口径对照；当前不估数、不用缺项补零。"}],
+          "coverage_note": "模拟缺口底稿：现有披露数值仍保留，AAPL FY2025 固定资产现金支出不被采用为全部资本投入。相关年际计算应阻断。需补非现金新增、租赁、无形资产等范围依据；没有这些材料不批准该研究结论。"
+        },
+        {"action": "submit", "note": "提交缺口记录，请复核研究用途拒绝和后续待补清单。"},
+        {"action": "return", "note": "保留待补并退回：当前证据不能覆盖全部资本投入，相关比较仍阻断。待补足并明确口径后另行修订提交，不将退回写成批准。"}
+      ],
+      "expected": {"status": "returned", "snapshot_count": 1, "review_decisions": ["return"], "blocked_comparisons": ["AAPL.capex"], "cash_flow_direction_check": null}
+    }
+  ]
+}

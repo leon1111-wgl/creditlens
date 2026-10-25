@@ -17,6 +17,7 @@ from .workflow import Actor, require
 
 
 STORE_VERSION = "research-handoff-1"
+BRIDGE_STORE_VERSION = "research-handoff-2"
 Revision = Annotated[int, Field(strict=True, ge=1)]
 Identifier = Annotated[str, Field(strict=True, min_length=1, max_length=256)]
 Reason = Annotated[str, Field(strict=True, min_length=1, max_length=2000)]
@@ -33,6 +34,7 @@ class ResearchTaskCreate(_Request):
     selection_reason: str = Field(strict=True, min_length=5, max_length=2000)
     material_mode: Literal["current_verified_materials", "historical_as_of"] = "current_verified_materials"
     as_of: date | None = None
+    include_cash_flow_bridge: bool = Field(default=False, strict=True)
 
     @model_validator(mode="after")
     def current_is_not_historical(self):
@@ -66,6 +68,7 @@ class ResearchTaskUpdate(_Request):
     decisions: list[ResearchDecision] = Field(max_length=8)
     hypotheses: list[ResearchHypothesis] = Field(max_length=3)
     coverage_note: str = Field(strict=True, max_length=4000)
+    bridge_review_note: str | None = Field(default=None, strict=True, max_length=4000)
 
     @model_validator(mode="after")
     def unique_records(self):
@@ -192,6 +195,27 @@ class ResearchTaskStore:
         except (MaterialsError, ValueError, TypeError) as exc:
             raise HTTPException(409, "Research comparison cannot be verified from the registered material") from exc
 
+    def _cash_flow_bridge(self, bundle):
+        from .cash_flow_bridge import build_cash_flow_bridge
+        try:
+            bridge = build_cash_flow_bridge(self.root)
+            totals = {s["reported_cfo_observation_id"]: s for s in bridge["statements"]}
+            registered = {o["id"]: o for o in bundle["observations"] if o["metric"] == "cfo"}
+            if len(totals) != len(bridge["statements"]) or set(totals) != set(registered):
+                raise ValueError("Bridge and task contain different cash flow totals")
+            for key, total in totals.items():
+                fact = registered[key]
+                if (total["reported_cfo"] != fact["normalized_value"]
+                        or total["source_sha256"] != fact["source"]["sha256"]
+                        or total["unit"] != fact["unit"]
+                        or any(total["period"][field] != fact["period"][field]
+                               for field in ("start", "end", "fiscal_calendar"))):
+                    raise ValueError("Bridge total does not match the task material")
+            _json(bridge)
+            return bridge
+        except (OSError, ValueError, TypeError, KeyError) as exc:
+            raise HTTPException(409, "Cash flow attachment cannot be verified against the task material") from exc
+
     @staticmethod
     def _checked_payload(row):
         try:
@@ -200,6 +224,9 @@ class ResearchTaskStore:
                 raise ValueError("Task integrity mismatch")
             if _sha(data["bundle"]) != data["bundle_sha256"]:
                 raise ValueError("Material integrity mismatch")
+            if data.get("store_version") == BRIDGE_STORE_VERSION:
+                if _sha(data["cash_flow_bridge"]) != data["cash_flow_bridge_sha256"]:
+                    raise ValueError("Cash flow attachment integrity mismatch")
             return data
         except (KeyError, TypeError, ValueError) as exc:
             raise HTTPException(409, "Stored research task integrity check failed") from exc
@@ -278,6 +305,10 @@ class ResearchTaskStore:
     def create(self, actor: Actor, payload: dict, idempotency_key: str) -> dict:
         require(actor, "analyst")
         request = _validate(ResearchTaskCreate, payload)
+        # An omitted/false option must retain v1's idempotency fingerprint.
+        include_bridge = request["include_cash_flow_bridge"]
+        if not include_bridge:
+            request.pop("include_cash_flow_bridge")
         if request["material_mode"] == "historical_as_of":
             raise HTTPException(422, {"code": "historical_version_unverified", "message": "These materials do not prove historical availability of the file versions"})
         if not isinstance(idempotency_key, str) or not 1 <= len(idempotency_key.strip()) <= 200:
@@ -300,6 +331,10 @@ class ResearchTaskStore:
                     "hypothesis_scope": "Associated material only; no causal or model validation",
                     "contributors": [actor.user_id], "snapshot_id": None, "snapshot_sha256": None,
                     "review": None, "review_history": [], "events": [], "automatic_approval": False}
+            if include_bridge:
+                bridge = self._cash_flow_bridge(bundle)
+                data.update(store_version=BRIDGE_STORE_VERSION, cash_flow_bridge=bridge,
+                            cash_flow_bridge_sha256=_sha(bridge), bridge_review_note="")
             self._event(data, actor, "create", "Registered current materials captured; historical availability is unverified")
             db.execute("INSERT INTO research_tasks VALUES (?,?,?,?,?,?,?)",
                        (data["id"], actor.tenant_id, data["revision"], _json(data), _sha(data), idempotency_key, request_sha))
@@ -311,10 +346,11 @@ class ResearchTaskStore:
             return self._view(db, self._load(db, task_id, actor))
 
     def update(self, task_id: str, actor: Actor, revision: int, decisions: list[dict],
-               hypotheses: list[dict], coverage_note: str) -> dict:
+               hypotheses: list[dict], coverage_note: str, bridge_review_note: str | None = None) -> dict:
         require(actor, "analyst")
         request = _validate(ResearchTaskUpdate, {"revision": revision, "decisions": decisions,
-                                              "hypotheses": hypotheses, "coverage_note": coverage_note})
+                                              "hypotheses": hypotheses, "coverage_note": coverage_note,
+                                              "bridge_review_note": bridge_review_note})
         with self.db(write=True) as db:
             data = self._load(db, task_id, actor)
             self._revision(data, request["revision"])
@@ -324,6 +360,11 @@ class ResearchTaskStore:
             referenced.update(e for hypothesis in request["hypotheses"] for e in hypothesis["evidence_ids"])
             if not referenced <= valid_ids:
                 raise HTTPException(422, "Research references must belong to this task's registered observations")
+            if data.get("store_version") == BRIDGE_STORE_VERSION:
+                if request["bridge_review_note"] is not None:
+                    data["bridge_review_note"] = request["bridge_review_note"]
+            elif request["bridge_review_note"] is not None:
+                raise HTTPException(422, "This task has no cash flow attachment; create an attachment-enabled task")
             data.update({key: request[key] for key in ("decisions", "hypotheses", "coverage_note")})
             data["comparison"] = self._comparison(data["bundle"], data["decisions"])
             data["contributors"] = sorted(set(data["contributors"]) | {actor.user_id})
@@ -351,6 +392,11 @@ class ResearchTaskStore:
                     raise HTTPException(422, "Adopt or reject every observation with a reason before submission")
                 if len(data["coverage_note"].strip()) < 10:
                     raise HTTPException(422, "Explain material coverage and limitations in at least 10 characters")
+                if data.get("store_version") == BRIDGE_STORE_VERSION:
+                    if len(data["bridge_review_note"].strip()) < 10:
+                        raise HTTPException(422, "Explain the attachment's scope and remaining checks in at least 10 characters")
+                    if _sha(self._cash_flow_bridge(data["bundle"])) != data["cash_flow_bridge_sha256"]:
+                        raise HTTPException(409, "Cash flow attachment sources or rules changed; create a new task")
                 if _sha(self._material_bundle(data["bundle_id"])) != data["bundle_sha256"]:
                     raise HTTPException(409, "Registered materials changed; create a new task without rewriting this one")
                 comparison = self._comparison(data["bundle"], data["decisions"])
@@ -363,7 +409,9 @@ class ResearchTaskStore:
                 content_keys = ("question", "selection_reason", "material_mode", "as_of", "bundle_id", "bundle",
                                 "bundle_sha256", "materials_frozen_at", "decisions", "hypotheses", "hypothesis_scope",
                                 "coverage_note", "comparison", "created_by", "contributors", "automatic_approval")
-                content = {"schema_version": 1, "store_version": STORE_VERSION, "task_id": data["id"],
+                if data.get("store_version") == BRIDGE_STORE_VERSION:
+                    content_keys += ("cash_flow_bridge", "cash_flow_bridge_sha256", "bridge_review_note")
+                content = {"schema_version": 1, "store_version": data["store_version"], "task_id": data["id"],
                            "tenant_id": data["tenant_id"], "task_revision": data["revision"],
                            "submitted_by": actor.user_id, "submitted_at": now,
                            **{key: data[key] for key in content_keys}}
