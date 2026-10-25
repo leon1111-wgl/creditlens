@@ -1,0 +1,594 @@
+{
+  "schema_version": 1,
+  "replay_version": "reference-review-replay-1",
+  "scope": {
+    "observations": "synthetic_invented_values_and_boxes",
+    "principals": "synthetic",
+    "source_tasks": "previously_observed_development_catalog",
+    "independent_human_annotations": 0,
+    "human_gold": false,
+    "new_ocr_calls": 0,
+    "model_calls": 0,
+    "network_calls": 0,
+    "main_database_modified": false,
+    "identity_independence_verified": false,
+    "existing_evaluation_references_replaced": false
+  },
+  "catalog_sha256": "b085ca58a428d80c2ec40b5c56194842cb4ed32da5902327c1ad4257368801ed",
+  "catalog_task_count": 40,
+  "implementation_sha256": {
+    "creditlens/reference_review_store.py": "85ba810cb97b0c1babdd8d2a8e072233db90160988ee469797455c4d2c8a1e7f",
+    "creditlens/reference_contract.py": "d6cb45168a2a4fa2253ad13b1be9125aa07f4b26125a7e0d0c8fdd28d9c0adff",
+    "scripts/replay_reference_review.py": "7fb40aff6985db99472097691a1611e97628dded9571bb48018bafed0c8d32d4"
+  },
+  "implementation_hash_basis": "python_utf8_lf",
+  "checks": [
+    {
+      "id": "first_content_hidden_from_reviewer",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "id": "first_comparison_hidden",
+      "actual": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "id": "first_hash_hidden",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "id": "viewer_cannot_submit",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "id": "same_principal_cannot_fill_second",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "id": "different_values_remain_disagreement",
+      "actual": "disagreed",
+      "expected": "disagreed",
+      "passed": true
+    },
+    {
+      "id": "cannot_force_disagreement_to_freeze",
+      "actual": 409,
+      "expected": 409,
+      "passed": true
+    },
+    {
+      "id": "new_round_has_no_copied_observations",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "id": "same_content_different_free_note_agrees",
+      "actual": "agreed",
+      "expected": "agreed",
+      "passed": true
+    },
+    {
+      "id": "free_note_difference_retained",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "id": "observer_role_change_cannot_review",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "id": "freeze_does_not_create_human_gold",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "id": "frozen_export_unchanged_after_new_round",
+      "actual": "06d06f33c9d61fb36740b855d0e915eb961fc3ba33c157d8fe7179171290fa67",
+      "expected": "06d06f33c9d61fb36740b855d0e915eb961fc3ba33c157d8fe7179171290fa67",
+      "passed": true
+    },
+    {
+      "id": "old_submit_replay_not_augmented",
+      "actual": "original_first_response",
+      "expected": "original_first_response",
+      "passed": true
+    },
+    {
+      "id": "rebuilt_store_export_matches",
+      "actual": "06d06f33c9d61fb36740b855d0e915eb961fc3ba33c157d8fe7179171290fa67",
+      "expected": "06d06f33c9d61fb36740b855d0e915eb961fc3ba33c157d8fe7179171290fa67",
+      "passed": true
+    },
+    {
+      "id": "missing_registry_blocks_new_observation",
+      "actual": 409,
+      "expected": 409,
+      "passed": true
+    },
+    {
+      "id": "missing_registry_does_not_block_history_closure",
+      "actual": "closed",
+      "expected": "closed",
+      "passed": true
+    },
+    {
+      "id": "closure_keeps_source_snapshot",
+      "actual": "8e729afb5c56adc09d46fc33c2289e0bf80c49157045dcda1a478e4d2dc5e392",
+      "expected": "8e729afb5c56adc09d46fc33c2289e0bf80c49157045dcda1a478e4d2dc5e392",
+      "passed": true
+    }
+  ],
+  "summary": {
+    "checks": 18,
+    "passed": 18,
+    "failed": 0,
+    "synthetic_rounds": 3,
+    "synthetic_observations": 4,
+    "frozen_candidates": 1,
+    "human_gold": 0
+  },
+  "disagreement_round": {
+    "automatic_approval": false,
+    "catalog_sha256": "b085ca58a428d80c2ec40b5c56194842cb4ed32da5902327c1ad4257368801ed",
+    "closure": {
+      "actor": "synthetic-reviewer",
+      "at": "2026-10-26T00:00:00+00:00",
+      "note": "Close the synthetic disagreement without editing either observation",
+      "revision": 4
+    },
+    "comparison": {
+      "answer_status": "answerable",
+      "automatic_approval": false,
+      "compared_fields": [
+        "status",
+        "raw_value",
+        "normalized_value",
+        "amount_bbox",
+        "unit_text",
+        "currency_text",
+        "section_text",
+        "section_note"
+      ],
+      "differences": [
+        {
+          "field": "raw_value",
+          "first": "123.45",
+          "second": "456.78"
+        },
+        {
+          "field": "normalized_value",
+          "first": "123.45",
+          "second": "456.78"
+        }
+      ],
+      "first_sha256": "7d21fc6572023fe0f0b61fbfd84011670ea69ceb8cbd7287747677e1183396cb",
+      "human_gold": false,
+      "limitations": [
+        "Agreement is limited to the listed content fields; free reason notes are retained but do not decide agreement.",
+        "No identity, source authenticity or observation correctness is established by matching content or hashes.",
+        "Both observations concern previously used development material; agreement is not a new independent benchmark."
+      ],
+      "notes_differ": false,
+      "rule_version": "reference-review-1",
+      "schema_version": 1,
+      "second_sha256": "8865f256738156ef3d0494927f366dad0c0d0bb821aae37af1e5a59d3f1503a9",
+      "status": "disagreement",
+      "task_id": "rq-b28c1cca5ececb61f8a038697c22d7ee953a24a38ad896bbb55fa7e4d1838cb3",
+      "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30"
+    },
+    "created_at": "2026-10-26T00:00:00+00:00",
+    "created_by": "synthetic-first",
+    "events": [
+      {
+        "action": "created",
+        "actor": "synthetic-first",
+        "at": "2026-10-26T00:00:00+00:00",
+        "note": "",
+        "revision": 1,
+        "role": "analyst",
+        "sequence": 1
+      },
+      {
+        "action": "observation_submitted",
+        "actor": "synthetic-first",
+        "at": "2026-10-26T00:00:00+00:00",
+        "note": "",
+        "revision": 2,
+        "role": "analyst",
+        "sequence": 2
+      },
+      {
+        "action": "observation_submitted",
+        "actor": "synthetic-second",
+        "at": "2026-10-26T00:00:00+00:00",
+        "note": "",
+        "revision": 3,
+        "role": "analyst",
+        "sequence": 3
+      },
+      {
+        "action": "close",
+        "actor": "synthetic-reviewer",
+        "at": "2026-10-26T00:00:00+00:00",
+        "note": "Close the synthetic disagreement without editing either observation",
+        "revision": 4,
+        "role": "reviewer",
+        "sequence": 4
+      }
+    ],
+    "freeze": null,
+    "human_gold": false,
+    "id": "00000000000000000000000000000001",
+    "independence_not_verified": true,
+    "observations": [
+      {
+        "observation": {
+          "amount_bbox": {
+            "bottom": 20.0,
+            "top": 10.0,
+            "x0": 10.0,
+            "x1": 50.0
+          },
+          "currency_text": null,
+          "normalized_value": "123.45",
+          "observation_sha256": "7d21fc6572023fe0f0b61fbfd84011670ea69ceb8cbd7287747677e1183396cb",
+          "page": 32,
+          "raw_value": "123.45",
+          "reason": "Synthetic workflow fixture, not an independent human observation",
+          "rule_version": "reference-review-1",
+          "schema_version": 1,
+          "section_note": null,
+          "section_text": "Synthetic section",
+          "status": "answerable",
+          "task_id": "rq-b28c1cca5ececb61f8a038697c22d7ee953a24a38ad896bbb55fa7e4d1838cb3",
+          "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+          "unit_text": "Synthetic units, not transcribed from the report"
+        },
+        "slot": 1,
+        "submitted_at": "2026-10-26T00:00:00+00:00",
+        "submitted_by": "synthetic-first",
+        "visible": true
+      },
+      {
+        "observation": {
+          "amount_bbox": {
+            "bottom": 20.0,
+            "top": 10.0,
+            "x0": 10.0,
+            "x1": 50.0
+          },
+          "currency_text": null,
+          "normalized_value": "456.78",
+          "observation_sha256": "8865f256738156ef3d0494927f366dad0c0d0bb821aae37af1e5a59d3f1503a9",
+          "page": 32,
+          "raw_value": "456.78",
+          "reason": "Synthetic workflow fixture, not an independent human observation",
+          "rule_version": "reference-review-1",
+          "schema_version": 1,
+          "section_note": null,
+          "section_text": "Synthetic section",
+          "status": "answerable",
+          "task_id": "rq-b28c1cca5ececb61f8a038697c22d7ee953a24a38ad896bbb55fa7e4d1838cb3",
+          "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+          "unit_text": "Synthetic units, not transcribed from the report"
+        },
+        "slot": 2,
+        "submitted_at": "2026-10-26T00:00:00+00:00",
+        "submitted_by": "synthetic-second",
+        "visible": true
+      }
+    ],
+    "previous_review_id": null,
+    "reason": "",
+    "revision": 4,
+    "round": 1,
+    "schema_version": 1,
+    "status": "closed",
+    "store_version": "reference-review-store-1",
+    "task": {
+      "basis": {
+        "human_gold": false,
+        "independent_test": false,
+        "material_status": "previously_observed_development",
+        "prior_model_output_hidden_in_task": true,
+        "prior_reference_hidden_in_task": true,
+        "source_authenticity_verified_by_contract": false
+      },
+      "coordinate_system": "pdf_points_top_left",
+      "doc_id": "aapl",
+      "height": 792.0,
+      "id": "rq-b28c1cca5ececb61f8a038697c22d7ee953a24a38ad896bbb55fa7e4d1838cb3",
+      "page": 32,
+      "query": {
+        "row_label": "Total net sales",
+        "year": 2024
+      },
+      "source": {
+        "image_sha256": "abe2728a1398afc64db24fa56e11c3ac38330674c3faa419fe1ba2b385a1e2bc",
+        "pdf_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+        "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf"
+      },
+      "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+      "width": 612.0
+    },
+    "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+    "tenant_id": "synthetic-reference-replay"
+  },
+  "frozen_candidate": {
+    "automatic_approval": false,
+    "content": {
+      "automatic_approval": false,
+      "catalog_sha256": "b085ca58a428d80c2ec40b5c56194842cb4ed32da5902327c1ad4257368801ed",
+      "closure": null,
+      "comparison": {
+        "answer_status": "answerable",
+        "automatic_approval": false,
+        "compared_fields": [
+          "status",
+          "raw_value",
+          "normalized_value",
+          "amount_bbox",
+          "unit_text",
+          "currency_text",
+          "section_text",
+          "section_note"
+        ],
+        "differences": [],
+        "first_sha256": "7d21fc6572023fe0f0b61fbfd84011670ea69ceb8cbd7287747677e1183396cb",
+        "human_gold": false,
+        "limitations": [
+          "Agreement is limited to the listed content fields; free reason notes are retained but do not decide agreement.",
+          "No identity, source authenticity or observation correctness is established by matching content or hashes.",
+          "Both observations concern previously used development material; agreement is not a new independent benchmark."
+        ],
+        "notes_differ": true,
+        "rule_version": "reference-review-1",
+        "schema_version": 1,
+        "second_sha256": "15318114d055f2acc121aab69b222f52a7633574f80612d5024e8d8abaa80e79",
+        "status": "exact_agreement",
+        "task_id": "rq-b28c1cca5ececb61f8a038697c22d7ee953a24a38ad896bbb55fa7e4d1838cb3",
+        "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30"
+      },
+      "created_at": "2026-10-26T00:00:00+00:00",
+      "created_by": "synthetic-first",
+      "events": [
+        {
+          "action": "created",
+          "actor": "synthetic-first",
+          "at": "2026-10-26T00:00:00+00:00",
+          "note": "",
+          "revision": 1,
+          "role": "analyst",
+          "sequence": 1
+        },
+        {
+          "action": "observation_submitted",
+          "actor": "synthetic-first",
+          "at": "2026-10-26T00:00:00+00:00",
+          "note": "",
+          "revision": 2,
+          "role": "analyst",
+          "sequence": 2
+        },
+        {
+          "action": "observation_submitted",
+          "actor": "synthetic-second",
+          "at": "2026-10-26T00:00:00+00:00",
+          "note": "",
+          "revision": 3,
+          "role": "analyst",
+          "sequence": 3
+        },
+        {
+          "action": "freeze",
+          "actor": "synthetic-reviewer",
+          "at": "2026-10-26T00:00:00+00:00",
+          "note": "Freeze only the synthetic agreement candidate, never a human gold answer",
+          "revision": 4,
+          "role": "reviewer",
+          "sequence": 4
+        }
+      ],
+      "freeze": {
+        "actor": "synthetic-reviewer",
+        "at": "2026-10-26T00:00:00+00:00",
+        "note": "Freeze only the synthetic agreement candidate, never a human gold answer",
+        "revision": 4
+      },
+      "human_gold": false,
+      "id": "00000000000000000000000000000002",
+      "independence_not_verified": true,
+      "observations": [
+        {
+          "observation": {
+            "amount_bbox": {
+              "bottom": 20.0,
+              "top": 10.0,
+              "x0": 10.0,
+              "x1": 50.0
+            },
+            "currency_text": null,
+            "normalized_value": "123.45",
+            "observation_sha256": "7d21fc6572023fe0f0b61fbfd84011670ea69ceb8cbd7287747677e1183396cb",
+            "page": 32,
+            "raw_value": "123.45",
+            "reason": "Synthetic workflow fixture, not an independent human observation",
+            "rule_version": "reference-review-1",
+            "schema_version": 1,
+            "section_note": null,
+            "section_text": "Synthetic section",
+            "status": "answerable",
+            "task_id": "rq-b28c1cca5ececb61f8a038697c22d7ee953a24a38ad896bbb55fa7e4d1838cb3",
+            "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+            "unit_text": "Synthetic units, not transcribed from the report"
+          },
+          "slot": 1,
+          "submitted_at": "2026-10-26T00:00:00+00:00",
+          "submitted_by": "synthetic-first"
+        },
+        {
+          "observation": {
+            "amount_bbox": {
+              "bottom": 20.0,
+              "top": 10.0,
+              "x0": 10.0,
+              "x1": 50.0
+            },
+            "currency_text": null,
+            "normalized_value": "123.45",
+            "observation_sha256": "15318114d055f2acc121aab69b222f52a7633574f80612d5024e8d8abaa80e79",
+            "page": 32,
+            "raw_value": "123.45",
+            "reason": "Another synthetic note; the same invented content was supplied",
+            "rule_version": "reference-review-1",
+            "schema_version": 1,
+            "section_note": null,
+            "section_text": "Synthetic section",
+            "status": "answerable",
+            "task_id": "rq-b28c1cca5ececb61f8a038697c22d7ee953a24a38ad896bbb55fa7e4d1838cb3",
+            "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+            "unit_text": "Synthetic units, not transcribed from the report"
+          },
+          "slot": 2,
+          "submitted_at": "2026-10-26T00:00:00+00:00",
+          "submitted_by": "synthetic-second"
+        }
+      ],
+      "previous_review_id": "00000000000000000000000000000001",
+      "reason": "Start another synthetic round; previous observations stay unchanged",
+      "revision": 4,
+      "round": 2,
+      "schema_version": 1,
+      "status": "frozen",
+      "store_version": "reference-review-store-1",
+      "task": {
+        "basis": {
+          "human_gold": false,
+          "independent_test": false,
+          "material_status": "previously_observed_development",
+          "prior_model_output_hidden_in_task": true,
+          "prior_reference_hidden_in_task": true,
+          "source_authenticity_verified_by_contract": false
+        },
+        "coordinate_system": "pdf_points_top_left",
+        "doc_id": "aapl",
+        "height": 792.0,
+        "id": "rq-b28c1cca5ececb61f8a038697c22d7ee953a24a38ad896bbb55fa7e4d1838cb3",
+        "page": 32,
+        "query": {
+          "row_label": "Total net sales",
+          "year": 2024
+        },
+        "source": {
+          "image_sha256": "abe2728a1398afc64db24fa56e11c3ac38330674c3faa419fe1ba2b385a1e2bc",
+          "pdf_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+          "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf"
+        },
+        "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+        "width": 612.0
+      },
+      "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+      "tenant_id": "synthetic-reference-replay"
+    },
+    "content_sha256": "b9c44058dd42a033e58bd3bf000fc42fb0c9cdd25d605ce1cbf9438b8115a83d",
+    "export_type": "reference_review_candidate",
+    "human_gold": false,
+    "independence_not_verified": true,
+    "review_id": "00000000000000000000000000000002",
+    "schema_version": 1,
+    "scope": "Two recorded observations and third-principal review; not verified human independence or a replacement for existing evaluation references"
+  },
+  "final_closed_round": {
+    "automatic_approval": false,
+    "catalog_sha256": "b085ca58a428d80c2ec40b5c56194842cb4ed32da5902327c1ad4257368801ed",
+    "closure": {
+      "actor": "synthetic-reviewer",
+      "at": "2026-10-26T00:00:00+00:00",
+      "note": "Close an incomplete synthetic round while the current registry is unavailable",
+      "revision": 2
+    },
+    "comparison": null,
+    "created_at": "2026-10-26T00:00:00+00:00",
+    "created_by": "synthetic-first",
+    "events": [
+      {
+        "action": "created",
+        "actor": "synthetic-first",
+        "at": "2026-10-26T00:00:00+00:00",
+        "note": "",
+        "revision": 1,
+        "role": "analyst",
+        "sequence": 1
+      },
+      {
+        "action": "close",
+        "actor": "synthetic-reviewer",
+        "at": "2026-10-26T00:00:00+00:00",
+        "note": "Close an incomplete synthetic round while the current registry is unavailable",
+        "revision": 2,
+        "role": "reviewer",
+        "sequence": 2
+      }
+    ],
+    "freeze": null,
+    "human_gold": false,
+    "id": "00000000000000000000000000000003",
+    "independence_not_verified": true,
+    "observations": [],
+    "previous_review_id": "00000000000000000000000000000002",
+    "reason": "Synthetic correction round preserves the preceding frozen candidate",
+    "revision": 2,
+    "round": 3,
+    "schema_version": 1,
+    "status": "closed",
+    "store_version": "reference-review-store-1",
+    "task": {
+      "basis": {
+        "human_gold": false,
+        "independent_test": false,
+        "material_status": "previously_observed_development",
+        "prior_model_output_hidden_in_task": true,
+        "prior_reference_hidden_in_task": true,
+        "source_authenticity_verified_by_contract": false
+      },
+      "coordinate_system": "pdf_points_top_left",
+      "doc_id": "aapl",
+      "height": 792.0,
+      "id": "rq-b28c1cca5ececb61f8a038697c22d7ee953a24a38ad896bbb55fa7e4d1838cb3",
+      "page": 32,
+      "query": {
+        "row_label": "Total net sales",
+        "year": 2024
+      },
+      "source": {
+        "image_sha256": "abe2728a1398afc64db24fa56e11c3ac38330674c3faa419fe1ba2b385a1e2bc",
+        "pdf_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+        "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf"
+      },
+      "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+      "width": 612.0
+    },
+    "task_sha256": "f58568d4adddc7f113aa10239416951ae5b9135c082323a9f700b252b30e3a30",
+    "tenant_id": "synthetic-reference-replay"
+  },
+  "limitations": [
+    "All submitted values, coordinates and principals here are synthetic; no real person supplied or independently confirmed an answer.",
+    "The 40 source queries concern previously observed development material; public prior answers remain accessible elsewhere.",
+    "A later round starts empty but its participants may have seen earlier rounds. The service does not authenticate their independence.",
+    "Stored hashes detect inconsistent contents, not a database administrator rewriting records and all hashes."
+  ]
+}
