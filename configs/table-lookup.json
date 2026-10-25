@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "id": "registered-table-lookup-development-1",
+  "rule_version": "table-lookup-1",
+  "query_fields": [
+    "row_label",
+    "year"
+  ],
+  "source_report": {
+    "path": "artifacts/document-ai-report.json",
+    "sha256": "11a5c50d4feaf3730d10bf3be454071024f3e5d82ae465edc2155b0dd36cefc5",
+    "canonical_sha256": "ff3d101f408813710c98bd12b5d7b3a2d7dd70840d0eaaccc1beec62af58aef7"
+  },
+  "scoring": {
+    "expected_amount_basis": "signed_raw_display",
+    "reference_coverage_min": 0.5,
+    "center_tolerance_points": 8.0
+  },
+  "documents": [
+    {
+      "id": "msft",
+      "pack_path": "data/examples/msft-fy2025-pdf.json",
+      "pack_sha256": "bd776c972631cbc6ff6e0cba585cdab2c32d875d21e950ae43987ffc6a033850",
+      "source_pdf_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "fact_ids": [
+        "revenue-2025",
+        "revenue-2024",
+        "liquid_assets-2025",
+        "liquid_assets-2024",
+        "short_debt-2025",
+        "short_debt-2024",
+        "current_debt-2025",
+        "current_debt-2024",
+        "long_debt-2025",
+        "long_debt-2024",
+        "current_assets-2025",
+        "current_assets-2024",
+        "current_liabilities-2025",
+        "current_liabilities-2024",
+        "cfo-2025",
+        "cfo-2024",
+        "capex-2025",
+        "capex-2024",
+        "net_income-2025",
+        "net_income-2024"
+      ],
+      "pages": [
+        {
+          "page": 50,
+          "width": 594.9599609375,
+          "height": 841.9199829101562,
+          "spans_count": 96,
+          "ocr_relative_path": "msft/ocr-50.json",
+          "ocr_file_sha256": "0a071a26dc1ccc71a1181544a22ab22881a0193fdf9e98a81666bdae685282ec",
+          "ocr_sha256": "809cc0d649c232bf189b84dc67077f58ae0a41abc8d0ed19b99286570ae95da1",
+          "image_sha256": "80296ebecd3d61aae584ec85ad3b5c7876b9ffd6634f739bc02134e9668f6ffa"
+        },
+        {
+          "page": 52,
+          "width": 594.9599609375,
+          "height": 841.9199829101562,
+          "spans_count": 123,
+          "ocr_relative_path": "msft/ocr-52.json",
+          "ocr_file_sha256": "d55add45dc023f65547fdf6e4edc2cb47304a3bd6044ae000755f7fa4171c173",
+          "ocr_sha256": "60fb6a469a1f36d0b58a21fb6569b3cd5dcb9619c94f27c69dc6c4b11d2f7be2",
+          "image_sha256": "5dbf4478b85499fdfbb3dbeacd799f8e6c35438aee70cee9da5dd1590309744f"
+        },
+        {
+          "page": 53,
+          "width": 594.9599609375,
+          "height": 841.9199829101562,
+          "spans_count": 155,
+          "ocr_relative_path": "msft/ocr-53.json",
+          "ocr_file_sha256": "4ddc887c5e4609a8d242ae4f4df58b315f6608355d4fdb7f98f606372c6a965a",
+          "ocr_sha256": "c0bc9eb4710e4fd508433e4670acf66c96cf070dce50f05df38eb7fe8606e4bf",
+          "image_sha256": "d33368ebe49f7876e54df1e7aad0687844e037d414f442de15ad3326aa96f24f"
+        }
+      ]
+    },
+    {
+      "id": "aapl",
+      "pack_path": "data/examples/aapl-fy2025-pdf.json",
+      "pack_sha256": "e26e93213bd8041fdd93b228749a468ce241952e673776cb5fa37ad11f2fec43",
+      "source_pdf_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "fact_ids": [
+        "revenue-2025",
+        "revenue-2024",
+        "cash_equivalents-2025",
+        "cash_equivalents-2024",
+        "short_investments-2025",
+        "short_investments-2024",
+        "short_debt-2025",
+        "short_debt-2024",
+        "current_debt-2025",
+        "current_debt-2024",
+        "long_debt-2025",
+        "long_debt-2024",
+        "current_assets-2025",
+        "current_assets-2024",
+        "current_liabilities-2025",
+        "current_liabilities-2024",
+        "cfo-2025",
+        "cfo-2024",
+        "capex-2025",
+        "capex-2024",
+        "net_income-2025",
+        "net_income-2024"
+      ],
+      "pages": [
+        {
+          "page": 32,
+          "width": 612.0,
+          "height": 792.0,
+          "spans_count": 102,
+          "ocr_relative_path": "aapl/ocr-32.json",
+          "ocr_file_sha256": "379e9a9859de4303aeb85fffafb526642dd41982e009507eaaf67de2ca1e75fa",
+          "ocr_sha256": "4b3ecb6cfc99feda6d92928a0f2af382f74e6929e125a9e8640fe8a100012e29",
+          "image_sha256": "abe2728a1398afc64db24fa56e11c3ac38330674c3faa419fe1ba2b385a1e2bc"
+        },
+        {
+          "page": 34,
+          "width": 612.0,
+          "height": 792.0,
+          "spans_count": 105,
+          "ocr_relative_path": "aapl/ocr-34.json",
+          "ocr_file_sha256": "1aba172e9e78c24a0a3430fd7168a2f6f1a39c80b106f529c19c36085ff442e8",
+          "ocr_sha256": "1177fe9fe856389d210bf22756de60073f8fb20acf374bd1da6f4654ea098548",
+          "image_sha256": "9b6e4beaf4a678baa07f015d2e11ed49d8bee455e649cb7596d9e1949c682c39"
+        },
+        {
+          "page": 36,
+          "width": 612.0,
+          "height": 792.0,
+          "spans_count": 144,
+          "ocr_relative_path": "aapl/ocr-36.json",
+          "ocr_file_sha256": "4d317bd113e82c8bc940cea331de6898710bb3639bd7f2644433236618e93d5c",
+          "ocr_sha256": "32faeedb64798c8930b0182281852fc9a4d1c9ad7cb07c3391893d54dd3c2799",
+          "image_sha256": "6d122d5db6e004e8082db496c2c078b8f80fa2780c0ec07cdd9845fed9fafb5a"
+        }
+      ]
+    }
+  ],
+  "scope": {
+    "previously_observed_development_facts": true,
+    "independent_human_gold": 0,
+    "new_ocr_calls": 0,
+    "held_out": false
+  }
+}
