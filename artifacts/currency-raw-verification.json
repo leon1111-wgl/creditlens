@@ -1,0 +1,191 @@
+{
+  "candidate_report_is_not_a_release_approval": true,
+  "diagnostic_report_sha256": "625909663cbd55ad92e384a279f2b05690e405bd27980a78d507ce3b04afb964",
+  "facts": [
+    {
+      "association_applied": true,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "cash_equivalents-2025",
+      "legacy_date_status": "insufficient",
+      "non_amount_unchanged": true,
+      "page": 74
+    },
+    {
+      "association_applied": true,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "cash_equivalents-2024",
+      "legacy_date_status": "insufficient",
+      "non_amount_unchanged": true,
+      "page": 74
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "current_assets-2025",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 74
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "current_assets-2024",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 74
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "current_liabilities-2025",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 74
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "current_liabilities-2024",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 74
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "long_debt-2025",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 74
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "long_debt-2024",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 74
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "cfo-2025",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 76
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "cfo-2024",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 76
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "net_income-2025",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 76
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "net_income-2024",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 76
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "capex-2025",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 76
+    },
+    {
+      "association_applied": false,
+      "currency_status": "consistent",
+      "document_id": "amd-fy2025",
+      "exact_after_parent_index_mapping": true,
+      "fact_id": "capex-2024",
+      "legacy_date_status": "consistent",
+      "non_amount_unchanged": true,
+      "page": 76
+    }
+  ],
+  "facts_checked": 14,
+  "full_ocr_canonical_hashes_verified": true,
+  "full_ocr_canonical_sha256": {
+    "amd-fy2025/ocr-lines-74.json": "7bd905d35dd1c752fef214a0d6ef7c9b785818649343c4fb444336c2f5a437b7",
+    "amd-fy2025/ocr-lines-76.json": "877b60114deb9d15826bd7abf38373a48a26448776a5945643e0cf36acb4c1e9",
+    "amd-fy2025/ocr-words-74.json": "69b07fb38566dd5415d19bd7232e43ef75fd19f5fee76b90023e892e0acb7d2a",
+    "amd-fy2025/ocr-words-76.json": "2fbc999c1dc5aaeba29f10dcae1979fbbc0cb88e78c46401f4001428c57d615b"
+  },
+  "full_ocr_rule_replay_verified": true,
+  "model_inference_performed": false,
+  "operation": "verify_preserved_currency_ocr_without_pdf_images_or_inference",
+  "original_model_execution_verified": false,
+  "pages": [
+    {
+      "complete_parent_lines": 101,
+      "document_id": "amd-fy2025",
+      "page": 74,
+      "published_parent_lines": 19
+    },
+    {
+      "complete_parent_lines": 215,
+      "document_id": "amd-fy2025",
+      "page": 76,
+      "published_parent_lines": 16
+    }
+  ],
+  "pdf_and_image_bytes_verified": false,
+  "published_parent_lines_checked": 35,
+  "published_parent_membership_verified": true,
+  "raw_ocr_file_sha256": {
+    "amd-fy2025/ocr-lines-74.json": "81858c87c9396bd361fdd24f4be98e2e2c667f59a937331c718bcfb66d3a86b0",
+    "amd-fy2025/ocr-lines-76.json": "4f0901013900dd1046bd10d3277088007496939863e077bf94a150b358d70b77",
+    "amd-fy2025/ocr-words-74.json": "d74970051ff1c9781ebc335b7546a0b5af911e81b3d28cc98b64eac696942d39",
+    "amd-fy2025/ocr-words-76.json": "751e9aac054803e3e0a91f0472a6d1933b752702b9f4b09842bbf13eeea80f78"
+  },
+  "schema_version": 1,
+  "scope": "Exact agreement of preserved complete OCR JSON, reviewed public parent membership, and current deterministic rules. No PDF/image read, model execution, source authentication or additional independent evaluation sample.",
+  "source_authenticity_verified": false,
+  "source_manifest_sha256": "fecba1a9228e920a25f0492d091894fb597e2c791321b39b7231feb330f05725",
+  "source_release_sha256": "b8c72d24c873ffaf0a54fbce80ea589b7ce11278f5d2f88a74660a968abcb2a3",
+  "source_report_sha256": "0e55dccf2d7923d75990f2e5a43e1698fb89de0bca5e57d10b9ecbc1e338ed34",
+  "status": "verified",
+  "synthetic_controls_are_separate_from_raw_ocr_samples": true,
+  "verification_implementation_sha256": "da9b40679e8b8618f3a411c2911ddf07e8b959e58fff7ad962de46737cc79d94",
+  "word_to_line_projection_verified": true
+}

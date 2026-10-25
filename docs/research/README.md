@@ -30,3 +30,6 @@
 - [公开事实驱动的模拟业务场景](2026-10-25-research-scenarios.md) · [场景合理性与叙述审查](2026-10-25-scenario-advisory.md)
 
 - [原始数据按需恢复与本地存储](2026-10-25-remote-data.md)
+
+
+第20轮新增：[金额符号规则](2026-10-25-currency-evidence.md)、[固定反例与可复算报告](2026-10-25-currency-controls.md)、[第十一份独立审查](2026-10-25-advisory-11.md)。对应[功能说明](../23-currency-evidence.md)与[制作报告](../iterations/2026-10-25-20.md)。
