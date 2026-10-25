@@ -1,0 +1,950 @@
+{
+  "schema_version": 1,
+  "purpose": "known_location_transfer",
+  "entity_id": "NVDA",
+  "company": "NVIDIA Corporation",
+  "title": "FY2025 NVIDIA 新发行人文档迁移参考（非时点研究数据）",
+  "sources": [
+    {
+      "id": "nvda-fy25-annual-wrapper",
+      "title": "NVIDIA FY2025 annual report wrapper / underlying Form 10-K",
+      "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/annual/NVIDIA-2025-Annual-Report.pdf",
+      "sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+      "wrapper_publication_date": null,
+      "underlying_filing_date": "2025-02-26",
+      "source_date_basis": "wrapper_publication_unknown",
+      "point_in_time_eligible": false
+    }
+  ],
+  "facts": [
+    {
+      "id": "cash_equivalents-2025",
+      "metric": "cash_equivalents",
+      "label": "现金及现金等价物",
+      "value": "8589",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-01-26",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Cash and cash equivalents / FY2025",
+      "raw_value": "8,589",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 464.235,
+          "top": 110.46,
+          "x1": 486.888,
+          "bottom": 118.11
+        },
+        "row_label": "Cash and cash equivalents",
+        "row_label_bbox": {
+          "x0": 78.567,
+          "top": 110.181,
+          "x1": 189.024,
+          "bottom": 118.641
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 463.955,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 26, 2025",
+        "period_bbox": {
+          "x0": 430.115,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 53.817,
+            "top": 96.084,
+            "x1": 117.114,
+            "bottom": 102.699
+          },
+          "end_bbox": {
+            "x0": 53.466,
+            "top": 181.431,
+            "x1": 137.607,
+            "bottom": 188.199
+          }
+        }
+      }
+    },
+    {
+      "id": "cash_equivalents-2024",
+      "metric": "cash_equivalents",
+      "label": "现金及现金等价物",
+      "value": "7280",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-01-28",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Cash and cash equivalents / FY2024",
+      "raw_value": "7,280",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 534.924,
+          "top": 110.46,
+          "x1": 557.55,
+          "bottom": 118.11
+        },
+        "row_label": "Cash and cash equivalents",
+        "row_label_bbox": {
+          "x0": 78.567,
+          "top": 110.181,
+          "x1": 189.024,
+          "bottom": 118.641
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 534.455,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 28, 2024",
+        "period_bbox": {
+          "x0": 500.615,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 53.817,
+            "top": 96.084,
+            "x1": 117.114,
+            "bottom": 102.699
+          },
+          "end_bbox": {
+            "x0": 53.466,
+            "top": 181.431,
+            "x1": 137.607,
+            "bottom": 188.199
+          }
+        }
+      }
+    },
+    {
+      "id": "short_investments-2025",
+      "metric": "short_investments",
+      "label": "流动资产中的有价证券",
+      "value": "34621",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-01-26",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Marketable securities / FY2025",
+      "raw_value": "34,621",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 458.817,
+          "top": 124.71,
+          "x1": 485.34,
+          "bottom": 132.36
+        },
+        "row_label": "Marketable securities",
+        "row_label_bbox": {
+          "x0": 78.855,
+          "top": 124.431,
+          "x1": 168.666,
+          "bottom": 131.199
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 463.955,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 26, 2025",
+        "period_bbox": {
+          "x0": 430.115,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 53.817,
+            "top": 96.084,
+            "x1": 117.114,
+            "bottom": 102.699
+          },
+          "end_bbox": {
+            "x0": 53.466,
+            "top": 181.431,
+            "x1": 137.607,
+            "bottom": 188.199
+          }
+        }
+      }
+    },
+    {
+      "id": "short_investments-2024",
+      "metric": "short_investments",
+      "label": "流动资产中的有价证券",
+      "value": "18704",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-01-28",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Marketable securities / FY2024",
+      "raw_value": "18,704",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 530.469,
+          "top": 124.71,
+          "x1": 557.595,
+          "bottom": 132.36
+        },
+        "row_label": "Marketable securities",
+        "row_label_bbox": {
+          "x0": 78.855,
+          "top": 124.431,
+          "x1": 168.666,
+          "bottom": 131.199
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 534.455,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 28, 2024",
+        "period_bbox": {
+          "x0": 500.615,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 53.817,
+            "top": 96.084,
+            "x1": 117.114,
+            "bottom": 102.699
+          },
+          "end_bbox": {
+            "x0": 53.466,
+            "top": 181.431,
+            "x1": 137.607,
+            "bottom": 188.199
+          }
+        }
+      }
+    },
+    {
+      "id": "current_assets-2025",
+      "metric": "current_assets",
+      "label": "流动资产",
+      "value": "80126",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-01-26",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Total current assets / FY2025",
+      "raw_value": "80,126",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 458.835,
+          "top": 181.71,
+          "x1": 486.96,
+          "bottom": 189.36
+        },
+        "row_label": "Total current assets",
+        "row_label_bbox": {
+          "x0": 53.466,
+          "top": 181.431,
+          "x1": 137.607,
+          "bottom": 188.199
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 463.955,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 26, 2025",
+        "period_bbox": {
+          "x0": 430.115,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "current_assets-2024",
+      "metric": "current_assets",
+      "label": "流动资产",
+      "value": "44345",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-01-28",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Total current assets / FY2024",
+      "raw_value": "44,345",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 529.227,
+          "top": 181.71,
+          "x1": 557.325,
+          "bottom": 189.36
+        },
+        "row_label": "Total current assets",
+        "row_label_bbox": {
+          "x0": 53.466,
+          "top": 181.431,
+          "x1": 137.607,
+          "bottom": 188.199
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 534.455,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 28, 2024",
+        "period_bbox": {
+          "x0": 500.615,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "current_liabilities-2025",
+      "metric": "current_liabilities",
+      "label": "流动负债",
+      "value": "18047",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-01-26",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Total current liabilities / FY2025",
+      "raw_value": "18,047",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 459.969,
+          "top": 382.71,
+          "x1": 486.771,
+          "bottom": 390.36
+        },
+        "row_label": "Total current liabilities",
+        "row_label_bbox": {
+          "x0": 53.466,
+          "top": 382.431,
+          "x1": 146.832,
+          "bottom": 389.199
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 463.955,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 26, 2025",
+        "period_bbox": {
+          "x0": 430.115,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "current_liabilities-2024",
+      "metric": "current_liabilities",
+      "label": "流动负债",
+      "value": "10631",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-01-28",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Total current liabilities / FY2024",
+      "raw_value": "10,631",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 530.469,
+          "top": 382.71,
+          "x1": 555.84,
+          "bottom": 390.36
+        },
+        "row_label": "Total current liabilities",
+        "row_label_bbox": {
+          "x0": 53.466,
+          "top": 382.431,
+          "x1": 146.832,
+          "bottom": 389.199
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 534.455,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 28, 2024",
+        "period_bbox": {
+          "x0": 500.615,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "long_debt-2025",
+      "metric": "long_debt",
+      "label": "长期债务",
+      "value": "8463",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-01-26",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Long-term debt / FY2025",
+      "raw_value": "8,463",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 464.235,
+          "top": 396.96,
+          "x1": 486.762,
+          "bottom": 404.61
+        },
+        "row_label": "Long-term debt",
+        "row_label_bbox": {
+          "x0": 54.105,
+          "top": 396.681,
+          "x1": 119.589,
+          "bottom": 405.267
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 463.955,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 26, 2025",
+        "period_bbox": {
+          "x0": 430.115,
+          "top": 67.71,
+          "x1": 484.556,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "long_debt-2024",
+      "metric": "long_debt",
+      "label": "长期债务",
+      "value": "8459",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-01-28",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.146 (10-K printed 54) / Long-term debt / FY2024",
+      "raw_value": "8,459",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 146,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 534.735,
+          "top": 396.96,
+          "x1": 557.388,
+          "bottom": 404.61
+        },
+        "row_label": "Long-term debt",
+        "row_label_bbox": {
+          "x0": 54.105,
+          "top": 396.681,
+          "x1": 119.589,
+          "bottom": 405.267
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 534.455,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 74.199
+        },
+        "period_header": "Jan 28, 2024",
+        "period_bbox": {
+          "x0": 500.615,
+          "top": 67.71,
+          "x1": 555.353,
+          "bottom": 75.729
+        },
+        "unit_header": "(In millions, except par value)",
+        "unit_bbox": {
+          "x0": 243.985,
+          "top": 45.612,
+          "x1": 368.122,
+          "bottom": 54.441
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "cfo-2025",
+      "metric": "cfo",
+      "label": "经营活动现金流",
+      "value": "64089",
+      "unit": "USD_million",
+      "period_start": "2024-01-29",
+      "period_end": "2025-01-26",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.148 (10-K printed 56) / Net cash provided by operating activities / FY2025",
+      "raw_value": "64,089",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 148,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 392.127,
+          "top": 331.71,
+          "x1": 420.135,
+          "bottom": 339.36
+        },
+        "row_label": "Net cash provided by operating activities",
+        "row_label_bbox": {
+          "x0": 53.355,
+          "top": 331.431,
+          "x1": 224.265,
+          "bottom": 340.017
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 397.955,
+          "top": 71.46,
+          "x1": 418.556,
+          "bottom": 77.949
+        },
+        "period_header": "Jan 26, 2025",
+        "period_bbox": {
+          "x0": 364.115,
+          "top": 71.46,
+          "x1": 418.556,
+          "bottom": 79.479
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 281.575,
+          "top": 41.112,
+          "x1": 330.463,
+          "bottom": 49.311
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "cfo-2024",
+      "metric": "cfo",
+      "label": "经营活动现金流",
+      "value": "28090",
+      "unit": "USD_million",
+      "period_start": "2023-01-30",
+      "period_end": "2024-01-28",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.148 (10-K printed 56) / Net cash provided by operating activities / FY2024",
+      "raw_value": "28,090",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 148,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 461.253,
+          "top": 331.71,
+          "x1": 489.297,
+          "bottom": 339.36
+        },
+        "row_label": "Net cash provided by operating activities",
+        "row_label_bbox": {
+          "x0": 53.355,
+          "top": 331.431,
+          "x1": 224.265,
+          "bottom": 340.017
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 466.955,
+          "top": 71.46,
+          "x1": 487.853,
+          "bottom": 77.949
+        },
+        "period_header": "Jan 28, 2024",
+        "period_bbox": {
+          "x0": 433.115,
+          "top": 71.46,
+          "x1": 487.853,
+          "bottom": 79.479
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 281.575,
+          "top": 41.112,
+          "x1": 330.463,
+          "bottom": 49.311
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "net_income-2025",
+      "metric": "net_income",
+      "label": "净利润",
+      "value": "72880",
+      "unit": "USD_million",
+      "period_start": "2024-01-29",
+      "period_end": "2025-01-26",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.148 (10-K printed 56) / Net income / FY2025",
+      "raw_value": "72,880",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 148,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 392.271,
+          "top": 99.96,
+          "x1": 420.297,
+          "bottom": 107.61
+        },
+        "row_label": "Net income",
+        "row_label_bbox": {
+          "x0": 53.355,
+          "top": 99.888,
+          "x1": 100.452,
+          "bottom": 106.449
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 397.955,
+          "top": 71.46,
+          "x1": 418.556,
+          "bottom": 77.949
+        },
+        "period_header": "Jan 26, 2025",
+        "period_bbox": {
+          "x0": 364.115,
+          "top": 71.46,
+          "x1": 418.556,
+          "bottom": 79.479
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 281.575,
+          "top": 41.112,
+          "x1": 330.463,
+          "bottom": 49.311
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "net_income-2024",
+      "metric": "net_income",
+      "label": "净利润",
+      "value": "29760",
+      "unit": "USD_million",
+      "period_start": "2023-01-30",
+      "period_end": "2024-01-28",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.148 (10-K printed 56) / Net income / FY2024",
+      "raw_value": "29,760",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 148,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 461.253,
+          "top": 99.96,
+          "x1": 489.297,
+          "bottom": 107.61
+        },
+        "row_label": "Net income",
+        "row_label_bbox": {
+          "x0": 53.355,
+          "top": 99.888,
+          "x1": 100.452,
+          "bottom": 106.449
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 466.955,
+          "top": 71.46,
+          "x1": 487.853,
+          "bottom": 77.949
+        },
+        "period_header": "Jan 28, 2024",
+        "period_bbox": {
+          "x0": 433.115,
+          "top": 71.46,
+          "x1": 487.853,
+          "bottom": 79.479
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 281.575,
+          "top": 41.112,
+          "x1": 330.463,
+          "bottom": 49.311
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "capex-2025",
+      "metric": "capex",
+      "label": "购建固定资产与无形资产现金流出",
+      "value": "3236",
+      "unit": "USD_million",
+      "period_start": "2024-01-29",
+      "period_end": "2025-01-26",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.148 (10-K printed 56) / Purchases related to property and equipment and intangible assets / FY2025",
+      "raw_value": "(3,236)",
+      "transformation": "absolute_cash_outflow",
+      "pdf_location": {
+        "page": 148,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 394.98,
+          "top": 425.562,
+          "x1": 422.7,
+          "bottom": 433.86
+        },
+        "row_label": "Purchases related to property and equipment and intangible assets",
+        "row_label_bbox": {
+          "x0": 77.628,
+          "top": 416.931,
+          "x1": 331.095,
+          "bottom": 432.699
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 397.955,
+          "top": 71.46,
+          "x1": 418.556,
+          "bottom": 77.949
+        },
+        "period_header": "Jan 26, 2025",
+        "period_bbox": {
+          "x0": 364.115,
+          "top": 71.46,
+          "x1": 418.556,
+          "bottom": 79.479
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 281.575,
+          "top": 41.112,
+          "x1": 330.463,
+          "bottom": 49.311
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    },
+    {
+      "id": "capex-2024",
+      "metric": "capex",
+      "label": "购建固定资产与无形资产现金流出",
+      "value": "1069",
+      "unit": "USD_million",
+      "period_start": "2023-01-30",
+      "period_end": "2024-01-28",
+      "source_id": "nvda-fy25-annual-wrapper",
+      "locator": "Annual-report PDF p.148 (10-K printed 56) / Purchases related to property and equipment and intangible assets / FY2024",
+      "raw_value": "(1,069)",
+      "transformation": "absolute_cash_outflow",
+      "pdf_location": {
+        "page": 148,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 463.98,
+          "top": 425.562,
+          "x1": 491.7,
+          "bottom": 433.86
+        },
+        "row_label": "Purchases related to property and equipment and intangible assets",
+        "row_label_bbox": {
+          "x0": 77.628,
+          "top": 416.931,
+          "x1": 331.095,
+          "bottom": 432.699
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 466.955,
+          "top": 71.46,
+          "x1": 487.853,
+          "bottom": 77.949
+        },
+        "period_header": "Jan 28, 2024",
+        "period_bbox": {
+          "x0": 433.115,
+          "top": 71.46,
+          "x1": 487.853,
+          "bottom": 79.479
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 281.575,
+          "top": 41.112,
+          "x1": 330.463,
+          "bottom": 49.311
+        },
+        "parser_version": "nvda-inline-dates-reference-1"
+      }
+    }
+  ],
+  "fiscal_calendar": "week_52_53"
+}
