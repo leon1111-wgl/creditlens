@@ -31,3 +31,4 @@ artifacts/service-v02.pid
 /.private/
 /local-notes/
 artifacts/table-lookup-syntax.js
+artifacts/reference-review-syntax.js

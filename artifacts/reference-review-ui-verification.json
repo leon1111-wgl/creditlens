@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "version": "0.23.0",
+  "date": "2026-10-26",
+  "preview": "http://127.0.0.1:8775/reference-review",
+  "browser": "in-app Chromium",
+  "scope": "Synthetic principals and artificial observations in an isolated local state directory; not financial references or human annotations.",
+  "software_tests": {
+    "run": 997,
+    "passed": 995,
+    "skipped": 2,
+    "skip_reason": "Windows symlink permission"
+  },
+  "new_tests": {
+    "contract": 22,
+    "workflow_and_replay": 24,
+    "api": 7
+  },
+  "browser_checks": [
+    "40 task catalog without prefilled observations",
+    "create and submit first synthetic observation",
+    "raw page loads without old boxes: 1224 by 1584 pixels",
+    "identity change clears hidden record and metadata",
+    "second identity sees null first observation before submitting",
+    "second synthetic observation exposes comparison; differing free reasons retained",
+    "third reviewer freezes candidate with human_gold false",
+    "export bytes match API after a new round",
+    "new round has no observations and references prior frozen record",
+    "viewer reads frozen history with writes disabled",
+    "compact content tables and translated comparison status",
+    "no browser console errors"
+  ],
+  "download": {
+    "bytes": 5479,
+    "sha256": "ed59784d31103d6e77c19d25175f44ee91b68af57f47acd0c0f3593f0e6d941a",
+    "matches_api_bytes_after_new_round": true
+  },
+  "synthetic_replay": {
+    "checks": 18,
+    "passed": 18,
+    "failed": 0,
+    "synthetic_rounds": 3,
+    "synthetic_observations": 4,
+    "frozen_candidates": 1,
+    "human_gold": 0
+  },
+  "saved_replay_matches": true,
+  "old_files_unchanged": 114,
+  "old_api_unchanged": [
+    {
+      "route": "/api/currency-diagnostic",
+      "bytes": 878461,
+      "sha256": "ea3de8366426b976282c375789ba70c4b2f4400df0352beaa0c659287e57def2"
+    },
+    {
+      "route": "/api/issuer-evaluation",
+      "bytes": 197549,
+      "sha256": "9ea41867c33ae4c19d376c5c72c66764957430ef1a3d51a9f439b7fe58eb6ed3"
+    },
+    {
+      "route": "/api/evidence-guard",
+      "bytes": 1301589,
+      "sha256": "c6a091d3bc51f2285733e70f5ab23bc905d188d36f8f7bc093636d50ee11b61f"
+    },
+    {
+      "route": "/api/document-input-checks",
+      "bytes": 22670,
+      "sha256": "b2bcf7f7f9ff10d4c65b62ae53b1597833de2bbb5848c101893413b3e8dc7390"
+    },
+    {
+      "route": "/api/cross-page-evidence",
+      "bytes": 26988,
+      "sha256": "648018944051de9ede73da2d863d1ff382579d1ea4a679fbe590b2052b214db7"
+    },
+    {
+      "route": "/api/table-lookup",
+      "bytes": 255356,
+      "sha256": "4a3f7272b88a6ce4033652270aaf62f0de7da477fe213458aff40f9bffe0136d"
+    },
+    {
+      "route": "/api/word-table-lookup",
+      "bytes": 536868,
+      "sha256": "4005054003f0d1a4e06d62822715ff0c41246b2df50d932d7338381084fbfb87"
+    }
+  ],
+  "actual_network_fault_injection": false,
+  "narrow_screen_tested": false,
+  "manual_region_interaction": "controlled JavaScript VM; actual browser verified unannotated image load and coordinate form input",
+  "new_ocr_calls": 0,
+  "model_calls": 0,
+  "independent_human_gold": 0,
+  "screenshot": "docs/images/reference-review-desktop.png",
+  "ui_vm_checks": 24,
+  "independent_advisor_workflow_groups": 6
+}
