@@ -8,6 +8,7 @@ from collections import Counter
 from datetime import datetime, timezone
 import argparse
 import hashlib
+from io import BytesIO
 from importlib.metadata import version
 import json
 from pathlib import Path
@@ -18,6 +19,7 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from creditlens.diligence import CasePack, digest
+from creditlens.experiment_paths import default_local_dir, default_report_path, validate_experiment_paths, validate_write_path
 from creditlens.visual import OcrPage, VISUAL_RULE_VERSION, crosscheck_fact
 from scripts.build_pdf_pack import verified_pdf
 
@@ -25,11 +27,41 @@ DOCUMENTS = {"msft": "msft-fy2025-pdf.json", "aapl": "aapl-fy2025-pdf.json"}
 
 
 def write_json(path, payload):
+    path = validate_write_path(ROOT, path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
 
 
-def run(*, download=False, output=ROOT/"artifacts/document-ai-report.json", local_dir=ROOT/".run/document-ai"):
+def save_page_image(path, image, *, expected_sha256=None):
+    path = validate_write_path(ROOT, path)
+    if path.is_relative_to((ROOT/".run/document-ai").resolve()) and expected_sha256 is None:
+        raise ValueError("Registered document previews require their frozen image hash")
+    rendered = BytesIO()
+    image.save(rendered, format="PNG")
+    raw = rendered.getvalue()
+    if expected_sha256 is not None:
+        if hashlib.sha256(raw).hexdigest() != expected_sha256:
+            raise ValueError("Rendered document preview differs from its frozen registration; use a separate reproduction --local-dir")
+        if path.exists():
+            if path.read_bytes() != raw:
+                raise ValueError("Existing document preview differs; use a separate reproduction --local-dir")
+            return  # Preserve an already verified preview, including its mtime.
+    path.write_bytes(raw)
+
+
+def run(*, download=False, output=None, local_dir=None):
+    paths = validate_experiment_paths(ROOT, output if output is not None else default_report_path(ROOT, "document-ai"),
+                                      local_dir if local_dir is not None else default_local_dir(ROOT, "document-ai"),
+                                      allow_registered_preview=True)
+    output, local_dir = paths.output, paths.local_dir
+    preview_root = (ROOT/".run/document-ai").resolve()
+    registered_images = None
+    if local_dir.is_relative_to(preview_root):
+        if local_dir != preview_root:
+            raise ValueError("Registered document previews require the exact .run/document-ai directory")
+        frozen = json.loads((ROOT/"artifacts/document-ai-report.json").read_text(encoding="utf-8"))
+        registered_images = {(d["id"], p["page"]): p["image_sha256"]
+                             for d in frozen["documents"] for p in d["pages"]}
     import pypdfium2 as pdfium
     import rapidocr
     from rapidocr import RapidOCR, EngineType, ModelType, OCRVersion
@@ -77,8 +109,13 @@ def run(*, download=False, output=ROOT/"artifacts/document-ai-report.json", loca
                         bitmap.close()
                 finally:
                     page.close()
-                image_path = directory/f"page-{page_number}.png"
-                image.save(image_path)
+                image_path = validate_write_path(ROOT, directory/f"page-{page_number}.png")
+                expected_image = None
+                if registered_images is not None:
+                    expected_image = registered_images.get((doc_id, page_number))
+                    if expected_image is None:
+                        raise ValueError("Page is not registered for the document preview directory")
+                save_page_image(image_path, image, expected_sha256=expected_image)
                 # Full unannotated image only. Do not pass known facts or crop boxes.
                 started = time.perf_counter()
                 result = engine(str(image_path))
@@ -120,6 +157,8 @@ def run(*, download=False, output=ROOT/"artifacts/document-ai-report.json", loca
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--download", action="store_true", help="Download only registered official PDFs if missing")
-    parser.add_argument("--output", type=Path, default=ROOT/"artifacts/document-ai-report.json")
+    parser.add_argument("--output", type=Path, default=default_report_path(ROOT, "document-ai"))
+    parser.add_argument("--local-dir", type=Path, default=default_local_dir(ROOT, "document-ai"),
+                        help="Local full-page images/OCR; defaults to an isolated reproduction directory")
     args = parser.parse_args()
-    run(download=args.download, output=args.output)
+    run(download=args.download, output=args.output, local_dir=args.local_dir)
