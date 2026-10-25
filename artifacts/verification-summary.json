@@ -367,6 +367,17 @@
       "network fault injection",
       "production load"
     ],
-    "training_or_paid_api": false
+    "training_or_paid_api": false,
+    "publication": {
+      "implementation_commit": "440d1820157c70ed7076a15b15451d126a2f9123",
+      "ci_url": "https://github.com/leon1111-wgl/creditlens/actions/runs/40168483852",
+      "ci": "success",
+      "profile_commit": "743bc2a",
+      "feature_branches_published": [
+        "feature/document-ai-words",
+        "feature/visual-robustness"
+      ],
+      "research_branch": "research/advisory"
+    }
   }
 }

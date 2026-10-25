@@ -87,7 +87,7 @@ flowchart LR
 | 检索召回 82.43% | [原始逐题结果](../artifacts/retrieval-baseline.json)、[core.py](../creditlens/core.py) | FinQA dev、页内检索；非问答分数 |
 | 受限模型计划 | [planner.py](../creditlens/planner.py)、[测试](../tests/test_planner.py) | 真实模型效果未测；接口测试用模拟响应 |
 | 独立复核与权限 | [workflow.py](../creditlens/workflow.py)、[API](../creditlens/api.py)、[工作流测试](../tests/test_workflow.py) | 模拟用户与本地演示；无银行生产验收 |
-| 168 项测试与 CI | [验收摘要](../artifacts/verification-summary.json)、[功能提交 CI](https://github.com/leon1111-wgl/creditlens/actions/runs/40166212935) | 168 是本地软件测试数量，15 个控制场景已包含其中；该 CI 链接是 v0.6 历史记录，新版远端验收见当前状态 |
+| 168 项测试与 CI | [验收摘要](../artifacts/verification-summary.json)、[功能提交 CI](https://github.com/leon1111-wgl/creditlens/actions/runs/40168483852) | 168 是软件测试数量，15 个控制场景已包含其中；本地与 v0.7 远端 CI 通过 |
 | 可追溯观察因子 | [因子输出](../artifacts/factor-snapshot.json) | 5 个观察指标，没有验证 alpha 或 PD |
 
 ## 面试讲解：约两分钟

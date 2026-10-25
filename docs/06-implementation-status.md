@@ -87,3 +87,5 @@ v0.6 wheel 已构建并确认包含文档页面与新 Python 模块；独立安�
 [完整简历材料](14-resume-and-interview.md) · [并行机制](15-parallel-iteration.md) · [桌面实验页](images/document-experiments-desktop.png) · [窄屏证据](images/document-experiments-narrow.png)。任务频率已改为每 15 分钟复核，已有任务继续而不重复开工。没有新增费用或租卡需求。
 
 v0.7 wheel 已构建，并确认包含五个页面及新增实验模块；仍须从仓库根目录运行，独立安装的数据分发未验收。
+
+v0.7 实现提交 `440d1820157c70ed7076a15b15451d126a2f9123` 已推送，[远端 CI](https://github.com/leon1111-wgl/creditlens/actions/runs/40168483852) 通过（含 Pillow 图像变换与 168 项测试）。两条实现分支及研究分支已发布，主页提交 `743bc2a` 增补实验说明与完整技术材料入口。全部提交保持核验的 leon1111-wgl 身份。
