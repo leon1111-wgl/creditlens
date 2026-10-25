@@ -11,10 +11,10 @@
   color-scheme: light;
   --font: "Times New Roman", "Songti SC", SimSun, "Noto Serif CJK SC", serif;
   --text: #1f2329;
-  --muted: #606773;
-  --line: #e4e6eb;
+  --muted: #5f6773;
+  --line: #dfe3e8;
   --soft: #f7f8fa;
-  --blue: #2155cc;
+  --blue: #2856a6;
   --radius: 4px;
 }
 * { box-sizing: border-box; }
@@ -30,7 +30,7 @@ button, input, select { font: inherit; }
 .workspace-nav { display: grid; gap: 5px; }
 .workspace-nav a { padding: 9px 12px; color: #414751; border-radius: var(--radius); font-size: 14px; }
 .workspace-nav a:hover { background: #eceef2; text-decoration: none; }
-.workspace-nav a[aria-current="page"] { color: var(--blue); background: #e8efff; font-weight: 700; }
+.workspace-nav a[aria-current="page"] { color: var(--blue); background: #eaf0fa; font-weight: 700; }
 .sidebar-foot { margin: auto 12px 0; padding-top: 24px; color: var(--muted); font-size: 12px; }
 .workspace { min-width: 0; }
 .topbar { height: 52px; border-bottom: 1px solid var(--line); padding: 0 28px; display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); }
@@ -50,9 +50,9 @@ input { width: 260px; }
 input::placeholder { color: #69717d; font-size: 13px; }
 select { min-width: 125px; }
 button { padding: 5px 15px; cursor: pointer; white-space: nowrap; }
-button:hover { border-color: var(--blue); color: var(--blue); background: #f6f8ff; }
+button:hover { border-color: var(--blue); color: var(--blue); background: #f2f5fa; }
 button.primary { color: #fff; background: var(--blue); border-color: var(--blue); }
-button.primary:hover { background: #1745ae; }
+button.primary:hover { background: #20478c; }
 button:disabled { background: #f4f5f7; border-color: #e0e3e8; color: #858b95; cursor: default; }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 .toolbar .export { margin-left: auto; }
@@ -116,6 +116,29 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
   .notice { margin-bottom: 20px; }
   .count { font-size: 16px; }
 }
+
+/* Shared workspace palette: restrained neutral surfaces and blue actions.
+   Native CSS, inspired by office workspaces; no external design-system package. */
+:root{--font:"Times New Roman","Songti SC",SimSun,"Noto Serif CJK SC",serif;--text:#1f2329;--ink:#1f2329;--muted:#5f6773;--line:#dfe3e8;--soft:#f5f6f8;--blue:#2856a6;--green:#2856a6;--accent:#2856a6;--bg:#f5f6f8;--amber:#8a6118;--red:#a5362d;font-family:var(--font);color:var(--text);background:var(--bg)}
+body{font:15px/1.6 var(--font);color:var(--text);background:var(--bg)}
+h1,h2,h3,.brand,.logo,.number,.fact-value,.metric .number,.empty h2{font-family:var(--font)}
+h1{font-size:24px;line-height:1.4;letter-spacing:0}h2{font-size:18px}h3{font-size:15px}
+button,input,select,textarea{font-family:var(--font)}
+input,select,textarea{color:var(--text);border-color:#aeb7c4}
+a{color:var(--blue);text-underline-offset:3px}
+button.primary,.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20478c;border-color:#20478c;color:#fff}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.panel,.controls{border-radius:4px}.brand,.logo{font-weight:700}
+.tag.consistent{background:#edf6f0;color:#28734e}.tag.insufficient,.tag.warn,.tag.derived_requires_review{background:#fff5e4;color:#8a6118}
+.tag.conflict,.tag.danger,.tag.blocked{background:#fcefee;color:#a5362d}
+.tag.missing{background:#f0f2f5;color:#5f6773}
+.notice{border-radius:3px}.empty{background:#f5f6f8}
+@media(max-width:700px){h1{font-size:22px}h2{font-size:18px}}
+
+.workspace{background:white}.sidebar{background:#f0f2f5}.notice{background:#f2f5fa}
+
+button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
 </style>
 </head>
 <body>
