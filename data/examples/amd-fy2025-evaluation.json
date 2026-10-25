@@ -1,0 +1,850 @@
+{
+  "schema_version": 1,
+  "purpose": "frozen_issuer_evaluation",
+  "entity_id": "AMD",
+  "company": "Advanced Micro Devices, Inc.",
+  "title": "AMD FY2025 新发行人固定参考（仅文档评测，非历史时点数据）",
+  "sources": [
+    {
+      "id": "amd-fy25-ir-annual",
+      "title": "AMD FY2025 annual report on official investor-relations website",
+      "url": "https://ir.amd.com/financial-information/sec-filings/content/0001193125-26-129106/0001193125-26-129106.pdf",
+      "sha256": "c7dac911d91ed1b38afa3fbf3b3408cbd0c105d1c820a4b6fa15f553e2892187",
+      "underlying_filing_date": "2026-02-04",
+      "wrapper_filing_date": "2026-03-27",
+      "wrapper_filing_evidence_url": "https://www.sec.gov/Archives/edgar/data/2488/000119312526129106/0001193125-26-129106-index.htm",
+      "exact_asset_publication_date": null,
+      "first_available_at": null,
+      "source_date_basis": "exact_asset_publication_unknown",
+      "publication_evidence_url": null,
+      "publication_note": "The issuer IR ARS listing associates this 124-page annual report with 2026-03-27, also the SEC ARS filing date. The SEC PDF attachment differs in bytes from the current IR asset; first public availability of these exact IR bytes is not established. The 10-K filing event is not this asset's publication date.",
+      "revision_note": "The underlying 10-K and 10-K/A (0000002488-26-000021) were filed on 2026-02-04. The amendment corrects the swapped Client unit-shipment and ASP growth percentages; the IR wrapper body already contains the corrected 15% and 31% figures. This does not mean a separate complete 10-K/A is appended. Note 2 says some FY2024 and FY2023 amounts were reclassified: these are FY2025-presented comparisons, not original FY2024 observations. Equivalence of the current IR asset and the SEC ARS attachment is not asserted.",
+      "retrieved_at": "2026-10-25T08:22:40.588016+00:00",
+      "historical_snapshot_verified": false,
+      "point_in_time_eligible": false
+    }
+  ],
+  "facts": [
+    {
+      "id": "cash_equivalents-2025",
+      "metric": "cash_equivalents",
+      "label": "现金及现金等价物",
+      "value": "5539",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.74 (printed 62) / Cash and cash equivalents / consolidated_balance_sheet / FY2025",
+      "raw_value": "5,539",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 74,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 439.12,
+          "top": 170.27,
+          "x1": 460.89,
+          "bottom": 178.55
+        },
+        "row_label": "Cash and cash equivalents",
+        "row_label_bbox": {
+          "x0": 89.28,
+          "top": 170.32,
+          "x1": 193.89,
+          "bottom": 179.31
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 437.14,
+          "top": 115.646,
+          "x1": 452.764,
+          "bottom": 121.246
+        },
+        "period_header": "December 27, 2025",
+        "period_bbox": {
+          "x0": 421.812,
+          "top": 107.646,
+          "x1": 468.132,
+          "bottom": 121.246
+        },
+        "unit_header": "(In millions, except par value amounts)",
+        "unit_bbox": {
+          "x0": 424.124,
+          "top": 127.598,
+          "x1": 522.788,
+          "bottom": 142.486
+        },
+        "parser_version": "amd-stacked-dates-reference-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 69.49,
+            "top": 158.24,
+            "x1": 133.45,
+            "bottom": 165.33
+          },
+          "end_bbox": {
+            "x0": 109.31,
+            "top": 234.39,
+            "x1": 193.21,
+            "bottom": 241.28
+          }
+        }
+      }
+    },
+    {
+      "id": "cash_equivalents-2024",
+      "metric": "cash_equivalents",
+      "label": "现金及现金等价物",
+      "value": "3787",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-12-28",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.74 (printed 62) / Cash and cash equivalents / consolidated_balance_sheet / FY2024",
+      "raw_value": "3,787",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 74,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 495.88,
+          "top": 170.39,
+          "x1": 517.44,
+          "bottom": 178.55
+        },
+        "row_label": "Cash and cash equivalents",
+        "row_label_bbox": {
+          "x0": 89.28,
+          "top": 170.32,
+          "x1": 193.89,
+          "bottom": 179.31
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 493.796,
+          "top": 115.646,
+          "x1": 509.46,
+          "bottom": 121.246
+        },
+        "period_header": "December 28, 2024",
+        "period_bbox": {
+          "x0": 478.468,
+          "top": 107.646,
+          "x1": 524.788,
+          "bottom": 121.246
+        },
+        "unit_header": "(In millions, except par value amounts)",
+        "unit_bbox": {
+          "x0": 424.124,
+          "top": 127.598,
+          "x1": 522.788,
+          "bottom": 142.486
+        },
+        "parser_version": "amd-stacked-dates-reference-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 69.49,
+            "top": 158.24,
+            "x1": 133.45,
+            "bottom": 165.33
+          },
+          "end_bbox": {
+            "x0": 109.31,
+            "top": 234.39,
+            "x1": 193.21,
+            "bottom": 241.28
+          }
+        }
+      }
+    },
+    {
+      "id": "current_assets-2025",
+      "metric": "current_assets",
+      "label": "流动资产",
+      "value": "26947",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.74 (printed 62) / Total current assets / consolidated_balance_sheet / FY2025",
+      "raw_value": "26,947",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 74,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 434.1,
+          "top": 234.31,
+          "x1": 460.79,
+          "bottom": 242.55
+        },
+        "row_label": "Total current assets",
+        "row_label_bbox": {
+          "x0": 109.31,
+          "top": 234.39,
+          "x1": 193.21,
+          "bottom": 241.28
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 437.14,
+          "top": 115.646,
+          "x1": 452.764,
+          "bottom": 121.246
+        },
+        "period_header": "December 27, 2025",
+        "period_bbox": {
+          "x0": 421.812,
+          "top": 107.646,
+          "x1": 468.132,
+          "bottom": 121.246
+        },
+        "unit_header": "(In millions, except par value amounts)",
+        "unit_bbox": {
+          "x0": 424.124,
+          "top": 127.598,
+          "x1": 522.788,
+          "bottom": 142.486
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "current_assets-2024",
+      "metric": "current_assets",
+      "label": "流动资产",
+      "value": "19049",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-12-28",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.74 (printed 62) / Total current assets / consolidated_balance_sheet / FY2024",
+      "raw_value": "19,049",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 74,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 491.56,
+          "top": 234.39,
+          "x1": 517.54,
+          "bottom": 242.55
+        },
+        "row_label": "Total current assets",
+        "row_label_bbox": {
+          "x0": 109.31,
+          "top": 234.39,
+          "x1": 193.21,
+          "bottom": 241.28
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 493.796,
+          "top": 115.646,
+          "x1": 509.46,
+          "bottom": 121.246
+        },
+        "period_header": "December 28, 2024",
+        "period_bbox": {
+          "x0": 478.468,
+          "top": 107.646,
+          "x1": 524.788,
+          "bottom": 121.246
+        },
+        "unit_header": "(In millions, except par value amounts)",
+        "unit_bbox": {
+          "x0": 424.124,
+          "top": 127.598,
+          "x1": 522.788,
+          "bottom": 142.486
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "current_liabilities-2025",
+      "metric": "current_liabilities",
+      "label": "流动负债",
+      "value": "9455",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.74 (printed 62) / Total current liabilities / consolidated_balance_sheet / FY2025",
+      "raw_value": "9,455",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 74,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 439.1,
+          "top": 401.27,
+          "x1": 460.68,
+          "bottom": 409.55
+        },
+        "row_label": "Total current liabilities",
+        "row_label_bbox": {
+          "x0": 109.31,
+          "top": 401.24,
+          "x1": 207.67,
+          "bottom": 408.28
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 437.14,
+          "top": 115.646,
+          "x1": 452.764,
+          "bottom": 121.246
+        },
+        "period_header": "December 27, 2025",
+        "period_bbox": {
+          "x0": 421.812,
+          "top": 107.646,
+          "x1": 468.132,
+          "bottom": 121.246
+        },
+        "unit_header": "(In millions, except par value amounts)",
+        "unit_bbox": {
+          "x0": 424.124,
+          "top": 127.598,
+          "x1": 522.788,
+          "bottom": 142.486
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "current_liabilities-2024",
+      "metric": "current_liabilities",
+      "label": "流动负债",
+      "value": "7281",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-12-28",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.74 (printed 62) / Total current liabilities / consolidated_balance_sheet / FY2024",
+      "raw_value": "7,281",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 74,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 495.65,
+          "top": 401.39,
+          "x1": 516.89,
+          "bottom": 409.55
+        },
+        "row_label": "Total current liabilities",
+        "row_label_bbox": {
+          "x0": 109.31,
+          "top": 401.24,
+          "x1": 207.67,
+          "bottom": 408.28
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 493.796,
+          "top": 115.646,
+          "x1": 509.46,
+          "bottom": 121.246
+        },
+        "period_header": "December 28, 2024",
+        "period_bbox": {
+          "x0": 478.468,
+          "top": 107.646,
+          "x1": 524.788,
+          "bottom": 121.246
+        },
+        "unit_header": "(In millions, except par value amounts)",
+        "unit_bbox": {
+          "x0": 424.124,
+          "top": 127.598,
+          "x1": 522.788,
+          "bottom": 142.486
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "long_debt-2025",
+      "metric": "long_debt",
+      "label": "长期债务（扣除流动部分后的净额）",
+      "value": "2348",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-12-27",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.74 (printed 62) / Long-term debt, net of current portion / noncurrent_debt_net / FY2025",
+      "raw_value": "2,348",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 74,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 439.1,
+          "top": 413.39,
+          "x1": 460.75,
+          "bottom": 421.55
+        },
+        "row_label": "Long-term debt, net of current portion",
+        "row_label_bbox": {
+          "x0": 69.12,
+          "top": 413.32,
+          "x1": 221.84,
+          "bottom": 422.32
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 437.14,
+          "top": 115.646,
+          "x1": 452.764,
+          "bottom": 121.246
+        },
+        "period_header": "December 27, 2025",
+        "period_bbox": {
+          "x0": 421.812,
+          "top": 107.646,
+          "x1": 468.132,
+          "bottom": 121.246
+        },
+        "unit_header": "(In millions, except par value amounts)",
+        "unit_bbox": {
+          "x0": 424.124,
+          "top": 127.598,
+          "x1": 522.788,
+          "bottom": 142.486
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "long_debt-2024",
+      "metric": "long_debt",
+      "label": "长期债务（扣除流动部分后的净额）",
+      "value": "1721",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-12-28",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.74 (printed 62) / Long-term debt, net of current portion / noncurrent_debt_net / FY2024",
+      "raw_value": "1,721",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 74,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 496.56,
+          "top": 413.39,
+          "x1": 516.89,
+          "bottom": 421.55
+        },
+        "row_label": "Long-term debt, net of current portion",
+        "row_label_bbox": {
+          "x0": 69.12,
+          "top": 413.32,
+          "x1": 221.84,
+          "bottom": 422.32
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 493.796,
+          "top": 115.646,
+          "x1": 509.46,
+          "bottom": 121.246
+        },
+        "period_header": "December 28, 2024",
+        "period_bbox": {
+          "x0": 478.468,
+          "top": 107.646,
+          "x1": 524.788,
+          "bottom": 121.246
+        },
+        "unit_header": "(In millions, except par value amounts)",
+        "unit_bbox": {
+          "x0": 424.124,
+          "top": 127.598,
+          "x1": 522.788,
+          "bottom": 142.486
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "cfo-2025",
+      "metric": "cfo",
+      "label": "持续经营活动现金流",
+      "value": "6493",
+      "unit": "USD_million",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.76 (printed 64) / Net cash provided by operating activities of continuing operations / continuing_operations / FY2025",
+      "raw_value": "6,493",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 76,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 382.89,
+          "top": 274.328,
+          "x1": 400.066,
+          "bottom": 280.92
+        },
+        "row_label": "Net cash provided by operating activities of continuing operations",
+        "row_label_bbox": {
+          "x0": 69.01,
+          "top": 274.336,
+          "x1": 279.77,
+          "bottom": 281.536
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 380.482,
+          "top": 121.496,
+          "x1": 396.106,
+          "bottom": 127.096
+        },
+        "period_header": "December 27, 2025",
+        "period_bbox": {
+          "x0": 365.154,
+          "top": 113.496,
+          "x1": 411.474,
+          "bottom": 127.096
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 424.474,
+          "top": 133.448,
+          "x1": 465.722,
+          "bottom": 140.336
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "cfo-2024",
+      "metric": "cfo",
+      "label": "持续经营活动现金流",
+      "value": "3041",
+      "unit": "USD_million",
+      "period_start": "2023-12-31",
+      "period_end": "2024-12-28",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.76 (printed 64) / Net cash provided by operating activities of continuing operations / continuing_operations / FY2024",
+      "raw_value": "3,041",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 76,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 439.61,
+          "top": 274.392,
+          "x1": 456.418,
+          "bottom": 280.92
+        },
+        "row_label": "Net cash provided by operating activities of continuing operations",
+        "row_label_bbox": {
+          "x0": 69.01,
+          "top": 274.336,
+          "x1": 279.77,
+          "bottom": 281.536
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 437.138,
+          "top": 121.496,
+          "x1": 452.802,
+          "bottom": 127.096
+        },
+        "period_header": "December 28, 2024",
+        "period_bbox": {
+          "x0": 421.81,
+          "top": 113.496,
+          "x1": 468.13,
+          "bottom": 127.096
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 424.474,
+          "top": 133.448,
+          "x1": 465.722,
+          "bottom": 140.336
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "net_income-2025",
+      "metric": "net_income",
+      "label": "整体净利润（包含终止经营）",
+      "value": "4335",
+      "unit": "USD_million",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.76 (printed 64) / Net income / consolidated_including_discontinued_operations / FY2025",
+      "raw_value": "4,335",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 76,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 382.802,
+          "top": 148.696,
+          "x1": 400.21,
+          "bottom": 155.32
+        },
+        "row_label": "Net income",
+        "row_label_bbox": {
+          "x0": 85.106,
+          "top": 148.736,
+          "x1": 121.954,
+          "bottom": 154.28
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 380.482,
+          "top": 121.496,
+          "x1": 396.106,
+          "bottom": 127.096
+        },
+        "period_header": "December 27, 2025",
+        "period_bbox": {
+          "x0": 365.154,
+          "top": 113.496,
+          "x1": 411.474,
+          "bottom": 127.096
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 424.474,
+          "top": 133.448,
+          "x1": 465.722,
+          "bottom": 140.336
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "net_income-2024",
+      "metric": "net_income",
+      "label": "整体净利润（包含终止经营）",
+      "value": "1641",
+      "unit": "USD_million",
+      "period_start": "2023-12-31",
+      "period_end": "2024-12-28",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.76 (printed 64) / Net income / consolidated_including_discontinued_operations / FY2024",
+      "raw_value": "1,641",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 76,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 440.242,
+          "top": 148.728,
+          "x1": 456.506,
+          "bottom": 155.32
+        },
+        "row_label": "Net income",
+        "row_label_bbox": {
+          "x0": 85.106,
+          "top": 148.736,
+          "x1": 121.954,
+          "bottom": 154.28
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 437.138,
+          "top": 121.496,
+          "x1": 452.802,
+          "bottom": 127.096
+        },
+        "period_header": "December 28, 2024",
+        "period_bbox": {
+          "x0": 421.81,
+          "top": 113.496,
+          "x1": 468.13,
+          "bottom": 127.096
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 424.474,
+          "top": 133.448,
+          "x1": 465.722,
+          "bottom": 140.336
+        },
+        "parser_version": "amd-stacked-dates-reference-1"
+      }
+    },
+    {
+      "id": "capex-2025",
+      "metric": "capex",
+      "label": "持续经营购建固定资产现金流出",
+      "value": "974",
+      "unit": "USD_million",
+      "period_start": "2024-12-29",
+      "period_end": "2025-12-27",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.76 (printed 64) / Purchases of property and equipment / continuing_operations / FY2025",
+      "raw_value": "(974)",
+      "transformation": "absolute_cash_outflow",
+      "pdf_location": {
+        "page": 76,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 386.338,
+          "top": 313.64,
+          "x1": 402.898,
+          "bottom": 320.456
+        },
+        "row_label": "Purchases of property and equipment",
+        "row_label_bbox": {
+          "x0": 85.034,
+          "top": 313.584,
+          "x1": 203.898,
+          "bottom": 320.784
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 380.482,
+          "top": 121.496,
+          "x1": 396.106,
+          "bottom": 127.096
+        },
+        "period_header": "December 27, 2025",
+        "period_bbox": {
+          "x0": 365.154,
+          "top": 113.496,
+          "x1": 411.474,
+          "bottom": 127.096
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 424.474,
+          "top": 133.448,
+          "x1": 465.722,
+          "bottom": 140.336
+        },
+        "parser_version": "amd-stacked-dates-reference-1",
+        "section": {
+          "start_label": "Cash flows from investing activities:",
+          "end_label": "Net cash used in investing activities of continuing operations",
+          "start_bbox": {
+            "x0": 69.13,
+            "top": 305.984,
+            "x1": 185.834,
+            "bottom": 313.184
+          },
+          "end_bbox": {
+            "x0": 68.946,
+            "top": 378.384,
+            "x1": 263.25,
+            "bottom": 385.584
+          }
+        }
+      }
+    },
+    {
+      "id": "capex-2024",
+      "metric": "capex",
+      "label": "持续经营购建固定资产现金流出",
+      "value": "636",
+      "unit": "USD_million",
+      "period_start": "2023-12-31",
+      "period_end": "2024-12-28",
+      "source_id": "amd-fy25-ir-annual",
+      "locator": "Annual PDF p.76 (printed 64) / Purchases of property and equipment / continuing_operations / FY2024",
+      "raw_value": "(636)",
+      "transformation": "absolute_cash_outflow",
+      "pdf_location": {
+        "page": 76,
+        "page_width": 594.0,
+        "page_height": 774.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 442.986,
+          "top": 313.576,
+          "x1": 459.546,
+          "bottom": 320.456
+        },
+        "row_label": "Purchases of property and equipment",
+        "row_label_bbox": {
+          "x0": 85.034,
+          "top": 313.584,
+          "x1": 203.898,
+          "bottom": 320.784
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 437.138,
+          "top": 121.496,
+          "x1": 452.802,
+          "bottom": 127.096
+        },
+        "period_header": "December 28, 2024",
+        "period_bbox": {
+          "x0": 421.81,
+          "top": 113.496,
+          "x1": 468.13,
+          "bottom": 127.096
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 424.474,
+          "top": 133.448,
+          "x1": 465.722,
+          "bottom": 140.336
+        },
+        "parser_version": "amd-stacked-dates-reference-1",
+        "section": {
+          "start_label": "Cash flows from investing activities:",
+          "end_label": "Net cash used in investing activities of continuing operations",
+          "start_bbox": {
+            "x0": 69.13,
+            "top": 305.984,
+            "x1": 185.834,
+            "bottom": 313.184
+          },
+          "end_bbox": {
+            "x0": 68.946,
+            "top": 378.384,
+            "x1": 263.25,
+            "bottom": 385.584
+          }
+        }
+      }
+    }
+  ],
+  "fiscal_calendar": "week_52_53"
+}
