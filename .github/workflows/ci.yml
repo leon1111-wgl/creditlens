@@ -25,10 +25,12 @@ jobs:
       - run: python scripts/evaluate_currency_diagnostic.py
       - run: python scripts/evaluate_evidence_guard.py
       - run: python scripts/evaluate_document_inputs.py
+      - run: python scripts/replay_document_preparation.py
       - run: python scripts/evaluate_research_acceptance.py
       - run: python scripts/evaluate_company_attribution.py
       - run: python -m compileall -q creditlens scripts
       - run: python scripts/check_artifacts.py
+      - run: node scripts/check_preparation_write_intent.js
       - name: Check browser JavaScript syntax
         run: |
           node --check artifacts/workbench-syntax.js
@@ -39,3 +41,4 @@ jobs:
           node --check artifacts/transfer-syntax.js
           node --check artifacts/tasks-syntax.js
           node --check artifacts/explanation-reviews-syntax.js
+          node --check artifacts/preparation-syntax.js
