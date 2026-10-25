@@ -181,3 +181,5 @@ flowchart LR
 面试可解释的一个真实缺陷：浏览器重写JSON将 `792.0` 变成 `792`，使Python规范化摘要失配；通过原样保存服务端响应修复，并实际下载两个版本逐字节对照。这说明核查范围包括用户真正拿到的文件，而不止后台返回成功。
 
 离线核验命令：`python scripts/verify_research_export.py artifacts/research-task-demo.json`。17项专属测试涵盖摘要改动、浮点字面变化、重复键、非有限数、文件大小及错版复核绑定；这是文件内部一致性验证，不是签名或机构认证。
+
+v0.10已发布的功能提交 `89a3b8e` 通过远端 [CI 40184164499](https://github.com/leon1111-wgl/creditlens/actions/runs/40184164499)，包括实际公开导出文件的离线核验。
