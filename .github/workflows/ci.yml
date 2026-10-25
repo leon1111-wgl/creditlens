@@ -24,6 +24,7 @@ jobs:
       - run: python scripts/replay_research_scenarios.py
       - run: python scripts/evaluate_currency_diagnostic.py
       - run: python scripts/evaluate_evidence_guard.py
+      - run: python scripts/evaluate_document_inputs.py
       - run: python scripts/evaluate_research_acceptance.py
       - run: python scripts/evaluate_company_attribution.py
       - run: python -m compileall -q creditlens scripts

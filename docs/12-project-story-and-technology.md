@@ -54,6 +54,8 @@ CreditLens围绕这段工作设计：让材料容易找到，让计算保持同�
 
 当前运行过微软、苹果、NVIDIA与AMD材料，包含真实失败和规则修正记录；范围仍是固定材料、已知位置核对。后续准备加入版面解析和视觉文档检索，参考 **ColPali（ICLR 2025）** 的页面多向量表示与 Late Interaction，比较它与OCR加文本检索找资料的效果。检索负责找到页面，金额是否读准另行核验。[现有实验](13-document-ai-experiment.md) · [新公司检查](19-issuer-evaluation.md) · [ColPali论文](https://proceedings.iclr.cc/paper_files/paper/2025/file/99e9e141aafc314f76b0ca3dd66898b3-Paper-Conference.pdf)
 
+接收新识别输出时，先用 Raw OCR Preflight 检查原始四角、数组结构及登记的页码与尺寸，再转换位置。坐标损坏会指出具体字段，重复登记的同一PDF会被拒绝；修正重试生成独立准备结果，尚不自动加入检索或复核。已有实验保留原路径。[输入契约与失败恢复](28-document-input-preflight.md)
+
 ### 用对数字：口径写进数据，计算交给程序
 
 用严格数据结构记录原值、归一值、币种、单位、实际期间和来源，用 `Decimal` 进行可复算的财务计算。单季与累计、现金流入与流出、合并与分部口径分别检查；缺少信息时保留未知，不默默补零。
@@ -112,4 +114,4 @@ CreditLens围绕这段工作设计：让材料容易找到，让计算保持同�
 
 文献与开源参考截至2026-10-25已核验的正式论文和作者仓库，包括[ColPali](https://github.com/illuin-tech/colpali)、[Time-MoE](https://github.com/Time-MoE/Time-MoE)、[AlphaForge](https://github.com/DulyHao/AlphaForge)、[RD-Agent](https://github.com/microsoft/RD-Agent)和[Qlib](https://github.com/microsoft/qlib)。目前没有完成这些方法在本项目同任务上的全文复现或效果对照。ColPali仓库已注明旧 `colpali-engine` 路径弃用，真正接入时需要重新核对实现版本和模型许可。
 
-社交媒体和GitHub分享用于发现问题与方法，技术承诺以原始资料和实际运行为准。开发每15分钟触发迭代，不代表产品数据实时刷新；新公告更新通常也不需要重新训练模型。
+社交媒体和GitHub分享用于发现问题与方法，技术承诺以原始资料和实际运行为准。开发每小时触发复核，不代表产品数据实时刷新；新公告更新通常也不需要重新训练模型。
