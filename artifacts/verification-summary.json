@@ -317,8 +317,16 @@
       "standalone_install_runtime": "not verified; run from repository root"
     },
     "publication": {
-      "status": "pending",
-      "remote_ci": "pending"
+      "status": "published",
+      "remote_ci": "success",
+      "implementation_commit": "63e4d62a7a43cbac8a22a1b4033c5f74c94c6215",
+      "profile_commit": "f8a446870aadf9d1cbffb54cf80fc4bb1da311a2",
+      "research_branch_commit": "ad6cafd70e50bc8b68d1f5ef4b93347caccb1522",
+      "ci_run_url": "https://github.com/leon1111-wgl/creditlens/actions/runs/40166212935",
+      "verified_ci_commit": "63e4d62a7a43cbac8a22a1b4033c5f74c94c6215",
+      "remote_report_and_profile": "verified through target GitHub connector",
+      "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
+      "scope": "Repository, research branch and profile published; application remains local, not a hosted production service."
     }
   }
 }
