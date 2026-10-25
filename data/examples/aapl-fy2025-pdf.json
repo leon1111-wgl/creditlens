@@ -1,0 +1,1366 @@
+{
+  "schema_version": 1,
+  "entity_id": "AAPL",
+  "company": "Apple Inc.",
+  "title": "FY2025 苹果现金流与债务复核",
+  "sources": [
+    {
+      "id": "aapl-fy25-10k-pdf",
+      "title": "Apple FY2025 Form 10-K / official PDF",
+      "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+      "published_at": "2025-10-31",
+      "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+    }
+  ],
+  "facts": [
+    {
+      "id": "revenue-2025",
+      "metric": "revenue",
+      "label": "营业收入",
+      "value": "416161",
+      "unit": "USD_million",
+      "period_start": "2024-09-29",
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.32 (printed 29) / Total net sales / FY2025",
+      "raw_value": "416,161",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 32,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 388.484,
+          "top": 179.603,
+          "x1": 419.012,
+          "bottom": 187.334
+        },
+        "row_label": "Total net sales",
+        "row_label_bbox": {
+          "x0": 70.256,
+          "top": 179.459,
+          "x1": 128.333,
+          "bottom": 186.146
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 383.198,
+          "top": 123.532,
+          "x1": 400.438,
+          "bottom": 129.444
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 364.882,
+          "top": 114.516,
+          "x1": 418.69,
+          "bottom": 129.444
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+        "unit_bbox": {
+          "x0": 115.712,
+          "top": 73.114,
+          "x1": 496.646,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "revenue-2024",
+      "metric": "revenue",
+      "label": "营业收入",
+      "value": "391035",
+      "unit": "USD_million",
+      "period_start": "2023-10-01",
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.32 (printed 29) / Total net sales / FY2024",
+      "raw_value": "391,035",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 32,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 457.565,
+          "top": 179.603,
+          "x1": 489.407,
+          "bottom": 187.334
+        },
+        "row_label": "Total net sales",
+        "row_label_bbox": {
+          "x0": 70.256,
+          "top": 179.459,
+          "x1": 128.333,
+          "bottom": 186.146
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 452.198,
+          "top": 123.532,
+          "x1": 469.518,
+          "bottom": 129.444
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 433.882,
+          "top": 114.516,
+          "x1": 487.69,
+          "bottom": 129.444
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and per-share amounts)",
+        "unit_bbox": {
+          "x0": 115.712,
+          "top": 73.114,
+          "x1": 496.646,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "cash_equivalents-2025",
+      "metric": "cash_equivalents",
+      "label": "现金及现金等价物",
+      "value": "35934",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Cash and cash equivalents / Current assets: / FY2025",
+      "raw_value": "35,934",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 458.069,
+          "top": 152.603,
+          "x1": 484.988,
+          "bottom": 160.334
+        },
+        "row_label": "Cash and cash equivalents",
+        "row_label_bbox": {
+          "x0": 70.526,
+          "top": 152.278,
+          "x1": 177.86,
+          "bottom": 160.864
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 445.448,
+          "top": 110.782,
+          "x1": 462.688,
+          "bottom": 116.694
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 427.132,
+          "top": 101.766,
+          "x1": 480.94,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 52.526,
+            "top": 138.028,
+            "x1": 112.367,
+            "bottom": 144.922
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 237.949,
+            "x1": 166.835,
+            "bottom": 244.636
+          }
+        }
+      }
+    },
+    {
+      "id": "cash_equivalents-2024",
+      "metric": "cash_equivalents",
+      "label": "现金及现金等价物",
+      "value": "29943",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Cash and cash equivalents / Current assets: / FY2024",
+      "raw_value": "29,943",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 531.497,
+          "top": 152.603,
+          "x1": 558.479,
+          "bottom": 160.334
+        },
+        "row_label": "Cash and cash equivalents",
+        "row_label_bbox": {
+          "x0": 70.526,
+          "top": 152.278,
+          "x1": 177.86,
+          "bottom": 160.864
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 518.948,
+          "top": 110.782,
+          "x1": 536.268,
+          "bottom": 116.694
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 500.632,
+          "top": 101.766,
+          "x1": 554.44,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 52.526,
+            "top": 138.028,
+            "x1": 112.367,
+            "bottom": 144.922
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 237.949,
+            "x1": 166.835,
+            "bottom": 244.636
+          }
+        }
+      }
+    },
+    {
+      "id": "short_investments-2025",
+      "metric": "short_investments",
+      "label": "流动有价证券",
+      "value": "18763",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Marketable securities / Current assets: / FY2025",
+      "raw_value": "18,763",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 458.663,
+          "top": 166.853,
+          "x1": 484.97,
+          "bottom": 174.584
+        },
+        "row_label": "Marketable securities",
+        "row_label_bbox": {
+          "x0": 70.787,
+          "top": 166.699,
+          "x1": 154.829,
+          "bottom": 173.386
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 445.448,
+          "top": 110.782,
+          "x1": 462.688,
+          "bottom": 116.694
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 427.132,
+          "top": 101.766,
+          "x1": 480.94,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 52.526,
+            "top": 138.028,
+            "x1": 112.367,
+            "bottom": 144.922
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 237.949,
+            "x1": 166.835,
+            "bottom": 244.636
+          }
+        }
+      }
+    },
+    {
+      "id": "short_investments-2024",
+      "metric": "short_investments",
+      "label": "流动有价证券",
+      "value": "35228",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Marketable securities / Current assets: / FY2024",
+      "raw_value": "35,228",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 531.56,
+          "top": 166.853,
+          "x1": 558.425,
+          "bottom": 174.584
+        },
+        "row_label": "Marketable securities",
+        "row_label_bbox": {
+          "x0": 70.787,
+          "top": 166.699,
+          "x1": 154.829,
+          "bottom": 173.386
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 518.948,
+          "top": 110.782,
+          "x1": 536.268,
+          "bottom": 116.694
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 500.632,
+          "top": 101.766,
+          "x1": 554.44,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Current assets:",
+          "end_label": "Total current assets",
+          "start_bbox": {
+            "x0": 52.526,
+            "top": 138.028,
+            "x1": 112.367,
+            "bottom": 144.922
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 237.949,
+            "x1": 166.835,
+            "bottom": 244.636
+          }
+        }
+      }
+    },
+    {
+      "id": "short_debt-2025",
+      "metric": "short_debt",
+      "label": "短期债务",
+      "value": "7979",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Commercial paper / Current liabilities: / FY2025",
+      "raw_value": "7,979",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 463.091,
+          "top": 437.603,
+          "x1": 484.898,
+          "bottom": 445.334
+        },
+        "row_label": "Commercial paper",
+        "row_label_bbox": {
+          "x0": 70.526,
+          "top": 437.278,
+          "x1": 143.633,
+          "bottom": 445.864
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 445.448,
+          "top": 110.782,
+          "x1": 462.688,
+          "bottom": 116.694
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 427.132,
+          "top": 101.766,
+          "x1": 480.94,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Current liabilities:",
+          "end_label": "Total current liabilities",
+          "start_bbox": {
+            "x0": 52.526,
+            "top": 380.278,
+            "x1": 120.359,
+            "bottom": 387.172
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 465.949,
+            "x1": 174.827,
+            "bottom": 472.636
+          }
+        }
+      }
+    },
+    {
+      "id": "short_debt-2024",
+      "metric": "short_debt",
+      "label": "短期债务",
+      "value": "9967",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Commercial paper / Current liabilities: / FY2024",
+      "raw_value": "9,967",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 536.636,
+          "top": 437.603,
+          "x1": 558.479,
+          "bottom": 445.334
+        },
+        "row_label": "Commercial paper",
+        "row_label_bbox": {
+          "x0": 70.526,
+          "top": 437.278,
+          "x1": 143.633,
+          "bottom": 445.864
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 518.948,
+          "top": 110.782,
+          "x1": 536.268,
+          "bottom": 116.694
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 500.632,
+          "top": 101.766,
+          "x1": 554.44,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Current liabilities:",
+          "end_label": "Total current liabilities",
+          "start_bbox": {
+            "x0": 52.526,
+            "top": 380.278,
+            "x1": 120.359,
+            "bottom": 387.172
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 465.949,
+            "x1": 174.827,
+            "bottom": 472.636
+          }
+        }
+      }
+    },
+    {
+      "id": "current_debt-2025",
+      "metric": "current_debt",
+      "label": "一年内到期长期债务",
+      "value": "12350",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Term debt / Current liabilities: / FY2025",
+      "raw_value": "12,350",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 458.663,
+          "top": 451.853,
+          "x1": 484.943,
+          "bottom": 459.584
+        },
+        "row_label": "Term debt",
+        "row_label_bbox": {
+          "x0": 70.256,
+          "top": 451.699,
+          "x1": 110.954,
+          "bottom": 458.386
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 445.448,
+          "top": 110.782,
+          "x1": 462.688,
+          "bottom": 116.694
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 427.132,
+          "top": 101.766,
+          "x1": 480.94,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Current liabilities:",
+          "end_label": "Total current liabilities",
+          "start_bbox": {
+            "x0": 52.526,
+            "top": 380.278,
+            "x1": 120.359,
+            "bottom": 387.172
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 465.949,
+            "x1": 174.827,
+            "bottom": 472.636
+          }
+        }
+      }
+    },
+    {
+      "id": "current_debt-2024",
+      "metric": "current_debt",
+      "label": "一年内到期长期债务",
+      "value": "10912",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Term debt / Current liabilities: / FY2024",
+      "raw_value": "10,912",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 532.163,
+          "top": 451.853,
+          "x1": 558.335,
+          "bottom": 459.584
+        },
+        "row_label": "Term debt",
+        "row_label_bbox": {
+          "x0": 70.256,
+          "top": 451.699,
+          "x1": 110.954,
+          "bottom": 458.386
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 518.948,
+          "top": 110.782,
+          "x1": 536.268,
+          "bottom": 116.694
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 500.632,
+          "top": 101.766,
+          "x1": 554.44,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Current liabilities:",
+          "end_label": "Total current liabilities",
+          "start_bbox": {
+            "x0": 52.526,
+            "top": 380.278,
+            "x1": 120.359,
+            "bottom": 387.172
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 465.949,
+            "x1": 174.827,
+            "bottom": 472.636
+          }
+        }
+      }
+    },
+    {
+      "id": "long_debt-2025",
+      "metric": "long_debt",
+      "label": "长期债务",
+      "value": "78328",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Term debt / Non-current liabilities: / FY2025",
+      "raw_value": "78,328",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 458.087,
+          "top": 508.853,
+          "x1": 484.925,
+          "bottom": 516.584
+        },
+        "row_label": "Term debt",
+        "row_label_bbox": {
+          "x0": 70.256,
+          "top": 508.699,
+          "x1": 110.954,
+          "bottom": 515.386
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 445.448,
+          "top": 110.782,
+          "x1": 462.688,
+          "bottom": 116.694
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 427.132,
+          "top": 101.766,
+          "x1": 480.94,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Non-current liabilities:",
+          "end_label": "Total non-current liabilities",
+          "start_bbox": {
+            "x0": 52.814,
+            "top": 494.449,
+            "x1": 137.864,
+            "bottom": 501.136
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 537.199,
+            "x1": 192.836,
+            "bottom": 543.886
+          }
+        }
+      }
+    },
+    {
+      "id": "long_debt-2024",
+      "metric": "long_debt",
+      "label": "长期债务",
+      "value": "85750",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Term debt / Non-current liabilities: / FY2024",
+      "raw_value": "85,750",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 531.596,
+          "top": 508.853,
+          "x1": 558.443,
+          "bottom": 516.584
+        },
+        "row_label": "Term debt",
+        "row_label_bbox": {
+          "x0": 70.256,
+          "top": 508.699,
+          "x1": 110.954,
+          "bottom": 515.386
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 518.948,
+          "top": 110.782,
+          "x1": 536.268,
+          "bottom": 116.694
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 500.632,
+          "top": 101.766,
+          "x1": 554.44,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1",
+        "section": {
+          "start_label": "Non-current liabilities:",
+          "end_label": "Total non-current liabilities",
+          "start_bbox": {
+            "x0": 52.814,
+            "top": 494.449,
+            "x1": 137.864,
+            "bottom": 501.136
+          },
+          "end_bbox": {
+            "x0": 88.256,
+            "top": 537.199,
+            "x1": 192.836,
+            "bottom": 543.886
+          }
+        }
+      }
+    },
+    {
+      "id": "current_assets-2025",
+      "metric": "current_assets",
+      "label": "流动资产",
+      "value": "147957",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Total current assets / FY2025",
+      "raw_value": "147,957",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 453.668,
+          "top": 238.103,
+          "x1": 484.988,
+          "bottom": 245.834
+        },
+        "row_label": "Total current assets",
+        "row_label_bbox": {
+          "x0": 88.256,
+          "top": 237.949,
+          "x1": 166.835,
+          "bottom": 244.636
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 445.448,
+          "top": 110.782,
+          "x1": 462.688,
+          "bottom": 116.694
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 427.132,
+          "top": 101.766,
+          "x1": 480.94,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "current_assets-2024",
+      "metric": "current_assets",
+      "label": "流动资产",
+      "value": "152987",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Total current assets / FY2024",
+      "raw_value": "152,987",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 527.168,
+          "top": 238.103,
+          "x1": 558.488,
+          "bottom": 245.834
+        },
+        "row_label": "Total current assets",
+        "row_label_bbox": {
+          "x0": 88.256,
+          "top": 237.949,
+          "x1": 166.835,
+          "bottom": 244.636
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 518.948,
+          "top": 110.782,
+          "x1": 536.268,
+          "bottom": 116.694
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 500.632,
+          "top": 101.766,
+          "x1": 554.44,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "current_liabilities-2025",
+      "metric": "current_liabilities",
+      "label": "流动负债",
+      "value": "165631",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Total current liabilities / FY2025",
+      "raw_value": "165,631",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 453.668,
+          "top": 466.103,
+          "x1": 483.512,
+          "bottom": 473.834
+        },
+        "row_label": "Total current liabilities",
+        "row_label_bbox": {
+          "x0": 88.256,
+          "top": 465.949,
+          "x1": 174.827,
+          "bottom": 472.636
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 445.448,
+          "top": 110.782,
+          "x1": 462.688,
+          "bottom": 116.694
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 427.132,
+          "top": 101.766,
+          "x1": 480.94,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "current_liabilities-2024",
+      "metric": "current_liabilities",
+      "label": "流动负债",
+      "value": "176392",
+      "unit": "USD_million",
+      "period_start": null,
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.34 (printed 31) / Total current liabilities / FY2024",
+      "raw_value": "176,392",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 34,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 527.168,
+          "top": 466.103,
+          "x1": 558.344,
+          "bottom": 473.834
+        },
+        "row_label": "Total current liabilities",
+        "row_label_bbox": {
+          "x0": 88.256,
+          "top": 465.949,
+          "x1": 174.827,
+          "bottom": 472.636
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 518.948,
+          "top": 110.782,
+          "x1": 536.268,
+          "bottom": 116.694
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 500.632,
+          "top": 101.766,
+          "x1": 554.44,
+          "bottom": 116.694
+        },
+        "unit_header": "(In millions, except number of shares, which are reflected in thousands, and par value)",
+        "unit_bbox": {
+          "x0": 134.952,
+          "top": 73.114,
+          "x1": 477.375,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "cfo-2025",
+      "metric": "cfo",
+      "label": "经营活动现金流",
+      "value": "111482",
+      "unit": "USD_million",
+      "period_start": "2024-09-29",
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.36 (printed 33) / Cash generated by operating activities / FY2025",
+      "raw_value": "111,482",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 36,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 391.095,
+          "top": 351.7,
+          "x1": 420.539,
+          "bottom": 359.001
+        },
+        "row_label": "Cash generated by operating activities",
+        "row_label_bbox": {
+          "x0": 82.504,
+          "top": 351.402,
+          "x1": 226.392,
+          "bottom": 359.622
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 383.198,
+          "top": 115.132,
+          "x1": 400.438,
+          "bottom": 121.044
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 364.882,
+          "top": 106.116,
+          "x1": 418.69,
+          "bottom": 121.044
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 283.642,
+          "top": 73.114,
+          "x1": 328.417,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "cfo-2024",
+      "metric": "cfo",
+      "label": "经营活动现金流",
+      "value": "118254",
+      "unit": "USD_million",
+      "period_start": "2023-10-01",
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.36 (printed 33) / Cash generated by operating activities / FY2024",
+      "raw_value": "118,254",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 36,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 460.095,
+          "top": 351.7,
+          "x1": 489.674,
+          "bottom": 359.001
+        },
+        "row_label": "Cash generated by operating activities",
+        "row_label_bbox": {
+          "x0": 82.504,
+          "top": 351.402,
+          "x1": 226.392,
+          "bottom": 359.622
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 452.198,
+          "top": 115.132,
+          "x1": 469.518,
+          "bottom": 121.044
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 433.882,
+          "top": 106.116,
+          "x1": 487.69,
+          "bottom": 121.044
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 283.642,
+          "top": 73.114,
+          "x1": 328.417,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "capex-2025",
+      "metric": "capex",
+      "label": "固定资产购建现金流出",
+      "value": "12715",
+      "unit": "USD_million",
+      "period_start": "2024-09-29",
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.36 (printed 33) / Payments for acquisition of property, plant and equipment / FY2025",
+      "raw_value": "(12,715)",
+      "transformation": "absolute_cash_outflow",
+      "pdf_location": {
+        "page": 36,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 392.701,
+          "top": 436.936,
+          "x1": 423.199,
+          "bottom": 445.011
+        },
+        "row_label": "Payments for acquisition of property, plant and equipment",
+        "row_label_bbox": {
+          "x0": 61.861,
+          "top": 436.469,
+          "x1": 278.271,
+          "bottom": 444.56
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 383.198,
+          "top": 115.132,
+          "x1": 400.438,
+          "bottom": 121.044
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 364.882,
+          "top": 106.116,
+          "x1": 418.69,
+          "bottom": 121.044
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 283.642,
+          "top": 73.114,
+          "x1": 328.417,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "capex-2024",
+      "metric": "capex",
+      "label": "固定资产购建现金流出",
+      "value": "9447",
+      "unit": "USD_million",
+      "period_start": "2023-10-01",
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.36 (printed 33) / Payments for acquisition of property, plant and equipment / FY2024",
+      "raw_value": "(9,447)",
+      "transformation": "absolute_cash_outflow",
+      "pdf_location": {
+        "page": 36,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 466.427,
+          "top": 436.936,
+          "x1": 492.199,
+          "bottom": 445.011
+        },
+        "row_label": "Payments for acquisition of property, plant and equipment",
+        "row_label_bbox": {
+          "x0": 61.861,
+          "top": 436.469,
+          "x1": 278.271,
+          "bottom": 444.56
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 452.198,
+          "top": 115.132,
+          "x1": 469.518,
+          "bottom": 121.044
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 433.882,
+          "top": 106.116,
+          "x1": 487.69,
+          "bottom": 121.044
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 283.642,
+          "top": 73.114,
+          "x1": 328.417,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "net_income-2025",
+      "metric": "net_income",
+      "label": "净利润",
+      "value": "112010",
+      "unit": "USD_million",
+      "period_start": "2024-09-29",
+      "period_end": "2025-09-27",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.36 (printed 33) / Net income / FY2025",
+      "raw_value": "112,010",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 36,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 391.095,
+          "top": 180.7,
+          "x1": 420.641,
+          "bottom": 188.001
+        },
+        "row_label": "Net income",
+        "row_label_bbox": {
+          "x0": 61.776,
+          "top": 180.054,
+          "x1": 103.775,
+          "bottom": 186.369
+        },
+        "year": 2025,
+        "year_bbox": {
+          "x0": 383.198,
+          "top": 115.132,
+          "x1": 400.438,
+          "bottom": 121.044
+        },
+        "period_header": "September 27, 2025",
+        "period_bbox": {
+          "x0": 364.882,
+          "top": 106.116,
+          "x1": 418.69,
+          "bottom": 121.044
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 283.642,
+          "top": 73.114,
+          "x1": 328.417,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    },
+    {
+      "id": "net_income-2024",
+      "metric": "net_income",
+      "label": "净利润",
+      "value": "93736",
+      "unit": "USD_million",
+      "period_start": "2023-10-01",
+      "period_end": "2024-09-28",
+      "source_id": "aapl-fy25-10k-pdf",
+      "locator": "PDF p.36 (printed 33) / Net income / FY2024",
+      "raw_value": "93,736",
+      "transformation": "displayed_magnitude",
+      "pdf_location": {
+        "page": 36,
+        "page_width": 612.0,
+        "page_height": 792.0,
+        "coordinate_system": "pdf_points_top_left",
+        "amount_bbox": {
+          "x0": 464.311,
+          "top": 180.7,
+          "x1": 489.624,
+          "bottom": 188.001
+        },
+        "row_label": "Net income",
+        "row_label_bbox": {
+          "x0": 61.776,
+          "top": 180.054,
+          "x1": 103.775,
+          "bottom": 186.369
+        },
+        "year": 2024,
+        "year_bbox": {
+          "x0": 452.198,
+          "top": 115.132,
+          "x1": 469.518,
+          "bottom": 121.044
+        },
+        "period_header": "September 28, 2024",
+        "period_bbox": {
+          "x0": 433.882,
+          "top": 106.116,
+          "x1": 487.69,
+          "bottom": 121.044
+        },
+        "unit_header": "(In millions)",
+        "unit_bbox": {
+          "x0": 283.642,
+          "top": 73.114,
+          "x1": 328.417,
+          "bottom": 81.664
+        },
+        "parser_version": "stacked-period-financial-table-1"
+      }
+    }
+  ],
+  "fiscal_calendar": "week_52_53"
+}

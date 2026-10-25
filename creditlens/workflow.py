@@ -226,8 +226,11 @@ def render_memo(data):
         for f in located:
             loc = f["pdf_location"]
             coords = ", ".join(str(loc["amount_bbox"][k]) for k in ("x0", "top", "x1", "bottom"))
+            label = loc["row_label"]
+            if loc.get("section"):
+                label += " / " + loc["section"]["start_label"]
             lines.append("| " + " | ".join(clean(v) for v in (f["id"], f["raw_value"], loc["page"], coords,
-                                                               loc["year"], loc["row_label"])) + " |")
+                                                               loc["year"], label)) + " |")
     lines += ["", "数据包 SHA256：" + data["pack_sha256"], "",
               "事件哈希链检查：" + str(data.get("event_integrity_valid", "not_checked")),
               "本地哈希链不抵御拥有数据库修改权限的管理员重新计算整个链。", ""]

@@ -3,7 +3,7 @@
   "timezone": "Asia/Shanghai",
   "python": "3.12.14",
   "unit_and_api_tests": {
-    "run": 70,
+    "run": 86,
     "failures": 0,
     "errors": 0
   },
@@ -11,8 +11,8 @@
   "local_markdown_file_links": "passed",
   "live_http_health": {
     "status": "ok",
-    "version": "0.3.0",
-    "rule_version": "cash-debt-review-2",
+    "version": "0.4.0",
+    "rule_version": "cash-debt-review-3",
     "cases": 883,
     "mode": "public_benchmark_local",
     "auth_mode": "demo",
@@ -41,8 +41,8 @@
     "admin": true
   },
   "github_publish": "repository created but remote has no heads; connector integration write 403; local credential inventory only Leon454323; previous device login no longer running; no new auth started",
-  "version": "0.3.0",
-  "official_financial_facts": 20,
+  "version": "0.4.0",
+  "official_financial_facts": 42,
   "source_linked_observed_factors": 5,
   "real_model_evaluation": "not run",
   "model_transport_tests": "passed with mock responses",
@@ -68,7 +68,8 @@
     "after_passed": 15,
     "before_implementation": "03d55b4",
     "after_rule_version": "cash-debt-review-2",
-    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 70 tests; not model accuracy"
+    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 86 tests; not model accuracy",
+    "latest_verified_rule_version": "cash-debt-review-3"
   },
   "pdf_evidence": {
     "official_reference_documents": 1,
@@ -98,6 +99,60 @@
       "verified": "PDF source selection, case creation, evidence table, coordinate disclosure, link target",
       "not_verified": "remote PDF viewer anchor navigation, full approval flow on PDF example",
       "screenshot": "docs/images/pdf-evidence-workbench.png"
+    },
+    "tested_version": "0.3.0"
+  },
+  "multi_issuer_pdf": {
+    "tested_version": "0.4.0",
+    "companies": 2,
+    "unique_financial_facts": 42,
+    "apple_physical_pages": [
+      32,
+      34,
+      36
+    ],
+    "apple_printed_pages": [
+      29,
+      31,
+      33
+    ],
+    "apple_reference_matched": 22,
+    "old_header_adapter_refused_pages": 3,
+    "scope": "Two fixed layouts and development references, no blind or independent model evaluation",
+    "rendered_pages_reviewed": [
+      32,
+      34,
+      36
+    ],
+    "live_http": {
+      "id": "e82a22e67270491e9946e6a3c4f8c0c5",
+      "status": "reviewed",
+      "revision": 5,
+      "event_count": 5,
+      "facts_with_location": 22,
+      "event_integrity_valid": true,
+      "comparison_rows": 11,
+      "memo_contains_sections": true,
+      "actors": [
+        "demo-analyst",
+        "demo-reviewer"
+      ]
+    },
+    "old_rule_v2": {
+      "readable": true,
+      "write_status": 409,
+      "events_unchanged": true
+    },
+    "browser_qa": {
+      "desktop_viewport": 1280,
+      "narrow_viewport": 497,
+      "full_simulated_workflow": "created, two dispositions, submitted, independent demo reviewer approved; five events",
+      "verified": "default cutoff, preservation of edited cutoff, section coordinates, 11 comparison rows, ratio precision",
+      "not_verified": "remote PDF viewer anchor, browser download file persistence",
+      "screenshots": [
+        "docs/images/apple-review-workbench.png",
+        "docs/images/apple-evidence-workbench.png"
+      ]
     }
   }
 }

@@ -1,0 +1,205 @@
+{
+  "compared": 22,
+  "matched": 22,
+  "missing_pdf_fact_ids": [],
+  "checks": [
+    {
+      "fact_id": "revenue-2025",
+      "pdf_value": "416161",
+      "reference_value": "416161",
+      "physical_page": 32,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "revenue-2024",
+      "pdf_value": "391035",
+      "reference_value": "391035",
+      "physical_page": 32,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "cash_equivalents-2025",
+      "pdf_value": "35934",
+      "reference_value": "35934",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "cash_equivalents-2024",
+      "pdf_value": "29943",
+      "reference_value": "29943",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "short_investments-2025",
+      "pdf_value": "18763",
+      "reference_value": "18763",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "short_investments-2024",
+      "pdf_value": "35228",
+      "reference_value": "35228",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "short_debt-2025",
+      "pdf_value": "7979",
+      "reference_value": "7979",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "short_debt-2024",
+      "pdf_value": "9967",
+      "reference_value": "9967",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "current_debt-2025",
+      "pdf_value": "12350",
+      "reference_value": "12350",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "current_debt-2024",
+      "pdf_value": "10912",
+      "reference_value": "10912",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "long_debt-2025",
+      "pdf_value": "78328",
+      "reference_value": "78328",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "long_debt-2024",
+      "pdf_value": "85750",
+      "reference_value": "85750",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "current_assets-2025",
+      "pdf_value": "147957",
+      "reference_value": "147957",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "current_assets-2024",
+      "pdf_value": "152987",
+      "reference_value": "152987",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "current_liabilities-2025",
+      "pdf_value": "165631",
+      "reference_value": "165631",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "current_liabilities-2024",
+      "pdf_value": "176392",
+      "reference_value": "176392",
+      "physical_page": 34,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "cfo-2025",
+      "pdf_value": "111482",
+      "reference_value": "111482",
+      "physical_page": 36,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "cfo-2024",
+      "pdf_value": "118254",
+      "reference_value": "118254",
+      "physical_page": 36,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "capex-2025",
+      "pdf_value": "12715",
+      "reference_value": "12715",
+      "physical_page": 36,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "capex-2024",
+      "pdf_value": "9447",
+      "reference_value": "9447",
+      "physical_page": 36,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "net_income-2025",
+      "pdf_value": "112010",
+      "reference_value": "112010",
+      "physical_page": 36,
+      "matched": true,
+      "different_fields": []
+    },
+    {
+      "fact_id": "net_income-2024",
+      "pdf_value": "93736",
+      "reference_value": "93736",
+      "physical_page": 36,
+      "matched": true,
+      "different_fields": []
+    }
+  ],
+  "generated_at": "2026-10-25T02:13:47.302877+00:00",
+  "parser_version": "stacked-period-financial-table-1",
+  "source_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+  "reference_sha256": "8b8682e5851390addb50ed77d3b72d08c9f7de37b4e54978d2799354468863d4",
+  "old_header_adapter": [
+    {
+      "page": 32,
+      "status": "refused",
+      "reason": "Unexpected or repeated year columns"
+    },
+    {
+      "page": 34,
+      "status": "refused",
+      "reason": "Unexpected or repeated year columns"
+    },
+    {
+      "page": 36,
+      "status": "refused",
+      "reason": "Unexpected or repeated year columns"
+    }
+  ],
+  "scope": "Development checks against a developer-transcribed filing reference; not held-out accuracy or authenticity."
+}

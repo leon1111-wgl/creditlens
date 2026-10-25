@@ -1,0 +1,30 @@
+{
+  "health": {
+    "status": "ok",
+    "version": "0.4.0",
+    "rule_version": "cash-debt-review-3",
+    "cases": 883,
+    "mode": "public_benchmark_local",
+    "auth_mode": "demo",
+    "dataset_sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51"
+  },
+  "apple": {
+    "id": "e82a22e67270491e9946e6a3c4f8c0c5",
+    "status": "reviewed",
+    "revision": 5,
+    "event_count": 5,
+    "facts_with_location": 22,
+    "event_integrity_valid": true,
+    "comparison_rows": 11,
+    "memo_contains_sections": true,
+    "actors": [
+      "demo-analyst",
+      "demo-reviewer"
+    ]
+  },
+  "old_rule_v2": {
+    "readable": true,
+    "write_status": 409,
+    "events_unchanged": true
+  }
+}

@@ -30,3 +30,7 @@ The planning documents summarize and link public papers, official repositories a
 ## Optional PDF tools
 
 The offline document adapter uses pypdfium2/PDFium and Pillow through installed packages, without vendoring their source or binaries. Versions are pinned in requirements-pdf.lock. Their licenses and required bundled notices remain with those packages: https://pypdfium2.readthedocs.io/en/stable/readme.html#licensing and https://github.com/python-pillow/Pillow/blob/main/LICENSE. A reader installing these dependencies must retain the relevant upstream notices when redistributing them.
+
+## Apple public disclosures
+
+The Apple example uses limited numerical facts and locating labels from the FY2025 Form 10-K, accession 0000320193-25-000079, filed 2025-10-31. The PDF and filing HTML URLs, retrieved hashes, dates, page positions and a developer-transcribed reference are registered in data/examples/aapl-pdf-provenance.json. Full source documents and rendered source pages are excluded. Apple retains rights to the underlying material; the repository MIT license does not relicense it. This project is not affiliated with or endorsed by Apple, and this historical development case is not a current credit or investment recommendation.

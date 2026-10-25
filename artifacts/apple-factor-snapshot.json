@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "entity_id": "AAPL",
+  "as_of": "2025-11-01",
+  "financial_period_end": "2025-09-27",
+  "source_pack_sha256": "e26e93213bd8041fdd93b228749a468ce241952e673776cb5fa37ad11f2fec43",
+  "factors": [
+    {
+      "id": "liquidity",
+      "title": "流动资金 / 短期债务",
+      "value": "2.690589797825766146883762113",
+      "kind": "ratio",
+      "unit": "ratio",
+      "formula": "(cash_equivalents + short_investments) / (short_debt + current_debt)",
+      "fact_ids": [
+        "cash_equivalents-2025",
+        "short_investments-2025",
+        "short_debt-2025",
+        "current_debt-2025"
+      ],
+      "operands": [
+        {
+          "id": "cash_equivalents-2025",
+          "value": "35934",
+          "unit": "USD_million"
+        },
+        {
+          "id": "short_investments-2025",
+          "value": "18763",
+          "unit": "USD_million"
+        },
+        {
+          "id": "short_debt-2025",
+          "value": "7979",
+          "unit": "USD_million"
+        },
+        {
+          "id": "current_debt-2025",
+          "value": "12350",
+          "unit": "USD_million"
+        }
+      ]
+    },
+    {
+      "id": "cash_conversion",
+      "title": "经营现金流 / 净利润",
+      "value": "0.9952861351665029908043924650",
+      "kind": "ratio",
+      "unit": "ratio",
+      "formula": "cfo / net_income",
+      "fact_ids": [
+        "cfo-2025",
+        "net_income-2025"
+      ],
+      "operands": [
+        {
+          "id": "cfo-2025",
+          "value": "111482",
+          "unit": "USD_million"
+        },
+        {
+          "id": "net_income-2025",
+          "value": "112010",
+          "unit": "USD_million"
+        }
+      ]
+    },
+    {
+      "id": "fcf",
+      "title": "自由现金流（简化口径）",
+      "value": "98767",
+      "kind": "amount",
+      "unit": "USD_million",
+      "formula": "cfo - capex",
+      "fact_ids": [
+        "cfo-2025",
+        "capex-2025"
+      ],
+      "operands": [
+        {
+          "id": "cfo-2025",
+          "value": "111482",
+          "unit": "USD_million"
+        },
+        {
+          "id": "capex-2025",
+          "value": "12715",
+          "unit": "USD_million"
+        }
+      ]
+    },
+    {
+      "id": "capex_intensity",
+      "title": "资本开支 / 经营现金流",
+      "value": "0.1140542867906926678746344701",
+      "kind": "ratio",
+      "unit": "ratio",
+      "formula": "capex / cfo",
+      "fact_ids": [
+        "capex-2025",
+        "cfo-2025"
+      ],
+      "operands": [
+        {
+          "id": "capex-2025",
+          "value": "12715",
+          "unit": "USD_million"
+        },
+        {
+          "id": "cfo-2025",
+          "value": "111482",
+          "unit": "USD_million"
+        }
+      ]
+    },
+    {
+      "id": "current_ratio",
+      "title": "流动比率",
+      "value": "0.8932929222186667954670321377",
+      "kind": "ratio",
+      "unit": "ratio",
+      "formula": "current_assets / current_liabilities",
+      "fact_ids": [
+        "current_assets-2025",
+        "current_liabilities-2025"
+      ],
+      "operands": [
+        {
+          "id": "current_assets-2025",
+          "value": "147957",
+          "unit": "USD_million"
+        },
+        {
+          "id": "current_liabilities-2025",
+          "value": "165631",
+          "unit": "USD_million"
+        }
+      ]
+    }
+  ],
+  "source_documents": [
+    {
+      "id": "aapl-fy25-10k-pdf",
+      "title": "Apple FY2025 Form 10-K / official PDF",
+      "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+      "published_at": "2025-10-31",
+      "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de"
+    }
+  ],
+  "issues": [
+    {
+      "id": "cash_conversion_review",
+      "title": "利润现金转化需解释",
+      "detail": "经营现金流低于净利润，需结合营运资本与一次性项目解释。",
+      "fact_ids": [
+        "cfo-2025",
+        "net_income-2025"
+      ],
+      "severity": "review"
+    },
+    {
+      "id": "scope_review",
+      "title": "债务与现金可用性仍需人工确认",
+      "detail": "本口径含现金、现金等价物和短期投资；债务覆盖不含全部租赁、担保、资本承诺和受限资金调整。公开披露不足以直接作授信决策。",
+      "fact_ids": [
+        "cash_equivalents-2025",
+        "short_investments-2025",
+        "short_debt-2025",
+        "current_debt-2025"
+      ],
+      "severity": "review"
+    }
+  ],
+  "outcome_label": null,
+  "usable_for_prediction_training": false,
+  "limitations": [
+    "Single-company historical example; no outcome labels or predictive validation.",
+    "Cutoff filters reported publication dates; present-day website capture is not an archived point-in-time snapshot.",
+    "Factors are simplified financial ratios; debt scope and cash availability require review.",
+    "The stress scenario is intentionally excluded from observed factors."
+  ]
+}

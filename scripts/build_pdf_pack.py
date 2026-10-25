@@ -43,20 +43,20 @@ def write_json(path, data):
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
 
 
-def verified_pdf(path, download=False):
+def verified_pdf(path, download=False, *, url=URL, sha256=SHA256):
     if not path.exists():
         if not download:
             raise EvidenceError("PDF missing; rerun with --download to retrieve the registered official source")
-        with urllib.request.urlopen(URL, timeout=40) as response:
+        with urllib.request.urlopen(url, timeout=40) as response:
             raw = response.read(30_000_001)
             final_url = response.url
-        if len(raw) > 30_000_000 or not raw.startswith(b"%PDF-") or hashlib.sha256(raw).hexdigest() != SHA256:
+        if len(raw) > 30_000_000 or not raw.startswith(b"%PDF-") or hashlib.sha256(raw).hexdigest() != sha256:
             raise EvidenceError("Downloaded source does not match the registered PDF; inspect before updating the profile")
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(raw)
         write_json(path.with_suffix(".download.json"), {"retrieved_at": datetime.now(timezone.utc).isoformat(),
-                   "requested_url": URL, "resolved_url": final_url, "sha256": SHA256})
-    if path.stat().st_size > 30_000_000 or hashlib.sha256(path.read_bytes()).hexdigest() != SHA256:
+                   "requested_url": url, "resolved_url": final_url, "sha256": sha256})
+    if path.stat().st_size > 30_000_000 or hashlib.sha256(path.read_bytes()).hexdigest() != sha256:
         raise EvidenceError("Local PDF changed; refusing stale page/label assumptions")
     metadata = path.with_suffix(".download.json")
     return json.loads(metadata.read_text(encoding="utf-8")) if metadata.exists() else {"retrieved_at": None}

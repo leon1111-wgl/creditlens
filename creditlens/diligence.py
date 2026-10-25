@@ -9,7 +9,7 @@ import json
 import re
 
 
-RULE_VERSION = "cash-debt-review-2"
+RULE_VERSION = "cash-debt-review-3"
 
 
 def displayed_amount(raw: str) -> Decimal:
@@ -49,6 +49,13 @@ class PdfBox(StrictModel):
         return self
 
 
+class PdfSection(StrictModel):
+    start_label: str = Field(min_length=1, max_length=100)
+    end_label: str = Field(min_length=1, max_length=100)
+    start_bbox: PdfBox
+    end_bbox: PdfBox
+
+
 class PdfLocation(StrictModel):
     page: int = Field(ge=1, le=20000)
     page_width: float = Field(gt=0, le=20000, allow_inf_nan=False)
@@ -64,10 +71,16 @@ class PdfLocation(StrictModel):
     unit_header: str = Field(min_length=1, max_length=100)
     unit_bbox: PdfBox
     parser_version: str = Field(min_length=1, max_length=100)
+    section: PdfSection | None = Field(default=None, exclude_if=lambda v: v is None)
 
     @model_validator(mode="after")
     def within_page(self):
-        for region in (self.amount_bbox, self.row_label_bbox, self.year_bbox, self.period_bbox, self.unit_bbox):
+        regions = [self.amount_bbox, self.row_label_bbox, self.year_bbox, self.period_bbox, self.unit_bbox]
+        if self.section:
+            regions.extend([self.section.start_bbox, self.section.end_bbox])
+            if not self.section.start_bbox.bottom < self.row_label_bbox.top < self.row_label_bbox.bottom < self.section.end_bbox.top:
+                raise ValueError("PDF row is outside its declared section")
+        for region in regions:
             if region.x1 > self.page_width or region.bottom > self.page_height:
                 raise ValueError("PDF evidence box is outside the page")
         return self
@@ -83,7 +96,7 @@ class Source(StrictModel):
 
 class Fact(StrictModel):
     id: str = Field(pattern=r"^[a-zA-Z0-9_-]{1,100}$")
-    metric: Literal["liquid_assets", "short_debt", "current_debt", "long_debt", "current_assets",
+    metric: Literal["liquid_assets", "cash_equivalents", "short_investments", "short_debt", "current_debt", "long_debt", "current_assets",
                     "current_liabilities", "cfo", "capex", "net_income", "revenue"]
     label: str = Field(min_length=1, max_length=100)
     value: Decimal = Field(max_digits=24, decimal_places=6, allow_inf_nan=False)
@@ -112,7 +125,7 @@ class Fact(StrictModel):
             raise ValueError("Flow facts need a start date; balance-sheet facts are point-in-time")
         if self.period_start is not None and self.period_start > self.period_end:
             raise ValueError("Invalid financial period")
-        if self.metric in {"capex", "liquid_assets", "short_debt", "current_debt", "long_debt",
+        if self.metric in {"capex", "liquid_assets", "cash_equivalents", "short_investments", "short_debt", "current_debt", "long_debt",
                            "current_assets", "current_liabilities"} and self.value < 0:
             raise ValueError("This metric must use a non-negative displayed magnitude")
         return self
@@ -125,6 +138,7 @@ class CasePack(StrictModel):
     title: str = Field(min_length=1, max_length=200)
     sources: list[Source] = Field(min_length=1, max_length=30)
     facts: list[Fact] = Field(min_length=1, max_length=300)
+    fiscal_calendar: Literal["week_52_53"] | None = Field(default=None, exclude_if=lambda v: v is None)
 
     @model_validator(mode="after")
     def references(self):
@@ -164,7 +178,7 @@ def analyze_pack(pack: CasePack, as_of: date, stress_pct: int = 0) -> dict:
     groups = {}
     for fact in current:
         groups.setdefault(fact.metric, []).append(fact)
-    required = {"liquid_assets", "short_debt", "current_debt", "cfo", "capex", "net_income"}
+    required = {"short_debt", "current_debt", "cfo", "capex", "net_income"}
     usable = {}
     for metric, values in groups.items():
         if len(values) != 1:
@@ -173,6 +187,18 @@ def analyze_pack(pack: CasePack, as_of: date, stress_pct: int = 0) -> dict:
             usable[metric] = values[0]
     for missing in sorted(required - set(usable)):
         issue("missing_" + missing, "缺少必要财务事实", missing + " 未通过可用性检查。", blocking=True)
+    components = ["cash_equivalents", "short_investments"]
+    liquidity_inputs = []
+    if "liquid_assets" in groups and any(n in groups for n in components):
+        issue("ambiguous_liquidity_basis", "流动资金合计与分项同时存在",
+              "请确认使用合计或完整分项，避免重复计入现金或短期投资。", current, True)
+    elif "liquid_assets" in usable:
+        liquidity_inputs = ["liquid_assets"]
+    elif "liquid_assets" not in groups and all(n in usable for n in components):
+        liquidity_inputs = components
+    else:
+        issue("missing_liquid_assets", "缺少必要财务事实",
+              "需要唯一流动资金合计，或现金及现金等价物与流动投资两个分项；缺失不得填零。", blocking=True)
 
     def add_metric(key, title, names, formula, calculate, kind="ratio"):
         if any(name not in usable for name in names):
@@ -197,8 +223,13 @@ def analyze_pack(pack: CasePack, as_of: date, stress_pct: int = 0) -> dict:
                         "formula": formula, "fact_ids": [f.id for f in facts],
                         "operands": [{"id": f.id, "value": str(f.value), "unit": f.unit} for f in facts]})
 
-    add_metric("liquidity", "流动资金 / 短期债务", ["liquid_assets", "short_debt", "current_debt"],
-               "liquid_assets / (short_debt + current_debt)", lambda c, s, d: c / (s + d) if s + d > 0 else None)
+    if liquidity_inputs == ["liquid_assets"]:
+        add_metric("liquidity", "流动资金 / 短期债务", liquidity_inputs + ["short_debt", "current_debt"],
+                   "liquid_assets / (short_debt + current_debt)", lambda c, s, d: c / (s + d) if s + d > 0 else None)
+    elif liquidity_inputs == components:
+        add_metric("liquidity", "流动资金 / 短期债务", components + ["short_debt", "current_debt"],
+                   "(cash_equivalents + short_investments) / (short_debt + current_debt)",
+                   lambda c, i, s, d: (c + i) / (s + d) if s + d > 0 else None)
     add_metric("cash_conversion", "经营现金流 / 净利润", ["cfo", "net_income"],
                "cfo / net_income", lambda c, n: c / n if n > 0 else None)
     add_metric("fcf", "自由现金流（简化口径）", ["cfo", "capex"], "cfo - capex", lambda c, x: c - x, "amount")
@@ -220,10 +251,10 @@ def analyze_pack(pack: CasePack, as_of: date, stress_pct: int = 0) -> dict:
               [usable["cfo"], usable["net_income"]])
     if "liquidity" in computed and computed["liquidity"] < 1:
         issue("liquidity_review", "所列流动资金不足以覆盖所列短债", "需核查现金可用性、其他授信及债务展期安排。",
-              [usable["liquid_assets"], usable["short_debt"], usable["current_debt"]])
+              [usable[n] for n in liquidity_inputs + ["short_debt", "current_debt"]])
     issue("scope_review", "债务与现金可用性仍需人工确认",
           "本口径含现金、现金等价物和短期投资；债务覆盖不含全部租赁、担保、资本承诺和受限资金调整。公开披露不足以直接作授信决策。",
-          [f for f in current if f.metric in {"liquid_assets", "short_debt", "current_debt"}])
+          [f for f in current if f.metric in {"liquid_assets", "cash_equivalents", "short_investments", "short_debt", "current_debt"}])
     comparison = []
     for f in usable.values():
         prior = [p for p in available if p.metric == f.metric and p.period_end < f.period_end]
@@ -235,8 +266,13 @@ def analyze_pack(pack: CasePack, as_of: date, stress_pct: int = 0) -> dict:
             continue
         p = candidates[0]
         comparable = p.unit == f.unit and (f.period_end - p.period_end).days in (365, 366)
+        if pack.fiscal_calendar == "week_52_53":
+            comparable = p.unit == f.unit and (f.period_end-p.period_end).days in (364, 371)
         if f.period_start and p.period_start:
             comparable &= abs((f.period_end-f.period_start).days - (p.period_end-p.period_start).days) <= 1
+            if pack.fiscal_calendar == "week_52_53":
+                comparable &= (f.period_end-f.period_start).days+1 in (364, 371)
+                comparable &= (p.period_end-p.period_start).days+1 in (364, 371)
         if comparable:
             comparison.append({"metric": f.metric, "label": f.label, "current": str(f.value),
                                "prior": str(p.value), "unit": f.unit,

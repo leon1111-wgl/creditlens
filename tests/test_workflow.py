@@ -232,6 +232,38 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(self.client.get("/api/example-pack?format=../../secrets", headers=self.headers()).status_code, 422)
         self.assertEqual(self.client.get("/api/example-pack?format=pdf", headers=self.headers("v-key")).status_code, 200)
 
+    def test_apple_example_independent_review_with_source_sections(self):
+        response = self.client.post("/api/reviews/example-apple", headers=self.headers(), json={})
+        self.assertEqual(response.status_code, 200)
+        case = response.json()
+        self.assertEqual(case["pack"]["entity_id"], "AAPL")
+        self.assertEqual(case["analysis"]["as_of"], "2025-11-01")
+        self.assertEqual(len(case["analysis"]["comparison"]), 11)
+        again = self.client.post("/api/reviews/example-apple", headers=self.headers(), json={}).json()
+        self.assertEqual(again["id"], case["id"])
+        for issue in case["analysis"]["issues"]:
+            response = self.change(case, "disposition", issue_id=issue["id"], disposition="accepted_limitation",
+                                   note="Checked declared period and source cells; scope is limited.")
+            self.assertEqual(response.status_code, 200)
+            case = response.json()
+        case = self.change(case, "submit").json()
+        case = self.change(case, "approve", key="r-key", note="Independent simulated review of financial evidence.").json()
+        self.assertEqual(case["status"], "reviewed")
+        self.assertTrue(case["event_integrity_valid"])
+        memo = self.client.get("/api/reviews/"+case["id"]+"/memo", headers=self.headers()).text
+        self.assertIn("Term debt / Current liabilities:", memo)
+        self.assertIn("cash_equivalents + short_investments", memo)
+        self.assertEqual(self.client.get("/api/reviews/"+case["id"], headers=self.headers("b-key")).status_code, 404)
+
+    def test_apple_permissions_cutoff_and_idempotency_content(self):
+        self.assertEqual(self.client.post("/api/reviews/example-apple", headers=self.headers("v-key"), json={}).status_code, 403)
+        template = self.client.get("/api/example-pack?format=apple-pdf", headers=self.headers("v-key")).json()
+        self.assertEqual(len(template["facts"]), 22)
+        case = self.client.post("/api/reviews/example-apple", headers=self.headers(), json={"as_of": "2025-10-30"}).json()
+        self.assertEqual(case["analysis"]["excluded_future_facts"], 22)
+        self.assertEqual(self.change(case, "submit").status_code, 422)
+        self.assertEqual(self.client.post("/api/reviews/example-apple", headers=self.headers(), json={}).status_code, 409)
+
 
 if __name__ == "__main__":
     unittest.main()

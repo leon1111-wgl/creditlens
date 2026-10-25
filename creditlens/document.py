@@ -5,6 +5,7 @@ from math import isfinite
 from .diligence import displayed_amount
 
 PARSER_VERSION = "positioned-financial-table-1"
+STACKED_PARSER_VERSION = "stacked-period-financial-table-1"
 
 
 class EvidenceError(ValueError):
@@ -94,6 +95,79 @@ def extract_table(tokens, *, page, width, height, title, unit_header, period_hea
                             "year": year, "year_bbox": box([column]), "period_header": period_header,
                             "period_bbox": box(period_tokens), "unit_header": unit_header,
                             "unit_bbox": box(unit_row), "parser_version": PARSER_VERSION}})
+    return result
+
+
+def extract_stacked_table(tokens, *, page, width, height, title, unit_header, years,
+                          date_headers, metrics, duration_header=None):
+    """Pinned centered, two-line date columns with explicit section boundaries.
+
+    Column regions come from header centers, never from reference financial values.
+    Repeated row labels require both an opening and closing section anchor.
+    """
+    rows = lines(tokens)
+    title_row, _ = phrase(rows, title)
+    unit_row, _ = phrase(rows, unit_header)
+    year_row, _ = phrase(rows, " ".join(map(str, years)))
+    date_row, _ = phrase(rows, " ".join(date_headers))
+    if len(years) < 2 or len(set(years)) != len(years) or len(date_headers) != len(years):
+        raise EvidenceError("Invalid declared date columns")
+    if not (title_row[0].cy < unit_row[0].cy < date_row[0].cy < year_row[0].cy
+            and year_row[0].cy-date_row[0].cy <= 18):
+        raise EvidenceError("Stacked date anchors are out of order")
+    if duration_header:
+        duration_row, _ = phrase(rows, duration_header)
+        if not unit_row[0].cy < duration_row[0].cy < date_row[0].cy:
+            raise EvidenceError("Duration header is misplaced")
+    centers = [(t.x0+t.x1)/2 for t in year_row]
+    edges = [centers[0]-(centers[1]-centers[0])/2]
+    edges += [(a+b)/2 for a, b in zip(centers, centers[1:])]
+    edges += [centers[-1]+(centers[-1]-centers[-2])/2]
+    if any(b-a < 20 for a, b in zip(edges, edges[1:])) or edges[0] < 0 or edges[-1] > width:
+        raise EvidenceError("Invalid date column regions")
+    dates = []
+    for i, label in enumerate(date_headers):
+        group = [t for t in date_row if edges[i] <= t.x0 and t.x1 <= edges[i+1]]
+        if [t.text for t in group] != label.split():
+            raise EvidenceError("Date text does not match its year column")
+        dates.append(group)
+    result = []
+    for metric, spec in metrics.items():
+        spec = {"label": spec} if isinstance(spec, str) else spec
+        candidate_rows, section = rows, None
+        if "section" in spec:
+            start, end = spec["section"]
+            first, _ = phrase(rows, start)
+            last, _ = phrase(rows, end, prefix=True)
+            if not year_row[0].cy < first[0].cy < last[0].cy:
+                raise EvidenceError("Section boundaries are out of order")
+            candidate_rows = [r for r in rows if first[0].cy < r[0].cy < last[0].cy]
+            section = {"start_label": start, "end_label": end,
+                       "start_bbox": box(first), "end_bbox": box(last[:len(end.split())])}
+        row, label_tokens = phrase(candidate_rows, spec["label"], prefix=True)
+        if row[0].cy <= year_row[0].cy or label_tokens[-1].x1 >= edges[0]:
+            raise EvidenceError("Financial row is outside the declared table")
+        cells = [t for t in row[len(label_tokens):] if t.text != "$"]
+        if len(cells) != len(years):
+            raise EvidenceError("Missing or ambiguous amount cells: " + metric)
+        for i, (year, column, cell) in enumerate(zip(years, year_row, cells)):
+            if not edges[i] <= cell.x0 < cell.x1 <= edges[i+1]:
+                raise EvidenceError("Amount crosses a date column: " + metric)
+            try:
+                amount = displayed_amount(cell.text)
+            except ValueError as exc:
+                raise EvidenceError("Unreadable amount: " + metric) from exc
+            loc = {"page": page, "page_width": width, "page_height": height,
+                   "coordinate_system": "pdf_points_top_left", "amount_bbox": box([cell]),
+                   "row_label": spec["label"], "row_label_bbox": box(label_tokens),
+                   "year": year, "year_bbox": box([column]),
+                   "period_header": f"{date_headers[i]} {year}", "period_bbox": box(dates[i]+[column]),
+                   "unit_header": unit_header, "unit_bbox": box(unit_row),
+                   "parser_version": STACKED_PARSER_VERSION}
+            if section:
+                loc["section"] = section
+            result.append({"metric": metric, "year": year, "raw_value": cell.text,
+                           "value": str(abs(amount) if metric == "capex" else amount), "pdf_location": loc})
     return result
 
 
