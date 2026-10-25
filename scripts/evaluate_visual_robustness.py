@@ -18,6 +18,7 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from creditlens.diligence import CasePack, digest
+from creditlens.experiment_paths import default_local_dir, default_report_path, validate_experiment_paths, validate_write_path
 from creditlens.visual import OcrPage, VISUAL_RULE_VERSION, crosscheck_fact
 from creditlens.visual_robustness import (RobustnessConfig, STATES, compare_conditions,
                                          compact_fact, summarize, transform_image, verified_image)
@@ -25,6 +26,7 @@ from creditlens.visual_store import REGISTERED_PACKS
 
 
 def write_json(path, payload):
+    path = validate_write_path(ROOT, path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
 
@@ -65,7 +67,12 @@ def result_to_page(result, page):
     return OcrPage(page=page["page"], width=page["width"], height=page["height"], spans=spans)
 
 
-def run(source_dir: Path, output: Path, local_dir: Path):
+def run(source_dir: Path | None = None, output: Path | None = None, local_dir: Path | None = None):
+    source_dir = Path(source_dir) if source_dir is not None else default_local_dir(ROOT, "document-ai")
+    paths = validate_experiment_paths(ROOT, output if output is not None else default_report_path(ROOT, "visual-robustness"),
+                                      local_dir if local_dir is not None else default_local_dir(ROOT, "visual-robustness"),
+                                      read_only_dirs=(source_dir,))
+    output, local_dir = paths.output, paths.local_dir
     config = RobustnessConfig.model_validate_json((ROOT/"configs/visual-robustness.json").read_text(encoding="utf-8"))
     source = json.loads((ROOT/"artifacts/document-ai-report.json").read_text(encoding="utf-8"))
     profile = json.loads((ROOT/"configs/document-ai.json").read_text(encoding="utf-8"))
@@ -109,7 +116,7 @@ def run(source_dir: Path, output: Path, local_dir: Path):
             directory = local_dir/item.document_id/f"page-{item.page}"/variant.id
             directory.mkdir(parents=True, exist_ok=True)
             image = transform_image(raw, variant)
-            image_path = directory/"input.png"
+            image_path = validate_write_path(ROOT, directory/"input.png")
             image_path.write_bytes(image)
             started = time.perf_counter()
             result = engine(str(image_path))  # Full image only, no reference facts or regions.
@@ -150,8 +157,8 @@ def run(source_dir: Path, output: Path, local_dir: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source-dir", type=Path, default=ROOT/".run/document-ai")
-    parser.add_argument("--local-dir", type=Path, default=ROOT/".run/visual-robustness")
-    parser.add_argument("--output", type=Path, default=ROOT/"artifacts/visual-robustness-report.json")
+    parser.add_argument("--source-dir", type=Path, default=default_local_dir(ROOT, "document-ai"))
+    parser.add_argument("--local-dir", type=Path, default=default_local_dir(ROOT, "visual-robustness"))
+    parser.add_argument("--output", type=Path, default=default_report_path(ROOT, "visual-robustness"))
     args = parser.parse_args()
     run(args.source_dir, args.output, args.local_dir)
