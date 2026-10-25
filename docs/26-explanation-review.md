@@ -42,6 +42,6 @@ python -m unittest discover -s tests -p "test_explanation*.py" -v
 
 这轮解决研究交接中的具体问题：后来补进来的解释，究竟由谁采用、在哪一版确认、还缺什么依据。岗位侧继续参考2026-10-25已整理的金融 Agent、证据检索、数字口径和权限要求；产品侧沿用已核验的金融文档工作流及 HKU LITE Lab/Microsoft 研究参照，不另造客户反馈或效率数字。
 
-详见[岗位与业务调研](01-product-and-career.md)、[任务设计](research/2026-10-25-enterprise-research-design.md)、[港大公开产业项目](research/2026-10-25-hku-industry-projects.md)。这是既有公开证据在当前任务上的设计应用，尚无客户访谈或生产部署验收。
+详见[岗位与业务调研](01-product-requirements.md)、[任务设计](research/2026-10-25-enterprise-research-design.md)、[港大公开产业项目](research/2026-10-25-hku-industry-projects.md)。这是既有公开证据在当前任务上的设计应用，尚无客户访谈或生产部署验收。
 
 本轮结果及实际页面见[制作记录](iterations/2026-10-25-23.md)。旧的[三类任务检查](24-research-task-acceptance.md)和[公司解释只读预览](25-company-attribution.md)继续按原版本工作；新补充稿有自己的证据和复核，不覆盖它们。
