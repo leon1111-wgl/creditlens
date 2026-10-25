@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "id": "registered-company-attributions-1",
+  "rule_version": "company-attribution-1",
+  "material_mode": "current_verified_materials",
+  "entries": [
+    {
+      "id": "msft-fy2025-cfo-company-attribution",
+      "issuer_id": "MSFT",
+      "company": "Microsoft Corporation",
+      "metric": "cfo",
+      "previous_year": 2024,
+      "current_year": 2025,
+      "periods": {
+        "previous": {"start": "2023-07-01", "end": "2024-06-30", "days": 366, "fiscal_calendar": "calendar_year", "kind": "annual"},
+        "current": {"start": "2024-07-01", "end": "2025-06-30", "days": 365, "fiscal_calendar": "calendar_year", "kind": "annual"}
+      },
+      "pdf_source_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "source": {
+        "url": "https://www.microsoft.com/investor/reports/ar25/index.html#discussion-analysis",
+        "retrieval_url": "https://www.microsoft.com/investor/reports/ar25/index.html",
+        "title": "Microsoft 2025 Annual Report",
+        "locator": "Discussion & Analysis > Liquidity and Capital Resources > Cash Flows；该小标题后的第一个完整段落，经营现金流解释为其中首句。",
+        "anchor_en": "Cash from operations increased $17.6 billion to $136.2 billion",
+        "article_id": "discussion-analysis",
+        "section_heading": "LIQUIDITY AND CAPITAL RESOURCES",
+        "subheading": "Cash Flows",
+        "response_bytes": 601259,
+        "response_sha256": "564154a15ac28c0f7f72f304ae26b74c29cfca9f3eafe8d59595776769d621ca",
+        "paragraph_sha256": "3d8588d240fdef2afd40ea68d9a70524221fa70885b5c0f33344128750538d87",
+        "hash_basis": "response_sha256：本次 HTTP 响应正文原始字节；paragraph_sha256：目标完整 p 元素的 HTML 实体解码文本，按 Unicode 空白折叠为单个空格，UTF-8 后计算 SHA-256。",
+        "paragraph_scope": "完整段落还包含融资和投资现金流句子；本条概述只对应第一句经营现金流解释。未公开整段英文。",
+        "retrieved_at": "2026-10-25T12:28:45.944648+00:00",
+        "exact_asset_publication_date": null,
+        "original_announcement_date": null,
+        "date_note": "仅登记当前抓取版本及财年；未核实该 HTML 字节首次公开日期，不把 PDF 公告日或网页中的股东信日期当作本段首次披露时点。",
+        "historical_snapshot_verified": false,
+        "point_in_time_eligible": false,
+        "same_report_as_pdf": true,
+        "independent_source": false,
+        "source_kind": "issuer_official_annual_report_html",
+        "license_note": "官方公开阅读材料；版权归原权利人。仅保留短定位锚、中文概述和摘要，不发布完整 HTML 或整段原文。",
+        "registration_method": "2026-10-25 工具辅助按章节定位并核对首句限定，独立人工确认待完成；非模型自动抽取。",
+        "independent_human_confirmation": "pending"
+      },
+      "paraphrase_zh": "公司称，2025 财年经营现金流的增加主要来自客户收款增加；供应商和雇员付款增加，以及所得税支付增加，抵消了部分增量。",
+      "qualifiers": {
+        "attribution_owner": "company",
+        "primary_driver_zh": "客户收款增加是公司陈述的主要原因",
+        "partial_offsets_zh": ["供应商和雇员付款增加", "所得税支付增加"],
+        "offset_relation_zh": "抵消了部分增量",
+        "exhaustive_causal_explanation": false,
+        "independently_verified": false
+      },
+      "reported_numbers": {
+        "currency": "USD",
+        "unit": "USD_billion",
+        "precision": "0.1",
+        "current_cfo": "136.2",
+        "cfo_change": "17.6",
+        "direction": "increase"
+      },
+      "independently_verified": false,
+      "automatic_approval": false
+    }
+  ],
+  "coverage": [
+    {"issuer_id": "MSFT", "company": "Microsoft Corporation", "registered": true, "entry_ids": ["msft-fy2025-cfo-company-attribution"], "status": "company_statement_registered", "note": "登记一条公司明示解释，尚未独立核实。"},
+    {"issuer_id": "AAPL", "company": "Apple Inc.", "registered": false, "entry_ids": [], "status": "not_registered", "note": "当前目录未登记苹果的经营解释；不表示苹果没有披露，也未作完整披露检索。"}
+  ],
+  "limitations": [
+    "公司明示解释属于公司陈述，不是本系统独立证实的经营原因。",
+    "同份年度报告的网页与 PDF 是两种载体，数值相符不构成两个独立证据源。",
+    "新补充未纳入旧任务冻结快照，未经过旧复核流程批准；原验收报告保持原样。",
+    "舍入兼容只核对两个摘要数值，不验证公司解释的事实充分性或因果真实性。",
+    "当前抓取日期不等于原始公告日；不用于历史可得时点研究。",
+    "固定目录不解析自由问题、不联网刷新、不接受任意 URL，也不生成新的经营解释。"
+  ]
+}
