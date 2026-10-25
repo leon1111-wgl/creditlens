@@ -1,0 +1,127 @@
+{
+  "pages": [
+    {
+      "page": 74,
+      "printed_page": 62,
+      "width": 594.0,
+      "height": 774.0,
+      "visible_bbox": [
+        0.0,
+        0.0,
+        594.0,
+        774.0
+      ],
+      "media_box": [
+        0.0,
+        0.0,
+        594.0,
+        774.0
+      ],
+      "crop_box": [
+        0.0,
+        0.0,
+        594.0,
+        774.0
+      ],
+      "rotation": 0,
+      "fact_ids": [
+        "cash_equivalents-2025",
+        "cash_equivalents-2024",
+        "current_assets-2025",
+        "current_assets-2024",
+        "current_liabilities-2025",
+        "current_liabilities-2024",
+        "long_debt-2025",
+        "long_debt-2024"
+      ],
+      "text_token_count": 1418,
+      "image_width": 1188,
+      "image_height": 1548,
+      "image_sha256": "83bb47d9e27fc2c84f6dd9d23baa72b08aabbc04533d206472ab4cac437aaec3"
+    },
+    {
+      "page": 76,
+      "printed_page": 64,
+      "width": 594.0,
+      "height": 774.0,
+      "visible_bbox": [
+        0.0,
+        0.0,
+        594.0,
+        774.0
+      ],
+      "media_box": [
+        0.0,
+        0.0,
+        594.0,
+        774.0
+      ],
+      "crop_box": [
+        0.0,
+        0.0,
+        594.0,
+        774.0
+      ],
+      "rotation": 0,
+      "fact_ids": [
+        "cfo-2025",
+        "cfo-2024",
+        "net_income-2025",
+        "net_income-2024",
+        "capex-2025",
+        "capex-2024"
+      ],
+      "text_token_count": 2242,
+      "image_width": 1188,
+      "image_height": 1548,
+      "image_sha256": "a007af0a6dac14cede0c28215a2239958cf61be94434005d0cd02c7c4083aa52"
+    }
+  ],
+  "parser_version": "amd-stacked-dates-reference-1",
+  "geometry_version": "visible-page-top-left-1",
+  "pack_canonical_sha256": "6dad127999746f5c44decff2524b88268b23a86fe3737da72cf4aa6519313be4",
+  "table_selection_sha256": "e5ef7ce612514456986c0782e87e0c02e2213687dc4e4fedf652b4d9d38eb45f",
+  "source_pdf_sha256": "c7dac911d91ed1b38afa3fbf3b3408cbd0c105d1c820a4b6fa15f553e2892187",
+  "render": {
+    "engine": "pypdfium2",
+    "version": "5.14.0",
+    "pillow_version": "13.0.0",
+    "scale": 2.0,
+    "rotation": 0,
+    "image_format": "PNG"
+  },
+  "pdfium_version": "156.0.8076.0",
+  "reference_preparation": "text_layer_and_visual_review_before_amd_ocr",
+  "unscored": [
+    {
+      "selection": "FY2023 comparison column",
+      "reason": "Only the latest two fiscal years were selected before OCR. The third column remains visible to the model and is validated for column geometry."
+    },
+    {
+      "selection": "Total and discontinued operating cash flow",
+      "reason": "Continuing operating cash flow was selected to match continuing capital expenditure. This is a scope decision made before OCR, not a recognition-quality exclusion."
+    },
+    {
+      "selection": "Discontinued-operations capital expenditure",
+      "reason": "The second repeated capex row belongs to discontinued investing activities. FY2024 displays a dash, which is not converted to zero. Both years are outside the preselected continuing-operations scope."
+    },
+    {
+      "selection": "Current portion of long-term debt",
+      "reason": "The fixed seven-metric inventory uses noncurrent debt. FY2024 current debt is a dash, which is not converted to zero; the financial debt coverage is incomplete."
+    },
+    {
+      "selection": "Other rows, non-cash capex and short-term investments",
+      "reason": "Outside the declared seven-metric, two-year inventory. No other row was selected or discarded using OCR output."
+    }
+  ],
+  "metric_scopes": {
+    "cash_equivalents": "consolidated_balance_sheet",
+    "current_assets": "consolidated_balance_sheet",
+    "current_liabilities": "consolidated_balance_sheet",
+    "long_debt": "noncurrent_debt_net",
+    "cfo": "continuing_operations",
+    "net_income": "consolidated_including_discontinued_operations",
+    "capex": "continuing_operations"
+  },
+  "limitation": "Evaluation only. Net income includes discontinued operations while CFO and capex are continuing-operations amounts; do not calculate a mixed-scope cash-conversion ratio or assert consolidated free cash flow from this pack."
+}

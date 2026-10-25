@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "files": {
+    "artifacts/issuer-evaluation-report.json": "0e55dccf2d7923d75990f2e5a43e1698fb89de0bca5e57d10b9ecbc1e338ed34",
+    "configs/issuer-evaluation.json": "fecba1a9228e920a25f0492d091894fb597e2c791321b39b7231feb330f05725"
+  }
+}

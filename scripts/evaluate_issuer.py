@@ -48,6 +48,20 @@ def _paths(output, local_dir):
     return paths
 
 
+def load_cpu_models(engine):
+    # RapidOCR 3.10 initializes sessions lazily. Load the pinned models without
+    # passing any image so providers can be checked before the first inference.
+    if engine.text_det is None:
+        engine._load_det_model()
+    if engine.text_rec is None:
+        engine._load_rec_model()
+    providers = {"detection": engine.text_det.session.session.get_providers(),
+                 "recognition": engine.text_rec.session.session.get_providers()}
+    require(providers == {"detection": ["CPUExecutionProvider"], "recognition": ["CPUExecutionProvider"]},
+            "Issuer inference must use only CPU providers")
+    return providers
+
+
 def run(*, manifest=None, output=None, local_dir=None, download=False):
     paths = _paths(output, local_dir)
     manifest_path = Path(manifest) if manifest is not None else ROOT/"configs/issuer-evaluation.json"
@@ -66,10 +80,7 @@ def run(*, manifest=None, output=None, local_dir=None, download=False):
                  for doc in frozen.documents}
     import pypdfium2 as pdfium
     engine = create_engine(frozen.profile)
-    providers = {"detection": engine.text_det.session.session.get_providers(),
-                 "recognition": engine.text_rec.session.session.get_providers()}
-    require(providers == {"detection": ["CPUExecutionProvider"], "recognition": ["CPUExecutionProvider"]},
-            "Issuer inference must use only CPU providers")
+    providers = load_cpu_models(engine)
     report = {"schema_version": 1, "suite_version": VERSION, "experiment_id": frozen.experiment_id,
               "generated_at": datetime.now(timezone.utc).isoformat(), "manifest_sha256": frozen.snapshot_sha256,
               "rule_versions": RULES.copy(), "scope": SCOPE, "automatic_approval": False,
