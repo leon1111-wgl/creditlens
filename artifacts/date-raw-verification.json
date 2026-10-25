@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "operation": "verify_preserved_full_ocr_no_inference",
+  "model_inference_performed": false,
+  "source_authenticity_verified": false,
+  "diagnostic_generated_at": "2026-10-25T08:09:55.385886+00:00",
+  "source": {
+    "report_path": "artifacts/document-transfer-report.json",
+    "report_sha256": "e470eb3318762da5e79f4042b58357fc0ed56c841f8904ba83991ee0c5f89aae",
+    "manifest_path": "configs/document-transfer.json",
+    "manifest_sha256": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1",
+    "release_path": "configs/document-transfer-artifact.json",
+    "release_sha256": "84caa38d0259f64bbde374213b09dee7d3deccab1245441cdcf43654fb014b70",
+    "experiment_id": "nvda-fy2025-transfer-v2-diagnostic",
+    "report_generated_at": "2026-10-25T07:38:32.178706Z",
+    "reference_packs": {
+      "nvda-fy2025": {
+        "path": "data/examples/nvda-fy2025-transfer-v2.json",
+        "sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c"
+      }
+    }
+  },
+  "raw_file_sha256": {
+    "nvda-fy2025/nvda-fy2025-annual.pdf": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+    "nvda-fy2025/page-146.png": "a6aee665d7282ca28edda84ed0516c6ce8869b1557f367dc78c3a3967f4548e2",
+    "nvda-fy2025/ocr-words-146.json": "f1a351f8058c31c00c10d2fea33ae94d33bcaa79c576d5f33c48be5630e11aee",
+    "nvda-fy2025/ocr-lines-146.json": "cdfc3492f6d7acf7c81b5f3ee54303cef422444486873260110d6d9252483616",
+    "nvda-fy2025/page-148.png": "f6b047ec1755dd4f16932286d424f260c8a8872a18354db021b0a63a9e77273f",
+    "nvda-fy2025/ocr-words-148.json": "86194f410b9aba784a9749a14f2541fa5bf74070f86449866466b71f359d6cc3",
+    "nvda-fy2025/ocr-lines-148.json": "00dc8e38dfa07b0fc68d6cb0f911f74a02fd65f9c7c11cecdb6cdf2e4e295a1f"
+  },
+  "facts": [
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "cash_equivalents-2025",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "cash_equivalents-2024",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "short_investments-2025",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "short_investments-2024",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "current_assets-2025",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "current_assets-2024",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "current_liabilities-2025",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "current_liabilities-2024",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "long_debt-2025",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "long_debt-2024",
+      "page": 146,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "cfo-2025",
+      "page": 148,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "cfo-2024",
+      "page": 148,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "net_income-2025",
+      "page": 148,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "net_income-2024",
+      "page": 148,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "capex-2025",
+      "page": 148,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    },
+    {
+      "document_id": "nvda-fy2025",
+      "fact_id": "capex-2024",
+      "page": 148,
+      "status": "consistent",
+      "exact_after_parent_index_mapping": true
+    }
+  ],
+  "distinct_date_groups": 4,
+  "verification_script_sha256": "dc77d99f0c61e0d632817c41ee71defd283607364d4714211f9811223c977dd1",
+  "verification_script_hash_basis": "python_utf8_lf"
+}
