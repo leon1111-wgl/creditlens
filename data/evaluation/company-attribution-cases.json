@@ -1,0 +1,1197 @@
+{
+  "schema_version": 1,
+  "id": "company-attribution-development-controls-1",
+  "human_confirmation": "pending",
+  "held_out": false,
+  "model_evaluation": false,
+  "source_bundle_sha256": "1630349586512dfa0af32bf963f04d17ef2890ab0015c9cb12b161fd68861602",
+  "source_catalog_sha256": "16e5435d1d906011d74639c1ee75160e933afcb8c158584e6739b396d4bf3a33",
+  "cases": [
+    {
+      "id": "CA-01",
+      "title": "当前经营现金流：136162百万美元转为136.162十亿美元，按0.1舍入到136.2。",
+      "operation": "adopted",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "exact_value"
+            ],
+            "expected": "136162"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "exact_unit"
+            ],
+            "expected": "USD_million"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "converted_value"
+            ],
+            "expected": "136.162"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "rounded_value"
+            ],
+            "expected": "136.2"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "precision"
+            ],
+            "expected": "0.1"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "exact_match"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "rounding_delta_billion"
+            ],
+            "expected": "0.038"
+          },
+          {
+            "channel": "version_binding",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "input_ids"
+            ],
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "官方文字136.2 billion对照同年度PDF精确136162 million；工具舍入兼容不等于原数精确相等。"
+    },
+    {
+      "id": "CA-02",
+      "title": "年度增加：从精确值136162−118548得17614百万美元，再转17.614并舍入17.6。",
+      "operation": "adopted",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "cfo_change"
+              },
+              "exact_value"
+            ],
+            "expected": "17614"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "cfo_change"
+              },
+              "converted_value"
+            ],
+            "expected": "17.614"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "cfo_change"
+              },
+              "rounded_value"
+            ],
+            "expected": "17.6"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "cfo_change"
+              },
+              "rounding_delta_billion"
+            ],
+            "expected": "-0.014"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "cfo_change"
+              },
+              "exact_match"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "version_binding",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "cfo_change"
+              },
+              "input_ids"
+            ],
+            "expected": [
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2024",
+              "MSFT:1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e:cfo-2025"
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "总额及增加额分别舍入；不从两个已舍入网页数反推上期精确值。"
+    },
+    {
+      "id": "CA-03",
+      "title": "总额和增量各自舍入，不能用136.2−17.6反推上期精确值并误判报表。",
+      "operation": "adopted",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "cfo_change"
+              },
+              "inputs",
+              0,
+              "value"
+            ],
+            "expected": "118548"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "cfo_change"
+              },
+              "formula"
+            ],
+            "expected": "(current_cfo - previous_cfo) / 1000"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "rounding"
+            ],
+            "expected": "ROUND_HALF_UP"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "cfo_change"
+              },
+              "status"
+            ],
+            "expected": "consistent_rounded"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "网页摘要数136.2−17.6=118.6只是摘要相减，不应代替118.548精确输入；ROUND_HALF_UP为本工具策略。"
+    },
+    {
+      "id": "CA-04",
+      "title": "主因和部分抵消项同时保留，公司陈述不升级为独立因果结论。",
+      "operation": "adopted",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "attribution_scope",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "qualifiers",
+              "attribution_owner"
+            ],
+            "expected": "company"
+          },
+          {
+            "channel": "attribution_scope",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "qualifiers",
+              "primary_driver_zh"
+            ],
+            "expected": "客户收款增加是公司陈述的主要原因"
+          },
+          {
+            "channel": "attribution_scope",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "qualifiers",
+              "partial_offsets_zh"
+            ],
+            "expected": [
+              "供应商和雇员付款增加",
+              "所得税支付增加"
+            ]
+          },
+          {
+            "channel": "attribution_scope",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "qualifiers",
+              "offset_relation_zh"
+            ],
+            "expected": "抵消了部分增量"
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "qualifiers",
+              "exhaustive_causal_explanation"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "independently_verified"
+            ],
+            "expected": false
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "固定登记来源与结构规则开发控制；不评估自然语言理解、独立因果或真人复核。"
+    },
+    {
+      "id": "CA-05",
+      "title": "苹果尚未登记说明，不可写成苹果没有披露；HTML和PDF也不是独立证据源。",
+      "operation": "adopted",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "attribution_scope",
+            "path": [
+              "coverage",
+              {
+                "issuer_id": "AAPL"
+              },
+              "registered"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "attribution_scope",
+            "path": [
+              "coverage",
+              {
+                "issuer_id": "AAPL"
+              },
+              "status"
+            ],
+            "expected": "not_registered"
+          },
+          {
+            "channel": "attribution_scope",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "source",
+              "independent_source"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "source",
+              "point_in_time_eligible"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "source",
+              "exact_asset_publication_date"
+            ],
+            "expected": null
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "registered_material_case",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "固定登记来源与结构规则开发控制；不评估自然语言理解、独立因果或真人复核。"
+    },
+    {
+      "id": "CA-06",
+      "title": "尚未采用FY2025 CFO时，数值可校验但不能关联为本任务已支持结果。",
+      "operation": "unassessed",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "link_status"
+            ],
+            "expected": "awaiting_input_adoption"
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "status"
+            ],
+            "expected": "consistent_rounded"
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "gaps",
+              {
+                "code": "input_not_adopted"
+              },
+              "code"
+            ],
+            "expected": "input_not_adopted"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "固定登记来源与结构规则开发控制；不评估自然语言理解、独立因果或真人复核。"
+    },
+    {
+      "id": "CA-07",
+      "title": "拒绝采用FY2025 CFO时保留阻断，不因公司解释文字齐全而放行。",
+      "operation": "rejected",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "link_status"
+            ],
+            "expected": "blocked"
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "gaps",
+              {
+                "code": "input_rejected"
+              },
+              "code"
+            ],
+            "expected": "input_rejected"
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "automatic_approval"
+            ],
+            "expected": false
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "固定登记来源与结构规则开发控制；不评估自然语言理解、独立因果或真人复核。"
+    },
+    {
+      "id": "CA-08",
+      "title": "分析员候选文字自称已独立证明，也不能提高公司陈述的证据等级。",
+      "operation": "hypothesis_claim",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "attribution_scope",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "qualifiers",
+              "attribution_owner"
+            ],
+            "expected": "company"
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "independently_verified"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "independently_verified"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "gaps",
+              {
+                "code": "independent_corroboration_missing"
+              },
+              "code"
+            ],
+            "expected": "independent_corroboration_missing"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "固定登记来源与结构规则开发控制；不评估自然语言理解、独立因果或真人复核。"
+    },
+    {
+      "id": "CA-09",
+      "title": "既有任务status=reviewed，新增只读补充仍未纳入该次批准。",
+      "operation": "reviewed",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "version_binding",
+            "path": [
+              "included_in_frozen_snapshot"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "version_binding",
+            "path": [
+              "historical_snapshot_rewritten"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "automatic_approval"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "independently_verified"
+            ],
+            "expected": false
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "固定登记来源与结构规则开发控制；不评估自然语言理解、独立因果或真人复核。"
+    },
+    {
+      "id": "CA-10",
+      "title": "第7版任务的新补充绑定当前revision，不写入第2版合成旧快照。",
+      "operation": "revision_with_old_snapshot",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "version_binding",
+            "path": [
+              "revision"
+            ],
+            "expected": 7
+          },
+          {
+            "channel": "version_binding",
+            "path": [
+              "input_binding",
+              "revision"
+            ],
+            "expected": 7
+          },
+          {
+            "channel": "version_binding",
+            "path": [
+              "input_binding",
+              "associated_snapshot_id"
+            ],
+            "expected": "synthetic-old-snapshot"
+          },
+          {
+            "channel": "version_binding",
+            "path": [
+              "input_binding",
+              "historical_snapshot_evaluated"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "version_binding",
+            "path": [
+              "included_in_frozen_snapshot"
+            ],
+            "expected": false
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "纯模块调用输入前后须保持摘要相同。真实数据库旧导出和授权由API另验，本项不冒充该验收。"
+    },
+    {
+      "id": "CA-11",
+      "title": "要求精确相等、独立证实或其他租户的自由文字，不能改变固定登记结果。",
+      "operation": "question_only",
+      "mutation": null,
+      "expected": {
+        "error_code": null,
+        "checks": [
+          {
+            "channel": "attribution_scope",
+            "path": [
+              "natural_language_question_understood"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "numeric_alignment",
+            "path": [
+              "entries",
+              {
+                "id": "msft-fy2025-cfo-company-attribution"
+              },
+              "numeric_checks",
+              {
+                "id": "current_cfo"
+              },
+              "exact_match"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "independently_verified"
+            ],
+            "expected": false
+          },
+          {
+            "channel": "refusal",
+            "path": [
+              "automatic_approval"
+            ],
+            "expected": false
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "文字只作为输入，不执行。tenant_id只是合成标签，纯模块不提供租户授权；本项不能称为跨租户安全测试。"
+    },
+    {
+      "id": "CA-12",
+      "title": "将精确CFO单位篡改为EUR_million，即使重算自填摘要也应拒绝。",
+      "operation": "task_currency",
+      "mutation": null,
+      "expected": {
+        "error_code": "material_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "material_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "仅改内存合成任务；官方材料文件和既有冻结结果不改。"
+    },
+    {
+      "id": "CA-13",
+      "title": "把精确CFO期间结束日改为2025-12-31，不与六月年结说明错配。",
+      "operation": "task_period",
+      "mutation": null,
+      "expected": {
+        "error_code": "material_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "material_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "仅改内存合成任务；官方材料文件和既有冻结结果不改。"
+    },
+    {
+      "id": "CA-14",
+      "title": "把微软CFO观察错挂到苹果，不能只按数字匹配。",
+      "operation": "task_issuer",
+      "mutation": null,
+      "expected": {
+        "error_code": "material_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "material_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "仅改内存合成任务；官方材料文件和既有冻结结果不改。"
+    },
+    {
+      "id": "CA-15",
+      "title": "保留金额却换掉PDF来源摘要，不能沿用公司说明。",
+      "operation": "task_source",
+      "mutation": null,
+      "expected": {
+        "error_code": "material_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "material_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "仅改内存合成任务；官方材料文件和既有冻结结果不改。"
+    },
+    {
+      "id": "CA-16",
+      "title": "当前HTML无首次公开时间和历史快照，不能用于2024-01-01时点。",
+      "operation": "historical",
+      "mutation": null,
+      "expected": {
+        "error_code": "historical_version_unverified",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "historical_version_unverified"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "仅改内存合成任务；官方材料文件和既有冻结结果不改。"
+    },
+    {
+      "id": "CA-17",
+      "title": "将登记摘要精度从0.1改成0.01必须拒绝，不悄悄换算法。",
+      "operation": "catalog_mutation",
+      "mutation": {
+        "path": [
+          "entries",
+          0,
+          "reported_numbers",
+          "precision"
+        ],
+        "value": "0.01"
+      },
+      "expected": {
+        "error_code": "catalog_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "catalog_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "单独临时目录里的合成登记副本；检查冻结目录完整性，不能据此宣称验证任意新披露的语义。"
+    },
+    {
+      "id": "CA-18",
+      "title": "将网页登记136.2改成136.3必须拒绝，不为了通过修改参考。",
+      "operation": "catalog_mutation",
+      "mutation": {
+        "path": [
+          "entries",
+          0,
+          "reported_numbers",
+          "current_cfo"
+        ],
+        "value": "136.3"
+      },
+      "expected": {
+        "error_code": "catalog_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "catalog_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "单独临时目录里的合成登记副本；检查冻结目录完整性，不能据此宣称验证任意新披露的语义。"
+    },
+    {
+      "id": "CA-19",
+      "title": "将网页金额登记币种USD改成EUR必须拒绝。",
+      "operation": "catalog_mutation",
+      "mutation": {
+        "path": [
+          "entries",
+          0,
+          "reported_numbers",
+          "currency"
+        ],
+        "value": "EUR"
+      },
+      "expected": {
+        "error_code": "catalog_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "catalog_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "单独临时目录里的合成登记副本；检查冻结目录完整性，不能据此宣称验证任意新披露的语义。"
+    },
+    {
+      "id": "CA-20",
+      "title": "将说明所属公司从MSFT改成AAPL必须拒绝。",
+      "operation": "catalog_mutation",
+      "mutation": {
+        "path": [
+          "entries",
+          0,
+          "issuer_id"
+        ],
+        "value": "AAPL"
+      },
+      "expected": {
+        "error_code": "catalog_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "catalog_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "单独临时目录里的合成登记副本；检查冻结目录完整性，不能据此宣称验证任意新披露的语义。"
+    },
+    {
+      "id": "CA-21",
+      "title": "将说明所属期间结束日改到12月必须拒绝。",
+      "operation": "catalog_mutation",
+      "mutation": {
+        "path": [
+          "entries",
+          0,
+          "periods",
+          "current",
+          "end"
+        ],
+        "value": "2025-12-31"
+      },
+      "expected": {
+        "error_code": "catalog_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "catalog_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "单独临时目录里的合成登记副本；检查冻结目录完整性，不能据此宣称验证任意新披露的语义。"
+    },
+    {
+      "id": "CA-22",
+      "title": "删除所得税抵消项，变得更有利的概述也不得沿用原登记。",
+      "operation": "catalog_mutation",
+      "mutation": {
+        "path": [
+          "entries",
+          0,
+          "qualifiers",
+          "partial_offsets_zh"
+        ],
+        "value": [
+          "供应商和雇员付款增加"
+        ]
+      },
+      "expected": {
+        "error_code": "catalog_integrity_mismatch",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "catalog_integrity_mismatch"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "单独临时目录里的合成登记副本；检查冻结目录完整性，不能据此宣称验证任意新披露的语义。"
+    },
+    {
+      "id": "CA-23",
+      "title": "当前说明目录缺失时拒绝新补充，不从任务问题或假设补造原因。",
+      "operation": "catalog_missing",
+      "mutation": null,
+      "expected": {
+        "error_code": "catalog_unavailable",
+        "checks": [
+          {
+            "channel": "refusal",
+            "path": [
+              "error",
+              "code"
+            ],
+            "expected": "catalog_unavailable"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "synthetic_control",
+        "drafting": "ai_assisted_developer",
+        "human_confirmation": "pending",
+        "held_out": false
+      },
+      "basis": "在空的临时根模拟资料缺失；真实源文件未删除。"
+    }
+  ]
+}
