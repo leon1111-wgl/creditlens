@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "version": "0.11.0",
+  "tests": {
+    "run": 453,
+    "passed": 452,
+    "skipped": 1,
+    "skip_reason": "Windows filesystem symlink privilege",
+    "financial_control_cases_included": 15,
+    "log_sha256": "45a48afd27e11ad281c85108a4c65ee3288419be0e2a51ed2dda9a42f9e1bc00"
+  },
+  "new_tests": {
+    "source": 16,
+    "arithmetic": 17,
+    "attachment_store_export": 8,
+    "http": 1,
+    "scenarios": 12,
+    "registered_download": 11
+  },
+  "registered_sources_rebuilt_byte_equal": true,
+  "source_canonical_sha256": "6e2835ffd2891258cc67aff2f46ff8f031c1000b9f9bbb04456655cc3e6d60a6",
+  "frozen_files_unchanged_from": "fc8a683e4a47355375fce470e0452fb4b24a3c79",
+  "frozen_files_checked": 17,
+  "scenario_manifest": "research-scenarios/manifest.json",
+  "scenario_outcomes": [
+    "reviewed",
+    "reviewed",
+    "returned"
+  ],
+  "scenario_exports_verified": 4,
+  "browser_record": "cash-flow-bridge-ui-verification.json",
+  "new_ocr_or_language_model_score": false,
+  "new_training": false,
+  "paid_services_used": false,
+  "download_tests": "mock network only; no actual upstream availability claim",
+  "scope": "Source-bound accounting and software/business workflow demonstration, not institutional deployment, causal validation, or investment performance.",
+  "post_cleanup_test_log_sha256": "93473d729c147300af0c06c4253dddd0f041aded84da7527bf3c2580cf895667",
+  "post_cleanup_same_test_result": true,
+  "github_ci": {
+    "commit": "d07a6d8d74db7279ba99308919ec7bf4a265c424",
+    "run_id": 40187333352,
+    "conclusion": "success"
+  },
+  "github_scenario_readback": {
+    "files": 4,
+    "all_sha256_matched": true,
+    "all_offline_checks_passed": true
+  }
+}
