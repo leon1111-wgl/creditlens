@@ -60,3 +60,22 @@ python -m unittest tests.test_currency_evidence
 ```
 
 本结果说明这套受限规则能解释已观察的两处完整货币词，不说明所有货币布局或未知公司文档都可处理。词位置仍来自原 OCR 适配器的识别序列投影，不是本轮新增的字符定位。跨页表格、没有可靠表头、多个词共同组成金额及其他币种的通用处理均未由本轮建立。即便诊断一致，事实仍需要既有的采用理由和独立复核流程。
+
+## 用保留的完整 OCR 检查公开片段是否遗漏
+
+新增只读工具 `scripts/verify_currency_raw.py`，仅读取已保存的两页 `ocr-words-*.json` 和 `ocr-lines-*.json`，不读取或重新下载 PDF、整页图片，不运行 OCR，也不写入完整识别文本。
+
+工具先验证旧发行人报告、冻结清单及来源登记，再重算新版公开货币诊断；随后逐页核对完整 JSON 的规范哈希、类型、页尺寸、行数、字词到父行投影，以及公开父行的 `source_line_index` 是否准确指向完整页。最后使用完整页重算旧行级、字词、日期和新货币结果，映射父行索引后逐字段及摘要比较。新 `column_bounds.current_header_index` 也参与映射，词在父行内的 `word_index`、`year_word_index` 等不会误映射。
+
+```powershell
+python scripts/verify_currency_raw.py --raw-dir .run/reproductions/issuer-evaluation --report artifacts/currency-diagnostic-report.json
+python -m unittest tests.test_currency_raw
+```
+
+`--raw-dir` 是发行人 ID 子目录的上一级；本轮实际文件位于其 `amd-fy2025/` 下。`--report` 也可以指定未发布的本地候选报告，核验成功不代表批准发布该候选。默认 stdout 只输出摘要、逐事实状态和哈希，不含完整 OCR。篡改、漏行、重复 JSON 键、非有限数、非法索引、类型改写或新报告不能复算时，返回结构化拒绝及非零退出码。
+
+本轮实际 CLI 核验通过：第 74、76 页分别有 101、215 个完整 OCR 父行；公开片段分别保留 19、16 个，共 35 个父行，14 个事实全部在映射后精确一致。核验的货币诊断报告字节 SHA256 为 `625909663cbd55ad92e384a279f2b05690e405bd27980a78d507ce3b04afb964`。
+
+9 项专属测试通过，包含带真实索引偏移的完整双列合成页、JSON 空白兼容和类型/内容篡改拒绝、父行投影、非法索引、漏行、公开资料和新报告变更、只读 CLI，以及一个关键反例：给完整页加上公开片段未包含的 `CAD` 父行时，即使片段仍通过，完整页重算也会拒绝一致性结论。
+
+这项检查证明的是保留下来的 JSON 与冻结登记及当前规则一致。它**未检查 PDF 或图像字节，未证明原始模型执行真实发生，也没有增加独立评测样本**。相关字段在摘要中明确为 `false`，公开 API 仍只承诺公开片段的复算范围。
