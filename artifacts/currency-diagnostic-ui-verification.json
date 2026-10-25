@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "version": "0.12.0",
+  "checked_at": "2026-10-25T11:42:04.309380+00:00",
+  "scope": "Actual local browser interactions with saved observed OCR diagnostics; no new model inference.",
+  "old_http_payloads": {
+    "/api/issuer-evaluation": {
+      "status": 200,
+      "bytes": 197549,
+      "sha256": "9ea41867c33ae4c19d376c5c72c66764957430ef1a3d51a9f439b7fe58eb6ed3",
+      "unchanged": true
+    },
+    "/api/date-diagnostic": {
+      "status": 200,
+      "bytes": 312653,
+      "sha256": "ff8398ee09b2d93db689fabf21f927713cd7d11928598e962e3ffdb917955feb",
+      "unchanged": true
+    },
+    "/api/document-transfer": {
+      "status": 200,
+      "bytes": 119355,
+      "sha256": "31f881692d8c02145bfbaebf7181029ca8bb2967ea04efa99477e4299b7b4642",
+      "unchanged": true
+    },
+    "/api/research/task-materials": {
+      "status": 200,
+      "bytes": 28329,
+      "sha256": "cfb7b30e94a81e3f645253db0febda5d13c44346e54867af7b037d1b4365fdef",
+      "unchanged": true
+    }
+  },
+  "browser_download": {
+    "bytes": 878461,
+    "sha256": "ea3de8366426b976282c375789ba70c4b2f4400df0352beaa0c659287e57def2",
+    "byte_equal_to_api": true,
+    "recomputed_payload_equal": true
+  },
+  "ui": {
+    "legacy_amd_methods": {
+      "line": [
+        10,
+        0,
+        4
+      ],
+      "word": [
+        12,
+        0,
+        2
+      ],
+      "date": [
+        12,
+        0,
+        2
+      ]
+    },
+    "legacy_nvidia_methods": {
+      "line": [
+        0,
+        0,
+        16
+      ],
+      "word": [
+        0,
+        0,
+        16
+      ],
+      "date": [
+        16,
+        0,
+        0
+      ]
+    },
+    "new_currency_counts": [
+      14,
+      0,
+      0
+    ],
+    "changed_filter_rows": 2,
+    "issues_filter_rows": 0,
+    "synthetic_control_rows": 34,
+    "split_c_prefix_refused": true,
+    "amount_detail_shows_old_insufficient_and_new_reason": true,
+    "currency_marker_scope_visible": true,
+    "credential_change_clears_rows_controls_detail_and_download": true,
+    "candidate_symbol_bbox_preview_loaded": true,
+    "source_image_natural_size": [
+      1188,
+      1548
+    ],
+    "desktop_viewport": [
+      1280,
+      720
+    ],
+    "desktop_document_scroll_width": 1265,
+    "narrow_viewport": [
+      497,
+      900
+    ],
+    "narrow_document_scroll_width": 482,
+    "narrow_detail_width": 450,
+    "temporary_viewport_reset": true,
+    "font_family": "Times New Roman, Songti SC, SimSun, Noto Serif CJK SC, serif"
+  },
+  "limits": [
+    "Not exhaustive keyboard/cross-browser testing",
+    "No new OCR or model accuracy result",
+    "No PDF/image authenticity check",
+    "No enterprise production deployment"
+  ]
+}
