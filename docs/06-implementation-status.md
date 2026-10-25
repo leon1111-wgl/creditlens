@@ -153,3 +153,5 @@ v0.8.1 实现提交 `9e1ad7d024a319c921dd3d06e049c5061fe03532` 已发布；[远�
 项目介绍已按研究员的工作过程重写，技术分别说明材料、数值、交接、Agent与实验。真实财报提供数值，团队角色和协作过程作为模拟场景单独登记；没有补造机构部署、客户反馈或模型收益。新调节表使用原生PDF提取，不增加OCR实验分数。
 
 本轮最终本地回归453项运行、452通过、1项Windows权限跳过。三项模拟业务实际复演为reviewed／reviewed／returned，四个快照导出均核验通过。新增远端来源索引及按需下载工具，清理与恢复边界见[数据存储](22-data-storage.md)。[完整验收](../artifacts/cash-flow-bridge-verification.json)。
+
+发布提交 `d07a6d8` 的[远端CI](https://github.com/leon1111-wgl/creditlens/actions/runs/40187333352)通过，主页 `5eccc65` 已同步。远端四份场景文件已读回校验。按用户要求清理222.27 MiB大文件缓存，服务冷启动与完整453项回归结果保持；详情见[清理记录](../artifacts/local-data-cleanup.json)。

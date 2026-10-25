@@ -34,5 +34,17 @@
   "new_training": false,
   "paid_services_used": false,
   "download_tests": "mock network only; no actual upstream availability claim",
-  "scope": "Source-bound accounting and software/business workflow demonstration, not institutional deployment, causal validation, or investment performance."
+  "scope": "Source-bound accounting and software/business workflow demonstration, not institutional deployment, causal validation, or investment performance.",
+  "post_cleanup_test_log_sha256": "93473d729c147300af0c06c4253dddd0f041aded84da7527bf3c2580cf895667",
+  "post_cleanup_same_test_result": true,
+  "github_ci": {
+    "commit": "d07a6d8d74db7279ba99308919ec7bf4a265c424",
+    "run_id": 40187333352,
+    "conclusion": "success"
+  },
+  "github_scenario_readback": {
+    "files": 4,
+    "all_sha256_matched": true,
+    "all_offline_checks_passed": true
+  }
 }

@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "scope": "Explicit requested removal of raw downloaded large files and disposable scenario databases; runtime small facts, source metadata and frozen OCR evidence retained.",
+  "status": "removed_after_github_export_and_source_index_verification",
+  "files": [
+    {
+      "workspace": "main",
+      "path": "data/raw/aapl-fy2025-10k.html",
+      "bytes": 1452459,
+      "sha256": "eb08113db1fa3b847936c68ddf7bd9c31b5d708c14794c94355fd38ac3846850",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "main",
+      "path": "data/raw/aapl-fy2025-10k.pdf",
+      "bytes": 1858048,
+      "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "main",
+      "path": "data/raw/finqa-dev.json",
+      "bytes": 10954658,
+      "sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "main",
+      "path": "data/raw/msft-fy2025-10k.pdf",
+      "bytes": 3024506,
+      "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "main",
+      "path": "data/raw/nvda-fy2025-annual.pdf",
+      "bytes": 49970589,
+      "sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "main",
+      "path": ".run/reproductions/round19-scenarios/replay.sqlite",
+      "bytes": 1474560,
+      "sha256": "3595c14eccdd587186236436a3f6ee76c02fbd4744da84f78f4e7f6645fd87fb",
+      "kind": "disposable_simulation_database"
+    },
+    {
+      "workspace": "main",
+      "path": ".run/reproductions/document-transfer/nvda-fy2025/nvda-fy2025-annual.pdf",
+      "bytes": 49970589,
+      "sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "main",
+      "path": ".run/reproductions/issuer-evaluation/amd-fy2025/amd-fy2025-annual.pdf",
+      "bytes": 4032484,
+      "sha256": "c7dac911d91ed1b38afa3fbf3b3408cbd0c105d1c820a4b6fa15f553e2892187",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "main",
+      "path": ".run/transfer-attempts/v1-reference-invalid/raw/nvda-fy2025/nvda-fy2025-annual.pdf",
+      "bytes": 49970589,
+      "sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "document-ai",
+      "path": "data/raw/amd-fy2025-annual.pdf",
+      "bytes": 4032484,
+      "sha256": "c7dac911d91ed1b38afa3fbf3b3408cbd0c105d1c820a4b6fa15f553e2892187",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "document-ai",
+      "path": ".run/cash-flow-bridge-input/aapl-fy2025-10k.pdf",
+      "bytes": 1858048,
+      "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "document-ai",
+      "path": ".run/cash-flow-bridge-input/msft-fy2025-10k.pdf",
+      "bytes": 3024506,
+      "sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "kind": "public_source_download_cache"
+    },
+    {
+      "workspace": "document-ai",
+      "path": ".run/reproductions/research-scenarios/replay.sqlite",
+      "bytes": 1474560,
+      "sha256": "2efb11f6c7f767ad4989e1b6f8edd47ebc0da62ce7b15816b357bd584cb1c3a7",
+      "kind": "disposable_simulation_database"
+    },
+    {
+      "workspace": "robustness",
+      "path": "data/raw/nvda-fy2025-annual.pdf",
+      "bytes": 49970589,
+      "sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+      "kind": "public_source_download_cache"
+    }
+  ],
+  "total_bytes": 233068669,
+  "publication_commit": "d07a6d8d74db7279ba99308919ec7bf4a265c424",
+  "github_ci_run": 40187333352,
+  "removed_at": "2026-10-25T11:06:09.9281294Z",
+  "restoration_scope": "Official PDFs and pinned FinQA can be requested through the source index if upstream bytes remain available; disposable simulation databases are regenerated through the scenario replay. Full original documents were not mirrored to this repository.",
+  "post_cleanup_checks": {
+    "software_tests_run": 453,
+    "passed": 452,
+    "skipped": 1,
+    "server_restarted": true,
+    "pages_and_research_materials_http_ok": true,
+    "existing_export_bytes_unchanged": true,
+    "cash_flow_recalculation_without_pdfs": true,
+    "full_finqa_requires_explicit_download": true
+  }
+}
