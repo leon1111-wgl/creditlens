@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "version": "0.8.0",
+  "download_matches_api": true,
+  "page_images_http_hash_checked": [
+    146,
+    148
+  ],
+  "stale_image_hash_http_status": 409,
+  "old_experiment_api_unchanged": true,
+  "old_frozen_files_unchanged": 7,
+  "old_preview_images_unchanged": 6,
+  "local_tests": {
+    "run": 244,
+    "passed": 243,
+    "skipped": 1
+  },
+  "health": {
+    "status": "ok",
+    "version": "0.8.0",
+    "rule_version": "cash-debt-review-3",
+    "cases": 883,
+    "mode": "public_benchmark_local",
+    "auth_mode": "demo",
+    "dataset_sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51"
+  },
+  "diagnostic_summary": {
+    "line": {
+      "consistent": 0,
+      "conflict": 0,
+      "insufficient": 16
+    },
+    "word": {
+      "consistent": 0,
+      "conflict": 0,
+      "insufficient": 16
+    }
+  },
+  "raw_evidence_verification": "Rescoring validates original full OCR/line equality, source report public/full reconstruction, all source/image hashes; independent adviser reproduced 64 v1/v2 method facts.",
+  "javascript_syntax_pages": 6,
+  "local_markdown_links": "passed",
+  "python_compile": "passed",
+  "wheel": {
+    "built": true,
+    "html_pages": 6,
+    "new_modules_included": true,
+    "standalone_data_install": "not tested; run from repository root"
+  },
+  "browser": {
+    "desktop_viewport": 1366,
+    "narrow_viewport": 497,
+    "narrow_content_width": 482,
+    "body_font_size": "15px",
+    "font_family": "Times New Roman with Songti SC/SimSun CJK fallback",
+    "checked": [
+      "unavailable release state",
+      "fact detail and word-parent evidence",
+      "original-page amount overlay",
+      "empty filter clears detail and image",
+      "credential edit clears state and disables export",
+      "download JSON equals same API snapshot"
+    ],
+    "screenshots": [
+      "docs/images/document-transfer-desktop.png",
+      "docs/images/document-transfer-narrow.png"
+    ],
+    "not_checked": [
+      "cross browser",
+      "complete keyboard navigation",
+      "production load"
+    ]
+  }
+}

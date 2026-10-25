@@ -14,7 +14,7 @@ for path in [ROOT / "README.md", *list((ROOT / "docs").rglob("*.md"))]:
             broken.append(f"{path.name}: {target}")
 if broken:
     raise SystemExit("\n".join(broken))
-for name in ["workbench", "review", "research", "documents", "experiments"]:
+for name in ["workbench", "review", "research", "documents", "experiments", "transfer"]:
     html = (ROOT / f"creditlens/{name}.html").read_text(encoding="utf-8")
     script = re.search(r"<script>(.*?)</script>", html, re.S)
     if not script:
