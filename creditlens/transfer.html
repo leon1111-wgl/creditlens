@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>新公司文档核对 · CreditLens</title><style>
+/* Original local workbench styling, inspired by enterprise workspace layouts.
+   No Tencent or Feishu component library or brand assets are bundled. */
+:root {
+  color-scheme: light;
+  --font: "Times New Roman", "Songti SC", SimSun, "Noto Serif CJK SC", serif;
+  --text: #1f2329;
+  --muted: #606773;
+  --line: #e4e6eb;
+  --soft: #f7f8fa;
+  --blue: #2155cc;
+  --radius: 4px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--text); background: #fff; font: 15px/1.6 var(--font); }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+.app { min-height: 100dvh; display: grid; grid-template-columns: 190px minmax(0, 1fr); }
+.sidebar { position: sticky; top: 0; height: 100dvh; overflow-y: auto; background: var(--soft); border-right: 1px solid var(--line); padding: 22px 12px; display: flex; flex-direction: column; }
+.brand { display: block; padding: 0 12px; color: var(--text); font-size: 25px; font-weight: 700; line-height: 1.2; }
+.sidebar-caption { margin: 5px 12px 30px; color: var(--muted); font-size: 12px; }
+.nav-label { color: var(--muted); font-size: 12px; margin: 0 12px 8px; }
+.workspace-nav { display: grid; gap: 5px; }
+.workspace-nav a { padding: 9px 12px; color: #414751; border-radius: var(--radius); font-size: 14px; }
+.workspace-nav a:hover { background: #eceef2; text-decoration: none; }
+.workspace-nav a[aria-current="page"] { color: var(--blue); background: #e8efff; font-weight: 700; }
+.sidebar-foot { margin: auto 12px 0; padding-top: 24px; color: var(--muted); font-size: 12px; }
+.workspace { min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); padding: 0 28px; display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); }
+.topbar strong { color: #424852; font-weight: 400; }
+main { max-width: 1440px; margin: auto; padding: 25px 28px 40px; }
+h1 { margin: 0; font-size: 24px; line-height: 1.4; font-weight: 700; }
+h2 { margin: 0; font-size: 18px; line-height: 1.45; font-weight: 700; }
+h3 { margin: 0 0 7px; font-size: 16px; line-height: 1.5; }
+p { margin: 7px 0; }
+.intro { color: var(--muted); margin: 6px 0 0; font-size: 14px; }
+.muted, small { color: var(--muted); }
+small { font-size: 13px; }
+.bar { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; margin: 18px 0 12px; }
+label { display: flex; flex-direction: column; gap: 5px; color: #424852; font-size: 13px; }
+input, select, button { min-height: 34px; border: 1px solid #c8cdd5; border-radius: var(--radius); background: #fff; color: var(--text); padding: 5px 10px; max-width: 100%; }
+input { width: 260px; }
+input::placeholder { color: #69717d; font-size: 13px; }
+select { min-width: 125px; }
+button { padding: 5px 15px; cursor: pointer; white-space: nowrap; }
+button:hover { border-color: var(--blue); color: var(--blue); background: #f6f8ff; }
+button.primary { color: #fff; background: var(--blue); border-color: var(--blue); }
+button.primary:hover { background: #1745ae; }
+button:disabled { background: #f4f5f7; border-color: #e0e3e8; color: #858b95; cursor: default; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.toolbar .export { margin-left: auto; }
+#status { margin: 0 0 15px; min-height: 21px; font-size: 13px; }
+.notice { padding: 10px 12px; margin: 0 0 22px; border: 1px solid #e1e6f0; background: #f8faff; color: #525c6d; font-size: 13px; }
+.notice strong { color: #414b5a; font-weight: 400; margin-right: 7px; }
+.overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; padding-bottom: 24px; }
+.overview article { min-width: 0; }
+.overview .muted { font-size: 13px; margin: 5px 0 12px; }
+.overview .table-note { margin: 10px 0 0; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: middle; }
+th { background: var(--soft); font-size: 13px; color: #555d68; font-weight: 400; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+tr:last-child td { border-bottom: 0; }
+.count { font-variant-numeric: tabular-nums; font-size: 17px; font-weight: 400; }
+.section { border-top: 1px solid var(--line); padding: 23px 0; scroll-margin-top: 18px; }
+.tag { display: inline-block; padding: 0 6px; border-radius: 3px; font-size: 12px; line-height: 22px; color: #246244; background: #eff7f2; white-space: nowrap; vertical-align: middle; }
+.tag.insufficient { color: #825614; background: #fff5df; }
+.tag.conflict { color: #a5271a; background: #fff0ee; }
+.detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; margin-top: 16px; }
+.detail > section { min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); }
+.detail h3 { padding: 10px 14px; background: var(--soft); border-bottom: 1px solid var(--line); margin: 0; font-size: 15px; }
+.field { padding: 12px 14px; border-bottom: 1px solid #eceef2; }
+.field:last-child { border-bottom: 0; }
+.field strong { font-size: 14px; margin-right: 5px; }
+.field p { font-size: 15px; }
+.raw { white-space: pre-wrap; overflow-wrap: anywhere; }
+.mono { font-family: var(--font); font-size: 13px; overflow-wrap: anywhere; }
+details { margin-top: 8px; }
+summary { cursor: pointer; color: var(--blue); font-size: 13px; }
+.field details p { font-size: 13px; }
+#stressRows > details { padding: 8px 0; }
+#stressRows summary { font-size: 14px; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.source-section { border-top: 1px solid var(--line); padding: 17px 0; }
+.source-section > summary { font-size: 15px; color: var(--text); }
+.source-section p { font-size: 13px; }
+.footer { margin: 4px 0 0; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+[hidden] { display: none !important; }
+@media (min-width: 1600px) { main { padding-left: 42px; padding-right: 42px; } }
+@media (max-width: 1024px) { .app { grid-template-columns: 164px minmax(0, 1fr); } main { padding: 22px; } .overview { gap: 20px; } th,td { padding: 8px; } }
+@media (max-width: 760px) {
+  .app { display: block; }
+  .sidebar { position: static; height: auto; padding: 12px 16px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .brand { padding: 0; font-size: 23px; }
+  .sidebar-caption, .nav-label, .sidebar-foot { display: none; }
+  .workspace-nav { display: flex; gap: 4px; margin-top: 9px; overflow-x: auto; }
+  .workspace-nav a { font-size: 13px; white-space: nowrap; padding: 8px 10px; border-radius: 3px 3px 0 0; }
+  .topbar { display: none; }
+  main { padding: 20px 16px 30px; }
+  h1 { font-size: 22px; }
+  .overview, .detail { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .overview { padding-bottom: 22px; }
+  .bar { gap: 10px; }
+  .bar label { flex: 1 1 150px; min-width: 0; }
+  .toolbar label { flex: 1 1 100%; }
+  input, select { width: 100%; }
+  .toolbar .export { margin-left: 0; }
+  .notice { margin-bottom: 20px; }
+  .count { font-size: 16px; }
+}
+
+.evidence-table td { text-align:left; }
+.evidence-table button { min-height:28px; padding:2px 9px; font-size:13px; }
+.source-meta { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:8px 24px; margin:15px 0; font-size:13px; }
+.preview { position:relative; background:#f7f8fa; border:1px solid var(--line); overflow:hidden; }
+.preview img { display:block; width:100%; height:auto; }
+.preview .box { position:absolute; border:2px solid #2155cc; pointer-events:none; background:#2155cc0b; }
+.preview-caption { font-size:13px; }
+@media(max-width:760px) { .source-meta { grid-template-columns:1fr; } .evidence-table { min-width:570px; } }
+</style></head><body>
+<div class="app"><aside class="sidebar">
+<a class="brand" href="/">CreditLens</a><p class="sidebar-caption">金融研究工作台</p><p class="nav-label">研究与验证</p>
+<nav class="workspace-nav" aria-label="主导航"><a href="/">信用复核</a><a href="/research">季度研究</a><a href="/documents">原页核对</a><a href="/experiments">文档实验</a><a href="/transfer" aria-current="page">新公司核对</a></nav>
+<p class="sidebar-foot">查看已有实验记录<br>不会自动批准财务事实</p></aside>
+<div class="workspace"><header class="topbar">研究与验证 <span>/</span> <strong>新公司文档核对</strong></header><main>
+<h1>新公司文档核对</h1><p class="intro">把固定的核对方法用到另一家公司的财报，查看哪些数字能对上，哪些仍需检查。</p>
+<div class="bar toolbar"><label>访问密钥（本地演示可留空）<input id="key" type="password" autocomplete="off" placeholder="只随请求发送，不保存"></label><button id="load" class="primary">载入结果</button><button id="export" class="export" disabled>导出核对记录</button></div>
+<p id="status" role="status" aria-live="polite">正在载入…</p>
+<div class="notice">本次是参考坐标修正后的诊断记录：首次运行发现 PDF 裁剪偏移导致参考框错位，原记录已保留并标为无效评分。这里复用首次完整 OCR，只重新核对修正后的参考；不属于盲测、模型能力提升或材料验真。</div>
+<section id="content" hidden>
+<div class="bar"><label>公司材料<select id="document"></select></label><label>筛选项目<select id="filter"><option value="all">全部项目</option><option value="issues">任一方法需检查</option><option value="changed">两种方法结果不同</option></select></label></div>
+<h2 id="company"></h2><div id="sourceMeta" class="source-meta"></div>
+<div class="scroll"><table><thead><tr><th>识别后的核对方法</th><th>一致</th><th>冲突</th><th>证据不足</th></tr></thead><tbody id="totals"></tbody></table></div>
+<p id="outcomeNote" class="muted"></p>
+<section class="section"><h2>逐项结果</h2><p class="muted" id="count"></p><div class="scroll"><table class="evidence-table"><thead><tr><th>财务项目</th><th>原文金额</th><th>期间截止</th><th>物理页</th><th>行级核对</th><th>字词核对</th><th>依据</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+<section class="section" id="detail" hidden><h2 id="factTitle"></h2><p id="factNote" class="muted"></p>
+<div class="detail"><section><h3>行级证据</h3><div id="line"></div></section><section><h3>字词级证据</h3><div id="word"></div></section></div>
+<details id="imagePanel"><summary>查看本地原页位置</summary><p id="imageStatus" role="status" class="preview-caption"></p><div id="preview" class="preview" hidden><img id="pageImage" alt="官方财报原页"><div id="box" class="box"></div></div></details></section>
+<details class="source-section"><summary>来源、参考和验证边界</summary><div id="provenance"></div></details>
+</section><p class="footer">页面读取已保存的实验。刷新不会启动识别模型；一致结果仍需按业务流程复核。</p>
+</main></div></div>
+<script>
+const $ = id => document.getElementById(id);
+const labels = {consistent:'一致',conflict:'冲突',insufficient:'不足'};
+const fieldLabels = {amount:'金额与符号',year:'年份',period:'期间',unit:'单位',row_label:'行标签',section_start:'分区起点',section_end:'分区终点'};
+const reasonLabels = {same_displayed_content:'识别文字与参考内容一致',merged_or_misaligned_region:'识别文字包含邻近内容，无法单独确认这个字段',detached_numeric_fragment_near_cell:'这个位置旁还有数字片段，需要确认它们是否属于同一日期或金额'};
+let data = null, selected = null, version = 0, imageVersion = 0, imageURL = null;
+function node(tag,text,cls) { const n=document.createElement(tag); if(text!==undefined)n.textContent=text; if(cls)n.className=cls; return n; }
+function tag(status) { return node('span',labels[status]||status,'tag '+status); }
+function auth() { return $('key').value ? {Authorization:'Bearer '+$('key').value} : {}; }
+function clearImage() { imageVersion++; if(imageURL)URL.revokeObjectURL(imageURL); imageURL=null; $('pageImage').removeAttribute('src'); $('preview').hidden=true; $('imageStatus').textContent=''; }
+function clear() { version++; data=null; selected=null; $('content').hidden=true; $('detail').hidden=true; $('export').disabled=true; $('imagePanel').open=false; clearImage(); }
+async function load() { clear(); const current=version; $('load').disabled=true; $('status').textContent='正在校验并载入记录…'; try { const response=await fetch('/api/document-transfer',{headers:auth(),cache:'no-store'}); if(!response.ok)throw new Error(response.status===401?'访问密钥无效或缺失。':response.status===503?'实验记录尚未准备好。':'记录未通过来源与完整性校验。'); const value=await response.json(); if(current!==version)return; data=value; $('document').replaceChildren(...data.report.documents.map(d=>{const o=node('option',d.company);o.value=d.id;return o;})); $('content').hidden=false; $('export').disabled=false; $('status').textContent='已载入已保存结果；本页只读。'; render(); } catch(error){if(current===version)$('status').textContent=error.message;} finally{if(current===version)$('load').disabled=false;} }
+function documentRecord(){ return data?.report.documents.find(d=>d.id===$('document').value); }
+function sourceLink(source,page){const a=node('a','打开官方原文');try{const u=new URL(source.url);if(!['https:','http:'].includes(u.protocol))return node('span','来源地址不可用');if(page)u.hash='page='+page;a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';}catch{return node('span','来源地址不可用');}return a;}
+function render(){const d=documentRecord();if(!d)return; selected=null;$('detail').hidden=true;$('imagePanel').open=false;clearImage();$('company').textContent=d.company;
+$('sourceMeta').replaceChildren(node('div','材料：'+d.source.title),node('div','本次任务：给定页面与位置的核对'),node('div','金额单位：'+(d.facts[0]?.line.unit==='USD_million'?'百万美元':d.facts[0]?.line.unit||'见原文')),node('div','底层 10-K 提交日：'+(d.source.underlying_filing_date||'未知')),node('div','当前 PDF 发布日期：未知；不用于历史时点回放'),sourceLink(d.source));
+$('totals').replaceChildren(...['line','word'].map(m=>{const tr=node('tr');tr.append(node('td',m==='line'?'整行识别后核对':'字词位置核对'));for(const s of ['consistent','conflict','insufficient'])tr.append(node('td',String(d.summary[m][s]),'count'));return tr;}));
+const pendingFields=[...new Set(d.facts.flatMap(f=>['line','word'].flatMap(m=>f[m].checks.filter(c=>c.status!=='consistent').map(c=>fieldLabels[c.field]||c.field))))];
+$('outcomeNote').textContent=pendingFields.length?'需检查的字段：'+pendingFields.join('、')+'。整项一致要求所有必需字段通过，金额对上不能单独放行。':'所有登记字段已通过当前规则；仍需按业务流程复核。';
+const facts=d.facts.filter(f=>$('filter').value==='all'||($('filter').value==='issues'?(f.line.status!=='consistent'||f.word.status!=='consistent'):f.line.status!==f.word.status));
+$('count').textContent='显示 '+facts.length+' / '+d.facts.length+' 项；选择“查看”可比较两种方法的证据。';
+$('rows').replaceChildren(...facts.map(f=>{const tr=node('tr');tr.append(node('td',f.line.label),node('td',f.line.raw_value),node('td',f.line.period_end),node('td',String(f.page)));for(const m of ['line','word']){const td=node('td');td.append(tag(f[m].status));tr.append(td);}const td=node('td');const b=node('button','查看');b.setAttribute('aria-label','查看 '+f.line.label+' '+f.line.period_end);b.onclick=()=>showFact(f);td.append(b);tr.append(td);return tr;}));
+const p=$('provenance');p.replaceChildren(node('p','完整 PDF、整页图片和完整 OCR 留在本地，公开记录只保留核对必需证据。'),node('p','期间起止由来源参考登记；当前图片核对检查给定列日期，不代表模型独立验证完整财年天数。往年数字是本年文件中的比较值。'),node('p','核对规则与模型保持不变；修正来自 PDF 自身可见边界，不按 OCR 结果调框。首次评分因参考坐标错误作废，本次仅为已观察材料的诊断。'),node('p','记录类型：'+(data.report.environment.operation==='rescoring_preserved_ocr'?'复用已保存 OCR 重算；未重新推理':'完整页 OCR 运行')+'；生成时间：'+data.report.generated_at),node('p','公开片段不能证明未公开的完整输出；完整输出核验另记。'));
+const details=node('details');details.append(node('summary','展开来源与参考登记'),node('pre',JSON.stringify(data.manifest,null,2),'mono raw'));p.append(details);const scope=node('p',typeof data.validation_scope==='string'?data.validation_scope:JSON.stringify(data.validation_scope),'mono raw');p.append(scope);
+}
+function renderFields(target,result){$(target).replaceChildren(...result.checks.map(c=>{const box=node('div',undefined,'field');const title=node('p');title.append(node('strong',fieldLabels[c.field]||c.field),tag(c.status));box.append(title,node('p','参考：'+c.expected,'raw'),node('p','识别：'+(c.observations.map(o=>o.text).join(' | ')||'没有可用文字'),'raw'),node('small','原因：'+(reasonLabels[c.reason]||c.reason)));const more=node('details');more.append(node('summary','位置与识别依据'),node('pre',JSON.stringify({reason_code:c.reason,region:c.region,observations:c.observations,parent_lines:c.parent_lines,word_guards:c.word_guards,guard_observations:c.guard_observations},null,2),'mono raw'));box.append(more);return box;}));}
+function showFact(f){selected=f;clearImage();$('imagePanel').open=false;$('detail').hidden=false;$('factTitle').textContent=f.line.label+' · '+f.line.period_end;$('factNote').textContent='原文金额 '+f.line.raw_value+'，'+(f.line.unit==='USD_million'?'百万美元':f.line.unit)+'；'+(f.line.period_start?'期间 '+f.line.period_start+' 至 '+f.line.period_end:'时点 '+f.line.period_end)+'；物理第 '+f.page+' 页。参考位置用于识别后的核对，不传给 OCR 模型。';renderFields('line',f.line);renderFields('word',f.word);$('detail').scrollIntoView({behavior:'smooth',block:'start'});}
+async function showImage(){if(!$('imagePanel').open||!selected||!data)return;clearImage();const current=imageVersion;const d=documentRecord(),f=selected;const p=d.pages.find(x=>x.page===f.page);$('imageStatus').textContent='正在读取本地原页…';try{const response=await fetch('/api/document-transfer/'+encodeURIComponent(d.id)+'/pages/'+f.page+'.png?expected_sha256='+encodeURIComponent(p.image_sha256),{headers:auth(),cache:'no-store'});if(!response.ok)throw new Error(response.status===404?'本机尚未准备该原页；仍可查看字段证据和官方原文。':'原页记录已变化或未通过校验，请重新载入结果。');const blob=await response.blob();if(current!==imageVersion)return;imageURL=URL.createObjectURL(blob);$('pageImage').src=imageURL;$('preview').hidden=false;const box=f.line.checks.find(c=>c.field==='amount').region;Object.assign($('box').style,{left:100*box.x0/p.width+'%',top:100*box.top/p.height+'%',width:100*(box.x1-box.x0)/p.width+'%',height:100*(box.bottom-box.top)/p.height+'%'});$('imageStatus').textContent='蓝框标出登记金额位置。物理页码与印刷页码可能不同。';}catch(error){if(current===imageVersion)$('imageStatus').textContent=error.message;}}
+$('key').addEventListener('input',()=>{clear();$('load').disabled=false;$('status').textContent='访问密钥已变更，请重新载入。';});$('load').onclick=load;$('document').onchange=render;$('filter').onchange=render;$('imagePanel').addEventListener('toggle',()=>{if($('imagePanel').open)showImage();else clearImage();});
+$('export').onclick=()=>{if(!data)return;const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'}));const a=node('a');a.href=url;a.download='creditlens-document-transfer.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};load();
+</script></body></html>

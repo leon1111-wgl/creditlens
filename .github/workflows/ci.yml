@@ -26,3 +26,4 @@ jobs:
           node --check artifacts/research-syntax.js
           node --check artifacts/documents-syntax.js
           node --check artifacts/experiments-syntax.js
+          node --check artifacts/transfer-syntax.js

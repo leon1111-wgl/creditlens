@@ -20,7 +20,7 @@ CreditLens 正在建设一个面向投研和风险团队的研究平台：把财
 
 [文档实验页新版界面](docs/images/document-experiments-enterprise-desktop.png)：Times New Roman 与宋体排版，白灰蓝工作台；[改版记录](docs/iterations/2026-10-25-12.md)。
 
-本轮新增 [字词定位与图像退化对照](docs/iterations/2026-10-25-11.md)，并已完成简历技术材料与多分支迭代机制；此前的 [季度研究页面](docs/iterations/2026-10-25-09.md) 继续可用。
+新增 [新公司文档核对](docs/17-new-issuer-transfer.md)：查看 NVIDIA 材料中的数字、年份和原页，区分参考坐标错误与核对规则不足，并保留每次实验。此前的 [字词与退化对照](docs/iterations/2026-10-25-11.md)、[季度研究页面](docs/iterations/2026-10-25-09.md) 继续可用。
 
 ## 数据是否实时，需要服务器吗
 
@@ -86,6 +86,8 @@ python scripts/evaluate_document_ai.py --download --local-dir .run/document-ai
 
 打开 [文档实验对照](http://127.0.0.1:8765/experiments)，无需模型或原页即可查看已保存的字词／行级与图像退化实验、展开失败原因、导出对照。完整重跑默认写入独立的 `.run/reproductions/`，不会替换页面展示的记录或已有原页。使用 `scripts/check_document_reproduction.py` 比较候选与冻结实验的逐字段证据；完整命令、差异说明与发布边界见[安全复现说明](docs/16-experiment-reproduction.md)。
 
+打开 [新公司文档核对](http://127.0.0.1:8765/transfer)，可查看 NVIDIA 的已保存诊断记录、筛选待检查项、展开证据并导出。当前金额字段均能对上，但完整事实仍因年份规则不足保留待核；参考修正前的无效尝试另存，没有改写成盲测成绩。原页准备与重跑步骤见[实验说明](docs/17-new-issuer-transfer.md)。
+
 需要 FinQA 实验室时执行 `python scripts/download_data.py`，下载后重启服务并访问 `/lab`。
 
 打开 [季度研究工作台](http://127.0.0.1:8765/research)，选择日期、查看变化，点“查看依据”追查数字，再导出当前快照。试选“首次公告当天”与“看到上半年”，查看尚未披露的数据如何保持缺失。网页与以下命令行共用计算模块，不需要网络或模型：
@@ -127,7 +129,7 @@ python scripts/evaluate_retrieval.py  # 需要先下载 FinQA
 
 | 验证 | 当前结果 |
 |---|---|
-| 核心、API、权限、并发、时点、季度数据、视觉核对与模型接口测试 | 197 项运行：196 通过，1 项平台权限跳过 |
+| 核心、API、权限、并发、时点、季度数据、视觉核对与模型接口测试 | 244 项运行：243 通过，1 项平台权限跳过 |
 | 财务控制回归场景 | 15/15 通过；1 个官方参考、14 个人工修改副本，不是模型准确率 |
 | 官方 PDF 开发样例核对 | 微软 20 项与 HTML 一致；苹果 22 项与登记参考一致，均非盲测或真实性验证 |
 | 官方披露工作流复现 | 5 个事件，独立模拟身份，事件校验通过 |
@@ -136,6 +138,7 @@ python scripts/evaluate_retrieval.py  # 需要先下载 FinQA
 | 真实 OCR 页图核对 | 六页、42 项开发事实：39 项字段一致，3 项证据不足，0 项明确冲突；不是通用抽取准确率 |
 | 字词定位对照 | 同次行级保持 39/3；字词级 42 项一致、0 不足，仅原来 3 项改变；已知开发位置，非泛化准确率 |
 | 合成图像退化 | 两页四档共 80 项条件结果；原图/JPEG 各 17 一致、3 不足，模糊/低对比度各 18/2；非真实扫描集 |
+| 新公司文档诊断 | NVIDIA 两页 16 项，修正参考后复用首次 OCR；两法均 0 完整一致、16 不足，均因年份规则；非盲测 |
 | 真实 LLM/VLM 问答、SFT/DPO、金融预测 | 尚未执行 |
 
 第 7 轮新增 [平台方向与季度数据模块](docs/iterations/2026-10-25-07.md)，含 17 项数据与解析测试。此前的 [第二家公司与口径修正](docs/iterations/2026-10-25-04.md)、苹果 [22 项参考核对](artifacts/aapl-pdf-crosscheck.json) 和微软 [20 项跨格式核对](artifacts/pdf-crosscheck.json) 保留原记录，均为开发验证。15 个财务控制场景已包含在软件测试中。v0.7.1 新增安全复现与逐项对照，Windows 本地跳过的是文件符号链接权限场景，目录 Junction 与硬链接已实际检查，见 [第 13 轮](docs/iterations/2026-10-25-13.md)。以下截图属于 v0.3；开头概览保留自 v0.2。
@@ -183,13 +186,14 @@ FastAPI、Pydantic、Decimal、SQLite 构成模块化单体。上图是已经实
 | [运行与模型接口](docs/07-operation-and-model.md) | 身份配置、API、状态存储与模型调用 |
 | [文档智能、因子与治理研究](docs/08-document-ai-and-governance.md) | 政策与论文证据、可检验的研究假设 |
 | [真实 OCR 实验与复现](docs/13-document-ai-experiment.md) | 图像输入、核对规则、模型版本、失败案例与原页展示 |
+| [新公司诊断与参考修正](docs/17-new-issuer-transfer.md) | NVIDIA 来源、可见页坐标、失效记录、同一 OCR 重评分及工作台 |
 | [权威数据登记](docs/09-data-register.md) | 来源优先级、许可与适用性 |
 | [时序与因子研究计划](docs/10-time-series-and-factors.md) | 已发表论文依据、季度现金流任务、因子稳定性与样本外实验 |
 | [金融研究平台与吴庆耀相关论文](docs/11-financial-research-platform.md) | 扩展后的产品定位、多模态／时序／关系／组合研究与实施顺序 |
 
 ## 数据与贡献
 
-FinQA 来自 EMNLP 2021 作者仓库，固定版本与哈希见 [manifest](data/manifest.json)。企业样例来自微软和苹果的官方披露，保存最小数值事实与来源定位，完整网页不随仓库分发。[第三方说明](THIRD_PARTY_NOTICES.md) 区分代码许可证和原始材料权利。
+FinQA 来自 EMNLP 2021 作者仓库，固定版本与哈希见 [manifest](data/manifest.json)。企业案例来自微软和苹果的官方披露，另有 NVIDIA 独立文档诊断参考，保存最小数值事实与来源定位，完整网页不随仓库分发。[第三方说明](THIRD_PARTY_NOTICES.md) 区分代码许可证和原始材料权利。
 
 项目贡献集中在业务工作流、证据契约、可复算工具、验证边界和可复现实验。BM25、视觉检索、QLoRA 与 DPO 都有既有研究；尚未声称算法首创、银行落地、收益提升或违约率改善。
 
