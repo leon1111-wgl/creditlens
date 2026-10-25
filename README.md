@@ -18,7 +18,9 @@ CreditLens 正在建设一个面向投研和风险团队的研究平台：把财
 
 [简历项目描述与技术讲解](docs/14-resume-and-interview.md) · [并行迭代与验收规则](docs/15-parallel-iteration.md)
 
-[文档实验页新版界面](docs/images/document-experiments-enterprise-desktop.png)：Times New Roman 与宋体排版，白灰蓝工作台；[改版记录](docs/iterations/2026-10-25-12.md)。
+[工作台新版界面](docs/images/workspace-palette-desktop.png)：六个业务页面统一为 Times New Roman 与宋体排版、浅灰导航和蓝色操作按钮；[本轮记录](docs/iterations/2026-10-25-17.md)。
+
+本轮补充[港大实际项目与产业合作调研](docs/research/2026-10-25-hku-industry-projects.md)及[相关团队的模型、代码与基准](docs/research/2026-10-25-hku-team-projects.md)，将下一阶段具体化为[两家同行、两期年度的现金流研究底稿](docs/research/2026-10-25-enterprise-research-design.md)：把数字、解释、缺口和复核快照放在同一任务中。外部项目是设计参考，这项完整流程尚未实现。
 
 新增 [AMD 固定规则检查](docs/19-issuer-evaluation.md)：先固定参考和规则，再让模型看另一家公司的财报；不确定的货币符号与金额保留待查。页面可以切换 AMD 与 NVIDIA，追查原页并导出。此前的 [新公司文档核对](docs/17-new-issuer-transfer.md)：查看 NVIDIA 材料中的数字、年份和原页，区分参考坐标错误与核对规则不足，并保留每次实验。[日期关联对照](docs/18-date-association.md) 可以按共同表头查看受影响数据，比较规则修改前后的依据。此前的 [字词与退化对照](docs/iterations/2026-10-25-11.md)、[季度研究页面](docs/iterations/2026-10-25-09.md) 继续可用。
 
