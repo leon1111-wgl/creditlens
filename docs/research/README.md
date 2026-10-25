@@ -34,3 +34,5 @@
 
 
 第20轮新增：[金额符号规则](2026-10-25-currency-evidence.md)、[固定反例与可复算报告](2026-10-25-currency-controls.md)、[第十一份独立审查](2026-10-25-advisory-11.md)。对应[功能说明](../23-currency-evidence.md)与[制作报告](../iterations/2026-10-25-20.md)。
+
+第22轮新增：[公司解释来源与核心](company-attribution-core.md)、[固定开发控制](company-attribution-cases.md)、[独立审查](advisory-13.md)。公司陈述、数值舍入与独立核实分别处理，见[功能说明](../25-company-attribution.md)。
