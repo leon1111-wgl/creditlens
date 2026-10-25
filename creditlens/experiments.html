@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>文档实验对照 · CreditLens</title>
+<style>
+/* Original local workbench styling, inspired by enterprise workspace layouts.
+   No Tencent or Feishu component library or brand assets are bundled. */
+:root {
+  color-scheme: light;
+  --font: "Times New Roman", "Songti SC", SimSun, "Noto Serif CJK SC", serif;
+  --text: #1f2329;
+  --muted: #606773;
+  --line: #e4e6eb;
+  --soft: #f7f8fa;
+  --blue: #2155cc;
+  --radius: 4px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--text); background: #fff; font: 15px/1.6 var(--font); }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+.app { min-height: 100dvh; display: grid; grid-template-columns: 190px minmax(0, 1fr); }
+.sidebar { position: sticky; top: 0; height: 100dvh; overflow-y: auto; background: var(--soft); border-right: 1px solid var(--line); padding: 22px 12px; display: flex; flex-direction: column; }
+.brand { display: block; padding: 0 12px; color: var(--text); font-size: 25px; font-weight: 700; line-height: 1.2; }
+.sidebar-caption { margin: 5px 12px 30px; color: var(--muted); font-size: 12px; }
+.nav-label { color: var(--muted); font-size: 12px; margin: 0 12px 8px; }
+.workspace-nav { display: grid; gap: 5px; }
+.workspace-nav a { padding: 9px 12px; color: #414751; border-radius: var(--radius); font-size: 14px; }
+.workspace-nav a:hover { background: #eceef2; text-decoration: none; }
+.workspace-nav a[aria-current="page"] { color: var(--blue); background: #e8efff; font-weight: 700; }
+.sidebar-foot { margin: auto 12px 0; padding-top: 24px; color: var(--muted); font-size: 12px; }
+.workspace { min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); padding: 0 28px; display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); }
+.topbar strong { color: #424852; font-weight: 400; }
+main { max-width: 1440px; margin: auto; padding: 25px 28px 40px; }
+h1 { margin: 0; font-size: 24px; line-height: 1.4; font-weight: 700; }
+h2 { margin: 0; font-size: 18px; line-height: 1.45; font-weight: 700; }
+h3 { margin: 0 0 7px; font-size: 16px; line-height: 1.5; }
+p { margin: 7px 0; }
+.intro { color: var(--muted); margin: 6px 0 0; font-size: 14px; }
+.muted, small { color: var(--muted); }
+small { font-size: 13px; }
+.bar { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; margin: 18px 0 12px; }
+label { display: flex; flex-direction: column; gap: 5px; color: #424852; font-size: 13px; }
+input, select, button { min-height: 34px; border: 1px solid #c8cdd5; border-radius: var(--radius); background: #fff; color: var(--text); padding: 5px 10px; max-width: 100%; }
+input { width: 260px; }
+input::placeholder { color: #69717d; font-size: 13px; }
+select { min-width: 125px; }
+button { padding: 5px 15px; cursor: pointer; white-space: nowrap; }
+button:hover { border-color: var(--blue); color: var(--blue); background: #f6f8ff; }
+button.primary { color: #fff; background: var(--blue); border-color: var(--blue); }
+button.primary:hover { background: #1745ae; }
+button:disabled { background: #f4f5f7; border-color: #e0e3e8; color: #858b95; cursor: default; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.toolbar .export { margin-left: auto; }
+#status { margin: 0 0 15px; min-height: 21px; font-size: 13px; }
+.notice { padding: 10px 12px; margin: 0 0 22px; border: 1px solid #e1e6f0; background: #f8faff; color: #525c6d; font-size: 13px; }
+.notice strong { color: #414b5a; font-weight: 400; margin-right: 7px; }
+.overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; padding-bottom: 24px; }
+.overview article { min-width: 0; }
+.overview .muted { font-size: 13px; margin: 5px 0 12px; }
+.overview .table-note { margin: 10px 0 0; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: middle; }
+th { background: var(--soft); font-size: 13px; color: #555d68; font-weight: 400; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+tr:last-child td { border-bottom: 0; }
+.count { font-variant-numeric: tabular-nums; font-size: 17px; font-weight: 400; }
+.section { border-top: 1px solid var(--line); padding: 23px 0; scroll-margin-top: 18px; }
+.tag { display: inline-block; padding: 0 6px; border-radius: 3px; font-size: 12px; line-height: 22px; color: #246244; background: #eff7f2; white-space: nowrap; vertical-align: middle; }
+.tag.insufficient { color: #825614; background: #fff5df; }
+.tag.conflict { color: #a5271a; background: #fff0ee; }
+.detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; margin-top: 16px; }
+.detail > section { min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); }
+.detail h3 { padding: 10px 14px; background: var(--soft); border-bottom: 1px solid var(--line); margin: 0; font-size: 15px; }
+.field { padding: 12px 14px; border-bottom: 1px solid #eceef2; }
+.field:last-child { border-bottom: 0; }
+.field strong { font-size: 14px; margin-right: 5px; }
+.field p { font-size: 15px; }
+.raw { white-space: pre-wrap; overflow-wrap: anywhere; }
+.mono { font-family: var(--font); font-size: 13px; overflow-wrap: anywhere; }
+details { margin-top: 8px; }
+summary { cursor: pointer; color: var(--blue); font-size: 13px; }
+.field details p { font-size: 13px; }
+#stressRows > details { padding: 8px 0; }
+#stressRows summary { font-size: 14px; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.source-section { border-top: 1px solid var(--line); padding: 17px 0; }
+.source-section > summary { font-size: 15px; color: var(--text); }
+.source-section p { font-size: 13px; }
+.footer { margin: 4px 0 0; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+[hidden] { display: none !important; }
+@media (min-width: 1600px) { main { padding-left: 42px; padding-right: 42px; } }
+@media (max-width: 1024px) { .app { grid-template-columns: 164px minmax(0, 1fr); } main { padding: 22px; } .overview { gap: 20px; } th,td { padding: 8px; } }
+@media (max-width: 760px) {
+  .app { display: block; }
+  .sidebar { position: static; height: auto; padding: 12px 16px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .brand { padding: 0; font-size: 23px; }
+  .sidebar-caption, .nav-label, .sidebar-foot { display: none; }
+  .workspace-nav { display: flex; gap: 4px; margin-top: 9px; overflow-x: auto; }
+  .workspace-nav a { font-size: 13px; white-space: nowrap; padding: 8px 10px; border-radius: 3px 3px 0 0; }
+  .topbar { display: none; }
+  main { padding: 20px 16px 30px; }
+  h1 { font-size: 22px; }
+  .overview, .detail { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .overview { padding-bottom: 22px; }
+  .bar { gap: 10px; }
+  .bar label { flex: 1 1 150px; min-width: 0; }
+  .toolbar label { flex: 1 1 100%; }
+  input, select { width: 100%; }
+  .toolbar .export { margin-left: 0; }
+  .notice { margin-bottom: 20px; }
+  .count { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <a class="brand" href="/">CreditLens</a>
+  <p class="sidebar-caption">金融研究工作台</p>
+  <p class="nav-label">研究与验证</p>
+  <nav class="workspace-nav" aria-label="主导航">
+    <a href="/">信用复核</a>
+    <a href="/research">季度研究</a>
+    <a href="/documents">原页核对</a>
+    <a href="/experiments" aria-current="page">文档实验</a>
+  </nav>
+  <p class="sidebar-foot">官方披露样例<br>离线记录 · 人工复核</p>
+</aside>
+<div class="workspace">
+<header class="topbar"><span>研究与验证</span><span aria-hidden="true">/</span><strong>文档实验对照</strong></header>
+<main>
+<header><h1>文档实验对照</h1><p class="intro">比较识别方法与图像退化结果，逐项查看财务数字的核对依据。</p></header>
+<div class="bar toolbar">
+  <label>API key（本机演示可留空）<input id="key" type="password" autocomplete="off" placeholder="仅保存在当前页面内存"></label>
+  <button id="load" class="primary">载入实验记录</button>
+  <button id="export" class="export" disabled>导出完整对照 JSON</button>
+</div>
+<p id="status" role="status" aria-live="polite" class="muted">准备载入已保存的记录。</p>
+<div class="notice"><strong>实验范围</strong>已知原页位置的开发样例；合成退化不等同真实扫描件。一致性结果不代表新文档准确率，也不会自动批准财务数据。</div>
+<section id="results" hidden>
+<div class="overview">
+  <article><h2>字词定位对照</h2><p class="muted">相同六页、相同模型与事实，保留原始行级基线。</p>
+    <div class="scroll"><table aria-label="字词定位对照汇总"><thead><tr><th scope="col">方法</th><th scope="col">一致</th><th scope="col">冲突</th><th scope="col">不足</th></tr></thead><tbody id="methods"></tbody></table></div>
+    <p id="wordNote" class="muted table-note"></p>
+  </article>
+  <article><h2>图片退化对照</h2><p class="muted">固定两页，每档核对相同的 20 项事实，采用行级规则。</p>
+    <div class="scroll"><table aria-label="图片退化对照汇总"><thead><tr><th scope="col">条件</th><th scope="col">一致</th><th scope="col">冲突</th><th scope="col">不足</th></tr></thead><tbody id="conditions"></tbody></table></div>
+    <p class="muted table-note">轻微退化可能改变文字分组，单页结果变好不能推及总体。</p>
+  </article>
+</div>
+<article class="section">
+  <h2>逐项核对</h2>
+  <div class="bar"><label>公司<select id="company"><option value="msft">微软</option><option value="aapl">苹果</option></select></label><label>范围<select id="filter"><option value="changed">仅字词方法状态有变化</option><option value="all">全部登记事实</option></select></label><label>事实<select id="fact"></select></label></div>
+  <p id="empty" hidden>当前筛选没有事实，请调整范围。</p><div id="factDetail"></div>
+</article>
+<article class="section">
+  <h2>退化结果明细</h2>
+  <div class="bar"><label>图像条件<select id="variant"></select></label><label>结果范围<select id="stressFilter"><option value="issues">仅不足或冲突</option><option value="all">全部结果</option></select></label></div><div id="stressRows"></div>
+</article>
+<details class="source-section"><summary>来源、配置与复现边界</summary><div id="provenance"></div><p>页面核验已审阅快照的文件哈希、来源绑定和汇总。完整 OCR 的逐字段复算在离线审查中完成。哈希不是独立签名，不能抵御同时重写数据与清单的管理员。</p><p>载入只读取记录，不重新识别图片或抓取最新财报。财报片段可在“原页核对”查看；首次使用需按 README 在本地准备原页。</p></details>
+</section>
+<p class="footer">官方事实、模型观察和人工复核分别记录。当前实验尚未接入审批门禁。</p>
+</main>
+</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);let data=null,epoch=0,controller=null;
+const stateNames={consistent:'一致',conflict:'冲突',insufficient:'证据不足'},variantNames={clean:'原图',blur_0_7:'轻度模糊 · 0.7',contrast_0_65:'降低对比度 · 0.65',jpeg_60:'JPEG 压缩 · 60'},fieldNames={amount:'金额',year:'年份',period:'期间',unit:'单位',row_label:'行标签',section_start:'分区开始',section_end:'分区结束'};
+const reasonNames={same_displayed_content:'显示内容一致',different_displayed_content:'显示内容与登记值不同',merged_or_misaligned_region:'文字框跨列或超出登记区域',no_spatial_evidence:'对应位置没有可用文字',low_ocr_confidence:'识别分数低于当前门槛',ambiguous_cell:'同一金额位置存在多个候选',unreadable_numeric_cell:'无法完整解析数字与符号',unreadable_year:'年份格式不完整',parent_line_without_spatial_words:'相关原始行缺少字词位置',token_text_not_conserved:'分词后丢失或改变了原始字符',detached_numeric_fragment_near_cell:'金额附近有未归属的数字或符号'};
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const badge=s=>`<span class="tag ${esc(s)}">${esc(stateNames[s]||s)}</span>`;
+const counts=(name,c)=>`<tr><td>${esc(name)}</td>${['consistent','conflict','insufficient'].map(s=>`<td class="count">${c[s]}</td>`).join('')}</tr>`;
+function clear(){epoch++;controller?.abort();controller=null;data=null;$('results').hidden=true;$('export').disabled=true;for(const id of ['methods','conditions','factDetail','stressRows','provenance'])$(id).replaceChildren();$('status').textContent='记录已清空，请重新载入。';$('load').disabled=false;}
+function renderFacts(){if(!data)return;const doc=data.word.documents.find(d=>d.id===$('company').value);const facts=doc.facts.filter(f=>$('filter').value==='all'||f.saved_baseline_status!==f.status||f.current_line_status!==f.saved_baseline_status);$('fact').innerHTML=facts.map(f=>`<option value="${esc(f.fact_id)}">${esc(f.label)} · ${esc(f.fact_id)}</option>`).join('');$('fact').disabled=!facts.length;$('empty').hidden=!!facts.length;renderFact();}
+function checkHTML(check){const observations=(check.observations||[]).map(o=>o.text).join(' | ');return `<div class="field"><strong>${esc(fieldNames[check.field]||check.field)}</strong> ${badge(check.status)}<p class="raw">登记：${esc(check.expected??'未提供')}<br>识别：${esc(observations||'没有可用观察片段')}</p><small>${esc(reasonNames[check.reason]||check.reason)}</small>${check.parent_lines?.length?`<details><summary>查看原始父行与规则记录</summary><p class="raw">${check.parent_lines.map(p=>esc(p.line.text)).join('<br>')}</p><p class="mono">${esc((check.word_guards||[]).join(', ')||'无额外拒绝规则触发')}</p></details>`:''}</div>`;}
+function renderFact(){if(!data)return;const id=$('company').value,doc=data.word.documents.find(d=>d.id===id),fact=doc.facts.find(f=>f.fact_id===$('fact').value);if(!fact){$('factDetail').replaceChildren();return;}const before=data.baseline.documents.find(d=>d.id===id).facts.find(f=>f.fact_id===fact.fact_id);$('factDetail').innerHTML=`<p><strong>${esc(fact.label)}</strong> · PDF 第 ${fact.page} 页 · ${esc(fact.raw_value)} ${esc(fact.unit==='USD_million'?'百万美元':fact.unit)}</p><p>原行级 ${badge(fact.saved_baseline_status)} → 本次行级 ${badge(fact.current_line_status)} → 字词级 ${badge(fact.status)}</p><div class="detail"><section><h3>原始行级记录</h3>${before.checks.map(checkHTML).join('')}</section><section><h3>字词级记录</h3>${fact.checks.map(checkHTML).join('')}</section></div>`;}
+function renderStress(){if(!data)return;const key=$('variant').value;const docs=data.robustness.documents.map(doc=>{const condition=doc.conditions.find(c=>c.id===key);const facts=condition.facts.filter(f=>$('stressFilter').value==='all'||f.status!=='consistent');return `<h3>${esc(doc.company)} · PDF 第 ${doc.page} 页</h3><p class="muted">${condition.summary.consistent} 项一致，${condition.summary.insufficient} 项不足；相比原图 ${condition.compared_with_clean.status_changed} 项状态改变。</p>${facts.length?facts.map(f=>`<details><summary>${esc(f.label)} · ${esc(f.fact_id)} ${badge(f.status)}</summary>${f.checks.filter(c=>c.status!=='consistent').map(checkHTML).join('')||'<p>所有登记字段一致。公开退化报告只保留失败字段的观察片段，完整 OCR 留在本地。</p>'}</details>`).join(''):'<p>当前筛选没有结果。</p>'}`;});$('stressRows').innerHTML=docs.join('<hr>');}
+async function load(){clear();const request=epoch;controller=new AbortController();$('load').disabled=true;$('status').textContent='正在校验保存的实验快照…';try{const headers=$('key').value?{Authorization:'Bearer '+$('key').value}:{};const response=await fetch('/api/experiments',{headers,signal:controller.signal,cache:'no-store'});if(!response.ok){const error=await response.json();throw new Error(error.detail||`HTTP ${response.status}`);}const payload=await response.json();if(request!==epoch)return;data=payload;$('methods').innerHTML=counts('保存的行级基线',data.word.baseline_summary)+counts('同次推理的行级',data.word.current_line_summary)+counts('同次推理的字词级',data.word.word_summary);$('conditions').innerHTML=data.robustness.summary_by_variant.map(v=>counts(variantNames[v.id]||v.id,v.summary)).join('');const unchanged=data.word.documents.every(d=>d.pages.every(p=>p.line_output_matches_saved_baseline));$('wordNote').textContent=`${data.word.changes.length} 项状态发生变化。${unchanged?'六页行级输出哈希与原基线相同。':'部分行级输出与原基线不同，需结合本次行级对照解释。'}`;$('variant').innerHTML=data.robustness.summary_by_variant.map(v=>`<option value="${esc(v.id)}">${esc(variantNames[v.id]||v.id)}</option>`).join('');$('provenance').innerHTML=`<p>字词实验保存于 ${esc(data.word.generated_at)}；退化实验保存于 ${esc(data.robustness.generated_at)}。</p><p>字词置信度采用父行分数，未作为校准概率。</p>${data.word.documents.map(d=>`<p>${esc(d.company)} · <a href="${esc(d.source.url)}" target="_blank" rel="noopener noreferrer">官方原始披露</a></p><p class="mono">事实包 SHA-256：${esc(d.pack_sha256)}</p>`).join('')}<p class="mono">字词配置：${esc(data.word.profile_sha256)}<br>退化配置：${esc(data.robustness.config_sha256)}</p>`;$('results').hidden=false;$('export').disabled=false;$('status').textContent='已载入经校验的保存记录；这是离线实验，没有自动批准或实时模型调用。';renderFacts();renderStress();}catch(error){if(request===epoch&&error.name!=='AbortError')$('status').textContent='载入失败：'+error.message;}finally{if(request===epoch)$('load').disabled=false;}}
+$('key').addEventListener('input',clear);$('load').onclick=load;$('company').onchange=renderFacts;$('filter').onchange=renderFacts;$('fact').onchange=renderFact;$('variant').onchange=renderStress;$('stressFilter').onchange=renderStress;
+$('export').onclick=()=>{if(!data)return;const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='creditlens-document-experiments.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};load();
+</script>
+</body>
+</html>

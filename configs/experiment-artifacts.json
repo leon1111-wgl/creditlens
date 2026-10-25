@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "hash_basis": "SHA-256 of UTF-8 files with LF line endings; .gitattributes pins LF",
+  "files": {
+    "artifacts/document-ai-report.json": "11a5c50d4feaf3730d10bf3be454071024f3e5d82ae465edc2155b0dd36cefc5",
+    "artifacts/document-ai-word-report.json": "a14528873795d0f61680cdb93c0ffb19ea77a1b5944f4915860bc367301772ff",
+    "artifacts/visual-robustness-report.json": "446279cb17a8ac7fcbf62d68673ae87e6d099cdec02b4366534731ee07122cb7",
+    "configs/document-ai.json": "df289fe53e585bfb51d68ecfc514c53f40c9a3837815156392e9ba94ad78b9aa",
+    "configs/document-ai-words.json": "a25df7532ff3ef9a530b005dd601ea0210ab1c183b5a85bec51aed0f4dab2777",
+    "configs/visual-robustness.json": "26ec0b5a1c965126a6f04bdc8a40eedc3cb21d4d6d8d991afc876cf73618cca9"
+  }
+}

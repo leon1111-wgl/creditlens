@@ -20,6 +20,7 @@ from .planner import LocalPlanner
 from .temporal import TemporalPack
 from .research import research_view
 from .visual_store import VisualStore, VisualArtifactError
+from .experiments import experiment_view
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -137,6 +138,19 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     @application.get("/documents", include_in_schema=False)
     def document_workspace():
         return FileResponse(ROOT / "creditlens/documents.html")
+
+    @application.get("/experiments", include_in_schema=False)
+    def experiment_workspace():
+        return FileResponse(ROOT / "creditlens/experiments.html")
+
+    @application.get("/api/experiments")
+    def experiment_records(identity: Actor = Depends(actor)):
+        try:
+            return experiment_view(ROOT)
+        except FileNotFoundError as exc:
+            raise HTTPException(503, "Frozen experiment files are unavailable") from exc
+        except VisualArtifactError as exc:
+            raise HTTPException(409, str(exc)) from exc
 
     @application.get("/api/documents")
     def document_evidence(identity: Actor = Depends(actor)):
