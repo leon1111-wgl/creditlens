@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "attempts": [
+    {
+      "experiment_id": "nvda-fy2025-transfer-v1",
+      "status": "invalid_reference",
+      "frozen_commit": "297ea58ba24400d9a68580995ecbf287a9076ae5",
+      "manifest_sha256": "8e4f1afe8f027b1afd6c90477ea5fde450db688b63a4fbfb1e07fa3070beb1f0",
+      "reference_pack_sha256": "5911a70e85b7855172abafa8fdd7324baa3653dd8e615ade3fd268af0be5ed59",
+      "report_sha256": "98b6485b1443bc470801dc40d2c7d6224a6a133097b31af053e64ede78a7c3e4",
+      "execution_summary": {
+        "line": {
+          "consistent": 0,
+          "conflict": 2,
+          "insufficient": 14
+        },
+        "word": {
+          "consistent": 0,
+          "conflict": 0,
+          "insufficient": 16
+        }
+      },
+      "eligible_for_model_quality_metrics": false,
+      "reason": "PDF text canvas coordinates were not translated to the visible MediaBox/CropBox intersection. Reference boxes were shifted +9,-9 points on both pages; scores are invalid as model quality. Raw inference is preserved for corrected-reference diagnostic rescoring.",
+      "raw_ocr_location": ".run/transfer-attempts/v1-reference-invalid/raw/",
+      "source_reference_path_at_commit": "data/examples/nvda-fy2025-transfer.json",
+      "source_manifest_path_at_commit": "configs/document-transfer.json",
+      "report_path": "artifacts/document-transfer-v1-invalid-report.json",
+      "manifest_archive_path": "configs/document-transfer-v1-invalid.json",
+      "local_raw_file_sha256": {
+        "nvda-fy2025-annual.pdf": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+        "ocr-lines-146.json": "cdfc3492f6d7acf7c81b5f3ee54303cef422444486873260110d6d9252483616",
+        "ocr-lines-148.json": "00dc8e38dfa07b0fc68d6cb0f911f74a02fd65f9c7c11cecdb6cdf2e4e295a1f",
+        "ocr-words-146.json": "f1a351f8058c31c00c10d2fea33ae94d33bcaa79c576d5f33c48be5630e11aee",
+        "ocr-words-148.json": "86194f410b9aba784a9749a14f2541fa5bf74070f86449866466b71f359d6cc3",
+        "page-146.png": "a6aee665d7282ca28edda84ed0516c6ce8869b1557f367dc78c3a3967f4548e2",
+        "page-148.png": "f6b047ec1755dd4f16932286d424f260c8a8872a18354db021b0a63a9e77273f"
+      }
+    },
+    {
+      "experiment_id": "nvda-fy2025-transfer-v2-diagnostic",
+      "status": "observed_diagnostic",
+      "frozen_commit": "bae898a",
+      "manifest_sha256": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1",
+      "report_sha256": "e470eb3318762da5e79f4042b58357fc0ed56c841f8904ba83991ee0c5f89aae",
+      "report_path": "artifacts/document-transfer-report.json",
+      "execution_summary": {
+        "line": {
+          "consistent": 0,
+          "conflict": 0,
+          "insufficient": 16
+        },
+        "word": {
+          "consistent": 0,
+          "conflict": 0,
+          "insufficient": 16
+        }
+      },
+      "eligible_for_blind_generalization_metrics": false,
+      "operation": "rescoring_preserved_ocr",
+      "source_report_sha256": "98b6485b1443bc470801dc40d2c7d6224a6a133097b31af053e64ede78a7c3e4",
+      "scope": "Reference coordinates corrected; same 16 financial facts and original OCR. All 16 remain insufficient at year field; no thresholds changed."
+    }
+  ]
+}

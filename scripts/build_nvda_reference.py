@@ -20,7 +20,7 @@ from creditlens.experiment_paths import validate_experiment_paths, validate_writ
 
 URL = "https://s201.q4cdn.com/141608511/files/doc_financials/2025/annual/NVIDIA-2025-Annual-Report.pdf"
 PDF_SHA256 = "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
-PARSER_VERSION = "nvda-inline-dates-reference-1"
+PARSER_VERSION = "nvda-inline-dates-reference-2"
 PERIODS = {2025: ("2024-01-29", "2025-01-26"), 2024: ("2023-01-30", "2024-01-28")}
 TABLES = [
     {"page": 146, "printed_page": 54, "title": "Consolidated Balance Sheets",

@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "geometry_version": "visible-page-top-left-1",
+  "reference_regions_checked": 88,
+  "corners_checked": 176,
+  "native_pdfium_max_error_pixels": 0.494,
+  "render_scale": 2,
+  "method": "Original canvas corners mapped by PDFium page-to-device independently of OCR, compared with corrected reference coordinates; <=0.5px integer rounding.",
+  "financial_fields_unchanged": true,
+  "old_six_pages_tokens_unchanged": true,
+  "pages": [
+    {
+      "pdf": "msft-fy2025-10k.pdf",
+      "page": 50,
+      "tokens": 156,
+      "delta": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "text_order_unchanged": true,
+      "visible_bbox": [
+        0.0,
+        0.0,
+        594.9599609375,
+        841.9199829101562
+      ]
+    },
+    {
+      "pdf": "msft-fy2025-10k.pdf",
+      "page": 52,
+      "tokens": 236,
+      "delta": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "text_order_unchanged": true,
+      "visible_bbox": [
+        0.0,
+        0.0,
+        594.9599609375,
+        841.9199829101562
+      ]
+    },
+    {
+      "pdf": "msft-fy2025-10k.pdf",
+      "page": 53,
+      "tokens": 299,
+      "delta": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "text_order_unchanged": true,
+      "visible_bbox": [
+        0.0,
+        0.0,
+        594.9599609375,
+        841.9199829101562
+      ]
+    },
+    {
+      "pdf": "aapl-fy2025-10k.pdf",
+      "page": 32,
+      "tokens": 176,
+      "delta": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "text_order_unchanged": true,
+      "visible_bbox": [
+        0.0,
+        0.0,
+        612.0,
+        792.0
+      ]
+    },
+    {
+      "pdf": "aapl-fy2025-10k.pdf",
+      "page": 34,
+      "tokens": 212,
+      "delta": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "text_order_unchanged": true,
+      "visible_bbox": [
+        0.0,
+        0.0,
+        612.0,
+        792.0
+      ]
+    },
+    {
+      "pdf": "aapl-fy2025-10k.pdf",
+      "page": 36,
+      "tokens": 304,
+      "delta": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "text_order_unchanged": true,
+      "visible_bbox": [
+        0.0,
+        0.0,
+        612.0,
+        792.0
+      ]
+    },
+    {
+      "pdf": "nvda-fy2025-annual.pdf",
+      "page": 146,
+      "tokens": 235,
+      "delta": [
+        -9,
+        9,
+        -9,
+        9
+      ],
+      "text_order_unchanged": true,
+      "visible_bbox": [
+        9.0,
+        9.0,
+        603.0,
+        783.0
+      ]
+    },
+    {
+      "pdf": "nvda-fy2025-annual.pdf",
+      "page": 148,
+      "tokens": 373,
+      "delta": [
+        -9,
+        9,
+        -9,
+        9
+      ],
+      "text_order_unchanged": true,
+      "visible_bbox": [
+        9.0,
+        9.0,
+        603.0,
+        783.0
+      ]
+    }
+  ],
+  "old_reference_sha256": "5911a70e85b7855172abafa8fdd7324baa3653dd8e615ade3fd268af0be5ed59",
+  "corrected_reference_sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c"
+}

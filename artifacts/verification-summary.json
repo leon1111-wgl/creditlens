@@ -3,8 +3,8 @@
   "timezone": "Asia/Shanghai",
   "python": "3.12.14",
   "unit_and_api_tests": {
-    "run": 197,
-    "passed": 196,
+    "run": 244,
+    "passed": 243,
     "failures": 0,
     "errors": 0,
     "skipped": 1,
@@ -14,7 +14,7 @@
   "local_markdown_file_links": "passed",
   "live_http_health": {
     "status": "ok",
-    "version": "0.7.1",
+    "version": "0.8.0",
     "rule_version": "cash-debt-review-3",
     "cases": 883,
     "mode": "public_benchmark_local",
@@ -36,7 +36,7 @@
     "tested_version": "0.2.0",
     "current_iteration": "Legacy full-flow screenshots belong to 0.2.0; see pdf_evidence.browser_qa for 0.3.0 evidence UI checks."
   },
-  "remote_ci": "success",
+  "remote_ci": "v0.8.0 pending publication; earlier release CI retained below",
   "github_connection": {
     "verified_account": "leon1111-wgl",
     "verified_repository": "leon1111-wgl/leon1111-wgl",
@@ -44,7 +44,7 @@
     "admin": true
   },
   "github_publish": "Published project main and profile entry to leon1111-wgl after user completed local Git Credential Manager authorization. Earlier connector write failure has not been independently retested.",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "official_financial_facts": 42,
   "source_linked_observed_factors": 5,
   "real_model_evaluation": "CPU OCR known-location cross-check executed; LLM/VLM quality, training and forecasting not run",
@@ -413,5 +413,84 @@
       "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
       "scope": "Repository publication only; application runs locally."
     }
+  },
+  "document_transfer_v08": {
+    "schema_version": 1,
+    "version": "0.8.0",
+    "download_matches_api": true,
+    "page_images_http_hash_checked": [
+      146,
+      148
+    ],
+    "stale_image_hash_http_status": 409,
+    "old_experiment_api_unchanged": true,
+    "old_frozen_files_unchanged": 7,
+    "old_preview_images_unchanged": 6,
+    "local_tests": {
+      "run": 244,
+      "passed": 243,
+      "skipped": 1
+    },
+    "health": {
+      "status": "ok",
+      "version": "0.8.0",
+      "rule_version": "cash-debt-review-3",
+      "cases": 883,
+      "mode": "public_benchmark_local",
+      "auth_mode": "demo",
+      "dataset_sha256": "a847fb7e0d61a3125a1e2909852df6b89f1ee64d2c5ff1bf689e332214deee51"
+    },
+    "diagnostic_summary": {
+      "line": {
+        "consistent": 0,
+        "conflict": 0,
+        "insufficient": 16
+      },
+      "word": {
+        "consistent": 0,
+        "conflict": 0,
+        "insufficient": 16
+      }
+    },
+    "raw_evidence_verification": "Rescoring validates original full OCR/line equality, source report public/full reconstruction, all source/image hashes; independent adviser reproduced 64 v1/v2 method facts.",
+    "javascript_syntax_pages": 6,
+    "local_markdown_links": "passed",
+    "python_compile": "passed",
+    "wheel": {
+      "built": true,
+      "html_pages": 6,
+      "new_modules_included": true,
+      "standalone_data_install": "not tested; run from repository root"
+    },
+    "browser": {
+      "desktop_viewport": 1366,
+      "narrow_viewport": 497,
+      "narrow_content_width": 482,
+      "body_font_size": "15px",
+      "font_family": "Times New Roman with Songti SC/SimSun CJK fallback",
+      "checked": [
+        "unavailable release state",
+        "fact detail and word-parent evidence",
+        "original-page amount overlay",
+        "empty filter clears detail and image",
+        "credential edit clears state and disables export",
+        "download JSON equals same API snapshot"
+      ],
+      "screenshots": [
+        "docs/images/document-transfer-desktop.png",
+        "docs/images/document-transfer-narrow.png"
+      ],
+      "not_checked": [
+        "cross browser",
+        "complete keyboard navigation",
+        "production load"
+      ]
+    },
+    "guide": "docs/17-new-issuer-transfer.md",
+    "report": "artifacts/document-transfer-report.json",
+    "attempts": "artifacts/document-transfer-attempts.json",
+    "geometry": "artifacts/document-geometry-verification.json",
+    "scope": "Observed diagnostic reference correction; not a held-out or model improvement result",
+    "gpu_or_paid_api_or_training": false
   }
 }

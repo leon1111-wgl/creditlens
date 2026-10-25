@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "suite_version": "document-transfer-1",
+  "experiment_id": "nvda-fy2025-transfer-v1",
+  "frozen_at": "2026-10-25T07:17:34.587170+00:00",
+  "selection_reason": "Pre-OCR selection of 16 two-year facts on physical pages 146 and 148, prepared from PDF text and full-page visual review with AI-agent cross-checking, not independent human double annotation. Existing rules and thresholds are unchanged. Short-term debt is excluded in both years because FY2025 uses a dash; no zero filling. FY2024 figures are comparative values as presented in FY2025, not historical snapshots. Known-location issuer transfer only.",
+  "reference_status": "single_annotator_development_reference",
+  "file_hash_basis": "python_utf8_lf_other_raw",
+  "files": {
+    "configs/document-ai-words.json": "a25df7532ff3ef9a530b005dd601ea0210ab1c183b5a85bec51aed0f4dab2777",
+    "configs/document-ai.json": "df289fe53e585bfb51d68ecfc514c53f40c9a3837815156392e9ba94ad78b9aa",
+    "creditlens/diligence.py": "e9793aa3caea937b8daf38fb8527bcdc0114d4216c2285ac930e6da39abc2561",
+    "creditlens/document_transfer.py": "e99bffd63831209b69d4eea7ac90b287669644986b0b8ac2ed992a2cf8d5a3c9",
+    "creditlens/experiment_paths.py": "50aef7e60d3f99ac00838780332f63ab15caf1af641fd7561bde7901477c9456",
+    "creditlens/visual.py": "be7f4159eb910150201fdd6dd6e36991dedfcee95ff8b44d5f1757bf4be0f012",
+    "creditlens/word_evidence.py": "76633f531075aff716d49e6a85fcf427c31c27b7fa5a4d8e5da34ac3d88bd4e3",
+    "scripts/evaluate_document_transfer.py": "855c44176b3bd1aa010d54adfba3bdfa35112f1d902f9fa37c404bdacdfbd410",
+    "scripts/evaluate_visual_robustness.py": "999a1647616208f9b5ff5e9285fd7ce37755be35bea225f216849cde247f09be",
+    "scripts/evaluate_word_evidence.py": "39c41b0a9ae012bb3110e0e17eb769102a19e6f77df636275d3c0bd6f36a0961"
+  },
+  "reference_files": {
+    "scripts/build_nvda_reference.py": "8be3616ea3b976716331b69356589b82a35c73f45a883008af27b47abe17e598",
+    "creditlens/document.py": "7f003500b369ac4bb6b2177c9bdc3c62760837065003fd95601f778fdc2a7c97"
+  },
+  "documents": [
+    {
+      "id": "nvda-fy2025",
+      "pack_path": "data/examples/nvda-fy2025-transfer.json",
+      "pack_sha256": "5911a70e85b7855172abafa8fdd7324baa3653dd8e615ade3fd268af0be5ed59",
+      "pdf": {
+        "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/annual/NVIDIA-2025-Annual-Report.pdf",
+        "sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+        "filename": "nvda-fy2025-annual.pdf",
+        "allowed_hosts": [
+          "s201.q4cdn.com"
+        ],
+        "underlying_filing_date": "2025-02-26",
+        "wrapper_published_at": null,
+        "publication_note": "The underlying SEC 10-K filing date does not establish when these IR annual-wrapper bytes became available. Wrapper publication is unknown. Printed pages 54/56 correspond to physical 146/148. FY2024 columns may be reclassified comparative values. No open redistribution license verified; full PDF, page images and complete OCR remain local. Reference preparation is text-layer plus visual/AI-agent checks, not independent human annotation.",
+        "point_in_time_eligible": false,
+        "retrieved_at": "2026-10-25T07:00:52.855664+00:00",
+        "accession": "0001045810-25-000023",
+        "acceptance_as_displayed": "2025-02-26 16:48:33"
+      },
+      "pages": [
+        {
+          "page": 146,
+          "width": 594.0,
+          "height": 774.0,
+          "fact_ids": [
+            "cash_equivalents-2025",
+            "cash_equivalents-2024",
+            "short_investments-2025",
+            "short_investments-2024",
+            "current_assets-2025",
+            "current_assets-2024",
+            "current_liabilities-2025",
+            "current_liabilities-2024",
+            "long_debt-2025",
+            "long_debt-2024"
+          ],
+          "image_width": 1188,
+          "image_height": 1548,
+          "image_sha256": "a6aee665d7282ca28edda84ed0516c6ce8869b1557f367dc78c3a3967f4548e2"
+        },
+        {
+          "page": 148,
+          "width": 594.0,
+          "height": 774.0,
+          "fact_ids": [
+            "cfo-2025",
+            "cfo-2024",
+            "net_income-2025",
+            "net_income-2024",
+            "capex-2025",
+            "capex-2024"
+          ],
+          "image_width": 1188,
+          "image_height": 1548,
+          "image_sha256": "f6b047ec1755dd4f16932286d424f260c8a8872a18354db021b0a63a9e77273f"
+        }
+      ]
+    }
+  ]
+}

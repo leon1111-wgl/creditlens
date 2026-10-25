@@ -21,6 +21,7 @@ from .temporal import TemporalPack
 from .research import research_view
 from .visual_store import VisualStore, VisualArtifactError
 from .experiments import experiment_view
+from .transfer_store import transfer_snapshot, transfer_image
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -142,6 +143,30 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     @application.get("/experiments", include_in_schema=False)
     def experiment_workspace():
         return FileResponse(ROOT / "creditlens/experiments.html")
+
+    @application.get("/transfer", include_in_schema=False)
+    def transfer_workspace():
+        return FileResponse(ROOT / "creditlens/transfer.html")
+
+    @application.get("/api/document-transfer")
+    def transfer_records(identity: Actor = Depends(actor)):
+        try:
+            return transfer_snapshot(ROOT)
+        except FileNotFoundError as exc:
+            raise HTTPException(503, "Transfer experiment files are unavailable") from exc
+        except (ValueError, KeyError, TypeError) as exc:
+            raise HTTPException(409, "Transfer experiment failed validation") from exc
+
+    @application.get("/api/document-transfer/{document_id}/pages/{page}.png")
+    def transfer_page(document_id: str, page: int,
+                      expected_sha256: str = Query(pattern=r"^[0-9a-f]{64}$"),
+                      identity: Actor = Depends(actor)):
+        try:
+            return Response(transfer_image(ROOT, document_id, page, expected_sha256=expected_sha256), media_type="image/png")
+        except FileNotFoundError as exc:
+            raise HTTPException(404, "Registered transfer image is unavailable") from exc
+        except (ValueError, KeyError, TypeError) as exc:
+            raise HTTPException(409, "Transfer image failed validation") from exc
 
     @application.get("/api/experiments")
     def experiment_records(identity: Actor = Depends(actor)):

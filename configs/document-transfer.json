@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "suite_version": "document-transfer-1",
-  "experiment_id": "nvda-fy2025-transfer-v1",
-  "frozen_at": "2026-10-25T07:17:34.587170+00:00",
-  "selection_reason": "Pre-OCR selection of 16 two-year facts on physical pages 146 and 148, prepared from PDF text and full-page visual review with AI-agent cross-checking, not independent human double annotation. Existing rules and thresholds are unchanged. Short-term debt is excluded in both years because FY2025 uses a dash; no zero filling. FY2024 figures are comparative values as presented in FY2025, not historical snapshots. Known-location issuer transfer only.",
+  "experiment_id": "nvda-fy2025-transfer-v2-diagnostic",
+  "frozen_at": "2026-10-25T07:33:20.070275+00:00",
+  "selection_reason": "Observed diagnostic revision after invalid_reference v1: generic PDF canvas-to-visible-page geometry corrected using MediaBox/CropBox intersection, independently checked with PDFium page-to-device. Exactly the same 16 financial facts, two pages, images, model settings and scoring rules; reuse preserved full v1 OCR rather than new inference. No blind or held-out accuracy claim. First attempt, original reference, source manifest and report remain available. Wrapper publication unknown; prior-year figures are current-document comparative values, not historical point-in-time snapshots. Short-term debt dashes remain excluded; capex label includes intangibles.",
   "reference_status": "single_annotator_development_reference",
   "file_hash_basis": "python_utf8_lf_other_raw",
   "files": {
@@ -19,14 +19,14 @@
     "scripts/evaluate_word_evidence.py": "39c41b0a9ae012bb3110e0e17eb769102a19e6f77df636275d3c0bd6f36a0961"
   },
   "reference_files": {
-    "scripts/build_nvda_reference.py": "8be3616ea3b976716331b69356589b82a35c73f45a883008af27b47abe17e598",
-    "creditlens/document.py": "7f003500b369ac4bb6b2177c9bdc3c62760837065003fd95601f778fdc2a7c97"
+    "scripts/build_nvda_reference.py": "dbc9905ace43f17a0650a323768b470d4c85f1014dd5854c82f2cdc1a81fb5a5",
+    "creditlens/document.py": "d3569bcf0dc0115234ce2fcd0676ff788bb9c7053618ad79f52b82f3b6d80481"
   },
   "documents": [
     {
       "id": "nvda-fy2025",
-      "pack_path": "data/examples/nvda-fy2025-transfer.json",
-      "pack_sha256": "5911a70e85b7855172abafa8fdd7324baa3653dd8e615ade3fd268af0be5ed59",
+      "pack_path": "data/examples/nvda-fy2025-transfer-v2.json",
+      "pack_sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c",
       "pdf": {
         "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/annual/NVIDIA-2025-Annual-Report.pdf",
         "sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
