@@ -289,7 +289,10 @@ def verify_preparation_export(payload: dict) -> dict:
     return {"schema_version": 1, "verification_version": VERIFICATION_VERSION, "status": "internally_consistent",
             "task_id": job["id"], "attempt_id": attempt["id"], "revision": attempt["revision"], "document_id": job["document_id"],
             "provenance": job["provenance"], "preparation_status": report["status"], "material_binding": deepcopy(job["material_binding"]),
-            "expected_pages": list(report["expected_pages"]), "versions": dict(report["versions"]), "store_version": SUPPORTED_STORE,
+            "expected_pages": list(report["expected_pages"]),
+            "page_registrations": [{"input_index": page["input_index"], **deepcopy(page["registration"])}
+                                   for page in report["page_results"] if page["registration"] is not None],
+            "versions": dict(report["versions"]), "store_version": SUPPORTED_STORE,
             "export_sha256": export_hash, "report_sha256": attempt["report_sha256"], "input_sha256": attempt["input_sha256"],
             "material_binding_sha256": job["material_binding_sha256"], "limitations": list(LIMITATIONS),
             "authenticated": False, "source_bytes_verified": False, "ocr_quality_verified": False, "queryable": False, "automatic_approval": False}

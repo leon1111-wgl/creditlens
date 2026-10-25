@@ -56,6 +56,34 @@ class PreparationVerifierTests(unittest.TestCase):
         checked[0]["material_binding"]["document_id"] = "changed"
         self.assertEqual(self.exports, before)
 
+    def test_page_registration_output_is_minimal_ordered_and_independently_copied(self):
+        result = verify_preparation_export(self.good)
+        expected = [{"input_index": page["input_index"], **deepcopy(page["registration"])}
+                    for page in self.good["attempt"]["report"]["page_results"] if page["registration"] is not None]
+        self.assertEqual(result["page_registrations"], expected)
+        self.assertEqual(set(result["page_registrations"][0]),
+                         {"input_index", "page", "document_id", "source_pdf_sha256", "image_sha256", "fact_ids"})
+        result["page_registrations"][0]["fact_ids"].append("changed-output")
+        self.assertNotIn("changed-output", self.good["attempt"]["report"]["page_results"][0]["registration"]["fact_ids"])
+        failed = verify_preparation_export(self.exports[1])
+        self.assertEqual([p["input_index"] for p in failed["page_registrations"]], [0])
+
+    def test_self_consistent_registration_rewrite_is_exposed_for_current_material_checks(self):
+        original = verify_preparation_export(self.good)
+        for field, value in (("image_sha256", "0"*64), ("fact_ids", ["unregistered-fact"])):
+            with self.subTest(field=field):
+                rewritten = deepcopy(self.good)
+                rewritten["attempt"]["report"]["page_results"][0]["registration"][field] = value
+                result = verify_preparation_export(rehash(rewritten))
+                # With no registry bytes this is internally coherent. The next
+                # applicability layer must compare these explicit registrations,
+                # not just the unchanged opaque material-binding digest.
+                self.assertEqual(result["status"], "internally_consistent")
+                self.assertFalse(result["authenticated"])
+                self.assertEqual(result["material_binding"], original["material_binding"])
+                self.assertNotEqual(result["page_registrations"], original["page_registrations"])
+                self.assertEqual(result["page_registrations"][0][field], value)
+
     def test_no_current_registry_file_network_or_database_read(self):
         with patch("builtins.open", side_effect=AssertionError("No file reads")), \
              patch("pathlib.Path.open", side_effect=AssertionError("No file reads")), \
