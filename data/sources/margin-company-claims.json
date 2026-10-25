@@ -1,0 +1,588 @@
+{
+  "schema_version": 1,
+  "id": "registered-margin-company-claims-1",
+  "registered_at": "2026-10-25T23:44:30.103810+00:00",
+  "margin_report_sha256": "c19c7e2bbd80e62ae027f4d8a6eacffd87a93475ad2deb69585ad4b72a471938",
+  "provenance": {
+    "registration_method": "AI辅助核对官方公开正文与已登记财报计算；非自动自然语言抽取",
+    "independent_human_confirmation": "pending",
+    "human_gold_count": 0,
+    "license_note": "原始披露版权归原权利人；仅保存短锚、中文转述、定位与摘要，不再分发完整HTML/PDF。",
+    "source_date_note": "备案日期是披露事件；当前抓取或解析版本不能作为当日网页字节快照。",
+    "apple_capture_note": "SEC直接HTTP抓取返回403，未重试绕过；采用浏览工具已返回的官方正文，原始HTML字节未核验。",
+    "causality_note": "数字或方向一致不证明公司解释成立；会计分解项与经营原因没有建立定量对应。"
+  },
+  "source_records": [
+    {
+      "id": "msft-margin-commentary-1",
+      "issuer_id": "MSFT",
+      "url": "https://www.microsoft.com/investor/reports/ar25/index.html#discussion-analysis",
+      "capture_sha256": "3e6226d0b63b2358993c6e1bb5e4932f1127b7b0ef4d1f0768b3fb71c85a3485",
+      "capture_method": "http_html_element_text",
+      "hash_basis": "指定 p/li 元素解码后按 Unicode 空白折叠，UTF-8 SHA-256",
+      "raw_response_sha256": "564154a15ac28c0f7f72f304ae26b74c29cfca9f3eafe8d59595776769d621ca",
+      "response_bytes": 601259,
+      "retrieved_at": "2026-10-25T23:42:43.218047+00:00",
+      "locator": "Discussion & Analysis > Summary Results of Operations > Fiscal Year 2025 Compared with Fiscal Year 2024；毛利段第1项",
+      "short_anchor_en": "",
+      "filing_date": "2025-07-30",
+      "filing_index_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/000095017025100235-index.html",
+      "exact_html_first_published_at": null,
+      "historical_snapshot_verified": false,
+      "full_text_retained": false,
+      "independent_source": false
+    },
+    {
+      "id": "msft-margin-commentary-2",
+      "issuer_id": "MSFT",
+      "url": "https://www.microsoft.com/investor/reports/ar25/index.html#discussion-analysis",
+      "capture_sha256": "199fb5f972feeffa0f0a26874e7ee56a47b7b04234a4db8dd517e70a6870a79e",
+      "capture_method": "http_html_element_text",
+      "hash_basis": "指定 p/li 元素解码后按 Unicode 空白折叠，UTF-8 SHA-256",
+      "raw_response_sha256": "564154a15ac28c0f7f72f304ae26b74c29cfca9f3eafe8d59595776769d621ca",
+      "response_bytes": 601259,
+      "retrieved_at": "2026-10-25T23:42:43.218047+00:00",
+      "locator": "Discussion & Analysis > Summary Results of Operations > Fiscal Year 2025 Compared with Fiscal Year 2024；毛利段第2项",
+      "short_anchor_en": "Gross margin percentage decreased slightly",
+      "filing_date": "2025-07-30",
+      "filing_index_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/000095017025100235-index.html",
+      "exact_html_first_published_at": null,
+      "historical_snapshot_verified": false,
+      "full_text_retained": false,
+      "independent_source": false
+    },
+    {
+      "id": "msft-margin-commentary-3",
+      "issuer_id": "MSFT",
+      "url": "https://www.microsoft.com/investor/reports/ar25/index.html#discussion-analysis",
+      "capture_sha256": "d829cf568dc4dbaca6ffbe40fb41b250cccf4cd2085f1696e852d45fbfd7620e",
+      "capture_method": "http_html_element_text",
+      "hash_basis": "指定 p/li 元素解码后按 Unicode 空白折叠，UTF-8 SHA-256",
+      "raw_response_sha256": "564154a15ac28c0f7f72f304ae26b74c29cfca9f3eafe8d59595776769d621ca",
+      "response_bytes": 601259,
+      "retrieved_at": "2026-10-25T23:42:43.218047+00:00",
+      "locator": "Discussion & Analysis > Summary Results of Operations > Fiscal Year 2025 Compared with Fiscal Year 2024；毛利段第3项",
+      "short_anchor_en": "",
+      "filing_date": "2025-07-30",
+      "filing_index_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/000095017025100235-index.html",
+      "exact_html_first_published_at": null,
+      "historical_snapshot_verified": false,
+      "full_text_retained": false,
+      "independent_source": false
+    },
+    {
+      "id": "aapl-margin-commentary-1",
+      "issuer_id": "AAPL",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+      "capture_sha256": "c979f35f1d66aaff9ae658f0641b633f7d76f480ffa40e14e85d9ac10e7cade2",
+      "capture_method": "web_tool_extracted_text",
+      "hash_basis": "官方网页经浏览工具解析的指定段落（第5项为表格行），空白折叠后UTF-8 SHA-256；不是原始HTML字节摘要",
+      "raw_response_sha256": null,
+      "response_bytes": null,
+      "retrieved_at": "2026-10-25T23:44:30.103810+00:00",
+      "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Products Gross Margin 第1段",
+      "short_anchor_en": "Products Gross Margin",
+      "filing_date": "2025-10-31",
+      "filing_index_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/0000320193-25-000079-index.html",
+      "exact_html_first_published_at": null,
+      "historical_snapshot_verified": false,
+      "raw_fetch_status": 403,
+      "full_text_retained": false,
+      "independent_source": false
+    },
+    {
+      "id": "aapl-margin-commentary-2",
+      "issuer_id": "AAPL",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+      "capture_sha256": "1bcf492315c60d32979fb90f2e422b75b94c784a2e69e2ad71036a370f92d178",
+      "capture_method": "web_tool_extracted_text",
+      "hash_basis": "官方网页经浏览工具解析的指定段落（第5项为表格行），空白折叠后UTF-8 SHA-256；不是原始HTML字节摘要",
+      "raw_response_sha256": null,
+      "response_bytes": null,
+      "retrieved_at": "2026-10-25T23:44:30.103810+00:00",
+      "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Products Gross Margin 第2段",
+      "short_anchor_en": "",
+      "filing_date": "2025-10-31",
+      "filing_index_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/0000320193-25-000079-index.html",
+      "exact_html_first_published_at": null,
+      "historical_snapshot_verified": false,
+      "raw_fetch_status": 403,
+      "full_text_retained": false,
+      "independent_source": false,
+      "numeric_evidence": {
+        "locator": "Item 7 > Gross Margin > Gross margin percentage 表，Products行，2025/2024列",
+        "capture_sha256": "dee80aee520d932255a7641143fca3324eed6158a6602d405430147882490f98",
+        "hash_basis": "浏览工具解析行，空白折叠；非原始HTML字节",
+        "raw_response_sha256": null,
+        "capture_method": "web_tool_extracted_text"
+      }
+    },
+    {
+      "id": "aapl-margin-commentary-3",
+      "issuer_id": "AAPL",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+      "capture_sha256": "8783e73382546d28b1c919bc9bed451907f5a67770fb2e86a053653f82e98417",
+      "capture_method": "web_tool_extracted_text",
+      "hash_basis": "官方网页经浏览工具解析的指定段落（第5项为表格行），空白折叠后UTF-8 SHA-256；不是原始HTML字节摘要",
+      "raw_response_sha256": null,
+      "response_bytes": null,
+      "retrieved_at": "2026-10-25T23:44:30.103810+00:00",
+      "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Services Gross Margin 第1段",
+      "short_anchor_en": "Services Gross Margin",
+      "filing_date": "2025-10-31",
+      "filing_index_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/0000320193-25-000079-index.html",
+      "exact_html_first_published_at": null,
+      "historical_snapshot_verified": false,
+      "raw_fetch_status": 403,
+      "full_text_retained": false,
+      "independent_source": false
+    },
+    {
+      "id": "aapl-margin-commentary-4",
+      "issuer_id": "AAPL",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+      "capture_sha256": "9d4225d0db671fd4c843508a48e2884112eac7183a71b9dfd69c8aec427968af",
+      "capture_method": "web_tool_extracted_text",
+      "hash_basis": "官方网页经浏览工具解析的指定段落（第5项为表格行），空白折叠后UTF-8 SHA-256；不是原始HTML字节摘要",
+      "raw_response_sha256": null,
+      "response_bytes": null,
+      "retrieved_at": "2026-10-25T23:44:30.103810+00:00",
+      "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Services Gross Margin 第2段",
+      "short_anchor_en": "",
+      "filing_date": "2025-10-31",
+      "filing_index_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/0000320193-25-000079-index.html",
+      "exact_html_first_published_at": null,
+      "historical_snapshot_verified": false,
+      "raw_fetch_status": 403,
+      "full_text_retained": false,
+      "independent_source": false,
+      "numeric_evidence": {
+        "locator": "Item 7 > Gross Margin > Gross margin percentage 表，Services行，2025/2024列",
+        "capture_sha256": "fd5e5e8597f9115b314fce31f5c19872105a91a6042beca30ad9cd3e742240fa",
+        "hash_basis": "浏览工具解析行，空白折叠；非原始HTML字节",
+        "raw_response_sha256": null,
+        "capture_method": "web_tool_extracted_text"
+      }
+    },
+    {
+      "id": "aapl-margin-commentary-5",
+      "issuer_id": "AAPL",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+      "capture_sha256": "f2f886a633fa5853d6dced9325e90de6a6d523e7fd3b9ee25b442a03c997e70e",
+      "capture_method": "web_tool_extracted_text",
+      "hash_basis": "官方网页经浏览工具解析的指定段落（第5项为表格行），空白折叠后UTF-8 SHA-256；不是原始HTML字节摘要",
+      "raw_response_sha256": null,
+      "response_bytes": null,
+      "retrieved_at": "2026-10-25T23:44:30.103810+00:00",
+      "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Gross margin percentage 表 Total 行",
+      "short_anchor_en": "",
+      "filing_date": "2025-10-31",
+      "filing_index_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/0000320193-25-000079-index.html",
+      "exact_html_first_published_at": null,
+      "historical_snapshot_verified": false,
+      "raw_fetch_status": 403,
+      "full_text_retained": false,
+      "independent_source": false
+    }
+  ],
+  "claims": [
+    {
+      "id": "msft-margin-commentary-1",
+      "issuer_id": "MSFT",
+      "report_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "base_year": 2024,
+      "current_year": 2025,
+      "periods": {
+        "base": {
+          "start": "2023-07-01",
+          "end": "2024-06-30"
+        },
+        "current": {
+          "start": "2024-07-01",
+          "end": "2025-06-30"
+        }
+      },
+      "scope": "consolidated_total",
+      "metric": "gross_profit_amount",
+      "claim_type": "company_explanation",
+      "source": {
+        "id": "msft-margin-commentary-1",
+        "url": "https://www.microsoft.com/investor/reports/ar25/index.html#discussion-analysis",
+        "sha256": "3e6226d0b63b2358993c6e1bb5e4932f1127b7b0ef4d1f0768b3fb71c85a3485",
+        "locator": "Discussion & Analysis > Summary Results of Operations > Fiscal Year 2025 Compared with Fiscal Year 2024；毛利段第1项"
+      },
+      "paraphrase_zh": "微软披露：各经营分部均有增长，总毛利金额增加229亿美元，约13%。",
+      "qualifiers": {
+        "primary": false,
+        "partial_offset": false
+      },
+      "drivers": [
+        {
+          "role": "driver",
+          "text_zh": "各经营分部毛利增长"
+        }
+      ],
+      "direction": "increase",
+      "disclosures": [
+        {
+          "kind": "delta_amount",
+          "value": "22.9",
+          "unit": "USD_billion",
+          "decimal_places": 1
+        },
+        {
+          "kind": "growth_percent",
+          "value": "13",
+          "unit": "percent",
+          "decimal_places": 0
+        }
+      ]
+    },
+    {
+      "id": "msft-margin-commentary-2",
+      "issuer_id": "MSFT",
+      "report_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "base_year": 2024,
+      "current_year": 2025,
+      "periods": {
+        "base": {
+          "start": "2023-07-01",
+          "end": "2024-06-30"
+        },
+        "current": {
+          "start": "2024-07-01",
+          "end": "2025-06-30"
+        }
+      },
+      "scope": "consolidated_total",
+      "metric": "gross_margin_rate",
+      "claim_type": "company_explanation",
+      "source": {
+        "id": "msft-margin-commentary-2",
+        "url": "https://www.microsoft.com/investor/reports/ar25/index.html#discussion-analysis",
+        "sha256": "199fb5f972feeffa0f0a26874e7ee56a47b7b04234a4db8dd517e70a6870a79e",
+        "locator": "Discussion & Analysis > Summary Results of Operations > Fiscal Year 2025 Compared with Fiscal Year 2024；毛利段第2项"
+      },
+      "paraphrase_zh": "微软称，总毛利率略降，受Intelligent Cloud影响，More Personal Computing部分抵消了下降。",
+      "qualifiers": {
+        "primary": false,
+        "partial_offset": true
+      },
+      "drivers": [
+        {
+          "role": "driver",
+          "text_zh": "Intelligent Cloud的影响"
+        },
+        {
+          "role": "partial_offset",
+          "text_zh": "More Personal Computing的抵消"
+        }
+      ],
+      "direction": "decrease",
+      "disclosures": []
+    },
+    {
+      "id": "msft-margin-commentary-3",
+      "issuer_id": "MSFT",
+      "report_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "base_year": 2024,
+      "current_year": 2025,
+      "periods": {
+        "base": {
+          "start": "2023-07-01",
+          "end": "2024-06-30"
+        },
+        "current": {
+          "start": "2024-07-01",
+          "end": "2025-06-30"
+        }
+      },
+      "scope": "microsoft_cloud",
+      "metric": "gross_margin_rate",
+      "claim_type": "company_explanation",
+      "source": {
+        "id": "msft-margin-commentary-3",
+        "url": "https://www.microsoft.com/investor/reports/ar25/index.html#discussion-analysis",
+        "sha256": "d829cf568dc4dbaca6ffbe40fb41b250cccf4cd2085f1696e852d45fbfd7620e",
+        "locator": "Discussion & Analysis > Summary Results of Operations > Fiscal Year 2025 Compared with Fiscal Year 2024；毛利段第3项"
+      },
+      "paraphrase_zh": "微软称，Microsoft Cloud毛利率降至69%，受AI基础设施扩张影响，Azure效率提升部分抵消了下降。",
+      "qualifiers": {
+        "primary": false,
+        "partial_offset": true
+      },
+      "drivers": [
+        {
+          "role": "driver",
+          "text_zh": "AI基础设施扩张"
+        },
+        {
+          "role": "partial_offset",
+          "text_zh": "Azure效率提升"
+        }
+      ],
+      "direction": "decrease",
+      "disclosures": [
+        {
+          "kind": "current_percent",
+          "value": "69",
+          "unit": "percent",
+          "decimal_places": 0
+        }
+      ]
+    },
+    {
+      "id": "aapl-margin-commentary-1",
+      "issuer_id": "AAPL",
+      "report_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "base_year": 2024,
+      "current_year": 2025,
+      "periods": {
+        "base": {
+          "start": "2023-10-01",
+          "end": "2024-09-28"
+        },
+        "current": {
+          "start": "2024-09-29",
+          "end": "2025-09-27"
+        }
+      },
+      "scope": "products",
+      "metric": "gross_profit_amount",
+      "claim_type": "company_explanation",
+      "source": {
+        "id": "aapl-margin-commentary-1",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "c979f35f1d66aaff9ae658f0641b633f7d76f480ffa40e14e85d9ac10e7cade2",
+        "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Products Gross Margin 第1段"
+      },
+      "paraphrase_zh": "苹果称，产品毛利金额增加，主要受有利成本和产品组合变化影响，关税成本抵消了部分增长。",
+      "qualifiers": {
+        "primary": true,
+        "partial_offset": true
+      },
+      "drivers": [
+        {
+          "role": "driver",
+          "text_zh": "有利成本"
+        },
+        {
+          "role": "driver",
+          "text_zh": "产品组合变化"
+        },
+        {
+          "role": "partial_offset",
+          "text_zh": "关税成本"
+        }
+      ],
+      "direction": "increase",
+      "disclosures": []
+    },
+    {
+      "id": "aapl-margin-commentary-2",
+      "issuer_id": "AAPL",
+      "report_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "base_year": 2024,
+      "current_year": 2025,
+      "periods": {
+        "base": {
+          "start": "2023-10-01",
+          "end": "2024-09-28"
+        },
+        "current": {
+          "start": "2024-09-29",
+          "end": "2025-09-27"
+        }
+      },
+      "scope": "products",
+      "metric": "gross_margin_rate",
+      "claim_type": "company_explanation",
+      "source": {
+        "id": "aapl-margin-commentary-2",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "1bcf492315c60d32979fb90f2e422b75b94c784a2e69e2ad71036a370f92d178",
+        "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Products Gross Margin 第2段"
+      },
+      "paraphrase_zh": "苹果称，产品毛利率下降，主要受产品组合变化和关税成本影响，其他有利成本抵消了部分下降。",
+      "qualifiers": {
+        "primary": true,
+        "partial_offset": true
+      },
+      "drivers": [
+        {
+          "role": "driver",
+          "text_zh": "产品组合变化"
+        },
+        {
+          "role": "driver",
+          "text_zh": "关税成本"
+        },
+        {
+          "role": "partial_offset",
+          "text_zh": "其他有利成本"
+        }
+      ],
+      "direction": "decrease",
+      "disclosures": [
+        {
+          "kind": "base_percent",
+          "value": "37.2",
+          "unit": "percent",
+          "decimal_places": 1
+        },
+        {
+          "kind": "current_percent",
+          "value": "36.8",
+          "unit": "percent",
+          "decimal_places": 1
+        }
+      ]
+    },
+    {
+      "id": "aapl-margin-commentary-3",
+      "issuer_id": "AAPL",
+      "report_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "base_year": 2024,
+      "current_year": 2025,
+      "periods": {
+        "base": {
+          "start": "2023-10-01",
+          "end": "2024-09-28"
+        },
+        "current": {
+          "start": "2024-09-29",
+          "end": "2025-09-27"
+        }
+      },
+      "scope": "services",
+      "metric": "gross_profit_amount",
+      "claim_type": "company_explanation",
+      "source": {
+        "id": "aapl-margin-commentary-3",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "8783e73382546d28b1c919bc9bed451907f5a67770fb2e86a053653f82e98417",
+        "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Services Gross Margin 第1段"
+      },
+      "paraphrase_zh": "苹果称，服务毛利金额增加，主要受服务销售额增加和服务组合变化影响。",
+      "qualifiers": {
+        "primary": true,
+        "partial_offset": false
+      },
+      "drivers": [
+        {
+          "role": "driver",
+          "text_zh": "服务销售额增加"
+        },
+        {
+          "role": "driver",
+          "text_zh": "服务组合变化"
+        }
+      ],
+      "direction": "increase",
+      "disclosures": []
+    },
+    {
+      "id": "aapl-margin-commentary-4",
+      "issuer_id": "AAPL",
+      "report_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "base_year": 2024,
+      "current_year": 2025,
+      "periods": {
+        "base": {
+          "start": "2023-10-01",
+          "end": "2024-09-28"
+        },
+        "current": {
+          "start": "2024-09-29",
+          "end": "2025-09-27"
+        }
+      },
+      "scope": "services",
+      "metric": "gross_margin_rate",
+      "claim_type": "company_explanation",
+      "source": {
+        "id": "aapl-margin-commentary-4",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "9d4225d0db671fd4c843508a48e2884112eac7183a71b9dfd69c8aec427968af",
+        "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Services Gross Margin 第2段"
+      },
+      "paraphrase_zh": "苹果称，服务毛利率上升，主要受服务组合变化影响，成本增加抵消了部分上升。",
+      "qualifiers": {
+        "primary": true,
+        "partial_offset": true
+      },
+      "drivers": [
+        {
+          "role": "driver",
+          "text_zh": "服务组合变化"
+        },
+        {
+          "role": "partial_offset",
+          "text_zh": "成本增加"
+        }
+      ],
+      "direction": "increase",
+      "disclosures": [
+        {
+          "kind": "base_percent",
+          "value": "73.9",
+          "unit": "percent",
+          "decimal_places": 1
+        },
+        {
+          "kind": "current_percent",
+          "value": "75.4",
+          "unit": "percent",
+          "decimal_places": 1
+        }
+      ]
+    },
+    {
+      "id": "aapl-margin-commentary-5",
+      "issuer_id": "AAPL",
+      "report_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "base_year": 2024,
+      "current_year": 2025,
+      "periods": {
+        "base": {
+          "start": "2023-10-01",
+          "end": "2024-09-28"
+        },
+        "current": {
+          "start": "2024-09-29",
+          "end": "2025-09-27"
+        }
+      },
+      "scope": "consolidated_total",
+      "metric": "gross_margin_rate",
+      "claim_type": "numeric_only",
+      "source": {
+        "id": "aapl-margin-commentary-5",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "sha256": "f2f886a633fa5853d6dced9325e90de6a6d523e7fd3b9ee25b442a03c997e70e",
+        "locator": "Form 10-K > Item 7 > Gross Margin；印刷页24；Gross margin percentage 表 Total 行"
+      },
+      "paraphrase_zh": "苹果表格披露总毛利率为46.9%，上年为46.2%；此条仅核对数值，不补写公司对总毛利率变化的原因解释。",
+      "qualifiers": {
+        "primary": false,
+        "partial_offset": false
+      },
+      "drivers": [],
+      "direction": null,
+      "disclosures": [
+        {
+          "kind": "base_percent",
+          "value": "46.2",
+          "unit": "percent",
+          "decimal_places": 1
+        },
+        {
+          "kind": "current_percent",
+          "value": "46.9",
+          "unit": "percent",
+          "decimal_places": 1
+        }
+      ]
+    }
+  ]
+}
