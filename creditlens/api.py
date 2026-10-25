@@ -24,6 +24,10 @@ from .experiments import experiment_view
 from .transfer_store import transfer_snapshot, transfer_image
 from .date_store import date_snapshot
 from .issuer_store import issuer_snapshot, issuer_image
+from .research_materials import build_material_bundle, MaterialsError
+from .research_task_store import (
+    ResearchTaskStore, ResearchTaskCreate, ResearchTaskUpdate, ResearchTaskAction,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -93,6 +97,8 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         application.state.service = ResearchService(path, db_path) if path.exists() else None
         application.state.access = AccessControl(auth_mode, principals)
         application.state.workflow = WorkflowService(db_path.with_name("workflow.sqlite"))
+        application.state.research_tasks = ResearchTaskStore(
+            db_path.with_name("research-tasks.sqlite"), ROOT)
         yield
 
     application = FastAPI(title="CreditLens", version=__version__,
@@ -137,6 +143,56 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     @application.get("/research", include_in_schema=False)
     def research():
         return FileResponse(ROOT / "creditlens/research.html")
+
+    @application.get("/tasks", include_in_schema=False)
+    def research_tasks_workspace():
+        return FileResponse(ROOT / "creditlens/tasks.html")
+
+    @application.get("/api/research/task-materials")
+    def research_task_materials(identity: Actor = Depends(actor)):
+        try:
+            return build_material_bundle(ROOT)
+        except (MaterialsError, FileNotFoundError) as exc:
+            raise HTTPException(409, "Registered research materials failed validation") from exc
+
+    @application.get("/api/research/tasks")
+    def research_tasks(identity: Actor = Depends(actor)):
+        return application.state.research_tasks.list(identity)
+
+    @application.post("/api/research/tasks", status_code=201)
+    def create_research_task(payload: ResearchTaskCreate, identity: Actor = Depends(actor),
+                             idempotency_key: str = Header(min_length=8, max_length=128)):
+        return application.state.research_tasks.create(
+            identity, payload.model_dump(mode="json"), idempotency_key)
+
+    @application.get("/api/research/tasks/{task_id}")
+    def research_task(task_id: str, identity: Actor = Depends(actor)):
+        return application.state.research_tasks.get(task_id, identity)
+
+    @application.patch("/api/research/tasks/{task_id}")
+    def update_research_task(task_id: str, payload: ResearchTaskUpdate,
+                             identity: Actor = Depends(actor)):
+        return application.state.research_tasks.update(
+            task_id, identity, payload.revision,
+            [d.model_dump(mode="json") for d in payload.decisions],
+            [h.model_dump(mode="json") for h in payload.hypotheses], payload.coverage_note)
+
+    @application.post("/api/research/tasks/{task_id}/actions")
+    def research_task_action(task_id: str, payload: ResearchTaskAction,
+                             identity: Actor = Depends(actor)):
+        return application.state.research_tasks.act(
+            task_id, identity, payload.revision, payload.action,
+            payload.note, payload.snapshot_sha256)
+
+    @application.get("/api/research/tasks/{task_id}/snapshots/{snapshot_id}")
+    def research_task_snapshot(task_id: str, snapshot_id: str,
+                              identity: Actor = Depends(actor)):
+        return application.state.research_tasks.get_snapshot(task_id, snapshot_id, identity)
+
+    @application.get("/api/research/tasks/{task_id}/export")
+    def export_research_task(task_id: str, snapshot_id: str | None = Query(default=None, max_length=128),
+                             identity: Actor = Depends(actor)):
+        return application.state.research_tasks.export(task_id, identity, snapshot_id)
 
     @application.get("/documents", include_in_schema=False)
     def document_workspace():
