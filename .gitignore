@@ -18,6 +18,7 @@ artifacts/documents-syntax.js
 artifacts/experiments-syntax.js
 artifacts/transfer-syntax.js
 artifacts/tasks-syntax.js
+artifacts/explanation-reviews-syntax.js
 artifacts/service.pid
 artifacts/service-v02.pid
 .run/
