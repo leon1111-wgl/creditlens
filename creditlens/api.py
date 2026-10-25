@@ -30,6 +30,10 @@ from .research_acceptance import (
     build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
 )
 from .company_attribution import build_company_attribution, CompanyAttributionError
+from .explanation_review_store import (
+    ExplanationReviewStore, ExplanationReviewCreate,
+    ExplanationReviewUpdate, ExplanationReviewAction,
+)
 from .research_task_store import (
     ResearchTaskStore, ResearchTaskCreate, ResearchTaskUpdate, ResearchTaskAction,
 )
@@ -104,6 +108,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         application.state.workflow = WorkflowService(db_path.with_name("workflow.sqlite"))
         application.state.research_tasks = ResearchTaskStore(
             db_path.with_name("research-tasks.sqlite"), ROOT)
+        application.state.explanation_reviews = ExplanationReviewStore(application.state.research_tasks)
         yield
 
     application = FastAPI(title="CreditLens", version=__version__,
@@ -227,6 +232,44 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     def export_research_task(task_id: str, snapshot_id: str | None = Query(default=None, max_length=128),
                              identity: Actor = Depends(actor)):
         return application.state.research_tasks.export(task_id, identity, snapshot_id)
+
+    @application.get("/explanation-reviews", include_in_schema=False)
+    def explanation_workspace():
+        return FileResponse(ROOT / "creditlens/explanation-reviews.html")
+
+    @application.get("/api/research/tasks/{task_id}/explanation-reviews")
+    def explanation_review_list(task_id: str, identity: Actor = Depends(actor)):
+        return application.state.explanation_reviews.list(task_id, identity)
+
+    @application.post("/api/research/tasks/{task_id}/explanation-reviews", status_code=201)
+    def create_explanation_review(task_id: str, payload: ExplanationReviewCreate,
+                                  identity: Actor = Depends(actor),
+                                  idempotency_key: str = Header(min_length=8, max_length=128)):
+        return application.state.explanation_reviews.create(
+            task_id, identity, payload.model_dump(mode="json"), idempotency_key)
+
+    @application.get("/api/research/explanation-reviews/{review_id}")
+    def explanation_review(review_id: str, identity: Actor = Depends(actor)):
+        return application.state.explanation_reviews.get(review_id, identity)
+
+    @application.patch("/api/research/explanation-reviews/{review_id}")
+    def update_explanation_review(review_id: str, payload: ExplanationReviewUpdate,
+                                  identity: Actor = Depends(actor)):
+        return application.state.explanation_reviews.update(
+            review_id, identity, payload.revision,
+            [d.model_dump(mode="json") for d in payload.decisions], payload.coverage_note)
+
+    @application.post("/api/research/explanation-reviews/{review_id}/actions")
+    def act_explanation_review(review_id: str, payload: ExplanationReviewAction,
+                               identity: Actor = Depends(actor)):
+        return application.state.explanation_reviews.act(
+            review_id, identity, payload.revision, payload.action,
+            payload.note, payload.snapshot_sha256)
+
+    @application.get("/api/research/explanation-reviews/{review_id}/export")
+    def export_explanation_review(review_id: str, identity: Actor = Depends(actor),
+                                   snapshot_id: str | None = Query(default=None, max_length=128)):
+        return application.state.explanation_reviews.export(review_id, identity, snapshot_id)
 
     @application.get("/documents", include_in_schema=False)
     def document_workspace():

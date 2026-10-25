@@ -19,6 +19,8 @@ jobs:
       - run: python scripts/evaluate_controls.py
       - run: python scripts/verify_research_export.py artifacts/research-task-demo.json
       - run: python scripts/verify_research_export.py artifacts/research-cash-flow-demo.json
+      - run: python scripts/verify_explanation_export.py artifacts/explanation-review-demo.json
+      - run: python scripts/verify_explanation_export.py artifacts/explanation-review-returned-demo.json
       - run: python scripts/replay_research_scenarios.py
       - run: python scripts/evaluate_currency_diagnostic.py
       - run: python scripts/evaluate_research_acceptance.py
@@ -34,3 +36,4 @@ jobs:
           node --check artifacts/experiments-syntax.js
           node --check artifacts/transfer-syntax.js
           node --check artifacts/tasks-syntax.js
+          node --check artifacts/explanation-reviews-syntax.js
