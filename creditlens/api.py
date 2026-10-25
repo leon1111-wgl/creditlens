@@ -32,6 +32,8 @@ from .preparation_routes import install_preparation_routes
 from .cross_page_routes import install_cross_page_routes
 from .table_lookup_routes import install_table_lookup_routes
 from .word_table_routes import install_word_table_routes
+from .reference_review_store import ReferenceReviewStore
+from .reference_routes import install_reference_routes
 from .research_materials import build_material_bundle, MaterialsError
 from .research_acceptance import (
     build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
@@ -117,6 +119,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
             db_path.with_name("research-tasks.sqlite"), ROOT)
         application.state.explanation_reviews = ExplanationReviewStore(application.state.research_tasks)
         application.state.batch_attempts = BatchAttemptStore(db_path.with_name("document-preparation.sqlite"), ROOT)
+        application.state.reference_reviews = ReferenceReviewStore(db_path.with_name("reference-reviews.sqlite"), ROOT)
         yield
 
     application = FastAPI(title="CreditLens", version=__version__,
@@ -147,6 +150,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     install_cross_page_routes(application, actor, ROOT)
     install_table_lookup_routes(application, actor, ROOT)
     install_word_table_routes(application, actor, ROOT)
+    install_reference_routes(application, actor, ROOT)
 
     def laboratory():
         if application.state.access.mode != "demo":

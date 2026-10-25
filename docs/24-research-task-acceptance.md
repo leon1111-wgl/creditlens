@@ -74,3 +74,7 @@
 36题固定预期全部符合：15项选定结构可用、5项材料不足、7项阻断、9项预期完整性拒绝；包含19项登记材料用例和17项合成控制。三个检查通道分别为数值/状态47个断言、来源定位44个断言、拒绝38个断言；同一题可覆盖多个通道，不能相加当作题目数，也不是语义引用支持率。独立人工确认0项。
 
 [题库](../data/evaluation/research-task-cases.json) · [逐题结果](../artifacts/research-acceptance-development-report.json) · [复跑说明](research/2026-10-25-task-acceptance-cases.md) · [独立审查](research/2026-10-25-advisory-12.md)。运行 python scripts/evaluate_research_acceptance.py 默认生成新的 .run/reproductions/research-acceptance-report.json；存在时拒绝覆盖，可用 --output 指定新文件名。
+
+## 第31轮补充：独立参考的工具准备
+
+新增[参考核对流程](34-reference-review.md)，可以分别提交原文观察、显式展示分歧并由第三身份冻结候选。已有40组开发查询用于软件控制，不能填补本页“人工独立核验题”缺口。真实人员、未参与调参来源、独立标注和最终参考采用尚待完成；本轮不更新三类业务任务的模型正确率。
