@@ -175,7 +175,8 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         return application.state.research_tasks.update(
             task_id, identity, payload.revision,
             [d.model_dump(mode="json") for d in payload.decisions],
-            [h.model_dump(mode="json") for h in payload.hypotheses], payload.coverage_note)
+            [h.model_dump(mode="json") for h in payload.hypotheses], payload.coverage_note,
+            payload.bridge_review_note)
 
     @application.post("/api/research/tasks/{task_id}/actions")
     def research_task_action(task_id: str, payload: ResearchTaskAction,
