@@ -1,0 +1,487 @@
+{
+  "schema_version": 1,
+  "kind": "synthetic_document_preparation_workflow",
+  "provenance": "synthetic",
+  "model_inference_performed": false,
+  "source_bytes_read": false,
+  "scope": "Committed diagnostic history and explicit retry, not background worker recovery or financial approval.",
+  "checks": {
+    "missing_page_blocked": true,
+    "damaged_page_blocked": true,
+    "corrected_batch_prepared": true,
+    "create_replay_exact": true,
+    "old_attempt_export_unchanged": true,
+    "new_store_reads_committed_history": true,
+    "raw_marker_absent_from_database_and_exports": true,
+    "temporary_database_retained": false
+  },
+  "attempt_exports": [
+    {
+      "schema_version": 1,
+      "export_type": "document_batch_attempt",
+      "store_version": "document-batch-attempts-1",
+      "job": {
+        "id": "4bf7b684d33e4c9599538452a9a61761",
+        "tenant": "synthetic-preparation",
+        "document_id": "nvda-fy2025",
+        "provenance": "synthetic",
+        "material_binding": {
+          "document_id": "nvda-fy2025",
+          "inventory_sha256": "fd246535025166fada69431b385fbaac34f9077a6a82047efecd14e38463d9d3",
+          "manifest_sha256": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1",
+          "pack_canonical_sha256": "5dd6f7622cbd5794b7daab5ec4944360bb4c73c658ed5d96ca5b04fb22b80d67",
+          "pack_sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c",
+          "registered_document_sha256": "c69c7ac54d44b685d84f66f10f14174d7213114f90ba3333b357e80aea3a34c8",
+          "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+        },
+        "material_binding_sha256": "fb651faf16a3926b103c2333a211e04376986a864d933f4fb134bb3737e959f7",
+        "created_by": "simulated-preparation-analyst",
+        "created_at": "2026-10-25T16:45:13.266252+00:00"
+      },
+      "attempt": {
+        "actor": "simulated-preparation-analyst",
+        "created_at": "2026-10-25T16:45:13.266252+00:00",
+        "id": "1fa8baef77f34bbfa4c5c97a1136136f",
+        "input_sha256": "df43e93a7e1cecee2b209d96e663d68d22b4c94db660ca308dc564e7dbdb7cbf",
+        "report": {
+          "automatic_approval": false,
+          "database_written": false,
+          "document_id": "nvda-fy2025",
+          "duplicate_pages": [],
+          "errors": [
+            {
+              "code": "missing_registered_pages",
+              "path": "pages",
+              "stage": "batch_preflight"
+            }
+          ],
+          "expected_pages": [
+            146,
+            148
+          ],
+          "input_hash_status": "canonical_json",
+          "input_sha256": "df43e93a7e1cecee2b209d96e663d68d22b4c94db660ca308dc564e7dbdb7cbf",
+          "limitations": [
+            "Page coverage is limited to this document's registered evidence pages, not the whole PDF.",
+            "Empty recognition or explicit missing word arrays block this preparation task conservatively; neither proves the source is empty or a fact was not disclosed.",
+            "Nonempty word arrays and valid geometry do not prove OCR accuracy, financial evidence sufficiency, or correct parent-word association.",
+            "Hashes bind input declarations and registered metadata; PDF/image bytes and model execution were not checked.",
+            "No raw or normalized OCR is returned or persisted by this function. A caller may separately persist this small diagnostic.",
+            "Current registrations are compared before, during and after inspection; this is not an operating-system lock against concurrent changes."
+          ],
+          "material_binding": {
+            "document_id": "nvda-fy2025",
+            "inventory_sha256": "fd246535025166fada69431b385fbaac34f9077a6a82047efecd14e38463d9d3",
+            "manifest_sha256": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1",
+            "pack_canonical_sha256": "5dd6f7622cbd5794b7daab5ec4944360bb4c73c658ed5d96ca5b04fb22b80d67",
+            "pack_sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c",
+            "registered_document_sha256": "c69c7ac54d44b685d84f66f10f14174d7213114f90ba3333b357e80aea3a34c8",
+            "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+          },
+          "missing_pages": [
+            148
+          ],
+          "page_results": [
+            {
+              "errors": [],
+              "input_hash_status": "canonical_json",
+              "input_index": 0,
+              "input_sha256": "144af63a73422468ee686f71358e6169c6e6001490198c319cb3999020b8911f",
+              "page": 146,
+              "registration": {
+                "document_id": "nvda-fy2025",
+                "fact_ids": [
+                  "cash_equivalents-2025",
+                  "cash_equivalents-2024",
+                  "short_investments-2025",
+                  "short_investments-2024",
+                  "current_assets-2025",
+                  "current_assets-2024",
+                  "current_liabilities-2025",
+                  "current_liabilities-2024",
+                  "long_debt-2025",
+                  "long_debt-2024"
+                ],
+                "image_sha256": "a6aee665d7282ca28edda84ed0516c6ce8869b1557f367dc78c3a3967f4548e2",
+                "page": 146,
+                "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+              },
+              "status": "prepared_not_indexed",
+              "structure_status": "passed",
+              "summary": {
+                "empty": false,
+                "lines": 1,
+                "words": 1
+              }
+            }
+          ],
+          "provenance": "synthetic",
+          "queryable": false,
+          "rule_version": "registered-document-batch-1",
+          "schema_version": 1,
+          "scope": {
+            "cross_page_tables_understood": false,
+            "expected_pages_basis": "all_registered_evidence_pages_not_entire_pdf",
+            "financial_content_verified": false,
+            "model_execution_verified": false,
+            "normalized_ocr_returned": false,
+            "raw_ocr_returned": false,
+            "same_inventory_checked": true,
+            "source_image_bytes_verified": false,
+            "source_pdf_bytes_verified": false
+          },
+          "status": "blocked",
+          "summary": {
+            "blocked_page_count": 0,
+            "empty_recognition_page_count": 0,
+            "expected_page_count": 2,
+            "prepared_page_count": 1,
+            "structure_passed_page_count": 1,
+            "submitted_page_count": 1,
+            "unique_expected_page_count": 1,
+            "unique_submitted_page_count": 1
+          },
+          "unexpected_pages": [],
+          "versions": {
+            "asset_preflight": "transfer-asset-preflight-1",
+            "batch": "registered-document-batch-1",
+            "document_input": "registered-document-input-1",
+            "ocr_input": "ocr-input-1"
+          }
+        },
+        "report_sha256": "ea787564657b714f13575578abfac2e4e3adb7d6d8259d284ee80be48a9bfca8",
+        "revision": 1,
+        "task_id": "4bf7b684d33e4c9599538452a9a61761",
+        "tenant": "synthetic-preparation"
+      },
+      "attempt_summary_persisted": true,
+      "queryable": false,
+      "automatic_approval": false,
+      "attempt_metadata_persisted": true,
+      "raw_ocr_persisted": false,
+      "persistence_scope": "attempt_summaries_only_no_raw_ocr",
+      "scope": "Committed explicit preflight attempt only; not financial ingestion, approval, background processing or pre-commit crash recovery."
+    },
+    {
+      "schema_version": 1,
+      "export_type": "document_batch_attempt",
+      "store_version": "document-batch-attempts-1",
+      "job": {
+        "id": "4bf7b684d33e4c9599538452a9a61761",
+        "tenant": "synthetic-preparation",
+        "document_id": "nvda-fy2025",
+        "provenance": "synthetic",
+        "material_binding": {
+          "document_id": "nvda-fy2025",
+          "inventory_sha256": "fd246535025166fada69431b385fbaac34f9077a6a82047efecd14e38463d9d3",
+          "manifest_sha256": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1",
+          "pack_canonical_sha256": "5dd6f7622cbd5794b7daab5ec4944360bb4c73c658ed5d96ca5b04fb22b80d67",
+          "pack_sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c",
+          "registered_document_sha256": "c69c7ac54d44b685d84f66f10f14174d7213114f90ba3333b357e80aea3a34c8",
+          "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+        },
+        "material_binding_sha256": "fb651faf16a3926b103c2333a211e04376986a864d933f4fb134bb3737e959f7",
+        "created_by": "simulated-preparation-analyst",
+        "created_at": "2026-10-25T16:45:13.266252+00:00"
+      },
+      "attempt": {
+        "actor": "simulated-preparation-analyst",
+        "created_at": "2026-10-25T16:45:13.293442+00:00",
+        "id": "33dabf7279a847d9a6acaa326ab8a93e",
+        "input_sha256": "8a51975d6b5a7b40b203fb12e6917a6c2acbf97cde641d102dc5e65e514b32b7",
+        "report": {
+          "automatic_approval": false,
+          "database_written": false,
+          "document_id": "nvda-fy2025",
+          "duplicate_pages": [],
+          "errors": [],
+          "expected_pages": [
+            146,
+            148
+          ],
+          "input_hash_status": "canonical_json",
+          "input_sha256": "8a51975d6b5a7b40b203fb12e6917a6c2acbf97cde641d102dc5e65e514b32b7",
+          "limitations": [
+            "Page coverage is limited to this document's registered evidence pages, not the whole PDF.",
+            "Empty recognition or explicit missing word arrays block this preparation task conservatively; neither proves the source is empty or a fact was not disclosed.",
+            "Nonempty word arrays and valid geometry do not prove OCR accuracy, financial evidence sufficiency, or correct parent-word association.",
+            "Hashes bind input declarations and registered metadata; PDF/image bytes and model execution were not checked.",
+            "No raw or normalized OCR is returned or persisted by this function. A caller may separately persist this small diagnostic.",
+            "Current registrations are compared before, during and after inspection; this is not an operating-system lock against concurrent changes."
+          ],
+          "material_binding": {
+            "document_id": "nvda-fy2025",
+            "inventory_sha256": "fd246535025166fada69431b385fbaac34f9077a6a82047efecd14e38463d9d3",
+            "manifest_sha256": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1",
+            "pack_canonical_sha256": "5dd6f7622cbd5794b7daab5ec4944360bb4c73c658ed5d96ca5b04fb22b80d67",
+            "pack_sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c",
+            "registered_document_sha256": "c69c7ac54d44b685d84f66f10f14174d7213114f90ba3333b357e80aea3a34c8",
+            "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+          },
+          "missing_pages": [],
+          "page_results": [
+            {
+              "errors": [],
+              "input_hash_status": "canonical_json",
+              "input_index": 0,
+              "input_sha256": "144af63a73422468ee686f71358e6169c6e6001490198c319cb3999020b8911f",
+              "page": 146,
+              "registration": {
+                "document_id": "nvda-fy2025",
+                "fact_ids": [
+                  "cash_equivalents-2025",
+                  "cash_equivalents-2024",
+                  "short_investments-2025",
+                  "short_investments-2024",
+                  "current_assets-2025",
+                  "current_assets-2024",
+                  "current_liabilities-2025",
+                  "current_liabilities-2024",
+                  "long_debt-2025",
+                  "long_debt-2024"
+                ],
+                "image_sha256": "a6aee665d7282ca28edda84ed0516c6ce8869b1557f367dc78c3a3967f4548e2",
+                "page": 146,
+                "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+              },
+              "status": "prepared_not_indexed",
+              "structure_status": "passed",
+              "summary": {
+                "empty": false,
+                "lines": 1,
+                "words": 1
+              }
+            },
+            {
+              "errors": [
+                {
+                  "code": "coordinate_out_of_bounds",
+                  "path": "pages[1].ocr_input.result.boxes[0][2][0]",
+                  "stage": "page_preflight"
+                }
+              ],
+              "input_hash_status": "canonical_json",
+              "input_index": 1,
+              "input_sha256": "e65ef74e4bad0275cd0e074746cbd621e366d30c24cb0ce15e3143d70183afc5",
+              "page": 148,
+              "registration": null,
+              "status": "blocked",
+              "structure_status": "failed",
+              "summary": null
+            }
+          ],
+          "provenance": "synthetic",
+          "queryable": false,
+          "rule_version": "registered-document-batch-1",
+          "schema_version": 1,
+          "scope": {
+            "cross_page_tables_understood": false,
+            "expected_pages_basis": "all_registered_evidence_pages_not_entire_pdf",
+            "financial_content_verified": false,
+            "model_execution_verified": false,
+            "normalized_ocr_returned": false,
+            "raw_ocr_returned": false,
+            "same_inventory_checked": true,
+            "source_image_bytes_verified": false,
+            "source_pdf_bytes_verified": false
+          },
+          "status": "blocked",
+          "summary": {
+            "blocked_page_count": 1,
+            "empty_recognition_page_count": 0,
+            "expected_page_count": 2,
+            "prepared_page_count": 1,
+            "structure_passed_page_count": 1,
+            "submitted_page_count": 2,
+            "unique_expected_page_count": 2,
+            "unique_submitted_page_count": 2
+          },
+          "unexpected_pages": [],
+          "versions": {
+            "asset_preflight": "transfer-asset-preflight-1",
+            "batch": "registered-document-batch-1",
+            "document_input": "registered-document-input-1",
+            "ocr_input": "ocr-input-1"
+          }
+        },
+        "report_sha256": "fb682945da245c604c0286e53f34a4397c5dafa222d7859daba33d31f005fe8d",
+        "revision": 2,
+        "task_id": "4bf7b684d33e4c9599538452a9a61761",
+        "tenant": "synthetic-preparation"
+      },
+      "attempt_summary_persisted": true,
+      "queryable": false,
+      "automatic_approval": false,
+      "attempt_metadata_persisted": true,
+      "raw_ocr_persisted": false,
+      "persistence_scope": "attempt_summaries_only_no_raw_ocr",
+      "scope": "Committed explicit preflight attempt only; not financial ingestion, approval, background processing or pre-commit crash recovery."
+    },
+    {
+      "schema_version": 1,
+      "export_type": "document_batch_attempt",
+      "store_version": "document-batch-attempts-1",
+      "job": {
+        "id": "4bf7b684d33e4c9599538452a9a61761",
+        "tenant": "synthetic-preparation",
+        "document_id": "nvda-fy2025",
+        "provenance": "synthetic",
+        "material_binding": {
+          "document_id": "nvda-fy2025",
+          "inventory_sha256": "fd246535025166fada69431b385fbaac34f9077a6a82047efecd14e38463d9d3",
+          "manifest_sha256": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1",
+          "pack_canonical_sha256": "5dd6f7622cbd5794b7daab5ec4944360bb4c73c658ed5d96ca5b04fb22b80d67",
+          "pack_sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c",
+          "registered_document_sha256": "c69c7ac54d44b685d84f66f10f14174d7213114f90ba3333b357e80aea3a34c8",
+          "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+        },
+        "material_binding_sha256": "fb651faf16a3926b103c2333a211e04376986a864d933f4fb134bb3737e959f7",
+        "created_by": "simulated-preparation-analyst",
+        "created_at": "2026-10-25T16:45:13.266252+00:00"
+      },
+      "attempt": {
+        "actor": "simulated-preparation-analyst",
+        "created_at": "2026-10-25T16:45:13.327907+00:00",
+        "id": "cd30fd1ce07a42238f269d29244d6d49",
+        "input_sha256": "3a1a80bfa85d5c5808f84ed3aaf6a8c18eb90179373adc104dd36db35f791e6f",
+        "report": {
+          "automatic_approval": false,
+          "database_written": false,
+          "document_id": "nvda-fy2025",
+          "duplicate_pages": [],
+          "errors": [],
+          "expected_pages": [
+            146,
+            148
+          ],
+          "input_hash_status": "canonical_json",
+          "input_sha256": "3a1a80bfa85d5c5808f84ed3aaf6a8c18eb90179373adc104dd36db35f791e6f",
+          "limitations": [
+            "Page coverage is limited to this document's registered evidence pages, not the whole PDF.",
+            "Empty recognition or explicit missing word arrays block this preparation task conservatively; neither proves the source is empty or a fact was not disclosed.",
+            "Nonempty word arrays and valid geometry do not prove OCR accuracy, financial evidence sufficiency, or correct parent-word association.",
+            "Hashes bind input declarations and registered metadata; PDF/image bytes and model execution were not checked.",
+            "No raw or normalized OCR is returned or persisted by this function. A caller may separately persist this small diagnostic.",
+            "Current registrations are compared before, during and after inspection; this is not an operating-system lock against concurrent changes."
+          ],
+          "material_binding": {
+            "document_id": "nvda-fy2025",
+            "inventory_sha256": "fd246535025166fada69431b385fbaac34f9077a6a82047efecd14e38463d9d3",
+            "manifest_sha256": "13090eec81c5d1bf46630b53b8b2335169b6514006a801cbe3a8359ec7c54ae1",
+            "pack_canonical_sha256": "5dd6f7622cbd5794b7daab5ec4944360bb4c73c658ed5d96ca5b04fb22b80d67",
+            "pack_sha256": "b699a819db90f532e947fd2fe399646166f1a44d295a433816f841e563fec77c",
+            "registered_document_sha256": "c69c7ac54d44b685d84f66f10f14174d7213114f90ba3333b357e80aea3a34c8",
+            "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+          },
+          "missing_pages": [],
+          "page_results": [
+            {
+              "errors": [],
+              "input_hash_status": "canonical_json",
+              "input_index": 0,
+              "input_sha256": "144af63a73422468ee686f71358e6169c6e6001490198c319cb3999020b8911f",
+              "page": 146,
+              "registration": {
+                "document_id": "nvda-fy2025",
+                "fact_ids": [
+                  "cash_equivalents-2025",
+                  "cash_equivalents-2024",
+                  "short_investments-2025",
+                  "short_investments-2024",
+                  "current_assets-2025",
+                  "current_assets-2024",
+                  "current_liabilities-2025",
+                  "current_liabilities-2024",
+                  "long_debt-2025",
+                  "long_debt-2024"
+                ],
+                "image_sha256": "a6aee665d7282ca28edda84ed0516c6ce8869b1557f367dc78c3a3967f4548e2",
+                "page": 146,
+                "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+              },
+              "status": "prepared_not_indexed",
+              "structure_status": "passed",
+              "summary": {
+                "empty": false,
+                "lines": 1,
+                "words": 1
+              }
+            },
+            {
+              "errors": [],
+              "input_hash_status": "canonical_json",
+              "input_index": 1,
+              "input_sha256": "ec1f41d591b1752fd013b47623e42cd171a220c22ab6ff1cd4f453e898d889e8",
+              "page": 148,
+              "registration": {
+                "document_id": "nvda-fy2025",
+                "fact_ids": [
+                  "cfo-2025",
+                  "cfo-2024",
+                  "net_income-2025",
+                  "net_income-2024",
+                  "capex-2025",
+                  "capex-2024"
+                ],
+                "image_sha256": "f6b047ec1755dd4f16932286d424f260c8a8872a18354db021b0a63a9e77273f",
+                "page": 148,
+                "source_pdf_sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc"
+              },
+              "status": "prepared_not_indexed",
+              "structure_status": "passed",
+              "summary": {
+                "empty": false,
+                "lines": 1,
+                "words": 1
+              }
+            }
+          ],
+          "provenance": "synthetic",
+          "queryable": false,
+          "rule_version": "registered-document-batch-1",
+          "schema_version": 1,
+          "scope": {
+            "cross_page_tables_understood": false,
+            "expected_pages_basis": "all_registered_evidence_pages_not_entire_pdf",
+            "financial_content_verified": false,
+            "model_execution_verified": false,
+            "normalized_ocr_returned": false,
+            "raw_ocr_returned": false,
+            "same_inventory_checked": true,
+            "source_image_bytes_verified": false,
+            "source_pdf_bytes_verified": false
+          },
+          "status": "prepared_not_indexed",
+          "summary": {
+            "blocked_page_count": 0,
+            "empty_recognition_page_count": 0,
+            "expected_page_count": 2,
+            "prepared_page_count": 2,
+            "structure_passed_page_count": 2,
+            "submitted_page_count": 2,
+            "unique_expected_page_count": 2,
+            "unique_submitted_page_count": 2
+          },
+          "unexpected_pages": [],
+          "versions": {
+            "asset_preflight": "transfer-asset-preflight-1",
+            "batch": "registered-document-batch-1",
+            "document_input": "registered-document-input-1",
+            "ocr_input": "ocr-input-1"
+          }
+        },
+        "report_sha256": "5ab0afdbb76979bded088e3704a7d1f21b07bf49d2c3619a58701adc8e96f06e",
+        "revision": 3,
+        "task_id": "4bf7b684d33e4c9599538452a9a61761",
+        "tenant": "synthetic-preparation"
+      },
+      "attempt_summary_persisted": true,
+      "queryable": false,
+      "automatic_approval": false,
+      "attempt_metadata_persisted": true,
+      "raw_ocr_persisted": false,
+      "persistence_scope": "attempt_summaries_only_no_raw_ocr",
+      "scope": "Committed explicit preflight attempt only; not financial ingestion, approval, background processing or pre-commit crash recovery."
+    }
+  ]
+}

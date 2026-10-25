@@ -27,6 +27,8 @@ from .issuer_store import issuer_snapshot, issuer_image
 from .currency_store import currency_snapshot
 from .evidence_guard_store import evidence_guard_snapshot
 from .input_store import input_snapshot
+from .batch_attempt_store import BatchAttemptStore
+from .preparation_routes import install_preparation_routes
 from .research_materials import build_material_bundle, MaterialsError
 from .research_acceptance import (
     build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
@@ -111,6 +113,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
         application.state.research_tasks = ResearchTaskStore(
             db_path.with_name("research-tasks.sqlite"), ROOT)
         application.state.explanation_reviews = ExplanationReviewStore(application.state.research_tasks)
+        application.state.batch_attempts = BatchAttemptStore(db_path.with_name("document-preparation.sqlite"), ROOT)
         yield
 
     application = FastAPI(title="CreditLens", version=__version__,
@@ -136,6 +139,8 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
 
     def actor(request: Request) -> Actor:
         return application.state.access.resolve(request)
+
+    install_preparation_routes(application, actor, ROOT)
 
     def laboratory():
         if application.state.access.mode != "demo":
