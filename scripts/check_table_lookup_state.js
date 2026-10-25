@@ -26,6 +26,15 @@ function fixture(label='report') {
         methods:{text_sequence:{score:{outcome:id==='msft'?'matched':'wrong'},extraction},
         layout:{score:{outcome:'matched'},extraction}}}]}))}};
 }
+function wordFixture() {
+  const result=fixture('word');result.report_sha256='b'.repeat(64);
+  for(const doc of result.report.documents)for(const item of doc.cases) {
+    item.methods={line:item.methods.layout,word:item.methods.text_sequence};
+    item.methods.line.score.outcome=doc.id==='msft'?'insufficient':'matched';
+    item.methods.word.score.outcome=doc.id==='msft'?'matched':'insufficient';
+  }
+  return result;
+}
 function jsonReply(value) {
   const raw=JSON.stringify(value).replace('"synthetic_height":792','"synthetic_height":792.0')+'\n';
   return {ok:true,status:200,text:async()=>raw,raw};
@@ -43,7 +52,7 @@ function harness() {
       click(){if(this.tagName==='A')env.downloads.push({href:this.href,name:this.download});}};
   }
   const document={getElementById(id){return nodes[id]??=node(
-    ['role','issuer','filter','case'].includes(id)?'select':'div');},createElement:node};
+    ['role','issuer','filter','case','experiment'].includes(id)?'select':'div');},createElement:node};
   class LocalURL extends URL {
     static createObjectURL(blob){const value='blob:synthetic-'+(env.created.length+1);
       env.created.push({value,blob});return value;}
@@ -52,14 +61,16 @@ function harness() {
   const context=vm.createContext({document,URL:LocalURL,Blob,setTimeout:fn=>fn(),
     fetch:(url,options)=>new Promise((resolve,reject)=>env.pending.push({url,options,resolve,reject})),env});
   vm.runInContext(source,context,{timeout:1000});
-  vm.runInContext("$('role').value='analyst';$('filter').value='all';",context,{timeout:1000});
+  vm.runInContext("$('role').value='analyst';$('filter').value='all';$('experiment').value='line';",context,{timeout:1000});
   return {env,nodes,run:code=>vm.runInContext(code,context,{timeout:1000}),
-    state:()=>JSON.parse(vm.runInContext(`JSON.stringify({epoch,imageEpoch,raw,imageUrl,
+    state:()=>JSON.parse(vm.runInContext(`JSON.stringify({epoch,imageEpoch,raw,imageUrl,apiBase,methodKeys,
       savedPresent:saved!==null,caseIds:cases.map(c=>c.id),selected:$('case').value,
       exportDisabled:$('export').disabled,workspaceHidden:$('workspace').hidden,
       detailHidden:$('caseDetail').hidden,status:$('status').textContent,title:$('queryTitle').textContent,
       previewHidden:$('preview').hidden,previewTitle:$('previewTitle').textContent,
-      previewNote:$('previewNote').textContent,frameChildren:$('pageFrame').children.length})`,context,{timeout:1000}))};
+      previewNote:$('previewNote').textContent,frameChildren:$('pageFrame').children.length,
+      transitionHidden:$('transitionPanel').hidden,transitionRows:$('transitions').children.length,
+      caseDelta:$('caseDelta').textContent,experimentNote:$('experimentNote').textContent})`,context,{timeout:1000}))};
 }
 async function populated() {
   const app=harness(),response=jsonReply(fixture()),loading=app.run('load()');
@@ -139,9 +150,54 @@ async function main() {
   logout.env.pending[1].reject(new Error('Synthetic old image error'));await request;
   assert.deepEqual(logout.state(),reset);passed.push('late_image_error_after_identity_change');
 
+  const switching=harness(),obsolete=switching.run('load()');
+  switching.run("$('experiment').value='word';$('experiment').onchange()");
+  const switched=switching.state();switching.env.pending[0].resolve(jsonReply(fixture()));await obsolete;
+  assert.deepEqual(switching.state(),switched);assert.equal(switching.state().raw,null);
+  assert.equal(switching.state().apiBase,null);
+  passed.push('experiment_change_invalidates_pending_report');
+
+  const replacing=harness(),oldReport=replacing.run('load()');
+  replacing.run("$('experiment').value='word';$('experiment').onchange()");
+  const wordLoad=replacing.run('load()'),wordResponse=jsonReply(wordFixture());
+  assert.equal(replacing.env.pending[1].url,'/api/word-table-lookup');
+  replacing.env.pending[1].resolve(wordResponse);await wordLoad;
+  const wordState=replacing.state();replacing.env.pending[0].resolve(jsonReply(fixture()));await oldReport;
+  assert.deepEqual(replacing.state(),wordState);assert.equal(wordState.apiBase,'/api/word-table-lookup');
+  assert.deepEqual(wordState.methodKeys,['line','word']);
+  replacing.run("$('export').onclick()");
+  const wordDownload=replacing.env.downloads.at(-1);
+  assert.equal(wordDownload.name,'creditlens-word-table-lookup.json');
+  assert.equal(await replacing.env.created.find(x=>x.value===wordDownload.href).blob.text(),wordResponse.raw);
+  passed.push('new_experiment_keeps_new_endpoint_and_raw_export');
+
+  const {app:imageSwitch}=await populated(),pendingOldImage=imageSwitch.run("showPage(currentCase(),'layout')");
+  imageSwitch.run("$('experiment').value='word';$('experiment').onchange()");
+  const readingWord=imageSwitch.run('load()');imageSwitch.env.pending[2].resolve(jsonReply(wordFixture()));await readingWord;
+  const readingWordImage=imageSwitch.run("showPage(currentCase(),'word')");
+  assert(imageSwitch.env.pending[3].url.startsWith('/api/word-table-lookup/cases/'));
+  assert(imageSwitch.env.pending[3].url.includes('b'.repeat(64)));
+  imageSwitch.env.pending[3].resolve(imageReply());await readingWordImage;
+  const newestWordImage=imageSwitch.state();imageSwitch.env.pending[1].resolve(imageReply());await pendingOldImage;
+  assert.deepEqual(imageSwitch.state(),newestWordImage);
+  passed.push('experiment_change_isolates_old_image_and_report_binding');
+
+  const transitionRows=replacing.nodes.transitions.children;
+  assert.deepEqual(transitionRows.map(row=>row.children.slice(1).map(cell=>cell.textContent)),
+    [['0','0','1'],['0','0','0'],['1','0','0']],
+    'Transition table must retain one regression and one improvement, not only a zero net change');
+  assert.equal(replacing.state().transitionHidden,false);assert(replacing.state().caseDelta.includes('→'));
+  replacing.run("$('filter').value='wrong';filterCases()");
+  assert.equal(replacing.state().detailHidden,true);assert.equal(replacing.state().caseDelta,'');
+  assert.equal(replacing.nodes.transitions.children.length,3);
+  replacing.run("$('experiment').value='line';$('experiment').onchange()");
+  assert.equal(replacing.state().transitionHidden,true);assert.equal(replacing.state().transitionRows,0);
+  assert.equal(replacing.state().raw,null);assert.equal(replacing.state().exportDisabled,true);
+  passed.push('transitions_preserve_regression_and_clear_on_experiment_change');
+
   const reportPath=process.argv[3] ? path.resolve(process.argv[3])
     : path.resolve(__dirname,'../artifacts/table-lookup-report.json');
-  let savedCasesRendered=0;
+  let savedCasesRendered=0,wordCasesRendered=0;
   if(fs.existsSync(reportPath)) {
     const reportBytes=fs.readFileSync(reportPath),payload=JSON.parse(reportBytes);
     const saved=payload.report ? payload : {report:payload,
@@ -169,9 +225,36 @@ async function main() {
     assert.equal(real.state().caseIds.length,42,'Filter must not replace the complete development denominator');
     passed.push('saved_report_all_cases_and_common_subset_fit_page');
   }
+  const wordReportPath=process.argv[4] ? path.resolve(process.argv[4])
+    : path.resolve(__dirname,'../artifacts/word-table-lookup-report.json');
+  if(fs.existsSync(wordReportPath)) {
+    const bytes=fs.readFileSync(wordReportPath),payload=JSON.parse(bytes);
+    const saved=payload.report ? payload : {report:payload,
+      report_sha256:crypto.createHash('sha256').update(bytes).digest('hex')};
+    const real=harness();real.run("$('experiment').value='word';$('experiment').onchange()");
+    const loading=real.run('load()');real.env.pending[0].resolve(jsonReply(saved));await loading;
+    assert.equal(real.state().savedPresent,true);assert.equal(real.state().caseIds.length,42);
+    assert.equal(real.state().transitionHidden,false);
+    assert.equal(real.nodes.transitions.children.flatMap(row=>row.children.slice(1))
+      .reduce((sum,cell)=>sum+Number(cell.textContent),0),42);
+    for(const id of real.state().caseIds) {
+      real.run("$('case').value="+JSON.stringify(id)+";renderCase()");
+      assert.equal(real.state().detailHidden,false);
+      for(const method of ['line','word']) {
+        const request=real.run('showPage(currentCase(),'+JSON.stringify(method)+')');
+        real.env.pending.at(-1).resolve(imageReply());await request;
+        assert(real.nodes.pageFrame.children.some(n=>n.tagName==='IMG'));
+        for(const box of real.nodes.pageFrame.children.filter(n=>n.tagName==='SPAN'))
+          assert(Object.values(box.style).every(value=>!String(value).includes('NaN')));
+      }
+      wordCasesRendered++;
+    }
+    real.run("$('filter').value='common';filterCases()");assert.equal(real.nodes.case.children.length,8);
+    passed.push('saved_word_report_all_cases_and_transition_matrix_fit_page');
+  }
 
   process.stdout.write(JSON.stringify({status:'passed',checks:passed.length,cases:passed,
-    saved_cases_rendered:savedCasesRendered,
+    saved_cases_rendered:savedCasesRendered,saved_word_cases_rendered:wordCasesRendered,
     scope:'Actual page script in isolated VM with synthetic report and controlled promises; no real browser, decoder, HTTP fault injection or model execution.'},null,2)+'\n');
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});

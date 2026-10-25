@@ -31,6 +31,7 @@ from .batch_attempt_store import BatchAttemptStore
 from .preparation_routes import install_preparation_routes
 from .cross_page_routes import install_cross_page_routes
 from .table_lookup_routes import install_table_lookup_routes
+from .word_table_routes import install_word_table_routes
 from .research_materials import build_material_bundle, MaterialsError
 from .research_acceptance import (
     build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
@@ -145,6 +146,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     install_preparation_routes(application, actor, ROOT)
     install_cross_page_routes(application, actor, ROOT)
     install_table_lookup_routes(application, actor, ROOT)
+    install_word_table_routes(application, actor, ROOT)
 
     def laboratory():
         if application.state.access.mode != "demo":
