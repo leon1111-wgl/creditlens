@@ -1,0 +1,181 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>表格取数 · CreditLens</title><style>
+/* Original local workbench styling, inspired by enterprise workspace layouts.
+   No Tencent or Feishu component library or brand assets are bundled. */
+:root {
+  color-scheme: light;
+  --font: "Times New Roman", "Songti SC", SimSun, "Noto Serif CJK SC", serif;
+  --text: #1f2329;
+  --muted: #5f6773;
+  --line: #dfe3e8;
+  --soft: #f7f8fa;
+  --blue: #2856a6;
+  --radius: 4px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--text); background: #fff; font: 15px/1.6 var(--font); }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+.app { min-height: 100dvh; display: grid; grid-template-columns: 190px minmax(0, 1fr); }
+.sidebar { position: sticky; top: 0; height: 100dvh; overflow-y: auto; background: var(--soft); border-right: 1px solid var(--line); padding: 22px 12px; display: flex; flex-direction: column; }
+.brand { display: block; padding: 0 12px; color: var(--text); font-size: 25px; font-weight: 700; line-height: 1.2; }
+.sidebar-caption { margin: 5px 12px 30px; color: var(--muted); font-size: 12px; }
+.nav-label { color: var(--muted); font-size: 12px; margin: 0 12px 8px; }
+.workspace-nav { display: grid; gap: 5px; }
+.workspace-nav a { padding: 9px 12px; color: #414751; border-radius: var(--radius); font-size: 14px; }
+.workspace-nav a:hover { background: #eceef2; text-decoration: none; }
+.workspace-nav a[aria-current="page"] { color: var(--blue); background: #eaf0fa; font-weight: 700; }
+.sidebar-foot { margin: auto 12px 0; padding-top: 24px; color: var(--muted); font-size: 12px; }
+.workspace { min-width: 0; }
+.topbar { height: 52px; border-bottom: 1px solid var(--line); padding: 0 28px; display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); }
+.topbar strong { color: #424852; font-weight: 400; }
+main { max-width: 1440px; margin: auto; padding: 25px 28px 40px; }
+h1 { margin: 0; font-size: 24px; line-height: 1.4; font-weight: 700; }
+h2 { margin: 0; font-size: 18px; line-height: 1.45; font-weight: 700; }
+h3 { margin: 0 0 7px; font-size: 16px; line-height: 1.5; }
+p { margin: 7px 0; }
+.intro { color: var(--muted); margin: 6px 0 0; font-size: 14px; }
+.muted, small { color: var(--muted); }
+small { font-size: 13px; }
+.bar { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; margin: 18px 0 12px; }
+label { display: flex; flex-direction: column; gap: 5px; color: #424852; font-size: 13px; }
+input, select, button { min-height: 34px; border: 1px solid #c8cdd5; border-radius: var(--radius); background: #fff; color: var(--text); padding: 5px 10px; max-width: 100%; }
+input { width: 260px; }
+input::placeholder { color: #69717d; font-size: 13px; }
+select { min-width: 125px; }
+button { padding: 5px 15px; cursor: pointer; white-space: nowrap; }
+button:hover { border-color: var(--blue); color: var(--blue); background: #f2f5fa; }
+button.primary { color: #fff; background: var(--blue); border-color: var(--blue); }
+button.primary:hover { background: #20478c; }
+button:disabled { background: #f4f5f7; border-color: #e0e3e8; color: #858b95; cursor: default; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.toolbar .export { margin-left: auto; }
+#status { margin: 0 0 15px; min-height: 21px; font-size: 13px; }
+.notice { padding: 10px 12px; margin: 0 0 22px; border: 1px solid #e1e6f0; background: #f8faff; color: #525c6d; font-size: 13px; }
+.notice strong { color: #414b5a; font-weight: 400; margin-right: 7px; }
+.overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; padding-bottom: 24px; }
+.overview article { min-width: 0; }
+.overview .muted { font-size: 13px; margin: 5px 0 12px; }
+.overview .table-note { margin: 10px 0 0; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+#controlRows td { vertical-align: top; }
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: middle; }
+th { background: var(--soft); font-size: 13px; color: #555d68; font-weight: 400; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+tr:last-child td { border-bottom: 0; }
+.count { font-variant-numeric: tabular-nums; font-size: 17px; font-weight: 400; }
+.section { border-top: 1px solid var(--line); padding: 23px 0; scroll-margin-top: 18px; }
+.tag { display: inline-block; padding: 0 6px; border-radius: 3px; font-size: 12px; line-height: 22px; color: #246244; background: #eff7f2; white-space: nowrap; vertical-align: middle; }
+.tag.insufficient { color: #825614; background: #fff5df; }
+.tag.conflict { color: #a5271a; background: #fff0ee; }
+.detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; margin-top: 16px; }
+.detail > section { min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); }
+.detail h3 { padding: 10px 14px; background: var(--soft); border-bottom: 1px solid var(--line); margin: 0; font-size: 15px; }
+.field { padding: 12px 14px; border-bottom: 1px solid #eceef2; }
+.field:last-child { border-bottom: 0; }
+.field strong { font-size: 14px; margin-right: 5px; }
+.field p { font-size: 15px; }
+.raw { white-space: pre-wrap; overflow-wrap: anywhere; }
+.mono { font-family: var(--font); font-size: 13px; overflow-wrap: anywhere; }
+details { margin-top: 8px; }
+summary { cursor: pointer; color: var(--blue); font-size: 13px; }
+.field details p { font-size: 13px; }
+#stressRows > details { padding: 8px 0; }
+#stressRows summary { font-size: 14px; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.source-section { border-top: 1px solid var(--line); padding: 17px 0; }
+.source-section > summary { font-size: 15px; color: var(--text); }
+.source-section p { font-size: 13px; }
+.footer { margin: 4px 0 0; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+[hidden] { display: none !important; }
+@media (min-width: 1600px) { main { padding-left: 42px; padding-right: 42px; } }
+@media (max-width: 1024px) { .app { grid-template-columns: 164px minmax(0, 1fr); } main { padding: 22px; } .overview { gap: 20px; } th,td { padding: 8px; } }
+@media (max-width: 760px) {
+  .app { display: block; }
+  .sidebar { position: static; height: auto; padding: 12px 16px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .brand { padding: 0; font-size: 23px; }
+  .sidebar-caption, .nav-label, .sidebar-foot { display: none; }
+  .workspace-nav { display: flex; gap: 4px; margin-top: 9px; overflow-x: auto; }
+  .workspace-nav a { font-size: 13px; white-space: nowrap; padding: 8px 10px; border-radius: 3px 3px 0 0; }
+  .topbar { display: none; }
+  main { padding: 20px 16px 30px; }
+  h1 { font-size: 22px; }
+  .overview, .detail { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .overview { padding-bottom: 22px; }
+  .bar { gap: 10px; }
+  .bar label { flex: 1 1 150px; min-width: 0; }
+  .toolbar label { flex: 1 1 100%; }
+  input, select { width: 100%; }
+  .toolbar .export { margin-left: 0; }
+  .notice { margin-bottom: 20px; }
+  .count { font-size: 16px; }
+}
+
+.evidence-table td { text-align:left; }
+.evidence-table button { min-height:28px; padding:2px 9px; font-size:13px; }
+.source-meta { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:8px 24px; margin:15px 0; font-size:13px; }
+.preview { position:relative; background:#f7f8fa; border:1px solid var(--line); overflow:hidden; }
+.preview img { display:block; width:100%; height:auto; }
+.preview .box { position:absolute; border:2px solid #2856a6; pointer-events:none; background:#2155cc0b; }
+.preview-caption { font-size:13px; }
+@media(max-width:760px) { .source-meta { grid-template-columns:1fr; } .evidence-table { min-width:570px; } }
+
+/* Shared workspace palette: restrained neutral surfaces and blue actions.
+   Native CSS, inspired by office workspaces; no external design-system package. */
+:root{--font:"Times New Roman","Songti SC",SimSun,"Noto Serif CJK SC",serif;--text:#1f2329;--ink:#1f2329;--muted:#5f6773;--line:#dfe3e8;--soft:#f5f6f8;--blue:#2856a6;--green:#2856a6;--accent:#2856a6;--bg:#f5f6f8;--amber:#8a6118;--red:#a5362d;font-family:var(--font);color:var(--text);background:var(--bg)}
+body{font:15px/1.6 var(--font);color:var(--text);background:var(--bg)}
+h1,h2,h3,.brand,.logo,.number,.fact-value,.metric .number,.empty h2{font-family:var(--font)}
+h1{font-size:24px;line-height:1.4;letter-spacing:0}h2{font-size:18px}h3{font-size:15px}
+button,input,select,textarea{font-family:var(--font)}
+input,select,textarea{color:var(--text);border-color:#aeb7c4}
+a{color:var(--blue);text-underline-offset:3px}
+button.primary,.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20478c;border-color:#20478c;color:#fff}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.panel,.controls{border-radius:4px}.brand,.logo{font-weight:700}
+.tag.consistent{background:#edf6f0;color:#28734e}.tag.insufficient,.tag.warn,.tag.derived_requires_review{background:#fff5e4;color:#8a6118}
+.tag.conflict,.tag.danger,.tag.blocked{background:#fcefee;color:#a5362d}
+.tag.missing{background:#f0f2f5;color:#5f6773}
+.notice{border-radius:3px}.empty{background:#f5f6f8}
+@media(max-width:700px){h1{font-size:22px}h2{font-size:18px}}
+
+.workspace{background:white}.sidebar{background:#f0f2f5}.notice{background:#f2f5fa}
+
+button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
+
+.prep-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;margin-top:24px}.prep-queue button{display:block;width:100%;text-align:left;margin-bottom:8px}.prep-queue small{display:block;color:var(--muted)}textarea{width:100%;min-height:170px;resize:vertical;font:12px/1.5 Consolas,monospace;border:1px solid var(--line);border-radius:4px;padding:12px;background:#fafbfc}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 Consolas,monospace}td{vertical-align:top}.attempts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.section{margin-bottom:18px}#result{border-top:1px solid var(--line);padding-top:18px}@media(max-width:850px){.prep-grid{grid-template-columns:1fr}.toolbar{flex-wrap:wrap}.prep-queue{max-height:190px;overflow:auto}}
+
+.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}.choices label{min-width:0}.choices select{width:100%;min-width:0}.evidence-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:20px}.evidence-list article{min-width:0;border-top:2px solid #dfe3e8;padding:12px 0}.evidence-list p{font-size:14px;overflow-wrap:anywhere}.formula{font-size:24px;margin:12px 0}.check-table td{text-align:left;vertical-align:top}.preview-wrap{max-width:850px;margin:16px 0}.box.amount{border-color:#2856a6}.box.year{border-color:#995e17;background:transparent}.box.unit{border-color:#737b87;background:transparent}#preview[hidden]{display:none}#preview img{min-height:0}.footnote{font-size:13px;color:var(--muted)}@media(max-width:900px){.evidence-list{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.formula{font-size:21px}}
+.case-choice{max-width:600px;flex:1;min-width:0}.case-choice select{max-width:100%}#methods .field p{overflow-wrap:anywhere}#summary td{font-variant-numeric:tabular-nums} .detail{margin-bottom:20px} @media(max-width:760px){.case-choice{min-width:100%}}
+
+.box.amount{border-style:dashed;border-width:1px}.box.amount.selected{border-style:solid;border-width:3px}
+</style></head><body><div class="app"><aside class="sidebar"><a class="brand" href="/">CreditLens</a><p class="sidebar-caption">金融证据工作台</p><p class="nav-label">研究与验证</p><nav class="workspace-nav" aria-label="主导航"><a href="/tasks">研究任务</a><a href="/documents">原页核对</a><a href="/cross-page">跨页证据</a><a href="/table-lookup" aria-current="page">表格取数</a><a href="/experiments">文档实验</a><a href="/transfer">新公司核对</a><a href="/document-preparation">材料准备</a></nav><p class="sidebar-foot">先看实际取数<br>再核对参考答案</p></aside><div class="workspace"><header class="topbar">文档研究 / 表格取数</header><main>
+<h1>按行名和年份找金额</h1><p class="intro">从整页识别文字里寻找候选，对照文字顺序与版面行列两种方法，保留取错和找不到的结果。</p>
+<div class="bar"><label>访问密钥<input id="key" type="password" autocomplete="off" placeholder="本地演示可留空"></label><label>本地演示身份<select id="role"><option value="analyst">分析员</option><option value="viewer">只读查看</option></select></label><button id="refresh">载入实验</button><button id="export" disabled>导出全部记录</button></div><p id="status" role="status" aria-live="polite">正在载入…</p>
+<section id="workspace" hidden><p class="notice">这里展示保存的开发实验。切换样例只读取已有结果，不会重新运行识别模型；参考金额和参考框只用于事后评分，没有传入取数函数。</p>
+<div class="scroll"><table><thead><tr><th>方法</th><th>金额与位置符合参考</th><th>取到其他值或位置</th><th>未选出候选</th><th>全部查询</th></tr></thead><tbody id="summary"></tbody></table></div>
+<div class="bar"><label>公司<select id="issuer"><option value="all">全部公司</option></select></label><label>样例范围<select id="filter"><option value="all">全部样例</option><option value="common">收入与现金流（8项）</option><option value="difference">两种方法不同</option><option value="insufficient">存在依据不足</option><option value="wrong">存在错取</option></select></label><label class="case-choice">行名与年份<select id="case"></select></label></div><p id="caseCount" class="muted"></p>
+<section id="caseDetail" hidden><h2 id="queryTitle"></h2><p id="queryMeta" class="muted"></p><div id="methods" class="detail"></div>
+<div class="section"><h3>事后核对的参考</h3><p id="reference"></p><p id="source"></p><details><summary>查看完整查询、候选和评分依据</summary><pre id="caseRaw"></pre></details></div>
+<section id="preview" class="preview-wrap" hidden><h3 id="previewTitle"></h3><p id="previewNote" class="muted"></p><div id="pageFrame" class="preview"></div><button id="closePreview">收起原页</button></section></section>
+<p class="footnote">同名行可能属于不同报表分区。只有行名与年份时，系统应保留歧义；不能借参考位置悄悄选出答案。识别到“百万”也不表示已经确认币种、完整期间或合并口径。</p>
+<p class="footnote">材料为此前已经观察过的微软与苹果财报。结果属于规则开发对照，独立人工金标准尚未完成，不代表通用问答或新模型识别质量；这些候选不会自动成为已采用财务事实。</p></section>
+</main></div></div><script>
+const $=id=>document.getElementById(id),methodKeys=['text_sequence','layout'];
+let epoch=0,imageEpoch=0,saved=null,raw=null,cases=[],imageUrl=null;
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function headers(){const h={'X-Demo-Role':$('role').value};if($('key').value)h.Authorization='Bearer '+$('key').value;return h;}
+function clearImage(){imageEpoch++;if(imageUrl){URL.revokeObjectURL(imageUrl);imageUrl=null;}$('pageFrame').replaceChildren();$('preview').hidden=true;$('previewTitle').textContent='';$('previewNote').textContent='';}
+function reset(message='身份已改变，请重新载入。'){epoch++;clearImage();saved=null;raw=null;cases=[];$('workspace').hidden=true;$('caseDetail').hidden=true;$('export').disabled=true;for(const id of ['summary','issuer','case','methods','source'])$(id).replaceChildren();for(const id of ['caseCount','queryTitle','queryMeta','reference','caseRaw'])$(id).textContent='';$('status').textContent=message;}
+function outcome(c,m){return c.methods[m].score.outcome;}
+function outcomeLabel(value){return {matched:'金额与位置符合参考',wrong:'与参考不同',insufficient:'依据不足'}[value]||'待核查';}
+function methodName(key){return key==='layout'?'版面行列':'文字顺序';}
+async function load(){reset('正在读取保存的实验…');const g=epoch;try{const response=await fetch('/api/table-lookup',{headers:headers(),cache:'no-store'});if(!response.ok)throw Error(response.status===401?'请填写有效访问密钥。':'实验记录不可用或校验失败，请稍后重试。');const text=await response.text(),value=JSON.parse(text);if(g!==epoch)return;saved=value;raw=text;cases=value.report.documents.flatMap(d=>d.cases.map(c=>({...c,document:d})));$('issuer').replaceChildren();const all=el('option','全部公司');all.value='all';$('issuer').append(all);for(const d of value.report.documents){const option=el('option',d.id.toUpperCase());option.value=d.id;$('issuer').append(option);}$('summary').replaceChildren();for(const m of methodKeys){const row=el('tr');row.append(el('td',methodName(m)));for(const state of ['matched','wrong','insufficient'])row.append(el('td',String(cases.filter(c=>outcome(c,m)===state).length)));row.append(el('td',String(cases.length)));$('summary').append(row);}$('workspace').hidden=false;$('export').disabled=false;$('status').textContent='保存结果已载入；完整复放需要已登记的本地OCR输入。';filterCases();}catch(error){if(g!==epoch)return;reset(error.message);}}
+function filterCases(){clearImage();const issuer=$('issuer').value,filter=$('filter').value;const visible=cases.filter(c=>(issuer==='all'||c.document.id===issuer)&&(filter==='all'||(filter==='common'?/^(revenue|cfo)-/.test(c.fact_id):filter==='difference'?(outcome(c,'text_sequence')!==outcome(c,'layout')||c.methods.text_sequence.extraction.normalized_value!==c.methods.layout.extraction.normalized_value):methodKeys.some(m=>outcome(c,m)===filter))));$('case').replaceChildren();for(const c of visible){const option=el('option',c.document.id.toUpperCase()+' · '+c.query.year+' · '+c.query.row_label);option.value=c.id;$('case').append(option);}$('caseCount').textContent='当前显示 '+visible.length+' / '+cases.length+' 项。顶部统计始终包含全部查询。';renderCase();}
+function currentCase(){return cases.find(c=>c.id===$('case').value);}
+function sourceLink(c){const a=el('a','打开官方文件 · 第 '+c.page+' 页');try{const u=new URL(c.document.source.url);if(u.protocol!=='https:')throw Error();u.hash='page='+c.page;a.href=u.toString();a.target='_blank';a.rel='noopener noreferrer';return a;}catch{return el('span','官方来源链接暂不可用。');}}
+function renderCase(){clearImage();const c=currentCase();$('caseDetail').hidden=!c;for(const id of ['methods','source'])$(id).replaceChildren();if(!c){for(const id of ['queryTitle','queryMeta','reference','caseRaw'])$(id).textContent='';return;}$('queryTitle').textContent=c.query.row_label+' · '+c.query.year;$('queryMeta').textContent=c.document.id.toUpperCase()+' · 物理第 '+c.page+' 页 · 输入仅为行名、年份与整页OCR';for(const key of methodKeys){const e=c.methods[key].extraction,section=el('section');section.append(el('h3',methodName(key)));const body=el('div',undefined,'field');body.append(el('span',outcomeLabel(outcome(c,key)),'tag '+(outcome(c,key)==='matched'?'consistent':outcome(c,key)==='wrong'?'conflict':'insufficient')),el('p',e.status==='selected'?'候选：'+e.raw_value:'未选出候选金额'),el('p','原因：'+(e.message||e.reason),'muted'),el('p','单位原文：'+(e.unit.raw_text||'未确认'),'muted'),el('p','币种与完整期间：此取数方法未建立。','muted'));const details=el('details'),sum=el('summary','查看原始文字与定位依据');details.append(sum,el('pre',JSON.stringify(e.evidence,null,2)));body.append(details);const button=el('button','在原页查看'+methodName(key));button.onclick=()=>showPage(c,key);body.append(button);section.append(body);$('methods').append(section);}$('reference').textContent='登记原值：'+c.reference.raw_value+'；单位：'+(c.reference.unit==='USD_million'?'百万美元':c.reference.unit)+'。这里只在候选产生后核对，不能代表独立人工金标准。';$('source').append(sourceLink(c));const {document,...detail}=c;$('caseRaw').textContent=JSON.stringify(detail,null,2);}
+async function showPage(c,key){const g=epoch;clearImage();const token=imageEpoch;$('preview').hidden=false;$('previewTitle').textContent='正在读取已保留的原页…';try{const response=await fetch('/api/table-lookup/cases/'+encodeURIComponent(c.id)+'/page.png?expected_report_sha256='+encodeURIComponent(saved.report_sha256),{headers:headers(),cache:'no-store'});if(!response.ok)throw Error(response.status===404?'本地没有保留这张原页，请使用官方文件链接。':'原页不可用或报告已变化，请重新载入。');const blob=await response.blob();if(g!==epoch||token!==imageEpoch)return;imageUrl=URL.createObjectURL(blob);const img=el('img');img.alt=c.document.id.toUpperCase()+' 第 '+c.page+' 页';img.src=imageUrl;img.onerror=()=>{if(g!==epoch||token!==imageEpoch)return;clearImage();$('preview').hidden=false;$('previewTitle').textContent='原页无法显示';$('previewNote').textContent='请使用官方文件链接核对。';};$('pageFrame').append(img);const page=c.document.pages.find(p=>p.page===c.page);const e=c.methods[key].extraction;for(const [role,color] of [['amounts','amount'],['year_headers','year'],['row_label','unit']])for(const evidence of e.evidence[role]||[]){const b=evidence.span.bbox,box=el('span',undefined,'box '+color+(role==='amounts'&&evidence.span_index===e.selected_span_index?' selected':''));box.style.left=(b.x0/page.width*100)+'%';box.style.top=(b.top/page.height*100)+'%';box.style.width=((b.x1-b.x0)/page.width*100)+'%';box.style.height=((b.bottom-b.top)/page.height*100)+'%';$('pageFrame').append(box);}$('previewTitle').textContent=methodName(key)+' · '+c.document.id.toUpperCase()+' 第 '+c.page+' 页';$('previewNote').textContent='蓝色实框为选中金额，蓝色虚框为其他候选；棕框为年份，灰框为行名。展示取数阶段的依据，不使用参考框补全。';}catch(error){if(g!==epoch||token!==imageEpoch)return;clearImage();$('preview').hidden=false;$('previewTitle').textContent='原页暂不可用';$('previewNote').textContent=error.message;}}
+$('refresh').onclick=load;$('key').oninput=()=>reset();$('role').onchange=()=>reset();$('issuer').onchange=filterCases;$('filter').onchange=filterCases;$('case').onchange=renderCase;$('closePreview').onclick=clearImage;$('export').onclick=()=>{if(!raw)return;const u=URL.createObjectURL(new Blob([raw],{type:'application/json'})),a=el('a');a.href=u;a.download='creditlens-table-lookup.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);};load();
+</script></body></html>
