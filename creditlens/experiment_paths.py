@@ -102,6 +102,10 @@ def validate_experiment_paths(root: Path, output: Path, local_dir: Path, *,
     if local.is_relative_to(preview) or preview.is_relative_to(local):
         if not allow_registered_preview or local != preview:
             raise ValueError("Local output cannot overwrite registered document previews")
+    transfer = _resolve(Path(root).expanduser()/".run/document-transfer")
+    if (report.is_relative_to(transfer) or transfer.is_relative_to(report) or
+        local.is_relative_to(transfer) or transfer.is_relative_to(local)):
+        raise ValueError("Experiment outputs cannot overwrite registered transfer evidence")
     for source in read_only_dirs:
         source = _resolve(Path(source).expanduser())
         if (report.is_relative_to(source) or source.is_relative_to(report) or
