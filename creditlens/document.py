@@ -1,11 +1,12 @@
 """Bounded, positioned-text table extraction; no OCR or document authentication."""
 from __future__ import annotations
 from dataclasses import dataclass
-from math import isfinite
+from math import isclose, isfinite
 from .diligence import displayed_amount
 
 PARSER_VERSION = "positioned-financial-table-1"
 STACKED_PARSER_VERSION = "stacked-period-financial-table-1"
+PDF_GEOMETRY_VERSION = "visible-page-top-left-1"
 
 
 class EvidenceError(ValueError):
@@ -171,24 +172,79 @@ def extract_stacked_table(tokens, *, page, width, height, title, unit_header, ye
     return result
 
 
+def _finite_rectangle(rectangle, label):
+    try:
+        left, bottom, right, top = rectangle
+        valid = all(isfinite(v) for v in (left, bottom, right, top)) and left < right and bottom < top
+    except (TypeError, ValueError) as exc:
+        raise EvidenceError("Invalid " + label + " rectangle") from exc
+    if not valid:
+        raise EvidenceError("Invalid " + label + " rectangle")
+    return left, bottom, right, top
+
+
+def _visible_page_geometry(page):
+    """Use PDFium's inherited MediaBox/CropBox intersection, not either alone.
+
+    get_bbox() and get_charbox() share PDF canvas coordinates. For an unrotated
+    render the visible top-left origin is (bbox.left, bbox.top), even when the
+    MediaBox itself starts at a nonzero or negative coordinate.
+
+    https://pypdfium2.readthedocs.io/en/stable/python_api.html#pypdfium2.PdfPage.get_bbox
+    """
+    if page.get_rotation() != 0:
+        raise EvidenceError("Rotated PDF pages require a separate coordinate adapter")
+    left, bottom, right, top = _finite_rectangle(page.get_bbox(), "visible page")
+    width, height = page.get_width(), page.get_height()
+    try:
+        valid = all(isfinite(v) and v > 0 for v in (width, height))
+    except TypeError as exc:
+        raise EvidenceError("Invalid visible page dimensions") from exc
+    # PDFium exposes float-sized page boxes and dimensions. This tolerance only
+    # accommodates their representation, not OCR matching or geometric guessing.
+    if not valid or not (isclose(width, right-left, rel_tol=1e-7, abs_tol=1e-4) and
+                         isclose(height, top-bottom, rel_tol=1e-7, abs_tol=1e-4)):
+        raise EvidenceError("Visible page box and render dimensions disagree")
+    return left, bottom, right, top, width, height
+
+
 def pdfium_tokens(page):
-    """Preserve word text and glyph locations from a digital PDF text layer."""
+    """Map visible digital-PDF glyphs to the unrotated rendered page's origin.
+
+    Any fully or partly clipped non-whitespace glyph rejects the page. Dropping
+    an off-page minus sign, decimal or final digit could change a number even
+    when whitespace separates it from the visible characters. Unreadable empty
+    character slots are also rejected rather than treated as verified whitespace.
+    This does not support rotation, extra bitmap cropping, or physical UserUnit
+    conversion; coordinates remain the same PDF canvas units used by PDFium.
+    """
+    page_left, page_bottom, page_right, page_top, width, height = _visible_page_geometry(page)
     textpage = page.get_textpage()
     tokens, word, glyphs = [], [], []
     def flush():
         if word:
             b = box(glyphs)
+            # The existing three-decimal token rounding may exceed a fractional
+            # page edge by <0.001. Keep that representation inside the page.
+            b = {"x0": max(0, b["x0"]), "top": max(0, b["top"]),
+                 "x1": min(width, b["x1"]), "bottom": min(height, b["bottom"])}
+            if b["x0"] >= b["x1"] or b["top"] >= b["bottom"]:
+                raise EvidenceError("Glyph extent vanished at token coordinate precision")
             tokens.append(Token("".join(word), **b))
             word.clear()
             glyphs.clear()
     try:
         for i in range(textpage.count_chars()):
             ch = textpage.get_text_range(i, 1)
-            if not ch or ch.isspace():
+            if not ch:
+                raise EvidenceError("Unreadable PDF character cannot be treated as whitespace")
+            if ch.isspace():
                 flush()
                 continue
-            left, bottom, right, top = textpage.get_charbox(i)
-            glyph = Token(ch, left, page.get_height()-top, right, page.get_height()-bottom)
+            left, bottom, right, top = _finite_rectangle(textpage.get_charbox(i), "glyph")
+            if left < page_left or right > page_right or bottom < page_bottom or top > page_top:
+                raise EvidenceError("Clipped PDF glyph cannot provide complete text evidence")
+            glyph = Token(ch, left-page_left, page_top-top, right-page_left, page_top-bottom)
             if glyphs and (glyph.top > max(g.bottom for g in glyphs)+1
                            or glyph.bottom < min(g.top for g in glyphs)-1
                            or glyph.x0-glyphs[-1].x1 > 3):
