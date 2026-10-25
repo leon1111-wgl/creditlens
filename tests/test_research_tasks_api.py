@@ -39,6 +39,28 @@ class ResearchTasksApiTests(unittest.TestCase):
         body.update(changes)
         return self.client.post('/api/research/tasks', json=body, headers=self.headers())
 
+    def test_cash_flow_attachment_create_edit_submit_and_export(self):
+        response = self.create(include_cash_flow_bridge=True)
+        self.assertEqual(response.status_code, 201, response.text)
+        task = response.json()
+        self.assertEqual(len(task['cash_flow_bridge']['statements']), 4)
+        body = dict(revision=task['revision'], decisions=[
+            dict(observation_id=o['id'], decision='adopted', note='Registered original statement inspected.')
+            for o in task['bundle']['observations']], hypotheses=[],
+            coverage_note='Current report comparative columns; no historical or causal conclusion.',
+            bridge_review_note='Accounting reconciliation only; underlying business causes remain unverified.')
+        response = self.client.patch('/api/research/tasks/' + task['id'], json=body, headers=self.headers())
+        self.assertEqual(response.status_code, 200, response.text)
+        response = self.action(response.json(), 'submit')
+        self.assertEqual(response.status_code, 200, response.text)
+        content = response.json()['snapshot']['content']
+        self.assertEqual(content['store_version'], 'research-handoff-2')
+        self.assertEqual(content['bridge_review_note'], body['bridge_review_note'])
+        response = self.client.get('/api/research/tasks/' + task['id'] + '/export', headers=self.headers('viewer-key'))
+        self.assertEqual(response.status_code, 200, response.text)
+        from scripts.verify_research_export import verify_export
+        self.assertTrue(verify_export(response.json())['ok'])
+
     def prepared(self):
         response = self.create()
         self.assertEqual(response.status_code, 201, response.text)

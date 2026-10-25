@@ -27,6 +27,7 @@ _CONTENT_KEYS = {"schema_version", "store_version", "task_id", "tenant_id", "tas
                  "submitted_by", "submitted_at", "question", "selection_reason", "material_mode", "as_of",
                  "bundle_id", "bundle", "bundle_sha256", "materials_frozen_at", "decisions", "hypotheses",
                  "hypothesis_scope", "coverage_note", "comparison", "created_by", "contributors", "automatic_approval"}
+_BRIDGE_KEYS = {"cash_flow_bridge", "cash_flow_bridge_sha256", "bridge_review_note"}
 
 
 class ExportError(ValueError):
@@ -101,9 +102,11 @@ def verify_export(document: dict) -> dict:
     _string(snapshot["submitted_by"], "submitted_by", 256)
     _timestamp(snapshot["created_at"], "snapshot created_at")
     content = snapshot["content"]
-    _object(content, _CONTENT_KEYS, "snapshot content")
+    has_bridge = type(content) is dict and content.get("store_version") == "research-handoff-2"
+    _object(content, _CONTENT_KEYS | (_BRIDGE_KEYS if has_bridge else set()), "snapshot content")
     _require(type(content["schema_version"]) is int and content["schema_version"] == 1
-             and content["store_version"] == "research-handoff-1",
+             and type(content["store_version"]) is str
+             and content["store_version"] in {"research-handoff-1", "research-handoff-2"},
              "unsupported_schema", "Unsupported research snapshot version")
     for key in ("task_id", "tenant_id", "submitted_by", "created_by", "bundle_id"):
         _string(content[key], key, 256)
@@ -133,6 +136,17 @@ def verify_export(document: dict) -> dict:
     _require(calculated == snapshot["sha256"], "snapshot_hash_mismatch", "Snapshot content SHA-256 does not match")
     _require(hashlib.sha256(canonical_bytes(content["bundle"])).hexdigest() == content["bundle_sha256"],
              "bundle_hash_mismatch", "Embedded bundle SHA-256 does not match")
+    if has_bridge:
+        _hash(content["cash_flow_bridge_sha256"], "cash flow attachment sha256")
+        _string(content["bridge_review_note"], "cash flow attachment review note")
+        bridge = content["cash_flow_bridge"]
+        _require(type(bridge) is dict and type(bridge.get("source_bundle")) is dict,
+                 "invalid_field_type", "Invalid cash flow attachment")
+        _require(hashlib.sha256(canonical_bytes(bridge)).hexdigest() == content["cash_flow_bridge_sha256"],
+                 "bridge_hash_mismatch", "Cash flow attachment SHA-256 does not match")
+        _hash(bridge.get("source_bundle_sha256"), "cash flow source bundle sha256")
+        _require(hashlib.sha256(canonical_bytes(bridge["source_bundle"])).hexdigest() == bridge["source_bundle_sha256"],
+                 "bridge_source_hash_mismatch", "Cash flow source bundle SHA-256 does not match")
     history = document["review_history"]
     _require(type(history) is list, "invalid_field_type", "review_history must be a list")
     previous_revision = snapshot["revision"]
@@ -154,7 +168,8 @@ def verify_export(document: dict) -> dict:
     return {
         "ok": True, "task_id": document["task_id"], "snapshot_id": snapshot["id"],
         "content_sha256": calculated, "review_count": len(history),
-        "checks": ["python_canonical_content_sha256", "embedded_bundle_sha256", "snapshot_metadata_binding", "review_snapshot_binding"],
+        "checks": ["python_canonical_content_sha256", "embedded_bundle_sha256", "snapshot_metadata_binding", "review_snapshot_binding"]
+                  + (["cash_flow_attachment_sha256", "cash_flow_source_bundle_sha256"] if has_bridge else []),
         "scope": "Unsigned internal consistency only; no signature, source authenticity, financial calculation or principal identity verification",
         "tenant_scope": "tenant_id is covered by the content hash; no external tenant identity is available",
     }
