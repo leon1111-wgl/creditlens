@@ -10,12 +10,15 @@
 | Microsoft 官方 10-K PDF | FY2025 文件 158 页；固定第 50、52、53 页，20 项事实 | 页码与金额/表头坐标，哈希及发行人 filing 日期；对照 HTML | 同发行人两种格式，不是独立真值；无 OCR/通用表格识别 |
 | Apple FY2025 官方 10-K | 80 页文件中物理页 32、34、36，22 项事实 | 固定 SHA-256、分行日期、重复行分区、周历财年；HTML 参考记录 | 开发者整理参考、无双人复核；不是保留测试或真实性鉴定 |
 | FinQA 作者仓库 | dev 883 题 | 固定 commit、SHA-256、隔离 gold；检索与引用算术 | 不能评测中文全报告、授信或预测；缺公告日期 |
+| Microsoft FY2025 Q1–Q4 官方现金流量表 | 18 项原始流量事实，覆盖单季和累计值 | 严格表头／年份／期间校验；四份现金流页面与四份新闻稿分别保存 URL、哈希、抓取日；公告后次日可用 | 当前网页抓取，不是历史归档；跨披露差分始终待复核，不能用于现阶段预测训练 |
 
 微软来源：[资产负债表](https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/balance-sheets)、[现金流量表](https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/cash-flows)、[利润表](https://www.microsoft.com/en-us/investor/earnings/fy-2025-q4/income-statements)。披露日期依据 [2025-07-30 新闻稿](https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q4/press-release-webcast)。原网页保存在本机 data/raw/，仓库只保存最小数值事实、定位及 [来源 manifest](../data/examples/msft-provenance.json)。
 
 `python scripts/build_company_pack.py` 重建数据；概念缺失、重复或年份不符即报错。抓取哈希证明本次材料版本，不证明 2025 年当天网页相同。FY2024 数值是 FY2025 披露中的比较数，不能倒填为 2024 年已知事实。
 
 FinQA：[作者仓库](https://github.com/czyssrs/FinQA)、[EMNLP 论文](https://aclanthology.org/2021.emnlp-main.300/)、[固定版本登记](../data/manifest.json)。原始基准单独下载；仓库 MIT 与源报告权利分开处理。
+
+季度样例来源与日期：[Q1 / 2024-10-30](https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q1/press-release-webcast)、[Q2 / 2025-01-29](https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q2/press-release-webcast)、[Q3 / 2025-04-30](https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q3/press-release-webcast)、[Q4 / 2025-07-30](https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q4/press-release-webcast)。原始流量表 URL 与各自哈希在 [事实包](../data/examples/msft-fy2025-temporal.json)，新闻稿与版本在 [登记](../data/examples/msft-temporal-provenance.json)。使用 `python scripts/build_temporal_pack.py --download` 重建；只有数字和定位进入公开仓库。公告当日排除是保守的数据政策，不意味着已取得精确发布时刻。与年度／PDF 样例存在重叠，不将 18 与 42 直接相加宣称独立事实总数。
 
 ## 下一批候选，尚未导入
 

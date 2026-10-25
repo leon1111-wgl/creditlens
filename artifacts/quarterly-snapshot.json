@@ -1,0 +1,554 @@
+{
+  "entity_id": "MSFT",
+  "as_of": "2025-07-31",
+  "availability_policy": "publication_date_plus_one_calendar_day",
+  "snapshot_sha256": "2928ab27d41ab336f78d5fbf88f7c6a21f20ae6d8549f8fb032abebec5874445",
+  "quarters": [
+    {
+      "quarter": 1,
+      "metric": "cfo",
+      "period_start": "2024-07-01",
+      "period_end": "2024-09-30",
+      "value": "34180",
+      "unit": "USD_million",
+      "status": "reported",
+      "eligible_as_observed": true,
+      "fact_ids": [
+        "msft-fy25-q1-quarter-cfo"
+      ],
+      "formula": "msft-fy25-q1-quarter-cfo",
+      "checks": [
+        "not_applicable_first_quarter"
+      ],
+      "available_from": "2024-10-31"
+    },
+    {
+      "quarter": 1,
+      "metric": "capex",
+      "period_start": "2024-07-01",
+      "period_end": "2024-09-30",
+      "value": "14923",
+      "unit": "USD_million",
+      "status": "reported",
+      "eligible_as_observed": true,
+      "fact_ids": [
+        "msft-fy25-q1-quarter-capex"
+      ],
+      "formula": "msft-fy25-q1-quarter-capex",
+      "checks": [
+        "not_applicable_first_quarter"
+      ],
+      "available_from": "2024-10-31"
+    },
+    {
+      "quarter": 1,
+      "metric": "net_income",
+      "period_start": "2024-07-01",
+      "period_end": "2024-09-30",
+      "value": "24667",
+      "unit": "USD_million",
+      "status": "reported",
+      "eligible_as_observed": true,
+      "fact_ids": [
+        "msft-fy25-q1-quarter-net_income"
+      ],
+      "formula": "msft-fy25-q1-quarter-net_income",
+      "checks": [
+        "not_applicable_first_quarter"
+      ],
+      "available_from": "2024-10-31"
+    },
+    {
+      "quarter": 2,
+      "metric": "cfo",
+      "period_start": "2024-10-01",
+      "period_end": "2024-12-31",
+      "value": "22291",
+      "unit": "USD_million",
+      "status": "reported",
+      "eligible_as_observed": true,
+      "fact_ids": [
+        "msft-fy25-q2-quarter-cfo",
+        "msft-fy25-q2-ytd-cfo",
+        "msft-fy25-q1-quarter-cfo"
+      ],
+      "formula": "msft-fy25-q2-quarter-cfo",
+      "checks": [
+        "cumulative_difference_matches"
+      ],
+      "available_from": "2025-01-30"
+    },
+    {
+      "quarter": 2,
+      "metric": "capex",
+      "period_start": "2024-10-01",
+      "period_end": "2024-12-31",
+      "value": "15804",
+      "unit": "USD_million",
+      "status": "reported",
+      "eligible_as_observed": true,
+      "fact_ids": [
+        "msft-fy25-q2-quarter-capex",
+        "msft-fy25-q2-ytd-capex",
+        "msft-fy25-q1-quarter-capex"
+      ],
+      "formula": "msft-fy25-q2-quarter-capex",
+      "checks": [
+        "cumulative_difference_matches"
+      ],
+      "available_from": "2025-01-30"
+    },
+    {
+      "quarter": 2,
+      "metric": "net_income",
+      "period_start": "2024-10-01",
+      "period_end": "2024-12-31",
+      "value": "24108",
+      "unit": "USD_million",
+      "status": "reported",
+      "eligible_as_observed": true,
+      "fact_ids": [
+        "msft-fy25-q2-quarter-net_income",
+        "msft-fy25-q2-ytd-net_income",
+        "msft-fy25-q1-quarter-net_income"
+      ],
+      "formula": "msft-fy25-q2-quarter-net_income",
+      "checks": [
+        "cumulative_difference_matches"
+      ],
+      "available_from": "2025-01-30"
+    },
+    {
+      "quarter": 3,
+      "metric": "cfo",
+      "period_start": "2025-01-01",
+      "period_end": "2025-03-31",
+      "value": "37044",
+      "unit": "USD_million",
+      "status": "reported",
+      "eligible_as_observed": true,
+      "fact_ids": [
+        "msft-fy25-q3-quarter-cfo",
+        "msft-fy25-q3-ytd-cfo",
+        "msft-fy25-q2-ytd-cfo"
+      ],
+      "formula": "msft-fy25-q3-quarter-cfo",
+      "checks": [
+        "cumulative_difference_matches"
+      ],
+      "available_from": "2025-05-01"
+    },
+    {
+      "quarter": 3,
+      "metric": "capex",
+      "period_start": "2025-01-01",
+      "period_end": "2025-03-31",
+      "value": "16745",
+      "unit": "USD_million",
+      "status": "reported",
+      "eligible_as_observed": true,
+      "fact_ids": [
+        "msft-fy25-q3-quarter-capex",
+        "msft-fy25-q3-ytd-capex",
+        "msft-fy25-q2-ytd-capex"
+      ],
+      "formula": "msft-fy25-q3-quarter-capex",
+      "checks": [
+        "cumulative_difference_matches"
+      ],
+      "available_from": "2025-05-01"
+    },
+    {
+      "quarter": 3,
+      "metric": "net_income",
+      "period_start": "2025-01-01",
+      "period_end": "2025-03-31",
+      "value": "25824",
+      "unit": "USD_million",
+      "status": "reported",
+      "eligible_as_observed": true,
+      "fact_ids": [
+        "msft-fy25-q3-quarter-net_income",
+        "msft-fy25-q3-ytd-net_income",
+        "msft-fy25-q2-ytd-net_income"
+      ],
+      "formula": "msft-fy25-q3-quarter-net_income",
+      "checks": [
+        "cumulative_difference_matches"
+      ],
+      "available_from": "2025-05-01"
+    },
+    {
+      "quarter": 4,
+      "metric": "cfo",
+      "period_start": "2025-04-01",
+      "period_end": "2025-06-30",
+      "value": "42647",
+      "unit": "USD_million",
+      "status": "derived_requires_review",
+      "eligible_as_observed": false,
+      "fact_ids": [
+        "msft-fy25-q4-ytd-cfo",
+        "msft-fy25-q3-ytd-cfo"
+      ],
+      "formula": "msft-fy25-q4-ytd-cfo - msft-fy25-q3-ytd-cfo",
+      "checks": [
+        "cross_disclosure_restatement_review_required"
+      ],
+      "available_from": "2025-07-31"
+    },
+    {
+      "quarter": 4,
+      "metric": "capex",
+      "period_start": "2025-04-01",
+      "period_end": "2025-06-30",
+      "value": "17079",
+      "unit": "USD_million",
+      "status": "derived_requires_review",
+      "eligible_as_observed": false,
+      "fact_ids": [
+        "msft-fy25-q4-ytd-capex",
+        "msft-fy25-q3-ytd-capex"
+      ],
+      "formula": "msft-fy25-q4-ytd-capex - msft-fy25-q3-ytd-capex",
+      "checks": [
+        "cross_disclosure_restatement_review_required"
+      ],
+      "available_from": "2025-07-31"
+    },
+    {
+      "quarter": 4,
+      "metric": "net_income",
+      "period_start": "2025-04-01",
+      "period_end": "2025-06-30",
+      "value": "27233",
+      "unit": "USD_million",
+      "status": "derived_requires_review",
+      "eligible_as_observed": false,
+      "fact_ids": [
+        "msft-fy25-q4-ytd-net_income",
+        "msft-fy25-q3-ytd-net_income"
+      ],
+      "formula": "msft-fy25-q4-ytd-net_income - msft-fy25-q3-ytd-net_income",
+      "checks": [
+        "cross_disclosure_restatement_review_required"
+      ],
+      "available_from": "2025-07-31"
+    }
+  ],
+  "evidence": {
+    "facts": [
+      {
+        "id": "msft-fy25-q1-quarter-net_income",
+        "metric": "net_income",
+        "label": "净利润",
+        "value": "24667",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2024-09-30",
+        "source_id": "msft-fy25-q1-cash-flows",
+        "locator": "us-gaap:NetIncomeLoss / Three Months Ended September 30, / 2024",
+        "raw_value": "$ 24,667",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q1-quarter-cfo",
+        "metric": "cfo",
+        "label": "经营活动现金流",
+        "value": "34180",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2024-09-30",
+        "source_id": "msft-fy25-q1-cash-flows",
+        "locator": "us-gaap:NetCashProvidedByUsedInOperatingActivities / Three Months Ended September 30, / 2024",
+        "raw_value": "34,180",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q1-quarter-capex",
+        "metric": "capex",
+        "label": "固定资产购建现金流出",
+        "value": "14923",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2024-09-30",
+        "source_id": "msft-fy25-q1-cash-flows",
+        "locator": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment / Three Months Ended September 30, / 2024",
+        "raw_value": "(14,923)",
+        "transformation": "absolute_cash_outflow",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q2-quarter-net_income",
+        "metric": "net_income",
+        "label": "净利润",
+        "value": "24108",
+        "unit": "USD_million",
+        "period_start": "2024-10-01",
+        "period_end": "2024-12-31",
+        "source_id": "msft-fy25-q2-cash-flows",
+        "locator": "us-gaap:NetIncomeLoss / Three Months Ended December 31, / 2024",
+        "raw_value": "$ 24,108",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q2-ytd-net_income",
+        "metric": "net_income",
+        "label": "净利润",
+        "value": "48775",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2024-12-31",
+        "source_id": "msft-fy25-q2-cash-flows",
+        "locator": "us-gaap:NetIncomeLoss / Six Months Ended December 31, / 2024",
+        "raw_value": "$ 48,775",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q2-quarter-cfo",
+        "metric": "cfo",
+        "label": "经营活动现金流",
+        "value": "22291",
+        "unit": "USD_million",
+        "period_start": "2024-10-01",
+        "period_end": "2024-12-31",
+        "source_id": "msft-fy25-q2-cash-flows",
+        "locator": "us-gaap:NetCashProvidedByUsedInOperatingActivities / Three Months Ended December 31, / 2024",
+        "raw_value": "22,291",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q2-ytd-cfo",
+        "metric": "cfo",
+        "label": "经营活动现金流",
+        "value": "56471",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2024-12-31",
+        "source_id": "msft-fy25-q2-cash-flows",
+        "locator": "us-gaap:NetCashProvidedByUsedInOperatingActivities / Six Months Ended December 31, / 2024",
+        "raw_value": "56,471",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q2-quarter-capex",
+        "metric": "capex",
+        "label": "固定资产购建现金流出",
+        "value": "15804",
+        "unit": "USD_million",
+        "period_start": "2024-10-01",
+        "period_end": "2024-12-31",
+        "source_id": "msft-fy25-q2-cash-flows",
+        "locator": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment / Three Months Ended December 31, / 2024",
+        "raw_value": "(15,804)",
+        "transformation": "absolute_cash_outflow",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q2-ytd-capex",
+        "metric": "capex",
+        "label": "固定资产购建现金流出",
+        "value": "30727",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2024-12-31",
+        "source_id": "msft-fy25-q2-cash-flows",
+        "locator": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment / Six Months Ended December 31, / 2024",
+        "raw_value": "(30,727)",
+        "transformation": "absolute_cash_outflow",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q3-quarter-net_income",
+        "metric": "net_income",
+        "label": "净利润",
+        "value": "25824",
+        "unit": "USD_million",
+        "period_start": "2025-01-01",
+        "period_end": "2025-03-31",
+        "source_id": "msft-fy25-q3-cash-flows",
+        "locator": "us-gaap:NetIncomeLoss / Three Months Ended March 31, / 2025",
+        "raw_value": "$ 25,824",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q3-ytd-net_income",
+        "metric": "net_income",
+        "label": "净利润",
+        "value": "74599",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-03-31",
+        "source_id": "msft-fy25-q3-cash-flows",
+        "locator": "us-gaap:NetIncomeLoss / Nine Months Ended March 31, / 2025",
+        "raw_value": "$ 74,599",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q3-quarter-cfo",
+        "metric": "cfo",
+        "label": "经营活动现金流",
+        "value": "37044",
+        "unit": "USD_million",
+        "period_start": "2025-01-01",
+        "period_end": "2025-03-31",
+        "source_id": "msft-fy25-q3-cash-flows",
+        "locator": "us-gaap:NetCashProvidedByUsedInOperatingActivities / Three Months Ended March 31, / 2025",
+        "raw_value": "37,044",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q3-ytd-cfo",
+        "metric": "cfo",
+        "label": "经营活动现金流",
+        "value": "93515",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-03-31",
+        "source_id": "msft-fy25-q3-cash-flows",
+        "locator": "us-gaap:NetCashProvidedByUsedInOperatingActivities / Nine Months Ended March 31, / 2025",
+        "raw_value": "93,515",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q3-quarter-capex",
+        "metric": "capex",
+        "label": "固定资产购建现金流出",
+        "value": "16745",
+        "unit": "USD_million",
+        "period_start": "2025-01-01",
+        "period_end": "2025-03-31",
+        "source_id": "msft-fy25-q3-cash-flows",
+        "locator": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment / Three Months Ended March 31, / 2025",
+        "raw_value": "(16,745)",
+        "transformation": "absolute_cash_outflow",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q3-ytd-capex",
+        "metric": "capex",
+        "label": "固定资产购建现金流出",
+        "value": "47472",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-03-31",
+        "source_id": "msft-fy25-q3-cash-flows",
+        "locator": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment / Nine Months Ended March 31, / 2025",
+        "raw_value": "(47,472)",
+        "transformation": "absolute_cash_outflow",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q4-ytd-net_income",
+        "metric": "net_income",
+        "label": "净利润",
+        "value": "101832",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-q4-cash-flows",
+        "locator": "us-gaap:NetIncomeLoss / Year Ended June 30, / 2025",
+        "raw_value": "$ 101,832",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q4-ytd-cfo",
+        "metric": "cfo",
+        "label": "经营活动现金流",
+        "value": "136162",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-q4-cash-flows",
+        "locator": "us-gaap:NetCashProvidedByUsedInOperatingActivities / Year Ended June 30, / 2025",
+        "raw_value": "136,162",
+        "transformation": "displayed_magnitude",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      },
+      {
+        "id": "msft-fy25-q4-ytd-capex",
+        "metric": "capex",
+        "label": "固定资产购建现金流出",
+        "value": "64551",
+        "unit": "USD_million",
+        "period_start": "2024-07-01",
+        "period_end": "2025-06-30",
+        "source_id": "msft-fy25-q4-cash-flows",
+        "locator": "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment / Year Ended June 30, / 2025",
+        "raw_value": "(64,551)",
+        "transformation": "absolute_cash_outflow",
+        "observation_kind": "reported",
+        "basis_id": "us_gaap_consolidated"
+      }
+    ],
+    "sources": [
+      {
+        "id": "msft-fy25-q1-cash-flows",
+        "title": "Microsoft FY2025 Q1 cash flows",
+        "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q1/cash-flows",
+        "published_at": "2024-10-30",
+        "sha256": "8c694a4ac62606970df456bedef420f34585e98f444f29e6352301a7af642103",
+        "retrieved_at": "2026-10-25T03:53:35.149433Z"
+      },
+      {
+        "id": "msft-fy25-q2-cash-flows",
+        "title": "Microsoft FY2025 Q2 cash flows",
+        "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q2/cash-flows",
+        "published_at": "2025-01-29",
+        "sha256": "a43791673899f2b444a5dbb00bff8ce97f35f2f2e1f48f13e9062fd7e6638366",
+        "retrieved_at": "2026-10-25T03:53:38.048953Z"
+      },
+      {
+        "id": "msft-fy25-q3-cash-flows",
+        "title": "Microsoft FY2025 Q3 cash flows",
+        "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q3/cash-flows",
+        "published_at": "2025-04-30",
+        "sha256": "60cf1bf6d143e78d1d327719b0a0a78cb45879dc6f2e7f67716f81f1d83c94f3",
+        "retrieved_at": "2026-10-25T03:53:40.551758Z"
+      },
+      {
+        "id": "msft-fy25-q4-cash-flows",
+        "title": "Microsoft FY2025 Q4 cash flows",
+        "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q4/cash-flows",
+        "published_at": "2025-07-30",
+        "sha256": "2a42d7a8c21586c29c7d3c2ff59d028464db1d4820ec048a4ace119a060f84e7",
+        "retrieved_at": "2026-10-25T03:53:43.242099Z"
+      }
+    ]
+  },
+  "usable_for_prediction_training": false,
+  "limitations": [
+    "Current website captures do not establish historical vintage integrity.",
+    "Derived values need restatement and scope review; no automatic approval.",
+    "Single fiscal year and issuer; no outcome labels or model evaluation.",
+    "No estimates or missing-value imputation; no 52/53-week calendar support."
+  ]
+}

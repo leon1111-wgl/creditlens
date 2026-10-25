@@ -3,7 +3,7 @@
   "timezone": "Asia/Shanghai",
   "python": "3.12.14",
   "unit_and_api_tests": {
-    "run": 86,
+    "run": 103,
     "failures": 0,
     "errors": 0
   },
@@ -68,7 +68,7 @@
     "after_passed": 15,
     "before_implementation": "03d55b4",
     "after_rule_version": "cash-debt-review-2",
-    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 86 tests; not model accuracy",
+    "scope": "1 official reference and 14 synthetic counterfactuals; included in the 103 tests; not model accuracy",
     "latest_verified_rule_version": "cash-debt-review-3"
   },
   "pdf_evidence": {
@@ -165,5 +165,33 @@
     "ci_conclusion": "success",
     "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
     "scope": "Public repository and profile README; not a hosted application or production deployment."
+  },
+  "quarterly_research": {
+    "date": "2026-10-25",
+    "adapter_version": "msft-fy2025-quarterly-1",
+    "official_disclosures": 4,
+    "reported_flow_facts": 18,
+    "quarterly_output_slots": 12,
+    "directly_reported_quarter_values": 9,
+    "derived_requires_review": 3,
+    "new_tests": 17,
+    "total_tests": 103,
+    "availability_policy": "publication_date_plus_one_calendar_day",
+    "source_type": "current capture of official issuer HTML; not historical archive proof",
+    "raw_materials_published": false,
+    "web_ui_integration": false,
+    "training_ready": false,
+    "model_training_or_forecast_results": "not run",
+    "commands_verified": [
+      "python scripts/build_temporal_pack.py",
+      "python scripts/export_quarters.py --as-of 2025-07-31",
+      "python scripts/export_quarters.py --as-of 2025-01-30 --output .run/january-quarterly.json"
+    ],
+    "reference_output": "artifacts/quarterly-snapshot.json",
+    "scope": "Existing workbench remains v0.4.0; added independent research CLI. No new browser or production acceptance."
+  },
+  "iteration07_publication": {
+    "status": "pending",
+    "previous_ci": "publication.verified_ci_commit refers to the prior v0.4 implementation, not this iteration"
   }
 }

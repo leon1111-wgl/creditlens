@@ -1,0 +1,51 @@
+{
+  "adapter_version": "msft-fy2025-quarterly-1",
+  "pack_sha256": "4599059cdb30bbf62a920dd5d4d2ea9e00e60a8949bcb41d0e981b361163e8a5",
+  "publication_evidence": [
+    {
+      "quarter": 1,
+      "published_at": "2024-10-30",
+      "locator": "REDMOND, Wash. dateline",
+      "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q1/press-release-webcast",
+      "retrieved_at": "2026-10-25T03:53:36.705267+00:00",
+      "sha256": "b7626c1a0d1f7bc7d42250f2c74e5905fad207a68e8f1787b11795ec48b084a9",
+      "bytes": 453547
+    },
+    {
+      "quarter": 2,
+      "published_at": "2025-01-29",
+      "locator": "REDMOND, Wash. dateline",
+      "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q2/press-release-webcast",
+      "retrieved_at": "2026-10-25T03:53:39.293480+00:00",
+      "sha256": "3e988a5588597b2b73a24ba807ba9a6790735d7a48d387bea7462000302e69ab",
+      "bytes": 573064
+    },
+    {
+      "quarter": 3,
+      "published_at": "2025-04-30",
+      "locator": "REDMOND, Wash. dateline",
+      "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q3/press-release-webcast",
+      "retrieved_at": "2026-10-25T03:53:41.755319+00:00",
+      "sha256": "3cc21ed6b34f05a1bd1a143da3c458d93ca18b8ecdaeb856940724e17a3beddf",
+      "bytes": 528549
+    },
+    {
+      "quarter": 4,
+      "published_at": "2025-07-30",
+      "locator": "REDMOND, Wash. dateline",
+      "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q4/press-release-webcast",
+      "retrieved_at": "2026-10-25T03:53:44.467938+00:00",
+      "sha256": "0dd3b8b5b047374178237fac0ef25c4e7e5814439b1fd118bbbdfea186d1138a",
+      "bytes": 533678
+    }
+  ],
+  "source_count": 4,
+  "reported_facts": 18,
+  "license": "Issuer materials retain publisher rights; no blanket redistribution license asserted. Only selected facts and provenance included.",
+  "scope": "Official public FY2025 disclosures; source-specific HTML adapter, not historical-vintage proof or a training dataset.",
+  "limitations": [
+    "Current website capture, not an archive from the disclosure date.",
+    "Prior-year comparison columns deliberately excluded.",
+    "Source statements do not automatically prove cross-release accounting comparability."
+  ]
+}
