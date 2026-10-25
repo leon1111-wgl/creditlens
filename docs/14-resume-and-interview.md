@@ -89,7 +89,7 @@ flowchart LR
 | 检索召回 82.43% | [原始逐题结果](../artifacts/retrieval-baseline.json)、[core.py](../creditlens/core.py) | FinQA dev、页内检索；非问答分数 |
 | 受限模型计划 | [planner.py](../creditlens/planner.py)、[测试](../tests/test_planner.py) | 真实模型效果未测；接口测试用模拟响应 |
 | 独立复核与权限 | [workflow.py](../creditlens/workflow.py)、[API](../creditlens/api.py)、[工作流测试](../tests/test_workflow.py) | 模拟用户与本地演示；无银行生产验收 |
-| 软件测试与 CI | [验收摘要](../artifacts/verification-summary.json)、[v0.7 CI](https://github.com/leon1111-wgl/creditlens/actions/runs/40168483852) | v0.7.1 本地 197 项运行、196 通过、1 项平台权限跳过；15 个控制场景已包含其中；历史 CI 链接对应 v0.7 |
+| 软件测试与 CI | [验收摘要](../artifacts/verification-summary.json)、[v0.7.1 CI](https://github.com/leon1111-wgl/creditlens/actions/runs/40170784484) | 本地及 Linux CI 各 197 项运行、196 通过、1 项跳过；Windows 跳过文件符号链接权限场景，Linux 跳过 Windows Junction；15 个控制场景已包含其中 |
 | 安全复现与证据对照 | [路径保护](../creditlens/experiment_paths.py)、[对照器](../creditlens/reproduction.py)、[真实重跑核验](../artifacts/reproduction-verification.json) | 同一开发材料；公开证据对照与完整 OCR 复算分别记录；不证明新公司泛化 |
 | 可追溯观察因子 | [因子输出](../artifacts/factor-snapshot.json) | 5 个观察指标，没有验证 alpha 或 PD |
 

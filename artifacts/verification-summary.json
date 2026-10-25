@@ -395,8 +395,23 @@
     "local_tests_passed": 196,
     "local_tests_skipped": 1,
     "publication": {
-      "status": "pending",
-      "remote_ci": "pending"
+      "status": "published",
+      "remote_ci": "success",
+      "implementation_commit": "7d8bcd6c0e52f4f9e6e25da25e68790640b1989f",
+      "ci_run_url": "https://github.com/leon1111-wgl/creditlens/actions/runs/40170784484",
+      "remote_tests": {
+        "run": 197,
+        "passed": 196,
+        "skipped": 1,
+        "skip_reason": "Windows Junction test not applicable on Linux; file symlink test executed."
+      },
+      "feature_branches_published": [
+        "feature/document-ai-words",
+        "feature/visual-robustness"
+      ],
+      "research_branch_published": "research/advisory",
+      "author_and_committer": "leon1111-wgl <205497500+leon1111-wgl@users.noreply.github.com>",
+      "scope": "Repository publication only; application runs locally."
     }
   }
 }
