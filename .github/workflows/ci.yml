@@ -20,6 +20,7 @@ jobs:
       - run: python scripts/verify_research_export.py artifacts/research-task-demo.json
       - run: python scripts/verify_research_export.py artifacts/research-cash-flow-demo.json
       - run: python scripts/replay_research_scenarios.py
+      - run: python scripts/evaluate_currency_diagnostic.py
       - run: python -m compileall -q creditlens scripts
       - run: python scripts/check_artifacts.py
       - name: Check browser JavaScript syntax

@@ -24,6 +24,7 @@ from .experiments import experiment_view
 from .transfer_store import transfer_snapshot, transfer_image
 from .date_store import date_snapshot
 from .issuer_store import issuer_snapshot, issuer_image
+from .currency_store import currency_snapshot
 from .research_materials import build_material_bundle, MaterialsError
 from .research_task_store import (
     ResearchTaskStore, ResearchTaskCreate, ResearchTaskUpdate, ResearchTaskAction,
@@ -233,6 +234,15 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
             raise HTTPException(503, "Issuer evaluation files are unavailable") from exc
         except (ValueError, KeyError, TypeError) as exc:
             raise HTTPException(409, "Issuer evaluation failed validation") from exc
+
+    @application.get("/api/currency-diagnostic")
+    def currency_records(identity: Actor = Depends(actor)):
+        try:
+            return currency_snapshot(ROOT)
+        except FileNotFoundError as exc:
+            raise HTTPException(503, "Currency diagnostic files are unavailable") from exc
+        except (ValueError, KeyError, TypeError) as exc:
+            raise HTTPException(409, "Currency diagnostic failed validation") from exc
 
     @application.get("/api/issuer-evaluation/{document_id}/pages/{page}.png")
     def issuer_page(document_id: str, page: int,
