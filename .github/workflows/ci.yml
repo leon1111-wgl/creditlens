@@ -38,6 +38,7 @@ jobs:
       - run: python scripts/run_margin_claims.py --verify-saved
       - run: python scripts/replay_reference_review.py
       - run: python scripts/verify_preparation_export.py artifacts/document-preparation-replay.json --attempt-index 2 --check-current
+      - run: python scripts/evaluate_research_queries.py --verify-saved
       - run: python scripts/evaluate_research_acceptance.py
       - run: python scripts/evaluate_company_attribution.py
       - run: python -m compileall -q creditlens scripts
@@ -50,6 +51,7 @@ jobs:
       - run: node scripts/check_row_disambiguation_ui.js
       - run: node scripts/check_row_selection_verification_ui.js
       - run: node scripts/check_research_write_retry_ui.js
+      - run: node scripts/check_research_query_ui.js
       - run: node scripts/check_reference_review_state.js
       - run: node scripts/check_margin_bridge_state.js
       - run: node scripts/check_margin_claim_state.js
