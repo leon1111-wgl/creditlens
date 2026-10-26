@@ -10,6 +10,7 @@ const vm = require('node:vm');
 const crypto = require('node:crypto');
 const root = process.argv[2] ? path.resolve(process.argv[2]) : path.resolve(__dirname, '..');
 const shared = fs.readFileSync(path.join(root, 'creditlens/research-write-intent.js'), 'utf8');
+const journal = fs.readFileSync(path.join(root, 'creditlens/research-write-journal.js'), 'utf8');
 const fixture = name => JSON.parse(fs.readFileSync(path.join(root, 'artifacts', name), 'utf8'));
 const parentExport = fixture('research-task-demo.json');
 const childExport = fixture('explanation-review-demo.json');
@@ -68,14 +69,16 @@ function harness(kind) {
     static createObjectURL(blob){const href='blob:synthetic-'+urls.length;urls.push({href,blob});return href;}
     static revokeObjectURL(){}
   }
-  const context=vm.createContext({document,Node:Element,Blob,URL:LocalURL,URLSearchParams,
+  const storageEntries=new Map();
+  const sessionStorage={getItem:key=>storageEntries.get(key)??null,setItem:(key,value)=>storageEntries.set(key,String(value)),removeItem:key=>storageEntries.delete(key)};
+  const context=vm.createContext({document,Node:Element,Blob,URL:LocalURL,URLSearchParams,TextEncoder,sessionStorage,
     location:{search:''},crypto,structuredClone,Intl,setTimeout:fn=>fn(),
     fetch:(url,options={})=>new Promise((resolve,reject)=>requests.push({url,options,resolve,reject}))});
   const run=code=>vm.runInContext(code,context,{timeout:1000});
-  run(shared);run(source);
+  run(journal);run(shared);run(source);
   const base=record(kind==='research'?parentExport:childExport,kind);
   const p=record(childExport.snapshot.content.evidence.parent_export,'research',7,'reviewed');
-  run("$('role').value='analyst';$('key').value='synthetic-key';session={role:'analyst',user_id:'synthetic-author'};");
+  run("$('role').value='analyst';$('key').value='synthetic-key';session={role:'analyst',user_id:'synthetic-author',tenant_id:'synthetic-tenant'};");
   if(kind==='explanation')run('parent='+JSON.stringify(p)+';');
   run((kind==='research'?'load':'loadReview')+'('+JSON.stringify(base)+');');
   function state(){return JSON.parse(run(`JSON.stringify({pending:writeFlow.pending(),busy,dirty,epoch,
@@ -91,7 +94,7 @@ function harness(kind) {
   const edit=()=>run("$('coverage').value='SYNTHETIC_UNSAVED_CANARY';markDirty();");
   const save=()=>run('run(save)');
   const action=kindAction=>{const isReview=kindAction!=='submit';
-    run(`session={role:'${isReview?'reviewer':'analyst'}',user_id:'synthetic-${isReview?'reviewer':'author'}'};`);
+    run(`session={role:'${isReview?'reviewer':'analyst'}',user_id:'synthetic-${isReview?'reviewer':'author'}',tenant_id:'synthetic-tenant'};`);
     run((kind==='research'?'load':'loadReview')+'('+JSON.stringify(show(1,isReview?'in_review':'draft'))+');');
     run("$('actionNote').value='SYNTHETIC_ACTION_NOTE with complete scope';");
     return run(`run(()=>${kind==='research'?'action':'act'}(${JSON.stringify(kindAction)}))`);};
