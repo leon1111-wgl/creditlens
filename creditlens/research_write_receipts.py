@@ -128,10 +128,13 @@ def remember(db, key, binding, response, current):
         return response
     try:
         _checked_response(response, binding, current)
-        binding_sha, response_sha = _sha(binding), _sha(response)
+        response_json = _json(response)
+        saved_response = json.loads(response_json)
+        binding_sha, response_sha = _sha(binding), _sha(saved_response)
         db.execute("INSERT INTO research_write_receipts VALUES (?,?,?,?,?,?,?)",
-                   (binding["tenant_id"], key, _json(binding), binding_sha, _json(response), response_sha,
+                   (binding["tenant_id"], key, _json(binding), binding_sha, response_json, response_sha,
                     _receipt_sha(binding["tenant_id"], key, binding_sha, response_sha)))
     except (ValueError, TypeError, KeyError, IndexError, UnicodeError, RecursionError, OverflowError, sqlite3.Error):
         _error("write_receipt_storage_failed", 503)
-    return response
+    # Keyed first responses and replays use the same JSON object ordering.
+    return saved_response
