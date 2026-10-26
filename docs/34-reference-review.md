@@ -46,7 +46,7 @@
 
 保存后的旧版本回放会另行重读当前记录；重读失败时明确说明显示的是操作返回版本，并要求读回后继续写入。500、无效JSON及迟到响应的异常路径通过可控脚本验证，未在真实浏览器中注入网络故障。手动两角坐标换算通过页面脚本控制，实际浏览器验证了原页显示与坐标输入。
 
-[模拟复演](../artifacts/reference-review-replay.json) · [界面验收记录](../artifacts/reference-review-ui-verification.json)
+[模拟复演](../artifacts/reference-review-replay.json)
 
 ![模拟观察核对与冻结状态](images/reference-review-desktop.png)
 

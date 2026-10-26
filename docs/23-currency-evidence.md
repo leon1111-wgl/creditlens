@@ -31,7 +31,7 @@ python scripts/verify_currency_raw.py --raw-dir .run/reproductions/issuer-evalua
 
 第一条只新建 .run/reproductions/my-currency-check.json，已有文件会拒绝覆盖。第二条需要原实验留下的四份完整OCR JSON；缺失时明确失败，不自动下载或运行模型。公开仓库的日常页面使用最小证据包，完整OCR与原文仍遵守各自再分发边界。
 
-[诊断结果](../artifacts/currency-diagnostic-report.json) · [完整OCR核验](../artifacts/currency-raw-verification.json) · [浏览器与实际下载](../artifacts/currency-diagnostic-ui-verification.json)
+[诊断结果](../artifacts/currency-diagnostic-report.json) · [完整OCR核验](../artifacts/currency-raw-verification.json)
 
 [桌面详情](images/currency-diagnostic-desktop.png) · [窄屏详情](images/currency-diagnostic-narrow.png)。浏览器实际下载878,461字节，与同次API响应一致，内容可以重新校验；切换访问密钥会清空记录、详情和下载状态。原页查看还可以切换到包含货币符号的完整识别金额框。
 

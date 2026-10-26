@@ -61,6 +61,6 @@ python scripts/verify_research_export.py artifacts/research-task-demo.json
 
 ## 实际验证与限制
 
-材料、存储及HTTP测试覆盖八项注册事实、口径阻断、来源改动、幂等冲突、过期版本、身份与租户隔离、参与者自审、退回重提和旧版导出。浏览器实际完成全部交接步骤，新旧两个下载文件均与对应API响应逐字节一致，且内容哈希可复算。保存结果见[演示导出](../artifacts/research-task-demo.json)、[界面与下载检查](../artifacts/research-task-ui-verification.json)。
+材料、存储及HTTP测试覆盖八项注册事实、口径阻断、来源改动、幂等冲突、过期版本、身份与租户隔离、参与者自审、退回重提和旧版导出。保存结果见[演示导出](../artifacts/research-task-demo.json)。
 
 这是公开样例和模拟身份演示，没有银行用户试用、生产部署或节省工时的实测结论。当前范围仍是一个白名单材料组、八项事实及人工解释；没有通用抽取或自动因果判断。完整横向比较还需要严格同行选择、对齐期间、同口径数据和版本证据；时序与因子实验继续受标签及样本外评估约束。

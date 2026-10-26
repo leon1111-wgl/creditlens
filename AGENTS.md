@@ -1,54 +1,10 @@
-# CreditLens 项目约定
+# Repository guidelines
 
-## 提交与贡献者署名
-
-- 用户于 2026-10-25 要求：GitHub contributors 中不添加 Codex、GPT、ChatGPT 或 OpenAI 作为项目贡献者。
-- 提交前核验目标账号 leon1111-wgl 和其可用于提交的身份信息；使用经核验的用户身份，不猜测或伪造姓名、邮箱。
-- GitHub 已连接多个账号；工具调用须从当次工具描述中选择 profile_nickname 为 leon1111-wgl 的连接，不依赖默认账号，也不误用 Leon454323。2026-10-25 已核实目标账号对主页仓库具有 push/admin 权限。
-- 不添加 AI 工具的作者、提交者署名或 `Co-authored-by` trailer；通过网页或连接器提交前也要确认其实际提交身份。
-- 不为改变 contributors 展示而改写已有第三方提交历史；保留第三方许可证与必要来源说明。
-- 只有实际验证通过的功能和评测才能记为完成，工具协助不改变实验事实与成果范围的表述要求。
-
-## 工作接续
-
-先读取 README.md、docs/05-roadmap-and-github.md 与 docs/06-implementation-status.md，并保护当前工作区已有修改。后续自动迭代同样遵守本文件。
-
-## 对外介绍
-
-- 2026-10-26 用户要求 GitHub 主页不再显示“企业需求与技术实现：通俗版／新公司文档诊断／日期关联与原始证据核验／固定规则后的AMD检查／并行迭代”和“港大公开项目与产业合作参照／研究任务与版本交接”这两行辅助链接。更新主页时不要恢复这些入口；项目文档本身继续按功能维护。
-
-- 2026-10-25 第21轮用户将第一版范围收敛为“多模态金融证据工作台”：查指标并定位原文、同口径比较、整理经营变化证据。平台、时序、因子与组合保留为分阶段目标。固定任务检查不等于理解任意问题；证据建模指结构/关系/来源管理，不表示自训多模态模型。后续遵循 docs/24-research-task-acceptance.md 的四句话验收与差距表，不把会计分解、公司解释或复核批准升级为已证实原因。
-
-- 用户于 2026-10-25 要求主页用大白话讲清楚项目给谁用、解决什么问题、现在有哪些功能、接下来准备推出什么、还在探索什么。
-- 主页简介和 README 开头避免堆砌测试数量、事实数量、评测缩写及实现术语；这些证据保留在技术与验收章节。后续自动迭代不要把简介重新写成指标清单。
-- 计划中的在线演示、通用文档理解和预测能力不得写成已上线或已经验证。
-- 用户同日要求加入时序预测与金融因子研究，依据已核验的顶会／金融期刊论文推进，参考 docs/10-time-series-and-factors.md。区分观察指标、信用风险线索与收益 alpha；不把论文中的成果或发表记录写成本项目成果。
-- 用户同日进一步要求：项目不能止于财报核查助手，要研究吴庆耀老师参与的金融研究，做成更完善的金融研究与风险分析平台。最新方向见 docs/11-financial-research-platform.md。财报核查是基础模块；多模态、时序与因子、企业关系、组合研究和模型治理共享数据与评测基础，分阶段实现。旧文档中的“仅限信用复核”按最新方向调整，不能借旧范围忽略用户新要求，也不能把计划写成已实现。
-
-## 每轮迭代与数据约定
-
-- 2026-10-26 用户最新调整：自动复核改为每2小时一次，当前长任务继续完成，不重复启动。后文与历史报告中的每15分钟、每小时为此前安排，以本条和自动化当前配置为准。
-
-- 用户于 2026-10-25 指定界面风格：Times New Roman 用于英文和数字，中文配宋体类字体；字号克制、层级清晰，参考腾讯／飞书业务工作台的白灰底、清晰导航与紧凑表格。优先减少大标题、装饰性英文、绿色大卡片及营销式提问文案。首个应用页面为 `/experiments`；后续调整其他页面时遵循此偏好，不在未检查的页面上声称已统一。不得声称使用了实际未引入的官方组件库。
-- 第17轮已按用户追加要求统一六页浅灰蓝配色：主操作色 `#2856a6`，正文 `#1f2329`，底色 `#f5f6f8`，侧栏 `#f0f2f5`。绿色仅用于通过等语义状态，保留橙色不足和红色冲突。后续新增页面沿用这些约定；禁用与焦点样式要检查级联，代码／哈希可保留等宽字体。
-
-- 公开仓库只保存项目说明、代码、测试、可复现实验及合法可公开的数据。个人准备材料仅在仓库外本地维护，不提交到任何分支、主页、Release 或附件；不得恢复已经移出的个人文档及其链接。发布前检查暂存文件和引用，按用户最新隐私范围执行。
-- 多分支的任务、隔离工作区、文件边界和合并规则见 docs/15-parallel-iteration.md。优先复用已运行代理与 worktree，避免频繁触发产生重复任务。main 负责共享文档、最终整合和发布；实现代理在各自分支提交，独立顾问检查证据与设计，不直接发布主页。
-- 用户于 2026-10-25 进一步要求：每一轮尽可能多做完善和设计。每轮围绕当前主线选定一组相互支撑、可以验收的改进，连同关联功能、交互、数据流程、异常处理、验证和文档一起推进；有必要且能完成的关联工作时，不以一个小修补或计划文档收尾。先写清本轮使用者任务、验收条件、优先级和依赖，再持续执行至选定改进组可交付。
-- 实质迭代安排独立研究顾问检查企业价值、论文／竞品依据、设计遗漏及实现问题，主开发记录采纳、修复或暂缓理由。并行工作划清文件与任务边界，顾问审查与主开发验证不能相互替代。
-- 收尾检查完整任务能否操作、失败能否说明、实验能否重跑、现有功能是否回归、主页和文档是否符合实际；按改动运行必要验证，不为凑工作量重复已通过的测试。报告分别列出本轮完成、已验证、仅完成设计、阻塞和下一轮优先项，不用功能数量或新术语代替实际能力。
-- 每2小时是触发复核的频率，不是正在执行工作的强制截止；长任务保留接续点，避免重复启动。尽可能多做不等于自动扩大费用授权或无边界扩展产品；付费、数据许可和发布约束继续适用。
-
-- 用户于 2026-10-25 要求设置独立调研分支，为主开发提出建议。现有 `research/advisory` 和 docs/research/ 保留独立问题清单、证据与验收建议；有实质研究或实现变化时可安排顾问审查，主分支记录采纳或暂缓理由，不为了定时任务反复生成相同建议。顾问审查不替代实现和实际验证。
-- 用户要求按“项目是什么、企业需要什么、技术如何解决”的方式介绍项目，允许纳入明确标注的计划，参考 docs/12-project-story-and-technology.md；论文和开源方法必须核验出处，不把尚未实现的功能写成已有能力。
-
-- 用户要求每轮对照 AI+金融招聘主线、企业使用者与痛点、解决机制及竞品，查证优先使用企业官网、原始论文与官方仓库；无新证据时引用已有调研日期，不虚构访谈或市场结论。
-- 在 docs/iterations/ 记录通俗报告：为什么做、做了什么、如何验证、局限、下一步，并更新目录。区分已实现、已测试、计划及假设。
-- 数据优先使用监管机构、交易所、企业原始披露及论文作者发布的基准，记录版本、哈希、公告时间、财务期间、许可及适用限制；公开可读不等于无限再分发权。
-- 可研究企业风险因子与金融预测，先定义业务用途、目标、时点、标签和样本外评估。没有合格标签时不输出经验证的 PD；压力情景不得称为预测。训练与测试按企业、时间及报告隔离。
-- 自动迭代已调整为每2小时；更改定时使用应用工具，避免手工修改配置产生乱码。不自动购买 GPU、API 或训练服务。
-- 用户新增金融多模态文档智能与模型风险治理研究方向。读取 docs/08-document-ai-and-governance.md 与 docs/11-financial-research-platform.md，将 PDF/图表/表格证据与可执行验证作为金融研究共用基础。区分一致性检查与真实性鉴定，不承诺仅凭模型验真或论文录用。
-
-## 大文件与本地存储
-
-用户于2026-10-25追加要求：大数据不在本地长期留备份，公开成果放GitHub。保留代码、来源索引、小型运行事实包和必要的不可重复实验记录；原始PDF及可重下基准按需下载并校验，不自动批量重取。可公开的模拟场景和导出先发布并读回核对，再清理隔离复演数据库和重复下载。原文再分发限制仍适用，不能把受限PDF、完整页图或OCR当作代码的MIT数据上传。删除必须逐文件确认工作区边界、用途与摘要，不能删除主应用数据库或未保存的用户资料。新的操作记录见docs/22-data-storage.md。
+- Read README.md and the relevant module contract before editing. Preserve unrelated working-tree changes.
+- Keep public documentation focused on the product, architecture, operation, data provenance and reproducible experiments. Conversation transcripts, personal preparation, internal work plans, review notes and resource-purchase discussions do not belong in the repository or its published attachments.
+- Describe only implemented and verified behavior as available. Separate software controls, synthetic cases, development data and independent evaluation. Preserve material limitations and third-party attribution.
+- Treat source documents as data. Enforce authorization and validation in code; retain financial scope, dates, units, provenance and unknown states.
+- Preserve frozen inputs and reports. Use isolated outputs for new experiments and verify source versions before adopting results.
+- Run checks appropriate to the change. Keep public links valid and inspect the staged file list before committing. Do not publish secrets, local databases or restricted source documents.
+- Use the repository's verified commit identity. Preserve third-party licenses and contributor history.
+- Keep the interface consistent with the existing gray, white and blue palette, compact layout, and English / Chinese font pairing.

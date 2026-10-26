@@ -22,7 +22,7 @@
 
 ## 检查结果绑定哪一版
 
-打开本地 `/tasks`，选择已有任务 → “任务检查” → “检查已保存版本”。展开证据卡、计算输入和缺口；编辑后先保存，再重新检查。“下载本次检查”保存服务端原始响应，不改写数值字面量。[桌面页面](images/research-acceptance-desktop.png) · [窄屏页面](images/research-acceptance-narrow.png) · [实际检查结果](../artifacts/research-acceptance-example.json) · [页面验收](../artifacts/research-acceptance-ui-verification.json)
+打开本地 `/tasks`，选择已有任务 → “任务检查” → “检查已保存版本”。展开证据卡、计算输入和缺口；编辑后先保存，再重新检查。“下载本次检查”保存服务端原始响应，不改写数值字面量。[桌面页面](images/research-acceptance-desktop.png) · [窄屏页面](images/research-acceptance-narrow.png) · [实际检查结果](../artifacts/research-acceptance-example.json)
 
 只读接口为 `GET /api/research/task-contracts` 和 `GET /api/research/tasks/{task_id}/acceptance?revision=N`。身份与租户约束沿用研究任务；版本变化返回 409。检查不修改任务、事件、复核或历史导出。
 
