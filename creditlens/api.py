@@ -2,6 +2,7 @@
 from __future__ import annotations
 from contextlib import asynccontextmanager
 from datetime import date
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -424,13 +425,18 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
             raise HTTPException(409, str(exc)) from exc
 
     @application.get("/api/documents/{document_id}/pages/{page}.png")
-    def document_image(document_id: str, page: int, identity: Actor = Depends(actor)):
+    def document_image(document_id: str, page: int,
+                       expected_sha256: str = Query(pattern=r"^[0-9a-f]{64}$"),
+                       identity: Actor = Depends(actor)):
         try:
-            return Response(VisualStore(ROOT).image(document_id, page), media_type="image/png")
+            raw = VisualStore(ROOT).image(document_id, page)
+            if hashlib.sha256(raw).hexdigest() != expected_sha256:
+                raise VisualArtifactError("Preview no longer matches the requested report; reload document evidence")
+            return Response(raw, media_type="image/png", headers={"Cache-Control": "no-store"})
         except FileNotFoundError as exc:
-            raise HTTPException(404, str(exc)) from exc
-        except VisualArtifactError as exc:
-            raise HTTPException(409, str(exc)) from exc
+            raise HTTPException(404, "Registered document image is unavailable") from exc
+        except (VisualArtifactError, OSError) as exc:
+            raise HTTPException(409, "Document image could not be verified against the requested report") from exc
 
     @application.get("/api/research/quarters")
     def research_quarters(identity: Actor = Depends(actor), as_of: date = date(2025, 7, 31),

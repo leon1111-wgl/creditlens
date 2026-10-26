@@ -232,16 +232,17 @@ class VisualStorageTests(unittest.TestCase):
         with patch("creditlens.api.ROOT", self.root), TestClient(create_app(self.root/"missing.json", self.root/"audit.sqlite",
                                                auth_mode="api_key", principals=principals)) as client:
             headers={"Authorization":"Bearer test-key"}
-            for route in ("/api/documents", "/api/documents/msft/pages/50.png"):
+            query="?expected_sha256="+hashlib.sha256(self.raw).hexdigest()
+            for route in ("/api/documents", "/api/documents/msft/pages/50.png"+query):
                 self.assertEqual(client.get(route).status_code, 401)
                 self.assertEqual(client.get(route, headers={"X-Demo-Role":"viewer"}).status_code, 401)
                 self.assertEqual(client.get(route, headers=headers).status_code, 200)
-            response=client.get("/api/documents/msft/pages/50.png",headers=headers)
+            response=client.get("/api/documents/msft/pages/50.png"+query,headers=headers)
             self.assertEqual(response.headers["content-type"],"image/png")
             self.assertEqual(response.headers["Cache-Control"],"no-store")
-            self.assertEqual(client.get("/api/documents/msft/pages/51.png",headers=headers).status_code,404)
+            self.assertEqual(client.get("/api/documents/msft/pages/51.png"+query,headers=headers).status_code,404)
             self.image_path.write_bytes(self.raw+b"changed")
-            self.assertEqual(client.get("/api/documents/msft/pages/50.png",headers=headers).status_code,409)
+            self.assertEqual(client.get("/api/documents/msft/pages/50.png"+query,headers=headers).status_code,409)
             self.assertEqual(client.post("/api/documents",headers=headers).status_code,405)
             self.assertEqual(client.get("/api/reviews",headers=headers).json(),[])
 
