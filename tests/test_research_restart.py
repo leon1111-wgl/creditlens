@@ -1,5 +1,6 @@
 """App lifecycle recovery controls, distinct from ordinary in-memory retries."""
 from contextlib import redirect_stdout
+import ast
 from copy import deepcopy
 import io
 import json
@@ -92,12 +93,54 @@ class ResearchRestartTests(unittest.TestCase):
     def test_checkout_source_newlines_do_not_change_replay(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)
-            for relative in replay.IMPLEMENTATION_FILES+replay.SOURCE_FILES:
+            for relative in replay.IMPLEMENTATION_FILES+replay.SOURCE_FILES+(replay.API_PATH,):
                 target=root/relative;target.parent.mkdir(parents=True,exist_ok=True)
                 target.write_bytes((self.root/relative).read_text(encoding="utf8").replace("\r\n","\n").encode())
             for relative in replay.SOURCE_FILES:
                 path=root/relative;path.write_bytes(path.read_bytes().replace(b"\n",b"\r\n"))
             self.assertEqual(replay.validate_replay(root,self.report),self.report)
+
+    def _copy_binding_files(self,root):
+        for relative in replay.IMPLEMENTATION_FILES+replay.SOURCE_FILES+(replay.API_PATH,):
+            path=root/relative;path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_text((self.root/relative).read_text(encoding="utf8"),encoding="utf8",newline="\n")
+
+    def test_unrelated_api_route_does_not_change_binding_or_saved_replay(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);self._copy_binding_files(root)
+            path=root/replay.API_PATH;original=path.read_text(encoding="utf8")
+            extra='    @application.get("/assets/unrelated-static.js")\n    def unrelated_static_route():\n        return "synthetic static route"\n\n'
+            path.write_text(original.replace("    def laboratory():",extra+"    def laboratory():"),encoding="utf8",newline="\n")
+            self.assertEqual(replay.bindings(root),replay.bindings(self.root))
+            self.assertEqual(replay.validate_replay(root,self.report),self.report)
+
+    def test_each_business_handler_change_changes_its_binding_and_refuses_saved_report(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);self._copy_binding_files(root)
+            path=root/replay.API_PATH;original=path.read_text(encoding="utf8")
+            baseline=replay.api_business_routes(root)
+            for name,_,_ in replay.API_TARGETS:
+                node=next(n for n in ast.walk(ast.parse(original)) if isinstance(n,ast.FunctionDef) and n.name==name)
+                lines=original.splitlines(keepends=True)
+                lines.insert(node.body[0].lineno-1,'        synthetic_changed_handler = True\n')
+                path.write_text("".join(lines),encoding="utf8",newline="\n")
+                changed=replay.api_business_routes(root)
+                changed_names=[new["handler"] for old,new in zip(baseline["targets"],changed["targets"]) if old!=new]
+                self.assertEqual(changed_names,[name])
+            with self.assertRaisesRegex(ValueError,"replay differs"):
+                replay.validate_replay(root,self.report)
+
+    def test_api_target_missing_duplicated_or_route_reassigned_fails_closed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);path=root/replay.API_PATH;path.parent.mkdir(parents=True)
+            original=(self.root/replay.API_PATH).read_text(encoding="utf8")
+            variants=[original.replace("def update_research_task(","def removed_handler("),
+                original.replace("    def laboratory():","    def update_research_task():\n        pass\n\n    def laboratory():"),
+                original.replace('@application.patch("/api/research/tasks/{task_id}")','@application.patch("/api/research/tasks/{other_id}")'),
+                original.replace("    def laboratory():",'    @application.patch("/api/research/tasks/{task_id}")\n    def conflicting_route():\n        pass\n\n    def laboratory():')]
+            for source in variants:
+                path.write_text(source,encoding="utf8",newline="\n")
+                with self.assertRaises(ValueError):replay.api_business_routes(root)
 
     def test_source_bindings_change_during_run_fails_closed(self):
         before=replay.bindings(self.root);after=deepcopy(before)

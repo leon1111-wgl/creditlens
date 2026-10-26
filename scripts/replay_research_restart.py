@@ -6,6 +6,7 @@ network interruption, backup restore or asynchronous worker recovery.
 from __future__ import annotations
 
 import argparse
+import ast
 from copy import deepcopy
 from hashlib import sha256
 import json
@@ -13,6 +14,7 @@ from pathlib import Path
 import sqlite3
 import sys
 import tempfile
+import textwrap
 import uuid
 from unittest.mock import patch
 
@@ -30,7 +32,14 @@ REPORT="artifacts/research-restart-report.json"
 NOTE="Synthetic restart validation; financial explanations remain independently unverified."
 SOURCE_FILES=("data/examples/msft-fy2025-pdf.json","data/examples/aapl-fy2025-pdf.json",
     "data/research/cash-flow-bridge-v1.json","data/sources/company-attributions.json")
-IMPLEMENTATION_FILES=("creditlens/api.py","creditlens/workflow.py","creditlens/research_task_store.py",
+API_PATH="creditlens/api.py"
+API_TARGETS=(
+    ("update_research_task","patch","/api/research/tasks/{task_id}"),
+    ("research_task_action","post","/api/research/tasks/{task_id}/actions"),
+    ("update_explanation_review","patch","/api/research/explanation-reviews/{review_id}"),
+    ("act_explanation_review","post","/api/research/explanation-reviews/{review_id}/actions"),
+)
+IMPLEMENTATION_FILES=("creditlens/workflow.py","creditlens/research_task_store.py",
     "creditlens/explanation_review_store.py","creditlens/research_write_receipts.py","creditlens/explanation_evidence.py",
     "creditlens/research_acceptance.py","creditlens/research_materials.py","creditlens/company_attribution.py",
     "creditlens/cash_flow_bridge.py","creditlens/cash_flow_sources.py","creditlens/diligence.py",
@@ -44,9 +53,48 @@ def file_hash(path):
     return sha256(Path(path).read_text(encoding="utf8").replace("\r\n","\n").replace("\r","\n").encode()).hexdigest()
 
 
+def api_business_routes(root):
+    """Pin exactly four named handlers, including signatures and decorators.
+
+    AST establishes identity/uniqueness; hashes use dedented LF source segments
+    so unrelated route insertions and Python AST formatting do not change them.
+    """
+    source=(Path(root)/API_PATH).read_text(encoding="utf8").replace("\r\n","\n").replace("\r","\n")
+    try:tree=ast.parse(source)
+    except SyntaxError as exc:raise ValueError("API source cannot be parsed") from exc
+    functions=(ast.FunctionDef,ast.AsyncFunctionDef)
+    factories=[n for n in tree.body if isinstance(n,functions) and n.name=="create_app"]
+    if len(factories)!=1:raise ValueError("Expected exactly one create_app declaration")
+    nested=[n for n in factories[0].body if isinstance(n,functions)]
+    all_functions=[n for n in ast.walk(tree) if isinstance(n,functions)]
+    def routes(node):
+        found=[]
+        for d in node.decorator_list:
+            if (isinstance(d,ast.Call) and isinstance(d.func,ast.Attribute)
+                    and isinstance(d.func.value,ast.Name) and d.func.value.id=="application"
+                    and d.args and isinstance(d.args[0],ast.Constant) and type(d.args[0].value) is str):
+                found.append((d.func.attr,d.args[0].value))
+        return found
+    lines=source.splitlines(keepends=True);result=[]
+    for name,method,path in API_TARGETS:
+        matches=[n for n in nested if n.name==name]
+        if len(matches)!=1 or sum(n.name==name for n in all_functions)!=1:
+            raise ValueError("API business handler missing or duplicated")
+        node=matches[0]
+        if routes(node).count((method,path))!=1 or sum(routes(n).count((method,path)) for n in nested)!=1:
+            raise ValueError("API business route declaration changed or duplicated")
+        first=min([node.lineno]+[d.lineno for d in node.decorator_list])-1
+        segment=textwrap.dedent("".join(lines[first:node.end_lineno]))
+        result.append({"handler":name,"factory":"create_app","method":method.upper(),"path":path,
+            "source_sha256":sha256(segment.encode("utf8")).hexdigest()})
+    return {"source_file":API_PATH,"targets":result}
+
+
 def bindings(root):
     return {"implementation_hash_basis":"python_utf8_lf","source_file_hash_basis":"utf8_lf",
             "implementation_sha256":{p:file_hash(root/p) for p in IMPLEMENTATION_FILES},
+            "api_business_route_hash_basis":"python_utf8_lf_dedented_function_with_signature_and_decorators",
+            "api_business_routes":api_business_routes(root),
             "source_file_sha256":{p:file_hash(root/p) for p in SOURCE_FILES}}
 
 
@@ -309,6 +357,7 @@ def build_replay(root:Path)->dict:
         "limitations":["新建应用和Store实例并重新打开SQLite连接，同一Python进程内完成；不等于操作系统或机器崩溃测试。",
             "成功回执保存于业务事务；未提交事务可以回滚，不代表此前请求已经受理。",
             "重放回执可能属于旧版本，必须与当前GET区分；本脚本不验证浏览器刷新逻辑。",
+            "API源码摘要只绑定四个写入处理器及其签名和路由声明；不声称冻结其他路由或整个应用源码。",
             "来源漂移仅改写临时复制的小型JSON；未改官方原文、主数据库或冻结报告。",
             "全部身份和故障均为合成软件控制，不是客户效果、金融准确率或独立人工标注。"],
         "automatic_approval":False}
