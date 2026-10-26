@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "application_version": "0.32.0",
+  "scope": "Actual local browser using saved development records; no new OCR, model call or independent human gold.",
+  "checks": {
+    "automatic_msft_revenue_2025": "281724 * 1000000 = 281724000000",
+    "ambiguous_aapl_term_debt": "not_selected; no expansion",
+    "explicit_aapl_term_debt_row_65": "12350 * 1000000 = 12350000000",
+    "identity_change": "clears unit result and disables export"
+  },
+  "download": {
+    "bytes": 2639,
+    "sha256": "52379c6221dddf791e4e953eb2d9eb4a0f4e1ecb45e61ab7d0cc478a7f326b07",
+    "matches_current_api_bytes": true,
+    "report_sha256": "fd68a55be89eb4a428fe39020ba758e8c28091d6f5cf1b682ed3ac85b0679fd0"
+  },
+  "software_validation": {
+    "new_core_tests": 17,
+    "new_experiment_tests": 16,
+    "new_api_tests": 6,
+    "new_page_controls": 62
+  },
+  "compatibility": {
+    "old_files_unchanged": 138,
+    "old_api_responses_unchanged": 19
+  },
+  "wheel": {
+    "filename": "creditlens-0.32.0-py3-none-any.whl",
+    "sha256": "5bbc3c36a2b7e87159a06524be019f2e1e373ddab483f68c6c272655607edff4",
+    "new_modules_and_page_verified": true
+  },
+  "limitations": [
+    "Saved development cases only",
+    "No currency, full financial period or scope confirmation",
+    "No automatic fact adoption or approval"
+  ],
+  "screenshot": "docs/images/unit-applicability-desktop.jpg"
+}
