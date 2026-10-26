@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_valida
 
 from .research_task_store import ResearchTaskStore, _json, _sha
 from .workflow import Actor, require
+from . import research_write_receipts as write_receipts
 
 
 STORE_VERSION = "explanation-review-1"
@@ -285,11 +286,16 @@ class ExplanationReviewStore:
         with self.parent.db() as db:
             return self._view(db, self._load(db, review_id, actor))
 
-    def update(self, review_id: str, actor: Actor, revision: int, decisions: list[dict], coverage_note: str) -> dict:
+    def update(self, review_id: str, actor: Actor, revision: int, decisions: list[dict], coverage_note: str,
+               idempotency_key: str | None = None) -> dict:
         require(actor, "analyst")
         request = _validate(ExplanationReviewUpdate, {"revision": revision, "decisions": decisions, "coverage_note": coverage_note})
         with self.parent.db(write=True) as db:
             data = self._load(db, review_id, actor)
+            binding = write_receipts.bind(idempotency_key, actor, "explanation_review", review_id, "update", request)
+            replayed = write_receipts.replay(db, idempotency_key, binding, data)
+            if replayed is not None:
+                return replayed
             self.parent._revision(data, request["revision"])
             self._editable(data)
             normalized = self._decisions(data, [{**item, "support_scope": SUPPORT_SCOPE} for item in request["decisions"]], request["coverage_note"])
@@ -298,15 +304,23 @@ class ExplanationReviewStore:
             data["revision"] += 1
             self._event(data, actor, "update", "Company-statement decisions and coverage updated; no causal approval")
             self._save(db, data, request["revision"])
-            return self._view(db, data)
+            return write_receipts.remember(db, idempotency_key, binding, self._view(db, data), data)
 
     def act(self, review_id: str, actor: Actor, revision: int, action: str, note: str,
-            snapshot_sha256: str | None = None) -> dict:
+            snapshot_sha256: str | None = None, idempotency_key: str | None = None) -> dict:
         request = _validate(ExplanationReviewAction, {"revision": revision, "action": action, "note": note,
                                                     "snapshot_sha256": snapshot_sha256})
         require(actor, "analyst" if request["action"] == "submit" else "reviewer")
         with self.parent.db(write=True) as db:
             data = self._load(db, review_id, actor)
+            if idempotency_key is not None and request["action"] != "submit":
+                forbidden = set(data["contributors"]) | set(self._parent_contributors(data))
+                if actor.user_id in forbidden:
+                    raise HTTPException(403, "A parent or supplement contributor cannot review this supplement")
+            binding = write_receipts.bind(idempotency_key, actor, "explanation_review", review_id, request["action"], request)
+            replayed = write_receipts.replay(db, idempotency_key, binding, data)
+            if replayed is not None:
+                return replayed
             self.parent._revision(data, request["revision"])
             if request["action"] == "submit":
                 self._editable(data)
@@ -352,7 +366,7 @@ class ExplanationReviewStore:
                 data["status"] = "reviewed" if request["action"] == "approve" else "returned"
             self._event(data, actor, request["action"], request["note"])
             self._save(db, data, request["revision"])
-            return self._view(db, data)
+            return write_receipts.remember(db, idempotency_key, binding, self._view(db, data), data)
 
     def export(self, review_id: str, actor: Actor, snapshot_id: str | None = None) -> dict:
         self.parent._reader(actor)
