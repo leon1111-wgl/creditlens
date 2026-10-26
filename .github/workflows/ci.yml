@@ -33,6 +33,7 @@ jobs:
       - run: python scripts/evaluate_table_lookup.py --verify-saved
       - run: python scripts/evaluate_word_table_lookup.py --verify-saved
       - run: python scripts/evaluate_role_table_lookup.py --verify-saved
+      - run: python scripts/evaluate_unit_applicability.py --verify-saved
       - run: python scripts/evaluate_row_disambiguation.py --verify-saved
       - run: python scripts/verify_row_selection.py --verify-saved
       - run: python scripts/evaluate_margin_bridge.py --verify-saved
@@ -49,6 +50,7 @@ jobs:
       - run: node scripts/check_cross_page_state.js
       - run: node scripts/check_table_lookup_state.js
       - run: node scripts/check_role_table_state.js
+      - run: node scripts/check_unit_applicability_ui.js
       - run: node scripts/check_row_disambiguation_ui.js
       - run: node scripts/check_row_selection_verification_ui.js
       - run: node scripts/check_research_write_retry_ui.js
