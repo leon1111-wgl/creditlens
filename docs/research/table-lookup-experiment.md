@@ -45,7 +45,7 @@
 本地保留六份原 OCR 时：
 
 ```powershell
-python scripts/evaluate_table_lookup.py --ocr-root D:/acl-xwf/creditlens/.run/document-ai --output table-lookup-rerun.json
+python scripts/evaluate_table_lookup.py --ocr-root .run/document-ai --output table-lookup-rerun.json
 ```
 
 未指定 `--ocr-root` 时只读本仓库的 `.run/document-ai`。缺文件或哈希不同则失败，不自行恢复或生成。输出只允许在 `.run/reproductions` 直接新建 JSON；不能覆盖已有文件、公开报告或原始实验。

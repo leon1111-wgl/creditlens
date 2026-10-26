@@ -33,9 +33,9 @@
 - AMD 已观察材料：两页、14 项保存事实，新旧金额规则均为 14 项一致；年份、期间、单位和行标签结果逐项保持原样。这里的一致是与登记参考一致，不是盲测准确率。
 - 固定合成控制：8 个合法情况、30 个应阻断情况，38 个均符合设计预期。旧符号规则曾在其中 12 个负例上判为一致，新守卫已阻断。控制的人工独立金标准数量仍为 0。
 - 初版守卫将两处拆开的 `$` 视为未归属，得到 12 项一致、2 项不足。修订后只允许同一父行内恰好两个完整词、左侧符号不重叠、距离不超过固定邻域、父框包含且全文守恒的明确关系；错币种、远距离、后缀或多余第三词仍不通过。关系成立也不等于事实批准。
-- 独立审查只读使用此前保留的 316 条完整 OCR 父行，对照 35 条公开必要父行；索引映射后，14 项新守卫输出逐字段一致。这是本批保存输入的兼容检查，发布接口只重算公开片段，不冒称每次核验完整 OCR。
+- 完整输入核验只读使用此前保留的 316 条 OCR 父行，对照 35 条公开必要父行；索引映射后，14 项新守卫输出逐字段一致。这是本批保存输入的兼容检查，发布接口只重算公开片段，不冒称每次核验完整 OCR。
 
-结果见[发布报告](../artifacts/evidence-guard-report.json)、[固定控制说明](research/evidence-guard-controls.md)、[独立审查](research/advisory-15.md)及[浏览器与 HTTP 核验](../artifacts/evidence-guard-http-verification.json)。
+结果见[发布报告](../artifacts/evidence-guard-report.json)与[固定控制说明](research/evidence-guard-controls.md)。
 
 ```bash
 python scripts/evaluate_evidence_guard.py --output my-evidence-guard-run.json

@@ -46,7 +46,7 @@ python scripts/evaluate_row_disambiguation.py --verify-saved
 从已有完整OCR重做所有路径并另存新文件；目录缺失会失败，不自动下载：
 
 ```powershell
-python scripts/evaluate_row_disambiguation.py --ocr-root D:/acl-xwf/creditlens/.run/reproductions/document-ai-words --output row-disambiguation-local.json
+python scripts/evaluate_row_disambiguation.py --ocr-root .run/reproductions/document-ai-words --output row-disambiguation-local.json
 ```
 
 输出只允许直接位于 `.run/reproductions` 的新JSON，禁止覆盖已有文件、公开产物和登记预览。若要对某份报告做完整输入复放，可调用 `validate_row_disambiguation_report(root, report, ocr_root=...)`；校验要求整个结果相等，不只是计数相等。
