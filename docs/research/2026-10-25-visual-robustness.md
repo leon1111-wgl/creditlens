@@ -61,7 +61,7 @@ python -m unittest tests.test_visual_robustness -v
 第一条命令刻意把重跑基线报告写到 `.run/`，以保留已冻结的公开基线报告；该报告含时间与耗时字段，覆盖它会改变摘要，鲁棒性脚本会拒绝继续。渲染器版本变化也可能改变 PNG 哈希，应核验原因并另建实验版本，不能无提示地替换冻结输入。Windows 本实验复用主工作区的已准备页图，实际命令为：
 
 ```powershell
-D:/acl-xwf/creditlens/.venv/Scripts/python.exe scripts/evaluate_visual_robustness.py --source-dir D:/acl-xwf/creditlens/.run/document-ai
+python scripts/evaluate_visual_robustness.py --source-dir .run/document-ai
 ```
 
 结果文件的 `config_sha256` 是经过校验和默认值规范化后的配置对象摘要，不是配置文件的原始字节哈希。`source_report_sha256`、事实包与 OCR 摘要同样使用项目的规范化 JSON 摘要；图像、PDF 和权重使用文件字节 SHA-256。

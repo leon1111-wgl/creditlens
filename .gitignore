@@ -33,3 +33,12 @@ artifacts/service-v02.pid
 artifacts/table-lookup-syntax.js
 artifacts/reference-review-syntax.js
 artifacts/margin-syntax.js
+
+# Internal working records are maintained outside this repository.
+/docs/iterations/
+/docs/research/*advisory*.md
+/docs/research/*-hku-*.md
+/docs/research/2026-10-25-enterprise-research-design.md
+/docs/05-roadmap-and-github.md
+/docs/06-implementation-status.md
+/docs/15-parallel-iteration.md

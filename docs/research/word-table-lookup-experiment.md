@@ -48,7 +48,7 @@
 完整本地复演：
 
 ```powershell
-python scripts/evaluate_word_table_lookup.py --ocr-root D:/acl-xwf/creditlens/.run/reproductions/document-ai-words --output word-table-lookup-new.json
+python scripts/evaluate_word_table_lookup.py --ocr-root .run/reproductions/document-ai-words --output word-table-lookup-new.json
 ```
 
 未指定路径时只读取本仓 `.run/reproductions/document-ai-words`，缺文件或哈希不同则停止，不下载或补造。输出只可在 `.run/reproductions` 直接新建JSON，同名文件拒绝覆盖。

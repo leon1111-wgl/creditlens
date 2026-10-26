@@ -59,8 +59,6 @@ python scripts/preflight_document_input.py --input .run/raw-page-input.json --ou
 
 - 25项合成原始输入控制：6项应通过、19项应拒绝，新入口全部符合预期；旧适配器接受了其中11项应拒绝输入。
 - 2项资产控制：当前登记通过，同一PDF换编号的合成重复登记被拒绝。
-- CLI验收执行错误输入、修正重试和同名覆盖拒绝，见[命令行验收](../artifacts/document-input-cli-verification.json)。原始OCR为明确的合成框，未冒充真实模型输出。
-- 浏览器实际载入25行，下载与API响应逐字节一致，身份输入变化后记录清空，见[界面及HTTP验收](../artifacts/document-input-ui-verification.json)。
 
 [固定报告](../artifacts/document-input-checks.json)保留每个输入和失败路径；NaN等特殊值以合成标签编码，不输出非法JSON。报告由发布摘要和完整重算共同验证，不允许只修改计数来伪造通过。以上是软件输入契约的开发控制，独立人工标注题为0，不代表文档问答或模型识别准确率。
 

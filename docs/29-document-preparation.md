@@ -53,6 +53,5 @@ python scripts/replay_document_preparation.py
 默认输出 `.run/reproductions/document-preparation-replay.json`，同名文件不会覆盖。再次运行可指定新的文件名，例如 `--output another-preparation-run.json`。脚本在独立临时数据库里复演三次尝试，重新创建 Store 后读回旧记录，并检查旧导出不变、正文标记未落入数据库和导出。任务编号和时间每次不同，业务判定与检查结果应相同。
 
 - [一次实际复演](../artifacts/document-preparation-replay.json)：缺页 → 坐标损坏 → 准备通过，三次尝试分别保留。
-- [真实浏览器验收记录](../artifacts/document-preparation-ui-verification.json)：完成三次提交、刷新后读回、历史选择、身份清理、只读限制及两次下载；下载文件与相应 HTTP 导出逐字节相同。
 
 准备记录复演未读取原始 PDF 或整页图片，也未运行新模型。SQLite 已提交记录可以在服务对象重建后继续读取；进程中断后的后台任务抢占、自动续跑、索引提交／回滚、文档删除传播仍未实现。登记哈希没有重新对实际 PDF 字节验真。跨页表头继承、表格合并和图表解释需要另设数据与验收，不能由页集完整性检查推导。

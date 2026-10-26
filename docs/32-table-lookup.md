@@ -41,7 +41,7 @@ python scripts/evaluate_table_lookup.py --verify-saved
 python scripts/evaluate_table_lookup.py --ocr-root .run/document-ai --output my-table-lookup-replay.json
 ```
 
-新文件位于`.run/reproductions/`，已有同名文件时拒绝覆盖。没有完整OCR时只能执行保存结果核验，不会自动下载。页面截图见[桌面视图](images/table-lookup-desktop.png)，实际操作与导出校验见[验证记录](../artifacts/table-lookup-ui-verification.json)。
+新文件位于`.run/reproductions/`，已有同名文件时拒绝覆盖。没有完整OCR时只能执行保存结果核验，不会自动下载。页面截图见[桌面视图](images/table-lookup-desktop.png)。
 
 ## 设计依据
 

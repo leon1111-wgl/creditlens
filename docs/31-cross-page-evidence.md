@@ -48,4 +48,4 @@ python -m unittest tests.test_cross_page_evidence tests.test_cross_page_material
 
 852项软件测试运行，850通过、2项既有Windows符号链接权限跳过；固定开发报告22项符合预期（4项登记材料，18项合成控制），独立人工金标准0、模型调用0。另有11项受控UI状态检查，真实浏览器完成正常计算、缺附注与错年度拒算、换身份清理、原页定位及三份下载；下载均与API原响应一致。
 
-[实际界面](images/cross-page-evidence-desktop.png) · [开发控制](../artifacts/cross-page-evidence-checks.json) · [页面验收](../artifacts/cross-page-ui-verification.json)。没有进行窄屏或真实浏览器网络故障注入验收。
+[实际界面](images/cross-page-evidence-desktop.png) · [开发控制](../artifacts/cross-page-evidence-checks.json)。没有进行窄屏或真实浏览器网络故障注入验收。
