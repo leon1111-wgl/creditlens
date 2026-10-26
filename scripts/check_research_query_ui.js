@@ -253,4 +253,3 @@ async function main(){
     scope:'Shipped research HTML and shared write flow; formal query results and registered task content, controlled promises. Not browser, real network, human reference or model evaluation.'},null,2)+'\n');
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});
-
