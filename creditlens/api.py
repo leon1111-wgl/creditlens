@@ -34,6 +34,7 @@ from .table_lookup_routes import install_table_lookup_routes
 from .word_table_routes import install_word_table_routes
 from .role_table_routes import install_role_table_routes
 from .row_disambiguation_routes import install_row_disambiguation_routes
+from .row_selection_verification_routes import install_row_selection_verification_routes
 from .reference_review_store import ReferenceReviewStore
 from .reference_routes import install_reference_routes
 from .margin_routes import install_margin_routes
@@ -139,7 +140,8 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
             if origin and (urlsplit(origin).netloc != request.headers.get("Host")
                            or urlsplit(origin).scheme not in {"http", "https"}):
                 return JSONResponse({"detail": "Cross-origin writes are not allowed"}, status_code=403)
-            if len(await request.body()) > 1_000_000:
+            # This read-only upload authenticates first and streams with its own smaller limit.
+            if request.url.path != '/api/row-selection-verification' and len(await request.body()) > 1_000_000:
                 return JSONResponse({"detail": "Request body too large"}, status_code=413)
         response = await call_next(request)
         response.headers["Cache-Control"] = "no-store"
@@ -156,6 +158,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     install_word_table_routes(application, actor, ROOT)
     install_role_table_routes(application, actor, ROOT)
     install_row_disambiguation_routes(application, actor, ROOT)
+    install_row_selection_verification_routes(application, actor, ROOT)
     install_reference_routes(application, actor, ROOT)
     install_margin_routes(application, actor, ROOT)
     install_margin_claim_routes(application, actor, ROOT)
