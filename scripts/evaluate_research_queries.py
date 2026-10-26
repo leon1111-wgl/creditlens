@@ -106,7 +106,10 @@ def cases():
 def _hashes(root):
     code = {p: sha256((root/p).read_text(encoding="utf8").replace("\r\n", "\n").replace("\r", "\n").encode()).hexdigest()
             for p in IMPLEMENTATION_FILES}
-    sources = {p: sha256((root/p).read_bytes()).hexdigest() for p in SOURCE_FILES}
+    # These are repository-owned UTF-8 JSON files, not downloaded source bytes.
+    # Git checkout line endings must not change an otherwise identical replay.
+    sources = {p: sha256((root/p).read_text(encoding="utf8").replace("\r\n", "\n").replace("\r", "\n").encode()).hexdigest()
+               for p in SOURCE_FILES}
     return code, sources
 
 
@@ -285,7 +288,7 @@ def build_report(root: Path, *, evaluator=None) -> dict:
             channel["checks"]+=1; channel["passed"]+=int(check["passed"]);channel["failed"]+=int(not check["passed"])
     report={"schema_version":1,"experiment_version":VERSION,"cases_sha256":digest(cases()),
         "implementation_sha256":code_hashes,"implementation_hash_basis":"python_utf8_lf",
-        "source_file_sha256":source_hashes,"source_file_hash_basis":"raw_bytes",
+        "source_file_sha256":source_hashes,"source_file_hash_basis":"utf8_lf",
         "bundle_sha256":digest(bundle),"attribution_catalog_sha256":digest(catalog),
         "source_bindings":deepcopy(bundle["source_versions"]),
         "scope":{"protocol":"fixed_explicit_selectors_and_synthetic_workflow_controls",
