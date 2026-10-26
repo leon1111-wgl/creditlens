@@ -45,6 +45,7 @@ jobs:
       - run: python scripts/evaluate_company_attribution.py
       - run: python -m compileall -q creditlens scripts
       - run: python scripts/check_artifacts.py
+      - run: node scripts/check_document_preview_ui.js
       - run: node scripts/check_preparation_write_intent.js
       - run: node scripts/check_preparation_current_view.js
       - run: node scripts/check_cross_page_state.js
