@@ -11,6 +11,11 @@ from creditlens.research_materials import build_material_bundle, ROOT
 
 
 class ResearchAcceptanceApiTests(unittest.TestCase):
+    def write_headers(self, *args, **kwargs):
+        # Preserve the original no-key CAS contract; retry keys have separate tests.
+        return {name: value for name, value in self.headers(*args, **kwargs).items()
+                if name != 'Idempotency-Key'}
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         root = Path(self.temp.name)
@@ -48,7 +53,7 @@ class ResearchAcceptanceApiTests(unittest.TestCase):
 
     def prepare(self):
         task = self.create()
-        r = self.client.patch('/api/research/tasks/'+task['id'], headers=self.headers(), json={
+        r = self.client.patch('/api/research/tasks/'+task['id'], headers=self.write_headers(), json={
             'revision': task['revision'], 'decisions': [
                 {'observation_id': o['id'], 'decision': 'adopted', 'note': '公开材料的模拟采用决定，供软件验收使用。'}
                 for o in task['bundle']['observations']],
@@ -89,11 +94,11 @@ class ResearchAcceptanceApiTests(unittest.TestCase):
     def test_recheck_never_changes_snapshot_or_promotes_hypotheses(self):
         task = self.prepare()
         base = '/api/research/tasks/'+task['id']
-        r = self.client.post(base+'/actions', headers=self.headers(), json={
+        r = self.client.post(base+'/actions', headers=self.write_headers(), json={
             'revision': task['revision'], 'action': 'submit', 'note': '模拟交接，经营原因仍留待补材料。'})
         self.assertEqual(r.status_code, 200, r.text)
         task = r.json()
-        r = self.client.post(base+'/actions', headers=self.headers('reviewer'), json={
+        r = self.client.post(base+'/actions', headers=self.write_headers('reviewer'), json={
             'revision': task['revision'], 'action': 'approve', 'note': '仅确认该底稿范围，不能把会计分解当作因果验证。',
             'snapshot_sha256': task['snapshot_sha256']})
         self.assertEqual(r.status_code, 200, r.text)
@@ -113,7 +118,7 @@ class ResearchAcceptanceApiTests(unittest.TestCase):
     def test_material_drift_fails_closed_without_rewriting_export(self):
         task = self.prepare()
         base = '/api/research/tasks/'+task['id']
-        response = self.client.post(base+'/actions', headers=self.headers(), json={
+        response = self.client.post(base+'/actions', headers=self.write_headers(), json={
             'revision': task['revision'], 'action': 'submit', 'note': '保存旧版底稿后模拟材料登记变化。'})
         self.assertEqual(response.status_code, 200, response.text)
         task = response.json()
