@@ -54,4 +54,4 @@ python scripts/verify_research_export.py artifacts/research-task-demo.json
 
 下一步优先为金额变化关联附注及候选解释，让每个解释标出支持、冲突或缺失的证据；明确完整材料范围后再进行解释评测。文档方面继续处理金额符号与跨页证据，不把已知模板提取扩写成通用多模态理解。
 
-来源、实现和独立检查：[原文提取说明](research/2026-10-25-cash-flow-sources.md)、[计算控制](research/2026-10-25-cash-flow-bridge.md)、[顾问审查](research/2026-10-25-advisory-10.md)、[本轮记录](iterations/2026-10-25-19.md)。
+来源与实现：[原文提取说明](research/2026-10-25-cash-flow-sources.md)、[计算控制](research/2026-10-25-cash-flow-bridge.md)。

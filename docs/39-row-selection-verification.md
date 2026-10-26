@@ -29,4 +29,4 @@
 
 接口在鉴权后读取受限流；只返回固定问题代码和可信字段位置，不回显上传的额外键名或内容。网页把JSON送到当前工作台服务检查；只有本地CLI不需要连接服务。
 
-[核心契约](research/row-selection-verification-contract.md) · [本轮记录](iterations/2026-10-26-36.md)
+[核心契约](research/row-selection-verification-contract.md)
