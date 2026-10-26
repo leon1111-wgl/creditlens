@@ -6,7 +6,7 @@
 
 首个迁移材料是 NVIDIA FY2025 官方年度 PDF，来源为[投资者关系年报列表](https://investor.nvidia.com/financial-info/annual-reports-and-proxies/default.aspx)。这个文件包含年会材料等前置页面，资产负债表是物理第 146 页／印刷第 54 页，现金流量表是物理第 148 页／印刷第 56 页。
 
-底层 10-K 的 SEC 提交日期为 2025-02-26。当前年度 PDF 文件本身的首发日期无法确认，因此分别登记 `underlying_filing_date` 与未知的 `wrapper_publication_date`，不拿抓取日期或 HTTP 修改时间冒充发布时间。往年数字是本年文件中列示的比较值，也不能直接当成当年的历史快照。详细来源、日期和许可核验见[独立顾问记录](research/2026-10-25-advisory-05.md)。
+底层 10-K 的 SEC 提交日期为 2025-02-26。当前年度 PDF 文件本身的首发日期无法确认，因此分别登记 `underlying_filing_date` 与未知的 `wrapper_publication_date`，不拿抓取日期或 HTTP 修改时间冒充发布时间。往年数字是本年文件中列示的比较值，也不能直接当成当年的历史快照。
 
 该参考使用独立数据契约，`point_in_time_eligible=false`，不会自动进入信用案件、季度回放、因子或回测。原 PDF、整页图和完整 OCR 留在本地；未确认原材料具有开放再分发许可证，代码许可不覆盖原披露文件。
 
@@ -16,13 +16,13 @@
 
 首次报告保留在[无效参考运行记录](../artifacts/document-transfer-v1-invalid-report.json)，[尝试台账](../artifacts/document-transfer-attempts.json) 将其标为 `invalid_reference`。其中的冲突／不足数量不能用于评价模型。通用修复根据 PDF 自身的可见边界换算坐标，未按 OCR 输出移动单个框；任何完全或部分裁切的非空白字符、不可读空字符均拒绝构建，避免把缺负号的数字当成正数。
 
-修正后的 v2 复用首次完整 OCR，仅重新评分，以隔离参考变化。模型、核对规则、图像和 OCR 均不变。这批材料已被观察，v2 是诊断实验，不能称为未见材料盲测、模型能力提升或泛化成绩。独立核查见[几何与评测审查](research/2026-10-25-advisory-06.md)。
+修正后的 v2 复用首次完整 OCR，仅重新评分，以隔离参考变化。模型、核对规则、图像和 OCR 均不变。这批材料已被观察，v2 是诊断实验，不能称为未见材料盲测、模型能力提升或泛化成绩。
 
 可见页面左边界为 `L`、上边界为 `T` 时，PDF 字符框 `(left, bottom, right, top)` 转为图片方向的框 `(left-L, T-top, right-L, T-bottom)`。独立核验用 PDFium 渲染后的 `bitmap.get_posconv(page).to_bitmap(x, y)` 对照原始字符框角点，不使用 OCR 来推导偏移。代码见[坐标适配](../creditlens/document.py)，边界检查见[几何回归](../tests/test_document_geometry.py)；当前拒绝旋转、尺寸不一致和边界裁切字符，没有实现一般裁切字符恢复。
 
 ## 如何固定参考和评分
 
-参考来自 PDF 文本层、原页视觉查看和代理间复核，不是两位独立人员的标注。登记两页中的现金、投资、流动资产与负债、长期债务、净利润、经营现金流，以及购建固定资产和无形资产的现金支出。支出口径保留完整标签，不把它当成仅固定资产支出；短债横线不填零，暂不纳入评分。
+参考通过 PDF 文本层与原页图像辅助建立，尚未经独立人工标注确认。登记两页中的现金、投资、流动资产与负债、长期债务、净利润、经营现金流，以及购建固定资产和无形资产的现金支出。支出口径保留完整标签，不把它当成仅固定资产支出；短债横线不填零，暂不纳入评分。
 
 v1 在模型推理前固定参考包、页面、全部事实与字段框、财年期间、图像哈希、模型配置及规则／运行代码指纹。固定 OCR 模型只看无标记完整页图，同次输出分别经过原有行级和字词规则。v2 在重新评分前另行冻结修正参考，并完整保留 v1。所有一致、冲突与不足都保留，不按本次结果改阈值或选择预处理。
 
@@ -39,7 +39,7 @@ python scripts/prepare_transfer_preview.py
 
 第一条命令读取当前冻结配置，只在缺失时获取登记的官方文件。完整输出默认写入 `.run/reproductions/document-transfer/`，候选报告为 `.run/reproductions/document-transfer-report.json`；不会更新发布记录。**已有首次原始输出时，应指定新的 `--local-dir` 和 `--output`，保留旧执行。** 第二条检查候选图片是否与已发布实验摘要一致，全部检查通过才准备本机预览；已有相同图片保留，不替换不同的已有文件。已发布结果在 `/transfer` 页面查看，支持筛选、对比两种方法、查看字段与原页位置、导出同一份记录。载入页面不会启动模型。
 
-本轮实际 v2 采用保存输出的重评分方式，原始 OCR 仍在本地时可运行：
+v2 采用保存输出的重评分方式，原始 OCR 仍在本地时可运行：
 
 ```bash
 python scripts/rescore_document_transfer.py --source-report artifacts/document-transfer-v1-invalid-report.json --source-manifest configs/document-transfer-v1-invalid.json --local-dir .run/transfer-attempts/v1-reference-invalid/raw
@@ -51,7 +51,7 @@ python scripts/rescore_document_transfer.py --source-report artifacts/document-t
 
 ## 怎样理解结果
 
-这一份材料仅用于检查现有规则换发行人后的表现。运行结果见[第 14 轮记录](iterations/2026-10-25-14.md)。共用表头的多个事实不是独立公司样本；结果相同不能证明真实性、预训练未见或行业泛化。查看结果后，这批材料成为已观察样例；后续改进需要新的未参与调参材料检验。
+这一份材料仅用于检查现有规则换发行人后的表现。运行结果保留在[修正参考诊断](../artifacts/document-transfer-report.json)。共用表头的多个事实不是独立公司样本；结果相同不能证明真实性、预训练未见或行业泛化。查看结果后，这批材料成为已观察样例；后续改进需要新的未参与调参材料检验。
 
 跨页表格、图表估读、完整报告找页、真实扫描件、模型问答与预测仍需各自的数据和评分任务，不并入当前一致项统计。
 

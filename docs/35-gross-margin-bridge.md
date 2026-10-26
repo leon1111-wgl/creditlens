@@ -55,6 +55,6 @@ python -m unittest discover -s tests -p "test_margin*.py" -v
 node scripts/check_margin_bridge_state.js
 ```
 
-来源登记：[28 项观察](../data/examples/margin-source-observations.json)。计算与控制：[保存实验](../artifacts/margin-bridge-report.json)。契约：[核心规则](research/margin-bridge-contract.md)；[实验说明](research/margin-bridge-experiment.md)；[独立审查](research/advisory-23.md)。本地复演输出必须写到新的隔离目录，已发布的源与结果不就地覆盖。
+来源登记：[28 项观察](../data/examples/margin-source-observations.json)。计算与控制：[保存实验](../artifacts/margin-bridge-report.json)。契约：[核心规则](research/margin-bridge-contract.md)；[实验说明](research/margin-bridge-experiment.md)。本地复演输出必须写到新的隔离目录，已发布的源与结果不就地覆盖。
 
-本轮实际浏览器与兼容检查见[制作记录](iterations/2026-10-26-32.md)和[验收文件](../artifacts/margin-bridge-ui-verification.json)。[页面截图](images/margin-bridge-desktop.png)。
+[页面截图](images/margin-bridge-desktop.png)。

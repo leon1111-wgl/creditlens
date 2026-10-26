@@ -4,7 +4,7 @@
 
 工作台提供四个固定任务：微软和苹果各自FY2024、FY2025的经营现金流净额占营业收入比例。选择两项金额和一项合并范围依据，检查主体、报告版本、实际期间、币种单位、原值与定位后，用Decimal计算。材料缺失或错配时列出缺口，不把缺数填成零。
 
-这是不同报表的多页证据关联。它没有自动拼接同一张跨页续表，也没有在本轮增加OCR、视觉问答或模型效果结论。
+这是不同报表的多页证据关联。它没有自动拼接同一张跨页续表，也不包含OCR、视觉问答或模型效果评测。
 
 ## 输入、正确标准、错误与恢复
 
@@ -44,8 +44,8 @@ python -m unittest tests.test_cross_page_evidence tests.test_cross_page_material
 
 复演默认写入新的`.run/reproductions/cross-page-evidence-checks.json`，同名结果不覆盖。正常任务与合成错选／异常分别标注，参考答案不是独立人工题；运行结果不能称模型问答准确率。旧实验和研究审批均保持原样。
 
-## 本轮实际验收
+## 固定任务验收
 
 852项软件测试运行，850通过、2项既有Windows符号链接权限跳过；固定开发报告22项符合预期（4项登记材料，18项合成控制），独立人工金标准0、模型调用0。另有11项受控UI状态检查，真实浏览器完成正常计算、缺附注与错年度拒算、换身份清理、原页定位及三份下载；下载均与API原响应一致。
 
-[实际界面](images/cross-page-evidence-desktop.png) · [开发控制](../artifacts/cross-page-evidence-checks.json) · [页面验收](../artifacts/cross-page-ui-verification.json) · [完整制作记录](iterations/2026-10-26-28.md)。没有进行窄屏或真实浏览器网络故障注入验收。
+[实际界面](images/cross-page-evidence-desktop.png) · [开发控制](../artifacts/cross-page-evidence-checks.json)。没有进行窄屏或真实浏览器网络故障注入验收。

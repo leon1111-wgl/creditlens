@@ -25,4 +25,4 @@
 
 `python scripts/evaluate_unit_applicability.py --verify-saved` 重新核对保存报告。读取既有小型来源与已核验提取记录，不重新下载 PDF、不调用 OCR，也不覆盖旧实验。需要生成新结果时使用脚本的独立输出参数；同名输出不覆盖。
 
-当前材料是此前已经用于开发的微软和苹果六页，单位检查次数、不同查询数和显式选择路径分别统计；人工构造的单位反例另列。没有新增独立人工金标准、新公司盲测或模型成绩。完整语法、数据范围与实际验证分别见[核心契约](research/unit-applicability-contract.md)、[实验说明](research/unit-applicability-experiment.md)及[本轮记录](iterations/2026-10-26-40.md)。
+当前材料是此前已经用于开发的微软和苹果六页，单位检查次数、不同查询数和显式选择路径分别统计；人工构造的单位反例另列。没有新增独立人工金标准、新公司盲测或模型成绩。完整语法、数据范围与实际验证见[核心契约](research/unit-applicability-contract.md)和[实验说明](research/unit-applicability-experiment.md)。
