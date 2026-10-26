@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "scope": "Actual desktop browser plus controlled JavaScript responses; no model or human-gold assessment",
+  "version": "0.27.0",
+  "report_sha256": "c71529a8450c0292aba0e418b09a80c843efb9e837bca0e95027c62b68d5aff0",
+  "full_input_replay_matches": true,
+  "tests": {
+    "run": 1184,
+    "passed": 1182,
+    "skipped_windows_symlink_permissions": 2,
+    "new_core": 20,
+    "new_experiment": 18,
+    "new_api": 6
+  },
+  "synthetic_controls": {
+    "passed": 15,
+    "total": 15
+  },
+  "javascript_controls": {
+    "new": 26,
+    "existing_role": 21,
+    "existing_table": 19
+  },
+  "browser": {
+    "same_name_rows_visible": true,
+    "no_default_selection": true,
+    "term_debt_2025_both_paths": true,
+    "marketable_securities_2024_second_path": true,
+    "original_page_loaded": true,
+    "all_row_boxes": 2,
+    "issuer_change_clears": true,
+    "identity_change_clears": true,
+    "reload_works": true,
+    "console_errors": 0,
+    "console_warnings": 0,
+    "narrow_screen_retested": false,
+    "full_keyboard_retested": false,
+    "screenshot": "docs/images/row-disambiguation-desktop.png"
+  },
+  "compatibility": {
+    "files": 126,
+    "api_responses": 10,
+    "unchanged": true
+  },
+  "download": {
+    "bytes": 19909,
+    "sha256": "5cf9b133e2dfa5d15e7ce892680586c8aed6e3e816eb4355e244e53f0f8dd258",
+    "equals_api": true
+  }
+}
