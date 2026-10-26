@@ -56,7 +56,7 @@ CreditLens 给投研和风险团队做三件事：查到财务指标并回到原
 
 新增[按证据用途核对取数](docs/37-role-aware-table-lookup.md)：把行名、年份与单位的整行依据，同金额字词的检查分开；完整保留货币符号，分别显示数字位置和含符号的范围。三种方法并排比较，能够看到恢复的结果、仍然缺少的依据和原始记录。[本轮记录](docs/iterations/2026-10-26-34.md)。
 
-新增[保存与提交恢复](docs/40-research-write-recovery.md)：保存后没有收到结果时，页面保留原请求供重试，确认后载入当前版本，避免重复保存或提交。需要放弃未保存改动时也有明确入口。[实际界面](docs/images/research-write-recovery-desktop.png) · [本轮记录](docs/iterations/2026-10-26-37.md)。
+[保存与提交恢复](docs/40-research-write-recovery.md)：保存后没有收到结果时，本标签页保留原操作，刷新并核对身份后可主动重试；确认后另读当前版本，避免重复写入或覆盖后续更新。损坏记录与清理失败有明确处理入口。[刷新后的界面](docs/images/research-reload-pending.jpg) · [本轮记录](docs/iterations/2026-10-26-39.md)。
 
 新增[按范围查证据](docs/41-explicit-research-queries.md)：明确选择公司、指标和期间后，只查看对应原文、可比性与经营依据。未登记、未采用和跨口径时说明原因，改选后旧结果失效，查询可独立下载。[实际界面](docs/images/research-query-comparison.png) · [本轮记录](docs/iterations/2026-10-26-38.md)。
 

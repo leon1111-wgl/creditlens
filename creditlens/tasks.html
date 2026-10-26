@@ -12,7 +12,7 @@
 </style></head>
 <body><div class="shell"><aside class="sidebar"><a class="brand" href="/">CreditLens</a><p class="caption">金融研究工作台</p><nav class="nav" aria-label="主导航"><a href="/tasks" aria-current="page">研究任务</a><a href="/">信用复核</a><a href="/research">季度研究</a><a href="/cross-page">跨页证据</a><a href="/documents">原页核对</a><a href="/transfer">新公司核对</a><a href="/experiments">文档实验</a><a href="/document-preparation">材料准备</a><a href="/margin">毛利率变化</a></nav><p class="queue-title">本工作区的研究</p><div id="queue" class="queue"></div></aside>
 <div class="workspace"><header class="top"><span>企业研究 / 材料与交接</span><div class="identity"><span id="identityLabel" class="small">正在连接</span><label for="role" id="roleLabel">演示身份</label><select id="role" aria-label="演示身份"><option value="analyst">分析员</option><option value="reviewer">复核员</option><option value="viewer">只读访客</option></select><input id="key" type="password" aria-label="工作区 API key" placeholder="工作区 API key" hidden><button id="connect" hidden>连接</button></div></header>
-<main class="content"><h1>研究任务</h1><p class="intro">把一项研究的问题、材料、数字口径和待查解释放在一起，固定底稿后交给同事复核。</p><div id="modeNotice" class="notice">当前使用微软和苹果的官方历史披露样例。两者不构成严格同行基准；财年口径不同的数字只并列展示，不做高低排名。当前材料不能恢复历史时点。</div><div id="error" class="error" role="alert" hidden></div><div id="status" class="status" role="status" aria-live="polite"></div><section id="writeRecovery" class="notice" hidden aria-live="polite"><p>上次操作尚未确认。原请求保留在当前页面，重试不会再次执行已完成的写入。关闭或刷新页面后，此待确认请求不会保留。</p><button id="retryWrite">重试原操作</button></section><div class="actions"><button id="discardDraft" hidden>放弃本页未保存改动并刷新</button></div>
+<main class="content"><h1>研究任务</h1><p class="intro">把一项研究的问题、材料、数字口径和待查解释放在一起，固定底稿后交给同事复核。</p><div id="modeNotice" class="notice">当前使用微软和苹果的官方历史披露样例。两者不构成严格同行基准；财年口径不同的数字只并列展示，不做高低排名。当前材料不能恢复历史时点。</div><div id="error" class="error" role="alert" hidden></div><div id="status" class="status" role="status" aria-live="polite"></div><p class="small">点击保存或提交后，本标签页暂存原操作及备注，供刷新后核对；确认后清除，不保存 API key。尚未点击保存的改动不会自动保存，关闭标签页后的恢复不作保证。</p><section id="writeRecovery" class="notice" hidden aria-live="polite"><p id="recoveryMessage">上次操作尚未确认。原请求保留在本标签页，刷新后可继续核对；不会自动重试。</p><p id="recoveryMeta" class="small"></p><div class="actions"><button id="refreshRecovery">重新核对待确认操作</button><button id="retryWrite">重试原操作</button></div><details><summary>放弃本地待确认记录</summary><p class="small">清除不会撤销已经完成的服务端操作。请先核对记录；清除后会重新载入已保存版本。</p><label class="small"><input type="checkbox" id="confirmClearJournal"> 我已核对，放弃本标签页的待确认记录和未保存改动</label><div class="actions"><button id="clearJournal" disabled>清除本地记录并重新载入</button></div></details></section><div class="actions"><button id="discardDraft" hidden>放弃本页未保存改动并刷新</button></div>
 <details class="panel" id="creation" open><summary>建立一项研究</summary><div class="creation-body"><div class="fields"><label class="field"><span>研究背景／待研究的问题（自由文字）</span><textarea id="question" maxlength="2000">两家公司各自的经营现金流和固定资产现金支出发生了什么变化，哪些口径需要继续核查？</textarea></label><label class="field"><span>为什么选择这些材料</span><textarea id="selectionReason" maxlength="2000">使用微软与苹果的官方年度披露演示跨公司研究与交接，不将其视为严格同行基准，也不直接按财年标签排名。</textarea></label></div><label class="bridge-option"><input type="checkbox" id="includeBridge" checked> 附上经营现金流拆解（登记资料会计核对）</label><div class="actions"><button class="primary" id="create">从官方材料建立任务</button><button id="refresh">刷新任务列表</button><span class="small">两家公司 · 两期年度 · 经营现金流与固定资产现金支出</span></div></div></details>
 <section id="task" hidden><div class="task-head"><div><h2 id="taskTitle"></h2><p class="meta" id="taskMeta"></p><p class="small" id="selectionText"></p></div><span id="taskStatus" class="tag"></span></div><nav class="tabs" aria-label="研究任务视图"><button data-tab="acceptance">任务检查</button><button data-tab="query">按范围查证据</button><button data-tab="materials" class="active">材料与采用</button><button data-tab="comparison">变化与口径</button><button data-tab="bridge">现金流拆解</button><button data-tab="attribution">公司解释</button><button data-tab="hypotheses">解释与局限</button><button data-tab="handoff">提交与记录</button></nav>
 <section class="panel tab-view" id="acceptance" hidden><h2>这份材料能支持哪些任务</h2><p class="small">检查已登记的现金流与固定资产现金支出，不自动理解上面的自由问题。结果绑定当前保存版本，与底稿复核分开。本检查沿用底稿中的登记材料；“公司解释”页是另行登记、尚未纳入本检查的只读补充。</p><div class="actions"><button id="checkAcceptance" class="primary">检查已保存版本</button><button id="exportAcceptance" disabled>下载本次检查</button></div><p id="acceptanceState" class="status" role="status" aria-live="polite">尚未检查。保存材料采用决定后，可重新检查。</p><div id="acceptanceResults"></div></section>
@@ -33,16 +33,26 @@
 <section class="panel tab-view" id="hypotheses" hidden><h2>候选解释与资料缺口</h2><p class="small">解释由研究人员填写。本阶段不生成因果结论；关联数字只能提供核查线索，不能证明原因。没有充分材料时可以不写解释。</p><div id="hypothesisList"></div><div class="actions"><button id="addHypothesis">添加候选解释</button><span class="small">最多三条，均保留待核或资料不足状态。</span></div><label class="field" style="margin-top:20px"><span>材料范围、不可比原因与下一步</span><textarea id="coverage" maxlength="4000" placeholder="例如：两家公司财年结束日不同，当前仅研究各自年度变化；缺少应收变动与管理层解释，尚不能判断现金流变化原因。"></textarea></label><div class="actions"><button class="primary save">保存研究草稿</button></div></section>
 <section class="panel tab-view" id="handoff" hidden><h2>固定底稿，交给另一身份复核</h2><p class="small">提交会固定本次材料、采用决定、候选解释、局限和计算。提交后不能继续编辑；被退回后可修订，原快照仍能查看和导出。复核完成仅表示这份底稿按所列范围检查完成。</p><div id="snapshotInfo" class="notice"></div><label class="field"><span>交接或复核说明</span><textarea id="actionNote" maxlength="2000" placeholder="说明本次核查范围、仍未解决的问题和后续处理要求。"></textarea></label><div class="actions"><button id="submit" class="primary">提交独立复核</button><button id="approve" class="primary">确认这份底稿</button><button id="return">退回补充材料</button><button id="export">导出当前冻结底稿</button></div><h3 style="margin-top:24px">冻结快照</h3><div id="snapshots" class="history"></div><h3 style="margin-top:24px">操作记录</h3><div id="events"></div></section>
 </section><footer class="footer">官方披露、直接计算、人工判断分别保留。本页没有调用语言模型或运行预测，也不会批准贷款或执行交易。视觉核对实验与本任务的事实采用状态分别记录，OCR 一致不会自动批准研究数据。</footer></main></div></div>
+<script src="/assets/research-write-journal.js"></script>
 <script src="/assets/research-write-intent.js"></script>
 <script>
 const $=id=>document.getElementById(id);let task=null,session=null,busy=false,view='materials',draftDecisions=new Map(),draftHypotheses=[],dirty=false,epoch=0,createKey=null,createSignature=null,acceptanceRaw=null,acceptanceResult=null,attributionRaw=null,attributionResult=null,queryRaw=null,queryResult=null,queryGeneration=0,queryLoading=false;
-const writeFlow=createResearchWriteFlow({api,getEpoch:()=>epoch,onPending:()=>syncControls(),onCommit:load,onNotice:message=>$('status').textContent=message});
+let journalIssue=null,recoveryReadRequired=false;
+const writeJournal=createResearchWriteJournal({namespace:'research'});
+const writeFlow=createResearchWriteFlow({journal:writeJournal,getActor:()=>session,api,getEpoch:()=>epoch,onPending:()=>syncControls(),onCommit:load,onNotice:message=>$('status').textContent=message});
 function writeControls(){
-  const pending=writeFlow.pending();$('writeRecovery').hidden=!pending;$('retryWrite').disabled=busy||!pending;
+  const info=writeFlow.pendingInfo();journalIssue=info&&!info.id?info.status:null;
+  const pending=writeFlow.pending()||Boolean(journalIssue);$('writeRecovery').hidden=!pending;
+  $('recoveryMeta').textContent=info?.id?'待确认：'+info.label+' · 原版本 '+info.revision+' · '+info.id:'';
+  $('recoveryMessage').textContent=journalIssue==='identity_mismatch'?'本标签页有其他身份的待确认操作。请切回原身份核对；当前身份不能查看或重试。':journalIssue==='invalid'?'本地待确认记录无法识别，未执行其中的操作。请核对服务端记录后明确清除。':journalIssue==='unavailable'?'浏览器暂不能读取本标签页的待确认记录。请恢复存储访问后重新核对。':recoveryReadRequired?'已找到待确认操作，尚未读到对应的服务端记录。重新核对后才能重试。':'原请求保留在本标签页，刷新后可继续核对；不会自动重试。';
+  if(info?.cleanupRequired)$('recoveryMessage').textContent='服务端已返回结果，但本地待确认记录尚未清除。请重试确认或明确清除，暂不进行新写入。';
+  $('refreshRecovery').disabled=busy||!session;
+  $('clearJournal').disabled=busy||!session||!$('confirmClearJournal').checked;
+  $('confirmClearJournal').disabled=busy||!session;
   $('discardDraft').hidden=!dirty||pending;$('discardDraft').disabled=busy||!task;
   if(pending)for(const node of document.querySelectorAll('.save,#coverage,#bridgeNote,#includeBridge,#addHypothesis,#submit,#approve,#return,#export,#create,#refresh,#checkAcceptance,#checkAttribution,#exportAcceptance,#exportAttribution,#actionNote,#observations select,#observations input,#hypothesisList input,#hypothesisList textarea,#hypothesisList select,#hypothesisList button,.queue button,#snapshots button'))node.disabled=true;
   for(const id of ['question','selectionReason'])$(id).disabled=busy||pending||session?.role!=='analyst';
-  $('retryWrite').disabled=busy||!pending;
+  $('retryWrite').disabled=busy||!info?.retryable||recoveryReadRequired||Boolean(journalIssue);
 }
 const statusNames={draft:'草稿 · 待核查',in_review:'已提交 · 待复核',reviewed:'底稿复核完成',returned:'已退回 · 待补充'};
 function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n;}
@@ -52,7 +62,7 @@ function reasons(xs){return [...new Set((xs||[]).map(x=>typeof x==='string'?x:x.
 function showError(e){$('error').textContent=e||'';$('error').hidden=!e;}
 function editable(){return session?.role==='analyst'&&task&&['draft','returned'].includes(task.status);}
 function markDirty(){dirty=true;resetQuery('草稿已修改；保存后重新查询。');resetAttribution('草稿已修改；保存后重新查看。');resetAcceptance('草稿已修改；保存后重新检查。');$('status').textContent='有尚未保存的研究改动。';syncControls();}
-function clear(){resetQuery();writeFlow.clear();busy=false;resetAcceptance();resetAttribution();task=null;session=null;draftDecisions=new Map();draftHypotheses=[];dirty=false;createKey=null;createSignature=null;$('task').hidden=true;$('evidence').hidden=true;for(const id of ['queue','evidence','observations','hypothesisList','snapshots','events','taskTitle','taskMeta','status','selectionText','taskStatus','comparisonTable','crossCompany','limits','snapshotInfo','bridgeResults','bridgeSources','bridgeIssuer','bridgeAdoption'])$(id).replaceChildren();for(const id of ['coverage','actionNote','question','selectionReason','bridgeNote'])$(id).value='';$('identityLabel').textContent='尚未连接身份';showError('');}
+function clear(){journalIssue=null;recoveryReadRequired=false;$('confirmClearJournal').checked=false;resetQuery();writeFlow.clear();busy=false;resetAcceptance();resetAttribution();task=null;session=null;draftDecisions=new Map();draftHypotheses=[];dirty=false;createKey=null;createSignature=null;$('task').hidden=true;$('evidence').hidden=true;for(const id of ['queue','evidence','observations','hypothesisList','snapshots','events','taskTitle','taskMeta','status','selectionText','taskStatus','comparisonTable','crossCompany','limits','snapshotInfo','bridgeResults','bridgeSources','bridgeIssuer','bridgeAdoption'])$(id).replaceChildren();for(const id of ['coverage','actionNote','question','selectionReason','bridgeNote'])$(id).value='';$('identityLabel').textContent='尚未连接身份';showError('');}
 async function api(path,options={},raw=false){
   const generation=epoch,headers={'Content-Type':'application/json','X-Demo-Role':$('role').value,...options.headers};
   if($('key').value)headers.Authorization='Bearer '+$('key').value;
@@ -126,7 +136,7 @@ async function action(kind){if(dirty)throw new Error('请先保存草稿，再�
   if(result){await list();tabs('handoff');}}
 
 async function download(snapshotId){const requested=task.id,query=snapshotId?'?snapshot_id='+encodeURIComponent(snapshotId):'',raw=await api('/api/research/tasks/'+requested+'/export'+query,{},true);const url=URL.createObjectURL(new Blob([raw],{type:'application/json'})),a=el('a');a.href=url;a.download='creditlens-research-'+requested+'-'+(snapshotId||task.snapshot.id)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('status').textContent='已导出指定冻结快照。';}
-async function connect(){const d=await api('/api/session');session=d;$('identityLabel').textContent=d.mode==='demo'?'本地演示 · 身份模拟':d.user_id+' / '+d.role;$('role').hidden=d.mode!=='demo';$('roleLabel').hidden=d.mode!=='demo';$('key').hidden=d.mode==='demo';$('connect').hidden=d.mode==='demo';await list();syncControls();}
+async function connect(){const d=await api('/api/session');session=d;$('identityLabel').textContent=d.mode==='demo'?'本地演示 · 身份模拟':d.user_id+' / '+d.role;$('role').hidden=d.mode!=='demo';$('roleLabel').hidden=d.mode!=='demo';$('key').hidden=d.mode==='demo';$('connect').hidden=d.mode==='demo';await list();await restorePendingWrite();syncControls();}
 $('create').addEventListener('click',()=>run(async()=>{if(dirty)throw new Error('请先保存当前研究草稿。');const payload={bundle_id:'msft-aapl-fy2025',question:$('question').value,selection_reason:$('selectionReason').value,material_mode:'current_verified_materials',as_of:null,include_cash_flow_bridge:$('includeBridge').checked},signature=JSON.stringify(payload);if(createSignature!==signature){createSignature=signature;createKey=crypto.randomUUID();}load(await api('/api/research/tasks',{method:'POST',headers:{'Idempotency-Key':createKey},body:signature}));createKey=null;createSignature=null;view='materials';tabs(view);await list();}));
 $('refresh').addEventListener('click',()=>run(async()=>{if(dirty)throw new Error('请先保存草稿，避免刷新覆盖。');if(task)load(await api('/api/research/tasks/'+task.id));await list();}));document.querySelectorAll('.save').forEach(b=>b.addEventListener('click',()=>run(save)));document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>tabs(b.dataset.tab)));$('coverage').addEventListener('input',markDirty);$('bridgeNote').addEventListener('input',markDirty);$('bridgeIssuer').addEventListener('change',renderBridgeResults);$('addHypothesis').addEventListener('click',()=>{if(!editable()||draftHypotheses.length>=3)return;draftHypotheses.push({id:crypto.randomUUID(),text:'',evidence_ids:[],status:'pending',note:''});renderHypotheses();markDirty();});for(const a of ['submit','approve','return'])$(a).addEventListener('click',()=>run(()=>action(a)));$('export').addEventListener('click',()=>run(()=>download(task.snapshot.id)));
 
@@ -249,7 +259,7 @@ function exportAttribution(){
 $('checkAttribution').addEventListener('click',()=>run(checkAttribution));
 $('exportAttribution').addEventListener('click',()=>run(async()=>exportAttribution()));
 
-$('retryWrite').addEventListener('click',()=>run(async()=>{const result=await writeFlow.retry();if(result){await list();}}));
+$('retryWrite').addEventListener('click',()=>run(async()=>{if(recoveryReadRequired||journalIssue)return;const result=await writeFlow.retry();if(result){await list();}}));
 $('discardDraft').addEventListener('click',()=>run(async()=>{if(!task||writeFlow.pending())return;const id=task.id;const latest=await api('/api/research/tasks/'+encodeURIComponent(id));load(latest);await list();$('status').textContent='已放弃本页未保存改动，并载入服务端版本。';}));
 $('role').addEventListener('change',()=>{epoch++;clear();run(connect);});$('key').addEventListener('input',()=>{epoch++;clear();createKey=null;createSignature=null;syncControls();});$('connect').addEventListener('click',()=>run(connect));
 
@@ -268,7 +278,7 @@ function resetQuery(message='选择范围后查询已保存版本。'){
   $('queryResults').replaceChildren();$('queryState').textContent=message;$('exportQuery').disabled=true;
 }
 function syncQueryControls(){
-  const pending=writeFlow.pending();
+  const pending=writeFlow.pending()||Boolean(journalIssue);
   if(pending&&(queryRaw||queryLoading))resetQuery('写入结果尚未确认；确认后重新查询。');
   $('queryEvidence').disabled=busy||pending||dirty||!task||!session||queryLoading;
   $('exportQuery').disabled=busy||pending||dirty||!queryRaw||!task||!session;
@@ -368,6 +378,34 @@ $('queryKind').addEventListener('change',()=>querySelectionChanged(true));
 for(const id of ['queryIssuer','queryMetric','queryYear','queryOtherIssuer','queryOtherYear'])$(id).addEventListener(id.includes('Year')?'input':'change',()=>querySelectionChanged());
 $('queryEvidence').addEventListener('click',queryEvidence);
 $('exportQuery').addEventListener('click',()=>{try{exportQuery();}catch(error){resetQuery(error.message);syncQueryControls();}});
+
+
+async function restorePendingWrite(){
+  const restored=writeFlow.restore();
+  journalIssue=['identity_mismatch','invalid','unavailable'].includes(restored.status)?restored.status:null;
+  if(restored.status==='empty'){recoveryReadRequired=false;syncControls();return false;}
+  if(journalIssue){syncControls();return true;}
+  recoveryReadRequired=true;syncControls();
+  const info=restored.info,generation=epoch;
+  try{
+    const latest=await api(info.readPath);
+    if(generation!==epoch)return true;
+    if(latest.id!==info.id||!Number.isSafeInteger(latest.revision)||latest.revision<info.revision)throw new Error('服务端记录与待确认操作不对应。');
+    load(latest);await list();
+    if(generation!==epoch)return true;
+    recoveryReadRequired=false;
+    $('status').textContent='已恢复待确认操作；下方显示服务端当前版本。需要确认结果时，点击“重试原操作”。';
+  }catch(e){if(generation===epoch)throw e;}
+  finally{if(generation===epoch)syncControls();}
+  return true;
+}
+$('refreshRecovery').addEventListener('click',()=>run(restorePendingWrite));
+$('confirmClearJournal').addEventListener('change',syncControls);
+$('clearJournal').addEventListener('click',()=>run(async()=>{
+  if(!$('confirmClearJournal').checked||!session)return;
+  writeFlow.discard();clear();busy=true;syncControls();await connect();
+  $('status').textContent='已清除本标签页的待确认记录。服务端操作没有被撤销，请从列表核对已保存版本。';
+}));
 
 run(async()=>{const health=await api('/health');if(health.auth_mode!=='demo'){$('role').hidden=true;$('roleLabel').hidden=true;$('key').hidden=false;$('connect').hidden=false;$('identityLabel').textContent='需要工作区身份';$('status').textContent='输入工作区 API key 后连接。';return;}await connect();});
 </script></body></html>
