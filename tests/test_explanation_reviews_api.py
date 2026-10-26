@@ -9,6 +9,11 @@ from creditlens.api import create_app
 
 
 class ExplanationReviewApiTests(unittest.TestCase):
+    def write_headers(self, *args, **kwargs):
+        # Preserve the original no-key CAS contract; retry keys have separate tests.
+        return {name: value for name, value in self.headers(*args, **kwargs).items()
+                if name != 'Idempotency-Key'}
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         root = Path(self.temp.name)
@@ -42,7 +47,7 @@ class ExplanationReviewApiTests(unittest.TestCase):
         base = '/api/research/tasks/'+data['id']
         if not approved:
             return data
-        response = self.client.patch(base, headers=self.headers(), json={
+        response = self.client.patch(base, headers=self.write_headers(), json={
             'revision': data['revision'], 'decisions': [
                 {'observation_id': item['id'], 'decision': 'adopted',
                  'note': '模拟核查已登记原文及期间口径，仅作软件验证。'}
@@ -51,12 +56,12 @@ class ExplanationReviewApiTests(unittest.TestCase):
             'bridge_review_note': '会计分解对应原始金额；新增解释须另行处理。'})
         self.assertEqual(response.status_code, 200, response.text)
         data = response.json()
-        response = self.client.post(base+'/actions', headers=self.headers(), json={
+        response = self.client.post(base+'/actions', headers=self.write_headers(), json={
             'revision': data['revision'], 'action': 'submit',
             'note': '提交公开材料的模拟交接，解释补充另行采用。'})
         self.assertEqual(response.status_code, 200, response.text)
         data = response.json()
-        response = self.client.post(base+'/actions', headers=self.headers('reviewer'), json={
+        response = self.client.post(base+'/actions', headers=self.write_headers('reviewer'), json={
             'revision': data['revision'], 'action': 'approve',
             'note': '模拟独立确认冻结事实范围，不确认任何经营因果。',
             'snapshot_sha256': data['snapshot_sha256']})
@@ -73,7 +78,7 @@ class ExplanationReviewApiTests(unittest.TestCase):
 
     def save(self, data, decision='adopt_as_company_statement'):
         response = self.client.patch('/api/research/explanation-reviews/'+data['id'],
-                                     headers=self.headers(), json={
+                                     headers=self.write_headers(), json={
                                          'revision': data['revision'],
                                          'decisions': [{'entry_id': entry['id'], 'decision': decision,
                                                         'note': '公司明示解释与原数字一致，尚无独立原因证据。'}
@@ -88,7 +93,7 @@ class ExplanationReviewApiTests(unittest.TestCase):
                    'snapshot_sha256': data.get('snapshot', {}).get('sha256') if data.get('snapshot') else None}
         payload.update(changes)
         return self.client.post('/api/research/explanation-reviews/'+data['id']+'/actions',
-                                headers=self.headers(key), json=payload)
+                                headers=self.write_headers(key), json=payload)
 
     def test_auth_tenant_strict_payload_and_pending_parent(self):
         draft = self.parent(approved=False)
@@ -148,14 +153,14 @@ class ExplanationReviewApiTests(unittest.TestCase):
         payload = {'revision': data['revision'], 'decisions': [{'entry_id': entry['id'],
                     'decision': 'adopt_as_company_statement', 'note': '只采用公司说法，不表示经营原因已经证实。'}],
                     'coverage_note': '原始材料说明范围，不赋予额外的因果证明。'}
-        self.assertEqual(self.client.patch(base, headers=self.headers(),
+        self.assertEqual(self.client.patch(base, headers=self.write_headers(),
                                          json={**payload, 'independently_verified': True}).status_code, 422)
         payload['decisions'][0]['support_scope'] = 'causal_proof'
-        self.assertEqual(self.client.patch(base, headers=self.headers(), json=payload).status_code, 422)
+        self.assertEqual(self.client.patch(base, headers=self.write_headers(), json=payload).status_code, 422)
         del payload['decisions'][0]['support_scope']
-        self.assertEqual(self.client.patch(base, headers=self.headers('viewer'), json=payload).status_code, 403)
+        self.assertEqual(self.client.patch(base, headers=self.write_headers('viewer'), json=payload).status_code, 403)
         saved = self.save(data)
-        self.assertEqual(self.client.patch(base, headers=self.headers(), json=payload).status_code, 409)
+        self.assertEqual(self.client.patch(base, headers=self.write_headers(), json=payload).status_code, 409)
         self.assertEqual(saved['decisions'][0]['support_scope'], 'company_statement_only')
         self.assertEqual(self.client.get(base, headers=self.headers()).json(), saved)
 
