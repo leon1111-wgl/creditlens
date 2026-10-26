@@ -2,7 +2,7 @@
 
 研究员按行名和年份找金额时，需要知道失败发生在哪里：是表头不清楚，还是数字本身不可靠。上一版词级检查把所有相关文字一并检查，单位说明中一个未用于取数的低分词，也可能让金额候选停下来。
 
-本轮保留整行与原词级方法，新增一项独立对照。行名、年份和单位继续使用整行依据；金额以及附带符号使用完整字词检查。没有采用的锚点字词问题仍保留记录，不用更高的父行分数替换金额词分数。
+按证据用途的取数方法与整行、原词级方法分别记录，构成三方对照。行名、年份和单位继续使用整行依据；金额以及附带符号使用完整字词检查。没有采用的锚点字词问题仍保留记录，不用更高的父行分数替换金额词分数。
 
 ## 输入、正确标准与失败处理
 
@@ -35,11 +35,11 @@
 
 ```powershell
 python scripts/evaluate_role_table_lookup.py --verify-saved
-python scripts/evaluate_role_table_lookup.py --ocr-root D:/acl-xwf/creditlens/.run/reproductions/document-ai-words --output role-table-lookup-new.json
+python scripts/evaluate_role_table_lookup.py --ocr-root .run/reproductions/document-ai-words --output role-table-lookup-new.json
 ```
 
-保存结果核验与完整 OCR 提取复演分别记录。后一条命令需要已经保留且摘要一致的六份输入；缺失时停止，同名输出不覆盖。公开仓库仅保存必要证据和可复现结果，完整页面、OCR 与原始 PDF 不作为本轮新增发布材料。
+保存结果核验与完整 OCR 提取复演分别记录。后一条命令需要已经保留且摘要一致的六份输入；缺失时停止，同名输出不覆盖。公开仓库仅保存必要证据和可复现结果，完整页面、OCR 与原始 PDF 不随该实验公开再分发。
 
-这批微软和苹果材料已经用于开发，42 条登记记录对应 40 组独立查询输入。苹果短期与长期债务存在同页同名查询，仍保留两条参考及歧义；没有加入独立人工金标准或新公司盲测。本轮没有新增 OCR、视觉模型推理或训练。
+这批微软和苹果材料已经用于开发，42 条登记记录对应 40 组独立查询输入。苹果短期与长期债务存在同页同名查询，仍保留两条参考及歧义；没有加入独立人工金标准或新公司盲测。该实验未新增 OCR、视觉模型推理或训练。
 
-业务依据沿用 2026-10-25 的[产品需求](01-product-requirements.md)与[企业研究设计](research/2026-10-25-enterprise-research-design.md)。FinQA、TAT-QA 的启发是把数字、依据和运算分别验收；这不证明本规则有通用模型优势，也不代表已有客户效率收益。实现细节、实际结果和独立审查见[契约](research/role-table-lookup-contract.md)、[实验报告](research/role-table-lookup-experiment.md)与[本轮审查](research/advisory-25.md)。
+FinQA、TAT-QA 的启发是把数字、依据和运算分别验收；这不证明本规则有通用模型优势，也不代表已有客户效率收益。实现细节与实际结果见[契约](research/role-table-lookup-contract.md)和[实验报告](research/role-table-lookup-experiment.md)。

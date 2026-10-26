@@ -44,4 +44,4 @@ node scripts/check_margin_claim_state.js
 
 运行环境和旧毛利报告依赖见[毛利率会计分解](35-gross-margin-bridge.md)。普通读取和复算不联网、不调用模型、不写数据库。实验、API和页面验证分别记录，不把构造控制、软件测试或固定公司样例合成一个模型准确率。
 
-[来源目录](../data/sources/margin-company-claims.json) · [保存结果](../artifacts/margin-claims-report.json) · [本轮制作记录](iterations/2026-10-26-33.md)
+[来源目录](../data/sources/margin-company-claims.json) · [保存结果](../artifacts/margin-claims-report.json)

@@ -29,6 +29,6 @@
 
 `python scripts/evaluate_row_disambiguation.py --verify-saved` 检查保存结果和必要来源关系。完整输入重放另需已有的本地识别文件，按脚本帮助指定新输出路径，不覆盖冻结结果，也不触发新的OCR。
 
-本轮仅处理此前开发材料中的4组不同查询、8条显式选择路径，不计算问答准确率或人工一致率。真实独立参考仍待完成。
+显式选行实验只覆盖已用开发材料中的4组不同查询、8条显式选择路径，不计算问答准确率或人工一致率。真实独立参考仍待完成。
 
-[核心契约](research/row-disambiguation-contract.md) · [实验说明](research/row-disambiguation-experiment.md) · [固定结果](../artifacts/row-disambiguation-report.json) · [制作记录](iterations/2026-10-26-35.md)
+[核心契约](research/row-disambiguation-contract.md) · [实验说明](research/row-disambiguation-experiment.md) · [固定结果](../artifacts/row-disambiguation-report.json)
