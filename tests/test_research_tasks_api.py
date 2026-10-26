@@ -10,6 +10,11 @@ from creditlens.api import create_app
 
 
 class ResearchTasksApiTests(unittest.TestCase):
+    def write_headers(self, *args, **kwargs):
+        # Preserve the original no-key CAS contract; retry keys have separate tests.
+        return {name: value for name, value in self.headers(*args, **kwargs).items()
+                if name != 'Idempotency-Key'}
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         root = Path(self.temp.name)
@@ -49,7 +54,7 @@ class ResearchTasksApiTests(unittest.TestCase):
             for o in task['bundle']['observations']], hypotheses=[],
             coverage_note='Current report comparative columns; no historical or causal conclusion.',
             bridge_review_note='Accounting reconciliation only; underlying business causes remain unverified.')
-        response = self.client.patch('/api/research/tasks/' + task['id'], json=body, headers=self.headers())
+        response = self.client.patch('/api/research/tasks/' + task['id'], json=body, headers=self.write_headers())
         self.assertEqual(response.status_code, 200, response.text)
         response = self.action(response.json(), 'submit')
         self.assertEqual(response.status_code, 200, response.text)
@@ -73,7 +78,7 @@ class ResearchTasksApiTests(unittest.TestCase):
                              evidence_ids=[task['bundle']['observations'][0]['id']], status='pending',
                              note='Cash flow totals do not establish causality; inspect reconciliation next.')],
             coverage_note='Fiscal dates and calendars differ. Within-company changes only, without ranking.')
-        response = self.client.patch('/api/research/tasks/' + task['id'], json=body, headers=self.headers())
+        response = self.client.patch('/api/research/tasks/' + task['id'], json=body, headers=self.write_headers())
         self.assertEqual(response.status_code, 200, response.text)
         return response.json()
 
@@ -83,7 +88,7 @@ class ResearchTasksApiTests(unittest.TestCase):
                     snapshot_sha256=task['snapshot']['sha256'] if task['snapshot'] else None)
         body.update(changes)
         return self.client.post('/api/research/tasks/' + task['id'] + '/actions',
-                                headers=self.headers(key), json=body)
+                                headers=self.write_headers(key), json=body)
 
     def test_materials_and_tasks_require_real_configured_identity(self):
         for route in ('/api/research/task-materials', '/api/research/tasks'):
@@ -161,7 +166,7 @@ class ResearchTasksApiTests(unittest.TestCase):
         self.assertEqual(self.action(ready, 'submit', revision=task['revision']).status_code, 409)
         bad = dict(revision=ready['revision'], decisions=ready['decisions'], coverage_note=ready['coverage_note'],
                    hypotheses=[{**ready['hypotheses'][0], 'status': 'supported'}])
-        self.assertEqual(self.client.patch('/api/research/tasks/' + task['id'], headers=self.headers(),
+        self.assertEqual(self.client.patch('/api/research/tasks/' + task['id'], headers=self.write_headers(),
                                            json=bad).status_code, 422)
 
 
