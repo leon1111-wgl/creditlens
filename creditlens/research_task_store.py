@@ -14,6 +14,7 @@ from fastapi import HTTPException
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 from .workflow import Actor, require
+from . import research_write_receipts as write_receipts
 
 
 STORE_VERSION = "research-handoff-1"
@@ -134,6 +135,7 @@ class ResearchTaskStore:
                     content TEXT NOT NULL, content_sha256 TEXT NOT NULL,
                     metadata TEXT NOT NULL, UNIQUE(task_id, id));
             """)
+            write_receipts.initialize(db)
 
     @contextmanager
     def db(self, write=False):
@@ -346,13 +348,18 @@ class ResearchTaskStore:
             return self._view(db, self._load(db, task_id, actor))
 
     def update(self, task_id: str, actor: Actor, revision: int, decisions: list[dict],
-               hypotheses: list[dict], coverage_note: str, bridge_review_note: str | None = None) -> dict:
+               hypotheses: list[dict], coverage_note: str, bridge_review_note: str | None = None,
+               idempotency_key: str | None = None) -> dict:
         require(actor, "analyst")
         request = _validate(ResearchTaskUpdate, {"revision": revision, "decisions": decisions,
                                               "hypotheses": hypotheses, "coverage_note": coverage_note,
                                               "bridge_review_note": bridge_review_note})
         with self.db(write=True) as db:
             data = self._load(db, task_id, actor)
+            binding = write_receipts.bind(idempotency_key, actor, "research_task", task_id, "update", request)
+            replayed = write_receipts.replay(db, idempotency_key, binding, data)
+            if replayed is not None:
+                return replayed
             self._revision(data, request["revision"])
             self._editable(data)
             valid_ids = self._observation_ids(data["bundle"])
@@ -371,10 +378,10 @@ class ResearchTaskStore:
             data["revision"] += 1
             self._event(data, actor, "update", "Decisions, associated hypotheses and material coverage updated")
             self._save(db, data, request["revision"])
-            return self._view(db, data)
+            return write_receipts.remember(db, idempotency_key, binding, self._view(db, data), data)
 
     def act(self, task_id: str, actor: Actor, revision: int, action: str, note: str,
-            snapshot_sha256: str | None = None) -> dict:
+            snapshot_sha256: str | None = None, idempotency_key: str | None = None) -> dict:
         request = _validate(ResearchTaskAction, {"revision": revision, "action": action, "note": note,
                                                "snapshot_sha256": snapshot_sha256})
         action = request["action"]
@@ -382,6 +389,12 @@ class ResearchTaskStore:
         require(actor, "analyst" if request["action"] == "submit" else "reviewer")
         with self.db(write=True) as db:
             data = self._load(db, task_id, actor)
+            if idempotency_key is not None and action != "submit" and actor.user_id in data["contributors"]:
+                raise HTTPException(403, "A principal who created, edited or submitted this task cannot review it")
+            binding = write_receipts.bind(idempotency_key, actor, "research_task", task_id, action, request)
+            replayed = write_receipts.replay(db, idempotency_key, binding, data)
+            if replayed is not None:
+                return replayed
             self._revision(data, request["revision"])
             if action == "submit":
                 self._editable(data)
@@ -436,7 +449,7 @@ class ResearchTaskStore:
                 data["status"] = "reviewed" if action == "approve" else "returned"
             self._event(data, actor, action, request["note"])
             self._save(db, data, request["revision"])
-            return self._view(db, data)
+            return write_receipts.remember(db, idempotency_key, binding, self._view(db, data), data)
 
     def get_snapshot(self, task_id: str, snapshot_id: str, actor: Actor) -> dict:
         self._reader(actor)
