@@ -57,3 +57,5 @@
 第32轮新增：[毛利桥契约](margin-bridge-contract.md)、[固定来源与独立算术对照](margin-bridge-experiment.md)、[第二十三份独立审查](advisory-23.md)。复用已保留原页，补28项AI辅助事实，明确近似定位与人工确认缺口；仅作会计分解，见[任务说明](../35-gross-margin-bridge.md)。
 
 第33轮新增：[公司说明契约](margin-claims-contract.md)、[来源与算术对照](margin-claims-experiment.md)、[第二十四份独立审查](advisory-24.md)。依据官方管理层讨论核对范围与金额／比率，区别公司原话、会计分解和独立核实，见[任务说明](../36-margin-company-statements.md)。
+
+第35轮新增：[同名行契约](row-disambiguation-contract.md)、[候选路径复演](row-disambiguation-experiment.md)、[第二十六份独立审查](advisory-26.md)。辅助选择与自动实验分开，不通过参考分区替用户选行，见[任务](../38-row-disambiguation.md)。
