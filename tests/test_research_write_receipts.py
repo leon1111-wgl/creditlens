@@ -127,6 +127,23 @@ class ResearchWriteReceiptTests(unittest.TestCase):
                 self.assertEqual(store.get(item["id"], VIEWER), reviewed)
                 self.assertEqual(before, self.dump())
 
+    def test_first_and_replayed_responses_have_identical_json_bytes(self):
+        def wire(value):
+            return json.dumps(value, ensure_ascii=False, allow_nan=False, separators=(",", ":")).encode("utf8")
+
+        for kind in ("task", "child"):
+            for action in ("approve", "return"):
+                store, item, author, reviewer, request = self.setup_kind(kind)
+                update_key = kind+action+"-wire-update"
+                edited = store.update(item["id"], author, **request, idempotency_key=update_key)
+                self.assertEqual(wire(edited), wire(store.update(item["id"], author, **request, idempotency_key=update_key)))
+                submit_args = (item["id"], author, edited["revision"], "submit", NOTE)
+                submitted = store.act(*submit_args, idempotency_key=kind+action+"-wire-submit")
+                self.assertEqual(wire(submitted), wire(store.act(*submit_args, idempotency_key=kind+action+"-wire-submit")))
+                review_args = (item["id"], reviewer, submitted["revision"], action, NOTE, submitted["snapshot_sha256"])
+                reviewed = store.act(*review_args, idempotency_key=kind+action+"-wire-review")
+                self.assertEqual(wire(reviewed), wire(store.act(*review_args, idempotency_key=kind+action+"-wire-review")))
+
     def test_return_receipt_remains_old_after_edit_resubmit_and_approve(self):
         for kind in ("task", "child"):
             store, item, author, reviewer, request = self.setup_kind(kind)
