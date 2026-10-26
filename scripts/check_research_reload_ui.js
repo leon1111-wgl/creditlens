@@ -146,6 +146,19 @@ async function reads(app,operation,{from=0,...options}={}){
   throw new Error('Read operation did not settle');
 }
 async function restore(app,options={}){app.run('clear()');const op=app.run('run(connect)');await reads(app,op,options);return op;}
+async function awaitRestoreTarget(app){
+  const answered=new Set();
+  for(let round=0;round<50;round++){
+    await tick();
+    for(const request of app.requests){
+      if(answered.has(request))continue;
+      assert(!request.options.method||request.options.method==='GET','Restore must remain read only');
+      if(request.url===app.prefix+app.base.id)return request;
+      answered.add(request);request.resolve(jsonReply(readValue(app,request.url)));
+    }
+  }
+  throw new Error('Restore target request did not arrive');
+}
 async function finishRetry(app,first){
   const op=app.retry(),write=next(app);sameWrite(first,write);
   write.resolve(jsonReply({id:app.base.id,revision:2}));await tick();
@@ -194,8 +207,7 @@ async function main(){
     }
     for(const failure of ['403','500','body','json','wrong_id']){
       const {storage}=await seed(kind),app=harness(kind,storage);app.run('clear()');const op=app.run('run(connect)');
-      next(app).resolve(jsonReply(readValue(app,'/api/session')));await tick();next(app).resolve(jsonReply(readValue(app,'/api/research/tasks')));await tick();
-      const target=next(app);assert.equal(target.url,app.prefix+app.base.id);
+      const target=await awaitRestoreTarget(app);assert.equal(target.url,app.prefix+app.base.id);
       if(failure==='body')target.resolve({ok:true,status:200,text:async()=>{throw Error('synthetic body error');}});
       else if(failure==='json')target.resolve({ok:true,status:200,text:async()=>'{bad'});
       else if(failure==='wrong_id')target.resolve(jsonReply({...app.show(4),id:'a'.repeat(32)}));
@@ -245,8 +257,7 @@ async function main(){
     }
     for(const stage of ['response','body']){
       const {storage}=await seed(kind),app=harness(kind,storage);app.run('clear()');const op=app.run('run(connect)');
-      next(app).resolve(jsonReply(readValue(app,'/api/session')));await tick();next(app).resolve(jsonReply(readValue(app,'/api/research/tasks')));await tick();
-      const target=next(app);let release;
+      const target=await awaitRestoreTarget(app);let release;
       if(stage==='body'){target.resolve({ok:true,status:200,text:()=>new Promise(resolve=>{release=resolve;})});await tick();}
       await app.changeIdentity();
       if(stage==='response')target.resolve(jsonReply(app.show(4)));else release(JSON.stringify(app.show(4)));
