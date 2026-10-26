@@ -58,6 +58,8 @@ CreditLens 给投研和风险团队做三件事：查到财务指标并回到原
 
 新增[保存与提交恢复](docs/40-research-write-recovery.md)：保存后没有收到结果时，页面保留原请求供重试，确认后载入当前版本，避免重复保存或提交。需要放弃未保存改动时也有明确入口。[实际界面](docs/images/research-write-recovery-desktop.png) · [本轮记录](docs/iterations/2026-10-26-37.md)。
 
+新增[按范围查证据](docs/41-explicit-research-queries.md)：明确选择公司、指标和期间后，只查看对应原文、可比性与经营依据。未登记、未采用和跨口径时说明原因，改选后旧结果失效，查询可独立下载。[实际界面](docs/images/research-query-comparison.png) · [本轮记录](docs/iterations/2026-10-26-38.md)。
+
 ## 数据是否实时，需要服务器吗
 
 当前使用已整理的官方历史披露样例。界面会即时计算已有数据，但不会自动获取最新财报、公告或行情，也没有持续更新的预测。开发过程中的定期迭代不是产品数据刷新服务；历史样例中按公告日筛选信息也不等于在线抓取。

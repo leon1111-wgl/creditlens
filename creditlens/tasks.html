@@ -13,9 +13,19 @@
 <body><div class="shell"><aside class="sidebar"><a class="brand" href="/">CreditLens</a><p class="caption">金融研究工作台</p><nav class="nav" aria-label="主导航"><a href="/tasks" aria-current="page">研究任务</a><a href="/">信用复核</a><a href="/research">季度研究</a><a href="/cross-page">跨页证据</a><a href="/documents">原页核对</a><a href="/transfer">新公司核对</a><a href="/experiments">文档实验</a><a href="/document-preparation">材料准备</a><a href="/margin">毛利率变化</a></nav><p class="queue-title">本工作区的研究</p><div id="queue" class="queue"></div></aside>
 <div class="workspace"><header class="top"><span>企业研究 / 材料与交接</span><div class="identity"><span id="identityLabel" class="small">正在连接</span><label for="role" id="roleLabel">演示身份</label><select id="role" aria-label="演示身份"><option value="analyst">分析员</option><option value="reviewer">复核员</option><option value="viewer">只读访客</option></select><input id="key" type="password" aria-label="工作区 API key" placeholder="工作区 API key" hidden><button id="connect" hidden>连接</button></div></header>
 <main class="content"><h1>研究任务</h1><p class="intro">把一项研究的问题、材料、数字口径和待查解释放在一起，固定底稿后交给同事复核。</p><div id="modeNotice" class="notice">当前使用微软和苹果的官方历史披露样例。两者不构成严格同行基准；财年口径不同的数字只并列展示，不做高低排名。当前材料不能恢复历史时点。</div><div id="error" class="error" role="alert" hidden></div><div id="status" class="status" role="status" aria-live="polite"></div><section id="writeRecovery" class="notice" hidden aria-live="polite"><p>上次操作尚未确认。原请求保留在当前页面，重试不会再次执行已完成的写入。关闭或刷新页面后，此待确认请求不会保留。</p><button id="retryWrite">重试原操作</button></section><div class="actions"><button id="discardDraft" hidden>放弃本页未保存改动并刷新</button></div>
-<details class="panel" id="creation" open><summary>建立一项研究</summary><div class="creation-body"><div class="fields"><label class="field"><span>研究问题</span><textarea id="question" maxlength="2000">两家公司各自的经营现金流和固定资产现金支出发生了什么变化，哪些口径需要继续核查？</textarea></label><label class="field"><span>为什么选择这些材料</span><textarea id="selectionReason" maxlength="2000">使用微软与苹果的官方年度披露演示跨公司研究与交接，不将其视为严格同行基准，也不直接按财年标签排名。</textarea></label></div><label class="bridge-option"><input type="checkbox" id="includeBridge" checked> 附上经营现金流拆解（登记资料会计核对）</label><div class="actions"><button class="primary" id="create">从官方材料建立任务</button><button id="refresh">刷新任务列表</button><span class="small">两家公司 · 两期年度 · 经营现金流与固定资产现金支出</span></div></div></details>
-<section id="task" hidden><div class="task-head"><div><h2 id="taskTitle"></h2><p class="meta" id="taskMeta"></p><p class="small" id="selectionText"></p></div><span id="taskStatus" class="tag"></span></div><nav class="tabs" aria-label="研究任务视图"><button data-tab="acceptance">任务检查</button><button data-tab="materials" class="active">材料与采用</button><button data-tab="comparison">变化与口径</button><button data-tab="bridge">现金流拆解</button><button data-tab="attribution">公司解释</button><button data-tab="hypotheses">解释与局限</button><button data-tab="handoff">提交与记录</button></nav>
+<details class="panel" id="creation" open><summary>建立一项研究</summary><div class="creation-body"><div class="fields"><label class="field"><span>研究背景／待研究的问题（自由文字）</span><textarea id="question" maxlength="2000">两家公司各自的经营现金流和固定资产现金支出发生了什么变化，哪些口径需要继续核查？</textarea></label><label class="field"><span>为什么选择这些材料</span><textarea id="selectionReason" maxlength="2000">使用微软与苹果的官方年度披露演示跨公司研究与交接，不将其视为严格同行基准，也不直接按财年标签排名。</textarea></label></div><label class="bridge-option"><input type="checkbox" id="includeBridge" checked> 附上经营现金流拆解（登记资料会计核对）</label><div class="actions"><button class="primary" id="create">从官方材料建立任务</button><button id="refresh">刷新任务列表</button><span class="small">两家公司 · 两期年度 · 经营现金流与固定资产现金支出</span></div></div></details>
+<section id="task" hidden><div class="task-head"><div><h2 id="taskTitle"></h2><p class="meta" id="taskMeta"></p><p class="small" id="selectionText"></p></div><span id="taskStatus" class="tag"></span></div><nav class="tabs" aria-label="研究任务视图"><button data-tab="acceptance">任务检查</button><button data-tab="query">按范围查证据</button><button data-tab="materials" class="active">材料与采用</button><button data-tab="comparison">变化与口径</button><button data-tab="bridge">现金流拆解</button><button data-tab="attribution">公司解释</button><button data-tab="hypotheses">解释与局限</button><button data-tab="handoff">提交与记录</button></nav>
 <section class="panel tab-view" id="acceptance" hidden><h2>这份材料能支持哪些任务</h2><p class="small">检查已登记的现金流与固定资产现金支出，不自动理解上面的自由问题。结果绑定当前保存版本，与底稿复核分开。本检查沿用底稿中的登记材料；“公司解释”页是另行登记、尚未纳入本检查的只读补充。</p><div class="actions"><button id="checkAcceptance" class="primary">检查已保存版本</button><button id="exportAcceptance" disabled>下载本次检查</button></div><p id="acceptanceState" class="status" role="status" aria-live="polite">尚未检查。保存材料采用决定后，可重新检查。</p><div id="acceptanceResults"></div></section>
+<section class="panel tab-view" id="query" hidden><h2>本次明确查询</h2><p class="small">选定公司、指标和期间后查证据。上方自由填写的研究问题只作背景；本次结果独立绑定所选范围，不修改底稿或审批。</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px">
+<label class="field"><span>查询任务</span><select id="queryKind"><option value="metric_lookup">查指标及原文</option><option value="comparable_change">比较两项指标</option><option value="operating_evidence">整理经营变化依据</option></select></label>
+<label class="field"><span>公司</span><select id="queryIssuer"><option value="MSFT">微软 · MSFT</option><option value="AAPL">苹果 · AAPL</option></select></label>
+<label class="field"><span>指标</span><select id="queryMetric"><option value="cfo">经营现金流</option><option value="capex">固定资产现金支出</option></select></label>
+<label class="field"><span id="queryYearLabel">年度标签</span><input id="queryYear" type="number" min="1" max="9999" step="1" value="2025"></label>
+<label class="field" id="queryOtherIssuerField" hidden><span>比较公司</span><select id="queryOtherIssuer"><option value="MSFT">微软 · MSFT</option><option value="AAPL">苹果 · AAPL</option></select></label>
+<label class="field" id="queryOtherYearField" hidden><span>后项年度标签</span><input id="queryOtherYear" type="number" min="1" max="9999" step="1" value="2025"></label>
+</div><p class="small">当前登记微软、苹果FY2024与FY2025。实际起止日以证据卡为准。固定资产现金支出不代表全部资本投入；未登记某年不表示公司没有披露。</p>
+<div class="actions"><button id="queryEvidence" class="primary">按所选范围查证据</button><button id="exportQuery" disabled>下载本次查询</button></div><p id="queryState" class="status" role="status" aria-live="polite">选择范围后查询已保存版本。</p><div id="queryResults"></div></section>
 <section class="panel tab-view" id="materials"><h2>逐项查看原文，再决定是否采用</h2><p class="small">采用表示分析员愿意将该事实用于本次研究，不等于通过独立复核。每项选择都需要理由；拒绝项保留缺口。固定资产现金支出显示流出绝对额，原表括号负号在“查看原文与口径”中保留。</p><div class="scroll"><table><thead><tr><th>公司与指标</th><th>实际期间</th><th>计算用金额 / 百万美元</th><th>本次采用决定</th></tr></thead><tbody id="observations"></tbody></table></div><div id="evidence" class="evidence" hidden></div><div class="actions"><button class="primary save">保存研究草稿</button><span class="small">保存后更新“变化与口径”；不会自动提交复核。</span></div></section>
 <section class="panel tab-view" id="comparison" hidden><h2>各公司自身的年度变化</h2><p class="small">以下由已采用事实和固定规则计算。尚未采用、范围不明或期间不匹配时保留阻断原因；基期为零或负数时不报告常规增长率。</p><div id="comparisonTable" class="scroll"></div><div id="crossCompany" class="comparison-note"></div><h3>为什么仍然需要核查</h3><ul id="limits" class="reason-list"></ul></section>
 <section class="panel tab-view" id="bridge" hidden><h2>现金流变化由哪些报表项目组成</h2><p class="small">这里只重算现金流量表的会计调节，不证明经营原因或资料真实性，也不自动采用任何事实。</p><div id="bridgeEmpty" class="notice" hidden>这份任务没有现金流拆解附件。旧底稿保持原样；需要拆解时，请新建任务并勾选附件。</div><div id="bridgeContent" hidden><div id="bridgeAdoption" class="notice"></div><label class="field"><span>查看公司</span><select id="bridgeIssuer" aria-label="现金流拆解公司"></select></label><div id="bridgeResults"></div><div id="bridgeSources" class="evidence"></div><label class="field" style="margin-top:18px"><span>附件核查范围与待补证据</span><textarea id="bridgeNote" maxlength="4000" placeholder="写明核查了哪些范围、还缺哪些证据。表内加总一致不代表逐项采用，更不代表原因已证实。至少10个字符后才能提交。"></textarea></label><div class="actions"><button class="primary save">保存研究草稿</button></div></div></section>
@@ -25,7 +35,7 @@
 </section><footer class="footer">官方披露、直接计算、人工判断分别保留。本页没有调用语言模型或运行预测，也不会批准贷款或执行交易。视觉核对实验与本任务的事实采用状态分别记录，OCR 一致不会自动批准研究数据。</footer></main></div></div>
 <script src="/assets/research-write-intent.js"></script>
 <script>
-const $=id=>document.getElementById(id);let task=null,session=null,busy=false,view='materials',draftDecisions=new Map(),draftHypotheses=[],dirty=false,epoch=0,createKey=null,createSignature=null,acceptanceRaw=null,acceptanceResult=null,attributionRaw=null,attributionResult=null;
+const $=id=>document.getElementById(id);let task=null,session=null,busy=false,view='materials',draftDecisions=new Map(),draftHypotheses=[],dirty=false,epoch=0,createKey=null,createSignature=null,acceptanceRaw=null,acceptanceResult=null,attributionRaw=null,attributionResult=null,queryRaw=null,queryResult=null,queryGeneration=0,queryLoading=false;
 const writeFlow=createResearchWriteFlow({api,getEpoch:()=>epoch,onPending:()=>syncControls(),onCommit:load,onNotice:message=>$('status').textContent=message});
 function writeControls(){
   const pending=writeFlow.pending();$('writeRecovery').hidden=!pending;$('retryWrite').disabled=busy||!pending;
@@ -41,8 +51,8 @@ function pct(v){if(v===null||v===undefined)return '—';return new Intl.NumberFo
 function reasons(xs){return [...new Set((xs||[]).map(x=>typeof x==='string'?x:x.message||x.code).filter(Boolean).map(x=>x.replace(/[。；]+$/,'')))].join('；');}
 function showError(e){$('error').textContent=e||'';$('error').hidden=!e;}
 function editable(){return session?.role==='analyst'&&task&&['draft','returned'].includes(task.status);}
-function markDirty(){dirty=true;resetAttribution('草稿已修改；保存后重新查看。');resetAcceptance('草稿已修改；保存后重新检查。');$('status').textContent='有尚未保存的研究改动。';syncControls();}
-function clear(){writeFlow.clear();busy=false;resetAcceptance();resetAttribution();task=null;session=null;draftDecisions=new Map();draftHypotheses=[];dirty=false;createKey=null;createSignature=null;$('task').hidden=true;$('evidence').hidden=true;for(const id of ['queue','evidence','observations','hypothesisList','snapshots','events','taskTitle','taskMeta','status','selectionText','taskStatus','comparisonTable','crossCompany','limits','snapshotInfo','bridgeResults','bridgeSources','bridgeIssuer','bridgeAdoption'])$(id).replaceChildren();for(const id of ['coverage','actionNote','question','selectionReason','bridgeNote'])$(id).value='';$('identityLabel').textContent='尚未连接身份';showError('');}
+function markDirty(){dirty=true;resetQuery('草稿已修改；保存后重新查询。');resetAttribution('草稿已修改；保存后重新查看。');resetAcceptance('草稿已修改；保存后重新检查。');$('status').textContent='有尚未保存的研究改动。';syncControls();}
+function clear(){resetQuery();writeFlow.clear();busy=false;resetAcceptance();resetAttribution();task=null;session=null;draftDecisions=new Map();draftHypotheses=[];dirty=false;createKey=null;createSignature=null;$('task').hidden=true;$('evidence').hidden=true;for(const id of ['queue','evidence','observations','hypothesisList','snapshots','events','taskTitle','taskMeta','status','selectionText','taskStatus','comparisonTable','crossCompany','limits','snapshotInfo','bridgeResults','bridgeSources','bridgeIssuer','bridgeAdoption'])$(id).replaceChildren();for(const id of ['coverage','actionNote','question','selectionReason','bridgeNote'])$(id).value='';$('identityLabel').textContent='尚未连接身份';showError('');}
 async function api(path,options={},raw=false){
   const generation=epoch,headers={'Content-Type':'application/json','X-Demo-Role':$('role').value,...options.headers};
   if($('key').value)headers.Authorization='Bearer '+$('key').value;
@@ -52,11 +62,11 @@ async function api(path,options={},raw=false){
   if(!response.ok){const error=new Error(typeof data.detail==='string'?data.detail:JSON.stringify(data.detail||data));error.httpStatus=response.status;throw error;}
   return raw?text:data;
 }
-function syncControls(){$('checkAttribution').disabled=busy||!task||dirty;$('exportAttribution').disabled=busy||dirty||!attributionRaw;$('checkAcceptance').disabled=busy||!task||dirty;$('exportAcceptance').disabled=busy||dirty||!acceptanceRaw;const edit=editable(),review=session?.role==='reviewer'&&task?.status==='in_review';$('create').disabled=busy||session?.role!=='analyst';$('refresh').disabled=busy||!session;$('role').disabled=busy;$('connect').disabled=busy;document.querySelectorAll('.save').forEach(b=>b.disabled=busy||!edit);document.querySelectorAll('#observations select,#observations input,#hypothesisList input,#hypothesisList textarea,#hypothesisList select,#hypothesisList button').forEach(n=>n.disabled=busy||!edit);$('coverage').disabled=busy||!edit;$('bridgeNote').disabled=busy||!edit;$('includeBridge').disabled=busy||session?.role!=='analyst';$('addHypothesis').disabled=busy||!edit||draftHypotheses.length>=3;$('submit').disabled=busy||!edit||dirty;$('approve').disabled=busy||!review;$('return').disabled=busy||!review;$('export').disabled=busy||!task?.snapshot;document.querySelectorAll('.queue button,#snapshots button').forEach(b=>b.disabled=busy);$('actionNote').disabled=busy||!(edit||review);writeControls();}
+function syncControls(){syncQueryControls();$('checkAttribution').disabled=busy||!task||dirty;$('exportAttribution').disabled=busy||dirty||!attributionRaw;$('checkAcceptance').disabled=busy||!task||dirty;$('exportAcceptance').disabled=busy||dirty||!acceptanceRaw;const edit=editable(),review=session?.role==='reviewer'&&task?.status==='in_review';$('create').disabled=busy||session?.role!=='analyst';$('refresh').disabled=busy||!session;$('role').disabled=busy;$('connect').disabled=busy;document.querySelectorAll('.save').forEach(b=>b.disabled=busy||!edit);document.querySelectorAll('#observations select,#observations input,#hypothesisList input,#hypothesisList textarea,#hypothesisList select,#hypothesisList button').forEach(n=>n.disabled=busy||!edit);$('coverage').disabled=busy||!edit;$('bridgeNote').disabled=busy||!edit;$('includeBridge').disabled=busy||session?.role!=='analyst';$('addHypothesis').disabled=busy||!edit||draftHypotheses.length>=3;$('submit').disabled=busy||!edit||dirty;$('approve').disabled=busy||!review;$('return').disabled=busy||!review;$('export').disabled=busy||!task?.snapshot;document.querySelectorAll('.queue button,#snapshots button').forEach(b=>b.disabled=busy);$('actionNote').disabled=busy||!(edit||review);writeControls();}
 async function run(fn){if(busy)return;const generation=epoch;busy=true;showError('');syncControls();try{await fn();}catch(e){if(generation===epoch)showError(e.message||e);}finally{if(generation===epoch){busy=false;syncControls();}}}
 function tabs(name){view=name;document.querySelectorAll('.tab-view').forEach(n=>n.hidden=n.id!==name);document.querySelectorAll('[data-tab]').forEach(n=>n.classList.toggle('active',n.dataset.tab===name));}
 async function list(){const rows=await api('/api/research/tasks');$('queue').replaceChildren();if(!rows.length){$('queue').append(el('p','还没有研究任务。','small'));return;}for(const r of rows){const b=el('button',r.question,r.id===task?.id?'active':'');b.append(el('small',(statusNames[r.status]||r.status)+' · v'+r.revision));b.addEventListener('click',()=>run(async()=>{if(dirty){showError('请先保存草稿，再切换研究任务。');return;}load(await api('/api/research/tasks/'+r.id));await list();}));$('queue').append(b);}}
-function load(d){resetAcceptance();resetAttribution();task=d;dirty=false;$('creation').open=false;draftDecisions=new Map((d.decisions||[]).map(x=>[x.observation_id,{...x}]));draftHypotheses=structuredClone(d.hypotheses||[]);$('coverage').value=d.coverage_note||'';$('bridgeNote').value=d.bridge_review_note||'';$('actionNote').value='';render();$('status').textContent='已载入任务版本 '+d.revision+'。材料与计算来自同一份记录。';}
+function load(d){resetQuery();resetAcceptance();resetAttribution();task=d;dirty=false;$('creation').open=false;draftDecisions=new Map((d.decisions||[]).map(x=>[x.observation_id,{...x}]));draftHypotheses=structuredClone(d.hypotheses||[]);$('coverage').value=d.coverage_note||'';$('bridgeNote').value=d.bridge_review_note||'';$('actionNote').value='';render();$('status').textContent='已载入任务版本 '+d.revision+'。材料与计算来自同一份记录。';}
 function render(){if(!task)return;$('explanationReviewLink').href='/explanation-reviews?task_id='+encodeURIComponent(task.id);$('task').hidden=false;$('taskTitle').textContent=task.question;$('taskMeta').textContent='版本 '+task.revision+' · 创建人 '+task.created_by+' · 当前材料模式 · '+task.id;$('selectionText').textContent=task.selection_reason;$('taskStatus').textContent=statusNames[task.status]||task.status;$('taskStatus').className='tag '+(task.status==='reviewed'?'good':task.status==='returned'?'warn':'');renderMaterials();renderComparison();renderBridge();renderHypotheses();renderHistory();tabs(view);syncControls();}
 function renderMaterials(){const body=$('observations');body.replaceChildren();$('evidence').hidden=true;for(const o of task.bundle.observations){const tr=el('tr');const title=el('td');title.append(el('div',o.company),el('div',o.label));const inspect=el('button','查看原文与口径','link-button');inspect.addEventListener('click',()=>showEvidence(o));title.append(inspect);tr.append(title,el('td',o.period.start+' — '+o.period.end+'\n'+o.period.days+' 天','period'),el('td',fmt(o.normalized_value),'numeric'));const td=el('td',undefined,'decision-cell'),select=el('select');select.setAttribute('aria-label',o.issuer_id+' '+o.year+' '+o.metric+' 采用决定');[['','尚未决定'],['adopted','采用这项事实'],['rejected','不采用，保留缺口']].forEach(([v,t])=>{const opt=el('option',t);opt.value=v;select.append(opt);});const decision=draftDecisions.get(o.id);select.value=decision?.decision||'';const note=el('input');note.type='text';note.maxLength=2000;note.placeholder='核查后填写采用或拒绝理由';note.setAttribute('aria-label',o.issuer_id+' '+o.year+' '+o.metric+' 核查理由');note.value=decision?.note||'';const update=()=>{if(select.value)draftDecisions.set(o.id,{observation_id:o.id,decision:select.value,note:note.value});else draftDecisions.delete(o.id);markDirty();};select.addEventListener('change',update);note.addEventListener('input',update);td.append(select,note);tr.append(td);body.append(tr);}}
 function showEvidence(o){const host=$('evidence');host.hidden=false;host.replaceChildren(el('h3',o.company+' · '+o.label+' · '+o.year));const dl=el('dl');const fields=[['原文显示',o.raw_value],['带符号原值',o.raw_signed_value],['归一值',o.normalized_value+' '+o.unit],['转换规则',o.transformation],['实际期间',o.period.start+' — '+o.period.end+'；'+o.period.days+'天'],['报表范围',o.basis.operations_scope],['固定资产现金支出范围',o.basis.capex_components],['定位',o.source.locator||'PDF 第 '+o.source.page+' 页'],['事实身份',o.id]];for(const [k,v]of fields){dl.append(el('dt',k),el('dd',v));}host.append(dl);for(const e of o.basis.scope_evidence||[])host.append(el('p','口径依据 · 第 '+e.page+' 页：'+e.quote,'small'));const a=el('a','查看官方 PDF 原文 ↗');const url=new URL(o.source.url);if(url.protocol==='https:'){a.href=o.source.url.split('#')[0]+'#page='+o.source.page;a.target='_blank';a.rel='noopener noreferrer';host.append(a);}host.append(el('p','原始文件 SHA-256：'+o.source.sha256,'mono'),el('p','当前核验绑定登记事实包与来源摘要；这次载入没有重新下载或重新识别整份 PDF。','small'));}
@@ -242,5 +252,122 @@ $('exportAttribution').addEventListener('click',()=>run(async()=>exportAttributi
 $('retryWrite').addEventListener('click',()=>run(async()=>{const result=await writeFlow.retry();if(result){await list();}}));
 $('discardDraft').addEventListener('click',()=>run(async()=>{if(!task||writeFlow.pending())return;const id=task.id;const latest=await api('/api/research/tasks/'+encodeURIComponent(id));load(latest);await list();$('status').textContent='已放弃本页未保存改动，并载入服务端版本。';}));
 $('role').addEventListener('change',()=>{epoch++;clear();run(connect);});$('key').addEventListener('input',()=>{epoch++;clear();createKey=null;createSignature=null;syncControls();});$('connect').addEventListener('click',()=>run(connect));
+
+function queryPayload(){
+  const year=Number($('queryYear').value),otherYear=Number($('queryOtherYear').value),kind=$('queryKind').value;
+  if(!Number.isSafeInteger(year)||year<1||year>9999||!$('queryYear').value.trim())throw new Error('请填写1至9999之间的整数年度标签。');
+  const observations=[{issuer_id:$('queryIssuer').value,metric:$('queryMetric').value,year}];
+  if(kind!=='metric_lookup'){
+    if(!Number.isSafeInteger(otherYear)||otherYear<1||otherYear>9999||!$('queryOtherYear').value.trim())throw new Error('请填写有效的后项年度标签。');
+    observations.push({issuer_id:kind==='operating_evidence'?$('queryIssuer').value:$('queryOtherIssuer').value,metric:$('queryMetric').value,year:otherYear});
+  }
+  return {revision:task.revision,task_kind:kind,observations};
+}
+function resetQuery(message='选择范围后查询已保存版本。'){
+  queryGeneration++;queryRaw=null;queryResult=null;queryLoading=false;
+  $('queryResults').replaceChildren();$('queryState').textContent=message;$('exportQuery').disabled=true;
+}
+function syncQueryControls(){
+  const pending=writeFlow.pending();
+  if(pending&&(queryRaw||queryLoading))resetQuery('写入结果尚未确认；确认后重新查询。');
+  $('queryEvidence').disabled=busy||pending||dirty||!task||!session||queryLoading;
+  $('exportQuery').disabled=busy||pending||dirty||!queryRaw||!task||!session;
+  for(const id of ['queryKind','queryIssuer','queryMetric','queryYear','queryOtherIssuer','queryOtherYear'])$(id).disabled=busy||pending||!task||!session;
+}
+function querySelectionChanged(modeChanged=false){
+  if(modeChanged){$('queryYear').value=$('queryKind').value==='metric_lookup'?'2025':'2024';$('queryOtherYear').value='2025';$('queryOtherIssuer').value=$('queryIssuer').value;}
+  $('queryOtherIssuerField').hidden=$('queryKind').value!=='comparable_change';
+  $('queryOtherYearField').hidden=$('queryKind').value==='metric_lookup';
+  $('queryYearLabel').textContent=$('queryKind').value==='metric_lookup'?'年度标签':'前项年度标签';
+  resetQuery('查询范围已改变，请按新选择重新查证据。');syncQueryControls();
+}
+function sameQuery(a,b){
+  return !!a&&a.revision===b.revision&&a.task_kind===b.task_kind&&Array.isArray(a.observations)&&a.observations.length===b.observations.length&&a.observations.every((x,i)=>x.issuer_id===b.observations[i].issuer_id&&x.metric===b.observations[i].metric&&x.year===b.observations[i].year);
+}
+function validQueryResponse(data,payload,currentTask){
+  const binding=data.input_binding,sha=/^[a-f0-9]{64}$/;
+  if(data.task_id!==currentTask.id||data.revision!==currentTask.revision||data.bundle_sha256!==currentTask.bundle_sha256||!sameQuery(data.query,payload)||data.read_only!==true||data.natural_language_question_understood!==false||data.automatic_approval!==false||data.included_in_frozen_snapshot!==false||data.historical_snapshot_rewritten!==false)return false;
+  if(!binding||binding.task_id!==data.task_id||binding.revision!==data.revision||binding.bundle_sha256!==data.bundle_sha256||binding.query_sha256!==data.query_sha256||!sha.test(data.query_sha256)||binding.source_bindings_sha256!==data.source_bindings_sha256||!sha.test(data.source_bindings_sha256))return false;
+  if(!Array.isArray(data.selected_evidence)||data.selected_evidence.length!==payload.observations.length)return false;
+  return data.selected_evidence.every((selected,index)=>{
+    const requested=payload.observations[index],s=selected.selector;
+    if(!s||s.issuer_id!==requested.issuer_id||s.metric!==requested.metric||s.year!==requested.year)return false;
+    const expected=currentTask.bundle.observations.find(o=>o.issuer_id===s.issuer_id&&o.metric===s.metric&&o.year===s.year),c=selected.card;
+    return expected?selected.status==='registered'&&!!c&&c.observation_id===expected.id&&c.issuer_id===s.issuer_id&&c.metric===s.metric&&c.year===s.year:selected.status==='not_registered'&&c===null;
+  });
+}
+function renderQuery(data){
+  const host=$('queryResults');host.replaceChildren();
+  const names={evidence_available:'已找到登记证据',computed:'所选变化可计算',not_registered:'所选材料未登记',blocked:'条件不满足',unsupported_scope:'当前任务不支持此范围',insufficient:'经营解释仍需补证据'};
+  host.append(el('h3',names[data.status]||data.status));
+  const selections=data.query.observations.map(x=>x.issuer_id+' · '+(x.metric==='cfo'?'经营现金流':'固定资产现金支出')+' · FY'+x.year);
+  host.append(el('p','本次选择：'+selections.join(' → '),'notice'));
+  for(const selected of data.selected_evidence){
+    if(!selected.card){host.append(el('p',selected.selector.issuer_id+' FY'+selected.selector.year+'：未在当前登记材料中找到，不代表未披露。','notice'));continue;}
+    const c=selected.card,adoption={adopted:'本底稿已采用',rejected:'本底稿不采用',unassessed:'本底稿尚未采用'};
+    host.append(acceptanceDetails(c.company+' · '+c.year+' · '+c.label+'：'+fmt(c.normalized_value)+' 百万美元；'+(adoption[c.adoption.status]||c.adoption.status),acceptanceSource(c)));
+  }
+  if(data.calculation){
+    const c=data.calculation;host.append(el('h3','计算与口径'));
+    host.append(acceptanceTable(['前期 → 后期','差额 / 百万美元','增长率'],[[c.from_year+' → '+c.to_year,fmt(c.absolute_change),pct(c.growth_rate)]]));
+    host.append(el('p','差额公式：'+c.formula.absolute_change+'；增长率公式：'+c.formula.growth_rate,'small'));
+    if(c.warnings?.length)host.append(el('p','期间提示：'+reasons(c.warnings),'small'));
+    if(c.reasons?.length)host.append(el('p',reasons(c.reasons),'small'));
+    if(c.growth_rate_status==='not_computed_nonpositive_base')host.append(el('p','基期非正，不报告常规增长率。','small'));
+  }
+  const operating=data.operating_evidence;
+  if(operating){
+    host.append(el('h3','会计分解'));
+    const accounting=operating.accounting_decomposition, c=accounting?.calculation;
+    if(c){host.append(el('p','现金流差额 '+fmt(c.reported_cfo_change)+' 百万美元；逐行贡献合计 '+fmt(c.contribution_total)+'；差额 '+fmt(c.residual)+'。会计加总不能证明经营原因。','small'));
+      host.append(acceptanceTable(['会计组成','对年度变化的贡献 / 百万美元'],(c.groups||[]).map(g=>[bridgeGroupNames[g.group]||g.group,fmt(g.contribution)])));}
+    else host.append(el('p',accounting?reasons(accounting.gaps):'当前底稿未附可用的会计分解。','small'));
+    host.append(el('h3','公司明示解释'));
+    if(!operating.company_statements.length)host.append(el('p','当前登记中没有这组期间的公司解释，不表示公司从未披露。','small'));
+    for(const statement of operating.company_statements){
+      host.append(el('p',statement.paraphrase_zh),el('p','这条公司说法尚未独立核实，也未自动纳入当前底稿审批。','small'));
+      const detail=el('div',undefined,'evidence'),link=el('a','查看公司说明来源');link.href=statement.source.url;link.target='_blank';link.rel='noopener noreferrer';detail.append(link,el('p',statement.source.locator,'small'));
+      for(const check of statement.numeric_checks||[]){
+        const label={current_cfo:'本期经营现金流',cfo_change:'经营现金流年度增量'}[check.id]||check.id;
+        const unit=value=>({USD_million:'百万美元',USD_billion:'十亿美元'}[value]||value);
+        detail.append(el('p',label+'：表中计算 '+fmt(check.exact_value)+' '+unit(check.exact_unit)+'；说明文字 '+fmt(check.reported_rounded_value)+' '+unit(check.reported_unit)+'。'+(check.status==='consistent_rounded'?'按登记精度舍入后相符。':'仍需核对。'),'small'));
+      }
+      if(statement.link_status!=='consistent_rounded')detail.append(el('p','相关数字尚未获本底稿采用，不能视为已确认的输入关联。','notice'));
+      host.append(acceptanceDetails('来源及金额对应',detail));
+    }
+    host.append(el('h3','待验证假设与独立核实'));
+    if(!operating.candidate_hypotheses.length)host.append(el('p','未登记关联假设；不自动补出经营解释。','small'));
+    for(const h of operating.candidate_hypotheses){host.append(el('p',h.text),el('p',h.note||'尚未填写核查说明。','small'));if(!h.all_references_selected)host.append(el('p','该假设还引用了本次范围之外的材料，所选证据不能代表其全部依据。','small'));}
+    host.append(el('p','独立核实尚缺；本次不产生已证实的经营原因。','notice'));
+  }
+  if(data.gaps.length){const list=el('ul',undefined,'reason-list');for(const gap of data.gaps)list.append(el('li',gap.message));host.append(acceptanceDetails('缺口与下一步',list));}
+  const binding=el('div');binding.append(el('p','底稿版本 '+data.revision+'；规则 '+data.rule_version,'small'),el('p','查询摘要：'+data.query_sha256,'mono'),el('p','材料摘要：'+data.bundle_sha256,'mono'));
+  for(const limitation of data.limitations||[])binding.append(el('p',limitation,'small'));
+  host.append(acceptanceDetails('范围、版本与限制',binding));
+}
+async function queryEvidence(){
+  if(!task||!session||dirty||busy||writeFlow.pending())return;
+  resetQuery();const generation=queryGeneration,identity=epoch,id=task.id,revision=task.revision;
+  let payload;try{payload=queryPayload();}catch(error){$('queryState').textContent=error.message;return;}
+  const current=()=>generation===queryGeneration&&identity===epoch&&task?.id===id&&task?.revision===revision&&!dirty;
+  queryLoading=true;$('queryState').textContent='正在按所选范围核对当前保存版本。';syncQueryControls();
+  try{
+    const raw=await api('/api/research/tasks/'+encodeURIComponent(id)+'/evidence-query',{method:'POST',body:JSON.stringify(payload)},true);
+    if(!current())return;
+    const data=JSON.parse(raw);
+    if(!validQueryResponse(data,payload,task))throw new Error('返回范围或材料身份与本次查询不一致，请重试。');
+    renderQuery(data);queryRaw=raw;queryResult=data;$('queryState').textContent='已查询保存版本 '+revision+'；结果仅对应本次明确选择，自由问题未作语义判断。';
+  }catch(error){if(current()){queryRaw=null;queryResult=null;$('queryResults').replaceChildren();$('queryState').textContent='本次查询未完成：'+(error.message||error)+' 请核对范围或重新载入任务后重试。';}}
+  finally{if(current()){queryLoading=false;syncQueryControls();}}
+}
+function exportQuery(){
+  if(!queryRaw||!queryResult||dirty||busy||writeFlow.pending()||!task||!validQueryResponse(queryResult,queryPayload(),task))throw new Error('查询已过期，请按当前选择重新查询。');
+  const url=URL.createObjectURL(new Blob([queryRaw],{type:'application/json'})),a=el('a');a.href=url;a.download='creditlens-query-'+task.id+'-v'+task.revision+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('queryState').textContent='已下载本次范围查询；原底稿及审批保持原样。';
+}
+$('queryKind').addEventListener('change',()=>querySelectionChanged(true));
+for(const id of ['queryIssuer','queryMetric','queryYear','queryOtherIssuer','queryOtherYear'])$(id).addEventListener(id.includes('Year')?'input':'change',()=>querySelectionChanged());
+$('queryEvidence').addEventListener('click',queryEvidence);
+$('exportQuery').addEventListener('click',()=>{try{exportQuery();}catch(error){resetQuery(error.message);syncQueryControls();}});
+
 run(async()=>{const health=await api('/health');if(health.auth_mode!=='demo'){$('role').hidden=true;$('roleLabel').hidden=true;$('key').hidden=false;$('connect').hidden=false;$('identityLabel').textContent='需要工作区身份';$('status').textContent='输入工作区 API key 后连接。';return;}await connect();});
 </script></body></html>

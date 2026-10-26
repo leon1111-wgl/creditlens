@@ -44,6 +44,7 @@ from .research_acceptance import (
     build_task_acceptance, task_contract_catalog, ResearchAcceptanceError,
 )
 from .company_attribution import build_company_attribution, CompanyAttributionError
+from .research_query_routes import register_research_query_routes
 from .explanation_review_store import (
     ExplanationReviewStore, ExplanationReviewCreate,
     ExplanationReviewUpdate, ExplanationReviewAction,
@@ -196,6 +197,8 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     @application.get("/api/research/tasks")
     def research_tasks(identity: Actor = Depends(actor)):
         return application.state.research_tasks.list(identity)
+
+    register_research_query_routes(application, actor)
 
     @application.get("/api/research/task-contracts")
     def research_task_contracts(identity: Actor = Depends(actor)):
