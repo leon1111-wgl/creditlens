@@ -77,8 +77,8 @@ Fact 可带 `pdf_location`，保存 1 起算页码、页面尺寸及金额/行�
 
 ## 文档视觉核对（v0.6）
 
-`/documents` 提供只读界面；`GET /api/documents` 返回校验后的运行记录，`GET /api/documents/{document_id}/pages/{page}.png` 返回本地登记页图。API-key 模式下两个 API 都验证身份，允许 viewer；页面图片通过带请求头的 fetch 获取，不把密钥写进 URL。当前仅支持同一组公开微软、苹果案例，不是私有租户文档上传服务。
+`/documents` 提供只读界面；`GET /api/documents` 返回校验后的运行记录，`GET /api/documents/{document_id}/pages/{page}.png?expected_sha256=<image_sha256>` 返回与调用者记录一致的本地登记页图。参数取自已载入报告中对应页面的 `image_sha256`，必须为 64 位小写十六进制 SHA-256；缺失或非法时返回 422。旧的无参数请求不再受支持。API-key 模式下两个 API 都验证身份，允许 viewer；页面图片通过带请求头的 fetch 获取，不把密钥写进 URL。当前仅支持同一组公开微软、苹果案例，不是私有租户文档上传服务。
 
-记录缺失返回 503，结构、引用或配置不一致返回 409；未知／缺失本地图片返回 404，图片哈希不一致返回 409。服务不因 HTTP 请求下载文档或启动 OCR。读取时对照当前事实包重算所有检查及统计；模型输出、参考和管理员权限仍有明确可信边界，不等于防伪鉴定。
+记录缺失返回 503，结构、引用或配置不一致返回 409；未知／缺失本地图片返回 404，图片无法读取或哈希与当前登记、调用者记录任一不一致时返回 409。服务对一次读取的同一份字节完成校验和响应，错误不回显本地路径；响应不缓存。服务不因 HTTP 请求下载文档或启动 OCR。读取时对照当前事实包重算所有检查及统计；模型输出、参考和管理员权限仍有明确可信边界，不等于防伪鉴定。
 
 安装可选 `requirements-ocr.lock`，执行 `python scripts/evaluate_document_ai.py --download` 可在 CPU 重跑到独立 `.run/reproductions/`。需要为网页准备原页时显式加 `--local-dir .run/document-ai`；记录不会覆盖公开冻结报告，完整流程见[安全复现说明](16-experiment-reproduction.md)。完整原页和 OCR 文本留在本地，仓库中保存必要观察与运行记录。详细配置、依赖、许可和失败结果见 [实验说明](13-document-ai-experiment.md)。
