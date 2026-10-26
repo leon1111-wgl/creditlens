@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "id": "row-disambiguation-development-1",
+  "rule_version": "row-disambiguation-1",
+  "role_report": {
+    "path": "artifacts/role-table-lookup-report.json",
+    "sha256": "9b9bbf12cb43726f67c8dd42c8242d55cf2cca353f43224e492ca5c376eb0073"
+  },
+  "input_config": {
+    "path": "configs/role-table-lookup.json",
+    "sha256": "347ee32541c37e5ddf5da02eb953b9aa75dac408cea3be4f2cf5226c249fddb4"
+  },
+  "selection_policy": "all_duplicate_row_label_queries_all_candidate_rows_no_reference_scoring",
+  "queries": [
+    {
+      "id": "query-a1c2babb9b4b65c60e9f",
+      "document_id": "aapl",
+      "page": 34,
+      "query": {
+        "row_label": "Marketable securities",
+        "year": 2025
+      },
+      "baseline_case_ids": [
+        "aapl:short_investments-2025"
+      ]
+    },
+    {
+      "id": "query-47cf29f159b9d22e8abc",
+      "document_id": "aapl",
+      "page": 34,
+      "query": {
+        "row_label": "Marketable securities",
+        "year": 2024
+      },
+      "baseline_case_ids": [
+        "aapl:short_investments-2024"
+      ]
+    },
+    {
+      "id": "query-1733d0fd87cd5caf2b39",
+      "document_id": "aapl",
+      "page": 34,
+      "query": {
+        "row_label": "Term debt",
+        "year": 2025
+      },
+      "baseline_case_ids": [
+        "aapl:current_debt-2025",
+        "aapl:long_debt-2025"
+      ]
+    },
+    {
+      "id": "query-635ba648808f9991d618",
+      "document_id": "aapl",
+      "page": 34,
+      "query": {
+        "row_label": "Term debt",
+        "year": 2024
+      },
+      "baseline_case_ids": [
+        "aapl:current_debt-2024",
+        "aapl:long_debt-2024"
+      ]
+    }
+  ]
+}
