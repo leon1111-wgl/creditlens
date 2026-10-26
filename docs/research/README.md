@@ -64,3 +64,5 @@
 第35轮新增：[同名行契约](row-disambiguation-contract.md)、[候选路径复演](row-disambiguation-experiment.md)、[第二十六份独立审查](advisory-26.md)。辅助选择与自动实验分开，不通过参考分区替用户选行，见[任务](../38-row-disambiguation.md)。
 
 第36轮新增：[选择导出核对契约](row-selection-verification-contract.md)、[可复演控制与CLI](row-selection-verification-experiment.md)、[第二十七份独立审查](advisory-27.md)。检查与可信冻结响应的对应关系，明确无签名与人工参考的范围。
+
+第40轮新增：[单位适用性契约](unit-applicability-contract.md)、[固定材料与五路径控制](unit-applicability-experiment.md)、[第三十一份独立审查](advisory-31.md)。完整读取单位例外后判断能否展开数量级；旧候选与报告不改写，见[功能说明](../42-unit-applicability.md)。
