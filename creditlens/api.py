@@ -274,6 +274,10 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     def research_write_intent_script():
         return FileResponse(ROOT / "creditlens/research-write-intent.js", media_type="text/javascript")
 
+    @application.get("/assets/research-write-journal.js", include_in_schema=False)
+    def research_write_journal_asset():
+        return FileResponse(ROOT / "creditlens/research-write-journal.js", media_type="text/javascript")
+
     @application.get("/api/research/tasks/{task_id}/explanation-reviews")
     def explanation_review_list(task_id: str, identity: Actor = Depends(actor)):
         return application.state.explanation_reviews.list(task_id, identity)
