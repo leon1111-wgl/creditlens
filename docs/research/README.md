@@ -59,3 +59,5 @@
 第33轮新增：[公司说明契约](margin-claims-contract.md)、[来源与算术对照](margin-claims-experiment.md)、[第二十四份独立审查](advisory-24.md)。依据官方管理层讨论核对范围与金额／比率，区别公司原话、会计分解和独立核实，见[任务说明](../36-margin-company-statements.md)。
 
 第35轮新增：[同名行契约](row-disambiguation-contract.md)、[候选路径复演](row-disambiguation-experiment.md)、[第二十六份独立审查](advisory-26.md)。辅助选择与自动实验分开，不通过参考分区替用户选行，见[任务](../38-row-disambiguation.md)。
+
+第36轮新增：[选择导出核对契约](row-selection-verification-contract.md)、[可复演控制与CLI](row-selection-verification-experiment.md)、[第二十七份独立审查](advisory-27.md)。检查与可信冻结响应的对应关系，明确无签名与人工参考的范围。
