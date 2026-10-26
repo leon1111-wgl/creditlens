@@ -57,11 +57,11 @@ CREDITLENS_STATE_DIR 默认 data/，保存 audit.sqlite、workflow.sqlite 和 re
 
 核心工作流不依赖模型。creditlens/planner.py 面向兼容 chat-completions / JSON Schema 的本地服务，例如 vLLM [structured outputs](https://docs.vllm.ai/en/latest/features/structured_outputs/)，具体版本兼容性需实测。
 
-设置 CREDITLENS_MODEL_BASE_URL=http://127.0.0.1:8000/v1 与 CREDITLENS_MODEL 为实际服务模型名，重启后以 demo analyst 调用 POST /api/agent/analyze，输入 case_id、question、k 和可选 as_of。无配置返回 503，不自动下载模型、租卡或调用收费服务。
+设置 CREDITLENS_MODEL_BASE_URL=http://127.0.0.1:8000/v1 与 CREDITLENS_MODEL 为实际服务模型名，重启后以 demo analyst 调用 POST /api/agent/analyze，输入 case_id、question、k 和可选 as_of。无配置返回 503，不自动下载模型或连接外部服务。
 
 模型只能提出计算或证据不足；最多 12 步加减乘除。执行器重读原单元格，拒绝未召回来源、错误引用和任意代码；限制上下文、响应体积和时长。只接受 loopback HTTP，关闭环境代理与重定向。约束限制工具权限，不证明公式语义或金融判断正确。
 
-模拟传输测试覆盖合法计划、虚构引用、非法操作、未来证据排除、坏响应和远程地址拒绝。**此语言模型接口尚无真实推理分数或吞吐结果；OCR 实验见下方**。下一阶段固定模型 revision、提示词、工具预算和数据，比较规则、普通 RAG、受限工具基线，再决定是否微调。
+模拟传输测试覆盖合法计划、虚构引用、非法操作、未来证据排除、坏响应和远程地址拒绝。**此语言模型接口尚无真实推理分数或吞吐结果；OCR 实验见下方**。后续对照需要固定模型 revision、提示词、工具调用约束和数据，比较规则、普通 RAG、受限工具基线，再评估微调效果。
 
 ## PDF 证据重建
 

@@ -1,6 +1,6 @@
 # CreditLens：项目用途、企业需求与技术实现
 
-更新：2026-10-26。功能与运行依据见[当前状态](06-implementation-status.md)。
+更新：2026-10-26。下文分别说明已实现功能、可复查的运行依据及待验证研究。
 
 ## CreditLens 是什么
 
@@ -28,7 +28,7 @@
 
 CreditLens围绕这段工作设计：让材料容易找到，让计算保持同一口径，让不确定的地方有明确去向。研究员负责提出问题和解释，程序负责核对可以写成规则的条件，复核员检查提交时那一版材料。未来加入预测和因子，也要回答它在什么数据、什么时期有效，不能只展示一条好看的曲线。
 
-需求来自岗位材料、官方产品和公开研究资料，现阶段尚无客户访谈或机构部署效果。具体依据见[岗位与业务调研](01-product-requirements.md)和[企业研究任务设计](research/2026-10-25-enterprise-research-design.md)。
+需求依据来自官方产品和公开研究资料，现阶段尚无客户访谈或机构部署效果。具体问题与验收方法见[企业问题与产品需求](01-product-requirements.md)。
 
 ## 一项研究怎样在团队里走完
 
@@ -92,7 +92,7 @@ CreditLens围绕这段工作设计：让材料容易找到，让计算保持同�
 
 预测先从下一目标季度经营现金流开始，以去年同季、季节统计、线性和树模型作为基线，再评估 **Time-MoE（ICLR 2025）** 等候选。因子研究则把“利润增长但现金回收转弱”等判断写成公式，参考 **AlphaForge（AAAI 2025）** 的公式化发现与组合思路，检查重复、复杂度和稳定性。按时间滚动验证，并单独检验未见公司；报告失败时期和成本。这部分目前是研究计划，尚无预测、alpha或收益结果。[Time-MoE论文](https://proceedings.iclr.cc/paper_files/paper/2025/hash/558d48c1f08675daa636e09bfe94a89e-Abstract-Conference.html) · [AlphaForge论文](https://ojs.aaai.org/index.php/AAAI/article/view/33365/35520) · [实验设计](10-time-series-and-factors.md)
 
-企业关系与组合研究随后再接入。参考吴庆耀老师参与的Melody-GCN、STDM、Cafe-GCN和Caracal，把公开关系与模型统计关联分开，关系边保留来源及可得时间；先比较纯数字、加入文本和加入关系后的差异。收益任务还需要历史成分、退市、公司行动和交易成本，不能拿现金流预测代替。[论文与平台方案](11-financial-research-platform.md)
+企业关系与组合研究随后再接入。Melody-GCN、STDM、Cafe-GCN和Caracal提供多模态、时空图与组合方法参考；应用时要把公开关系与模型统计关联分开，关系边保留来源及可得时间，比较纯数字、加入文本和加入关系后的差异。收益任务还需要历史成分、退市、公司行动和交易成本，不能拿现金流预测代替。[论文与平台方案](11-financial-research-platform.md)
 
 ### 检查模型靠不靠谱：保留失败，再决定是否改进
 
@@ -100,13 +100,9 @@ CreditLens围绕这段工作设计：让材料容易找到，让计算保持同�
 
 后续将加入真实扫描件、跨页表格、图表与正文联合任务，并验证分布外数据、漂移、校准、泄漏和提示注入。人工修正先成为候选数据，经过审核再进入训练或评测，冻结测试集保持独立。是否适用由任务结果决定，不因换了新模型就默认更好。
 
-## 从港大的实际项目里借鉴什么
+## 文档与表格研究参考
 
-公开产学项目提供的是问题和工作方式参照。LITE Lab与Microsoft的尽调工作流让我们关注材料范围、引用和时间线；企业文档PoC提示原型应进入真实工作步骤，验收交接能否完成；德勤与港大合作调查提醒我们考虑数据可用性和团队协作。SAAS Data Science Lab与ImpactInvest的历史合作，则提供多源金融信息关联的界面思路。[产业项目调研](research/2026-10-25-hku-industry-projects.md)
-
-团队的表格与文档研究用于挑选技术候选：OHRBench帮助区分OCR错误如何传到下游，TRivia对应复杂表格结构，TabGPT属于公开研究目标，UniTabE可作为后续表格表示参考。尚未运行的方法不写成本项目成果；OHRBench数据的研究、非商用限制也不能省略。[团队项目与产物](research/2026-10-25-hku-team-projects.md)
-
-学校和企业的合作、用户反馈、论文成绩属于原团队。本项目的经历描述应对应本人实际承担的工作，公开项目不能替代参与证明。
+[OHRBench（ICCV 2025）](https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_OCR_Hinders_RAG_Evaluating_the_Cascading_Impact_of_OCR_on_ICCV_2025_paper.pdf)区分OCR错误如何影响检索与回答；其数据的研究、非商用限制需要单独遵守。[TRivia（CVPR 2026）](https://openaccess.thecvf.com/content/CVPR2026/html/Zhang_TRivia_Self-supervised_Fine-tuning_of_Vision-Language_Models_for_Table_Recognition_CVPR_2026_paper.html)提供复杂表格识别方法，适合进一步比较多行表头与合并单元格。[UniTabE（ICLR 2024）](https://openreview.net/pdf?id=6LLho5X6xV)可作为结构化表格表示的后续参考。以上方法尚未完成本项目同任务上的实验，论文结果不能替代财务正确性或机构部署验证。
 
 ## 目前与下一步
 
@@ -114,13 +110,13 @@ CreditLens围绕这段工作设计：让材料容易找到，让计算保持同�
 
 **近期完善：** 扩充现金流附注和公司解释，并把新增解释纳入独立复核，扩充同口径、多季度材料，继续处理扫描件、跨页表格和公告变更，准备在线演示。
 
-**后续研究：** 通用多模态检索问答、现金流时序预测、财务与文本因子、企业关系及含成本的组合实验。先有合法数据、明确标签和可运行基线，再决定是否租用A100训练。
+**后续研究：** 通用多模态检索问答、现金流时序预测、财务与文本因子、企业关系及含成本的组合实验。模型实验依赖合法数据、明确标签和可运行基线。
 
 ## 方法依据与取舍
 
 文献与开源参考截至2026-10-25已核验的正式论文和作者仓库，包括[ColPali](https://github.com/illuin-tech/colpali)、[Time-MoE](https://github.com/Time-MoE/Time-MoE)、[AlphaForge](https://github.com/DulyHao/AlphaForge)、[RD-Agent](https://github.com/microsoft/RD-Agent)和[Qlib](https://github.com/microsoft/qlib)。目前没有完成这些方法在本项目同任务上的全文复现或效果对照。ColPali仓库已注明旧 `colpali-engine` 路径弃用，真正接入时需要重新核对实现版本和模型许可。
 
-社交媒体和GitHub分享用于发现问题与方法，技术承诺以原始资料和实际运行为准。开发每2小时触发复核，不代表产品数据实时刷新；新公告更新通常也不需要重新训练模型。
+技术结论以原始资料和实际运行为准。当前材料为登记后的披露快照，不是实时行情或公告流；更新公告与重新训练模型是不同的数据处理步骤。
 
 ## 材料没处理完时，下一位同事能接着做
 
