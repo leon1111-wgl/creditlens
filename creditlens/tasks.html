@@ -37,14 +37,15 @@
 <script src="/assets/research-write-intent.js"></script>
 <script>
 const $=id=>document.getElementById(id);let task=null,session=null,busy=false,view='materials',draftDecisions=new Map(),draftHypotheses=[],dirty=false,epoch=0,createKey=null,createSignature=null,acceptanceRaw=null,acceptanceResult=null,attributionRaw=null,attributionResult=null,queryRaw=null,queryResult=null,queryGeneration=0,queryLoading=false;
-let journalIssue=null,recoveryReadRequired=false;
+let journalIssue=null,recoveryReadRequired=false,journalCheckRequired=false;
 const writeJournal=createResearchWriteJournal({namespace:'research'});
 const writeFlow=createResearchWriteFlow({journal:writeJournal,getActor:()=>session,api,getEpoch:()=>epoch,onPending:()=>syncControls(),onCommit:load,onNotice:message=>$('status').textContent=message});
 function writeControls(){
   const info=writeFlow.pendingInfo();journalIssue=info&&!info.id?info.status:null;
-  const pending=writeFlow.pending()||Boolean(journalIssue);$('writeRecovery').hidden=!pending;
+  const pending=journalCheckRequired||writeFlow.pending()||Boolean(journalIssue);$('writeRecovery').hidden=!pending;
   $('recoveryMeta').textContent=info?.id?'待确认：'+info.label+' · 原版本 '+info.revision+' · '+info.id:'';
   $('recoveryMessage').textContent=journalIssue==='identity_mismatch'?'本标签页有其他身份的待确认操作。请切回原身份核对；当前身份不能查看或重试。':journalIssue==='invalid'?'本地待确认记录无法识别，未执行其中的操作。请核对服务端记录后明确清除。':journalIssue==='unavailable'?'浏览器暂不能读取本标签页的待确认记录。请恢复存储访问后重新核对。':recoveryReadRequired?'已找到待确认操作，尚未读到对应的服务端记录。重新核对后才能重试。':'原请求保留在本标签页，刷新后可继续核对；不会自动重试。';
+  if(journalCheckRequired)$('recoveryMessage').textContent='尚未完成本标签页的待确认记录检查。请重新连接或重新核对，暂不进行新操作。';
   if(info?.cleanupRequired)$('recoveryMessage').textContent='服务端已返回结果，但本地待确认记录尚未清除。请重试确认或明确清除，暂不进行新写入。';
   $('refreshRecovery').disabled=busy||!session;
   $('clearJournal').disabled=busy||!session||!$('confirmClearJournal').checked;
@@ -52,7 +53,7 @@ function writeControls(){
   $('discardDraft').hidden=!dirty||pending;$('discardDraft').disabled=busy||!task;
   if(pending)for(const node of document.querySelectorAll('.save,#coverage,#bridgeNote,#includeBridge,#addHypothesis,#submit,#approve,#return,#export,#create,#refresh,#checkAcceptance,#checkAttribution,#exportAcceptance,#exportAttribution,#actionNote,#observations select,#observations input,#hypothesisList input,#hypothesisList textarea,#hypothesisList select,#hypothesisList button,.queue button,#snapshots button'))node.disabled=true;
   for(const id of ['question','selectionReason'])$(id).disabled=busy||pending||session?.role!=='analyst';
-  $('retryWrite').disabled=busy||!info?.retryable||recoveryReadRequired||Boolean(journalIssue);
+  $('retryWrite').disabled=busy||!info?.retryable||journalCheckRequired||recoveryReadRequired||Boolean(journalIssue);
 }
 const statusNames={draft:'草稿 · 待核查',in_review:'已提交 · 待复核',reviewed:'底稿复核完成',returned:'已退回 · 待补充'};
 function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n;}
@@ -62,7 +63,7 @@ function reasons(xs){return [...new Set((xs||[]).map(x=>typeof x==='string'?x:x.
 function showError(e){$('error').textContent=e||'';$('error').hidden=!e;}
 function editable(){return session?.role==='analyst'&&task&&['draft','returned'].includes(task.status);}
 function markDirty(){dirty=true;resetQuery('草稿已修改；保存后重新查询。');resetAttribution('草稿已修改；保存后重新查看。');resetAcceptance('草稿已修改；保存后重新检查。');$('status').textContent='有尚未保存的研究改动。';syncControls();}
-function clear(){journalIssue=null;recoveryReadRequired=false;$('confirmClearJournal').checked=false;resetQuery();writeFlow.clear();busy=false;resetAcceptance();resetAttribution();task=null;session=null;draftDecisions=new Map();draftHypotheses=[];dirty=false;createKey=null;createSignature=null;$('task').hidden=true;$('evidence').hidden=true;for(const id of ['queue','evidence','observations','hypothesisList','snapshots','events','taskTitle','taskMeta','status','selectionText','taskStatus','comparisonTable','crossCompany','limits','snapshotInfo','bridgeResults','bridgeSources','bridgeIssuer','bridgeAdoption'])$(id).replaceChildren();for(const id of ['coverage','actionNote','question','selectionReason','bridgeNote'])$(id).value='';$('identityLabel').textContent='尚未连接身份';showError('');}
+function clear(){journalIssue=null;recoveryReadRequired=false;journalCheckRequired=false;$('confirmClearJournal').checked=false;resetQuery();writeFlow.clear();busy=false;resetAcceptance();resetAttribution();task=null;session=null;draftDecisions=new Map();draftHypotheses=[];dirty=false;createKey=null;createSignature=null;$('task').hidden=true;$('evidence').hidden=true;for(const id of ['queue','evidence','observations','hypothesisList','snapshots','events','taskTitle','taskMeta','status','selectionText','taskStatus','comparisonTable','crossCompany','limits','snapshotInfo','bridgeResults','bridgeSources','bridgeIssuer','bridgeAdoption'])$(id).replaceChildren();for(const id of ['coverage','actionNote','question','selectionReason','bridgeNote'])$(id).value='';$('identityLabel').textContent='尚未连接身份';showError('');}
 async function api(path,options={},raw=false){
   const generation=epoch,headers={'Content-Type':'application/json','X-Demo-Role':$('role').value,...options.headers};
   if($('key').value)headers.Authorization='Bearer '+$('key').value;
@@ -75,7 +76,7 @@ async function api(path,options={},raw=false){
 function syncControls(){syncQueryControls();$('checkAttribution').disabled=busy||!task||dirty;$('exportAttribution').disabled=busy||dirty||!attributionRaw;$('checkAcceptance').disabled=busy||!task||dirty;$('exportAcceptance').disabled=busy||dirty||!acceptanceRaw;const edit=editable(),review=session?.role==='reviewer'&&task?.status==='in_review';$('create').disabled=busy||session?.role!=='analyst';$('refresh').disabled=busy||!session;$('role').disabled=busy;$('connect').disabled=busy;document.querySelectorAll('.save').forEach(b=>b.disabled=busy||!edit);document.querySelectorAll('#observations select,#observations input,#hypothesisList input,#hypothesisList textarea,#hypothesisList select,#hypothesisList button').forEach(n=>n.disabled=busy||!edit);$('coverage').disabled=busy||!edit;$('bridgeNote').disabled=busy||!edit;$('includeBridge').disabled=busy||session?.role!=='analyst';$('addHypothesis').disabled=busy||!edit||draftHypotheses.length>=3;$('submit').disabled=busy||!edit||dirty;$('approve').disabled=busy||!review;$('return').disabled=busy||!review;$('export').disabled=busy||!task?.snapshot;document.querySelectorAll('.queue button,#snapshots button').forEach(b=>b.disabled=busy);$('actionNote').disabled=busy||!(edit||review);writeControls();}
 async function run(fn){if(busy)return;const generation=epoch;busy=true;showError('');syncControls();try{await fn();}catch(e){if(generation===epoch)showError(e.message||e);}finally{if(generation===epoch){busy=false;syncControls();}}}
 function tabs(name){view=name;document.querySelectorAll('.tab-view').forEach(n=>n.hidden=n.id!==name);document.querySelectorAll('[data-tab]').forEach(n=>n.classList.toggle('active',n.dataset.tab===name));}
-async function list(){const rows=await api('/api/research/tasks');$('queue').replaceChildren();if(!rows.length){$('queue').append(el('p','还没有研究任务。','small'));return;}for(const r of rows){const b=el('button',r.question,r.id===task?.id?'active':'');b.append(el('small',(statusNames[r.status]||r.status)+' · v'+r.revision));b.addEventListener('click',()=>run(async()=>{if(dirty){showError('请先保存草稿，再切换研究任务。');return;}load(await api('/api/research/tasks/'+r.id));await list();}));$('queue').append(b);}}
+async function list(){const generation=epoch;let rows;try{rows=await api('/api/research/tasks');if(!Array.isArray(rows))throw new Error('任务列表格式不正确。');}catch(e){if(generation===epoch)$('queue').replaceChildren(el('p','任务列表暂不可用，不能据此判断是否已有任务。请稍后刷新。','small'));throw e;}$('queue').replaceChildren();if(!rows.length){$('queue').append(el('p','还没有研究任务。','small'));return;}for(const r of rows){const b=el('button',r.question,r.id===task?.id?'active':'');b.append(el('small',(statusNames[r.status]||r.status)+' · v'+r.revision));b.addEventListener('click',()=>run(async()=>{if(dirty){showError('请先保存草稿，再切换研究任务。');return;}load(await api('/api/research/tasks/'+r.id));await list();}));$('queue').append(b);}}
 function load(d){resetQuery();resetAcceptance();resetAttribution();task=d;dirty=false;$('creation').open=false;draftDecisions=new Map((d.decisions||[]).map(x=>[x.observation_id,{...x}]));draftHypotheses=structuredClone(d.hypotheses||[]);$('coverage').value=d.coverage_note||'';$('bridgeNote').value=d.bridge_review_note||'';$('actionNote').value='';render();$('status').textContent='已载入任务版本 '+d.revision+'。材料与计算来自同一份记录。';}
 function render(){if(!task)return;$('explanationReviewLink').href='/explanation-reviews?task_id='+encodeURIComponent(task.id);$('task').hidden=false;$('taskTitle').textContent=task.question;$('taskMeta').textContent='版本 '+task.revision+' · 创建人 '+task.created_by+' · 当前材料模式 · '+task.id;$('selectionText').textContent=task.selection_reason;$('taskStatus').textContent=statusNames[task.status]||task.status;$('taskStatus').className='tag '+(task.status==='reviewed'?'good':task.status==='returned'?'warn':'');renderMaterials();renderComparison();renderBridge();renderHypotheses();renderHistory();tabs(view);syncControls();}
 function renderMaterials(){const body=$('observations');body.replaceChildren();$('evidence').hidden=true;for(const o of task.bundle.observations){const tr=el('tr');const title=el('td');title.append(el('div',o.company),el('div',o.label));const inspect=el('button','查看原文与口径','link-button');inspect.addEventListener('click',()=>showEvidence(o));title.append(inspect);tr.append(title,el('td',o.period.start+' — '+o.period.end+'\n'+o.period.days+' 天','period'),el('td',fmt(o.normalized_value),'numeric'));const td=el('td',undefined,'decision-cell'),select=el('select');select.setAttribute('aria-label',o.issuer_id+' '+o.year+' '+o.metric+' 采用决定');[['','尚未决定'],['adopted','采用这项事实'],['rejected','不采用，保留缺口']].forEach(([v,t])=>{const opt=el('option',t);opt.value=v;select.append(opt);});const decision=draftDecisions.get(o.id);select.value=decision?.decision||'';const note=el('input');note.type='text';note.maxLength=2000;note.placeholder='核查后填写采用或拒绝理由';note.setAttribute('aria-label',o.issuer_id+' '+o.year+' '+o.metric+' 核查理由');note.value=decision?.note||'';const update=()=>{if(select.value)draftDecisions.set(o.id,{observation_id:o.id,decision:select.value,note:note.value});else draftDecisions.delete(o.id);markDirty();};select.addEventListener('change',update);note.addEventListener('input',update);td.append(select,note);tr.append(td);body.append(tr);}}
@@ -136,9 +137,9 @@ async function action(kind){if(dirty)throw new Error('请先保存草稿，再�
   if(result){await list();tabs('handoff');}}
 
 async function download(snapshotId){const requested=task.id,query=snapshotId?'?snapshot_id='+encodeURIComponent(snapshotId):'',raw=await api('/api/research/tasks/'+requested+'/export'+query,{},true);const url=URL.createObjectURL(new Blob([raw],{type:'application/json'})),a=el('a');a.href=url;a.download='creditlens-research-'+requested+'-'+(snapshotId||task.snapshot.id)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('status').textContent='已导出指定冻结快照。';}
-async function connect(){const d=await api('/api/session');session=d;$('identityLabel').textContent=d.mode==='demo'?'本地演示 · 身份模拟':d.user_id+' / '+d.role;$('role').hidden=d.mode!=='demo';$('roleLabel').hidden=d.mode!=='demo';$('key').hidden=d.mode==='demo';$('connect').hidden=d.mode==='demo';await list();await restorePendingWrite();syncControls();}
-$('create').addEventListener('click',()=>run(async()=>{if(dirty)throw new Error('请先保存当前研究草稿。');const payload={bundle_id:'msft-aapl-fy2025',question:$('question').value,selection_reason:$('selectionReason').value,material_mode:'current_verified_materials',as_of:null,include_cash_flow_bridge:$('includeBridge').checked},signature=JSON.stringify(payload);if(createSignature!==signature){createSignature=signature;createKey=crypto.randomUUID();}load(await api('/api/research/tasks',{method:'POST',headers:{'Idempotency-Key':createKey},body:signature}));createKey=null;createSignature=null;view='materials';tabs(view);await list();}));
-$('refresh').addEventListener('click',()=>run(async()=>{if(dirty)throw new Error('请先保存草稿，避免刷新覆盖。');if(task)load(await api('/api/research/tasks/'+task.id));await list();}));document.querySelectorAll('.save').forEach(b=>b.addEventListener('click',()=>run(save)));document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>tabs(b.dataset.tab)));$('coverage').addEventListener('input',markDirty);$('bridgeNote').addEventListener('input',markDirty);$('bridgeIssuer').addEventListener('change',renderBridgeResults);$('addHypothesis').addEventListener('click',()=>{if(!editable()||draftHypotheses.length>=3)return;draftHypotheses.push({id:crypto.randomUUID(),text:'',evidence_ids:[],status:'pending',note:''});renderHypotheses();markDirty();});for(const a of ['submit','approve','return'])$(a).addEventListener('click',()=>run(()=>action(a)));$('export').addEventListener('click',()=>run(()=>download(task.snapshot.id)));
+async function connect(){journalCheckRequired=true;syncControls();const d=await api('/api/session');session=d;$('identityLabel').textContent=d.mode==='demo'?'本地演示 · 身份模拟':d.user_id+' / '+d.role;$('role').hidden=d.mode!=='demo';$('roleLabel').hidden=d.mode!=='demo';$('key').hidden=d.mode==='demo';$('connect').hidden=d.mode==='demo';if(await restorePendingWrite())return;await list();syncControls();}
+$('create').addEventListener('click',()=>run(async()=>{if(journalCheckRequired||writeFlow.pending())throw new Error('请先核对本标签页的待确认操作。');if(dirty)throw new Error('请先保存当前研究草稿。');const payload={bundle_id:'msft-aapl-fy2025',question:$('question').value,selection_reason:$('selectionReason').value,material_mode:'current_verified_materials',as_of:null,include_cash_flow_bridge:$('includeBridge').checked},signature=JSON.stringify(payload);if(createSignature!==signature){createSignature=signature;createKey=crypto.randomUUID();}load(await api('/api/research/tasks',{method:'POST',headers:{'Idempotency-Key':createKey},body:signature}));createKey=null;createSignature=null;view='materials';tabs(view);await list();}));
+$('refresh').addEventListener('click',()=>run(async()=>{if(dirty)throw new Error('请先保存草稿，避免刷新覆盖。');if(await restorePendingWrite())return;if(task)load(await api('/api/research/tasks/'+task.id));await list();}));document.querySelectorAll('.save').forEach(b=>b.addEventListener('click',()=>run(save)));document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>tabs(b.dataset.tab)));$('coverage').addEventListener('input',markDirty);$('bridgeNote').addEventListener('input',markDirty);$('bridgeIssuer').addEventListener('change',renderBridgeResults);$('addHypothesis').addEventListener('click',()=>{if(!editable()||draftHypotheses.length>=3)return;draftHypotheses.push({id:crypto.randomUUID(),text:'',evidence_ids:[],status:'pending',note:''});renderHypotheses();markDirty();});for(const a of ['submit','approve','return'])$(a).addEventListener('click',()=>run(()=>action(a)));$('export').addEventListener('click',()=>run(()=>download(task.snapshot.id)));
 
 function resetAcceptance(message='尚未检查。保存材料采用决定后，可重新检查。'){
   acceptanceRaw=null;acceptanceResult=null;$('acceptanceResults').replaceChildren();$('acceptanceState').textContent=message;$('exportAcceptance').disabled=true;
@@ -259,7 +260,7 @@ function exportAttribution(){
 $('checkAttribution').addEventListener('click',()=>run(checkAttribution));
 $('exportAttribution').addEventListener('click',()=>run(async()=>exportAttribution()));
 
-$('retryWrite').addEventListener('click',()=>run(async()=>{if(recoveryReadRequired||journalIssue)return;const result=await writeFlow.retry();if(result){await list();}}));
+$('retryWrite').addEventListener('click',()=>run(async()=>{if(journalCheckRequired||recoveryReadRequired||journalIssue)return;const result=await writeFlow.retry();if(result){await list();}}));
 $('discardDraft').addEventListener('click',()=>run(async()=>{if(!task||writeFlow.pending())return;const id=task.id;const latest=await api('/api/research/tasks/'+encodeURIComponent(id));load(latest);await list();$('status').textContent='已放弃本页未保存改动，并载入服务端版本。';}));
 $('role').addEventListener('change',()=>{epoch++;clear();run(connect);});$('key').addEventListener('input',()=>{epoch++;clear();createKey=null;createSignature=null;syncControls();});$('connect').addEventListener('click',()=>run(connect));
 
@@ -278,7 +279,7 @@ function resetQuery(message='选择范围后查询已保存版本。'){
   $('queryResults').replaceChildren();$('queryState').textContent=message;$('exportQuery').disabled=true;
 }
 function syncQueryControls(){
-  const pending=writeFlow.pending()||Boolean(journalIssue);
+  const pending=journalCheckRequired||writeFlow.pending()||Boolean(journalIssue);
   if(pending&&(queryRaw||queryLoading))resetQuery('写入结果尚未确认；确认后重新查询。');
   $('queryEvidence').disabled=busy||pending||dirty||!task||!session||queryLoading;
   $('exportQuery').disabled=busy||pending||dirty||!queryRaw||!task||!session;
@@ -381,7 +382,9 @@ $('exportQuery').addEventListener('click',()=>{try{exportQuery();}catch(error){r
 
 
 async function restorePendingWrite(){
+  journalCheckRequired=true;
   const restored=writeFlow.restore();
+  journalCheckRequired=false;
   journalIssue=['identity_mismatch','invalid','unavailable'].includes(restored.status)?restored.status:null;
   if(restored.status==='empty'){recoveryReadRequired=false;syncControls();return false;}
   if(journalIssue){syncControls();return true;}
@@ -391,10 +394,10 @@ async function restorePendingWrite(){
     const latest=await api(info.readPath);
     if(generation!==epoch)return true;
     if(latest.id!==info.id||!Number.isSafeInteger(latest.revision)||latest.revision<info.revision)throw new Error('服务端记录与待确认操作不对应。');
-    load(latest);await list();
-    if(generation!==epoch)return true;
+    load(latest);
     recoveryReadRequired=false;
     $('status').textContent='已恢复待确认操作；下方显示服务端当前版本。需要确认结果时，点击“重试原操作”。';
+    try{await list();}catch(e){if(generation===epoch)showError('当前任务已读回，待确认操作仍保留；任务列表暂不可用，可重试原操作或稍后重新核对。');}
   }catch(e){if(generation===epoch)throw e;}
   finally{if(generation===epoch)syncControls();}
   return true;
