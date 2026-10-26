@@ -33,6 +33,7 @@ from .cross_page_routes import install_cross_page_routes
 from .table_lookup_routes import install_table_lookup_routes
 from .word_table_routes import install_word_table_routes
 from .role_table_routes import install_role_table_routes
+from .row_disambiguation_routes import install_row_disambiguation_routes
 from .reference_review_store import ReferenceReviewStore
 from .reference_routes import install_reference_routes
 from .margin_routes import install_margin_routes
@@ -154,6 +155,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     install_table_lookup_routes(application, actor, ROOT)
     install_word_table_routes(application, actor, ROOT)
     install_role_table_routes(application, actor, ROOT)
+    install_row_disambiguation_routes(application, actor, ROOT)
     install_reference_routes(application, actor, ROOT)
     install_margin_routes(application, actor, ROOT)
     install_margin_claim_routes(application, actor, ROOT)
