@@ -30,6 +30,7 @@ jobs:
       - run: python scripts/evaluate_cross_page_evidence.py
       - run: python scripts/evaluate_table_lookup.py --verify-saved
       - run: python scripts/evaluate_word_table_lookup.py --verify-saved
+      - run: python scripts/evaluate_role_table_lookup.py --verify-saved
       - run: python scripts/evaluate_margin_bridge.py --verify-saved
       - run: python scripts/run_margin_claims.py --verify-saved
       - run: python scripts/replay_reference_review.py
@@ -42,6 +43,7 @@ jobs:
       - run: node scripts/check_preparation_current_view.js
       - run: node scripts/check_cross_page_state.js
       - run: node scripts/check_table_lookup_state.js
+      - run: node scripts/check_role_table_state.js
       - run: node scripts/check_reference_review_state.js
       - run: node scripts/check_margin_bridge_state.js
       - run: node scripts/check_margin_claim_state.js

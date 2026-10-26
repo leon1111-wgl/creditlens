@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "id": "role-table-lookup-development-1",
+  "rule_version": "role-table-lookup-1",
+  "query_fields": [
+    "row_label",
+    "year"
+  ],
+  "baseline": {
+    "report_path": "artifacts/word-table-lookup-report.json",
+    "report_sha256": "5526c6d496a304c877ebd2b9121ef314bdf3a36c67fa8023ae34505b68255460",
+    "config_path": "configs/word-table-lookup.json",
+    "config_sha256": "51e8332ac3af7ccc12bf624e57430d6409f9eeb5ad44573fef1af1dff1f8b503"
+  },
+  "thresholds": {
+    "minimum_confidence": 0.9,
+    "parent_containment_tolerance_points": 0.0,
+    "same_parent_symbol_gap_points": 8.0,
+    "cross_parent_policy": "whole_row_dollar_amount_pairs_with_left_barrier",
+    "cross_parent_gap_limit": null
+  },
+  "documents": [
+    {
+      "id": "msft",
+      "source_pdf_sha256": "1d13a76168650bb5efb42f29c6da81aa673e44217d082357ec0815afc70abf2e",
+      "pack_sha256": "bd776c972631cbc6ff6e0cba585cdab2c32d875d21e950ae43987ffc6a033850",
+      "fact_ids": [
+        "revenue-2025",
+        "revenue-2024",
+        "liquid_assets-2025",
+        "liquid_assets-2024",
+        "short_debt-2025",
+        "short_debt-2024",
+        "current_debt-2025",
+        "current_debt-2024",
+        "long_debt-2025",
+        "long_debt-2024",
+        "current_assets-2025",
+        "current_assets-2024",
+        "current_liabilities-2025",
+        "current_liabilities-2024",
+        "cfo-2025",
+        "cfo-2024",
+        "capex-2025",
+        "capex-2024",
+        "net_income-2025",
+        "net_income-2024"
+      ],
+      "pages": [
+        {
+          "page": 50,
+          "width": 594.9599609375,
+          "height": 841.9199829101562,
+          "image_sha256": "80296ebecd3d61aae584ec85ad3b5c7876b9ffd6634f739bc02134e9668f6ffa",
+          "line_count": 96,
+          "word_count": 156,
+          "ocr_relative_path": "msft/ocr-words-50.json",
+          "word_file_sha256": "cb2a3e9ee2321565cea4ddaddcc9210fa3bc88c97b280e6a9fe539cbb1a748aa",
+          "word_sha256": "065835111fba131593aeb76c56da9638a3497bb341e09b44753bc3df0da83e3f",
+          "line_projection_sha256": "809cc0d649c232bf189b84dc67077f58ae0a41abc8d0ed19b99286570ae95da1",
+          "previous_line_sha256": "809cc0d649c232bf189b84dc67077f58ae0a41abc8d0ed19b99286570ae95da1",
+          "line_projection_matches_previous": true
+        },
+        {
+          "page": 52,
+          "width": 594.9599609375,
+          "height": 841.9199829101562,
+          "image_sha256": "5dbf4478b85499fdfbb3dbeacd799f8e6c35438aee70cee9da5dd1590309744f",
+          "line_count": 123,
+          "word_count": 236,
+          "ocr_relative_path": "msft/ocr-words-52.json",
+          "word_file_sha256": "c7760b3a5a505e40ef22715bb683fc6b0f0a4ae877d7e15ea242d918b79d8b43",
+          "word_sha256": "37769792583bbd944d1a9248120a568560dbe4ea35b920e54d33a33fc3b4abc2",
+          "line_projection_sha256": "60fb6a469a1f36d0b58a21fb6569b3cd5dcb9619c94f27c69dc6c4b11d2f7be2",
+          "previous_line_sha256": "60fb6a469a1f36d0b58a21fb6569b3cd5dcb9619c94f27c69dc6c4b11d2f7be2",
+          "line_projection_matches_previous": true
+        },
+        {
+          "page": 53,
+          "width": 594.9599609375,
+          "height": 841.9199829101562,
+          "image_sha256": "d33368ebe49f7876e54df1e7aad0687844e037d414f442de15ad3326aa96f24f",
+          "line_count": 155,
+          "word_count": 298,
+          "ocr_relative_path": "msft/ocr-words-53.json",
+          "word_file_sha256": "c056b7aded38b97608bb1a3e7af55c7892711a3c53433729b72cd6a020440534",
+          "word_sha256": "c016fa9c722fe71e8a0fa43bd08d4bfcbcb2c5e84a6fa852be1c41b4ccb61c15",
+          "line_projection_sha256": "c0bc9eb4710e4fd508433e4670acf66c96cf070dce50f05df38eb7fe8606e4bf",
+          "previous_line_sha256": "c0bc9eb4710e4fd508433e4670acf66c96cf070dce50f05df38eb7fe8606e4bf",
+          "line_projection_matches_previous": true
+        }
+      ]
+    },
+    {
+      "id": "aapl",
+      "source_pdf_sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+      "pack_sha256": "e26e93213bd8041fdd93b228749a468ce241952e673776cb5fa37ad11f2fec43",
+      "fact_ids": [
+        "revenue-2025",
+        "revenue-2024",
+        "cash_equivalents-2025",
+        "cash_equivalents-2024",
+        "short_investments-2025",
+        "short_investments-2024",
+        "short_debt-2025",
+        "short_debt-2024",
+        "current_debt-2025",
+        "current_debt-2024",
+        "long_debt-2025",
+        "long_debt-2024",
+        "current_assets-2025",
+        "current_assets-2024",
+        "current_liabilities-2025",
+        "current_liabilities-2024",
+        "cfo-2025",
+        "cfo-2024",
+        "capex-2025",
+        "capex-2024",
+        "net_income-2025",
+        "net_income-2024"
+      ],
+      "pages": [
+        {
+          "page": 32,
+          "width": 612.0,
+          "height": 792.0,
+          "image_sha256": "abe2728a1398afc64db24fa56e11c3ac38330674c3faa419fe1ba2b385a1e2bc",
+          "line_count": 102,
+          "word_count": 176,
+          "ocr_relative_path": "aapl/ocr-words-32.json",
+          "word_file_sha256": "e596a537ee0bee71a9d5b82846384d402d34096f4d61f83c6fca52eed6cd7d04",
+          "word_sha256": "0a5e6b9675b85fc79c777e49ab71e37e721f442fc62b2cddfa7170712e4c4763",
+          "line_projection_sha256": "4b3ecb6cfc99feda6d92928a0f2af382f74e6929e125a9e8640fe8a100012e29",
+          "previous_line_sha256": "4b3ecb6cfc99feda6d92928a0f2af382f74e6929e125a9e8640fe8a100012e29",
+          "line_projection_matches_previous": true
+        },
+        {
+          "page": 34,
+          "width": 612.0,
+          "height": 792.0,
+          "image_sha256": "9b6e4beaf4a678baa07f015d2e11ed49d8bee455e649cb7596d9e1949c682c39",
+          "line_count": 105,
+          "word_count": 212,
+          "ocr_relative_path": "aapl/ocr-words-34.json",
+          "word_file_sha256": "e7ac90de51a1b8f79a21acf3da5d053d81e89a0dd9ab6b1694b25061195061e8",
+          "word_sha256": "4243a9d784ad87668a8084c5ad1842a7f6ea2733ae9a2d75b852f205263d7d0f",
+          "line_projection_sha256": "1177fe9fe856389d210bf22756de60073f8fb20acf374bd1da6f4654ea098548",
+          "previous_line_sha256": "1177fe9fe856389d210bf22756de60073f8fb20acf374bd1da6f4654ea098548",
+          "line_projection_matches_previous": true
+        },
+        {
+          "page": 36,
+          "width": 612.0,
+          "height": 792.0,
+          "image_sha256": "6d122d5db6e004e8082db496c2c078b8f80fa2780c0ec07cdd9845fed9fafb5a",
+          "line_count": 144,
+          "word_count": 303,
+          "ocr_relative_path": "aapl/ocr-words-36.json",
+          "word_file_sha256": "903d8c2f8b1564f054f2379d585a789e291ca9af3dbc9e695b14920f9c3865ed",
+          "word_sha256": "17670c9e0abb6f83a3d94ee5cd2894d67c188004edf575ab824e174e217ae761",
+          "line_projection_sha256": "32faeedb64798c8930b0182281852fc9a4d1c9ad7cb07c3391893d54dd3c2799",
+          "previous_line_sha256": "32faeedb64798c8930b0182281852fc9a4d1c9ad7cb07c3391893d54dd3c2799",
+          "line_projection_matches_previous": true
+        }
+      ]
+    }
+  ],
+  "scope": {
+    "previously_observed": true,
+    "independent_human_gold": 0,
+    "new_ocr_calls": 0,
+    "known_query_page": true
+  }
+}
