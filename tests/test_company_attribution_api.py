@@ -11,6 +11,11 @@ from creditlens.company_attribution import CompanyAttributionError
 
 
 class CompanyAttributionApiTests(unittest.TestCase):
+    def write_headers(self, *args, **kwargs):
+        # Preserve the original no-key CAS contract; retry keys have separate tests.
+        return {name: value for name, value in self.headers(*args, **kwargs).items()
+                if name != 'Idempotency-Key'}
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         root = Path(self.temp.name)
@@ -41,7 +46,7 @@ class CompanyAttributionApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 201, response.text)
         task = response.json()
         if adopt:
-            response = self.client.patch('/api/research/tasks/'+task['id'], headers=self.headers(), json={
+            response = self.client.patch('/api/research/tasks/'+task['id'], headers=self.write_headers(), json={
                 'revision': task['revision'], 'decisions': [
                     {'observation_id': o['id'], 'decision': 'adopted',
                      'note': '公开材料的模拟采用决定，仅供软件验收使用。'}
@@ -102,11 +107,11 @@ class CompanyAttributionApiTests(unittest.TestCase):
     def test_old_approved_export_and_acceptance_are_byte_unchanged(self):
         task = self.create(adopt=True)
         base = '/api/research/tasks/'+task['id']
-        response = self.client.post(base+'/actions', headers=self.headers(), json={
+        response = self.client.post(base+'/actions', headers=self.write_headers(), json={
             'revision': task['revision'], 'action': 'submit', 'note': '模拟交接，不包含后来提供的解释补充材料。'})
         self.assertEqual(response.status_code, 200, response.text)
         task = response.json()
-        response = self.client.post(base+'/actions', headers=self.headers('reviewer'), json={
+        response = self.client.post(base+'/actions', headers=self.write_headers('reviewer'), json={
             'revision': task['revision'], 'action': 'approve',
             'note': '只确认冻结内容，后续公司的解释需另行采用和复核。',
             'snapshot_sha256': task['snapshot_sha256']})

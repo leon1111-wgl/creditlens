@@ -237,19 +237,21 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
 
     @application.patch("/api/research/tasks/{task_id}")
     def update_research_task(task_id: str, payload: ResearchTaskUpdate,
-                             identity: Actor = Depends(actor)):
+                             identity: Actor = Depends(actor),
+                             idempotency_key: str | None = Header(default=None, min_length=8, max_length=128)):
         return application.state.research_tasks.update(
             task_id, identity, payload.revision,
             [d.model_dump(mode="json") for d in payload.decisions],
             [h.model_dump(mode="json") for h in payload.hypotheses], payload.coverage_note,
-            payload.bridge_review_note)
+            payload.bridge_review_note, idempotency_key=idempotency_key)
 
     @application.post("/api/research/tasks/{task_id}/actions")
     def research_task_action(task_id: str, payload: ResearchTaskAction,
-                             identity: Actor = Depends(actor)):
+                             identity: Actor = Depends(actor),
+                             idempotency_key: str | None = Header(default=None, min_length=8, max_length=128)):
         return application.state.research_tasks.act(
             task_id, identity, payload.revision, payload.action,
-            payload.note, payload.snapshot_sha256)
+            payload.note, payload.snapshot_sha256, idempotency_key=idempotency_key)
 
     @application.get("/api/research/tasks/{task_id}/snapshots/{snapshot_id}")
     def research_task_snapshot(task_id: str, snapshot_id: str,
@@ -264,6 +266,10 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     @application.get("/explanation-reviews", include_in_schema=False)
     def explanation_workspace():
         return FileResponse(ROOT / "creditlens/explanation-reviews.html")
+
+    @application.get("/assets/research-write-intent.js", include_in_schema=False)
+    def research_write_intent_script():
+        return FileResponse(ROOT / "creditlens/research-write-intent.js", media_type="text/javascript")
 
     @application.get("/api/research/tasks/{task_id}/explanation-reviews")
     def explanation_review_list(task_id: str, identity: Actor = Depends(actor)):
@@ -282,17 +288,20 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
 
     @application.patch("/api/research/explanation-reviews/{review_id}")
     def update_explanation_review(review_id: str, payload: ExplanationReviewUpdate,
-                                  identity: Actor = Depends(actor)):
+                                  identity: Actor = Depends(actor),
+                                  idempotency_key: str | None = Header(default=None, min_length=8, max_length=128)):
         return application.state.explanation_reviews.update(
             review_id, identity, payload.revision,
-            [d.model_dump(mode="json") for d in payload.decisions], payload.coverage_note)
+            [d.model_dump(mode="json") for d in payload.decisions], payload.coverage_note,
+            idempotency_key=idempotency_key)
 
     @application.post("/api/research/explanation-reviews/{review_id}/actions")
     def act_explanation_review(review_id: str, payload: ExplanationReviewAction,
-                               identity: Actor = Depends(actor)):
+                               identity: Actor = Depends(actor),
+                               idempotency_key: str | None = Header(default=None, min_length=8, max_length=128)):
         return application.state.explanation_reviews.act(
             review_id, identity, payload.revision, payload.action,
-            payload.note, payload.snapshot_sha256)
+            payload.note, payload.snapshot_sha256, idempotency_key=idempotency_key)
 
     @application.get("/api/research/explanation-reviews/{review_id}/export")
     def export_explanation_review(review_id: str, identity: Actor = Depends(actor),
