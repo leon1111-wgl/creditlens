@@ -123,6 +123,26 @@ class ResearchQueryExperimentTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"changed during replay"):
                 experiment.build_report(self.root)
 
+    def test_checkout_line_endings_match_but_source_content_changes_are_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            for relative in experiment.IMPLEMENTATION_FILES+experiment.SOURCE_FILES:
+                path=root/relative;path.parent.mkdir(parents=True,exist_ok=True)
+                raw=(self.root/relative).read_bytes().replace(b"\r\n",b"\n").replace(b"\r",b"\n")
+                path.write_bytes(raw)
+            lf_hashes=experiment._hashes(root)
+            for relative in experiment.SOURCE_FILES:
+                path=root/relative;path.write_bytes(path.read_bytes().replace(b"\n",b"\r\n"))
+            self.assertEqual(experiment._hashes(root),lf_hashes)
+            self.assertEqual(experiment.validate_report(root,self.report),self.report)
+            path=root/experiment.SOURCE_FILES[0]
+            original=path.read_bytes()
+            changed=original.replace(b"136,162",b"136,163")
+            self.assertNotEqual(original,changed)
+            path.write_bytes(changed)
+            self.assertNotEqual(experiment._hashes(root)[1],lf_hashes[1])
+            with self.assertRaises(ValueError): experiment.validate_report(root,self.report)
+
     def test_default_candidate_failure_cannot_be_saved_as_verified(self):
         import creditlens.research_query as core
         def broken(task,request):
