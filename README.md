@@ -20,7 +20,9 @@ CreditLens 面向投研和风险分析中的财报核查：查到指标并回到
 <details>
 <summary>查看工作台</summary>
 
-![表格取数：指标列表、方法对照与原页](docs/images/table-lookup-workspace.png)
+![表格取数：指标选择、方法对照与原页](docs/images/table-lookup-workspace.png)
+
+![毛利率变化：期间选择与计算结果](docs/images/margin-workspace.png)
 
 </details>
 

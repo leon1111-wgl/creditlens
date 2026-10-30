@@ -7,4 +7,4 @@
 - Preserve frozen inputs and reports. Use isolated outputs for new experiments and verify source versions before adopting results.
 - Run checks appropriate to the change. Keep public links valid and inspect the staged file list before committing. Do not publish secrets, local databases or restricted source documents.
 - Use the repository's verified commit identity. Preserve third-party licenses and contributor history.
-- Keep the interface consistent with the existing gray, white and blue palette, compact layout, and English / Chinese font pairing.
+- Use top-level navigation and module-specific accent palettes. Preserve compact financial tables, clear status colors and the English / Chinese font pairing; reserve dimensional type treatments for the wordmark and page headings.
