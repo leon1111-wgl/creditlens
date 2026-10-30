@@ -71,6 +71,7 @@ jobs:
           node --check artifacts/experiments-syntax.js
           node --check artifacts/transfer-syntax.js
           node --check artifacts/tasks-syntax.js
+          node --check creditlens/workspace.js
           node --check creditlens/research-write-intent.js
           node --check creditlens/research-write-journal.js
           node --check artifacts/explanation-reviews-syntax.js

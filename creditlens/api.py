@@ -174,6 +174,14 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
             raise HTTPException(503, "FinQA dataset missing; run scripts/download_data.py")
         return application.state.service
 
+    @application.get("/assets/workspace.css", include_in_schema=False)
+    def workspace_styles():
+        return FileResponse(ROOT / "creditlens/workspace.css", media_type="text/css")
+
+    @application.get("/assets/workspace.js", include_in_schema=False)
+    def workspace_navigation():
+        return FileResponse(ROOT / "creditlens/workspace.js", media_type="text/javascript")
+
     @application.get("/", include_in_schema=False)
     def index():
         return FileResponse(ROOT / "creditlens/review.html")

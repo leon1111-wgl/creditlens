@@ -140,25 +140,8 @@ button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20
 
 button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
 </style>
-</head>
-<body>
-<div class="app">
-<aside class="sidebar">
-  <a class="brand" href="/">CreditLens</a>
-  <p class="sidebar-caption">金融研究工作台</p>
-  <p class="nav-label">研究与验证</p>
-  <nav class="workspace-nav" aria-label="主导航">
-    <a href="/">信用复核</a>
-    <a href="/tasks">研究任务</a><a href="/research">季度研究</a>
-    <a href="/documents">原页核对</a>
-    <a href="/transfer">新公司核对</a>
-    <a href="/table-lookup">表格取数</a><a href="/experiments" aria-current="page">文档实验</a>
-  <a href="/margin">毛利率变化</a></nav>
-  <p class="sidebar-foot">官方披露样例<br>离线记录 · 人工复核</p>
-</aside>
-<div class="workspace">
-<header class="topbar"><span>研究与验证</span><span aria-hidden="true">/</span><strong>文档实验对照</strong></header>
-<main>
+<link rel="stylesheet" href="/assets/workspace.css"></head>
+<body class="cl-workspace cl-page-experiments"><a class="cl-skip" href="#main-content">跳至内容</a><div class="cl-app"><aside class="cl-sidebar"><a class="cl-brand" href="/tasks">CreditLens</a><p class="cl-brand-caption">金融证据工作台</p><nav class="cl-navigation" aria-label="主导航"><div class="cl-nav-group"><span class="cl-nav-group-title">研究</span><a href="/tasks">研究任务</a><a href="/table-lookup">表格取数</a><a href="/margin">毛利率变化</a><a href="/research">季度研究</a></div><div class="cl-nav-group"><span class="cl-nav-group-title">证据</span><a href="/documents">原页核对</a><a href="/cross-page">跨页证据</a></div><div class="cl-nav-group"><span class="cl-nav-group-title">复核</span><a href="/">信用复核</a><a href="/explanation-reviews">解释补充底稿</a><a href="/reference-review">参考核对</a></div><div class="cl-nav-group"><span class="cl-nav-group-title">材料与实验</span><a href="/experiments" aria-current="page">文档实验</a><a href="/transfer">新公司核对</a><a href="/document-preparation">材料准备</a><a href="/lab">FinQA 实验室</a></div></nav><div class="cl-sidebar-bottom"><span class="cl-local">本地工作区</span><a href="/docs">API 文档 ↗</a></div></aside><div class="cl-main"><header class="cl-topbar"><div class="cl-breadcrumb"><span>材料与实验</span><span aria-hidden="true">/</span><strong>文档实验</strong></div><span class="cl-topnote">金融证据工作台</span></header><main id="main-content" tabindex="-1">
 <header><h1>文档实验对照</h1><p class="intro">比较识别方法与图像退化结果，逐项查看财务数字的核对依据。</p></header>
 <div class="bar toolbar">
   <label>API key（本机演示可留空）<input id="key" type="password" autocomplete="off" placeholder="仅保存在当前页面内存"></label>
@@ -190,9 +173,7 @@ button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f
 <details class="source-section"><summary>来源、配置与复现边界</summary><div id="provenance"></div><p>页面核验已审阅快照的文件哈希、来源绑定和汇总。完整 OCR 的逐字段复算在离线审查中完成。哈希不是独立签名，不能抵御同时重写数据与清单的管理员。</p><p>载入只读取记录，不重新识别图片或抓取最新财报。财报片段可在“原页核对”查看；首次使用需按 README 在本地准备原页。</p></details>
 </section>
 <p class="footer">官方事实、模型观察和人工复核分别记录。当前实验尚未接入审批门禁。</p>
-</main>
-</div>
-</div>
+</main></div></div>
 <script>
 const $=id=>document.getElementById(id);let data=null,epoch=0,controller=null;
 const stateNames={consistent:'一致',conflict:'冲突',insufficient:'证据不足'},variantNames={clean:'原图',blur_0_7:'轻度模糊 · 0.7',contrast_0_65:'降低对比度 · 0.65',jpeg_60:'JPEG 压缩 · 60'},fieldNames={amount:'金额',year:'年份',period:'期间',unit:'单位',row_label:'行标签',section_start:'分区开始',section_end:'分区结束'};
@@ -209,5 +190,5 @@ async function load(){clear();const request=epoch;controller=new AbortController
 $('key').addEventListener('input',clear);$('load').onclick=load;$('company').onchange=renderFacts;$('filter').onchange=renderFacts;$('fact').onchange=renderFact;$('variant').onchange=renderStress;$('stressFilter').onchange=renderStress;
 $('export').onclick=()=>{if(!data)return;const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='creditlens-document-experiments.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};load();
 </script>
-</body>
+<script src="/assets/workspace.js" defer></script></body>
 </html>

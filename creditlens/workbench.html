@@ -49,11 +49,9 @@ button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20
 button.secondary{background:#edf1f7;color:var(--blue)}.brand{color:var(--text)}
 
 button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
-</style></head>
-<body>
-<header><div class="brand">CreditLens<span>金融证据工作台</span></div><nav><a href="/docs">API 文档</a><a href="https://github.com/czyssrs/FinQA" target="_blank" rel="noreferrer">数据来源</a></nav></header>
-<main>
-<div class="intro"><div><h1>从财报证据开始，逐步核验计算。</h1><p class="muted">选择公开财务问题，检索原始段落与表格，再引用单元格完成可复算的分析。当前为真实数据上的检索与计算基线。</p></div><div class="stamp" id="health">正在连接本地服务</div></div>
+</style><link rel="stylesheet" href="/assets/workspace.css"></head>
+<body class="cl-workspace cl-page-workbench"><a class="cl-skip" href="#main-content">跳至内容</a><div class="cl-app"><aside class="cl-sidebar"><a class="cl-brand" href="/tasks">CreditLens</a><p class="cl-brand-caption">金融证据工作台</p><nav class="cl-navigation" aria-label="主导航"><div class="cl-nav-group"><span class="cl-nav-group-title">研究</span><a href="/tasks">研究任务</a><a href="/table-lookup">表格取数</a><a href="/margin">毛利率变化</a><a href="/research">季度研究</a></div><div class="cl-nav-group"><span class="cl-nav-group-title">证据</span><a href="/documents">原页核对</a><a href="/cross-page">跨页证据</a></div><div class="cl-nav-group"><span class="cl-nav-group-title">复核</span><a href="/">信用复核</a><a href="/explanation-reviews">解释补充底稿</a><a href="/reference-review">参考核对</a></div><div class="cl-nav-group"><span class="cl-nav-group-title">材料与实验</span><a href="/experiments">文档实验</a><a href="/transfer">新公司核对</a><a href="/document-preparation">材料准备</a><a href="/lab" aria-current="page">FinQA 实验室</a></div></nav><div class="cl-sidebar-bottom"><span class="cl-local">本地工作区</span><a href="/docs">API 文档 ↗</a></div></aside><div class="cl-main"><header class="cl-topbar"><div class="cl-breadcrumb"><span>材料与实验</span><span aria-hidden="true">/</span><strong>FinQA 实验室</strong></div><span class="cl-topnote">金融证据工作台</span></header><main id="main-content" tabindex="-1">
+<div class="intro"><div><h1>FinQA 证据实验室</h1><p class="muted">选择公开财务问题，检索原始段落与表格，再引用单元格完成可复算的分析。当前为真实数据上的检索与计算基线。</p></div><div class="stamp" id="health">正在连接本地服务</div></div>
 <div class="layout">
 <aside class="panel"><h2>研究任务</h2><label for="filter">查找公司或问题</label><input id="filter" placeholder="例如 V/2008 或 payment">
 <div class="actions"><button id="search-cases" class="secondary">查找题目</button></div>
@@ -73,7 +71,7 @@ button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f
 </section>
 </div></div>
 <footer>FinQA 公开开发集 · 证据定位为数据集段落或表格行 · 本地研究原型，尚未接入生产身份认证与权限系统</footer>
-</main>
+</main></div></div>
 <script>
 const $=id=>document.getElementById(id);
 let cases=[],report=null,activeRequest=null,busy=false;
@@ -108,4 +106,4 @@ $("run").onclick=async()=>{clearReport();try{lock(true);status("正在检索…"
 $("calculate").onclick=async()=>{if(!activeRequest)return;try{lock(true);status("正在复算…");const body={...activeRequest,steps:[{op:$("op").value,left:$("left").value,right:$("right").value}]};const data=await json("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});render(data);status("复算完成，已记录来源和计算步骤。");}catch(e){$("calculation").replaceChildren(text("p",e.message,"error"));status("计算未完成",true)}finally{lock(false)}};
 $("export").onclick=()=>{if(!report)return;const a=document.createElement("a"),url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:"application/json"}));a.href=url;a.download="creditlens-"+report.id+".json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 json("/health").then(d=>{$("health").textContent=d.cases+" 道公开题目 · 本地服务";loadCases()}).catch(e=>{status("本地服务不可用："+e.message,true);$("health").textContent="服务未连接";$("run").disabled=true});
-</script></body></html>
+</script><script src="/assets/workspace.js" defer></script></body></html>

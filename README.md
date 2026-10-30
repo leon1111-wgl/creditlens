@@ -20,8 +20,7 @@ CreditLens 面向投研和风险分析中的财报核查：查到指标并回到
 <details>
 <summary>查看工作台</summary>
 
-![研究任务与比较](docs/images/research-query-comparison.png)
-![单位与例外核对](docs/images/unit-applicability-desktop.jpg)
+![表格取数：指标列表、方法对照与原页](docs/images/table-lookup-workspace.png)
 
 </details>
 

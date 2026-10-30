@@ -23,11 +23,13 @@
 
 ## 如何查看
 
-打开本地 `/table-lookup`，载入保存实验 → 选择公司、结果范围和行名年份 → 并列看两种方法 → 展开原始文字和定位 → 必要时查看已保留原页 → 导出全部记录。顶部统计始终包含所有查询，筛选不会缩小成绩分母。
+打开本地 `/table-lookup`，载入保存实验 → 选择公司、结果范围和行名年份 → 并列看两种方法 → 展开原始文字和定位 → 必要时查看已保留原页 → 导出全部记录。“完整实验统计与方法变化”始终包含所有查询，筛选不会缩小成绩分母。
 
 改选、过滤、重载或切身份后，旧图片和迟到响应不得混入当前视图。原图缺失会提供官方来源入口，不自动下载。页面读取保存结果；重新提取需显式运行复演脚本并提供已有OCR目录。
 
 `GET /api/table-lookup`先校验身份，再检查保存报告；`GET /api/table-lookup/cases/{case_id}/page.png?expected_report_sha256=...`从登记案例取得文档与页码，并校验本地原页。没有任意文件路径或客户端金额写入入口。快照核验与使用完整OCR重跑分别标注，避免把文件内部检查当作再次推理。
+
+左侧导航在13个工作页面保持一致。表格页按资料与指标、方法结果、来源与原页排列；行名搜索仅筛选左侧记录列表，点击具体记录才切换当前查询。原始下拉选择仍可使用。来源区的“展开阅读区”可放大当前原页，按 Escape 收起并返回按钮焦点；不会重新下载或复制另一份证据。窄屏将来源区排列到结果下方，表格在自身容器内横向滚动。
 
 ## 当前结果与复演
 
@@ -41,7 +43,7 @@ python scripts/evaluate_table_lookup.py --verify-saved
 python scripts/evaluate_table_lookup.py --ocr-root .run/document-ai --output my-table-lookup-replay.json
 ```
 
-新文件位于`.run/reproductions/`，已有同名文件时拒绝覆盖。没有完整OCR时只能执行保存结果核验，不会自动下载。页面截图见[桌面视图](images/table-lookup-desktop.png)。
+新文件位于`.run/reproductions/`，已有同名文件时拒绝覆盖。没有完整OCR时只能执行保存结果核验，不会自动下载。页面截图见[桌面视图](images/table-lookup-workspace.png)。
 
 ## 设计依据
 
