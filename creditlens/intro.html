@@ -5,6 +5,8 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 .cl-intro * { box-sizing: border-box; }
 .cl-intro a { color: inherit; }
 .cl-intro :focus-visible { outline: 2px solid var(--cl-focus); outline-offset: 3px; }
+.intro-bar :focus-visible, .stage :focus-visible { outline-color: var(--cl-brass-bright); }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .intro-bar { position: relative; display: flex; align-items: center; gap: 28px; min-height: 60px; padding: 0 max(24px, calc((100vw - 1240px) / 2)); background: var(--cl-night); color: var(--cl-night-ink); }
 .intro-bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5px; pointer-events: none;
   background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--cl-brass-bright) 55%, transparent) 0 1px, transparent 1px 10px) bottom/100% 3px no-repeat,
@@ -128,7 +130,7 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 <section class="stage" aria-labelledby="stage-title"><h2 id="stage-title" hidden>取数读数演示</h2>
 <div class="stage-head"><div class="stage-tabs" id="stageTabs" role="group" aria-label="选择页面"></div><div class="stage-controls"><button type="button" id="prevTarget" aria-label="上一项">‹</button><button type="button" id="pauseTarget" aria-pressed="false">暂停</button><button type="button" id="nextTarget" aria-label="下一项">›</button></div></div>
 <div id="sheet" class="sheet" aria-hidden="true"><div class="stage-fallback">正在读取保存的识别记录…</div></div>
-<div class="stage-foot"><dl class="readout" id="readout" aria-live="polite"></dl><p class="stage-caption" id="stageCaption">画面只绘制仓库中保存的识别片段（文字与坐标），不是原页图像。金额框为“版面行列”方法在取数阶段选中的位置；参考值只在取数之后核对。</p></div>
+<div class="stage-foot"><dl class="readout" id="readout"></dl><p id="stageStatus" class="sr-only" role="status" aria-live="polite"></p><p class="stage-caption" id="stageCaption">画面只绘制仓库中保存的识别片段（文字与坐标），不是原页图像。金额框为“版面行列”方法在取数阶段选中的位置；参考值只在取数之后核对。</p></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="scan" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation=".35" result="soft"/><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="grey"/><feComponentTransfer in="grey" result="grain"><feFuncA type="table" tableValues="0 .16"/></feComponentTransfer><feComposite in="grain" in2="soft" operator="over"/></filter></svg>
 </section></section></div>
 
@@ -252,7 +254,7 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
     return [(x - current.region.x) / current.region.w * g.width, (y - current.region.y) / current.region.h * g.height];
   }
   function show(i) {
-    if (!current?.targets.length) return;
+    if (!current?.targets.length) return null;
     index = (i + current.targets.length) % current.targets.length;
     const t = current.targets[index], focus = t.amount || t.row;
     for (const svg of [current.nodes.base, current.nodes.zoom]) {
@@ -269,6 +271,12 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
     row('定位框', t.amount ? `x ${fmt(t.amount.x0)}–${fmt(t.amount.x1)} · y ${fmt(t.amount.top)}–${fmt(t.amount.bottom)}` : '无（只标出行名）');
     row('单位原文', t.e.unit?.raw_text || '未确认');
     const out = row('结果', ''); out.append(el('span', OUTCOME[t.outcome] || '待核查', 'outcome ' + t.outcome));
+    return t;
+  }
+  function announce(t) {
+    if (!t) return;
+    $('stageStatus').textContent = [t.doc.id.toUpperCase() + ' 第 ' + t.c.page + ' 页', t.c.query.row_label, String(t.c.query.year),
+      t.e.status === 'selected' ? t.e.raw_value : '未选出候选', OUTCOME[t.outcome] || '待核查'].join('，');
   }
   function schedule() {
     clearTimeout(timer);
@@ -277,8 +285,8 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
   }
   function setPaused(value) { paused = value; $('pauseTarget').setAttribute('aria-pressed', String(value)); $('pauseTarget').textContent = value ? '继续' : '暂停'; schedule(); }
 
-  $('prevTarget').onclick = () => { show(index - 1); schedule(); };
-  $('nextTarget').onclick = () => { show(index + 1); schedule(); };
+  $('prevTarget').onclick = () => { announce(show(index - 1)); schedule(); };
+  $('nextTarget').onclick = () => { announce(show(index + 1)); schedule(); };
   $('pauseTarget').onclick = () => setPaused(!paused);
   document.addEventListener('visibilitychange', schedule);
   addEventListener('resize', () => current && show(index));
@@ -298,7 +306,7 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
     .then(response => response.ok ? response.json() : Promise.reject(response.status))
     .then(value => {
       report = value;
-      PAGES.forEach((p, i) => { const b = el('button', p.doc.toUpperCase() + ' · 第 ' + p.page + ' 页'); b.type = 'button'; b.dataset.index = String(i); b.onclick = () => { renderPage(i); schedule(); }; $('stageTabs').append(b); });
+      PAGES.forEach((p, i) => { const b = el('button', p.doc.toUpperCase() + ' · 第 ' + p.page + ' 页'); b.type = 'button'; b.dataset.index = String(i); b.onclick = () => { renderPage(i); announce(current?.targets[0]); schedule(); }; $('stageTabs').append(b); });
       renderPage(0); schedule();
     })
     .catch(status => {

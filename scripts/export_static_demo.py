@@ -258,11 +258,15 @@ def _rewrite_page(source: str) -> str:
 
 
 def _source_commit() -> str | None:
-    if os.getenv("GITHUB_SHA"):
-        return os.environ["GITHUB_SHA"]
+    """The commit the export was built from; CI passes the tested SHA explicitly."""
+    if os.getenv("CREDITLENS_SOURCE_COMMIT"):
+        return os.environ["CREDITLENS_SOURCE_COMMIT"]
     try:
-        return subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True,
-                              check=True).stdout.strip() or None
+        head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True,
+                              check=True).stdout.strip()
+        dirty = subprocess.run(["git", "status", "--porcelain"], cwd=ROOT, capture_output=True, text=True,
+                               check=True).stdout.strip()
+        return (head + "-dirty" if dirty else head) or None
     except (OSError, subprocess.CalledProcessError):
         return None
 

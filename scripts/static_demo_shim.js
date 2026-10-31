@@ -36,17 +36,25 @@
   }
 
   let toastTimer = null;
-  function notify(message) {
+  function toastNode() {
+    let toast = document.getElementById('clStaticToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'clStaticToast'; toast.className = 'cl-static-toast'; toast.hidden = true;
+      toast.setAttribute('role', 'status'); toast.setAttribute('aria-live', 'polite');
+      const text = document.createElement('span'), close = document.createElement('button');
+      close.type = 'button'; close.textContent = '知道了'; close.addEventListener('click', () => { toast.hidden = true; });
+      toast.append(text, close); document.body.append(toast);
+    }
+    return toast;
+  }
+  /* Unrecorded reads stay on screen until dismissed: the page's own error copy may only say "retry". */
+  function notify(message, persistent = false) {
     const show = () => {
-      let toast = document.getElementById('clStaticToast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'clStaticToast'; toast.className = 'cl-static-toast';
-        toast.setAttribute('role', 'status'); toast.setAttribute('aria-live', 'polite');
-        document.body.append(toast);
-      }
-      toast.textContent = message; toast.hidden = false;
-      clearTimeout(toastTimer); toastTimer = setTimeout(() => { toast.hidden = true; }, 7000);
+      const toast = toastNode();
+      toast.firstChild.textContent = message; toast.hidden = false;
+      clearTimeout(toastTimer);
+      if (!persistent) toastTimer = setTimeout(() => { toast.hidden = true; }, 7000);
     };
     if (document.body) show(); else document.addEventListener('DOMContentLoaded', show, {once: true});
   }
@@ -56,7 +64,7 @@
     const method = String(init.method || (input instanceof Request ? input.method : 'GET')).toUpperCase();
     if (url.origin !== location.origin || !(url.pathname.startsWith('/api/') || url.pathname === '/health')) return realFetch(input, init);
     const readOnlyPost = method === 'POST' && READ_ONLY_POST.test(url.pathname);
-    if (!['GET', 'HEAD'].includes(method) && !readOnlyPost) {
+    if (method !== 'GET' && !readOnlyPost) {
       notify(url.pathname === '/api/row-selection-verification' ? '静态演示：上传核对需要本地服务，文件没有发送到任何服务器。'
         : '静态演示：写入没有发送或保存，改动只留在本标签页。');
       return json(403, WRITE_DETAIL);
@@ -68,13 +76,13 @@
     const role = headerValue(init.headers, 'X-Demo-Role');
     const entry = (role && routes[key + ' |role=' + role]) || routes[key];
     if (!entry) {
-      notify('静态演示没有录制这项请求；完整服务请按 README 本地运行。');
+      notify('静态演示没有录制这项请求（例如其他截止日或年度），页面上的“请重试”不会成功。完整服务请按 README 本地运行。', true);
       console.warn('[CreditLens static demo] unrecorded request', key);
       return json(404, MISSING_DETAIL);
     }
     const response = await realFetch(new URL(entry.file, siteRoot), {cache: 'force-cache'});
     if (!response.ok) return json(503, '静态演示的录制文件暂不可用，请刷新后重试。');
-    return new Response(method === 'HEAD' ? null : await response.blob(), {status: entry.status, headers: {'Content-Type': entry.type}});
+    return new Response(await response.blob(), {status: entry.status, headers: {'Content-Type': entry.type}});
   };
 
   /* Links that scripts set at runtime still point at server routes; map them to exported pages. */
@@ -99,6 +107,8 @@
 .cl-static-banner a{color:var(--cl-brass,#85601f);text-decoration:underline;text-underline-offset:3px}
 .cl-static-toast{position:fixed;right:16px;bottom:16px;z-index:70;max-width:min(420px,calc(100vw - 32px));padding:12px 14px;border-radius:8px;background:var(--cl-night,#131a3a);color:var(--cl-night-ink,#eef0fa);border-left:3px solid var(--cl-brass-bright,#d5ac5f);box-shadow:0 10px 30px #0006;font:13px/1.55 var(--cl-font,system-ui,sans-serif)}
 .cl-static-toast[hidden]{display:none}
+.cl-static-toast{display:flex;gap:12px;align-items:flex-start}.cl-static-toast button{flex-shrink:0;min-height:26px;padding:2px 10px;border:1px solid #ffffff40;border-radius:5px;background:transparent;color:inherit;font:inherit;font-size:12px;cursor:pointer}
+.cl-static-banner :focus-visible,.cl-static-toast :focus-visible{outline:2px solid var(--cl-brass-bright,#d5ac5f);outline-offset:2px}
 body.cl-static .lookup-evidence{top:44px}
 @media (max-width:760px){.cl-static-banner{gap:2px 6px;font-size:11px;padding:4px 10px;line-height:1.45}.cl-static-sep{display:none}}`;
     document.head.append(style);
@@ -108,6 +118,7 @@ body.cl-static .lookup-evidence{top:44px}
     const skip = document.querySelector('.cl-skip');
     if (skip) skip.after(strip); else document.body.prepend(strip);
     document.body.classList.add('cl-static');
+    toastNode();
   }
   if (document.body) banner(); else document.addEventListener('DOMContentLoaded', banner, {once: true});
 })();

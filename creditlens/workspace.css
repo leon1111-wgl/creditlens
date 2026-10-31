@@ -86,9 +86,9 @@ body.cl-workspace {
 .cl-workspace .cl-primary-nav { display: flex; align-items: stretch; align-self: stretch; gap: 4px; padding: 0; margin: 0; background: none; border: 0; }
 .cl-primary-nav a { --tab: var(--cl-iris-bright); position: relative; display: flex; align-items: center; gap: 8px; min-height: 60px; padding: 0 14px; color: var(--cl-night-muted); font-size: 14px; font-weight: 500; white-space: nowrap; border-radius: 0; }
 .cl-primary-nav a::before { content: ""; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--tab); flex-shrink: 0; }
-.cl-primary-nav a[href="/documents"], .cl-primary-nav a[href="documents.html"], .cl-primary-nav a[data-section="evidence"] { --tab: #8fc0f2; }
-.cl-primary-nav a[href="/"], .cl-primary-nav a[data-section="review"] { --tab: #f0a4b6; }
-.cl-primary-nav a[href="/experiments"], .cl-primary-nav a[href="experiments.html"], .cl-primary-nav a[data-section="lab"] { --tab: #8dd3c1; }
+.cl-primary-nav a[data-section="evidence"] { --tab: #8fc0f2; }
+.cl-primary-nav a[data-section="review"] { --tab: #f0a4b6; }
+.cl-primary-nav a[data-section="lab"] { --tab: #8dd3c1; }
 .cl-primary-nav a.is-current { color: var(--cl-night-ink); background: none; font-weight: 600; box-shadow: none; }
 .cl-primary-nav a.is-current::before { background: var(--tab); }
 .cl-primary-nav a.is-current::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 7px; height: 2px; background: var(--tab); border-radius: 1px; }
@@ -148,7 +148,7 @@ body.cl-workspace {
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cl-workspace :is(button.primary,.primary), :root:not([data-theme="light"]) .cl-workspace :is(button.primary,.primary):hover:not(:disabled) { color: #0b1026; } }
 .cl-workspace button:disabled, .cl-workspace button.primary:disabled { color: var(--cl-faint); background: var(--cl-sunken); border-color: var(--cl-line); opacity: 1; cursor: not-allowed; filter: none; }
 .cl-workspace :focus-visible { outline: 2px solid var(--cl-focus); outline-offset: 3px; }
-.cl-masthead :focus-visible { outline-color: var(--cl-brass-bright); }
+.cl-masthead :focus-visible, .lookup-evidence :focus-visible, .cl-page-tasks .task-head :focus-visible, .cl-page-research #evidence-panel :focus-visible, .cl-page-documents .document-paper :focus-visible { outline-color: var(--cl-brass-bright); }
 .cl-workspace :is(button,a,input,select,summary) { transition: background-color .16s ease, border-color .16s ease, color .16s ease; }
 .cl-workspace textarea { resize: vertical; padding: 9px 11px; line-height: 1.65; border: 1px solid var(--cl-line-strong); }
 .cl-workspace label { font-size: 12px; color: var(--cl-muted); }
