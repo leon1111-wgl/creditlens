@@ -2,6 +2,8 @@
 
 ### 多模态金融证据工作台
 
+**[在线演示](https://leon1111-wgl.github.io/creditlens/)** · 静态页面回放仓库中保存的结果，写入不会保存；完整服务请按[本地运行](#本地运行)启动。项目仍在开发中。
+
 CreditLens 面向投研和风险分析中的财报核查：查到指标并回到原文，检查数字是否可比，整理经营变化的依据。数字、计算、公司解释和待验证假设分别保存，研究底稿可以修订、复核和导出。
 
 ## 主要功能
@@ -20,9 +22,13 @@ CreditLens 面向投研和风险分析中的财报核查：查到指标并回到
 <details>
 <summary>查看工作台</summary>
 
-![表格取数：指标选择、方法对照与原页](docs/images/table-lookup-workspace.png)
+![介绍页：放大镜沿保存的识别片段移动，读出金额、页码与定位框](docs/images/intro-landing.png)
 
-![毛利率变化：期间选择与计算结果](docs/images/margin-workspace.png)
+![表格取数：方法对照与来源原页，原页为保存识别片段的重建示意](docs/images/table-lookup-workspace.png)
+
+![毛利率变化：期间选择、三项毛利率与分解结果](docs/images/margin-workspace.png)
+
+![研究任务：模拟业务场景的底稿、采用决定与复核状态](docs/images/research-tasks-workspace.png)
 
 ![季度研究：按截止日查看季度变化与原始依据](docs/images/research-workspace.png)
 
@@ -43,6 +49,7 @@ python -m venv .venv
 
 macOS / Linux 使用 `.venv/bin/python`。工作台使用仓库内的小型财务事实包，当前功能无需 GPU 或模型密钥。
 
+- [介绍页](http://127.0.0.1:8765/intro)：工作台概览与核查路线。
 - [研究任务](http://127.0.0.1:8765/tasks)：建立任务、核对材料、记录理由、提交与复核。
 - [表格取数](http://127.0.0.1:8765/table-lookup)：选择实验和样例，查看金额、原文位置与单位。
 - [经营变化](http://127.0.0.1:8765/margin)：查看毛利率分解及公司说明。
@@ -77,6 +84,8 @@ python -m unittest discover -s tests -v
 python scripts/check_artifacts.py
 python scripts/evaluate_unit_applicability.py --verify-saved
 ```
+
+静态演示由 `python scripts/export_static_demo.py --output site` 在 GitHub Actions 中录制确定性服务的读取结果，`node scripts/check_static_demo.js site` 逐条核对；录制范围与限制见[静态演示说明](docs/43-static-demo.md)。
 
 文档实验的模型、输入和完整复演方法见[OCR 实验说明](docs/13-document-ai-experiment.md)及[复现说明](docs/16-experiment-reproduction.md)。FinQA 页内检索需另按登记版本下载数据，使用 `python scripts/evaluate_retrieval.py` 运行。
 

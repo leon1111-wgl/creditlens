@@ -182,6 +182,14 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     def workspace_navigation():
         return FileResponse(ROOT / "creditlens/workspace.js", media_type="text/javascript")
 
+    @application.get("/assets/theme.js", include_in_schema=False)
+    def workspace_theme():
+        return FileResponse(ROOT / "creditlens/theme.js", media_type="text/javascript")
+
+    @application.get("/intro", include_in_schema=False)
+    def product_intro():
+        return FileResponse(ROOT / "creditlens/intro.html")
+
     @application.get("/", include_in_schema=False)
     def index():
         return FileResponse(ROOT / "creditlens/review.html")

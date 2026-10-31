@@ -42,3 +42,6 @@ artifacts/margin-syntax.js
 /docs/05-roadmap-and-github.md
 /docs/06-implementation-status.md
 /docs/15-parallel-iteration.md
+
+# Static demo output is built by .github/workflows/pages.yml.
+/site/

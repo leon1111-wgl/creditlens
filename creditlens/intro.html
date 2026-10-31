@@ -1,0 +1,311 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CreditLens · 多模态金融证据工作台</title>
+<meta name="description" content="CreditLens：查到财报指标后回到原页位置，核对口径与可比性，拆解毛利率变化，并把研究底稿交给同事复核。">
+<script src="/assets/theme.js"></script><link rel="stylesheet" href="/assets/workspace.css"><style>
+body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font: 15px/1.65 var(--cl-font); -webkit-font-smoothing: antialiased; }
+.cl-intro * { box-sizing: border-box; }
+.cl-intro a { color: inherit; }
+.cl-intro :focus-visible { outline: 2px solid var(--cl-focus); outline-offset: 3px; }
+.intro-bar { position: relative; display: flex; align-items: center; gap: 28px; min-height: 60px; padding: 0 max(24px, calc((100vw - 1240px) / 2)); background: var(--cl-night); color: var(--cl-night-ink); }
+.intro-bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5px; pointer-events: none;
+  background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--cl-brass-bright) 55%, transparent) 0 1px, transparent 1px 10px) bottom/100% 3px no-repeat,
+              repeating-linear-gradient(90deg, color-mix(in srgb, var(--cl-brass-bright) 75%, transparent) 0 1px, transparent 1px 50px) bottom/100% 5px no-repeat; }
+.intro-mark { display: inline-flex; align-items: center; font: 650 20px/1 var(--cl-font); letter-spacing: -.4px; text-decoration: none; color: var(--cl-night-ink); }
+.intro-mark .loupe { position: relative; width: 15px; height: 15px; margin-right: 10px; border: 2px solid var(--cl-brass-bright); border-radius: 50%; }
+.intro-mark .loupe::after { content: ""; position: absolute; width: 7px; height: 2px; right: -7px; bottom: -3px; background: var(--cl-brass-bright); border-radius: 1px; transform: rotate(45deg); }
+.intro-mark b { font-weight: 500; color: var(--cl-brass-bright); }
+.intro-links { display: flex; gap: 20px; margin-left: auto; font-size: 13px; }
+.intro-links a { color: var(--cl-night-muted); text-decoration: none; }
+.intro-links a:hover { color: var(--cl-night-ink); }
+.intro-enter-sm { padding: 7px 14px; border-radius: 6px; background: var(--cl-iris-bright); color: #12102b !important; font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.intro-enter-sm:hover { filter: brightness(1.06); }
+.intro-wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+.intro-hero { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.25fr); gap: 48px; align-items: center; padding: 56px 0 44px; }
+.intro-kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; color: var(--cl-iris); font-size: 13px; font-weight: 600; letter-spacing: .4px; }
+.intro-chip { padding: 1px 8px; border: 1px solid currentColor; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.intro-hero h1 { margin: 0 0 18px; font: 650 clamp(26px, 2.6vw, 38px)/1.3 var(--cl-font); letter-spacing: -.8px; color: var(--cl-ink); }
+.intro-hero h1 em { font-style: normal; color: var(--cl-brass); white-space: nowrap; }
+.intro-lede { margin: 0 0 26px; color: var(--cl-muted); font-size: 15px; max-width: 34em; }
+.intro-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.intro-enter { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 8px; background: var(--cl-night); color: var(--cl-night-ink) !important; font-weight: 600; text-decoration: none; border: 1px solid var(--cl-night); }
+.intro-enter span { color: var(--cl-iris-bright); }
+.intro-enter:hover { background: var(--cl-night-2); }
+:root[data-theme="dark"] .intro-enter { background: var(--cl-iris-bright); color: #12102b !important; border-color: var(--cl-iris-bright); }
+:root[data-theme="dark"] .intro-enter span { color: #12102b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .intro-enter { background: var(--cl-iris-bright); color: #12102b !important; border-color: var(--cl-iris-bright); } :root:not([data-theme="light"]) .intro-enter span { color: #12102b; } }
+.intro-ghost { padding: 11px 16px; border-radius: 8px; border: 1px solid var(--cl-line-strong); color: var(--cl-ink-2) !important; text-decoration: none; font-size: 14px; }
+.intro-ghost:hover { border-color: var(--cl-ink-2); }
+.intro-source-note { margin: 22px 0 0; font-size: 12px; color: var(--cl-faint); max-width: 36em; }
+
+/* The light table: a reconstructed filing fragment under a brass loupe. */
+.stage { position: relative; padding: 16px 16px 14px; border-radius: 12px; background: radial-gradient(ellipse at 50% 40%, #1f2a5c 0, transparent 70%), var(--cl-night-2); border: 1px solid var(--cl-night-line); color: var(--cl-night-ink); }
+.stage-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.stage-tabs, .stage-controls { display: flex; gap: 6px; }
+.stage button { min-height: 30px; padding: 4px 10px; border: 1px solid var(--cl-night-line); border-radius: 6px; background: transparent; color: var(--cl-night-muted); font: 500 12px/1 var(--cl-font); cursor: pointer; }
+.stage button:hover { color: var(--cl-night-ink); border-color: var(--cl-night-muted); }
+.stage button[aria-pressed="true"] { color: var(--cl-night-ink); border-color: var(--cl-iris-bright); background: #ffffff0d; }
+.stage-tabs button { font-family: var(--cl-mono); }
+.sheet { position: relative; margin: 0; border-radius: 3px; background: #f1ede2; box-shadow: 0 14px 34px #00000070, 0 0 0 1px #00000030; overflow: hidden; touch-action: pan-y; }
+.sheet svg { display: block; width: 100%; height: auto; }
+.sheet .base { filter: url(#scan); opacity: .9; }
+.lens { position: absolute; z-index: 2; width: var(--d); height: var(--d); border-radius: 50%; overflow: hidden; pointer-events: none;
+  box-shadow: 0 0 0 3px var(--cl-brass-bright), 0 0 0 5px #3a2a0c, 0 10px 26px #0009; background: #fbf9f3;
+  transition: left .85s cubic-bezier(.3,.7,.2,1), top .85s cubic-bezier(.3,.7,.2,1); }
+.lens::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #ffffff55, transparent 40%); }
+.lens svg { position: absolute; display: block; transition: left .85s cubic-bezier(.3,.7,.2,1), top .85s cubic-bezier(.3,.7,.2,1); }
+.lens-handle { position: absolute; z-index: 1; width: 46px; height: 9px; border-radius: 5px; background: linear-gradient(#c79a4b, #8a6524); box-shadow: 0 4px 10px #0007; transform-origin: 0 50%; transform: rotate(42deg); pointer-events: none; transition: left .85s cubic-bezier(.3,.7,.2,1), top .85s cubic-bezier(.3,.7,.2,1); }
+.sheet.free .lens, .sheet.free .lens svg, .sheet.free .lens-handle { transition: none; }
+.stage-foot { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 14px 18px; margin-top: 14px; align-items: start; }
+.readout { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; font: 12px/1.6 var(--cl-mono); }
+.readout dt { color: var(--cl-night-muted); }
+.readout dd { margin: 0; color: var(--cl-night-ink); overflow-wrap: anywhere; }
+.readout dd.value { color: var(--cl-brass-bright); font-size: 15px; font-weight: 600; }
+.outcome { display: inline-block; padding: 0 7px; border-radius: 4px; font: 600 11px/20px var(--cl-font); }
+.outcome.matched { background: #12301f; color: #8fdcb2; }
+.outcome.wrong { background: #3a1716; color: #f4a59b; }
+.outcome.insufficient { background: #33270f; color: #efc57a; }
+.stage-caption { margin: 0; font-size: 12px; color: var(--cl-night-muted); line-height: 1.6; }
+.stage-caption a { color: var(--cl-brass-bright); }
+.stage-fallback { padding: 40px 16px; text-align: center; color: var(--cl-night-muted); font-size: 13px; }
+
+/* Route: five stops along one brass line, each opening its console page. */
+.intro-section { padding: 46px 0; border-top: 1px solid var(--cl-line); }
+.intro-section h2 { margin: 0 0 6px; font: 650 22px/1.4 var(--cl-font); letter-spacing: -.3px; }
+.intro-section > .intro-wrap > p.lead { margin: 0 0 28px; color: var(--cl-muted); max-width: 46em; }
+.route { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
+.route::before { content: ""; position: absolute; left: 9px; right: 9px; top: 9px; height: 1px; background: color-mix(in srgb, var(--cl-brass) 55%, transparent); }
+.route li { position: relative; min-width: 0; padding-top: 34px; }
+.route li::before { content: ""; position: absolute; left: 0; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--cl-bg); border: 2px solid var(--stop); }
+.route li::after { content: counter(list-item); position: absolute; left: 26px; top: 0; font: 600 11px/18px var(--cl-mono); color: var(--cl-faint); }
+.route li { --stop: var(--cl-research); }
+.route h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; }
+.route .where { margin: 0 0 8px; font: 12px/1.5 var(--cl-mono); color: var(--stop); }
+.route p { margin: 0 0 10px; font-size: 13px; color: var(--cl-muted); }
+.route a { font-size: 13px; color: var(--stop); text-decoration: none; font-weight: 600; }
+.route a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.side-routes { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 30px 0 0; padding: 16px 0 0; border-top: 1px dashed var(--cl-line-strong); font-size: 13px; color: var(--cl-muted); }
+.side-routes a { color: var(--cl-ink-2); font-weight: 600; text-decoration: none; margin-right: 6px; }
+.side-routes a:hover { text-decoration: underline; }
+.scope { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.scope section { padding: 20px 22px; border: 1px solid var(--cl-line); border-radius: 10px; background: var(--cl-surface); }
+.scope h3 { margin: 0 0 10px; font-size: 14px; }
+.scope ul { margin: 0; padding-left: 18px; color: var(--cl-ink-2); font-size: 13px; }
+.scope li { margin: 6px 0; }
+.scope .pending { border-style: dashed; background: transparent; }
+.scope .pending h3 { color: var(--cl-warn); }
+.data-note { margin: 18px 0 0; font-size: 12px; color: var(--cl-muted); max-width: 60em; }
+.intro-foot { padding: 22px 0 36px; border-top: 1px solid var(--cl-line); color: var(--cl-faint); font-size: 12px; }
+.intro-foot a { color: var(--cl-muted); }
+@media (max-width: 1020px) {
+  .intro-hero { grid-template-columns: minmax(0, 1fr); gap: 30px; padding-top: 40px; }
+  .route { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 26px; }
+  .route::before { display: none; }
+}
+@media (max-width: 640px) {
+  .intro-bar { gap: 12px; padding: 0 16px; }
+  .intro-links a:not(.cl-theme) { display: none; }
+  .intro-links { gap: 8px; }
+  .intro-wrap { padding: 0 16px; }
+  .intro-hero { padding: 28px 0 32px; }
+  .stage { padding: 12px 10px 12px; margin: 0 -4px; }
+  .stage-head { flex-wrap: wrap; }
+  .stage-foot { grid-template-columns: minmax(0, 1fr); }
+  .route, .scope { grid-template-columns: minmax(0, 1fr); }
+  .intro-section { padding: 34px 0; }
+}
+@media (prefers-reduced-motion: reduce) { .lens, .lens svg, .lens-handle { transition: none; } }
+</style></head>
+<body class="cl-intro"><a class="cl-skip" href="#main-content">跳至内容</a>
+<header class="intro-bar"><a class="intro-mark" href="/intro" aria-label="CreditLens 介绍页"><span class="loupe" aria-hidden="true"></span>Credit<b>Lens</b></a>
+<nav class="intro-links" aria-label="介绍页"><a href="#route">核查路线</a><a href="#scope">实现范围</a><a href="https://github.com/leon1111-wgl/creditlens">代码</a><button type="button" class="cl-theme" data-theme-toggle aria-label="切换主题"><span class="cl-theme-mark" aria-hidden="true"></span><span class="cl-theme-label">跟随系统</span></button></nav>
+<a class="intro-enter-sm" href="/table-lookup">进入工作台</a></header>
+<main id="main-content" tabindex="-1">
+<div class="intro-wrap"><section class="intro-hero" aria-labelledby="intro-title">
+<div><p class="intro-kicker">多模态金融证据工作台 <span class="intro-chip">开发中</span></p>
+<h1 id="intro-title">每个取到的数字，<br>都能回到<em>原页上的那一格。</em></h1>
+<p class="intro-lede">CreditLens 面向投研和风险分析中的财报核查：查到指标时一并保留页码、定位框和单位原文；先核对口径与可比性，再计算毛利率与现金流变化，最后把固定的研究底稿交给另一位同事复核。</p>
+<div class="intro-actions"><a class="intro-enter" href="/table-lookup">进入工作台 <span aria-hidden="true">→</span></a><a class="intro-ghost" href="https://github.com/leon1111-wgl/creditlens">查看代码</a></div>
+<p class="intro-source-note">当前材料以微软、苹果的官方历史年报为主，文档实验另有 AMD、NVIDIA 案例。页面展示仓库中保存的识别与计算结果，不重新运行 OCR。</p></div>
+<section class="stage" aria-labelledby="stage-title"><h2 id="stage-title" hidden>取数读数演示</h2>
+<div class="stage-head"><div class="stage-tabs" id="stageTabs" role="group" aria-label="选择页面"></div><div class="stage-controls"><button type="button" id="prevTarget" aria-label="上一项">‹</button><button type="button" id="pauseTarget" aria-pressed="false">暂停</button><button type="button" id="nextTarget" aria-label="下一项">›</button></div></div>
+<div id="sheet" class="sheet" aria-hidden="true"><div class="stage-fallback">正在读取保存的识别记录…</div></div>
+<div class="stage-foot"><dl class="readout" id="readout" aria-live="polite"></dl><p class="stage-caption" id="stageCaption">画面只绘制仓库中保存的识别片段（文字与坐标），不是原页图像。金额框为“版面行列”方法在取数阶段选中的位置；参考值只在取数之后核对。</p></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="scan" x="0" y="0" width="100%" height="100%"><feGaussianBlur stdDeviation=".35" result="soft"/><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="grey"/><feComponentTransfer in="grey" result="grain"><feFuncA type="table" tableValues="0 .16"/></feComponentTransfer><feComposite in="grain" in2="soft" operator="over"/></filter></svg>
+</section></section></div>
+
+<section class="intro-section" id="route" aria-labelledby="route-title"><div class="intro-wrap">
+<h2 id="route-title">一条核查路线</h2><p class="lead">工作台按核查顺序组织：先找到数字和它的位置，再判断能否比较、怎样变化，最后固定成可复核的底稿。每一步都保留输入、规则和未解决的问题。</p>
+<ol class="route">
+<li><h3>查指标</h3><p class="where">研究 · 表格取数</p><p>按行名与年份取数。整行、词级和按证据用途三种规则并排，取错与依据不足一同保留。</p><a href="/table-lookup">打开表格取数 →</a></li>
+<li><h3>回到原页</h3><p class="where">来源与原页</p><p>选中金额、年份表头和行名分别标框，附官方文件页码；保存的定位记录可展开核对。</p><a href="/table-lookup">查看定位框 →</a></li>
+<li><h3>核对口径</h3><p class="where">单位适用性 · 同名行</p><p>完整读取单位说明后才展开数量级；同名行先由分析员明确所指，系统不替人选择。</p><a href="/table-lookup">检查单位与同名行 →</a></li>
+<li><h3>毛利率变化</h3><p class="where">研究 · 毛利率变化</p><p>以各公司自身两期数据分解毛利率变化，公式和输入同屏；公司说明与会计计算分开列示。</p><a href="/margin">打开毛利率变化 →</a></li>
+<li><h3>研究交接</h3><p class="where">研究 · 研究任务</p><p>记录采用理由，固定版本快照，交给另一身份复核或退回；修订后原快照仍可导出。</p><a href="/tasks">打开研究任务 →</a></li>
+</ol>
+<p class="side-routes"><span><a href="/research">季度研究</a>按研究截止日查看微软 FY2025 季度变化与原始依据。</span><span><a href="/experiments">文档实验</a>比较定位方法与图像退化下保存的识别结果。</span></p>
+</div></section>
+
+<section class="intro-section" id="scope" aria-labelledby="scope-title"><div class="intro-wrap">
+<h2 id="scope-title">实现范围</h2><p class="lead">工作台只把已实现并经过检查的功能列为可用；其余方向仍在开发中。</p>
+<div class="scope"><section><h3>已实现</h3><ul>
+<li>表格取数三种规则对照，保留候选、定位框和评分记录</li>
+<li>单位适用性检查与同名行的明确选择、导出和核对</li>
+<li>毛利率与经营现金流的确定性分解，Decimal 计算，公式可展开</li>
+<li>研究任务：采用理由、版本快照、独立复核与退回、导出一致性核对</li>
+<li>文档实验：保存的 CPU OCR 结果、方法对照和图像退化结果</li>
+</ul></section><section class="pending"><h3>开发中 · 尚未实现</h3><ul>
+<li>预测模型与组合实验</li>
+<li>通用多模态问答与自动公告更新</li>
+<li>跨页续表、图表取数和同口径历史材料</li>
+<li>独立人工金标准，以及未参与调参材料上的评测</li>
+</ul></section></div>
+<p class="data-note">企业数据来自官方历史披露，仓库只保存必要数值、口径和来源定位，完整 PDF 与完整 OCR 不随仓库分发。现有材料属于开发样例；来源可追溯、计算一致，不代表披露真实性或经营原因已获独立证实。</p>
+</div></section>
+</main>
+<footer class="intro-foot"><div class="intro-wrap">CreditLens · 代码采用 MIT 许可 · <a href="https://github.com/leon1111-wgl/creditlens">github.com/leon1111-wgl/creditlens</a></div></footer>
+<script>
+'use strict';
+(() => {
+  const $ = id => document.getElementById(id);
+  const PAGES = [{doc: 'msft', page: 52}, {doc: 'aapl', page: 34}];
+  const OUTCOME = {matched: '金额与位置符合参考', wrong: '与参考不同', insufficient: '依据不足'};
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const svgNS = 'http://www.w3.org/2000/svg';
+  let report = null, current = null, index = 0, paused = reduced.matches, hovering = false, timer = null;
+  const fmt = n => (Math.round(n * 10) / 10).toFixed(1);
+  function el(tag, text, cls) { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (cls) n.className = cls; return n; }
+  function svgEl(tag, attrs) { const n = document.createElementNS(svgNS, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); return n; }
+
+  function collect(document, pageNumber) {
+    const meta = document.pages.find(p => p.page === pageNumber);
+    const cases = document.cases.filter(c => c.page === pageNumber);
+    const spans = new Map();
+    for (const c of cases) for (const method of Object.values(c.methods))
+      for (const evidence of Object.values(method.extraction.evidence || {}))
+        if (Array.isArray(evidence)) for (const e of evidence) if (e.span?.bbox) spans.set(e.span_index, e.span);
+    const boxes = [...spans.values()].map(s => s.bbox);
+    const region = {x: Math.max(0, Math.min(...boxes.map(b => b.x0)) - 12), y: Math.max(0, Math.min(...boxes.map(b => b.top)) - 14)};
+    region.w = Math.min(meta.width, Math.max(...boxes.map(b => b.x1)) + 12) - region.x;
+    region.h = Math.min(meta.height, Math.max(...boxes.map(b => b.bottom)) + 16) - region.y;
+    const targets = cases.map(c => {
+      const e = c.methods.layout.extraction, ev = e.evidence || {};
+      const amount = (ev.amounts || []).find(a => a.span_index === e.selected_span_index);
+      const year = (ev.year_headers || []).find(y => y.span.text.trim() === String(c.query.year));
+      return {c, doc: document, e, amount: amount?.span.bbox || null, year: year?.span.bbox || null, row: ev.row_label?.[0]?.span.bbox || null,
+        outcome: c.methods.layout.score.outcome};
+    }).filter(t => t.amount || t.row);
+    return {document, meta, region, spans: [...spans.values()], targets};
+  }
+
+  function drawContent(view, crisp) {
+    const g = svgEl('g', {});
+    g.append(svgEl('rect', {x: view.region.x, y: view.region.y, width: view.region.w, height: view.region.h, fill: crisp ? '#fbf9f3' : '#f1ede2'}));
+    const rows = [...new Set(view.spans.map(s => Math.round(s.bbox.bottom / 4) * 4))];
+    for (const y of rows) g.append(svgEl('line', {x1: view.region.x + 8, x2: view.region.x + view.region.w - 8, y1: y + 2.5, y2: y + 2.5, stroke: '#1c1a14', 'stroke-opacity': crisp ? .08 : .05, 'stroke-width': .6}));
+    for (const s of view.spans) {
+      const b = s.bbox, h = b.bottom - b.top, t = svgEl('text', {x: b.x0, y: b.bottom - h * .22, 'font-size': (h * .74).toFixed(2), textLength: (b.x1 - b.x0).toFixed(2), lengthAdjust: 'spacingAndGlyphs', fill: crisp ? '#191712' : '#4a463d', 'font-family': '"Times New Roman", Times, "Songti SC", serif'});
+      t.textContent = s.text; g.append(t);
+    }
+    return g;
+  }
+  function drawMarks(target, crisp) {
+    const g = svgEl('g', {fill: 'none'});
+    const rect = (b, attrs) => b && g.append(svgEl('rect', {x: b.x0 - 1.5, y: b.top - 1.5, width: b.x1 - b.x0 + 3, height: b.bottom - b.top + 3, rx: 1, ...attrs}));
+    rect(target.row, {stroke: '#737b87', 'stroke-width': crisp ? .9 : .6, 'stroke-opacity': crisp ? .9 : .5});
+    rect(target.year, {stroke: '#995e17', 'stroke-width': crisp ? .9 : .6, 'stroke-dasharray': '2 1.5', 'stroke-opacity': crisp ? 1 : .5});
+    rect(target.amount, {stroke: '#2856a6', 'stroke-width': crisp ? 1.6 : 1, 'stroke-opacity': crisp ? 1 : .6, fill: '#2856a614'});
+    return g;
+  }
+  function makeSvg(view, crisp) {
+    const svg = svgEl('svg', {viewBox: `${view.region.x} ${view.region.y} ${view.region.w} ${view.region.h}`, preserveAspectRatio: 'xMidYMid meet', role: 'presentation'});
+    if (!crisp) svg.setAttribute('class', 'base');
+    svg.append(drawContent(view, crisp), svgEl('g', {class: 'marks'}));
+    return svg;
+  }
+
+  function renderPage(i) {
+    const choice = PAGES[i], document = report.report.documents.find(d => d.id === choice.doc);
+    if (!document) return;
+    current = collect(document, choice.page); index = 0;
+    for (const b of $('stageTabs').children) b.setAttribute('aria-pressed', String(b.dataset.index === String(i)));
+    const sheet = $('sheet'); sheet.replaceChildren();
+    const base = makeSvg(current, false), lens = el('div', undefined, 'lens'), handle = el('div', undefined, 'lens-handle'), zoom = makeSvg(current, true);
+    lens.append(zoom); sheet.append(base, handle, lens);
+    current.nodes = {sheet, base, lens, zoom, handle};
+    show(0);
+  }
+  function geometry() {
+    const {sheet} = current.nodes, width = sheet.clientWidth, height = width * current.region.h / current.region.w;
+    const d = Math.round(Math.min(Math.max(width * .3, 104), 176));
+    return {width, height, d, zoom: 2.1};
+  }
+  function place(px, py) {
+    const {lens, zoom, handle} = current.nodes, g = geometry();
+    lens.style.setProperty('--d', g.d + 'px');
+    lens.style.left = (px - g.d / 2) + 'px'; lens.style.top = (py - g.d / 2) + 'px';
+    zoom.style.width = (g.width * g.zoom) + 'px'; zoom.style.height = (g.height * g.zoom) + 'px';
+    zoom.style.left = (g.d / 2 - px * g.zoom) + 'px'; zoom.style.top = (g.d / 2 - py * g.zoom) + 'px';
+    const r = g.d / 2, a = 42 * Math.PI / 180;
+    handle.style.left = (px + Math.cos(a) * (r + 2)) + 'px'; handle.style.top = (py + Math.sin(a) * (r + 2) - 4) + 'px';
+  }
+  function toPixels(x, y) {
+    const g = geometry();
+    return [(x - current.region.x) / current.region.w * g.width, (y - current.region.y) / current.region.h * g.height];
+  }
+  function show(i) {
+    if (!current?.targets.length) return;
+    index = (i + current.targets.length) % current.targets.length;
+    const t = current.targets[index], focus = t.amount || t.row;
+    for (const svg of [current.nodes.base, current.nodes.zoom]) {
+      const marks = drawMarks(t, svg === current.nodes.zoom);
+      marks.setAttribute('class', 'marks'); svg.querySelector('.marks').replaceWith(marks);
+    }
+    place(...toPixels((focus.x0 + focus.x1) / 2, (focus.top + focus.bottom) / 2));
+    const r = $('readout'); r.replaceChildren();
+    const row = (k, v, cls) => { const dd = el('dd', v, cls); r.append(el('dt', k), dd); return dd; };
+    row('文件', t.doc.id.toUpperCase() + ' · 第 ' + t.c.page + ' 页');
+    row('行名', t.c.query.row_label);
+    row('年份', String(t.c.query.year));
+    row('取值', t.e.status === 'selected' ? t.e.raw_value : '未选出候选', 'value');
+    row('定位框', t.amount ? `x ${fmt(t.amount.x0)}–${fmt(t.amount.x1)} · y ${fmt(t.amount.top)}–${fmt(t.amount.bottom)}` : '无（只标出行名）');
+    row('单位原文', t.e.unit?.raw_text || '未确认');
+    const out = row('结果', ''); out.append(el('span', OUTCOME[t.outcome] || '待核查', 'outcome ' + t.outcome));
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (paused || hovering || document.hidden || !current) return;
+    timer = setTimeout(() => { show(index + 1); schedule(); }, 3600);
+  }
+  function setPaused(value) { paused = value; $('pauseTarget').setAttribute('aria-pressed', String(value)); $('pauseTarget').textContent = value ? '继续' : '暂停'; schedule(); }
+
+  $('prevTarget').onclick = () => { show(index - 1); schedule(); };
+  $('nextTarget').onclick = () => { show(index + 1); schedule(); };
+  $('pauseTarget').onclick = () => setPaused(!paused);
+  document.addEventListener('visibilitychange', schedule);
+  addEventListener('resize', () => current && show(index));
+  $('sheet').addEventListener('pointermove', event => {
+    if (event.pointerType !== 'mouse' || !current?.nodes) return;
+    hovering = true; clearTimeout(timer);
+    const box = current.nodes.sheet.getBoundingClientRect();
+    current.nodes.sheet.classList.add('free'); place(event.clientX - box.left, event.clientY - box.top);
+  });
+  $('sheet').addEventListener('pointerleave', () => {
+    if (!current?.nodes) return;
+    hovering = false; current.nodes.sheet.classList.remove('free'); show(index); schedule();
+  });
+
+  setPaused(paused);
+  fetch('/api/table-lookup', {headers: {'X-Demo-Role': 'viewer'}, cache: 'no-store'})
+    .then(response => response.ok ? response.json() : Promise.reject(response.status))
+    .then(value => {
+      report = value;
+      PAGES.forEach((p, i) => { const b = el('button', p.doc.toUpperCase() + ' · 第 ' + p.page + ' 页'); b.type = 'button'; b.dataset.index = String(i); b.onclick = () => { renderPage(i); schedule(); }; $('stageTabs').append(b); });
+      renderPage(0); schedule();
+    })
+    .catch(status => {
+      if (typeof status !== 'number') console.error(status);
+      $('sheet').replaceChildren(el('div', status === 401 ? '此服务启用了访问密钥。进入工作台后在“访问设置”中填写密钥，即可查看保存的取数记录。' : '保存的识别记录暂不可用，请进入工作台重新载入。', 'stage-fallback'));
+      for (const id of ['prevTarget', 'pauseTarget', 'nextTarget']) $(id).disabled = true;
+    });
+})();
+</script>
+</body></html>
