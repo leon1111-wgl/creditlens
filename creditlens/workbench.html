@@ -53,17 +53,17 @@ button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f
 <body class="cl-workspace cl-page-workbench"><a class="cl-skip" href="#main-content">跳至内容</a><div class="cl-app"><header class="cl-masthead"><a class="cl-wordmark" href="/tasks" aria-label="CreditLens 首页"><span>Credit</span><span class="cl-lens">Lens</span></a><nav class="cl-primary-nav" aria-label="工作区导航"><a href="/tasks">研究</a><a href="/documents">证据</a><a href="/">复核</a><a href="/experiments" class="is-current" aria-current="true">材料与实验</a></nav><div class="cl-masthead-meta"><span>金融证据工作台</span><a href="/docs">API 文档</a></div></header><nav class="cl-section-nav" aria-label="材料与实验页面"><a href="/experiments">文档实验</a><a href="/transfer">新公司核对</a><a href="/document-preparation">材料准备</a><a href="/lab" aria-current="page">FinQA 实验室</a></nav><div class="cl-main"><main id="main-content" tabindex="-1">
 <section class="cl-page-heading"><div class="intro"><div><h1>FinQA 证据实验室</h1><p class="muted">选择公开财务问题，检索原始段落与表格，再引用单元格完成可复算的分析。当前为真实数据上的检索与计算基线。</p></div><div class="stamp" id="health">正在连接本地服务</div></div></section>
 <div class="layout">
-<aside class="panel"><h2>研究任务</h2><label for="filter">查找公司或问题</label><input id="filter" placeholder="例如 V/2008 或 payment">
+<section class="panel lab-query"><div class="lab-case"><h2>研究任务</h2><label for="filter">查找公司或问题</label><input id="filter" placeholder="例如 V/2008 或 payment">
 <div class="actions"><button id="search-cases" class="secondary">查找题目</button></div>
 <label for="cases">公开数据案例</label><select id="cases"></select>
-<label for="question">待核验问题</label><textarea id="question"></textarea>
-<label for="asof">信息截止日期（可选）</label><input id="asof" type="date">
+</div><div class="lab-question"><label for="question">待核验问题</label><textarea id="question"></textarea>
+</div><div class="lab-cutoff"><label for="asof">信息截止日期（可选）</label><input id="asof" type="date">
 <div class="section-note">严格时点模式会排除公告日期未知的材料。FinQA 未提供原始公告时间。</div>
-<div class="actions"><button id="run">检索证据</button><button id="export" class="secondary" disabled>导出 JSON</button></div>
+</div><div class="lab-run"><div class="actions"><button id="run" class="primary">检索证据</button><button id="export" class="secondary" disabled>导出 JSON</button></div>
 <div id="status" class="status" role="status" aria-live="polite"></div>
 <div class="notice">当前不调用大模型，也不自动生成授信意见。计算公式、单位和金融含义由分析人员复核。</div>
-</aside>
-<div>
+</div></section>
+<div class="lab-output">
 <section class="panel"><div class="result-head"><h2>来源与证据</h2><span class="muted" id="result-meta">等待检索</span></div><div id="evidence"><div class="empty">选择任务后开始检索。<br>证据将保留报告定位和内容哈希。</div></div></section>
 <section class="panel calc"><h2>确定性计算</h2><p class="muted">从已检索的表格中选择输入，服务端重新读取单元格并计算。</p>
 <div class="calc-fields"><div><label for="left">输入 A</label><select id="left" disabled></select></div><div><label for="op">运算</label><select id="op"><option value="divide">除以</option><option value="subtract">减去</option><option value="add">加上</option><option value="multiply">乘以</option></select></div><div><label for="right">输入 B</label><select id="right" disabled></select></div></div>

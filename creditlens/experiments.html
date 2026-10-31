@@ -144,29 +144,29 @@ button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f
 <body class="cl-workspace cl-page-experiments"><a class="cl-skip" href="#main-content">跳至内容</a><div class="cl-app"><header class="cl-masthead"><a class="cl-wordmark" href="/tasks" aria-label="CreditLens 首页"><span>Credit</span><span class="cl-lens">Lens</span></a><nav class="cl-primary-nav" aria-label="工作区导航"><a href="/tasks">研究</a><a href="/documents">证据</a><a href="/">复核</a><a href="/experiments" class="is-current" aria-current="true">材料与实验</a></nav><div class="cl-masthead-meta"><span>金融证据工作台</span><a href="/docs">API 文档</a></div></header><nav class="cl-section-nav" aria-label="材料与实验页面"><a href="/experiments" aria-current="page">文档实验</a><a href="/transfer">新公司核对</a><a href="/document-preparation">材料准备</a><a href="/lab">FinQA 实验室</a></nav><div class="cl-main"><main id="main-content" tabindex="-1">
 <section class="cl-page-heading"><header><h1>文档实验对照</h1><p class="intro">比较识别方法与图像退化结果，逐项查看财务数字的核对依据。</p></header></section>
 <div class="bar toolbar">
-  <label>API key（本机演示可留空）<input id="key" type="password" autocomplete="off" placeholder="仅保存在当前页面内存"></label>
+
   <button id="load" class="primary">载入实验记录</button>
   <button id="export" class="export" disabled>导出完整对照 JSON</button>
-</div>
+<details class="cl-access"><summary>访问设置</summary><div class="cl-access-fields"><label>API key（本机演示可留空）<input id="key" type="password" autocomplete="off" placeholder="仅保存在当前页面内存"></label></div></details></div>
 <p id="status" role="status" aria-live="polite" class="muted">准备载入已保存的记录。</p>
 <div class="notice"><strong>实验范围</strong>已知原页位置的开发样例；合成退化不等同真实扫描件。一致性结果不代表新文档准确率，也不会自动批准财务数据。</div>
 <section id="results" hidden>
 <div class="overview">
-  <article><h2>字词定位对照</h2><p class="muted">相同六页、相同模型与事实，保留原始行级基线。</p>
+  <article class="experiment-methods"><h2>字词定位对照</h2><p class="muted">相同六页、相同模型与事实，保留原始行级基线。</p>
     <div class="scroll"><table aria-label="字词定位对照汇总"><thead><tr><th scope="col">方法</th><th scope="col">一致</th><th scope="col">冲突</th><th scope="col">不足</th></tr></thead><tbody id="methods"></tbody></table></div>
     <p id="wordNote" class="muted table-note"></p>
   </article>
-  <article><h2>图片退化对照</h2><p class="muted">固定两页，每档核对相同的 20 项事实，采用行级规则。</p>
+  <article class="experiment-degradation"><h2>图片退化对照</h2><p class="muted">固定两页，每档核对相同的 20 项事实，采用行级规则。</p>
     <div class="scroll"><table aria-label="图片退化对照汇总"><thead><tr><th scope="col">条件</th><th scope="col">一致</th><th scope="col">冲突</th><th scope="col">不足</th></tr></thead><tbody id="conditions"></tbody></table></div>
     <p class="muted table-note">轻微退化可能改变文字分组，单页结果变好不能推及总体。</p>
   </article>
 </div>
-<article class="section">
+<article class="section experiment-facts">
   <h2>逐项核对</h2>
   <div class="bar"><label>公司<select id="company"><option value="msft">微软</option><option value="aapl">苹果</option></select></label><label>范围<select id="filter"><option value="changed">仅字词方法状态有变化</option><option value="all">全部登记事实</option></select></label><label>事实<select id="fact"></select></label></div>
   <p id="empty" hidden>当前筛选没有事实，请调整范围。</p><div id="factDetail"></div>
 </article>
-<article class="section">
+<article class="section experiment-stress">
   <h2>退化结果明细</h2>
   <div class="bar"><label>图像条件<select id="variant"></select></label><label>结果范围<select id="stressFilter"><option value="issues">仅不足或冲突</option><option value="all">全部结果</option></select></label></div><div id="stressRows"></div>
 </article>

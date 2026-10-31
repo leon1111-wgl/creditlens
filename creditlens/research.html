@@ -41,7 +41,7 @@ button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f
 <section id="workspace" class="workspace" hidden aria-label="研究结果">
 <div class="snapshot-head"><div><h2 id="snapshot-title"></h2><p class="sub" id="freshness"></p><p class="sub">只按已登记的公告日期筛选；仅有日期时，保守地从公告次日纳入。</p></div><button id="export" type="button" disabled>导出当前研究快照 ↓</button></div>
 <div id="quality" class="quality" aria-label="全部三个指标的数据状态"></div>
-<div class="columns"><section class="panel"><div class="panel-top"><div><h2>季度变化</h2><p class="sub">财年：2024-07-01 — 2025-06-30</p></div><label>查看指标<select id="metric"><option value="cfo">经营现金流</option><option value="capex">固定资产现金支出</option><option value="net_income">净利润</option></select></label></div>
+<div class="columns research-analysis"><section class="panel research-chart"><div class="panel-top"><div><h2>季度变化</h2><p class="sub">财年：2024-07-01 — 2025-06-30</p></div><label>查看指标<select id="metric"><option value="cfo">经营现金流</option><option value="capex">固定资产现金支出</option><option value="net_income">净利润</option></select></label></div>
 <div class="legend"><span>直接披露</span><span class="estimate">计算待复核</span></div><p class="sub" id="chart-unit"></p><div id="chart" class="chart"></div><p id="chart-note" class="sub"></p>
 <div class="table-wrap"><table><caption class="sub">选择“查看依据”追查原始数据</caption><thead><tr><th scope="col">季度</th><th scope="col">金额</th><th scope="col">状态</th><th scope="col">依据</th></tr></thead><tbody id="rows"></tbody></table></div></section>
 <section id="evidence-panel" class="panel evidence" aria-label="所选季度的依据"><h2 id="evidence-title">原始依据</h2><div id="evidence"></div></section></div>

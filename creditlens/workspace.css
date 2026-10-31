@@ -120,7 +120,7 @@ body.cl-page-workbench { --page-accent: #355f8b; --page-wash: #f5f8fc; --page-ti
 .cl-records { display: flex; gap: 16px; align-items: center; padding: 0 0 16px; margin: 0 0 17px; border-bottom: 1px solid var(--line); }
 .cl-records>p { font-size: 12px; color: #59697b; white-space: nowrap; margin: 0; }
 .cl-records>button { flex-shrink: 0; }
-.cl-records .queue { display: flex; gap: 8px; min-width: 0; overflow: auto; margin: 0; max-height: 94px; flex: 1; }
+.cl-records .queue { display: flex; flex-direction: row; gap: 8px; min-width: 0; overflow: auto; margin: 0; max-height: 94px; flex: 1; }
 .cl-records .queue button { display: block; flex: 0 0 250px; text-align: left; padding: 9px 12px; font: 12px/1.5 var(--font); border: 1px solid transparent; border-radius: 12px; background: #fff; color: #3c4c62; }
 .cl-records .queue button.active { border-color: var(--page-accent); background: var(--page-tint); }
 .cl-records .queue small { display: block; margin-top: 4px; }
@@ -276,6 +276,205 @@ body.cl-page-workbench { --page-accent: #355f8b; --page-wash: #f5f8fc; --page-ti
   .cl-page-margin #headline article:last-child { border-bottom: 0; }
   .cl-page-margin #headline .number { font-size: 24px; }
   .cl-page-margin #content>.section { padding: 16px; }
+}
+/* Module workspaces share controls, but arrange evidence around each task. */
+body.cl-workspace { --canvas: #f1f5f7; --glow: #dcefee; background: radial-gradient(ellipse at 92% 5%,var(--glow),transparent 52%),var(--canvas); }
+body.cl-page-tasks { --canvas:#f0f5f3; --glow:#deeee5; }
+body.cl-page-research { --canvas:#f1f4fa; --glow:#dce8f8; }
+body.cl-page-documents { --canvas:#f5f3ee; --glow:#efe5cf; }
+body.cl-page-cross-page { --canvas:#edf4f6; --glow:#dcecf1; }
+body.cl-page-review { --canvas:#f1f2f7; --glow:#e2e4f3; }
+body.cl-page-explanation-reviews { --canvas:#f7f3f4; --glow:#f0dfe6; }
+body.cl-page-reference-review { --canvas:#f4f5ef; --glow:#e8eddb; }
+body.cl-page-experiments { --canvas:#f4f2f8; --glow:#e8dff4; }
+body.cl-page-transfer { --canvas:#f7f3ef; --glow:#f2e4d7; }
+body.cl-page-preparation { --canvas:#f0f4f6; --glow:#dbe8ee; }
+body.cl-page-workbench { --canvas:#f0f3f8; --glow:#e0e7f1; }
+.cl-workspace :is(.task-lobby,.research-analysis,.document-desk,.explanation-desk,.reference-catalog,.reference-observation,.transfer-diagnosis,.preparation-desk,.lab-output)>* { min-width:0; }
+.cl-workspace .toolbar, .cl-workspace .module-toolbar { padding:10px 18px; border-radius:16px; background:#fff; }
+.cl-workspace :is(.toolbar,.module-toolbar)>.cl-access { margin-left:auto; }
+
+/* Research tasks: a brief, recent work and a full-width evidence ledger. */
+.task-lobby { display:grid; grid-template-columns:minmax(260px,.85fr) minmax(0,1.5fr); gap:32px; align-items:center; margin-bottom:22px; }
+.task-lobby .cl-page-heading { margin:0; }
+.task-lobby .cl-records { display:block; margin:0; padding:16px 18px; border:0; border-radius:20px; background:#ffffff8c; }
+.task-lobby .cl-records>p { margin-bottom:9px; }
+.cl-page-tasks .creation-body { background:#fff; }
+.cl-page-tasks #creation { padding:0; overflow:clip; }
+.cl-page-tasks #creation>summary { padding:16px 22px; color:var(--page-accent); background:var(--page-tint); }
+.cl-page-tasks .task-brief { padding:20px 22px; }
+.cl-page-tasks .task-brief .fields { grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); }
+.cl-page-tasks .task-head { padding:24px; margin-top:20px; border-radius:20px; background:#e1eee7; border:0; }
+.cl-page-tasks .task-head h2 { font-size:22px; margin-bottom:8px; }
+.cl-page-tasks #materials { padding:18px; }
+.cl-page-tasks #materials th { background:#edf4f0; }
+
+/* Quarter research: the time cutoff leads into a chart and its source inspector. */
+.cl-page-research .controls { display:grid; grid-template-columns:1.2fr 1fr; align-items:center; gap:8px 22px; }
+.cl-page-research .controls .fields { margin:0; }
+.cl-page-research .presets { display:flex; gap:7px; align-items:center; flex-wrap:wrap; padding:0 0 0 20px; border:0; border-left:1px solid #dce5f0; margin:0; }
+.cl-page-research .controls #status { grid-column:1/-1; margin-bottom:0; }
+.cl-page-research .controls .fields label { display:flex; flex-direction:row; align-items:center; gap:8px; }
+.cl-page-research .workspace { margin-top:16px; }
+.cl-page-research .snapshot-head { margin:18px 0 10px; }
+.cl-page-research .snapshot-head p { margin:4px 0; }
+.cl-page-research #snapshot-title { font-size:22px; }
+.cl-page-research .quality { display:flex; gap:16px; flex-wrap:wrap; padding:0; margin:6px 0 18px; }
+.cl-page-research .quality>* { background:transparent; border:0; padding:0; }
+.cl-page-research .research-analysis { grid-template-columns:minmax(0,1.65fr) minmax(320px,1fr); align-items:start; }
+.cl-page-research .research-chart { padding:24px; background:linear-gradient(150deg,#fff 55%,#edf3fc); }
+.cl-page-research #chart { border:0; border-radius:16px; background:#edf3fc; padding:24px 18px 12px; }
+.cl-page-research #evidence-panel { background:#e4ecf7; box-shadow:none; }
+.cl-page-research #evidence-panel h2 { color:#285383; }
+.cl-page-research .limits { padding:16px 22px; background:#ffffff8c; }
+
+/* Document desk: warm paper surface, large source, narrow fact inspector. */
+.cl-page-documents .document-toolbar { padding:12px 20px; }
+.cl-page-documents .summary { display:flex; flex-wrap:wrap; gap:22px; padding:14px 0 0; margin:0; }
+.cl-page-documents .summary>* { padding:0; background:transparent; border:0; box-shadow:none; }
+.cl-page-documents .document-desk { grid-template-columns:minmax(0,1.55fr) minmax(350px,1fr); align-items:start; }
+.cl-page-documents #workspace>.columns>.document-paper:first-child { background:#eae7df; padding:20px; box-shadow:none; }
+.cl-page-documents .document-paper .viewer { background:#fff; border:0; box-shadow:0 8px 25px #433e3312; }
+.cl-page-documents .document-paper .sub { color:#536278; }
+.cl-page-documents .document-inspector { padding:22px; }
+.cl-page-documents .fact-selector { display:grid; grid-template-columns:1fr; gap:12px; padding:0 0 18px; border-bottom:1px solid #eee8dd; }
+.cl-page-documents .fact-selector label { display:flex; flex-direction:column; gap:5px; }
+.cl-page-documents .fact-selector select { width:100%; }
+.cl-page-documents .source { background:#ffffff80; padding:16px 22px; }
+
+/* Cross-page calculation: two amounts and a separate scope requirement. */
+.cross-context { display:flex; gap:24px; justify-content:space-between; align-items:center; padding:12px 20px; background:#fff; border-radius:18px; }
+.cross-context .bar { margin:0; flex:1; }
+.cross-context #taskMeta { max-width:48%; margin:0; }
+.cl-page-cross-page .choices { display:grid; grid-template-columns:1fr 1fr .85fr; gap:14px; margin:22px 0 14px; }
+.cl-page-cross-page .choices label { padding:14px 16px; border:0; border-radius:14px; background:#e1edf1; }
+.cl-page-cross-page .choices label:last-child { background:#e9ece7; }
+.cl-page-cross-page .choices select { width:100%; margin-top:8px; }
+.cl-page-cross-page .evidence-list { grid-template-columns:1fr 1fr .85fr; gap:14px; }
+.cl-page-cross-page .evidence-list>article { border:0; border-radius:18px; padding:20px; background:#fff; }
+.cross-check { display:flex; justify-content:space-between; align-items:center; gap:20px; margin:22px 0 14px; padding:10px 20px; background:#dcebf0; border-radius:16px; }
+.cross-check p { font-size:12px; color:#4e6270; }
+.cl-page-cross-page #result { padding:24px 28px; border-left:5px solid var(--page-accent); }
+.cl-page-cross-page .formula { font:600 23px/1.5 var(--font); color:#214e64; font-variant-numeric:tabular-nums; }
+
+/* Credit review: portfolio queue, continuous metric strip and review priorities. */
+.cl-page-review .tools { padding:18px 22px; background:#e8eaf4; border:0; border-radius:18px; }
+.cl-page-review #metrics { gap:0; background:#fff; border-radius:20px; padding:8px 4px; margin-bottom:22px; }
+.cl-page-review #metrics .metric { background:transparent; border-radius:0; border-right:1px solid #e9eaf0; }
+.cl-page-review #metrics .metric:last-child { border:0; }
+.cl-page-review .review-overview { grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr); gap:22px; }
+.cl-page-review .review-priorities { background:#e8eaf4; }
+.cl-page-review .review-priorities h2 { color:#454b75; }
+.cl-page-review #goReview { margin-top:18px; }
+.cl-page-review #goReview:not(:disabled) { color:#fff; background:#575d8e; border-color:transparent; }
+.cl-page-review .review-box { padding:20px; background:#edf0f8; border:0; border-radius:16px; }
+
+/* Explanation supplements: editorial evidence column and a distinct handoff. */
+.cl-page-explanation-reviews .explanation-context { background:#f0e4e9; padding:20px 24px; }
+.cl-page-explanation-reviews .explanation-context .fields { grid-template-columns:1.3fr 1fr; }
+.explanation-desk { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(320px,1fr); gap:22px; align-items:start; margin-top:22px; }
+.cl-page-explanation-reviews .explanation-handoff { background:#fffafb; border-top:4px solid #a56d82; }
+.cl-page-explanation-reviews .explanation-handoff .actions { flex-wrap:wrap; }
+.cl-page-explanation-reviews .explanation-claims>h2 { font-size:20px; }
+
+/* Manual observations: source and blank form share a reading desk. */
+.reference-catalog { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr); gap:18px; align-items:start; }
+.cl-page-reference-review #catalogPanel { background:#e9eedf; }
+.cl-page-reference-review #listPanel { background:#fff; }
+.cl-page-reference-review #detail { margin-top:22px; }
+.reference-observation { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(340px,1fr); gap:24px; align-items:start; }
+.reference-page { min-width:0; padding-top:12px; }
+.reference-observation:has(#preview[hidden]) { grid-template-columns:1fr; }
+.reference-observation:has(#entry[hidden]) { grid-template-columns:1fr; }
+.reference-observation:has(#preview[hidden]) .reference-page { display:none; }
+.cl-page-reference-review #entry { padding:20px; background:#f1f4eb; border-radius:16px; border:0; }
+.cl-page-reference-review .form-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.cl-page-reference-review .form-grid label { min-width:0; }
+.cl-page-reference-review .reference-decision { padding:20px; margin-top:22px; background:#f1f4eb; border:0; border-radius:16px; }
+
+/* Experiment results: paired summaries followed by method and stress sections. */
+.cl-page-experiments .overview { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); align-items:start; margin:22px 0; }
+.cl-page-experiments .overview>.experiment-methods { background:#eae3f4; }
+.cl-page-experiments .overview>.experiment-degradation { background:#fff; margin-top:24px; }
+.cl-page-experiments .overview th { background:#f5f2f9; }
+.cl-page-experiments .experiment-facts { padding:24px; background:#fff; border-radius:20px; border:0; margin-bottom:24px; }
+.cl-page-experiments .experiment-facts>.bar { background:#f3eff8; padding:12px 16px; border-radius:14px; }
+.cl-page-experiments .detail { gap:16px; border:0; }
+.cl-page-experiments .detail>section { padding:16px; border:0; border-radius:14px; background:#f6f4fa; }
+.cl-page-experiments .experiment-stress { padding:24px; background:#eeeaf3; border-radius:20px; border:0; }
+
+/* Issuer diagnostics: shared source context, date issues and a compact baseline. */
+.transfer-diagnosis { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr); gap:16px 22px; margin:20px 0; }
+.transfer-source { grid-column:1/-1; }
+.cl-page-transfer .transfer-dates { padding:22px; background:#fff; border:0; border-radius:20px; margin:0; }
+.transfer-summary { padding:22px; background:#eee2d7; border-radius:20px; align-self:start; }
+.transfer-summary .muted, .cl-page-experiments .overview .muted { color:#536278; }
+.cl-page-transfer #company { font-size:22px; margin-bottom:6px; }
+.cl-page-transfer #factList { padding:22px; background:#fff; border:0; border-radius:20px; margin-top:22px; }
+.cl-page-transfer #detail { padding:24px; background:#fffaf5; border:0; border-radius:20px; margin-top:22px; }
+.cl-page-transfer #detail>.detail { gap:16px; border:0; }
+.cl-page-transfer #detail>.detail>section { padding:18px; border:0; border-radius:14px; background:#f1e8de; }
+.cl-page-transfer #inputPanel { padding:14px 18px; border:1px solid #e3d7c9; border-radius:14px; }
+
+/* Preparation: horizontal job history, input beside the selected attempt. */
+.cl-page-preparation .prep-grid>aside { background:#e1ebf0; }
+.preparation-desk { display:grid; grid-template-columns:minmax(320px,.85fr) minmax(0,1.6fr); gap:22px; align-items:start; }
+.cl-page-preparation .preparation-input { padding:22px; background:#fff; border:0; border-radius:20px; }
+.cl-page-preparation .preparation-input .bar { gap:8px; }
+.cl-page-preparation #result { padding:24px; background:#fff; border-radius:20px; }
+.cl-page-preparation #result h2 { font-size:20px; overflow-wrap:anywhere; }
+.cl-page-preparation #editor { padding:12px 14px; background:#edf3f6; border:0; border-radius:12px; }
+.cl-page-preparation #editor textarea { min-height:340px; }
+.cl-page-preparation .attempts { padding:0 0 14px; border-bottom:1px solid #e4ebef; }
+.cl-page-preparation .preparation-desk:not(:has(#result:not([hidden]))) { grid-template-columns:1fr; max-width:950px; }
+
+/* FinQA: a horizontal query composer, then evidence and a calculation bench. */
+.cl-page-workbench .layout { display:block; }
+.cl-page-workbench .lab-query { display:grid; grid-template-columns:1fr 1.5fr .8fr; gap:18px 24px; background:#e2e9f2; padding:22px; }
+.lab-query>div { min-width:0; }
+.lab-query .lab-run { grid-column:1/-1; display:flex; align-items:center; gap:22px; flex-wrap:wrap; border-top:1px solid #ccd7e4; padding-top:14px; }
+.lab-query .lab-run .notice { background:none; margin:0; padding:0; flex:1; min-width:220px; }
+.cl-page-workbench .lab-query input, .cl-page-workbench .lab-query select { margin-bottom:8px; width:100%; }
+.cl-page-workbench .lab-query textarea { min-height:144px; margin:0; }
+.cl-page-workbench .lab-output { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(290px,1fr); gap:22px; margin-top:22px; align-items:start; }
+.cl-page-workbench .lab-output .calc { margin:0; background:#e9eff7; }
+.cl-page-workbench .calc-fields { grid-template-columns:1fr; gap:12px; }
+.cl-page-workbench #calculate { width:100%; }
+
+@media (max-width:1100px) {
+  .task-lobby { grid-template-columns:minmax(230px,.8fr) minmax(0,1.2fr); gap:22px; }
+  .cl-page-research .controls { grid-template-columns:1fr; }
+  .cl-page-research .presets { border:0; padding:0; }
+  .cl-page-research .research-analysis { grid-template-columns:minmax(0,1.3fr) minmax(280px,1fr); }
+  .cl-page-documents .document-desk { grid-template-columns:minmax(0,1.2fr) minmax(300px,1fr); }
+  .preparation-desk, .explanation-desk, .reference-observation { grid-template-columns:minmax(0,1fr); }
+  .cl-page-workbench .lab-query { grid-template-columns:1fr 1.3fr; }
+  .lab-query .lab-cutoff { grid-column:1/-1; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  .cl-page-workbench .lab-cutoff input { width:auto; margin:0; }
+  .lab-cutoff .section-note { flex:1; min-width:250px; }
+}
+@media (max-width:760px) {
+  .task-lobby, .reference-catalog, .transfer-diagnosis, .cl-page-research .research-analysis, .cl-page-documents .document-desk, .cl-page-review .review-overview, .cl-page-experiments .overview, .cl-page-workbench .lab-query, .cl-page-workbench .lab-output { grid-template-columns:minmax(0,1fr); }
+  .task-lobby { gap:18px; }
+  .cl-page-tasks .task-brief .fields, .cl-page-explanation-reviews .explanation-context .fields { grid-template-columns:1fr; }
+  .cl-page-tasks .task-head { padding:18px; }
+  .cl-page-research .controls .fields label { flex-direction:column; align-items:stretch; }
+  .cross-context, .cross-check { display:block; padding:14px 16px; }
+  .cross-context #taskMeta { max-width:none; margin-top:12px; }
+  .cl-page-cross-page .choices, .cl-page-cross-page .evidence-list { grid-template-columns:1fr; }
+  .cl-page-cross-page .choices { gap:8px; }
+  .cl-page-cross-page .choices label { padding:10px 14px; }
+  .cl-page-cross-page .formula { font-size:19px; overflow-wrap:anywhere; }
+  .cl-page-review #metrics .metric { border:0; }
+  .cl-page-experiments .overview>.experiment-degradation { margin:0; }
+  .cl-page-experiments .detail { grid-template-columns:1fr; }
+  .cl-page-reference-review .form-grid { grid-template-columns:1fr; }
+  .cl-page-workbench .lab-run { display:block; }
+  .lab-query .lab-run .notice { margin-top:12px; min-width:0; }
+  .cl-page-workbench .lab-cutoff { display:block; }
+  .cl-page-workbench .lab-cutoff input { width:100%; }
+  .cl-page-workbench .lab-query textarea { min-height:110px; }
+  .cl-page-documents #workspace>.columns>.document-paper:first-child, .cl-page-documents .document-inspector, .cl-page-experiments .experiment-facts, .cl-page-experiments .experiment-stress, .cl-page-transfer #factList, .cl-page-transfer #detail, .cl-page-preparation .preparation-input, .cl-page-preparation #result { padding:16px; }
 }
 @media (prefers-reduced-motion:reduce) {
   html { scroll-behavior: auto !important; }

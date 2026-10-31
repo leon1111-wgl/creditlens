@@ -24,6 +24,10 @@ CreditLens 面向投研和风险分析中的财报核查：查到指标并回到
 
 ![毛利率变化：期间选择与计算结果](docs/images/margin-workspace.png)
 
+![季度研究：按截止日查看季度变化与原始依据](docs/images/research-workspace.png)
+
+![文档实验：定位方法与图像退化结果对照](docs/images/experiments-workspace.png)
+
 </details>
 
 ## 本地运行
