@@ -41,9 +41,10 @@
     if (!toast) {
       toast = document.createElement('div');
       toast.id = 'clStaticToast'; toast.className = 'cl-static-toast'; toast.hidden = true;
-      toast.setAttribute('role', 'status'); toast.setAttribute('aria-live', 'polite');
       const text = document.createElement('span'), close = document.createElement('button');
-      close.type = 'button'; close.textContent = '知道了'; close.addEventListener('click', () => { toast.hidden = true; });
+      text.setAttribute('role', 'status'); text.setAttribute('aria-live', 'polite');
+      close.type = 'button'; close.textContent = '知道了';
+      close.addEventListener('click', () => { toast.hidden = true; toast.dataset.persistent = ''; });
       toast.append(text, close); document.body.append(toast);
     }
     return toast;
@@ -52,7 +53,9 @@
   function notify(message, persistent = false) {
     const show = () => {
       const toast = toastNode();
+      if (!persistent && toast.dataset.persistent && !toast.hidden) return;
       toast.firstChild.textContent = message; toast.hidden = false;
+      toast.dataset.persistent = persistent ? 'true' : '';
       clearTimeout(toastTimer);
       if (!persistent) toastTimer = setTimeout(() => { toast.hidden = true; }, 7000);
     };
@@ -64,6 +67,7 @@
     const method = String(init.method || (input instanceof Request ? input.method : 'GET')).toUpperCase();
     if (url.origin !== location.origin || !(url.pathname.startsWith('/api/') || url.pathname === '/health')) return realFetch(input, init);
     const readOnlyPost = method === 'POST' && READ_ONLY_POST.test(url.pathname);
+    if (method === 'HEAD') return new Response(null, {status: 405});
     if (method !== 'GET' && !readOnlyPost) {
       notify(url.pathname === '/api/row-selection-verification' ? '静态演示：上传核对需要本地服务，文件没有发送到任何服务器。'
         : '静态演示：写入没有发送或保存，改动只留在本标签页。');
