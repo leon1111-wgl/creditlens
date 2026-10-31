@@ -7,4 +7,4 @@
 - Preserve frozen inputs and reports. Use isolated outputs for new experiments and verify source versions before adopting results.
 - Run checks appropriate to the change. Keep public links valid and inspect the staged file list before committing. Do not publish secrets, local databases or restricted source documents.
 - Use the repository's verified commit identity. Preserve third-party licenses and contributor history.
-- Use top-level navigation, a consistent sans-serif type scale and restrained module accents. Keep financial tables compact and readable, with tabular numerals and clear status colors. Use a text wordmark; avoid ornamental type shadows, large decorative headers and template icons in task interfaces.
+- Use top-level navigation, a consistent sans-serif type scale and restrained module accents. Prefer softly rounded surfaces with navy and cool-teal emphasis; avoid repeated nested borders. Keep financial tables compact and readable, with tabular numerals and clear status colors. Use a text wordmark; avoid ornamental type shadows, large decorative headers and template icons in task interfaces.
