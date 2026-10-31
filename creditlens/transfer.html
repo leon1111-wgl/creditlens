@@ -5,7 +5,7 @@
    No Tencent or Feishu component library or brand assets are bundled. */
 :root {
   color-scheme: light;
-  --font: "Times New Roman", "Songti SC", SimSun, "Noto Serif CJK SC", serif;
+  --font: "Segoe UI", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
   --text: #1f2329;
   --muted: #5f6773;
   --line: #dfe3e8;
@@ -125,7 +125,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
 
 /* Shared workspace palette: restrained neutral surfaces and blue actions.
    Native CSS, inspired by office workspaces; no external design-system package. */
-:root{--font:"Times New Roman","Songti SC",SimSun,"Noto Serif CJK SC",serif;--text:#1f2329;--ink:#1f2329;--muted:#5f6773;--line:#dfe3e8;--soft:#f5f6f8;--blue:#2856a6;--green:#2856a6;--accent:#2856a6;--bg:#f5f6f8;--amber:#8a6118;--red:#a5362d;font-family:var(--font);color:var(--text);background:var(--bg)}
+:root{--font:"Segoe UI","PingFang SC","Microsoft YaHei UI","Microsoft YaHei",sans-serif;--text:#1f2329;--ink:#1f2329;--muted:#5f6773;--line:#dfe3e8;--soft:#f5f6f8;--blue:#2856a6;--green:#2856a6;--accent:#2856a6;--bg:#f5f6f8;--amber:#8a6118;--red:#a5362d;font-family:var(--font);color:var(--text);background:var(--bg)}
 body{font:15px/1.6 var(--font);color:var(--text);background:var(--bg)}
 h1,h2,h3,.brand,.logo,.number,.fact-value,.metric .number,.empty h2{font-family:var(--font)}
 h1{font-size:24px;line-height:1.4;letter-spacing:0}h2{font-size:18px}h3{font-size:15px}
@@ -145,7 +145,7 @@ button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20
 .workspace{background:white}.sidebar{background:#f0f2f5}.notice{background:#f2f5fa}
 
 button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
-</style><link rel="stylesheet" href="/assets/workspace.css"></head><body class="cl-workspace cl-page-transfer cl-heading-editorial"><a class="cl-skip" href="#main-content">跳至内容</a><div class="cl-app"><header class="cl-masthead"><a class="cl-wordmark" href="/tasks" aria-label="CreditLens 首页"><span>Credit</span><span class="cl-lens">Lens</span></a><nav class="cl-primary-nav" aria-label="工作区导航"><a href="/tasks">研究</a><a href="/documents">证据</a><a href="/">复核</a><a href="/experiments" class="is-current" aria-current="true">材料与实验</a></nav><div class="cl-masthead-meta"><span>金融证据工作台</span><a href="/docs">API 文档</a></div></header><nav class="cl-section-nav" aria-label="材料与实验页面"><a href="/experiments">文档实验</a><a href="/transfer" aria-current="page">新公司核对</a><a href="/document-preparation">材料准备</a><a href="/lab">FinQA 实验室</a></nav><div class="cl-main"><main id="main-content" tabindex="-1">
+</style><link rel="stylesheet" href="/assets/workspace.css"></head><body class="cl-workspace cl-page-transfer"><a class="cl-skip" href="#main-content">跳至内容</a><div class="cl-app"><header class="cl-masthead"><a class="cl-wordmark" href="/tasks" aria-label="CreditLens 首页"><span>Credit</span><span class="cl-lens">Lens</span></a><nav class="cl-primary-nav" aria-label="工作区导航"><a href="/tasks">研究</a><a href="/documents">证据</a><a href="/">复核</a><a href="/experiments" class="is-current" aria-current="true">材料与实验</a></nav><div class="cl-masthead-meta"><span>金融证据工作台</span><a href="/docs">API 文档</a></div></header><nav class="cl-section-nav" aria-label="材料与实验页面"><a href="/experiments">文档实验</a><a href="/transfer" aria-current="page">新公司核对</a><a href="/document-preparation">材料准备</a><a href="/lab">FinQA 实验室</a></nav><div class="cl-main"><main id="main-content" tabindex="-1">
 <section class="cl-page-heading"><h1>新公司文档核对</h1><p class="intro">检查财报里的金额、符号和日期，查看问题来自哪里，并比较规则修改前后的依据。</p></section>
 <div class="bar toolbar"><label>实验任务<select id="experiment" aria-label="实验任务"><option value="issuer">AMD · 固定规则检查</option><option value="date">NVIDIA · 日期规则开发对照</option><option value="currency">AMD · 金额符号开发对照</option><option value="guard">金额证据完整性 · 开发对照</option></select></label><label>访问密钥（本地演示可留空）<input id="key" aria-label="访问密钥" type="password" autocomplete="off" placeholder="只随请求发送，不保存"></label><button id="load" class="primary">载入结果</button><button id="export" class="export" disabled>导出核对记录</button></div>
 <p id="status" role="status" aria-live="polite">正在载入…</p>

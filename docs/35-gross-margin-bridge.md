@@ -49,6 +49,8 @@
 
 启动本地应用后打开 `/margin`。选择公司，查看两期毛利率、分项贡献、输入金额与原页位置；导出完整响应。已鉴权的只读用户可以查看这些公开登记案例，页面不写入研究任务或旧审批；它不支持上传任意企业材料。图片缺失时保留官方报告链接，不自动下载。
 
+公司与期间选择、两期毛利率和变动并列显示，下面紧接分解表。右上角“访问设置”可展开密钥与演示身份；身份变更后，旧计算、公司说明及原页一并清除，重新载入提示保留在页面上。窄屏将指标按行排列，宽表在自身容器内滚动。当前页面见[工作台截图](images/margin-workspace.png)。
+
 ```powershell
 python scripts/evaluate_margin_bridge.py --verify-saved
 python -m unittest discover -s tests -p "test_margin*.py" -v
