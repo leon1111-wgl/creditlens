@@ -2,7 +2,12 @@
 
 ### 多模态金融证据工作台
 
-**[在线演示](https://leon1111-wgl.github.io/creditlens/)** · 静态页面回放仓库中保存的结果，写入不会保存；完整服务请按[本地运行](#本地运行)启动。项目仍在开发中。
+**读财报表格取数，核对单位与口径，保留原文页码和定位证据。**
+Financial figures checked back to the source page.
+
+**[在线演示](https://leon1111-wgl.github.io/creditlens/)** · [代码](https://github.com/leon1111-wgl/creditlens) · [技术文档](#技术文档) · 静态页面回放仓库中保存的结果，写入不会保存；完整服务请按[本地运行](#本地运行)启动。项目仍在开发中。
+
+**关键词 / Keywords**：财报核查 · 表格取数 table lookup · OCR / Document AI · 单位与口径可比性检查 · 原文页码与定位证据 provenance · 毛利率与现金流分解 · 研究底稿复核 · FastAPI · Decimal
 
 CreditLens 面向投研和风险分析中的财报核查：查到指标并回到原文，检查数字是否可比，整理经营变化的依据。数字、计算、公司解释和待验证假设分别保存，研究底稿可以修订、复核和导出。
 
