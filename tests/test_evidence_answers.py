@@ -105,5 +105,20 @@ class EvidenceAnswerTests(unittest.TestCase):
         self.assertEqual(set(pack["pages"]), {"MSFT:50", "MSFT:52", "MSFT:53", "AAPL:32", "AAPL:34", "AAPL:36"})
 
 
+class AskRouteTests(unittest.TestCase):
+    def test_local_service_serves_the_page_and_its_assets(self):
+        import tempfile
+        from fastapi.testclient import TestClient
+        from creditlens.api import create_app
+        with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "missing.json", Path(tmp) / "audit.sqlite")) as client:
+            page = client.get("/ask")
+            self.assertEqual(page.status_code, 200)
+            self.assertIn('src="/assets/ask.js"', page.text)
+            self.assertEqual(client.get("/assets/ask.js").headers["content-type"].split(";")[0], "text/javascript")
+            pack = client.get("/assets/ask-pack.json")
+            self.assertEqual(pack.status_code, 200)
+            self.assertEqual(len(pack.json()["observations"]), 66)
+
+
 if __name__ == "__main__":
     unittest.main()
