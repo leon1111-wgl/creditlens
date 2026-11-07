@@ -119,6 +119,9 @@ export function composeAnswer(pack: Pack, item: PlannedItem, notes: string[] = [
   const row = answer.comparison as ChangeRow;
   card.checks = changeChecks(row);
   const [first, second] = obs;
+  if (first?.kind === 'percent' && row.status === 'computed') {
+    card.checks = [{ text: '两期毛利率来自同一份登记的毛利率分解（margin-bridge-1）：同一公司、同一来源与单位、合并口径、完整年度均已检查。', tone: 'ok' }];
+  }
   if (answer.status === 'blocked') {
     card.headline = `不能计算${metricLabel}的变化：${answer.gaps.map(g => g.message).join(' ')}`;
     card.rows = obs.flatMap(o => o.kind === 'percent' ? [] : [readout(pack, o as Observation, null, null)]);
@@ -160,7 +163,7 @@ export function compose(pack: Pack, question: string): Composed {
   const reading = [
     `公司：${r.issuers.map(i => ZH[i]).join('、')}`, `指标：${r.metrics.map(m => pack.metrics[m]?.label ?? m).join('、')}`,
     `期间：${r.years.length ? r.years.map(y => `FY${y}`).join('、') : '未指定'}`, `类型：${READING_KIND[r.intent]}`,
-    `单位：${r.unit ? (r.unit.currency === 'USD' ? (r.unit.scale ? SCALE_LABEL[r.unit.scale] : '美元') : r.unit.currency) : '按报表（百万美元）'}`,
+    `单位：${r.unit ? (r.unit.currency === 'USD' ? (r.unit.scale ? SCALE_LABEL[r.unit.scale] : '美元') : r.unit.currency) : r.metrics.every(m => pack.metrics[m]?.kind === 'percent') ? '百分比' : '按报表（百万美元）'}`,
     `口径：${r.scope === 'parent_only' ? '母公司' : '合并'}`,
   ].join(' · ');
   const cards = understood.plans.map(item => composeAnswer(pack, item));
@@ -176,6 +179,8 @@ function nextSteps(pack: Pack, understood: Extract<Understood, { type: 'plans' }
   const has = (i: string) => observations.has(`${i}:${metrics[0]}:2025`) || percents.has(`${i}:${metrics[0]}:2025`);
   const amount = pack.metrics[metrics[0]]?.kind !== 'percent';
   if (!has(issuers[0])) return [];
+  const statuses = understood.plans.map(p => answerPlan(pack, p.plan).status);
+  if (statuses.includes('unit_unavailable') && amount) out.push(`${issuer}FY${understood.reading.years[0] ?? 2025} ${label}是多少亿美元`);
   if (intent === 'lookup' && issuers.length === 1) out.push(`${issuer}FY2024 到 FY2025 ${label}变化了多少`);
   if (issuers.length === 1 && has('MSFT') && has('AAPL')) out.push(`微软和苹果 FY2025 的${label}能直接比吗`);
   if (intent !== 'lookup' && issuers.length === 1 && amount) out.push(`${issuer}FY2025 ${label}是多少亿美元`);
