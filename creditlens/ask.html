@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>问证据 · CreditLens</title>
+<script src="/assets/theme.js"></script>
+<link rel="stylesheet" href="/assets/workspace.css">
+<style>
+.ask-main { max-width: 1120px; margin: 0 auto; padding: 28px 28px 64px; }
+.ask-lede { max-width: 760px; color: var(--cl-ink-2); }
+.ask-engine { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin: 14px 0 22px; padding: 9px 14px; border-left: 3px solid var(--cl-brass-bright); background: var(--cl-brass-soft); color: var(--cl-ink); font-size: 13px; border-radius: 0 6px 6px 0; }
+.ask-engine b { color: var(--cl-brass); font-weight: 650; }
+.ask-form { padding: 18px; background: var(--cl-surface); border: 1px solid var(--cl-line); border-radius: 10px; box-shadow: var(--cl-shadow); }
+.ask-form label { display: block; margin: 0 0 8px; font-weight: 650; }
+.ask-row { display: flex; gap: 10px; }
+.ask-row input { flex: 1; min-width: 0; min-height: 44px; padding: 9px 13px; border: 1px solid var(--cl-line-strong); border-radius: 8px; background: var(--cl-surface-2); color: var(--cl-ink); font: 15px/1.4 var(--cl-font); }
+.ask-row button { min-height: 44px; padding: 0 20px; border: 1px solid var(--cl-iris); border-radius: 8px; background: var(--cl-iris); color: #fff; font: 650 15px/1 var(--cl-font); cursor: pointer; }
+:root[data-theme="dark"] .ask-row button { color: #12102b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ask-row button { color: #12102b; } }
+.ask-examples { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.ask-examples button, .ask-next button { padding: 5px 11px; border: 1px solid var(--cl-line-strong); border-radius: 6px; background: transparent; color: var(--cl-ink-2); font: 13px/1.4 var(--cl-font); cursor: pointer; text-align: left; }
+.ask-examples button:hover, .ask-next button:hover { border-color: var(--cl-iris); color: var(--cl-iris); }
+.ask-examples .trap { border-style: dashed; }
+.ask-hint { margin: 10px 0 0; font-size: 12px; color: var(--cl-muted); }
+.ask-out { margin-top: 22px; display: grid; gap: 16px; }
+.ask-reading { font: 12.5px/1.6 var(--cl-mono); color: var(--cl-muted); overflow-wrap: anywhere; }
+.ask-notes { margin: 0; padding-left: 18px; font-size: 13px; color: var(--cl-warn); }
+.ask-card { padding: 18px 20px; background: var(--cl-surface); border: 1px solid var(--cl-line); border-radius: 10px; box-shadow: var(--cl-shadow); }
+.ask-card-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-bottom: 8px; }
+.ask-card-head h2 { margin: 0; font-size: 14px; font-weight: 650; color: var(--cl-ink-2); }
+.ask-badge { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 5px; font-size: 12px; font-weight: 650; }
+.ask-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid currentColor; }
+.ask-badge.ok { background: var(--cl-ok-bg); color: var(--cl-ok); } .ask-badge.ok::before { background: currentColor; }
+.ask-badge.warn { background: var(--cl-warn-bg); color: var(--cl-warn); }
+.ask-badge.stop { background: var(--cl-bad-bg); color: var(--cl-bad); }
+.ask-headline { margin: 4px 0 10px; font-size: 16px; line-height: 1.65; font-variant-numeric: tabular-nums; }
+.ask-readouts { display: grid; gap: 10px; margin: 12px 0 0; }
+.ask-readout { padding: 10px 12px; border: 1px solid var(--cl-line); border-left: 3px solid var(--cl-brass-bright); border-radius: 6px; background: var(--cl-surface-2); }
+.ask-readout-title { margin: 0 0 6px; font-size: 13px; font-weight: 650; }
+.ask-readout dl { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 3px 12px; margin: 0; font: 12.5px/1.55 var(--cl-mono); }
+.ask-readout dt { color: var(--cl-muted); font-family: var(--cl-font); }
+.ask-readout dd { margin: 0; overflow-wrap: anywhere; }
+.ask-readout dd.value { color: var(--cl-brass); font-weight: 650; }
+.ask-readout dd.ok { color: var(--cl-ok); } .ask-readout dd.warn { color: var(--cl-warn); }
+.ask-checks { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 13px; }
+.ask-checks li { position: relative; padding-left: 18px; }
+.ask-checks li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor; }
+.ask-checks .ok { color: var(--cl-ok); } .ask-checks .ok::before { background: currentColor; }
+.ask-checks .warn { color: var(--cl-warn); } .ask-checks .stop { color: var(--cl-bad); }
+.ask-formula { margin: 10px 0 0; font: 12.5px/1.6 var(--cl-mono); color: var(--cl-ink-2); }
+.ask-card-notes { margin: 8px 0 0; font-size: 12.5px; color: var(--cl-muted); }
+.ask-engine-line { margin: 12px 0 0; font-size: 11.5px; color: var(--cl-faint); }
+.ask-preview-toggle { margin-top: 10px; padding: 4px 10px; border: 1px solid var(--cl-line-strong); border-radius: 6px; background: transparent; color: var(--cl-ink-2); font: 12.5px var(--cl-font); cursor: pointer; }
+.ask-drawer { margin-top: 10px; padding: 12px; border-top: 2px solid var(--cl-brass-bright); border-radius: 0 0 8px 8px; background: var(--cl-night); color: var(--cl-night-ink); }
+.ask-drawer p { margin: 0 0 8px; font-size: 12px; color: var(--cl-night-muted); }
+.ask-drawer svg { display: block; width: 100%; height: auto; max-height: 520px; background: #fbfaf6; border-radius: 4px; }
+.ask-refusal { padding: 16px 18px; border: 1px solid var(--cl-line); border-left: 3px solid var(--cl-bad); border-radius: 8px; background: var(--cl-surface); }
+.ask-refusal.clarify { border-left-color: var(--cl-warn); }
+.ask-refusal h2 { margin: 0 0 6px; font-size: 15px; }
+.ask-unknown { font-family: var(--cl-mono); color: var(--cl-bad); }
+.ask-next { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.ask-next-wrap h3 { margin: 4px 0 0; font-size: 13px; color: var(--cl-muted); font-weight: 600; }
+.ask-scope { margin-top: 30px; }
+.ask-scope summary { cursor: pointer; font-weight: 650; }
+.ask-scope ul { padding-left: 18px; font-size: 13px; color: var(--cl-ink-2); }
+.ask-scope table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+.ask-scope th, .ask-scope td { padding: 5px 8px; border-bottom: 1px solid var(--cl-line); text-align: left; vertical-align: top; }
+.ask-scope th { color: var(--cl-muted); font-weight: 600; }
+.ask-status { min-height: 1.5em; font-size: 13px; color: var(--cl-muted); }
+@media (max-width: 700px) {
+  .ask-main { padding: 18px 16px 48px; }
+  .ask-row { flex-direction: column; }
+  .ask-row button { width: 100%; }
+  .ask-readout dl { grid-template-columns: 1fr; gap: 0; }
+  .ask-readout dt { margin-top: 4px; }
+  .ask-headline { font-size: 15px; }
+  .ask-scope table, .ask-scope tbody, .ask-scope tr, .ask-scope td { display: block; }
+  .ask-scope thead { display: none; }
+  .ask-scope td { border: 0; padding: 2px 0; } .ask-scope tr { padding: 6px 0; border-bottom: 1px solid var(--cl-line); }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+<script src="/assets/workspace.js" defer></script>
+<script src="/assets/ask.js" defer></script>
+</head>
+<body class="cl-workspace cl-page-ask"><a class="cl-skip" href="#main-content">跳至内容</a><div class="cl-app"><header class="cl-masthead"><a class="cl-wordmark" href="/intro" aria-label="CreditLens 介绍页"><span class="cl-loupe" aria-hidden="true"></span><span>Credit</span><span class="cl-lens">Lens</span></a><nav class="cl-primary-nav" aria-label="工作区"><a href="/tasks" data-section="research" class="is-current" aria-current="true">研究</a><a href="/documents" data-section="evidence">证据</a><a href="/" data-section="review">复核</a><a href="/experiments" data-section="lab">材料与实验</a></nav><div class="cl-masthead-meta"><span class="cl-meta-text">金融证据工作台</span><span class="cl-dev-flag">开发中</span><a href="/docs">API 文档</a><button type="button" class="cl-theme" data-theme-toggle aria-label="切换主题"><span class="cl-theme-mark" aria-hidden="true"></span><span class="cl-theme-label">跟随系统</span></button></div></header><nav class="cl-section-nav" aria-label="研究页面" data-section-label="研究"><a href="/ask" aria-current="page">问证据</a><a href="/tasks">研究任务</a><a href="/table-lookup">表格取数</a><a href="/margin">毛利率变化</a><a href="/research">季度研究</a></nav><div class="cl-main"><main id="main-content" tabindex="-1" class="ask-main">
+<section class="cl-page-heading"><h1>问证据</h1>
+<p class="ask-lede">输入一个关于微软、苹果 FY2025 年报的问题。本页把问题读成公司、指标、财年、单位与口径，再按登记的数字作答，并给出读数：数值 · 页码 · 定位框 · 单位 · 核对结果。没有登记或读不懂的部分，会说明缺什么，不用相近的数字代替。</p></section>
+<p class="ask-engine" role="note"><b>页内规则引擎</b><span>在本标签页计算，无服务器、无密钥、不调用模型</span><span>规则与 Python 后端逐项一致（parity 测试）</span><span>研究任务等页面的录制结果仍是真实服务的证据</span></p>
+<form class="ask-form" id="askForm" autocomplete="off"><label for="question">问题</label>
+<div class="ask-row"><input id="question" name="q" type="text" maxlength="200" placeholder="例如：苹果 FY2024 到 FY2025 经营现金流变化了多少" aria-describedby="askHint"><button type="submit" id="askButton">提问</button></div>
+<ul class="ask-examples" aria-label="示例问题">
+<li><button type="button" data-q="微软 FY2025 营业收入是多少亿美元">微软 FY2025 营业收入是多少亿美元</button></li>
+<li><button type="button" data-q="苹果 FY2024 到 FY2025 经营现金流变化了多少">苹果 FY2024 到 FY2025 经营现金流变化了多少</button></li>
+<li><button type="button" data-q="微软和苹果 FY2025 的经营现金流能直接比吗">微软和苹果 FY2025 的经营现金流能直接比吗</button></li>
+<li><button type="button" data-q="苹果 FY2025 服务毛利率">苹果 FY2025 服务毛利率</button></li>
+<li><button type="button" class="trap" data-q="微软 2025 年营收多少亿元人民币">陷阱：微软 2025 年营收多少亿元人民币</button></li>
+<li><button type="button" class="trap" data-q="微软 FY2025 现金及现金等价物">陷阱：微软 FY2025 现金及现金等价物</button></li>
+</ul>
+<p class="ask-hint" id="askHint">虚线按钮是故意设的陷阱：币种、口径或登记范围不对时，答案应当说明缺什么。</p></form>
+<p class="ask-status" id="askStatus" role="status" aria-live="polite">正在载入登记材料…</p>
+<div class="ask-out" id="askOut" aria-live="polite"></div>
+<details class="ask-scope" id="askScope"><summary>能回答什么、不能回答什么</summary><div id="scopeBody"></div></details>
+</main></div></div>
+</body>
+</html>

@@ -5,7 +5,9 @@
 **读财报表格取数，核对单位与口径，保留原文页码和定位证据。**
 Financial figures checked back to the source page.
 
-**[在线演示](https://leon1111-wgl.github.io/creditlens/)** · [代码](https://github.com/leon1111-wgl/creditlens) · [技术文档](#技术文档) · 静态页面回放仓库中保存的结果，写入不会保存；完整服务请按[本地运行](#本地运行)启动。项目仍在开发中。
+By [Leon Wang](https://leon1111-wgl.github.io/)
+
+**[在线演示](https://leon1111-wgl.github.io/creditlens/)** · [问证据](https://leon1111-wgl.github.io/creditlens/ask.html) · [代码](https://github.com/leon1111-wgl/creditlens) · [技术文档](#技术文档) · [更新记录](CHANGELOG.md) · 静态页面回放仓库中保存的结果，写入不会保存；“问证据”页在浏览器内按登记数字作答。完整服务请按[本地运行](#本地运行)启动。项目仍在开发中。
 
 **关键词 / Keywords**：财报核查 · 表格取数 table lookup · OCR / Document AI · 单位与口径可比性检查 · 原文页码与定位证据 provenance · 毛利率与现金流分解 · 研究底稿复核 · FastAPI · Decimal
 
@@ -15,6 +17,7 @@ CreditLens 面向投研和风险分析中的财报核查：查到指标并回到
 
 | 任务 | 工作台提供的内容 |
 |---|---|
+| 问证据 | 输入问题，浏览器内读成公司、指标、财年、单位与口径，按登记数字作答并给出页码、定位框、单位和核对结果；读不懂或未登记时说明缺什么 |
 | 查指标与原文 | 按行名和年份寻找金额，保留文字、页码及定位证据；同名行可明确选择 |
 | 核对财务口径 | 检查单位、期间、范围和披露时间；完整读取单位例外后再展开数量级 |
 | 查看经营变化 | 计算各公司自身的年度变化、现金流调节项目及毛利率分解，展示输入和公式 |
@@ -22,7 +25,7 @@ CreditLens 面向投研和风险分析中的财报核查：查到指标并回到
 | 研究交接 | 记录采用理由、固定提交版本、独立复核或退回；保存不确定时按原请求恢复 |
 | 比较文档方法 | 并排查看整行、词级和按证据用途取数，检查失败原因并导出结果 |
 
-当前运行材料以微软、苹果的历史披露为主，文档实验另有 AMD、NVIDIA 案例。OCR 已在 CPU 上运行；页面展示保存的实验结果。底稿使用结构化规则与模板，通用多模态问答、自动公告更新和预测模型尚未实现。
+当前运行材料以微软、苹果的历史披露为主，文档实验另有 AMD、NVIDIA 案例。OCR 已在 CPU 上运行；页面展示保存的实验结果。问答使用封闭词表与确定性规则，不是模型；通用多模态问答、自动公告更新和预测模型尚未实现。
 
 <details>
 <summary>查看工作台</summary>
@@ -55,6 +58,7 @@ python -m venv .venv
 macOS / Linux 使用 `.venv/bin/python`。工作台使用仓库内的小型财务事实包，当前功能无需 GPU 或模型密钥。
 
 - [介绍页](http://127.0.0.1:8765/intro)：工作台概览与核查路线。
+- [问证据](http://127.0.0.1:8765/ask)：输入问题，按登记数字作答。
 - [研究任务](http://127.0.0.1:8765/tasks)：建立任务、核对材料、记录理由、提交与复核。
 - [表格取数](http://127.0.0.1:8765/table-lookup)：选择实验和样例，查看金额、原文位置与单位。
 - [经营变化](http://127.0.0.1:8765/margin)：查看毛利率分解及公司说明。
@@ -99,12 +103,14 @@ python scripts/evaluate_unit_applicability.py --verify-saved
 | FinQA 页内检索 | dev 883题，Macro evidence Recall@5 为82.43%；这是证据召回率，不是回答准确率 |
 | 表格取数 | 同一批42条登记记录、40组查询比较不同规则，保留取错与不足；详见[方法对照](docs/37-role-aware-table-lookup.md) |
 | 单位适用性 | 176次保存材料检查、20种合成场景的100次方法检查；详见[输入、结果与边界](docs/42-unit-applicability.md) |
+| 页内问证据 | 另一个模型编写的146道盲测题首轮（`a05f450`）正确114、错答2、弃答30，应拒答58/58；修复后同题（已看过）正确145、错答0；详见[评测](docs/44-browser-answers.md#评测) |
 
 软件测试、合成控制和真实材料实验分别解释。现有材料属于开发样例，独立人工参考及未参与调参材料的评测仍待完成。来源可追溯和计算一致不代表披露真实性或经营原因已获独立证实。
 
 ## 技术文档
 
 - [项目用途与技术实现](docs/12-project-story-and-technology.md)
+- [页内问证据](docs/44-browser-answers.md)与[前沿调研](docs/FRONTIER_REVIEW.md)
 - [三类研究任务的验收标准](docs/24-research-task-acceptance.md)
 - [现金流分解](docs/21-cash-flow-bridge.md)、[毛利率分解](docs/35-gross-margin-bridge.md)与[公司说明核对](docs/36-margin-company-statements.md)
 - [同名行选择](docs/38-row-disambiguation.md)、[导出一致性核对](docs/39-row-selection-verification.md)与[独立参考流程](docs/34-reference-review.md)

@@ -1,0 +1,303 @@
+{
+ "about": "The developer's own visitor probe before the review: 46 fresh wordings aimed at wrong numbers. Every answer was read; the wrong-number and off-target classes it found were fixed. Regression only, not a measurement.",
+ "cases": [
+  {
+   "q": "微软去年营收多少",
+   "refuse": "relative_period"
+  },
+  {
+   "q": "苹果2025年的营收是多少万元",
+   "items": [
+    "lookup AAPL:revenue:2025 CNY:ten_thousand"
+   ],
+   "status": [
+    "unit_unavailable"
+   ]
+  },
+  {
+   "q": "苹果 2025 财年营收，单位亿",
+   "items": [
+    "lookup AAPL:revenue:2025 USD:hundred_million"
+   ],
+   "status": [
+    "answered"
+   ]
+  },
+  {
+   "q": "微软2025年的营业收入跟2024年比增加了多少钱",
+   "items": [
+    "change MSFT:revenue:2024 MSFT:revenue:2025"
+   ],
+   "status": [
+    "computed"
+   ]
+  },
+  {
+   "q": "苹果净利润2025比2024多赚了多少",
+   "items": [
+    "change AAPL:net_income:2024 AAPL:net_income:2025"
+   ],
+   "status": [
+    "computed"
+   ]
+  },
+  {
+   "q": "微软的长期负债2025年",
+   "clarify": "ambiguous_metric"
+  },
+  {
+   "q": "苹果2025年总负债",
+   "refuse": "metric_not_registered"
+  },
+  {
+   "q": "微软2025年现金流量表里经营活动的钱",
+   "clarify": "ambiguous_metric"
+  },
+  {
+   "q": "苹果的毛利率是不是比微软高",
+   "items": [
+    "cross_company MSFT:gross_margin_pct:2025 AAPL:gross_margin_pct:2025 ranking_refused"
+   ],
+   "status": [
+    "side_by_side_only"
+   ]
+  },
+  {
+   "q": "微软毛利率2025年是多少，跟苹果比呢",
+   "items": [
+    "cross_company MSFT:gross_margin_pct:2025 AAPL:gross_margin_pct:2025"
+   ],
+   "status": [
+    "side_by_side_only"
+   ]
+  },
+  {
+   "q": "苹果2025年9月30日的现金",
+   "refuse": "date_not_registered"
+  },
+  {
+   "q": "苹果2025年9月的现金",
+   "items": [
+    "lookup AAPL:cash_equivalents:2025"
+   ],
+   "status": [
+    "answered"
+   ]
+  },
+  {
+   "q": "微软2024年6月的流动资产",
+   "items": [
+    "lookup MSFT:current_assets:2024"
+   ],
+   "status": [
+    "answered"
+   ]
+  },
+  {
+   "q": "微软2025年6月的营业收入",
+   "refuse": "period_not_registered"
+  },
+  {
+   "q": "苹果第四财季收入",
+   "refuse": "period_not_registered"
+  },
+  {
+   "q": "微软2025年EPS",
+   "refuse": "metric_not_registered"
+  },
+  {
+   "q": "苹果2025年净利率",
+   "refuse": "metric_not_registered"
+  },
+  {
+   "q": "苹果2025年服务收入占比",
+   "refuse": "unknown_words"
+  },
+  {
+   "q": "微软2025年收入是2024年的多少倍",
+   "refuse": "unknown_words"
+  },
+  {
+   "q": "苹果2025年的营收用十亿美元表示",
+   "items": [
+    "lookup AAPL:revenue:2025 USD:billion"
+   ],
+   "status": [
+    "answered"
+   ]
+  },
+  {
+   "q": "苹果2025年营收多少billion",
+   "items": [
+    "lookup AAPL:revenue:2025 USD:billion"
+   ],
+   "status": [
+    "answered"
+   ]
+  },
+  {
+   "q": "msft fy25 revenue in rmb",
+   "items": [
+    "lookup MSFT:revenue:2025 CNY:null"
+   ],
+   "status": [
+    "unit_unavailable"
+   ]
+  },
+  {
+   "q": "微软 FY2025 和 FY2024 的净利润分别是多少",
+   "items": [
+    "lookup MSFT:net_income:2024",
+    "lookup MSFT:net_income:2025"
+   ],
+   "status": [
+    "answered",
+    "answered"
+   ]
+  },
+  {
+   "q": "苹果 FY2025 资本开支比经营现金流",
+   "refuse": "derived_not_supported"
+  },
+  {
+   "q": "苹果的iPhone卖了多少",
+   "refuse": "scope_not_registered"
+  },
+  {
+   "q": "微软云收入",
+   "refuse": "scope_not_registered"
+  },
+  {
+   "q": "苹果2025年服务收入同比",
+   "items": [
+    "change AAPL:service_revenue:2024 AAPL:service_revenue:2025"
+   ],
+   "status": [
+    "computed"
+   ]
+  },
+  {
+   "q": "微软2025年产品收入下降了吗",
+   "items": [
+    "change MSFT:product_revenue:2024 MSFT:product_revenue:2025"
+   ],
+   "status": [
+    "computed"
+   ]
+  },
+  {
+   "q": "微软 2025 财年的短期债务为零吗",
+   "refuse": "unknown_words"
+  },
+  {
+   "q": "苹果2024年商业票据和一年内到期的定期债务",
+   "items": [
+    "lookup AAPL:short_debt:2024",
+    "lookup AAPL:current_debt:2024"
+   ],
+   "status": [
+    "answered",
+    "answered"
+   ]
+  },
+  {
+   "q": "苹果 FY2025 定期债务",
+   "clarify": "ambiguous_metric"
+  },
+  {
+   "q": "两家公司2025年的流动负债",
+   "items": [
+    "cross_company MSFT:current_liabilities:2025 AAPL:current_liabilities:2025"
+   ],
+   "status": [
+    "side_by_side_only"
+   ]
+  },
+  {
+   "q": "苹果2025年流动资产减流动负债",
+   "refuse": "derived_not_supported"
+  },
+  {
+   "q": "微软最新一年的经营现金流比去年多了多少",
+   "items": [
+    "change MSFT:cfo:2024 MSFT:cfo:2025"
+   ],
+   "status": [
+    "computed"
+   ]
+  },
+  {
+   "q": "微软2025年1-12月营收",
+   "refuse": "period_not_registered"
+  },
+  {
+   "q": "苹果2025年度报告里的研发",
+   "refuse": "metric_not_registered"
+  },
+  {
+   "q": "微软2025年营业收入（母公司口径）",
+   "items": [
+    "lookup MSFT:revenue:2025"
+   ],
+   "status": [
+    "scope_unavailable"
+   ]
+  },
+  {
+   "q": "苹果2025年合并口径的净利润",
+   "items": [
+    "lookup AAPL:net_income:2025"
+   ],
+   "status": [
+    "answered"
+   ]
+  },
+  {
+   "q": "苹果营收 2025 year",
+   "items": [
+    "lookup AAPL:revenue:2025"
+   ],
+   "status": [
+    "answered"
+   ]
+  },
+  {
+   "q": "苹果2024财年末现金",
+   "items": [
+    "lookup AAPL:cash_equivalents:2024"
+   ],
+   "status": [
+    "answered"
+   ]
+  },
+  {
+   "q": "微软2025财年末现金",
+   "clarify": "ambiguous_metric"
+  },
+  {
+   "q": "微软和苹果谁的现金多",
+   "refuse": "unknown_words"
+  },
+  {
+   "q": "苹果 2025 财年营业收入 2817.24 亿美元对吗",
+   "refuse": "unknown_words"
+  },
+  {
+   "q": "苹果2025年营收为多少亿美元？比微软多吗",
+   "items": [
+    "cross_company MSFT:revenue:2025 AAPL:revenue:2025 USD:hundred_million ranking_refused"
+   ],
+   "status": [
+    "side_by_side_only"
+   ]
+  },
+  {
+   "q": "告诉我所有数据",
+   "refuse": "unknown_words"
+  },
+  {
+   "q": "<script>alert(1)</script>",
+   "refuse": "unknown_words"
+  }
+ ]
+}

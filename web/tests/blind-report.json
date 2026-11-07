@@ -1,0 +1,1598 @@
+{
+ "n": 146,
+ "correct": 145,
+ "wrong": 0,
+ "abstained": 1,
+ "rs0": 0.9932,
+ "rs10": 0.9932,
+ "by_expect": {
+  "answer": {
+   "n": 88,
+   "correct": 87,
+   "wrong": 0,
+   "abstained": 1
+  },
+  "refuse": {
+   "n": 58,
+   "correct": 58,
+   "wrong": 0,
+   "abstained": 0
+  }
+ },
+ "by_trap": {
+  "null": {
+   "n": 89,
+   "correct": 88,
+   "wrong": 0,
+   "abstained": 1
+  },
+  "ranking": {
+   "n": 6,
+   "correct": 6,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "unit": {
+   "n": 8,
+   "correct": 8,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "period": {
+   "n": 18,
+   "correct": 18,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "scope": {
+   "n": 11,
+   "correct": 11,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "metric": {
+   "n": 10,
+   "correct": 10,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "entity": {
+   "n": 4,
+   "correct": 4,
+   "wrong": 0,
+   "abstained": 0
+  }
+ },
+ "by_wording": {
+  "plain": {
+   "n": 88,
+   "correct": 88,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "colloquial": {
+   "n": 32,
+   "correct": 31,
+   "wrong": 0,
+   "abstained": 1
+  },
+  "mixed": {
+   "n": 13,
+   "correct": 13,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "english": {
+   "n": 10,
+   "correct": 10,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "typo": {
+   "n": 3,
+   "correct": 3,
+   "wrong": 0,
+   "abstained": 0
+  }
+ },
+ "by_kind": {
+  "lookup": {
+   "n": 88,
+   "correct": 87,
+   "wrong": 0,
+   "abstained": 1
+  },
+  "change": {
+   "n": 15,
+   "correct": 15,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "comparable_check": {
+   "n": 6,
+   "correct": 6,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "cross_company": {
+   "n": 12,
+   "correct": 12,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "unanswerable": {
+   "n": 23,
+   "correct": 23,
+   "wrong": 0,
+   "abstained": 0
+  },
+  "multi_lookup": {
+   "n": 2,
+   "correct": 2,
+   "wrong": 0,
+   "abstained": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "bl-001",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-002",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-003",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-004",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-005",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-006",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-007",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-008",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-009",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-010",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-011",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-012",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-013",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-014",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-015",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-016",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-017",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-018",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-019",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-020",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-021",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-022",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-023",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-024",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-025",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-026",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-027",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-028",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-029",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-030",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-031",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-032",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-033",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-034",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-035",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-036",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-037",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-038",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-039",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-040",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-041",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-042",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-043",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-044",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-045",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-046",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-047",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "abstained",
+   "engine": "refuse:metric_not_registered",
+   "why": "refuse:metric_not_registered"
+  },
+  {
+   "id": "bl-048",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-049",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-050",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-051",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-052",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-053",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-054",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-055",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-056",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-057",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-058",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-059",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-060",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-061",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-062",
+   "expect": "answer",
+   "kind": "change",
+   "trap": null,
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-063",
+   "expect": "answer",
+   "kind": "comparable_check",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-064",
+   "expect": "answer",
+   "kind": "comparable_check",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-065",
+   "expect": "answer",
+   "kind": "comparable_check",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-066",
+   "expect": "answer",
+   "kind": "comparable_check",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-067",
+   "expect": "answer",
+   "kind": "comparable_check",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-068",
+   "expect": "answer",
+   "kind": "comparable_check",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "computed",
+   "why": ""
+  },
+  {
+   "id": "bl-069",
+   "expect": "answer",
+   "kind": "cross_company",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "side_by_side_only",
+   "why": ""
+  },
+  {
+   "id": "bl-070",
+   "expect": "answer",
+   "kind": "cross_company",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "side_by_side_only",
+   "why": ""
+  },
+  {
+   "id": "bl-071",
+   "expect": "answer",
+   "kind": "cross_company",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "side_by_side_only",
+   "why": ""
+  },
+  {
+   "id": "bl-072",
+   "expect": "answer",
+   "kind": "cross_company",
+   "trap": null,
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "side_by_side_only",
+   "why": ""
+  },
+  {
+   "id": "bl-073",
+   "expect": "answer",
+   "kind": "cross_company",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "side_by_side_only",
+   "why": ""
+  },
+  {
+   "id": "bl-074",
+   "expect": "answer",
+   "kind": "cross_company",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "side_by_side_only",
+   "why": ""
+  },
+  {
+   "id": "bl-075",
+   "expect": "refuse",
+   "kind": "cross_company",
+   "trap": "ranking",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "side_by_side_only",
+   "why": ""
+  },
+  {
+   "id": "bl-076",
+   "expect": "refuse",
+   "kind": "cross_company",
+   "trap": "ranking",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "side_by_side_only",
+   "why": ""
+  },
+  {
+   "id": "bl-077",
+   "expect": "refuse",
+   "kind": "cross_company",
+   "trap": "ranking",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-078",
+   "expect": "refuse",
+   "kind": "cross_company",
+   "trap": "ranking",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "side_by_side_only",
+   "why": ""
+  },
+  {
+   "id": "bl-079",
+   "expect": "refuse",
+   "kind": "cross_company",
+   "trap": "ranking",
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-080",
+   "expect": "refuse",
+   "kind": "cross_company",
+   "trap": "ranking",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-081",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-082",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-083",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-084",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-085",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-086",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-087",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "unit",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "unit_unavailable",
+   "why": ""
+  },
+  {
+   "id": "bl-088",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "unit",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "unit_unavailable",
+   "why": ""
+  },
+  {
+   "id": "bl-089",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "unit",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "unit_unavailable",
+   "why": ""
+  },
+  {
+   "id": "bl-090",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "unit",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "unit_unavailable",
+   "why": ""
+  },
+  {
+   "id": "bl-091",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "unit",
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "unit_unavailable",
+   "why": ""
+  },
+  {
+   "id": "bl-092",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "unit",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-093",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "unit",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "unit_unavailable",
+   "why": ""
+  },
+  {
+   "id": "bl-094",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "unit",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "unit_unavailable",
+   "why": ""
+  },
+  {
+   "id": "bl-095",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-096",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "refuse:relative_period",
+   "why": ""
+  },
+  {
+   "id": "bl-097",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-098",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "refuse:period_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-099",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:period_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-100",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:period_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-101",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:period_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-102",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:date_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-103",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-104",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "refuse:relative_period",
+   "why": ""
+  },
+  {
+   "id": "bl-105",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "refuse:relative_period",
+   "why": ""
+  },
+  {
+   "id": "bl-106",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:date_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-107",
+   "expect": "refuse",
+   "kind": "change",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-108",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:period_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-109",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "refuse:period_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-110",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "refuse:period_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-111",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "period",
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "refuse:period_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-112",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "scope",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "scope_unavailable,scope_unavailable",
+   "why": ""
+  },
+  {
+   "id": "bl-113",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "scope",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-114",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "scope",
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "refuse:scope_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-115",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "scope",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "refuse:scope_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-116",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "scope",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:scope_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-117",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "scope",
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "refuse:scope_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-118",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "scope",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:scope_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-119",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "scope",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-120",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "scope",
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-121",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "scope",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-122",
+   "expect": "refuse",
+   "kind": "lookup",
+   "trap": "scope",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-123",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:metric_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-124",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "refuse:metric_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-125",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "refuse:metric_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-126",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:metric_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-127",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:metric_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-128",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:metric_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-129",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:metric_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-130",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:metric_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-131",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:metric_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-132",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "entity",
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "refuse:issuer_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-133",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "entity",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:issuer_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-134",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "entity",
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "refuse:issuer_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-135",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "entity",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:scope_not_registered",
+   "why": ""
+  },
+  {
+   "id": "bl-136",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "metric",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-137",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "typo",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-138",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "typo",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-139",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-140",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "english",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-141",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "mixed",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-142",
+   "expect": "answer",
+   "kind": "lookup",
+   "trap": null,
+   "wording": "typo",
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
+  },
+  {
+   "id": "bl-143",
+   "expect": "answer",
+   "kind": "multi_lookup",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "answered,answered",
+   "why": ""
+  },
+  {
+   "id": "bl-144",
+   "expect": "answer",
+   "kind": "multi_lookup",
+   "trap": null,
+   "wording": "colloquial",
+   "verdict": "correct",
+   "engine": "answered,answered",
+   "why": ""
+  },
+  {
+   "id": "bl-145",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": "period",
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  },
+  {
+   "id": "bl-146",
+   "expect": "refuse",
+   "kind": "unanswerable",
+   "trap": null,
+   "wording": "plain",
+   "verdict": "correct",
+   "engine": "refuse:unknown_words",
+   "why": ""
+  }
+ ]
+}

@@ -41,16 +41,18 @@ ROLES = ("analyst", "reviewer", "viewer")
 # Server route -> exported file. Other routes stay available only in the local service.
 PAGES = {
     "/intro": ("index.html", "intro.html"),
+    "/ask": ("ask.html", "ask.html"),
     "/table-lookup": ("table-lookup.html", "table-lookup.html"),
     "/margin": ("margin.html", "margin.html"),
     "/research": ("research.html", "research.html"),
     "/tasks": ("tasks.html", "tasks.html"),
     "/experiments": ("experiments.html", "experiments.html"),
 }
-APP_ROUTES = ("/", "/intro", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
+APP_ROUTES = ("/", "/intro", "/ask", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
               "/explanation-reviews", "/reference-review", "/experiments", "/transfer", "/document-preparation",
               "/lab", "/docs")
-ASSETS = ("workspace.css", "workspace.js", "theme.js", "research-write-intent.js", "research-write-journal.js")
+ASSETS = ("workspace.css", "workspace.js", "theme.js", "research-write-intent.js", "research-write-journal.js",
+          "ask.js", "ask-pack.json")
 # Snapshot loaders re-validate frozen reports on every request. The export reads each once;
 # responses are unchanged because the files cannot change during one export.
 MEMOIZED_LOADERS = (
@@ -241,7 +243,7 @@ def _rewrite_page(source: str) -> str:
         if path in APP_ROUTES:
             return f'{attr}="{LOCAL_RUN_URL}" data-local-route="{path}" title="此页面需本地运行完整服务"'
         return match.group(0)
-    page = re.sub(r'\b(href|src)="(/[^"]*)"', link, source)
+    page = re.sub(r'\b(href|src|action)="(/[^"]*)"', link, source)
 
     def mark_local(match):
         tag = match.group(0)

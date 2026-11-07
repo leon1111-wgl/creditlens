@@ -1,0 +1,19 @@
+{
+  "name": "creditlens-ask",
+  "private": true,
+  "version": "1.0.0",
+  "description": "In-browser evidence answers for the CreditLens static demo (TypeScript port of creditlens/evidence_answers.py)",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "22.18.8",
+    "esbuild": "0.25.10",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
+  },
+  "packageManager": "pnpm@11.25.0"
+}
