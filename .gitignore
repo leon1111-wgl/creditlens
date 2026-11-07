@@ -45,3 +45,8 @@ artifacts/margin-syntax.js
 
 # Static demo output is built by .github/workflows/pages.yml.
 /site/
+
+# In-browser answer engine: dependencies and generated parity fixture.
+web/node_modules/
+web/tests/fixtures/
+site/
