@@ -17,7 +17,7 @@ describe('a word that changes the metric is never dropped', () => {
     ['苹果2024年服务业务卖了多少钱呀', ['AAPL:service_revenue:2024']],
     ['微软服务及其他2024财年毛利率是多少', ['MSFT:service_gross_margin_pct:2024']],
     ['苹果2025年产品的成本', ['AAPL:product_cost:2025']],
-    ['苹果2025年产品和服务的收入', ['clarify:ambiguous_metric']],
+    ['苹果2025年产品和服务的收入', ['AAPL:product_revenue:2025', 'AAPL:service_revenue:2025']],
     ['苹果2025年产品净利润', ['clarify:ambiguous_metric']],
     ['苹果2025年产品毛利', ['refuse:metric_not_registered']],
     ['苹果2025年硬件', ['clarify:ambiguous_metric']],

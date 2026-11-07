@@ -36,6 +36,12 @@ export function group(text: string): string {
   return (negative ? '-' : '') + grouped + (frac !== undefined ? '.' + frac : '');
 }
 const abs = (text: string) => (text.startsWith('-') ? text.slice(1) : text);
+const LINE_NAMED = new Set(['short_debt', 'current_debt', 'long_debt', 'liquid_assets', 'cash_equivalents', 'short_investments']);
+/** Metric label, with the issuer's own statement line where the two issuers' lines differ. */
+const labelOf = (o: Observation) => (LINE_NAMED.has(o.metric) ? `${o.label}（报表行 ${o.row_label}）` : o.label);
+/** The figure the rules compute with; a bracketed outflow is shown as its registered absolute amount. */
+const amountOf = (o: Observation) => (o.raw_signed_value !== o.normalized_value ? `${group(o.normalized_value)} 百万美元（原文 ${o.raw_value}，括号表示现金流出，按登记规则取绝对额）` : `${o.raw_value} 百万美元`);
+const shortAmount = (o: Observation) => group(o.normalized_value);
 const fmtBox = (b: Box | null) => (b ? `${b.x0.toFixed(1)},${b.top.toFixed(1)} → ${b.x1.toFixed(1)},${b.bottom.toFixed(1)}` : '—');
 
 function periodText(o: { year: number; period: { start: string | null; end: string; days: number | null; kind: string } }): string {
@@ -52,7 +58,7 @@ function readout(pack: Pack, o: Observation, requestedScale: string | null, requ
   const source = o.evidence.method === 'pdf_text_layer' ? `PDF 文本层定位（${o.evidence.parser_version}）` : 'OCR 片段与 AI 辅助转写（定位框为近似）';
   return {
     observation_id: o.id, issuer: ZH[o.issuer_id], label: o.label, period: periodText(o),
-    value: `${o.raw_value} 百万美元`, requested: requestedScale && requestedValue ? `${group(requestedValue)} ${SCALE_LABEL[requestedScale]}` : null,
+    value: amountOf(o), requested: requestedScale && requestedValue ? `${group(requestedValue)} ${SCALE_LABEL[requestedScale]}` : null,
     page, bbox: fmtBox(o.source.amount_bbox), unit: `${o.source.unit_header ?? '登记单位：百万美元'}${unitRule}`,
     outcome, outcome_tone: tone, source,
     preview: pack.pages[`${o.issuer_id}:${o.source.page}`] ? { key: `${o.issuer_id}:${o.source.page}`, amount: o.source.amount_bbox, ocr: o.ocr.span?.bbox ?? null } : null,
@@ -95,11 +101,12 @@ export function composeAnswer(pack: Pack, item: PlannedItem, notes: string[] = [
       const [a, b] = card.rows;
       card.headline = `${ZH[p.issuer_id]} ${periodText(p)}${p.label}：${p.percent_2dp}%（6 位小数为 ${p.percent_6dp}%）。`;
       card.formula = `${p.label} = ${p.metric === 'gross_margin_pct' ? '毛利 ÷ 营业收入' : '(收入 − 成本) ÷ 收入'}，输入为下列登记值（${a.label} ${a.value.split(' ')[0]}，${b.label} ${b.value.split(' ')[0]}），登记计算 ${p.rule_version}。`;
+      if (card.rows.some(r => r.outcome.startsWith('登记自 OCR'))) card.tone = 'warn';
       card.derived = [p.percent_2dp, p.percent_6dp];
     } else {
       const ob = o as Observation;
       card.rows = [readout(pack, ob, v.requested?.scale ?? null, v.requested?.value ?? null)];
-      card.headline = `${ZH[ob.issuer_id]} ${periodText(ob)}${ob.label}：${ob.raw_value} 百万美元` + (v.requested ? `，折合 ${group(v.requested.value)} ${SCALE_LABEL[v.requested.scale]}（按 1 百万美元精确换算，未四舍五入）` : '') + '。';
+      card.headline = `${ZH[ob.issuer_id]} ${periodText(ob)}${labelOf(ob)}：${amountOf(ob)}` + (v.requested ? `，折合 ${group(v.requested.value)} ${SCALE_LABEL[v.requested.scale]}（按 1 百万美元精确换算，未四舍五入）` : '') + '。';
       if (ob.ocr.outcome !== 'matched') card.tone = 'warn';
     }
     return card;
@@ -107,7 +114,7 @@ export function composeAnswer(pack: Pack, item: PlannedItem, notes: string[] = [
   if (answer.status === 'side_by_side_only') {
     card.tone = 'warn';
     const parts = obs.map((o, i) => o.kind === 'percent' ? `${ZH[o.issuer_id]} ${periodText(o)}${o.label} ${(o as PercentObservation).percent_2dp}%`
-      : `${ZH[o.issuer_id]} ${periodText(o)}${(o as Observation).label} ${(o as Observation).raw_value} 百万美元`
+      : `${ZH[o.issuer_id]} ${periodText(o)}${labelOf(o as Observation)} ${amountOf(o as Observation)}`
         + (values[i].requested ? `（= ${group(values[i].requested!.value)} ${SCALE_LABEL[values[i].requested!.scale]}）` : ''));
     card.rows = obs.flatMap((o, i) => o.kind === 'percent' ? percentRows(pack, o as PercentObservation)
       : [readout(pack, o as Observation, values[i].requested?.scale ?? null, values[i].requested?.value ?? null)]);
@@ -144,10 +151,11 @@ export function composeAnswer(pack: Pack, item: PlannedItem, notes: string[] = [
   const dir = change.startsWith('-') ? '减少' : change === '0' ? '持平，变化' : '增加';
   const growth = row.growth_rate_percent as string | null;
   const requested = row.requested_change as { scale: string; value: string } | null;
-  card.headline = `${ZH[a.issuer_id]}${a.label} FY${a.year} → FY${b.year}：${a.raw_value} → ${b.raw_value} 百万美元，${dir} ${group(abs(change))} 百万美元`
+  const outflow = a.raw_signed_value !== a.normalized_value;
+  card.headline = `${ZH[a.issuer_id]}${labelOf(a)} FY${a.year} → FY${b.year}：${shortAmount(a)} → ${shortAmount(b)} 百万美元${outflow ? '（现金流出绝对额）' : ''}，${dir} ${group(abs(change))} 百万美元`
     + (requested ? `（折合 ${group(abs(requested.value))} ${SCALE_LABEL[requested.scale]}）` : '')
     + (growth !== null ? `，变动率 ${growth.startsWith('-') ? '' : '+'}${growth}%` : '，基期不为正数，不计算变动率') + '。';
-  card.formula = `差额 = ${b.raw_value} − ${a.raw_value}；变动率 = 差额 ÷ ${a.raw_value}，保留 6 位小数（四舍六入五成双）。未经分析员采用，不写入研究底稿。`;
+  card.formula = `差额 = ${shortAmount(b)} − ${shortAmount(a)}；变动率 = 差额 ÷ ${shortAmount(a)}，保留 6 位小数（四舍六入五成双）。${outflow ? `原文为括号负值 ${a.raw_value}、${b.raw_value}，按登记规则取现金流出绝对额后计算。` : ''}未经分析员采用，不写入研究底稿。`;
   card.derived = [change, ...(growth !== null ? [growth, row.growth_rate as string] : []), ...(requested ? [requested.value] : [])];
   if (row.warnings.length) card.tone = 'warn';
   return card;
@@ -163,7 +171,7 @@ export function compose(pack: Pack, question: string): Composed {
   const reading = [
     `公司：${r.issuers.map(i => ZH[i]).join('、')}`, `指标：${r.metrics.map(m => pack.metrics[m]?.label ?? m).join('、')}`,
     `期间：${r.years.length ? r.years.map(y => `FY${y}`).join('、') : '未指定'}`, `类型：${READING_KIND[r.intent]}`,
-    `单位：${r.unit ? (r.unit.currency === 'USD' ? (r.unit.scale ? SCALE_LABEL[r.unit.scale] : '美元') : r.unit.currency) : r.metrics.every(m => pack.metrics[m]?.kind === 'percent') ? '百分比' : '按报表（百万美元）'}`,
+    `单位：${r.unit ? (r.unit.currency === 'USD' ? (r.unit.scale ? SCALE_LABEL[r.unit.scale] : '美元（按报表百万美元列示）') : r.unit.currency) : r.metrics.every(m => pack.metrics[m]?.kind === 'percent') ? '百分比' : '按报表（百万美元）'}`,
     `口径：${r.scope === 'parent_only' ? '母公司' : '合并'}`,
   ].join(' · ');
   const cards = understood.plans.map(item => composeAnswer(pack, item));

@@ -2,7 +2,7 @@
    answer layer uses: add/sub keep the smaller exponent, division rounds to 40
    significant digits, quantize uses ROUND_HALF_EVEN. Values are int × 10^exp. */
 
-export interface Dec { int: bigint; exp: number }
+export interface Dec { int: bigint; exp: number; neg?: boolean } // neg marks a negative zero, as Python keeps it
 
 const TEN = 10n;
 const pow10 = (n: number): bigint => TEN ** BigInt(n);
@@ -40,8 +40,9 @@ function roundHalfEven(value: bigint, divisor: bigint): bigint {
 
 /** Python's quantize(Decimal(10**exp), rounding=ROUND_HALF_EVEN). */
 export function quantize(a: Dec, exp: number): Dec {
-  if (a.exp >= exp) return { int: a.int * pow10(a.exp - exp), exp };
-  return { int: roundHalfEven(a.int, pow10(exp - a.exp)), exp };
+  if (a.exp >= exp) return { int: a.int * pow10(a.exp - exp), exp, neg: a.neg };
+  const int = roundHalfEven(a.int, pow10(exp - a.exp));
+  return int === 0n && (a.int < 0n || a.neg) ? { int, exp, neg: true } : { int, exp };
 }
 
 const digitCount = (v: bigint): number => (v < 0n ? -v : v).toString().length;
@@ -86,7 +87,7 @@ export function div40(a: Dec, b: Dec): Dec {
 
 /** Python format(d, 'f'). */
 export function formatF(a: Dec): string {
-  const negative = a.int < 0n;
+  const negative = a.int < 0n || (a.int === 0n && a.neg === true);
   let digits = (negative ? -a.int : a.int).toString();
   let out: string;
   if (a.exp >= 0) out = digits + '0'.repeat(a.exp);
