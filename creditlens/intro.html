@@ -26,6 +26,7 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 .intro-chip { padding: 1px 8px; border: 1px solid currentColor; border-radius: 4px; font-size: 11px; font-weight: 500; }
 .intro-hero h1 { margin: 0 0 18px; font: 650 clamp(26px, 2.6vw, 38px)/1.3 var(--cl-font); letter-spacing: -.8px; color: var(--cl-ink); }
 .intro-hero h1 em { font-style: normal; color: var(--cl-brass); white-space: nowrap; }
+.intro-stack { margin: -6px 0 18px; font: 15px/1.6 var(--cl-mono); letter-spacing: .02em; color: var(--cl-iris); }
 .intro-lede { margin: 0 0 26px; color: var(--cl-muted); font-size: 15px; max-width: 34em; }
 .intro-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 .intro-ask { margin: 22px 0 0; max-width: 560px; }
@@ -131,7 +132,7 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 <main id="main-content" tabindex="-1">
 <div class="intro-wrap"><section class="intro-hero" aria-labelledby="intro-title">
 <div><p class="intro-kicker">多模态金融证据工作台 <span class="intro-chip">开发中</span></p>
-<h1 id="intro-title">每个取到的数字，<br>都能回到<em>原页上的那一格。</em></h1>
+<h1 id="intro-title">CreditLens</h1><p class="intro-stack">Document AI / OCR · FastAPI · Decimal · TypeScript</p>
 <p class="intro-lede">CreditLens 面向投研和风险分析中的财报核查：查到指标时一并保留页码、定位框和单位原文；先核对口径与可比性，再计算毛利率与现金流变化，最后把固定的研究底稿交给另一位同事复核。</p>
 <div class="intro-actions"><a class="intro-enter" href="/table-lookup">进入工作台 <span aria-hidden="true">→</span></a><a class="intro-ghost" href="https://github.com/leon1111-wgl/creditlens">查看代码</a></div>
 <form class="intro-ask" action="/ask" method="get" role="search"><label for="intro-q">问一个关于这两份年报的问题</label><div class="intro-ask-row"><input id="intro-q" name="q" type="text" maxlength="200" autocomplete="off" placeholder="例如：苹果 FY2025 服务毛利率是多少"><button type="submit">提问</button></div><p>在本页浏览器内按登记数字作答，给出页码、定位框、单位与核对结果；不是模型，也没有服务器。</p></form>
