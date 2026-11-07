@@ -106,8 +106,9 @@ export function composeAnswer(pack: Pack, item: PlannedItem, notes: string[] = [
   }
   if (answer.status === 'side_by_side_only') {
     card.tone = 'warn';
-    const parts = obs.map(o => o.kind === 'percent' ? `${ZH[o.issuer_id]} ${periodText(o)}${o.label} ${(o as PercentObservation).percent_2dp}%`
-      : `${ZH[o.issuer_id]} ${periodText(o)}${(o as Observation).label} ${(o as Observation).raw_value} 百万美元`);
+    const parts = obs.map((o, i) => o.kind === 'percent' ? `${ZH[o.issuer_id]} ${periodText(o)}${o.label} ${(o as PercentObservation).percent_2dp}%`
+      : `${ZH[o.issuer_id]} ${periodText(o)}${(o as Observation).label} ${(o as Observation).raw_value} 百万美元`
+        + (values[i].requested ? `（= ${group(values[i].requested!.value)} ${SCALE_LABEL[values[i].requested!.scale]}）` : ''));
     card.rows = obs.flatMap((o, i) => o.kind === 'percent' ? percentRows(pack, o as PercentObservation)
       : [readout(pack, o as Observation, values[i].requested?.scale ?? null, values[i].requested?.value ?? null)]);
     card.derived = obs.filter(o => o.kind === 'percent').flatMap(o => [(o as PercentObservation).percent_2dp]);

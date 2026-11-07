@@ -1,16 +1,16 @@
 {
  "n": 146,
- "correct": 144,
+ "correct": 145,
  "wrong": 0,
- "abstained": 2,
- "rs0": 0.9863,
- "rs10": 0.9863,
+ "abstained": 1,
+ "rs0": 0.9932,
+ "rs10": 0.9932,
  "by_expect": {
   "answer": {
    "n": 88,
-   "correct": 86,
+   "correct": 87,
    "wrong": 0,
-   "abstained": 2
+   "abstained": 1
   },
   "refuse": {
    "n": 58,
@@ -22,9 +22,9 @@
  "by_trap": {
   "null": {
    "n": 89,
-   "correct": 87,
+   "correct": 88,
    "wrong": 0,
-   "abstained": 2
+   "abstained": 1
   },
   "ranking": {
    "n": 6,
@@ -90,17 +90,17 @@
   },
   "typo": {
    "n": 3,
-   "correct": 2,
+   "correct": 3,
    "wrong": 0,
-   "abstained": 1
+   "abstained": 0
   }
  },
  "by_kind": {
   "lookup": {
    "n": 88,
-   "correct": 86,
+   "correct": 87,
    "wrong": 0,
-   "abstained": 2
+   "abstained": 1
   },
   "change": {
    "n": 15,
@@ -891,7 +891,7 @@
    "trap": "ranking",
    "wording": "colloquial",
    "verdict": "correct",
-   "engine": "refuse:unknown_words",
+   "engine": "side_by_side_only",
    "why": ""
   },
   {
@@ -1500,9 +1500,9 @@
    "kind": "lookup",
    "trap": null,
    "wording": "typo",
-   "verdict": "abstained",
-   "engine": "refuse:unknown_words",
-   "why": "refuse:unknown_words"
+   "verdict": "correct",
+   "engine": "answered",
+   "why": ""
   },
   {
    "id": "bl-138",

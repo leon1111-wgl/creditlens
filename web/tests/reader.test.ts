@@ -62,8 +62,14 @@ describe('typo repair is unique, reported and never invents a metric', () => {
     }
   });
   it('repairs two Latin typos', () => expect(items('microsfot revenu fy2025')).toEqual(['MSFT:revenue:2025']));
+  it('keeps the meaning of the readable part: 净利 + typo repairs to 净利润, never to 净利率', () => {
+    expect(items('微软2025财年净利闰是多少')).toEqual(['MSFT:net_income:2025']);
+  });
+  it('never rewrites a readable word into another metric (现金多 is not 现金流)', () => {
+    expect(understand(pack, '微软和苹果谁的现金多').type).not.toBe('plans');
+    expect(understand(pack, '苹果的现金多不多 2025年').type).not.toBe('plans');
+  });
   it.each([
-    ['微软2025财年净利闰是多少'], // 净利润 or 净利率: two readings, no repair
     ['微软2025年营业利闰'],       // nearest name is unregistered
     ['微软2025年总利闰'],
     ['微软2025年收入是不是2817亿'],

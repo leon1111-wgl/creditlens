@@ -30,7 +30,7 @@ type Token =
   | { t: 'unit'; currency: string | null; scale: string | null; text: string }
   | { t: 'percent' } | { t: 'scope'; v: string; text: string }
   | { t: 'intent'; v: Intent | 'multi' | 'compare' | 'growth' }
-  | { t: 'filler' };
+  | { t: 'filler' } | { t: 'ended' };
 
 /* ---------- normalisation ---------- */
 const TRAD: Record<string, string> = {'蘋': '苹', '軟': '软', '營': '营', '淨': '净', '潤': '润', '現': '现', '負': '负', '債': '债', '資': '资', '產': '产', '長': '长', '經': '经', '銷': '销', '開': '开', '億': '亿', '萬': '万', '財': '财', '變': '变', '較': '较', '對': '对', '務': '务', '動': '动', '額': '额', '業': '业', '與': '与', '還': '还', '這': '这', '個': '个', '幾': '几', '麼': '么', '嗎': '吗', '報': '报', '費': '费', '稅': '税', '價': '价', '總': '总', '計': '计', '貨': '货', '幣': '币', '點': '点', '減': '减', '兩': '两', '間': '间', '時': '时', '據': '据', '於': '于', '為': '为', '們': '们', '說': '说', '請': '请', '問': '问', '詢': '询', '給': '给', '訴': '诉', '發': '发', '賺': '赚', '錢': '钱', '賣': '卖', '買': '买', '設': '设', '備': '备', '購': '购', '權': '权', '虧': '亏', '損': '损', '專': '专', '團': '团', '體': '体', '單': '单', '區': '区', '場': '场', '華': '华', '國': '国', '際': '际', '東': '东', '歐': '欧', '鎊': '镑', '韓': '韩', '漲': '涨', '齊': '齐', '別': '别', '種': '种', '類': '类', '裡': '里', '裏': '里', '樣': '样', '簡': '简', '獲': '获', '純': '纯', '證': '证', '劵': '券', '準': '准', '啟': '启', '實': '实', '層': '层', '項': '项', '結': '结', '餘': '余', '彙': '汇', '匯': '汇', '臺': '台', '灣': '湾', '戶': '户', '帳': '账', '賬': '账', '圓': '圆', '訂': '订', '內': '内', '兌': '兑', '換': '换', '標': '标', '舊': '旧', '預': '预', '測': '测', '來': '来', '將': '将', '鬥': '斗', '達': '达', '隻': '只', '歷': '历', '屆': '届'};
@@ -165,7 +165,7 @@ rule(`(?<![0-9])(20\\d{2}) ?年 ?(\\d{1,2}) ?月(?:份)?(末|底)?`, m => ({ t: 
 words(['自然年度', '自然年', '日历年度', '日历年', '公历年', '1-12月', '1月至12月', '1月到12月', '一月到十二月', '全年1-12月', '12月31日', '十二月三十一日'], m => ({ t: 'period_unsupported', text: m[0], why: 'calendar' }));
 english(['calendar year', 'calendar'], m => ({ t: 'period_unsupported', text: m[0], why: 'calendar' }));
 words(['年底', '年末', '年终', '岁末'], m => ({ t: 'period_unsupported', text: m[0], why: 'year_end' }));
-rule('(?:第 ?[一二三四1-4] ?(?:季度|季)|[一二三四1-4] ?季度|q ?[1-4](?![0-9])|单季度?|季度|季报|前三季度|上半年|下半年|半年报|半年度|半年|h[12](?![0-9])|月度|月份|单月|本月|上月|每月|ttm|过去 ?12 ?个月|近 ?12 ?个月|最近 ?12 ?个月|滚动 ?12 ?个月|环比)', m => ({ t: 'period_unsupported', text: m[0], why: 'sub_annual' }));
+rule('(?:第 ?[一二三四1-4] ?(?:财季|财务季度|季度|季)|财季|[一二三四1-4] ?季度|q ?[1-4](?![0-9])|单季度?|季度|季报|前三季度|上半年|下半年|半年报|半年度|半年|h[12](?![0-9])|月度|月份|单月|本月|上月|每月|ttm|过去 ?12 ?个月|近 ?12 ?个月|最近 ?12 ?个月|滚动 ?12 ?个月|环比)', m => ({ t: 'period_unsupported', text: m[0], why: 'sub_annual' }));
 english(['quarter', 'quarterly', 'trailing twelve months', 'last twelve months', 'ltm', 'half-year', 'year to date', 'ytd'], m => ({ t: 'period_unsupported', text: m[0], why: 'sub_annual' }));
 words(['与上一年相比', '和上一年相比', '跟上一年相比', '与上年相比', '和上年相比', '跟上年相比', '与去年相比', '和去年相比', '跟去年相比', '相比上一年', '相比上年', '相比去年', '相较上年', '相较去年', '较上一年', '较上年', '较去年', '比上一年', '比上年', '比去年', '对比上年', '对比去年', '上年同期', '去年同期'], m => ({ t: 'relative', v: 'prev', text: m[0] }));
 words(['上一年度', '上一财年', '上一年', '上年度', '上年', '前一年', '去年'], m => ({ t: 'relative', v: 'unanchored', text: m[0] }));
@@ -184,7 +184,7 @@ rule('(百万|亿|万|千|十亿)? ?(?:港元|港币|欧元|日元|英镑|韩元
 english(['hkd', 'eur', 'euros?', 'jpy', 'yen', 'gbp', 'pounds?', 'rmb', 'cny', 'yuan'], m => ({ t: 'unit', currency: ['rmb', 'cny', 'yuan'].includes(m[0]) ? 'CNY' : m[0].toUpperCase().startsWith('H') ? 'HKD' : 'OTHER', scale: null, text: m[0] }));
 rule('(?:万亿|千万|百亿|千亿|trillion)', m => ({ t: 'unit', currency: null, scale: 'unsupported', text: m[0] }));
 rule('(?:是|为|有|合|折合)?(?:多少|几) ?(百万|亿|万|千|十亿)', m => ({ t: 'unit', currency: null, scale: SCALE[m[1]], text: m[0] }));
-rule('(百万|十亿)', m => ({ t: 'unit', currency: null, scale: SCALE[m[1]], text: m[0] }));
+rule('(百万|十亿|亿)', m => ({ t: 'unit', currency: null, scale: SCALE[m[1]], text: m[0] }));
 rule('(?:%|百分比|百分之几|百分之多少|百分点|个百分点|pp(?![a-z]))', () => ({ t: 'percent' }));
 
 // Scope.
@@ -207,9 +207,9 @@ english(['change', 'changed', 'increase', 'increased', 'decrease', 'decreased', 
 words(['可比不可比', '可不可比', '能直接对比', '可以直接对比', '能不能直接对比', '能否直接对比', '直接对比', '放一起比较', '放一起比', '能不能放一起比', '能不能比较', '能不能直接比较', '能不能直接比', '能否直接比较', '能否直接比', '可以直接比较', '可以直接比', '可不可以比较', '可不可以比', '能不能比较', '能不能比', '能否比较', '能比较', '能比', '可比较', '可比性', '可比', '直接比较', '直接比', '口径一致', '口径一样', '口径相同', '同口径', '同一口径', '放在一起比较', '放在一起比', '横向比较', '一起比较', '一样吗', '一致吗', '相同吗', '可以比较吗', '比较吗'], () => ({ t: 'intent', v: 'comparable' }));
 english(['comparable', 'apples to apples', 'like for like', 'compare directly'], () => ({ t: 'intent', v: 'comparable' }));
 rule('(?:谁|哪家|哪个|哪一家|哪一个|哪边)(?:公司)?(?:的)?(?:更|比较)?(?:高|多|大|低|少|小|强|好|厉害|赚得多|赚得更多|领先)?', () => ({ t: 'intent', v: 'rank' }));
-words(['更高', '更多', '更大', '更低', '更少', '更小', '更强', '排名', '排序', '排行', '领先', '高于', '低于', '超过', '胜过', '赢', '谁多', '谁高', '谁大'], () => ({ t: 'intent', v: 'rank' }));
+words(['高吗', '低吗', '多吗', '少吗', '大吗', '高', '低', '更高', '更多', '更大', '更低', '更少', '更小', '更强', '排名', '排序', '排行', '领先', '高于', '低于', '超过', '胜过', '赢', '谁多', '谁高', '谁大'], () => ({ t: 'intent', v: 'rank' }));
 english(['which is higher', 'which is larger', 'which is bigger', 'which company', 'higher', 'larger', 'bigger', 'more than', 'less than', 'rank', 'ranking', 'outperform'], () => ({ t: 'intent', v: 'rank' }));
-words(['多花了多少', '多花了', '少花了多少', '多多少', '少多少', '高多少', '低多少', '差多少', '相差多少', '差了多少', '差多大', '差距', '差额', '相差', '差了', '多出', '多了多少', '少了多少', '大多少', '小多少', '减去', '减'], () => ({ t: 'intent', v: 'diff' }));
+words(['多赚了多少', '多赚了', '少赚了多少', '少赚了', '多花了多少', '多花了', '少花了多少', '多多少', '少多少', '高多少', '低多少', '差多少', '相差多少', '差了多少', '差多大', '差距', '差额', '相差', '差了', '多出', '多了多少', '少了多少', '大多少', '小多少', '减去', '减'], () => ({ t: 'intent', v: 'diff' }));
 english(['difference', 'gap', 'minus'], () => ({ t: 'intent', v: 'diff' }));
 words(['对比一下', '对比', '比较一下', '比较', '比一比', '比一下', '相比', '相较于', '相较', '相对于', '相对', '比起', '较', '对照', '比', '并排', '并列', '放一起看', '放在一起看', '一起看', '放一起', '放在一起', '列出来', '各列出来'], () => ({ t: 'intent', v: 'compare' }));
 english(['versus', 'vs\\.?', 'compare', 'compared', 'comparison', 'side by side', 'side-by-side'], () => ({ t: 'intent', v: 'compare' }));
@@ -220,19 +220,22 @@ english(['and', '&'], () => ({ t: 'intent', v: 'multi' }));
 // Fillers: words that carry no financial meaning here.
 words(['请问一下', '请问', '麻烦你', '麻烦', '帮我查一下', '帮我查查', '帮我查', '帮我看看', '帮我看一下', '帮我', '帮忙', '我想知道', '想知道', '我想问', '想问一下', '想问', '问一下', '问下', '我想', '我要', '查一下', '查查', '查询', '查', '看一下', '看看', '看下', '告诉我', '告诉', '给我', '说说', '说一下', '讲讲', '列出', '显示', '报一下', '一下', '下',
   '是多少', '为多少', '有多少', '多少', '是几', '几', '多大', '几何', '怎么样', '如何', '怎样', '情况', '水平', '规模', '数据', '数字', '数值', '金额', '总额', '合计', '总计', '一共', '总共', '大概', '大约', '约', '左右', '具体', '到底', '究竟', '是否', '是不是', '有没有', '能否', '能不能', '可以', '能', '吗', '呢', '吧', '呀', '啊', '嘛', '哈', '哦', '噢', '呗', '啦',
-  '的', '了', '是', '为', '在', '于', '中', '里面', '里', '上面', '上', '内', '这个', '那个', '这', '那', '其', '它', '它们', '他们', '公司', '企业', '集团', '财报', '年报', '报表', '报告', '表里', '表上', '表中', '利润表', '损益表', '资产负债表', '现金流量表', '财务报表', '10-k', '10k', 'form 10-k', '披露', '公布', '列示', '报告期', '期末', '期间', '期内', '时', '时候', '截至', '截止到', '截止', '截至到', '止年度', '止的年度', '止的', '止', '那年', '这年', '全年', '年度', '财年', '年', '会计年度', '一年', '整年', '对应', '相应', '账上', '手上', '手里', '兜里', '账面', '口径', '按', '用', '以', '计', '计算', '表示', '单位', '换算成', '换算', '折合', '折算成', '折算', '合多少', '算', '算一下', '数额', '共', '实际', '原文', '原值', '报的', '的话', '呢?', '谢谢', '多谢', '你好', '您好', '请', '一', '个', '笔', '期'],
+  '的', '了', '是', '为', '在', '于', '中', '里面', '里', '上面', '上', '内', '这个', '那个', '这', '那', '其', '它', '它们', '他们', '公司', '企业', '集团', '财报', '年报', '报表', '报告', '表里', '表上', '表中', '利润表', '损益表', '资产负债表', '现金流量表', '财务报表', '10-k', '10k', 'form 10-k', '披露', '公布', '列示', '报告期', '期末', '期间', '期内', '时', '时候', '那年', '这年', '全年', '年度', '财年', '年', '会计年度', '一年', '整年', '对应', '相应', '账上', '手上', '手里', '兜里', '账面', '口径', '按', '用', '以', '计', '计算', '表示', '单位', '换算成', '换算', '折合', '折算成', '折算', '合多少', '算', '算一下', '数额', '共', '实际', '原文', '原值', '报的', '的话', '呢?', '谢谢', '多谢', '你好', '您好', '请', '一', '个', '笔', '期'],
   () => ({ t: 'filler' }));
+words(['截至', '截止到', '截止', '截至到', '止年度', '止的年度', '止的财年', '止财年', '止的', '止'], () => ({ t: 'ended' } as Token));
+english(['year ended', 'ended', 'ending'], () => ({ t: 'ended' } as Token));
 words(['从', '由', '到', '至', '之间', '期间的', '期间长度', '长度', '天数', '直接', '业务', '方面', '总', '把', '写完整数字', '完整数字', '完整的数字', '写完整', '全部数字', '报给我', '报', '付了多少现金', '支付的现金', '付了多少', '付了', '支付了', '付款', '支付', '经营活动', '多少钱', '花了多少钱', '花了多少', '花了', '花的', '花', '余额', '卖的', '卖', '这块', '那块', '这一块', '这部分', '那部分', '财年末', '财年底', '年度末', '有', '一共有', '分别有'], () => ({ t: 'filler' }));
-english(['what', "what's", 'whats', 'is', 'was', 'were', 'are', 'the', 'of', 'in', 'for', 'how', 'much', 'many', 'did', 'does', 'do', 'make', 'made', 'please', 'show', 'me', 'tell', 'give', 'between', 'from', 'to', 'its', "it's", 'it', 'a', 'an', 'on', 'at', 'as', 'by', 'with', 'reported', 'report', 'annual', 'total', 'amount', 'value', 'figure', 'year', 'fiscal', 'ended', 'ending', 'end', 'as of', 'fy', 'can', 'i', 'we', 'you', 'they', 'their', 'company', 'inc', 'corp', 'statement', 'balance sheet', 'income statement', 'cash flow statement', 'lookup', 'look up', 'find', 'get', 'number', 'about', 'than', 'were'],
+english(['what', "what's", 'whats', 'is', 'was', 'were', 'are', 'the', 'of', 'in', 'for', 'how', 'much', 'many', 'did', 'does', 'do', 'make', 'made', 'please', 'show', 'me', 'tell', 'give', 'between', 'from', 'to', 'its', "it's", 'it', 'a', 'an', 'on', 'at', 'as', 'by', 'with', 'reported', 'report', 'annual', 'total', 'amount', 'value', 'figure', 'year', 'fiscal', 'end', 'as of', 'fy', 'can', 'i', 'we', 'you', 'they', 'their', 'company', 'inc', 'corp', 'statement', 'balance sheet', 'income statement', 'cash flow statement', 'lookup', 'look up', 'find', 'get', 'number', 'about', 'than', 'were'],
   () => ({ t: 'filler' }));
 rule('[\\s,，。.!！?？;；:：()（）\\[\\]【】<>《》/\\\\\'"·~—_-]+', () => ({ t: 'filler' }));
 
 /* ---------- tokenizer ---------- */
-export function tokenize(question: string): { tokens: Token[]; unknown: string[]; unknownAt: number[] } {
+export function tokenize(question: string): ReturnType<typeof tokenizeNormalised> {
   return tokenizeNormalised(normalise(question));
 }
-function tokenizeNormalised(s: string): { tokens: Token[]; unknown: string[]; unknownAt: number[] } {
+function tokenizeNormalised(s: string): { tokens: Token[]; unknown: string[]; unknownAt: number[]; spans: { start: number; end: number; token: Token | null }[] } {
   const tokens: Token[] = [];
+  const spans: { start: number; end: number; token: Token | null }[] = [];
   const unknown: string[] = [];
   const unknownAt: number[] = [];
   let pending = '';
@@ -248,10 +251,11 @@ function tokenizeNormalised(s: string): { tokens: Token[]; unknown: string[]; un
     if (pending.trim()) unknown.push(pending.trim());
     pending = '';
     if (best.token && best.token.t !== 'filler') tokens.push(best.token);
+    spans.push({ start: i, end: i + best.len, token: best.token });
     i += best.len;
   }
   if (pending.trim()) unknown.push(pending.trim());
-  return { tokens, unknown, unknownAt };
+  return { tokens, unknown, unknownAt, spans };
 }
 
 /* Typo repair: at most two corrections, each one character (CJK substitution; Latin
@@ -278,7 +282,7 @@ export function repair(s: string): { text: string; fixes: [string, string][] } |
   let current = s;
   const fixes: [string, string][] = [];
   for (let round = 0; round < 2; round++) {
-    const { unknownAt } = tokenizeNormalised(current);
+    const { unknownAt, spans } = tokenizeNormalised(current);
     if (!unknownAt.length) break;
     const options = new Map<string, [string, string]>();
     for (const target of LITERALS) {
@@ -289,6 +293,11 @@ export function repair(s: string): { text: string; fixes: [string, string][] } |
           const sub = current.slice(start, start + len);
           if (!variants(sub, target)) continue;
           if (latin && (/[a-z0-9]/.test(current[start - 1] ?? '') || /[a-z0-9]/.test(current[start + len] ?? ''))) continue;
+          // Only unreadable characters, or a recognised word with the same meaning, may be rewritten:
+          // "现金多" must not become "现金流", and fillers are never consumed.
+          const meaning = JSON.stringify(rules.map(([re, make]) => { re.lastIndex = 0; const m = new RegExp(re.source).exec(target); return m && m[0] === target ? make(m) : null; }).find(Boolean) ?? null);
+          const overlapping = spans.filter(sp => sp.start < start + len && sp.end > start && sp.token?.t !== 'filler' || (sp.start < start + len && sp.end > start && sp.token?.t === 'filler' && current.slice(sp.start, sp.end).trim()));
+          if (overlapping.some(sp => sp.start < start || sp.end > start + len || JSON.stringify(sp.token) !== meaning)) continue;
           const next = current.slice(0, start) + target + current.slice(start + len);
           const after = tokenizeNormalised(next).unknownAt.length;
           if (after < unknownAt.length) options.set(next, [sub, target]);
@@ -470,6 +479,13 @@ export function understand(pack: Pack, question: string): Understood {
       const ends = targets.map(i => `${ZH[i]} ${FY_END[i][2024]}、${FY_END[i][2025]}`).join('；');
       return { type: 'refuse', reason: 'date_not_registered', detail: `${asked} 不是登记的财年末（${ends}）。演示只有财年末余额和完整财年的发生额，不做日期换算。`, suggestions: GENERAL };
     }
+    const flows = metrics.filter(m => pack.metrics[m]?.kind !== 'instant');
+    if (flows.length && d.d === null) {
+      return { type: 'refuse', reason: 'period_not_registered', detail: `“${d.y}年${d.m}月”的${pack.metrics[flows[0]]?.label ?? flows[0]}是月度口径；演示只有完整财年的发生额，没有月度数据。`, suggestions: [suggestion(pack, issuers[0] ?? 'MSFT', flows[0], [matched])] };
+    }
+    if (flows.length && !of('ended').length) {
+      return { type: 'refuse', reason: 'period_not_registered', detail: `${asked} 是一个时点；${pack.metrics[flows[0]]?.label ?? flows[0]}是整个财年的发生额。请问“FY${matched}”或“截至 ${asked} 止的财年”。`, suggestions: [suggestion(pack, issuers[0] ?? 'MSFT', flows[0], [matched])] };
+    }
     if (d.d === null) notes.push(`“${d.y}年${d.m}月”按 FY${matched} 期末（${targets.map(i => FY_END[i][matched!]).join('、')}）理解。`);
     years.push(matched);
   }
@@ -489,11 +505,16 @@ export function understand(pack: Pack, question: string): Understood {
   // Kind.
   let intent: Intent = 'lookup';
   const twoIssuers = issuers.length === 2;
+  const wantsChange = intents.has('change') || intents.has('growth') || relPrev;
+  if (!twoIssuers && metrics.length >= 2 && !wantsChange && (intents.has('diff') || intents.has('compare') || intents.has('rank') || intents.has('comparable'))) {
+    return { type: 'refuse', reason: 'derived_not_supported', detail: '演示不计算不同指标之间的差额、比值或排序（例如流动资产减流动负债、资本开支比经营现金流）；可以分别查询每一项。',
+      suggestions: metrics.slice(0, 2).map(m => suggestion(pack, issuers[0], m, uniqueYears.slice(0, 1))) };
+  }
   if (intents.has('rank')) intent = 'rank';
   else if (intents.has('diff') && twoIssuers) intent = 'diff';
   else if (intents.has('comparable')) intent = 'comparable';
-  else if (intents.has('change') || intents.has('growth') || intents.has('diff') || relPrev) intent = 'change';
-  else if (intents.has('compare') && !twoIssuers && (uniqueYears.length === 2 || metrics.length === 1)) intent = 'change';
+  else if (wantsChange || intents.has('diff')) intent = 'change';
+  else if (intents.has('compare') && !twoIssuers) intent = 'change';
   if ((intent === 'rank' || intent === 'diff') && !twoIssuers) {
     // "2025 年比 2024 年高多少" on one issuer is a two-year change.
     intent = uniqueYears.length === 2 || relPrev || intents.has('compare') ? 'change' : intent;
