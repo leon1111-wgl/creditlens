@@ -49,11 +49,13 @@ button.primary:not(:disabled):hover,.primary:not(:disabled):hover{background:#20
 button.secondary{background:#edf1f7;color:var(--blue)}.brand{color:var(--text)}
 
 button:disabled,button.primary:disabled,.sidebar button:disabled{background:#f0f2f5;border-color:#d9dee6;color:#727b88;opacity:1;cursor:not-allowed}
-</style></head>
+</style><link rel="stylesheet" href="/assets/workspace.css">
+<script src="/assets/workspace.js" defer></script>
+</head>
 <body>
 <header><div class="brand">CreditLens<span>金融证据工作台</span></div><nav><a href="/docs">API 文档</a><a href="https://github.com/czyssrs/FinQA" target="_blank" rel="noreferrer">数据来源</a></nav></header>
 <main>
-<div class="intro"><div><h1>从财报证据开始，逐步核验计算。</h1><p class="muted">选择公开财务问题，检索原始段落与表格，再引用单元格完成可复算的分析。当前为真实数据上的检索与计算基线。</p></div><div class="stamp" id="health">正在连接本地服务</div></div>
+<div class="intro"><div><h1>财报证据检索</h1><p class="muted">选择公开财务问题，检索原始段落与表格，再引用单元格完成可复算的分析。当前为真实数据上的检索与计算基线。</p></div><div class="stamp" id="health">正在连接本地服务</div></div>
 <div class="layout">
 <aside class="panel"><h2>研究任务</h2><label for="filter">查找公司或问题</label><input id="filter" placeholder="例如 V/2008 或 payment">
 <div class="actions"><button id="search-cases" class="secondary">查找题目</button></div>

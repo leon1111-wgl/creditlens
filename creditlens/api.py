@@ -9,6 +9,7 @@ from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Query, Request, Depends, Header
 from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse, Response
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -129,6 +130,7 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
                           description="Financial research workbench, source-linked review and benchmark laboratory.",
                           lifespan=lifespan)
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "localhost", "testserver"])
+    application.mount("/assets", StaticFiles(directory=Path(__file__).parent / "static"), name="assets")
 
     @application.middleware("http")
     async def bounded_request(request: Request, call_next):
