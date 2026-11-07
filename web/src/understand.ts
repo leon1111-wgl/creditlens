@@ -21,7 +21,7 @@ export type Understood =
 
 type Token =
   | { t: 'issuer'; v: string } | { t: 'both' } | { t: 'other_issuer'; text: string }
-  | { t: 'metric'; v: string; note?: string } | { t: 'ambiguous'; family: string; text: string }
+  | { t: 'metric'; v: string; note?: string; soft?: boolean } | { t: 'ambiguous'; family: string; text: string }
   | { t: 'unsupported_metric'; text: string; why?: string }
   | { t: 'year'; v: number; end?: 'calendar' | 'fiscal' } | { t: 'years'; v: number[] }
   | { t: 'date'; y: number; m: number; d: number | null }
@@ -38,6 +38,7 @@ const TRAD: Record<string, string> = {'蘋': '苹', '軟': '软', '營': '营', 
 export function normalise(text: string): string {
   let s = text.normalize('NFKC').toLowerCase();
   s = Array.from(s, ch => TRAD[ch] ?? ch).join('');
+  s = s.replace(/([a-z])['’]s(?![a-z])/g, '$1');
   return s.replace(/[‐-―−]/g, '-').replace(/[“”"「」『』‘’`]/g, '').replace(/\s+/g, ' ').trim();
 }
 
@@ -51,8 +52,22 @@ const W = (body: string) => `(?<![a-z0-9])(?:${body})(?![a-z0-9])`; // English w
 type Rule = [RegExp, (m: RegExpExecArray) => Token | null];
 const rules: Rule[] = [];
 const rule = (source: string, make: (m: RegExpExecArray) => Token | null) => rules.push([new RegExp(source, 'y'), make]);
-const words = (list: string[], make: (m: RegExpExecArray) => Token | null) => rule(`(?:${list.join('|')})`, make);
-const english = (list: string[], make: (m: RegExpExecArray) => Token | null) => rule(W(list.join('|')), make);
+export const LITERALS: string[] = [];
+const record = (list: string[], make: (m: RegExpExecArray) => Token | null) => {
+  for (const raw of list) {
+    const plural = /^([a-z][a-z -]*)s\?$/.exec(raw);
+    for (const text of plural ? [plural[1], plural[1] + 's'] : [raw]) record1(text, make);
+  }
+};
+const record1 = (text: string, make: (m: RegExpExecArray) => Token | null) => {
+  {
+    if (/[\\()?|[\]*+]/.test(text)) return;
+    const token = make([text] as unknown as RegExpExecArray);
+    if (token && ['metric', 'issuer', 'unsupported_metric', 'other_issuer'].includes(token.t)) LITERALS.push(text);
+  }
+};
+const words = (list: string[], make: (m: RegExpExecArray) => Token | null) => { record(list, make); rule(`(?:${list.join('|')})`, make); };
+const english = (list: string[], make: (m: RegExpExecArray) => Token | null) => { record(list, make); rule(W(list.join('|')), make); };
 const metric = (v: string, note?: string) => () => ({ t: 'metric', v, note } as Token);
 
 // Issuers.
@@ -80,39 +95,41 @@ rule(`${CAT_S}${JOIN}${COST}`, metric('service_cost'));
 rule(`${CAT_P}${JOIN}(?:毛利率|gross margin (?:percentage|rate|%))`, metric('product_gross_margin_pct'));
 rule(`${CAT_S}${JOIN}(?:毛利率|gross margin (?:percentage|rate|%))`, metric('service_gross_margin_pct'));
 rule(`${CAT_P}${JOIN}(?:毛利润|毛利额|毛利)|${CAT_S}${JOIN}(?:毛利润|毛利额|毛利)`, m => ({ t: 'unsupported_metric', text: m[0], why: '分类毛利金额是由收入减成本推导的，未作为披露金额登记；可以问产品或服务毛利率。' }));
-words(['营业总收入', '营业收入', '总营收', '营收', '总收入', '收入总额', '收入', '销售收入', '净销售额', '销售总额', '总销售额', '销售额', '营业额', '卖了多少钱', '卖了多少', '卖出多少钱', '卖了'], metric('revenue'));
+words(['营业总收入', '营业收入', '总营收', '营收', '总收入', '收入总额', '收入', '销售收入', '净销售额', '销售总额', '总销售额', '销售额', '营业额'], metric('revenue'));
+words(['一共卖了多少钱', '卖了多少钱', '卖了多少', '卖出多少钱', '卖了', '卖出了', '销量'], () => ({ t: 'metric', v: 'revenue', soft: true } as Token));
 english(['total net sales', 'net sales', 'total revenues?', 'revenues?', 'sales', 'top line', 'turnover'], metric('revenue'));
-words(['营业成本', '营收成本', '销售成本', '收入成本', '主营业务成本', '营业总成本'], metric('cost_of_revenue'));
+words(['营业成本', '营收成本', '销售成本', '收入成本', '主营业务成本', '营业总成本', '总营业成本', '总销售成本', '营业成本合计', '销售成本合计'], metric('cost_of_revenue'));
 english(['total cost of revenue', 'total cost of sales', 'cost of revenue', 'cost of sales', 'cogs'], metric('cost_of_revenue'));
 words(['成本'], metric('cost_of_revenue', '“成本”按营业成本（cost of revenue / cost of sales）理解，不含经营费用。'));
 words(['销售毛利率', '综合毛利率', '整体毛利率', '毛利润率', '毛利率'], metric('gross_margin_pct'));
 english(['gross margin percentage', 'gross margin rate', 'gross margin %', 'gross margin ratio', 'gross profit margin'], metric('gross_margin_pct'));
 words(['毛利润', '毛利额', '毛利金额', '毛利'], metric('gross_profit'));
 english(['gross profit', 'gross margin'], metric('gross_profit', '按报表 Gross margin 行（金额）理解；毛利率请问“毛利率”。'));
-words(['净利润', '净利', '纯利润', '纯利', '净收益', '税后利润', '净赚', '赚了多少钱', '赚了多少', '赚多少钱', '赚多少', '赚了', '挣了多少钱', '挣了多少', '挣了', '盈利了多少', '盈利'], metric('net_income'));
+words(['净利润', '净利', '纯利润', '纯利', '净收益', '税后利润'], metric('net_income'));
+words(['净赚', '赚了多少钱', '赚了多少', '赚多少钱', '赚多少', '赚了', '赚的钱', '赚钱', '挣了多少钱', '挣了多少', '挣了', '盈利了多少', '盈利'], () => ({ t: 'metric', v: 'net_income', soft: true } as Token));
 english(['net income', 'net profit', 'net earnings', 'earnings', 'bottom line'], metric('net_income'));
 words(['经营活动产生的现金流量净额', '经营活动现金流量净额', '经营活动产生的现金流量', '经营活动现金净流量', '经营活动净现金流', '经营活动现金流净额', '经营活动的现金流', '经营活动现金流', '经营活动现金流量', '经营现金流量', '经营现金流', '经营性现金流', '经营净现金流', '营运现金流'], metric('cfo'));
 english(['net cash from operations', 'cash generated by operating activities', 'cash from operations', 'operating cash flows?', 'cash flow from operations', 'cfo', 'ocf'], metric('cfo'));
 words(['现金流'], metric('cfo', '“现金流”按经营活动现金流净额理解；投资、筹资活动现金流未登记。'));
-words(['资本开支', '资本支出', '资本性支出', '购建固定资产支付的现金', '购建固定资产的现金', '购建固定资产', '固定资产购建支出', '固定资产购建现金流出', '固定资产购建', '固定资产投资', '固定资产支出', '购置固定资产', '买固定资产', '花在固定资产上', '买设备'], metric('capex'));
-english(['capex', 'capital expenditures?', 'purchases of property(?:, plant)? and equipment', 'additions to property and equipment', 'payments for acquisition of property, plant and equipment', 'ppe'], metric('capex'));
+words(['资本开支', '资本支出', '资本性支出', '购建固定资产支付的现金', '购建固定资产的现金', '购建固定资产', '固定资产购建支出', '固定资产购建现金流出', '固定资产购建', '固定资产投资', '固定资产支出', '购置固定资产', '购买固定资产', '买固定资产', '花在固定资产上', '买设备', '买厂房设备', '购买厂房设备', '购置厂房设备', '厂房设备', '厂房和设备', '物业、厂房及设备', '不动产、厂房和设备', '不动产厂房设备', '购买物业厂房及设备', '固定资产付款', '固定资产现金支出'], metric('capex'));
+english(['capex', 'capital expenditures?', 'pp&e', 'pp ?& ?e payments?', 'ppe payments?', 'purchases of property(?:, plant)? and equipment', 'additions to property and equipment', 'payments for acquisition of property, plant and equipment', 'ppe'], metric('capex'));
 words(['短期债务', '短期借款', '短债', '商业票据', '短期票据'], metric('short_debt'));
 english(['commercial paper', 'short-term debt', 'short term debt'], metric('short_debt'));
-words(['一年内到期的长期债务', '一年内到期长期债务', '一年内到期的长期借款', '长期债务的流动部分', '长期债务流动部分', '一年内到期的定期债务', '一年内到期的债务', '当期到期的长期债务', '流动部分的长期债务'], metric('current_debt'));
-english(['current portion of long-term debt', 'current portion of term debt', 'current term debt'], metric('current_debt'));
-words(['非流动长期债务', '长期债务', '长期借款', '长债', '非流动债务'], metric('long_debt'));
+words(['流动的定期债务', '流动部分的定期债务', '定期债务的流动部分', '定期债务(流动)', '定期债务(流动部分)', '一年内到期的长期债务', '一年内到期长期债务', '一年内到期的长期借款', '长期债务的流动部分', '长期债务流动部分', '一年内到期的定期债务', '一年内到期的债务', '当期到期的长期债务', '流动部分的长期债务'], metric('current_debt'));
+english(['current portion of long-term debt', 'current portion of term debt', 'current term debt', 'term debt, current', 'term debt \\(current\\)'], metric('current_debt'));
+words(['非流动长期债务', '长期债务', '长期借款', '长债', '非流动债务', '非流动的定期债务', '非流动定期债务', '非流动部分的定期债务', '定期债务的非流动部分', '定期债务(非流动)', '定期债务(非流动部分)'], metric('long_debt'));
 rule('长期债务 ?\\(非流动(?:部分)?\\)|长期债务的非流动部分|长期债务非流动部分', metric('long_debt'));
-english(['long-term debt', 'long term debt', 'non-current term debt'], metric('long_debt'));
+english(['long-term debt', 'long term debt', 'non-current term debt', 'term debt, non-current', 'term debt \\(non-current\\)'], metric('long_debt'));
 words(['流动资产合计', '流动资产总额', '流动资产'], metric('current_assets'));
 english(['total current assets', 'current assets'], metric('current_assets'));
 words(['流动负债合计', '流动负债总额', '流动负债'], metric('current_liabilities'));
 english(['total current liabilities', 'current liabilities'], metric('current_liabilities'));
-rule('现金(?:、| ?和 ?| ?及 ?| ?与 ?)?现金等价物(?:、| ?和 ?| ?及 ?| ?与 ?|加)短期投资(?:合计|总额|总计)?|现金(?:、| ?和 ?| ?及 ?| ?与 ?|加)短期投资(?:合计|总额|总计)?', metric('liquid_assets'));
+rule('短期投资(?:加|和|与|及|、)现金(?:及现金等价物|和现金等价物)?(?:合计|总额|总计)?|现金(?:、| ?和 ?| ?及 ?| ?与 ?)?现金等价物(?:、| ?和 ?| ?及 ?| ?与 ?|加)短期投资(?:合计|总额|总计)?|现金(?:、| ?和 ?| ?及 ?| ?与 ?|加)短期投资(?:合计|总额|总计)?', metric('liquid_assets'));
 english(['total cash, cash equivalents,? and short-term investments', 'cash, cash equivalents,? and short-term investments', 'cash and short-term investments'], metric('liquid_assets'));
 words(['现金及现金等价物', '现金和现金等价物', '现金与现金等价物', '现金、现金等价物', '现金等价物'], metric('cash_equivalents'));
 english(['cash and cash equivalents'], metric('cash_equivalents'));
-words(['流动有价证券', '短期有价证券', '有价证券', '短期投资'], metric('short_investments'));
-english(['current marketable securities', 'marketable securities', 'short-term investments'], metric('short_investments'));
+words(['流动有价证券', '流动性有价证券', '流动的有价证券', '短期有价证券', '有价证券', '短期投资'], metric('short_investments'));
+english(['current marketable securities', 'marketable securities, current', 'marketable securities \\(current\\)', 'marketable securities', 'short-term investments'], metric('short_investments'));
 
 // Ambiguous words: answered only when a specific metric of the same family is also present.
 words(['利润', '利润额', '盈利能力'], m => ({ t: 'ambiguous', family: 'profit', text: m[0] }));
@@ -123,7 +140,7 @@ words(['债务', '负债', '借款', '借了多少钱', '借了多少', '借了'
 english(['debt', 'borrowings', 'term debt'], m => ({ t: 'ambiguous', family: 'debt', text: m[0] }));
 words(['净收入'], m => ({ t: 'ambiguous', family: 'income', text: m[0] }));
 words(['投资'], m => ({ t: 'ambiguous', family: 'investment', text: m[0] }));
-words(['产品', '硬件', '服务'], m => ({ t: 'ambiguous', family: 'category', text: m[0] }));
+words(['硬件产品', '产品', '硬件', '服务及其他', '服务和其他', '服务与其他', '服务'], m => ({ t: 'ambiguous', family: 'category', text: m[0] }));
 
 // Metrics that are not registered (named back).
 words(['营业利润', '经营利润', '主营利润', '利润总额', '税前利润', '息税前利润', '归母净利润', '归属于母公司的净利润', '扣非净利润', '扣非', '营业费用', '经营费用', '运营费用', '研发费用', '研发支出', '研发投入', '研发', '销售费用', '管理费用', '销售及管理费用', '所得税', '税费', '利息支出', '利息', '折旧', '摊销', '每股收益', '每股', '股息', '分红', '回购', '市值', '股价', '总资产', '资产总额', '资产合计', '资产', '总负债', '负债合计', '负债总额', '股东权益', '所有者权益', '净资产', '权益', '自由现金流', '净债务', '净负债', '有息负债', '总债务', '债务总额', '全部债务', '流动比率', '速动比率', '资产负债率', '负债率', '净利率', '净利润率', '营业利润率', '经营利润率', '投资回报率', '净资产收益率', '杠杆', '投资活动现金流', '投资活动', '筹资活动现金流', '筹资活动', '融资活动', '现金净增加', '存货', '库存', '应收账款', '应收', '应付账款', '应付', '商誉', '无形资产', '员工', '人数', '全部资本投入', '资本投入总额', '总资本投入', '全部资本开支', '所有资本投资', '资本投入', '资本投资', '订单', '积压', '剩余履约义务', '收入确认', '营运资本', '营运资金', '运营资本'],
@@ -157,7 +174,7 @@ words(['今年', '本年度', '本年', '明年', '前年', '当年', '近一年
 english(['this year', 'last year', 'next year', 'forecast', 'guidance', 'latest'], m => ({ t: 'relative', v: m[0] === 'latest' ? 'latest' : 'unanchored', text: m[0] }));
 
 // Units.
-rule('(?:多少|几) ?(百万|亿|万|千|十亿)? ?(?:美元|美金|美刀|刀)', m => ({ t: 'unit', currency: 'USD', scale: m[1] ? SCALE[m[1]] : 'one', text: m[0] }));
+rule('(?:是|为|有|合|折合)?(?:多少|几) ?(百万|亿|万|千|十亿)? ?(?:美元|美金|美刀|刀)', m => ({ t: 'unit', currency: 'USD', scale: m[1] ? SCALE[m[1]] : 'one', text: m[0] }));
 rule('(百万|亿|万|千|十亿)? ?(?:美元|美金|美刀)', m => ({ t: 'unit', currency: 'USD', scale: m[1] ? SCALE[m[1]] : null, text: m[0] }));
 rule(W('(?:in )?(?:us ?\\$|usd|\\$|dollars?) ?(millions?|billions?|thousands?|mn|bn)?') + '|' + W('(?:in )?(millions?|billions?|thousands?|mn|bn)(?: of)?(?: (?:us )?(?:dollars|usd))?'),
   m => ({ t: 'unit', currency: 'USD', scale: (m[1] || m[2]) ? SCALE[m[1] || m[2]] : null, text: m[0] }));
@@ -166,7 +183,7 @@ rule('(百万|亿|万|千|十亿|万亿|千万)? ?(?:人民币|元|块钱|块|rm
 rule('(百万|亿|万|千|十亿)? ?(?:港元|港币|欧元|日元|英镑|韩元|新台币|台币|卢布)', m => ({ t: 'unit', currency: m[0].includes('港') ? 'HKD' : m[0].includes('欧') ? 'EUR' : m[0].includes('日') ? 'JPY' : m[0].includes('英') ? 'GBP' : 'OTHER', scale: m[1] ? SCALE[m[1]] : null, text: m[0] }));
 english(['hkd', 'eur', 'euros?', 'jpy', 'yen', 'gbp', 'pounds?', 'rmb', 'cny', 'yuan'], m => ({ t: 'unit', currency: ['rmb', 'cny', 'yuan'].includes(m[0]) ? 'CNY' : m[0].toUpperCase().startsWith('H') ? 'HKD' : 'OTHER', scale: null, text: m[0] }));
 rule('(?:万亿|千万|百亿|千亿|trillion)', m => ({ t: 'unit', currency: null, scale: 'unsupported', text: m[0] }));
-rule('(?:多少|几) ?(百万|亿|万|千|十亿)', m => ({ t: 'unit', currency: null, scale: SCALE[m[1]], text: m[0] }));
+rule('(?:是|为|有|合|折合)?(?:多少|几) ?(百万|亿|万|千|十亿)', m => ({ t: 'unit', currency: null, scale: SCALE[m[1]], text: m[0] }));
 rule('(百万|十亿)', m => ({ t: 'unit', currency: null, scale: SCALE[m[1]], text: m[0] }));
 rule('(?:%|百分比|百分之几|百分之多少|百分点|个百分点|pp(?![a-z]))', () => ({ t: 'percent' }));
 
@@ -187,15 +204,15 @@ words(['同比增长率', '同比增速', '同比增幅', '同比变化率', '�
 english(['growth rate', 'growth', 'yoy', 'year over year', 'year-over-year', 'percent change'], () => ({ t: 'intent', v: 'growth' }));
 words(['同比增长', '同比增加', '同比下降', '同比减少', '同比变化', '同比', '变化', '变动', '增长了', '增长', '增加了', '增加', '减少了', '减少', '下降了', '下降', '下滑', '上升', '提升', '提高', '降低', '增减', '涨了', '跌了', '涨', '跌', '多了', '少了', '变了', '变成', '走势', '趋势', '怎么变', '升了', '降了', '升', '降', '翻了'], () => ({ t: 'intent', v: 'change' }));
 english(['change', 'changed', 'increase', 'increased', 'decrease', 'decreased', 'grow', 'grew', 'rise', 'rose', 'fall', 'fell', 'decline', 'declined', 'trend'], () => ({ t: 'intent', v: 'change' }));
-words(['能不能直接比较', '能不能直接比', '能否直接比较', '能否直接比', '可以直接比较', '可以直接比', '可不可以比较', '可不可以比', '能不能比较', '能不能比', '能否比较', '能比较', '能比', '可比较', '可比性', '可比', '直接比较', '直接比', '口径一致', '口径一样', '口径相同', '同口径', '同一口径', '放在一起比较', '放在一起比', '横向比较', '一起比较', '一样吗', '一致吗', '相同吗', '可以比较吗', '比较吗'], () => ({ t: 'intent', v: 'comparable' }));
+words(['可比不可比', '可不可比', '能直接对比', '可以直接对比', '能不能直接对比', '能否直接对比', '直接对比', '放一起比较', '放一起比', '能不能放一起比', '能不能比较', '能不能直接比较', '能不能直接比', '能否直接比较', '能否直接比', '可以直接比较', '可以直接比', '可不可以比较', '可不可以比', '能不能比较', '能不能比', '能否比较', '能比较', '能比', '可比较', '可比性', '可比', '直接比较', '直接比', '口径一致', '口径一样', '口径相同', '同口径', '同一口径', '放在一起比较', '放在一起比', '横向比较', '一起比较', '一样吗', '一致吗', '相同吗', '可以比较吗', '比较吗'], () => ({ t: 'intent', v: 'comparable' }));
 english(['comparable', 'apples to apples', 'like for like', 'compare directly'], () => ({ t: 'intent', v: 'comparable' }));
 rule('(?:谁|哪家|哪个|哪一家|哪一个|哪边)(?:公司)?(?:的)?(?:更|比较)?(?:高|多|大|低|少|小|强|好|厉害|赚得多|赚得更多|领先)?', () => ({ t: 'intent', v: 'rank' }));
 words(['更高', '更多', '更大', '更低', '更少', '更小', '更强', '排名', '排序', '排行', '领先', '高于', '低于', '超过', '胜过', '赢', '谁多', '谁高', '谁大'], () => ({ t: 'intent', v: 'rank' }));
 english(['which is higher', 'which is larger', 'which is bigger', 'which company', 'higher', 'larger', 'bigger', 'more than', 'less than', 'rank', 'ranking', 'outperform'], () => ({ t: 'intent', v: 'rank' }));
-words(['多多少', '少多少', '高多少', '低多少', '差多少', '相差多少', '差了多少', '差多大', '差距', '差额', '相差', '差了', '多出', '多了多少', '少了多少', '大多少', '小多少', '减去', '减'], () => ({ t: 'intent', v: 'diff' }));
+words(['多花了多少', '多花了', '少花了多少', '多多少', '少多少', '高多少', '低多少', '差多少', '相差多少', '差了多少', '差多大', '差距', '差额', '相差', '差了', '多出', '多了多少', '少了多少', '大多少', '小多少', '减去', '减'], () => ({ t: 'intent', v: 'diff' }));
 english(['difference', 'gap', 'minus'], () => ({ t: 'intent', v: 'diff' }));
-words(['对比一下', '对比', '比较一下', '比较', '比一比', '比一下', '相比', '相较', '对照', '比'], () => ({ t: 'intent', v: 'compare' }));
-english(['versus', 'vs\\.?', 'compare', 'compared', 'comparison'], () => ({ t: 'intent', v: 'compare' }));
+words(['对比一下', '对比', '比较一下', '比较', '比一比', '比一下', '相比', '相较于', '相较', '相对于', '相对', '比起', '较', '对照', '比', '并排', '并列', '放一起看', '放在一起看', '一起看', '放一起', '放在一起', '列出来', '各列出来'], () => ({ t: 'intent', v: 'compare' }));
+english(['versus', 'vs\\.?', 'compare', 'compared', 'comparison', 'side by side', 'side-by-side'], () => ({ t: 'intent', v: 'compare' }));
 words(['分别是', '分别为', '分别', '各自', '各是', '各为', '各', '两年', '这两年', '两个财年', '两个年度', '两期', '两份'], () => ({ t: 'intent', v: 'multi' }));
 words(['和', '与', '及', '以及', '跟', '同', '、', '还有', '加上'], () => ({ t: 'intent', v: 'multi' }));
 english(['and', '&'], () => ({ t: 'intent', v: 'multi' }));
@@ -205,16 +222,19 @@ words(['请问一下', '请问', '麻烦你', '麻烦', '帮我查一下', '帮�
   '是多少', '为多少', '有多少', '多少', '是几', '几', '多大', '几何', '怎么样', '如何', '怎样', '情况', '水平', '规模', '数据', '数字', '数值', '金额', '总额', '合计', '总计', '一共', '总共', '大概', '大约', '约', '左右', '具体', '到底', '究竟', '是否', '是不是', '有没有', '能否', '能不能', '可以', '能', '吗', '呢', '吧', '呀', '啊', '嘛', '哈', '哦', '噢', '呗', '啦',
   '的', '了', '是', '为', '在', '于', '中', '里面', '里', '上面', '上', '内', '这个', '那个', '这', '那', '其', '它', '它们', '他们', '公司', '企业', '集团', '财报', '年报', '报表', '报告', '表里', '表上', '表中', '利润表', '损益表', '资产负债表', '现金流量表', '财务报表', '10-k', '10k', 'form 10-k', '披露', '公布', '列示', '报告期', '期末', '期间', '期内', '时', '时候', '截至', '截止到', '截止', '截至到', '止年度', '止的年度', '止的', '止', '那年', '这年', '全年', '年度', '财年', '年', '会计年度', '一年', '整年', '对应', '相应', '账上', '手上', '手里', '兜里', '账面', '口径', '按', '用', '以', '计', '计算', '表示', '单位', '换算成', '换算', '折合', '折算成', '折算', '合多少', '算', '算一下', '数额', '共', '实际', '原文', '原值', '报的', '的话', '呢?', '谢谢', '多谢', '你好', '您好', '请', '一', '个', '笔', '期'],
   () => ({ t: 'filler' }));
-words(['从', '由', '期间的', '多少钱', '花了多少钱', '花了多少', '花了', '花的', '花', '余额', '卖的', '卖', '这块', '那块', '这一块', '这部分', '那部分', '财年末', '财年底', '年度末', '有', '一共有', '分别有'], () => ({ t: 'filler' }));
+words(['从', '由', '到', '至', '之间', '期间的', '期间长度', '长度', '天数', '直接', '业务', '方面', '总', '把', '写完整数字', '完整数字', '完整的数字', '写完整', '全部数字', '报给我', '报', '付了多少现金', '支付的现金', '付了多少', '付了', '支付了', '付款', '支付', '经营活动', '多少钱', '花了多少钱', '花了多少', '花了', '花的', '花', '余额', '卖的', '卖', '这块', '那块', '这一块', '这部分', '那部分', '财年末', '财年底', '年度末', '有', '一共有', '分别有'], () => ({ t: 'filler' }));
 english(['what', "what's", 'whats', 'is', 'was', 'were', 'are', 'the', 'of', 'in', 'for', 'how', 'much', 'many', 'did', 'does', 'do', 'make', 'made', 'please', 'show', 'me', 'tell', 'give', 'between', 'from', 'to', 'its', "it's", 'it', 'a', 'an', 'on', 'at', 'as', 'by', 'with', 'reported', 'report', 'annual', 'total', 'amount', 'value', 'figure', 'year', 'fiscal', 'ended', 'ending', 'end', 'as of', 'fy', 'can', 'i', 'we', 'you', 'they', 'their', 'company', 'inc', 'corp', 'statement', 'balance sheet', 'income statement', 'cash flow statement', 'lookup', 'look up', 'find', 'get', 'number', 'about', 'than', 'were'],
   () => ({ t: 'filler' }));
 rule('[\\s,，。.!！?？;；:：()（）\\[\\]【】<>《》/\\\\\'"·~—_-]+', () => ({ t: 'filler' }));
 
 /* ---------- tokenizer ---------- */
-export function tokenize(question: string): { tokens: Token[]; unknown: string[] } {
-  const s = normalise(question);
+export function tokenize(question: string): { tokens: Token[]; unknown: string[]; unknownAt: number[] } {
+  return tokenizeNormalised(normalise(question));
+}
+function tokenizeNormalised(s: string): { tokens: Token[]; unknown: string[]; unknownAt: number[] } {
   const tokens: Token[] = [];
   const unknown: string[] = [];
+  const unknownAt: number[] = [];
   let pending = '';
   let i = 0;
   while (i < s.length) {
@@ -224,14 +244,66 @@ export function tokenize(question: string): { tokens: Token[]; unknown: string[]
       const m = re.exec(s);
       if (m && m[0].length > 0 && (!best || m[0].length > best.len)) best = { len: m[0].length, token: make(m) };
     }
-    if (!best) { pending += s[i]; i += 1; continue; }
+    if (!best) { if (s[i] !== ' ') unknownAt.push(i); pending += s[i]; i += 1; continue; }
     if (pending.trim()) unknown.push(pending.trim());
     pending = '';
     if (best.token && best.token.t !== 'filler') tokens.push(best.token);
     i += best.len;
   }
   if (pending.trim()) unknown.push(pending.trim());
-  return { tokens, unknown };
+  return { tokens, unknown, unknownAt };
+}
+
+/* Typo repair: at most two corrections, each one character (CJK substitution; Latin
+   substitution, deletion, insertion or adjacent transposition) to a known issuer or metric name of
+   3+ CJK / 5+ Latin characters, overlapping an unreadable character, and unique: if two corrections
+   would both make the question readable, nothing is repaired. Each repair is reported. */
+function variants(sub: string, target: string): boolean {
+  if (sub === target) return false;
+  if (sub.length === target.length) {
+    let diff = 0;
+    for (let k = 0; k < sub.length; k++) if (sub[k] !== target[k]) diff++;
+    if (diff === 1) return true;
+    if (diff === 2 && /^[a-z]/.test(target)) {
+      for (let k = 0; k + 1 < sub.length; k++) if (sub[k] === target[k + 1] && sub[k + 1] === target[k] && sub.slice(0, k) === target.slice(0, k) && sub.slice(k + 2) === target.slice(k + 2)) return true;
+    }
+    return false;
+  }
+  if (!/^[a-z]/.test(target) || Math.abs(sub.length - target.length) !== 1) return false;
+  const [short, long] = sub.length < target.length ? [sub, target] : [target, sub];
+  for (let k = 0; k < long.length; k++) if (long.slice(0, k) + long.slice(k + 1) === short) return true;
+  return false;
+}
+export function repair(s: string): { text: string; fixes: [string, string][] } | null {
+  let current = s;
+  const fixes: [string, string][] = [];
+  for (let round = 0; round < 2; round++) {
+    const { unknownAt } = tokenizeNormalised(current);
+    if (!unknownAt.length) break;
+    const options = new Map<string, [string, string]>();
+    for (const target of LITERALS) {
+      const latin = /^[a-z]/.test(target);
+      if (target.length < (latin ? 5 : 3)) continue;
+      for (const len of latin ? [target.length - 1, target.length, target.length + 1] : [target.length]) {
+        for (const at of unknownAt) for (let start = Math.max(0, at - len + 1); start <= at && start + len <= current.length; start++) {
+          const sub = current.slice(start, start + len);
+          if (!variants(sub, target)) continue;
+          if (latin && (/[a-z0-9]/.test(current[start - 1] ?? '') || /[a-z0-9]/.test(current[start + len] ?? ''))) continue;
+          const next = current.slice(0, start) + target + current.slice(start + len);
+          const after = tokenizeNormalised(next).unknownAt.length;
+          if (after < unknownAt.length) options.set(next, [sub, target]);
+        }
+      }
+    }
+    if (!options.size) return null;
+    const scored = [...options.entries()].map(([text, fix]) => ({ text, fix, left: tokenizeNormalised(text).unknownAt.length }));
+    const best = Math.min(...scored.map(x => x.left));
+    const winners = scored.filter(x => x.left === best);
+    if (winners.length !== 1) return null;
+    current = winners[0].text;
+    fixes.push(winners[0].fix);
+  }
+  return tokenizeNormalised(current).unknownAt.length ? null : { text: current, fixes };
 }
 
 /* ---------- reading ---------- */
@@ -255,13 +327,18 @@ export function understand(pack: Pack, question: string): Understood {
   const text = question.trim();
   if (!text) return { type: 'clarify', reason: 'empty', detail: '请输入一个关于微软或苹果 FY2024、FY2025 年报数字的问题。', suggestions: GENERAL };
   if (text.length > 200) return { type: 'refuse', reason: 'too_long', detail: '问题超过 200 字。请一次只问一个数字、一组两期变化或一组可比性。', suggestions: GENERAL };
-  const { tokens, unknown } = tokenize(text);
+  let { tokens, unknown } = tokenize(text);
+  const notes: string[] = [];
   if (unknown.length) {
-    return { type: 'refuse', reason: 'unknown_words', unknown,
-      detail: `没有读懂：${unknown.map(u => `“${u}”`).join('、')}。为避免给出不对应的数字，整句不作答。`, suggestions: GENERAL };
+    const fixed = repair(normalise(text));
+    if (!fixed) {
+      return { type: 'refuse', reason: 'unknown_words', unknown,
+        detail: `没有读懂：${unknown.map(u => `“${u}”`).join('、')}。为避免给出不对应的数字，整句不作答。`, suggestions: GENERAL };
+    }
+    ({ tokens, unknown } = tokenizeNormalised(fixed.text));
+    for (const [from, to] of fixed.fixes) notes.push(`“${from}”按“${to}”理解（疑似错字）；如不是这个意思，请改写后再问。`);
   }
   const of = <K extends Token['t']>(t: K) => tokens.filter(x => x.t === t) as Extract<Token, { t: K }>[];
-  const notes: string[] = [];
 
   const others = of('other_issuer');
   if (others.length) return { type: 'refuse', reason: 'issuer_not_registered', detail: `演示只登记了微软和苹果的 FY2025 年报，没有“${others[0].text}”的材料。`, suggestions: GENERAL };
@@ -312,18 +389,36 @@ export function understand(pack: Pack, question: string): Understood {
   const scope = of('scope').some(s => s.v === 'parent_only') ? 'parent_only' : 'consolidated';
 
   // Metrics, resolving ambiguous words.
-  const metricTokens = of('metric');
+  const allMetricTokens = of('metric');
+  const firm = allMetricTokens.filter(m => !m.soft);
+  // Verb phrases such as 赚了 / 卖了 name a metric only when no metric is named outright.
+  const metricTokens = firm.length ? firm : allMetricTokens;
   let metrics = [...new Set(metricTokens.map(m => m.v))];
+  const categoryWords = of('ambiguous').filter(a => a.family === 'category');
+  if (categoryWords.length) {
+    const kinds = new Set(categoryWords.map(a => (a.text.startsWith('服务') ? 'service' : 'product')));
+    const map: Record<string, string> = { revenue: 'revenue', cost_of_revenue: 'cost', gross_margin_pct: 'gross_margin_pct' };
+    const base = metrics.filter(m => !/^(product|service)_/.test(m));
+    if (kinds.size > 1 || metrics.length !== 1 || (base.length === 1 && !map[base[0]] && base[0] !== 'gross_profit')) {
+      return { type: 'clarify', reason: 'ambiguous_metric', detail: '“产品/服务”需要和一个收入、成本或毛利率指标连在一起问，例如“苹果 FY2025 服务收入”。', suggestions: GENERAL };
+    }
+    if (base[0] === 'gross_profit') return { type: 'refuse', reason: 'metric_not_registered', detail: '分类毛利金额是由收入减成本推导的，未作为披露金额登记；可以问产品或服务毛利率。', suggestions: GENERAL };
+    if (base.length === 1) {
+      const cat = [...kinds][0];
+      metrics = [base[0] === 'revenue' ? `${cat}_revenue` : base[0] === 'cost_of_revenue' ? `${cat}_cost` : `${cat}_gross_margin_pct`];
+    } else if (!metrics[0].startsWith([...kinds][0])) {
+      return { type: 'clarify', reason: 'ambiguous_metric', detail: '问题里的产品/服务分类前后不一致，请只问一类。', suggestions: GENERAL };
+    }
+  }
   for (const m of metricTokens) if (m.note && !notes.includes(m.note)) notes.push(m.note);
   const families: Record<string, string[]> = {
-    profit: ['net_income', 'gross_profit', 'gross_margin_pct'], cash: ['liquid_assets', 'cash_equivalents', 'short_investments', 'cfo'],
+    profit: ['net_income', 'gross_profit', 'gross_margin_pct'], cash: ['liquid_assets', 'cash_equivalents', 'short_investments', 'cfo', 'capex'],
     debt: ['short_debt', 'current_debt', 'long_debt'], income: ['net_income', 'revenue'], investment: ['capex', 'short_investments', 'liquid_assets'],
     category: ['product_revenue', 'service_revenue', 'product_cost', 'service_cost', 'product_gross_margin_pct', 'service_gross_margin_pct'],
   };
-  for (const amb of of('ambiguous')) {
+  for (const amb of of('ambiguous').filter(a => a.family !== 'category')) {
     if (metrics.some(m => families[amb.family].includes(m))) continue;
     if (['钱', '账上的钱', '手上的钱'].includes(amb.text) && metrics.length) continue;
-    if (amb.family === 'category' && metrics.length === 1 && ['revenue', 'cost_of_revenue', 'gross_margin_pct', 'gross_profit'].includes(metrics[0])) continue;
     if (amb.family === 'cash' && issuers.length === 1 && issuers[0] === 'AAPL' && !metrics.length) {
       metrics.push('cash_equivalents');
       notes.push('“现金”按苹果资产负债表的“现金及现金等价物”理解；流动有价证券另列，未合并。');
@@ -345,15 +440,6 @@ export function understand(pack: Pack, question: string): Understood {
       category: '请说明是产品/服务的收入、成本还是毛利率。',
     }[amb.family] as string;
     return { type: 'clarify', reason: 'ambiguous_metric', detail, suggestions: options[amb.family].filter(m => pack.observations.some(o => o.issuer_id === issuer && o.metric === m) || pack.percents.some(o => o.issuer_id === issuer && o.metric === m)).map(m => suggestion(pack, issuer, m, yrs.slice(0, 1))) };
-  }
-
-  // "服务 … 毛利率" / "产品 … 收入": a category word plus one base metric names the category metric.
-  const categories = of('ambiguous').filter(a => a.family === 'category');
-  if (categories.length === 1 && metrics.length === 1) {
-    const cat = categories[0].text === '服务' ? 'service' : 'product';
-    const map: Record<string, string> = { revenue: `${cat}_revenue`, cost_of_revenue: `${cat}_cost`, gross_margin_pct: `${cat}_gross_margin_pct` };
-    if (metrics[0] === 'gross_profit') return { type: 'refuse', reason: 'metric_not_registered', detail: '分类毛利金额是由收入减成本推导的，未作为披露金额登记；可以问产品或服务毛利率。', suggestions: GENERAL };
-    if (map[metrics[0]]) metrics = [map[metrics[0]]];
   }
 
   // Intent.
