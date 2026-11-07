@@ -28,6 +28,14 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 .intro-hero h1 em { font-style: normal; color: var(--cl-brass); white-space: nowrap; }
 .intro-lede { margin: 0 0 26px; color: var(--cl-muted); font-size: 15px; max-width: 34em; }
 .intro-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.intro-ask { margin: 22px 0 0; max-width: 560px; }
+.intro-ask label { display: block; margin: 0 0 6px; font-size: 13px; font-weight: 600; color: var(--cl-ink-2); }
+.intro-ask-row { display: flex; gap: 8px; }
+.intro-ask input { flex: 1; min-width: 0; min-height: 40px; padding: 8px 12px; border: 1px solid var(--cl-line-strong); border-radius: 7px; background: var(--cl-surface); color: var(--cl-ink); font: inherit; }
+.intro-ask button { min-height: 40px; padding: 0 16px; border: 1px solid var(--cl-iris); border-radius: 7px; background: var(--cl-iris); color: #fff; font: 600 14px/1 var(--cl-font); cursor: pointer; }
+:root[data-theme="dark"] .intro-ask button { color: #12102b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .intro-ask button { color: #12102b; } }
+.intro-ask p { margin: 6px 0 0; font-size: 12px; color: var(--cl-muted); }
 .intro-enter { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 8px; background: var(--cl-night); color: var(--cl-night-ink) !important; font-weight: 600; text-decoration: none; border: 1px solid var(--cl-night); }
 .intro-enter span { color: var(--cl-iris-bright); }
 .intro-enter:hover { background: var(--cl-night-2); }
@@ -126,6 +134,7 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 <h1 id="intro-title">每个取到的数字，<br>都能回到<em>原页上的那一格。</em></h1>
 <p class="intro-lede">CreditLens 面向投研和风险分析中的财报核查：查到指标时一并保留页码、定位框和单位原文；先核对口径与可比性，再计算毛利率与现金流变化，最后把固定的研究底稿交给另一位同事复核。</p>
 <div class="intro-actions"><a class="intro-enter" href="/table-lookup">进入工作台 <span aria-hidden="true">→</span></a><a class="intro-ghost" href="https://github.com/leon1111-wgl/creditlens">查看代码</a></div>
+<form class="intro-ask" action="/ask" method="get" role="search"><label for="intro-q">问一个关于这两份年报的问题</label><div class="intro-ask-row"><input id="intro-q" name="q" type="text" maxlength="200" autocomplete="off" placeholder="例如：苹果 FY2025 服务毛利率是多少"><button type="submit">提问</button></div><p>在本页浏览器内按登记数字作答，给出页码、定位框、单位与核对结果；不是模型，也没有服务器。</p></form>
 <p class="intro-source-note">当前材料以微软、苹果的官方历史年报为主，文档实验另有 AMD、NVIDIA 案例。页面展示仓库中保存的识别与计算结果，不重新运行 OCR。</p></div>
 <section class="stage" aria-labelledby="stage-title"><h2 id="stage-title" hidden>取数读数演示</h2>
 <div class="stage-head"><div class="stage-tabs" id="stageTabs" role="group" aria-label="选择页面"></div><div class="stage-controls"><button type="button" id="prevTarget" aria-label="上一项">‹</button><button type="button" id="pauseTarget" aria-pressed="false">暂停</button><button type="button" id="nextTarget" aria-label="下一项">›</button></div></div>
@@ -154,6 +163,7 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 <li>毛利率与经营现金流的确定性分解，Decimal 计算，公式可展开</li>
 <li>研究任务：采用理由、版本快照、独立复核与退回、导出一致性核对</li>
 <li>文档实验：保存的 CPU OCR 结果、方法对照和图像退化结果</li>
+<li>问证据：在浏览器内把问题读成公司、指标、财年、单位与口径，按登记数字作答或说明缺什么；读不懂的词会被指出</li>
 </ul></section><section class="pending"><h3>开发中 · 尚未实现</h3><ul>
 <li>预测模型与组合实验</li>
 <li>通用多模态问答与自动公告更新</li>

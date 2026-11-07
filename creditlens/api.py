@@ -186,6 +186,18 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     def workspace_theme():
         return FileResponse(ROOT / "creditlens/theme.js", media_type="text/javascript")
 
+    @application.get("/assets/ask.js", include_in_schema=False)
+    def ask_script():
+        return FileResponse(ROOT / "creditlens/ask.js", media_type="text/javascript")
+
+    @application.get("/assets/ask-pack.json", include_in_schema=False)
+    def ask_pack():
+        return FileResponse(ROOT / "creditlens/ask-pack.json", media_type="application/json")
+
+    @application.get("/ask", include_in_schema=False)
+    def ask_page():
+        return FileResponse(ROOT / "creditlens/ask.html")
+
     @application.get("/intro", include_in_schema=False)
     def product_intro():
         return FileResponse(ROOT / "creditlens/intro.html")

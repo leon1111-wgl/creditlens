@@ -79,7 +79,7 @@ function shuffledBody(value) {
   assert.equal(missing.status, 404);
   for (const page of Object.values(manifest.pages)) {
     const html = fs.readFileSync(path.join(site, page), 'utf8');
-    assert(!/\b(?:href|src)="\/(?!\/)/.test(html), page + ' still references a server path');
+    assert(!/\b(?:href|src|action)="\/(?!\/)/.test(html), page + ' still references a server path');
     for (const [, code] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(code, {filename: page});
     const firstScript = html.match(/<script[^>]*>/)[0];
     assert.equal(firstScript, '<script src="assets/static-demo.js">', page + ' must load the shim first');

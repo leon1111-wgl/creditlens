@@ -5,7 +5,7 @@
   "description": "In-browser evidence answers for the CreditLens static demo (TypeScript port of creditlens/evidence_answers.py)",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/main.ts --bundle --format=iife --target=es2020 --minify --legal-comments=none --outfile=../creditlens/ask.js",
+    "build": "node build.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
