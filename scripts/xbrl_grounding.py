@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import gzip
 from collections import Counter
 from datetime import datetime, timezone
 import hashlib
@@ -107,7 +108,10 @@ class Fetcher:
         raw = self.get(archive_url, max_bytes=max_bytes)
         if sha1_base32(raw) != capture["digest"]:
             raise RuntimeError("Archived bytes do not match the capture digest: " + original)
-        return raw, {"original_url": capture["original"], "capture_timestamp": capture["timestamp"],
+        encoded = raw[:2] == b"\x1f\x8b"
+        if encoded:  # stored as served (Content-Encoding: gzip); the digest covers the stored bytes
+            raw = gzip.decompress(raw)
+        return raw, {"stored_gzip": encoded, "original_url": capture["original"], "capture_timestamp": capture["timestamp"],
                      "archive_url": archive_url, "capture_sha1_base32": capture["digest"],
                      "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
 
@@ -345,7 +349,9 @@ def render_issuer(browser, html_path: Path, out_dir: Path, issuer_id: str, confi
     pages = paginate(data["breaks"], data["height"], render["min_page_css_px"])
     if len(pages) < config["heldout_rule"]["accept"]["min_page_breaks"]:
         context.close()
-        return {"rejected": "too_few_page_breaks", "page_breaks": len(pages)}
+        return {"rejected": "too_few_page_breaks", "page_breaks": len(pages), "raw_breaks": len(data["breaks"]),
+                "height": data["height"], "facts": len(data["facts"]), "title": data["title"][:120],
+                "head": html_path.read_bytes()[:160].decode("utf-8", "replace")}
     ppx = render["points_per_css_px"]
     for fact in data["facts"]:
         fact["page"] = None
