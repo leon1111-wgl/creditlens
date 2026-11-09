@@ -1,0 +1,766 @@
+{
+ "schema_version": 1,
+ "benchmark_version": "xbrl-grounding-1",
+ "score_rule_version": "xbrl-grounding-score-1",
+ "mode": "heldout",
+ "label": "heldout-first-run",
+ "scope": "Clean Chromium renders of born-digital Inline XBRL 10-K pages, not scans or the issuers' PDFs. Answer key = the issuer's own XBRL tags (concept, context, unit, decimals, scale, sign) plus the printed parentheses next to each tagged number. Extraction input = page image only (RapidOCR, pinned profile); facts are matched to OCR spans only after recognition.",
+ "run": {
+  "commit": "b7a16f749762a09dc4bbba5f02373b3cc30fec80",
+  "run_id": "42712945764",
+  "run_url": "https://github.com/leon1111-wgl/creditlens/actions/runs/42712945764",
+  "generated_at": "2026-11-09T22:49:52.662312+00:00",
+  "environment": {
+   "python": "3.12.16",
+   "os": "Linux-7.0.0-1019-azure-x86_64-with-glibc2.43",
+   "packages": {
+    "rapidocr": "3.10.0",
+    "onnxruntime": "1.31.0",
+    "playwright": "1.49.1",
+    "Pillow": "13.0.0",
+    "numpy": "2.5.4"
+   }
+  },
+  "config_sha256": "18991d234840eeb10716d255cd221d8493dae3a66b8641c887a7e15ad7201e1f",
+  "ocr_profile": "full-page-ocr-crosscheck-1",
+  "ocr_weights": {
+   "Det": {
+    "filename": "PP-OCRv6_det_small.onnx",
+    "sha256": "090f04abcd9d9a7498bc4ebf677e4cb9bdce1fe4197ddb7e529f1ef44e1ff94f"
+   },
+   "Rec": {
+    "filename": "PP-OCRv6_rec_small.onnx",
+    "sha256": "6f327246b50388f3c176ae304bd95767ea6dc0c9ae92153ef8cbe210b3c14884"
+   }
+  }
+ },
+ "summary": {
+  "facts_scored": 1762,
+  "not_scored": {
+   "unsupported_format": 12
+  },
+  "outcomes": {
+   "match": 1370,
+   "conflict": 0,
+   "abstain": 392
+  },
+  "abstain_reasons": {
+   "cell_crosses_column": 11,
+   "low_ocr_confidence": 2,
+   "merged_or_misaligned_region": 136,
+   "no_spatial_evidence": 103,
+   "share_or_per_share_row": 140
+  },
+  "conflict_components": {},
+  "box_recall": {
+   "hit": 1659,
+   "of": 1762,
+   "rate": 0.9415
+  },
+  "exact_value": {
+   "correct": 1381,
+   "read": 1381,
+   "of": 1762,
+   "rate_of_read": 1.0,
+   "rate_of_all": 0.7838
+  },
+  "period_column": {
+   "correct": 1504,
+   "read": 1504,
+   "of": 1762,
+   "rate_of_read": 1.0,
+   "rate_of_all": 0.8536
+  },
+  "rs_0": 0.7775,
+  "rs_10": 0.7775
+ },
+ "by_issuer": {
+  "arcc": {
+   "facts_scored": 330,
+   "not_scored": {},
+   "outcomes": {
+    "match": 276,
+    "conflict": 0,
+    "abstain": 54
+   },
+   "abstain_reasons": {
+    "cell_crosses_column": 2,
+    "merged_or_misaligned_region": 13,
+    "no_spatial_evidence": 15,
+    "share_or_per_share_row": 24
+   },
+   "conflict_components": {},
+   "box_recall": {
+    "hit": 315,
+    "of": 330,
+    "rate": 0.9545
+   },
+   "exact_value": {
+    "correct": 278,
+    "read": 278,
+    "of": 330,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.8424
+   },
+   "period_column": {
+    "correct": 300,
+    "read": 300,
+    "of": 330,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.9091
+   },
+   "rs_0": 0.8364,
+   "rs_10": 0.8364
+  },
+  "asts": {
+   "facts_scored": 345,
+   "not_scored": {
+    "unsupported_format": 8
+   },
+   "outcomes": {
+    "match": 217,
+    "conflict": 0,
+    "abstain": 128
+   },
+   "abstain_reasons": {
+    "cell_crosses_column": 6,
+    "low_ocr_confidence": 1,
+    "merged_or_misaligned_region": 44,
+    "no_spatial_evidence": 51,
+    "share_or_per_share_row": 26
+   },
+   "conflict_components": {},
+   "box_recall": {
+    "hit": 294,
+    "of": 345,
+    "rate": 0.8522
+   },
+   "exact_value": {
+    "correct": 223,
+    "read": 223,
+    "of": 345,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.6464
+   },
+   "period_column": {
+    "correct": 241,
+    "read": 241,
+    "of": 345,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.6986
+   },
+   "rs_0": 0.629,
+   "rs_10": 0.629
+  },
+  "pltr": {
+   "facts_scored": 239,
+   "not_scored": {},
+   "outcomes": {
+    "match": 184,
+    "conflict": 0,
+    "abstain": 55
+   },
+   "abstain_reasons": {
+    "merged_or_misaligned_region": 24,
+    "no_spatial_evidence": 6,
+    "share_or_per_share_row": 25
+   },
+   "conflict_components": {},
+   "box_recall": {
+    "hit": 233,
+    "of": 239,
+    "rate": 0.9749
+   },
+   "exact_value": {
+    "correct": 184,
+    "read": 184,
+    "of": 239,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.7699
+   },
+   "period_column": {
+    "correct": 209,
+    "read": 209,
+    "of": 239,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.8745
+   },
+   "rs_0": 0.7699,
+   "rs_10": 0.7699
+  },
+  "spsc": {
+   "facts_scored": 251,
+   "not_scored": {},
+   "outcomes": {
+    "match": 194,
+    "conflict": 0,
+    "abstain": 57
+   },
+   "abstain_reasons": {
+    "cell_crosses_column": 1,
+    "low_ocr_confidence": 1,
+    "merged_or_misaligned_region": 28,
+    "no_spatial_evidence": 9,
+    "share_or_per_share_row": 18
+   },
+   "conflict_components": {},
+   "box_recall": {
+    "hit": 242,
+    "of": 251,
+    "rate": 0.9641
+   },
+   "exact_value": {
+    "correct": 195,
+    "read": 195,
+    "of": 251,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.7769
+   },
+   "period_column": {
+    "correct": 212,
+    "read": 212,
+    "of": 251,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.8446
+   },
+   "rs_0": 0.7729,
+   "rs_10": 0.7729
+  },
+  "stba": {
+   "facts_scored": 341,
+   "not_scored": {},
+   "outcomes": {
+    "match": 298,
+    "conflict": 0,
+    "abstain": 43
+   },
+   "abstain_reasons": {
+    "cell_crosses_column": 1,
+    "merged_or_misaligned_region": 12,
+    "no_spatial_evidence": 8,
+    "share_or_per_share_row": 22
+   },
+   "conflict_components": {},
+   "box_recall": {
+    "hit": 333,
+    "of": 341,
+    "rate": 0.9765
+   },
+   "exact_value": {
+    "correct": 299,
+    "read": 299,
+    "of": 341,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.8768
+   },
+   "period_column": {
+    "correct": 320,
+    "read": 320,
+    "of": 341,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.9384
+   },
+   "rs_0": 0.8739,
+   "rs_10": 0.8739
+  },
+  "ufpt": {
+   "facts_scored": 256,
+   "not_scored": {
+    "unsupported_format": 4
+   },
+   "outcomes": {
+    "match": 201,
+    "conflict": 0,
+    "abstain": 55
+   },
+   "abstain_reasons": {
+    "cell_crosses_column": 1,
+    "merged_or_misaligned_region": 15,
+    "no_spatial_evidence": 14,
+    "share_or_per_share_row": 25
+   },
+   "conflict_components": {},
+   "box_recall": {
+    "hit": 242,
+    "of": 256,
+    "rate": 0.9453
+   },
+   "exact_value": {
+    "correct": 202,
+    "read": 202,
+    "of": 256,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.7891
+   },
+   "period_column": {
+    "correct": 222,
+    "read": 222,
+    "of": 256,
+    "rate_of_read": 1.0,
+    "rate_of_all": 0.8672
+   },
+   "rs_0": 0.7852,
+   "rs_10": 0.7852
+  }
+ },
+ "abstain_reasons": {
+  "no_spatial_evidence": "no OCR span selected at the fact's box",
+  "low_ocr_confidence": "a selected OCR span scored below 0.90",
+  "merged_or_misaligned_region": "a selected OCR span reaches more than 8 pt outside the fact's box",
+  "ambiguous_cell": "more than one OCR span selected for one cell",
+  "detached_numeric_fragment_near_cell": "a separate sign or digit fragment sits next to the cell",
+  "unreadable_numeric_cell": "the cell text is not a complete amount (e.g. a dash, footnote mark or merged text)",
+  "unit_missing": "no supported unit header (e.g. '(In millions)') above the cell",
+  "share_or_per_share_row": "row or heading names shares / per share / par value; the printed scale does not state it",
+  "no_year_header": "no year column header above the cell",
+  "duplicate_header_year": "the year header repeats a year, so the column is not unique",
+  "outside_header_columns": "the cell lies outside the year columns",
+  "cell_crosses_column": "the cell crosses a year-column boundary"
+ },
+ "issuers": [
+  {
+   "id": "pltr",
+   "name": "Palantir Technologies Inc.",
+   "cik": 1321655,
+   "role": "heldout",
+   "sic_description": null,
+   "filing": {
+    "form": "10-K",
+    "accession": "0001321655-26-000011",
+    "filed": "20260217",
+    "report_date": "December 31, 2025",
+    "document_url": "https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/pltr-20251231.htm",
+    "index_url": "https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/0001321655-26-000011-index.htm",
+    "document_sha256": "50f6bf9abdb6def326fe4f96129eaf9a9129ae4865c9a3f840333f6f0fa76fb5",
+    "retrieved_at": "2026-11-09T22:37:05.665769+00:00"
+   },
+   "pages": [
+    {
+     "page": 85,
+     "statements": [
+      "balance"
+     ],
+     "image": "pltr-p85.webp",
+     "sha256": "f7988fa88d7fd9b82518cecbc33c0938b8c6192bb853cf34213926b9ea146197",
+     "bytes": 84764,
+     "width": 642.0,
+     "height": 587.39,
+     "pixel_width": 1284,
+     "pixel_height": 1259,
+     "content_pixel_height": 1175,
+     "ocr_lines": 110
+    },
+    {
+     "page": 86,
+     "statements": [
+      "income"
+     ],
+     "image": "pltr-p86.webp",
+     "sha256": "00055c7317d8c903bd0082f0a0e5e58fd85e4640efcef9103d588d5f946452b9",
+     "bytes": 78522,
+     "width": 642.0,
+     "height": 476.98,
+     "pixel_width": 1284,
+     "pixel_height": 1037,
+     "content_pixel_height": 953,
+     "ocr_lines": 101
+    },
+    {
+     "page": 87,
+     "statements": [
+      "comprehensive_income"
+     ],
+     "image": "pltr-p87.webp",
+     "sha256": "8063e722d3c88ec25f94047a3ad9f50161c705ed82891e8ee7f972d15be7eb94",
+     "bytes": 42612,
+     "width": 642.0,
+     "height": 309.48,
+     "pixel_width": 1284,
+     "pixel_height": 702,
+     "content_pixel_height": 618,
+     "ocr_lines": 41
+    },
+    {
+     "page": 89,
+     "statements": [
+      "cash_flow"
+     ],
+     "image": "pltr-p89.webp",
+     "sha256": "a815b97fab30799f935526e4766e021ce002e868473aa5b4002d4158e11b13b0",
+     "bytes": 96094,
+     "width": 642.0,
+     "height": 598.5,
+     "pixel_width": 1284,
+     "pixel_height": 1281,
+     "content_pixel_height": 1197,
+     "ocr_lines": 132
+    }
+   ],
+   "facts_file": "pltr.json",
+   "facts_file_sha256": "bc43282424e7c94f041c3c35f5eea04e8e3278f2fc75d57393fc45fce286558f"
+  },
+  {
+   "id": "asts",
+   "name": "AST SPACEMOBILE, INC.",
+   "cik": 1780312,
+   "role": "heldout",
+   "sic_description": null,
+   "filing": {
+    "form": "10-K",
+    "accession": "0001780312-26-000006",
+    "filed": "20260302",
+    "report_date": "December 31, 2025",
+    "document_url": "https://www.sec.gov/Archives/edgar/data/1780312/000178031226000006/asts-20251231.htm",
+    "index_url": "https://www.sec.gov/Archives/edgar/data/1780312/000178031226000006/0001780312-26-000006-index.htm",
+    "document_sha256": "5831c2992244d74fe3e8004933f170ddf99b0fbbcf5ec87596e2b70f7061e4ce",
+    "retrieved_at": "2026-11-09T22:41:28.492742+00:00"
+   },
+   "pages": [
+    {
+     "page": 79,
+     "statements": [
+      "balance"
+     ],
+     "image": "asts-p79.webp",
+     "sha256": "e52b8fc76549b7424b23c78532236c362b6f7398210eedcaeb7bede05df8fe91",
+     "bytes": 102514,
+     "width": 612.0,
+     "height": 702.7,
+     "pixel_width": 1224,
+     "pixel_height": 1488,
+     "content_pixel_height": 1404,
+     "ocr_lines": 127
+    },
+    {
+     "page": 80,
+     "statements": [
+      "income"
+     ],
+     "image": "asts-p80.webp",
+     "sha256": "abfc9d06c7a8912f71874d429c782630c4ed901db1f3a6ae42e026737c0c6c69",
+     "bytes": 111136,
+     "width": 612.0,
+     "height": 717.52,
+     "pixel_width": 1224,
+     "pixel_height": 1518,
+     "content_pixel_height": 1434,
+     "ocr_lines": 110
+    },
+    {
+     "page": 81,
+     "statements": [
+      "comprehensive_income"
+     ],
+     "image": "asts-p81.webp",
+     "sha256": "50ddecf3afa8d6c0e28e9d0d1f52ab11dd4663e7066aee8da6d8321a048fd79d",
+     "bytes": 49756,
+     "width": 612.0,
+     "height": 325.39,
+     "pixel_width": 1224,
+     "pixel_height": 734,
+     "content_pixel_height": 650,
+     "ocr_lines": 41
+    },
+    {
+     "page": 83,
+     "statements": [
+      "cash_flow"
+     ],
+     "image": "asts-p83.webp",
+     "sha256": "d1907dff592d8602d04ee490e795c40e66df90da3143e9b01609c461817c65da",
+     "bytes": 124230,
+     "width": 612.0,
+     "height": 750.14,
+     "pixel_width": 1224,
+     "pixel_height": 1584,
+     "content_pixel_height": 1500,
+     "ocr_lines": 197
+    }
+   ],
+   "facts_file": "asts.json",
+   "facts_file_sha256": "d84980b6b19f93c34b8a5bddca46036eafa04472c655963cdf4d3dee1ed13091"
+  },
+  {
+   "id": "stba",
+   "name": "S&T BANCORP, INC.",
+   "cik": 719220,
+   "role": "heldout",
+   "sic_description": null,
+   "filing": {
+    "form": "10-K",
+    "accession": "0000719220-26-000030",
+    "filed": "20260227",
+    "report_date": "December 31, 2025",
+    "document_url": "https://www.sec.gov/Archives/edgar/data/719220/000071922026000030/stba-20251231.htm",
+    "index_url": "https://www.sec.gov/Archives/edgar/data/719220/000071922026000030/0000719220-26-000030-index.htm",
+    "document_sha256": "9d1ab616fe4029b6902af64f56c85514a6ab91862ec64581cebb50adf8072dc3",
+    "retrieved_at": "2026-11-09T22:41:36.094827+00:00"
+   },
+   "pages": [
+    {
+     "page": 57,
+     "statements": [
+      "balance"
+     ],
+     "image": "stba-p57.webp",
+     "sha256": "4b8b5ef9125aa759aec5d784957830e80074cc8a209c279946d240a53432d8f0",
+     "bytes": 86068,
+     "width": 612.0,
+     "height": 601.12,
+     "pixel_width": 1224,
+     "pixel_height": 1286,
+     "content_pixel_height": 1202,
+     "ocr_lines": 117
+    },
+    {
+     "page": 58,
+     "statements": [
+      "income"
+     ],
+     "image": "stba-p58.webp",
+     "sha256": "22d3175740d5133890e2e5eb177b9b56ba75a47e0b8ae2ba53487a46598e035d",
+     "bytes": 85312,
+     "width": 612.0,
+     "height": 600.47,
+     "pixel_width": 1224,
+     "pixel_height": 1284,
+     "content_pixel_height": 1200,
+     "ocr_lines": 161
+    },
+    {
+     "page": 59,
+     "statements": [
+      "comprehensive_income"
+     ],
+     "image": "stba-p59.webp",
+     "sha256": "a1b5348eae3971a57623df88b17b604e02ae5a2ec2749f0526c55da7a99a0f7c",
+     "bytes": 67686,
+     "width": 612.0,
+     "height": 404.21,
+     "pixel_width": 1224,
+     "pixel_height": 891,
+     "content_pixel_height": 807,
+     "ocr_lines": 84
+    },
+    {
+     "page": 61,
+     "statements": [
+      "cash_flow"
+     ],
+     "image": "stba-p61.webp",
+     "sha256": "ac07fadfbc2b0d707e09f987959e84c27c648f0fdaab1e6a0175afc1c6ab8fe5",
+     "bytes": 119182,
+     "width": 612.0,
+     "height": 724.3,
+     "pixel_width": 1224,
+     "pixel_height": 1532,
+     "content_pixel_height": 1448,
+     "ocr_lines": 179
+    }
+   ],
+   "facts_file": "stba.json",
+   "facts_file_sha256": "26b6da8e768a785a8b0165438f5bc99783c01af490d789053401a0d25026b52f"
+  },
+  {
+   "id": "arcc",
+   "name": "ARES CAPITAL CORPORATION",
+   "cik": 1287750,
+   "role": "heldout",
+   "sic_description": null,
+   "filing": {
+    "form": "10-K",
+    "accession": "0001287750-26-000006",
+    "filed": "20260204",
+    "report_date": "December 31, 2025",
+    "document_url": "https://www.sec.gov/Archives/edgar/data/1287750/000128775026000006/arcc-20251231.htm",
+    "index_url": "https://www.sec.gov/Archives/edgar/data/1287750/000128775026000006/0001287750-26-000006-index.htm",
+    "document_sha256": "ad71baf7a7214d6301ba8a431b40f34c081508999847273ab3add7bcb49f317f",
+    "retrieved_at": "2026-11-09T22:44:11.432562+00:00"
+   },
+   "pages": [
+    {
+     "page": 119,
+     "statements": [
+      "balance"
+     ],
+     "image": "arcc-p119.webp",
+     "sha256": "5defe947d8d9cc19326e8ff0d751eda96fac2a183cdbc556dbd99754b0236bc9",
+     "bytes": 92352,
+     "width": 640.5,
+     "height": 739.97,
+     "pixel_width": 1281,
+     "pixel_height": 1563,
+     "content_pixel_height": 1479,
+     "ocr_lines": 108
+    },
+    {
+     "page": 120,
+     "statements": [
+      "income"
+     ],
+     "image": "arcc-p120.webp",
+     "sha256": "c775b0519562ee33053689ba6279c6a805b9e6a5ff5adfcba26a62b6cf2bde30",
+     "bytes": 109660,
+     "width": 640.5,
+     "height": 736.51,
+     "pixel_width": 1281,
+     "pixel_height": 1557,
+     "content_pixel_height": 1473,
+     "ocr_lines": 225
+    },
+    {
+     "page": 273,
+     "statements": [
+      "cash_flow"
+     ],
+     "image": "arcc-p273.webp",
+     "sha256": "5571061f7338e04963c1fa8df02629cadf233b57f0fcc84c5ad793603fd24673",
+     "bytes": 104864,
+     "width": 640.5,
+     "height": 683.92,
+     "pixel_width": 1281,
+     "pixel_height": 1451,
+     "content_pixel_height": 1367,
+     "ocr_lines": 173
+    }
+   ],
+   "facts_file": "arcc.json",
+   "facts_file_sha256": "085cbfe14a7f57027f5e5df551e19c02b1174a7248668620d612643d0eeedecb"
+  },
+  {
+   "id": "spsc",
+   "name": "SPS COMMERCE, INC.",
+   "cik": 1092699,
+   "role": "heldout",
+   "sic_description": null,
+   "filing": {
+    "form": "10-K",
+    "accession": "0001092699-26-000012",
+    "filed": "20260219",
+    "report_date": "December 31, 2025",
+    "document_url": "https://www.sec.gov/Archives/edgar/data/1092699/000109269926000012/spsc-20251231.htm",
+    "index_url": "https://www.sec.gov/Archives/edgar/data/1092699/000109269926000012/0001092699-26-000012-index.htm",
+    "document_sha256": "bfbf27459fe278c21d45acf412b22c3b8da913024b91472844e21f69c79dba69",
+    "retrieved_at": "2026-11-09T22:48:27.004686+00:00"
+   },
+   "pages": [
+    {
+     "page": 39,
+     "statements": [
+      "balance"
+     ],
+     "image": "spsc-p39.webp",
+     "sha256": "41a02b49518659fdb4f6f149e43215b900a96340da9caa4d4153f81e8618c667",
+     "bytes": 94772,
+     "width": 612.0,
+     "height": 758.5,
+     "pixel_width": 1224,
+     "pixel_height": 1601,
+     "content_pixel_height": 1517,
+     "ocr_lines": 128
+    },
+    {
+     "page": 40,
+     "statements": [
+      "comprehensive_income",
+      "income"
+     ],
+     "image": "spsc-p40.webp",
+     "sha256": "79a577d6e4c6ee5ed6fa3a8243a4e6a0aea65cc9a9de42541c36ef23b2d7bdae",
+     "bytes": 85720,
+     "width": 612.0,
+     "height": 620.44,
+     "pixel_width": 1224,
+     "pixel_height": 1325,
+     "content_pixel_height": 1241,
+     "ocr_lines": 115
+    },
+    {
+     "page": 42,
+     "statements": [
+      "cash_flow"
+     ],
+     "image": "spsc-p42.webp",
+     "sha256": "02d6670264b8a0d95e44bfd02787b5ee6e8165cb9bbc35f39aa197baa5f400a8",
+     "bytes": 117284,
+     "width": 612.0,
+     "height": 714.77,
+     "pixel_width": 1224,
+     "pixel_height": 1514,
+     "content_pixel_height": 1430,
+     "ocr_lines": 145
+    }
+   ],
+   "facts_file": "spsc.json",
+   "facts_file_sha256": "19dd2f26a91ebb1516480d2625c17a28eb13bd781b96904de67a202b6965cf96"
+  },
+  {
+   "id": "ufpt",
+   "name": "UFP Technologies, Inc.",
+   "cik": 914156,
+   "role": "heldout",
+   "sic_description": null,
+   "filing": {
+    "form": "10-K",
+    "accession": "0001628280-26-012816",
+    "filed": "20260227",
+    "report_date": "December 31, 2025",
+    "document_url": "https://www.sec.gov/Archives/edgar/data/914156/000162828026012816/ufpt-20251231.htm",
+    "index_url": "https://www.sec.gov/Archives/edgar/data/914156/000162828026012816/0001628280-26-012816-index.htm",
+    "document_sha256": "2d6a3648fa0228cf09c8e26497ff60936d830bd25a4dabf8cc1223df2ee33789",
+    "retrieved_at": "2026-11-09T22:48:31.527846+00:00"
+   },
+   "pages": [
+    {
+     "page": 41,
+     "statements": [
+      "balance"
+     ],
+     "image": "ufpt-p41.webp",
+     "sha256": "1496539380e94ef4a94515e9b347b8c315d2f51dabf756913227fb6465af5256",
+     "bytes": 105458,
+     "width": 612.0,
+     "height": 854.62,
+     "pixel_width": 1224,
+     "pixel_height": 1793,
+     "content_pixel_height": 1709,
+     "ocr_lines": 127
+    },
+    {
+     "page": 42,
+     "statements": [
+      "comprehensive_income",
+      "income"
+     ],
+     "image": "ufpt-p42.webp",
+     "sha256": "70c1e1ebe78a40aba7873bd72276fd90aba6312ad51621c82937d32ce8d2a535",
+     "bytes": 76542,
+     "width": 612.0,
+     "height": 622.49,
+     "pixel_width": 1224,
+     "pixel_height": 1328,
+     "content_pixel_height": 1244,
+     "ocr_lines": 113
+    },
+    {
+     "page": 44,
+     "statements": [
+      "cash_flow"
+     ],
+     "image": "ufpt-p44.webp",
+     "sha256": "df2b3fc1b9824ceeb925a5739d1a6bd7244aefbc1ec7cced3e493877b1ef8c96",
+     "bytes": 102178,
+     "width": 612.0,
+     "height": 785.66,
+     "pixel_width": 1224,
+     "pixel_height": 1655,
+     "content_pixel_height": 1571,
+     "ocr_lines": 158
+    }
+   ],
+   "facts_file": "ufpt.json",
+   "facts_file_sha256": "52399a0e58872e00da3ec196a243c241f658b76af173a5181429652a8ec0552d"
+  }
+ ],
+ "image_bytes": 1936706
+}

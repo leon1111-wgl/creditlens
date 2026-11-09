@@ -55,7 +55,7 @@
 
 /* Each console section owns one accent; pages inherit it through legacy variables. */
 body.cl-workspace { --section: var(--cl-research); --section-soft: var(--cl-research-soft); }
-body:is(.cl-page-documents,.cl-page-cross-page) { --section: var(--cl-evidence); --section-soft: var(--cl-evidence-soft); }
+body:is(.cl-page-documents,.cl-page-cross-page,.cl-page-grounding) { --section: var(--cl-evidence); --section-soft: var(--cl-evidence-soft); }
 body:is(.cl-page-review,.cl-page-explanation-reviews,.cl-page-reference-review) { --section: var(--cl-review); --section-soft: var(--cl-review-soft); }
 body:is(.cl-page-experiments,.cl-page-transfer,.cl-page-preparation,.cl-page-workbench) { --section: var(--cl-lab); --section-soft: var(--cl-lab-soft); }
 body.cl-workspace {

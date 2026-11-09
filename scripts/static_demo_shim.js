@@ -120,7 +120,9 @@ body.cl-static .lookup-evidence{top:44px}
     strip.className = 'cl-static-banner'; strip.setAttribute('role', 'note');
     const local = document.body.classList.contains('cl-page-ask')
       ? '<span>本页答案由浏览器内的规则引擎计算，不保存、不发送</span>'
-      : '<span>页面回放仓库中保存的结果</span>';
+      : document.body.classList.contains('cl-page-grounding')
+        ? '<span>本页展示一次 GitHub Actions 基准运行的保存结果</span>'
+        : '<span>页面回放仓库中保存的结果</span>';
     strip.innerHTML = '<b>静态演示</b>' + local + '<span class="cl-static-sep" aria-hidden="true">·</span><span>完整服务请按 <a href="' + README + '">README</a> 本地运行</span>';
     const skip = document.querySelector('.cl-skip');
     if (skip) skip.after(strip); else document.body.prepend(strip);

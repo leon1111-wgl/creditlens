@@ -198,6 +198,23 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     def ask_page():
         return FileResponse(ROOT / "creditlens/ask.html")
 
+    # XBRL 对照: a saved Actions benchmark run (rendered SEC 10-K pages + per-fact outcomes).
+    @application.get("/grounding", include_in_schema=False)
+    def grounding_page():
+        return FileResponse(ROOT / "creditlens/grounding.html")
+
+    @application.get("/assets/grounding.js", include_in_schema=False)
+    def grounding_script():
+        return FileResponse(ROOT / "creditlens/grounding.js", media_type="text/javascript")
+
+    @application.get("/assets/grounding/{name}", include_in_schema=False)
+    def grounding_asset(name: str):
+        import re
+        folder = ROOT / "creditlens/grounding"
+        if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,40}(?:-p[0-9]{1,4}\.webp|\.json)", name) or not (folder / name).is_file():
+            raise HTTPException(404, "Not a published benchmark file")
+        return FileResponse(folder / name, media_type="image/webp" if name.endswith(".webp") else "application/json")
+
     @application.get("/intro", include_in_schema=False)
     def product_intro():
         return FileResponse(ROOT / "creditlens/intro.html")

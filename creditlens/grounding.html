@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XBRL 对照 · CreditLens</title>
+<meta name="description" content="CreditLens XBRL 对照：项目未用过的发行人 10-K 报表页，只用图像 OCR 取数，再与发行人自己的 Inline XBRL 标签逐项对照。">
+<script src="/assets/theme.js"></script>
+<link rel="stylesheet" href="/assets/workspace.css">
+<style>
+.gr-main { max-width: 1240px; margin: 0 auto; padding: 28px 28px 64px; }
+.gr-lede { max-width: 780px; color: var(--cl-ink-2); }
+.gr-key { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin: 14px 0 10px; padding: 9px 14px; border-left: 3px solid var(--cl-brass-bright); background: var(--cl-brass-soft); color: var(--cl-ink); font-size: 13px; border-radius: 0 6px 6px 0; }
+.gr-key b { color: var(--cl-brass); font-weight: 650; }
+.gr-key a { color: var(--cl-brass); text-decoration: underline; text-underline-offset: 3px; }
+.gr-practice { margin: 0 0 22px; font-size: 12.5px; color: var(--cl-muted); max-width: 900px; }
+.gr-practice a { color: var(--cl-ink-2); text-decoration: underline; text-underline-offset: 3px; }
+.gr-section-title { margin: 26px 0 8px; font-size: 16px; font-weight: 650; }
+.gr-headline { margin: 0 0 12px; font-size: 14px; color: var(--cl-ink-2); font-variant-numeric: tabular-nums; }
+.gr-results { padding: 16px 18px; background: var(--cl-surface); border: 1px solid var(--cl-line); border-radius: 10px; box-shadow: var(--cl-shadow); }
+.gr-table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.gr-table th, .gr-table td { padding: 7px 8px; border-bottom: 1px solid var(--cl-line); text-align: right; vertical-align: top; }
+.gr-table thead th { color: var(--cl-muted); font-weight: 600; font-size: 12px; }
+.gr-table th[scope="row"], .gr-table thead th:first-child { text-align: left; }
+.gr-table th[scope="row"] span { display: block; font-weight: 600; color: var(--cl-ink); }
+.gr-table th[scope="row"] small { color: var(--cl-muted); font-weight: 400; font-size: 11.5px; }
+.gr-table td.ok { color: var(--cl-ok); font-weight: 600; } .gr-table td.warn { color: var(--cl-warn); } .gr-table td.bad { color: var(--cl-bad); font-weight: 600; }
+.gr-table tr.total th, .gr-table tr.total td { border-top: 2px solid var(--cl-line-strong); border-bottom: 0; }
+.gr-reasons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 28px; margin-top: 12px; font-size: 12.5px; color: var(--cl-ink-2); }
+.gr-reasons h3 { grid-column: span 1; margin: 6px 0 2px; font-size: 12.5px; color: var(--cl-muted); font-weight: 600; }
+.gr-reasons ul { margin: 0; padding-left: 18px; }
+.gr-note { margin: 12px 0 0; font-size: 12px; color: var(--cl-muted); }
+.gr-viewer { margin-top: 26px; }
+.gr-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; }
+.gr-tabs button, .gr-chip, .gr-step button { min-height: 32px; padding: 4px 11px; border: 1px solid var(--cl-line-strong); border-radius: 6px; background: var(--cl-surface); color: var(--cl-ink-2); font: 13px/1.3 var(--cl-font); cursor: pointer; }
+.gr-tabs button[aria-pressed="true"] { border-color: var(--cl-evidence); color: var(--cl-evidence); background: var(--cl-evidence-soft); font-weight: 600; }
+.gr-pages button { font-size: 12.5px; }
+.gr-stage { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(300px, 1fr); gap: 18px; align-items: start; margin-top: 6px; }
+.gr-sheet-wrap { min-width: 0; }
+.gr-sheet { position: relative; overflow: hidden; border-radius: 4px; background: #fbfaf6; box-shadow: 0 10px 28px #0b102633, 0 0 0 1px #00000026; touch-action: manipulation; cursor: crosshair; }
+.gr-sheet > img { display: block; width: 100%; height: auto; }
+.gr-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.gr-lens { position: absolute; z-index: 2; width: var(--d, 150px); height: var(--d, 150px); border-radius: 50%; overflow: hidden; pointer-events: none; background: #fbfaf6;
+  box-shadow: 0 0 0 3px var(--cl-brass-bright), 0 0 0 5px #3a2a0c, 0 10px 26px #0009; transition: left .6s cubic-bezier(.3,.7,.2,1), top .6s cubic-bezier(.3,.7,.2,1); }
+.gr-lens::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #ffffff55, transparent 40%); }
+.gr-lens img, .gr-lens svg { position: absolute; display: block; max-width: none; transition: left .6s cubic-bezier(.3,.7,.2,1), top .6s cubic-bezier(.3,.7,.2,1); }
+.gr-lens-handle { position: absolute; z-index: 1; width: 46px; height: 9px; border-radius: 5px; background: linear-gradient(#c79a4b, #8a6524); box-shadow: 0 4px 10px #0007; transform-origin: 0 50%; transform: rotate(42deg); pointer-events: none; transition: left .6s cubic-bezier(.3,.7,.2,1), top .6s cubic-bezier(.3,.7,.2,1); }
+.gr-sheet.free .gr-lens, .gr-sheet.free .gr-lens img, .gr-sheet.free .gr-lens svg, .gr-sheet.free .gr-lens-handle { transition: none; }
+.gr-source { margin: 8px 0 0; font-size: 12px; color: var(--cl-muted); overflow-wrap: anywhere; }
+.gr-source a { color: var(--cl-evidence); }
+.gr-side { position: sticky; top: 12px; display: grid; gap: 10px; min-width: 0; }
+.gr-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0; padding: 0; list-style: none; font-size: 12.5px; color: var(--cl-ink-2); }
+.gr-legend li { display: inline-flex; align-items: center; gap: 6px; }
+.gr-legend i { width: 16px; height: 10px; border: 2px solid; border-radius: 2px; }
+.gr-legend .match i { border-color: #1d8a4e; } .gr-legend .abstain i { border-color: #c07a0c; border-style: dashed; } .gr-legend .conflict i { border-color: #c4302b; }
+.gr-filter { display: flex; flex-wrap: wrap; gap: 6px; }
+.gr-chip[aria-pressed="true"] { border-color: var(--cl-ink-2); color: var(--cl-ink); font-weight: 600; background: var(--cl-surface-2); }
+.gr-chip.match[aria-pressed="true"] { border-color: var(--cl-ok); color: var(--cl-ok); background: var(--cl-ok-bg); }
+.gr-chip.abstain[aria-pressed="true"] { border-color: var(--cl-warn); color: var(--cl-warn); background: var(--cl-warn-bg); }
+.gr-chip.conflict[aria-pressed="true"] { border-color: var(--cl-bad); color: var(--cl-bad); background: var(--cl-bad-bg); }
+.gr-step { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 12.5px var(--cl-mono); color: var(--cl-muted); }
+.gr-drawer { padding: 12px 14px 14px; border-top: 2px solid var(--cl-brass-bright); border-radius: 0 0 8px 8px; background: var(--cl-night); color: var(--cl-night-ink); }
+.gr-readout { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 4px 12px; margin: 0; font: 12px/1.55 var(--cl-mono); }
+.gr-readout dt { color: var(--cl-night-muted); font-family: var(--cl-font); }
+.gr-readout dd { margin: 0; overflow-wrap: anywhere; }
+.gr-readout dd.value { color: var(--cl-brass-bright); font-weight: 600; }
+.gr-readout dd.match { color: #8fdcb2; font-weight: 600; } .gr-readout dd.abstain { color: #efc57a; font-weight: 600; } .gr-readout dd.conflict { color: #f4a59b; font-weight: 600; }
+.gr-list-wrap { margin-top: 14px; }
+.gr-list-wrap summary, .gr-method summary { cursor: pointer; font-weight: 650; }
+.gr-list { margin: 8px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 12px; max-height: 420px; overflow: auto; }
+.gr-item { display: grid; grid-template-columns: 12px minmax(0, 1fr); gap: 0 8px; width: 100%; padding: 5px 8px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: var(--cl-ink); text-align: left; font: 12.5px/1.45 var(--cl-font); cursor: pointer; }
+.gr-item:hover, .gr-item[aria-current="true"] { border-color: var(--cl-line-strong); background: var(--cl-surface); }
+.gr-dot { grid-row: span 2; width: 10px; height: 10px; margin-top: 4px; border-radius: 50%; border: 2px solid; }
+.gr-item.match .gr-dot { border-color: var(--cl-ok); background: var(--cl-ok); } .gr-item.abstain .gr-dot { border-color: var(--cl-warn); } .gr-item.conflict .gr-dot { border-color: var(--cl-bad); background: var(--cl-bad); } .gr-item.not_scored .gr-dot { border-color: var(--cl-neutral); }
+.gr-item-concept { font-weight: 600; overflow-wrap: anywhere; }
+.gr-item-meta { color: var(--cl-muted); font: 11.5px/1.45 var(--cl-mono); overflow-wrap: anywhere; }
+.gr-method { margin-top: 26px; padding: 14px 18px; border: 1px solid var(--cl-line); border-radius: 10px; background: var(--cl-surface); }
+.gr-method h3 { margin: 14px 0 4px; font-size: 13.5px; }
+.gr-method p, .gr-method li { font-size: 13px; color: var(--cl-ink-2); }
+.gr-method ul { padding-left: 18px; margin: 4px 0; }
+.gr-method code { font-family: var(--cl-mono); font-size: 12px; }
+.gr-fallback { padding: 28px 16px; text-align: center; color: var(--cl-muted); font-size: 13px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (max-width: 980px) {
+  .gr-stage { grid-template-columns: minmax(0, 1fr); }
+  .gr-side { position: static; }
+}
+@media (max-width: 700px) {
+  .gr-main { padding: 18px 16px 48px; }
+  .gr-results { padding: 12px; }
+  .gr-table thead { display: none; }
+  .gr-table, .gr-table tbody, .gr-table tr, .gr-table th, .gr-table td { display: block; }
+  .gr-table tr { padding: 8px 0; border-bottom: 1px solid var(--cl-line); }
+  .gr-table th, .gr-table td { border: 0; padding: 1px 0; text-align: left; }
+  .gr-table td::before { content: attr(data-label) "："; color: var(--cl-muted); }
+  .gr-table tr.total th, .gr-table tr.total td { border: 0; }
+  .gr-reasons { grid-template-columns: minmax(0, 1fr); }
+  .gr-list { grid-template-columns: minmax(0, 1fr); }
+  .gr-readout { grid-template-columns: 1fr; gap: 0; }
+  .gr-readout dt { margin-top: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { .gr-lens, .gr-lens img, .gr-lens svg, .gr-lens-handle { transition: none; } }
+</style>
+<script src="/assets/workspace.js" defer></script>
+<script src="/assets/grounding.js" defer></script>
+</head>
+<body class="cl-workspace cl-page-grounding"><a class="cl-skip" href="#main-content">跳至内容</a><div class="cl-app"><header class="cl-masthead"><a class="cl-wordmark" href="/intro" aria-label="CreditLens 介绍页"><span class="cl-loupe" aria-hidden="true"></span><span>Credit</span><span class="cl-lens">Lens</span></a><nav class="cl-primary-nav" aria-label="工作区"><a href="/tasks" data-section="research">研究</a><a href="/grounding" data-section="evidence" class="is-current" aria-current="true">证据</a><a href="/" data-section="review">复核</a><a href="/experiments" data-section="lab">材料与实验</a></nav><div class="cl-masthead-meta"><span class="cl-meta-text">金融证据工作台</span><span class="cl-dev-flag">开发中</span><a href="/docs">API 文档</a><button type="button" class="cl-theme" data-theme-toggle aria-label="切换主题"><span class="cl-theme-mark" aria-hidden="true"></span><span class="cl-theme-label">跟随系统</span></button></div></header><nav class="cl-section-nav" aria-label="证据页面" data-section-label="证据"><a href="/grounding" aria-current="page">XBRL 对照</a><a href="/documents">原页核对</a><a href="/cross-page">跨页证据</a></nav><div class="cl-main"><main id="main-content" tabindex="-1" class="gr-main">
+<section class="cl-page-heading"><h1>XBRL 对照</h1>
+<p class="gr-lede">从项目从未用过的上市公司 10-K 中渲染财务报表页，只把页面图像交给 OCR 取数，再与发行人自己在 Inline XBRL 中给每个数字打的标签逐项对照：数值、括号符号、单位量级和年份列。绿框为一致，琥珀虚线框为未作答，红框为冲突；点选任一框查看 XBRL 概念与上下文。</p></section>
+<p class="gr-key" role="note"><b>答案键 = 发行人自己的 XBRL 标签</b><span>干净渲染页，不是扫描件</span><span>OCR 只看图像，HTML 文字不参与取数</span><span id="grRunLine">正在载入保存的运行结果…</span></p>
+<p class="gr-practice">对照的做法：抽取字段附上定位框与置信度，低置信度交给人工，如 <a href="https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-bedrock-data-automation-available-preview/" rel="noopener">AWS Bedrock Data Automation 的视觉定位</a>（2024-12 预览）。本页规模小、不用密钥，取数是 CPU 上的 OCR 加确定性规则，不是大模型。</p>
+<section class="gr-results" aria-labelledby="grResultsTitle"><h2 id="grResultsTitle" class="gr-section-title" style="margin-top:0">首轮结果 · <span id="grRule"></span></h2>
+<p class="gr-headline" id="grHeadline"></p>
+<div id="grSummary"><p class="gr-fallback">正在载入…</p></div>
+<p class="gr-note">“定位召回”：标签框处有 OCR 片段的比例（项目原有的空间规则）。“数值全对”：数位、括号符号与量级都对；“年份列对”：数字所在列的年份与标签期间一致。两项都按全部计分事实计，括号里是规则实际读出的项数。未作答不算错；RS(10) 对每个冲突扣 10 分。数字聚集在少数几家公司的同一批页面里，彼此并不独立；没有人工复核。</p>
+</section>
+<section class="gr-viewer" aria-labelledby="grViewerTitle"><h2 id="grViewerTitle" class="gr-section-title">逐页查看</h2>
+<div class="gr-tabs" id="grIssuers" role="group" aria-label="发行人"></div>
+<div class="gr-tabs gr-pages" id="grPages" role="group" aria-label="报表页"></div>
+<div class="gr-stage">
+<div class="gr-sheet-wrap"><div id="grSheet" class="gr-sheet"><p class="gr-fallback">正在载入页面…</p></div><p class="gr-source" id="grSource"></p></div>
+<aside class="gr-side" aria-label="所选标签的读数">
+<ul class="gr-legend" aria-label="框的颜色"><li class="match"><i></i>一致</li><li class="abstain"><i></i>未作答</li><li class="conflict"><i></i>冲突</li></ul>
+<div class="gr-filter" id="grFilter" role="group" aria-label="按结果筛选"></div>
+<div class="gr-step"><button type="button" id="grPrev">‹ 上一项</button><span id="grPos" aria-hidden="true"></span><button type="button" id="grNext">下一项 ›</button></div>
+<div class="gr-drawer"><dl id="grReadout" class="gr-readout"></dl></div>
+<p id="grStatus" class="sr-only" role="status" aria-live="polite"></p>
+</aside>
+</div>
+<details class="gr-list-wrap"><summary>本页标签列表（<span id="grCount">—</span>）</summary><ol id="grList" class="gr-list"></ol></details>
+</section>
+<details class="gr-method"><summary>方法、评分规则与边界</summary>
+<h3>发行人怎样选</h3>
+<p>规则在任何运行之前提交（<code>configs/xbrl-grounding.json</code>，heldout-2026-11-a）：从 SEC 的 <code>dei:EntityPublicFloat</code> 年度数据（2025-06-30 公众流通市值不低于 7 亿美元）取总体；排除项目已用的微软、苹果、AMD、NVIDIA，以及 FinQA 开发集里的全部股票代码；按加盐 SHA-256 排序，依次检查 12 月财年末、2026 年提交、Inline XBRL 的 10-K，取前 6 家能找到利润表、资产负债表和现金流量表的发行人。页面上不手工挑选公司或页码。</p>
+<h3>页面与答案键</h3>
+<ul>
+<li>在 GitHub Actions 上从 EDGAR 取 10-K 的 iXBRL HTML，用 Chromium 渲染（禁止其他网络请求），按文件自身的分页样式切页；每家最多 4 页报表页。</li>
+<li>每个 <code>ix:nonFraction</code> 记录位置框、印刷文字、概念、上下文（期间与维度）、单位、decimals、scale 与 sign。<code>ix:hidden</code> 里的事实只有在正文以 <code>-sec-ix-hidden</code> 显示时才进入对照；文本块内、嵌套、重复出现的标签分别标注。</li>
+<li>符号以印刷括号为准，XBRL 的 sign 属性并列显示：有的概念印成扣减项“(500)”，标签值却是正数，这类不同只说明列报方式，不算读错。</li>
+</ul>
+<h3>取数与评分</h3>
+<ul>
+<li>OCR 只接收整页 PNG：RapidOCR 3.10、PP-OCRv6 small、CPU，与项目文档实验同一套固定配置。单位表头与年份列也只从 OCR 文字和位置读出。</li>
+<li>识别完成后才按标签框取片段：覆盖框 35% 以上或中心落在框内；置信度不低于 0.90；片段越出框 8 pt 以上、一格多段、旁边有分离的符号碎片、文字不是完整金额时都不作答。涉及股数、每股或面值的行不套用单位表头的量级。</li>
+<li>一致 = 数位、括号符号、量级、年份列全部相符；冲突 = 读出了完整读数但至少一项不符；其余为未作答。</li>
+</ul>
+<h3>边界</h3>
+<ul>
+<li>干净渲染页比扫描件容易；Chromium 的字体替换也会让页面与发行人 PDF 不同。</li>
+<li>评分规则沿用项目已有规则，首轮之前没有按这些公司调过；首轮之后的任何修改都不再是盲测，会另行标注。</li>
+<li>没有人工复核；XBRL 标签本身也可能有误，这里把它当作发行人自己的答案。</li>
+</ul>
+</details>
+</main></div></div>
+</body>
+</html>

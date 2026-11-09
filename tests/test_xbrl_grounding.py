@@ -232,5 +232,27 @@ class SummaryAndRuleTests(unittest.TestCase):
         self.assertEqual(paginate([100, 101, 500], 900, 50), [(0.0, 100), (100, 500), (500, 900.0)])
 
 
+class GroundingRouteTests(unittest.TestCase):
+    def test_local_service_serves_the_page_and_only_published_files(self):
+        import tempfile
+        from fastapi.testclient import TestClient
+        from creditlens.api import create_app
+        with tempfile.TemporaryDirectory() as tmp, TestClient(create_app(Path(tmp) / "missing.json", Path(tmp) / "audit.sqlite")) as client:
+            page = client.get("/grounding")
+            self.assertEqual(page.status_code, 200)
+            self.assertIn('src="/assets/grounding.js"', page.text)
+            self.assertIn("答案键 = 发行人自己的 XBRL 标签", page.text)
+            self.assertIn("干净渲染页，不是扫描件", page.text)
+            self.assertEqual(client.get("/assets/grounding.js").headers["content-type"].split(";")[0], "text/javascript")
+            for name in ("..%2Fapi.py", "index.html", "x.png", "a/b.json"):
+                self.assertEqual(client.get("/assets/grounding/" + name).status_code, 404, name)
+            index = ROOT / "creditlens/grounding/index.json"
+            if index.is_file():
+                data = json.loads(index.read_text(encoding="utf-8"))
+                self.assertEqual(client.get("/assets/grounding/index.json").json()["summary"], data["summary"])
+                image = data["issuers"][0]["pages"][0]["image"]
+                self.assertEqual(client.get("/assets/grounding/" + image).headers["content-type"], "image/webp")
+
+
 if __name__ == "__main__":
     unittest.main()

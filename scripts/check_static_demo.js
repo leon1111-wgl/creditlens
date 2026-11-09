@@ -84,6 +84,30 @@ function shuffledBody(value) {
     const firstScript = html.match(/<script[^>]*>/)[0];
     assert.equal(firstScript, '<script src="assets/static-demo.js">', page + ' must load the shim first');
   }
-  assert(!fs.readdirSync(path.join(site, 'data')).some(name => /\.(png|jpe?g|pdf)$/i.test(name)), 'No page images or PDFs may be published');
+  assert(!fs.readdirSync(path.join(site, 'data')).some(name => /\.(png|jpe?g|webp|pdf)$/i.test(name)), 'No page images or PDFs may be published');
+  // The only page images allowed: the saved XBRL grounding run's rendered SEC 10-K statement pages,
+  // each listed in its index with a hash, an SEC filing URL and an accession number, at most 4 per issuer.
+  const imageFiles = [];
+  const walk = dir => { for (const entry of fs.readdirSync(dir, {withFileTypes: true})) { const p = path.join(dir, entry.name); if (entry.isDirectory()) walk(p); else if (/\.(png|jpe?g|webp|gif|pdf)$/i.test(entry.name)) imageFiles.push(path.relative(site, p)); } };
+  walk(site);
+  const groundingDir = path.join(site, 'assets/grounding');
+  const listed = new Set();
+  if (fs.existsSync(path.join(groundingDir, 'index.json'))) {
+    const index = JSON.parse(fs.readFileSync(path.join(groundingDir, 'index.json'), 'utf8'));
+    let bytes = 0;
+    for (const issuer of index.issuers) {
+      assert.match(issuer.filing.accession, /^\d{10}-\d{2}-\d{6}$/, issuer.id + ' accession');
+      assert(issuer.filing.document_url.startsWith('https://www.sec.gov/Archives/edgar/data/'), issuer.id + ' filing URL');
+      assert(issuer.pages.length >= 1 && issuer.pages.length <= 4, issuer.id + ' must publish 1 to 4 pages');
+      for (const page of issuer.pages) {
+        const raw = fs.readFileSync(path.join(groundingDir, page.image));
+        assert.equal(require('node:crypto').createHash('sha256').update(raw).digest('hex'), page.sha256, page.image);
+        bytes += raw.length;
+        listed.add(path.join('assets/grounding', page.image));
+      }
+    }
+    assert(bytes < 20 * 1024 * 1024, 'Published page images must stay well under 20 MB');
+  }
+  for (const file of imageFiles) assert(listed.has(file), 'Unlisted image or PDF in the site: ' + file);
   console.log(JSON.stringify({status: 'ok', routes: checked, pages: Object.keys(manifest.pages).length}));
 })().catch(error => { console.error(error); process.exit(1); });

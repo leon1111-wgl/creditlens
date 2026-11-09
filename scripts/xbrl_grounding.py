@@ -680,7 +680,10 @@ def markdown_summary(report: dict) -> str:
 # ---------------------------------------------------------------------------
 
 def verify_saved(report_path: Path, site_dir: Path | None) -> dict:
-    report = json.loads(report_path.read_text(encoding="utf-8"))
+    report_raw = report_path.read_bytes()
+    if report_path.suffix == ".gz":  # committed gzipped; decompresses to the run artifact's report.json
+        report_raw = gzip.decompress(report_raw)
+    report = json.loads(report_raw.decode("utf-8"))
     rescored = [r for issuer in report["issuers"] for r in score_issuer(issuer)]
     if rescored != report["records"]:
         mismatch = next(i for i, (a, b) in enumerate(zip(rescored, report["records"])) if a != b) if len(rescored) == len(report["records"]) else "length"
@@ -712,7 +715,8 @@ def verify_saved(report_path: Path, site_dir: Path | None) -> dict:
                 if hashlib.sha256(raw).hexdigest() != page["sha256"] or not raw.startswith(b"RIFF"):
                     raise SystemExit("Published page image hash or format mismatch: " + page["image"])
                 checked_images += 1
-    result = {"status": "ok", "records": len(rescored), "images": checked_images, "summary": report["summary"]["all"]}
+    result = {"status": "ok", "report_sha256": hashlib.sha256(report_raw).hexdigest(), "records": len(rescored),
+              "images": checked_images, "summary": report["summary"]["all"]}
     print(json.dumps(result, ensure_ascii=False))
     return result
 

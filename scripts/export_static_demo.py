@@ -3,10 +3,12 @@
 Runs the FastAPI app in-process with demo identities and temporary state, replays
 the registered synthetic research scenarios through ResearchTaskStore, records the
 GET responses the demo pages request, and writes HTML with relative links plus a
-fetch shim (scripts/static_demo_shim.js). No OCR, model, network call or page image
-of an issuer filing is produced: source-page previews are reconstructions drawn
-only from OCR text spans already saved in the repository. Writes are not recorded;
-the shim refuses them in the browser.
+fetch shim (scripts/static_demo_shim.js). No OCR, model or network call runs here.
+Source-page previews of the registered PDFs are reconstructions drawn only from
+OCR text spans already saved in the repository. The one exception is the XBRL
+grounding page: it copies the saved Actions run in creditlens/grounding/, whose
+few rendered SEC 10-K statement pages each carry their filing URL and accession.
+Writes are not recorded; the shim refuses them in the browser.
 """
 from __future__ import annotations
 
@@ -42,17 +44,18 @@ ROLES = ("analyst", "reviewer", "viewer")
 PAGES = {
     "/intro": ("index.html", "intro.html"),
     "/ask": ("ask.html", "ask.html"),
+    "/grounding": ("grounding.html", "grounding.html"),
     "/table-lookup": ("table-lookup.html", "table-lookup.html"),
     "/margin": ("margin.html", "margin.html"),
     "/research": ("research.html", "research.html"),
     "/tasks": ("tasks.html", "tasks.html"),
     "/experiments": ("experiments.html", "experiments.html"),
 }
-APP_ROUTES = ("/", "/intro", "/ask", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
+APP_ROUTES = ("/", "/intro", "/ask", "/grounding", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
               "/explanation-reviews", "/reference-review", "/experiments", "/transfer", "/document-preparation",
               "/lab", "/docs")
 ASSETS = ("workspace.css", "workspace.js", "theme.js", "research-write-intent.js", "research-write-journal.js",
-          "ask.js", "ask-pack.json")
+          "ask.js", "ask-pack.json", "grounding.js")
 # Snapshot loaders re-validate frozen reports on every request. The export reads each once;
 # responses are unchanged because the files cannot change during one export.
 MEMOIZED_LOADERS = (
@@ -259,6 +262,24 @@ def _rewrite_page(source: str) -> str:
     return page.replace(marker, marker + '<script src="assets/static-demo.js"></script>', 1)
 
 
+def _copy_grounding(target: Path) -> None:
+    """Copy only the files the saved grounding index lists, after checking their hashes."""
+    source = ROOT/"creditlens/grounding"
+    index_path = source/"index.json"
+    if not index_path.is_file():
+        return
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    target.mkdir(parents=True)
+    shutil.copyfile(index_path, target/"index.json")
+    for issuer in index["issuers"]:
+        files = [(issuer["facts_file"], issuer["facts_file_sha256"])] + [(p["image"], p["sha256"]) for p in issuer["pages"]]
+        for name, sha in files:
+            raw = (source/name).read_bytes()
+            if hashlib.sha256(raw).hexdigest() != sha:
+                raise ValueError(f"Grounding asset does not match its saved index: {name}")
+            (target/name).write_bytes(raw)
+
+
 def _source_commit() -> str | None:
     """The commit the export was built from; CI passes the tested SHA explicitly."""
     if os.getenv("CREDITLENS_SOURCE_COMMIT"):
@@ -370,13 +391,15 @@ def export(out: Path) -> dict:
     for name in ASSETS:
         shutil.copyfile(ROOT/"creditlens"/name, out/"assets"/name)
     shutil.copyfile(ROOT/"scripts/static_demo_shim.js", out/"assets/static-demo.js")
+    _copy_grounding(out/"assets/grounding")
     for route, (target, source) in PAGES.items():
         (out/target).write_text(_rewrite_page((ROOT/"creditlens"/source).read_text(encoding="utf-8")), encoding="utf-8")
     (out/".nojekyll").write_text("", encoding="utf-8")
     manifest = {
         "schema_version": 1, "application_version": __version__, "source_commit": _source_commit(),
         "scope": "Static replay of saved results and registered synthetic research scenarios; no OCR, model or "
-                 "network inference; writes are refused in the browser; page previews are span reconstructions.",
+                 "network inference; writes are refused in the browser; page previews are span reconstructions, "
+                 "except the XBRL grounding run's rendered SEC 10-K statement pages (filing URL and accession on each).",
         "pages": {route: target for route, (target, _) in PAGES.items()},
         "app_routes": list(APP_ROUTES),
         "routes": dict(sorted(rec.routes.items())),
