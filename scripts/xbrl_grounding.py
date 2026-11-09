@@ -488,6 +488,12 @@ def run(args) -> int:
         take = len(candidates)
     from playwright.sync_api import sync_playwright
     issuers, rejected = [], []
+
+    class Rejections(list):
+        def append(self, item):
+            print(json.dumps({"rejected": item}, ensure_ascii=False, default=str)[:1500], flush=True)
+            super().append(item)
+    rejected = Rejections()
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch()
         for examined, candidate in enumerate(candidates, start=1):
