@@ -35,7 +35,7 @@ jobs:
           cache: pip
       - name: Install OCR and renderer
         run: |
-          python -m pip install -r requirements-ocr.lock playwright==1.49.1
+          python -m pip install -r requirements.lock -r requirements-ocr.lock playwright==1.49.1
           python -m playwright install --with-deps chromium
       - uses: actions/cache@v4
         with:
