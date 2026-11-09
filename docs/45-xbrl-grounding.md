@@ -127,6 +127,8 @@ SEC 要求自动化访问声明身份并控制频率。本基准在 GitHub Actio
 - 加一家（不计入保留集）：`mode = added`，`filings = cik:accession:主文件名`，例如 `320193:0000320193-25-000079:aapl-20250927.htm`（主文件名见 EDGAR 的提交索引页）。该文件须已有互联网档案馆抓取。
 - 合并前：在任意 `xbrl-run/*` 分支上改 `configs/xbrl-grounding-dispatch.json` 后推送。
 
+例：开发者自测用 `added` 模式跑了可口可乐 FY2025 10-K（`21344:0001628280-26-010047:ko-20251231.htm`，不在保留集里，运行 [42718740819](https://github.com/leon1111-wgl/creditlens/actions/runs/42718740819)，提交 `21c9cc5` 加一处调度文件改动）：4 页、264 个事实，一致 220、冲突 0、未作答 44（越出标签框 30、股数行 12、无片段 2），运行内的 `verify-saved` 通过。这次结果不计入保留集，也没有发布页面图片。
+
 结果在运行摘要与产物 `xbrl-grounding-<label>`（`report.json`、页面 PNG、可发布的 `site/`）中。把 `site/` 复制为 `creditlens/grounding/`、`report.json` 复制到 `artifacts/xbrl-grounding/` 并更新 CI 中的 `verify-saved` 路径，即可在页面展示。
 
 不需要 OCR 或网络的复核（CI 已运行）：
