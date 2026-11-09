@@ -2,7 +2,7 @@
   "schema_version": 1,
   "benchmark_version": "xbrl-grounding-1",
   "note": "Committed before the first held-out run. The held-out issuers are whatever this rule yields on Actions; nothing here names them.",
-  "user_agent": "CreditLens public financial research (https://github.com/leon1111-wgl/creditlens)",
+  "user_agent": "CreditLens public financial research (https://github.com/leon1111-wgl/creditlens) 205497500+leon1111-wgl@users.noreply.github.com",
   "min_request_interval_seconds": 0.34,
   "heldout_rule": {
     "rule_id": "heldout-2026-11-a",
@@ -12,7 +12,12 @@
       "min_public_float_usd": 700000000
     },
     "exclude": {
-      "ciks": [789019, 320193, 2488, 1045810],
+      "ciks": [
+        789019,
+        320193,
+        2488,
+        1045810
+      ],
       "ciks_note": "Microsoft, Apple, AMD and NVIDIA: issuers whose filings the project's document pipeline already uses",
       "finqa_note": "Also excluded: every ticker in the pinned FinQA dev split (data/manifest.json) used by the retrieval lab, mapped to CIKs through SEC's ticker file",
       "ticker_map_url": "https://www.sec.gov/files/company_tickers.json"
@@ -29,7 +34,11 @@
       "inline_xbrl": true,
       "max_document_bytes": 25000000,
       "min_page_breaks": 20,
-      "statements_required": ["income", "balance", "cash_flow"]
+      "statements_required": [
+        "income",
+        "balance",
+        "cash_flow"
+      ]
     },
     "take": 6,
     "max_candidates": 80
@@ -47,10 +56,25 @@
     "rule": "For each statement, the first rendered page (document order) holding a non-dimensional fact of its first available anchor concept, on a page with at least min_facts_on_page tagged numbers",
     "min_facts_on_page": 10,
     "anchors": {
-      "income": ["us-gaap:EarningsPerShareDiluted", "us-gaap:EarningsPerShareBasic", "us-gaap:EarningsPerShareBasicAndDiluted", "us-gaap:NetIncomeLoss", "us-gaap:ProfitLoss"],
-      "comprehensive_income": ["us-gaap:ComprehensiveIncomeNetOfTax", "us-gaap:ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest"],
-      "balance": ["us-gaap:LiabilitiesAndStockholdersEquity", "us-gaap:Assets"],
-      "cash_flow": ["us-gaap:NetCashProvidedByUsedInOperatingActivities", "us-gaap:NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"]
+      "income": [
+        "us-gaap:EarningsPerShareDiluted",
+        "us-gaap:EarningsPerShareBasic",
+        "us-gaap:EarningsPerShareBasicAndDiluted",
+        "us-gaap:NetIncomeLoss",
+        "us-gaap:ProfitLoss"
+      ],
+      "comprehensive_income": [
+        "us-gaap:ComprehensiveIncomeNetOfTax",
+        "us-gaap:ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest"
+      ],
+      "balance": [
+        "us-gaap:LiabilitiesAndStockholdersEquity",
+        "us-gaap:Assets"
+      ],
+      "cash_flow": [
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"
+      ]
     }
   },
   "max_pages_per_issuer": 4,
@@ -61,7 +85,10 @@
     "acceptance": "confidence >= 0.90; no selected span more than 8 pt outside the box; exactly one span; no detached sign/digit fragment within 8 pt (word-evidence-1); strict amount grammar (table-lookup-1)",
     "page_reading": "Reference-free from OCR only: nearest '(In thousands|millions|billions ...)' header above; nearest row of 2-6 year headers above, column bounds at header midpoints; rows naming shares, per share or par value abstain on scale",
     "key": "magnitude from the fact's printed text and ixt format; scale attribute; period year = context end date or instant; sign = printed parentheses, with the XBRL sign attribute reported beside it",
-    "penalties": [0, 10]
+    "penalties": [
+      0,
+      10
+    ]
   },
   "publish": {
     "format": "WEBP greyscale with a provenance strip below the page",
@@ -69,5 +96,6 @@
     "strip_px": 84,
     "strip_font_px": 15,
     "max_total_bytes": 15000000
-  }
+  },
+  "user_agent_note": "SEC asks automated clients to declare a contact. The contact is the project's public GitHub noreply commit identity, not a personal address. A User-Agent without a contact got HTTP 403 from data.sec.gov on 2026-11-09 (Actions run 42709826308)."
 }

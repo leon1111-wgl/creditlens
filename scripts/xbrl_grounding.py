@@ -69,11 +69,14 @@ class Fetcher:
                     raw = response.read(max_bytes + 1)
                     status = response.status
             except HTTPError as error:
-                status, raw = error.code, b""
+                status, raw = error.code, error.read(2000)
             except URLError as error:
                 status, raw = None, str(error).encode()
             self.log.append({"url": url, "status": status, "bytes": len(raw),
                              "at": datetime.now(timezone.utc).isoformat()})
+            if status not in accept_status and status is not None and status not in (429, 500, 502, 503, 504):
+                body = re.sub(r"<[^>]+>|\s+", " ", raw.decode("utf-8", "replace"))[:300]
+                raise RuntimeError(f"HTTP {status} for {url}: {body}")
             if status in (429, 500, 502, 503, 504) or status is None:
                 time.sleep(2 * (attempt + 1))
                 continue
