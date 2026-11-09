@@ -38,7 +38,7 @@ sys.path.insert(0, str(ROOT))
 
 from creditlens.xbrl_grounding import (  # noqa: E402
     PageReading, SCORE_RULE_VERSION, ABSTAIN_REASONS, OUTCOME_LABELS, candidate_order, canonical_digest,
-    key_entry, score_fact, slice_summaries, statement_pages, summarize,
+    key_entry, page_period_starts, score_fact, slice_summaries, statement_pages, summarize,
 )
 
 CONFIG = ROOT / "configs/xbrl-grounding.json"
@@ -457,8 +457,10 @@ def score_issuer(issuer: dict) -> list[dict]:
     occurrences = Counter((f["concept"], f["context_ref"], f["unit_ref"]) for f in issuer["facts"])
     for page in issuer["images"]:
         reading = PageReading(page["ocr"])
-        for fact in [f for f in issuer["facts"] if f["page"] == page["page"]]:
-            key = key_entry(fact, issuer["contexts"], issuer["units"])
+        on_page = [f for f in issuer["facts"] if f["page"] == page["page"]]
+        starts = page_period_starts(on_page, issuer["contexts"])
+        for fact in on_page:
+            key = key_entry(fact, issuer["contexts"], issuer["units"], starts)
             result = score_fact(fact, key, reading)
             ident = (fact["concept"], fact["context_ref"], fact["unit_ref"])
             records.append({
@@ -469,6 +471,7 @@ def score_issuer(issuer: dict) -> list[dict]:
                 "in_text_cell": bool(fact.get("in_text_cell")), "in_text_block": bool(fact.get("in_text_block")),
                 "in_exclude": bool(fact.get("in_exclude")), "nested": bool(fact.get("nested")), "via_hidden": bool(fact.get("via_hidden")),
                 "dimensional": bool(key["dimensions"]), "repeated_on_pages": occurrences[ident] > 1,
+                "opening_or_closing_balance": key["period_role"] == "opening_or_closing_balance",
             })
     return records
 
@@ -477,7 +480,7 @@ def build_summary(records: list[dict]) -> dict:
     return {"all": summarize(records), "by_issuer": slice_summaries(records, "issuer"),
             "by_statement": slice_summaries(records, "statement"), "by_role": slice_summaries(records, "role"),
             "slices": {name: slice_summaries(records, name) for name in
-                       ("printed_negative", "sign_differs", "dash_zero", "in_text_cell", "dimensional", "repeated_on_pages", "via_hidden")}}
+                       ("printed_negative", "sign_differs", "dash_zero", "in_text_cell", "dimensional", "repeated_on_pages", "via_hidden", "opening_or_closing_balance")}}
 
 
 def run(args) -> int:
@@ -639,7 +642,7 @@ def publish(report: dict, pages_dir: Path, site_dir: Path, config: dict) -> dict
                 "read": None if not r.get("read") else {k: r["read"][k] for k in ("magnitude", "negative", "scale", "year")} | {
                     "unit_text": image["ocr"][r["read"]["unit_span"]]["text"] if r["read"]["unit_span"] is not None else None,
                     "column_text": image["ocr"][r["read"]["column_span"]]["text"] if r["read"].get("column_span") is not None else None},
-                "flags": [k for k in ("in_text_cell", "in_text_block", "nested", "via_hidden", "repeated_on_pages", "sign_differs", "dash_zero") if r.get(k)],
+                "flags": [k for k in ("in_text_cell", "in_text_block", "nested", "via_hidden", "repeated_on_pages", "sign_differs", "dash_zero", "opening_or_closing_balance") if r.get(k)],
             })
         issuer_file = f"{issuer['id']}.json"
         payload = {"id": issuer["id"], "facts": facts_out}

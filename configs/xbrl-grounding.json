@@ -94,12 +94,13 @@
     "rule_version": "xbrl-grounding-score-1",
     "box_recall": "visual-evidence-1 selection: an OCR span covers at least 35% of the fact box, or its centre lies inside it",
     "acceptance": "confidence >= 0.90; no selected span more than 8 pt outside the box; exactly one span; no detached sign/digit fragment within 8 pt (word-evidence-1); strict amount grammar (table-lookup-1)",
-    "page_reading": "Reference-free from OCR only: nearest '(In thousands|millions|billions ...)' header above; nearest row of 2-6 year headers above, column bounds at header midpoints; rows naming shares, per share or par value abstain on scale",
-    "key": "magnitude from the fact's printed text and ixt format; scale attribute; period year = context end date or instant; sign = printed parentheses, with the XBRL sign attribute reported beside it",
+    "page_reading": "Reference-free from OCR only: nearest '(In thousands|millions|billions ...)' header above; nearest row of 2-6 year headers above, column bounds at header midpoints; rows whose label or heading (nearest label-only line above, skipping up to 4 amount rows) names shares, per share or par value abstain on scale",
+    "key": "magnitude from the fact's printed text and ixt format; scale attribute; column year = context end year, or for an instant that is the day before a duration on the same page starts, either its own year (closing balance) or that duration's end year (opening balance); sign = printed parentheses, with the XBRL sign attribute reported beside it",
     "penalties": [
       0,
       10
-    ]
+    ],
+    "frozen_before_heldout_run": "Rules changed only on the dev filings (Apple, Microsoft; run 42712316145): heading lookup and opening/closing balances. No held-out issuer had been fetched when they were committed."
   },
   "publish": {
     "format": "WEBP greyscale with a provenance strip below the page",

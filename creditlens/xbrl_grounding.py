@@ -19,6 +19,7 @@ Chromium renders of born-digital filings, not scans.
 from __future__ import annotations
 
 from collections import Counter, defaultdict
+from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
 import hashlib
 import json
@@ -35,6 +36,7 @@ SIGN_GAP_POINTS = 8.0          # word_evidence.SIGN_GAP_POINTS
 ROW_CENTER_TOLERANCE = 4.0     # table_lookup.ROW_CENTER_TOLERANCE
 MIN_VERTICAL_OVERLAP = 0.50    # table_lookup.MIN_VERTICAL_OVERLAP
 PENALTIES = (0, 10)
+HEADING_ROWS = 4               # amount rows a heading may sit above (Basic, Diluted, ...)
 
 # Formats whose printed text has a defined numeric value here. Others are kept
 # in the key but not scored for value (counted as unsupported_format).
@@ -100,6 +102,36 @@ def key_magnitude(text: str, fmt: str | None) -> Decimal | None:
         return None
 
 
+def page_period_starts(facts: list[dict], contexts: dict) -> dict[str, int]:
+    """Start date -> end year of every duration context used on one page."""
+    starts = {}
+    for fact in facts:
+        period = (contexts.get(fact.get("context_ref") or "", {}) or {}).get("period") or {}
+        if period.get("start") and period.get("end") and re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", period["end"]):
+            starts[period["start"]] = int(period["end"][:4])
+    return starts
+
+
+def column_years(context: dict, starts: dict[str, int] | None = None) -> tuple[list[int], str | None]:
+    """Years of the printed columns a fact may legitimately sit in.
+
+    A duration sits in the column of its end year; an instant in the column of its own year.
+    An instant dated the day before a duration on the same page starts is also that duration's
+    opening balance (cash "beginning of period" on a cash-flow statement), so the same fact is
+    printed in two columns: its own year as an ending balance and the next as an opening one.
+    """
+    year = period_year(context)
+    if year is None:
+        return [], None
+    period = context.get("period") or {}
+    instant = period.get("instant")
+    if instant and starts:
+        following = (date.fromisoformat(instant) + timedelta(days=1)).isoformat()
+        if following in starts and starts[following] != year:
+            return [year, starts[following]], "opening_or_closing_balance"
+    return [year], None
+
+
 def period_year(context: dict) -> int | None:
     period = context.get("period") or {}
     end = period.get("instant") or period.get("end")
@@ -108,7 +140,7 @@ def period_year(context: dict) -> int | None:
     return int(end[:4])
 
 
-def key_entry(fact: dict, contexts: dict, units: dict) -> dict:
+def key_entry(fact: dict, contexts: dict, units: dict, starts: dict[str, int] | None = None) -> dict:
     """Derive the comparison key for one fact; never consults OCR."""
     magnitude = key_magnitude(fact.get("text", ""), fact.get("format"))
     try:
@@ -121,15 +153,17 @@ def key_entry(fact: dict, contexts: dict, units: dict) -> dict:
     value = None
     if magnitude is not None and scale is not None:
         value = magnitude.scaleb(scale)
+    years, period_role = column_years(context, starts)
+    year = years[0] if years else None
     return {
         "magnitude": None if magnitude is None else format(magnitude, "f"),
-        "scale": scale, "year": period_year(context),
+        "scale": scale, "year": year, "years": years, "period_role": period_role,
         "printed_negative": printed_negative, "xbrl_negative": xbrl_negative,
         "printed_value": None if value is None else format(-value if printed_negative else value, "f"),
         "xbrl_value": None if value is None else format(-value if xbrl_negative else value, "f"),
         "unit": units.get(fact.get("unit_ref") or "", fact.get("unit_ref")),
         "period": context.get("period"), "dimensions": context.get("dims", []),
-        "scorable": magnitude is not None and scale is not None and period_year(context) is not None,
+        "scorable": magnitude is not None and scale is not None and year is not None,
         "not_scored_reason": None if magnitude is not None else "unsupported_format",
     }
 
@@ -220,19 +254,28 @@ class PageReading:
         return " ".join(s["text"] for s in sorted(words, key=lambda s: s["bbox"]["x0"]))
 
     def _heading(self, index):
-        """Nearest label-only line above (e.g. 'Earnings per share:' above 'Basic')."""
+        """Nearest label-only line above (e.g. 'Earnings per share:' above 'Basic' and 'Diluted').
+
+        Rows that carry amounts are skipped (at most HEADING_ROWS of them), so 'Diluted' finds the
+        heading above 'Basic'. A year-header row ends the search. 'Above' compares centres, since
+        OCR boxes of adjacent lines can overlap by a fraction of a point.
+        """
         box = self.spans[index]["bbox"]
-        above = [j for j, s in enumerate(self.spans) if s["bbox"]["bottom"] <= box["top"]]
+        above = [j for j, s in enumerate(self.spans) if _cy(s["bbox"]) < box["top"]]
         rows: list[list[int]] = []
         for j in sorted(above, key=lambda k: -_cy(self.spans[k]["bbox"])):
             if rows and _same_row(self.spans[rows[-1][0]]["bbox"], self.spans[j]["bbox"]):
                 rows[-1].append(j)
             else:
                 rows.append([j])
+        skipped = 0
         for row in rows:
-            if all(self.amounts[j] is None and header_year(self.spans[j]["text"]) is None for j in row):
+            if any(header_year(self.spans[j]["text"]) is not None for j in row):
+                return ""
+            if all(self.amounts[j] is None for j in row):
                 return " ".join(self.spans[j]["text"] for j in sorted(row, key=lambda k: self.spans[k]["bbox"]["x0"]))
-            if any(self.amounts[j] is not None for j in row):
+            skipped += 1
+            if skipped > HEADING_ROWS:
                 return ""
         return ""
 
@@ -345,7 +388,7 @@ def score_fact(fact: dict, key: dict, reading: PageReading, *, min_confidence: f
     if view["scale"] is not None:
         partial["scale"] = view["scale"] == key["scale"]
     if view["year"] is not None:
-        partial["period"] = view["year"] == key["year"]
+        partial["period"] = view["year"] in key["years"]
     record["checks"] = partial
     if view["reason"]:
         return abstain(view["reason"])

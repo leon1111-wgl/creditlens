@@ -140,6 +140,25 @@ class ReadingTests(unittest.TestCase):
         self.assertEqual((r["outcome"], r["reason"]), ("abstain", "share_or_per_share_row"))
         self.assertTrue(r["checks"]["digits"] and r["checks"]["period"])
 
+    def test_diluted_row_finds_the_heading_above_basic(self):
+        # OCR boxes of adjacent lines overlap slightly; the heading sits above two amount rows.
+        page = statement_page([span("Earnings per share:", 6, 134, 87, 146.6), span("Basic", 22, 146.1, 50, 160.1),
+                               span("7.49", 414, 146.1, 440, 160.1), span("Diluted", 22, 157.6, 56, 172.6),
+                               span("7.46", 414, 158.1, 442, 172.1)])
+        for text, b in (("7.49", box(414, 146.1, 440, 160.1)), ("7.46", box(414, 158.1, 442, 172.1))):
+            f = fact(text, b, scale="0", unit="usdps")
+            r = score_fact(f, key_entry(f, CONTEXTS, UNITS), PageReading(page))
+            self.assertEqual(r["reason"], "share_or_per_share_row", text)
+
+    def test_opening_balance_belongs_to_the_column_it_opens(self):
+        contexts = dict(CONTEXTS, open25={"period": {"instant": "2024-12-31"}, "dims": []})
+        on_page = [{"context_ref": "fy25"}, {"context_ref": "fy24"}]
+        starts = __import__("creditlens.xbrl_grounding", fromlist=["page_period_starts"]).page_period_starts(on_page, contexts)
+        k = key_entry(fact("1", box(0, 0, 1, 1), context="open25"), contexts, UNITS, starts)
+        self.assertEqual((k["years"], k["period_role"]), ([2024, 2025], "opening_or_closing_balance"))
+        # On a balance sheet (no durations on the page) the instant keeps its own year only.
+        self.assertEqual(key_entry(fact("1", box(0, 0, 1, 1), context="open25"), contexts, UNITS, {})["years"], [2024])
+
     def test_missing_unit_header_abstains(self):
         page = [span("2025", 400, 94, 424, 104), span("2024", 490, 94, 514, 104), span("1,234", 399, 120, 425, 130)]
         f = fact("1,234", box(399, 120, 425, 130))
