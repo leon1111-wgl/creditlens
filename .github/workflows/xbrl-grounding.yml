@@ -1,0 +1,86 @@
+name: xbrl-grounding
+# Held-out grounding benchmark: fetch 10-K Inline XBRL from EDGAR, render statement pages with
+# Chromium, OCR the images with the pinned RapidOCR profile, score against the issuer's own tags.
+# SEC requests, rendering and OCR run only here, never on a developer machine.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "heldout (committed rule) | dev | added (explicit CIKs, not held-out)"
+        default: heldout
+        type: choice
+        options: [heldout, dev, added]
+      ciks:
+        description: "Comma-separated CIKs for dev/added"
+        default: ""
+      label:
+        description: "Run label"
+        default: manual
+  push:
+    branches: ["xbrl-run/**"]
+permissions:
+  contents: read
+concurrency:
+  group: xbrl-grounding-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install OCR and renderer
+        run: |
+          python -m pip install -r requirements-ocr.lock playwright==1.49.1
+          python -m playwright install --with-deps chromium
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/creditlens-ocr
+          key: ocr-weights-${{ hashFiles('configs/document-ai.json') }}
+      - name: Resolve inputs
+        id: inputs
+        env:
+          EVENT: ${{ github.event_name }}
+          IN_MODE: ${{ inputs.mode }}
+          IN_CIKS: ${{ inputs.ciks }}
+          IN_LABEL: ${{ inputs.label }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT" = "push" ]; then
+            MODE=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['mode'])")
+            CIKS=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['ciks'])")
+            LABEL=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['label'])")
+          else
+            MODE="$IN_MODE"; CIKS="$IN_CIKS"; LABEL="$IN_LABEL"
+          fi
+          case "$MODE" in heldout|dev|added) ;; *) echo "bad mode"; exit 1;; esac
+          [[ "$CIKS" =~ ^[0-9,\ ]*$ ]] || { echo "bad ciks"; exit 1; }
+          [[ "$LABEL" =~ ^[A-Za-z0-9._-]{1,60}$ ]] || { echo "bad label"; exit 1; }
+          { echo "mode=$MODE"; echo "ciks=$CIKS"; echo "label=$LABEL"; } >> "$GITHUB_OUTPUT"
+      - name: Run benchmark
+        env:
+          MODE: ${{ steps.inputs.outputs.mode }}
+          CIKS: ${{ steps.inputs.outputs.ciks }}
+          LABEL: ${{ steps.inputs.outputs.label }}
+        run: |
+          set -euo pipefail
+          python scripts/xbrl_grounding.py run --mode "$MODE" --ciks "$CIKS" --label "$LABEL" --out out 2>&1 | tee run-log.txt
+          cp run-log.txt out/
+          python scripts/xbrl_grounding.py verify-saved out/report.json --site out/site
+          cat out/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: xbrl-grounding-${{ steps.inputs.outputs.label }}
+          path: |
+            out/report.json
+            out/summary.md
+            out/run-log.txt
+            out/site/
+            out/pages/
+          if-no-files-found: error
+          retention-days: 14

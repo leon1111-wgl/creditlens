@@ -1,0 +1,6 @@
+{
+  "note": "Read by .github/workflows/xbrl-grounding.yml on pushes to xbrl-run/** branches (workflow_dispatch needs the file on main).",
+  "mode": "dev",
+  "ciks": "320193,789019",
+  "label": "dev-pipeline-check"
+}
