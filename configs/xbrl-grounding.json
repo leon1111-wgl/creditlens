@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "xbrl-grounding-1",
+  "note": "Committed before the first held-out run. The held-out issuers are whatever this rule yields on Actions; nothing here names them.",
+  "user_agent": "CreditLens public financial research (https://github.com/leon1111-wgl/creditlens) 205497500+leon1111-wgl@users.noreply.github.com",
+  "min_request_interval_seconds": 1.0,
+  "heldout_rule": {
+    "rule_id": "heldout-2026-11-b",
+    "revision_note": "Revision of heldout-2026-11-a (commit 0354141) made before any held-out run: SEC refuses Actions runners, and the frames/submissions APIs that rule a used have no Internet Archive captures. Same exclusions, salt and acceptance idea.",
+    "population": {
+      "description": "SEC Financial Statement Data Sets 2026q1, sub.txt: original 10-K filings of large accelerated filers with a December 31 fiscal year end and period 2025-12-31",
+      "dataset_url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2026q1.zip",
+      "filter": {
+        "form": "10-K",
+        "afs": "1-LAF",
+        "fye": "1231",
+        "period": "20251231",
+        "prevrpt": "0"
+      },
+      "primary_document": "FSDS instance '<doc>_htm.xml' names the Inline XBRL primary document '<doc>.htm'"
+    },
+    "exclude": {
+      "ciks": [
+        789019,
+        320193,
+        2488,
+        1045810
+      ],
+      "ciks_note": "Microsoft, Apple, AMD and NVIDIA: issuers whose filings the project's document pipeline already uses",
+      "finqa_note": "Also excluded: every ticker in the pinned FinQA dev split (data/manifest.json) used by the retrieval lab, mapped to CIKs through SEC's ticker file",
+      "ticker_map_url": "https://www.sec.gov/files/company_tickers.json"
+    },
+    "order": {
+      "description": "Ascending SHA-256 of salt + 10-digit zero-padded CIK; the salt was fixed in rule a before any run",
+      "salt": "creditlens-xbrl-heldout-2026-11-a:"
+    },
+    "source": "Latest Internet Archive capture (HTTP 200) of each SEC URL, fetched as original bytes (id_) and checked against the CDX SHA-1 digest; the HTML's own dei:EntityCentralIndexKey and dei:DocumentType must match the candidate",
+    "accept": {
+      "max_document_bytes": 25000000,
+      "min_page_breaks": 20,
+      "statements_required": [
+        "income",
+        "balance",
+        "cash_flow"
+      ],
+      "reject_reasons": [
+        "no_archive_capture",
+        "archive_fetch_failed",
+        "archived_copy_not_this_filing",
+        "too_few_page_breaks",
+        "statement_pages_not_found"
+      ]
+    },
+    "take": 6,
+    "max_candidates": 60
+  },
+  "render": {
+    "engine": "Playwright Chromium (headless), network blocked except the saved filing HTML",
+    "viewport_css_px": 816,
+    "device_scale_factor": 1.5,
+    "points_per_css_px": 0.75,
+    "pixels_per_point": 2,
+    "min_page_css_px": 100,
+    "pagination": "Page breaks from page-break/break-before/after styles in the filing HTML"
+  },
+  "statement_pages": {
+    "rule": "For each statement, the first rendered page (document order) holding a non-dimensional fact of its first available anchor concept, on a page with at least min_facts_on_page tagged numbers",
+    "min_facts_on_page": 10,
+    "anchors": {
+      "income": [
+        "us-gaap:EarningsPerShareDiluted",
+        "us-gaap:EarningsPerShareBasic",
+        "us-gaap:EarningsPerShareBasicAndDiluted",
+        "us-gaap:NetIncomeLoss",
+        "us-gaap:ProfitLoss"
+      ],
+      "comprehensive_income": [
+        "us-gaap:ComprehensiveIncomeNetOfTax",
+        "us-gaap:ComprehensiveIncomeNetOfTaxIncludingPortionAttributableToNoncontrollingInterest"
+      ],
+      "balance": [
+        "us-gaap:LiabilitiesAndStockholdersEquity",
+        "us-gaap:Assets"
+      ],
+      "cash_flow": [
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"
+      ]
+    }
+  },
+  "max_pages_per_issuer": 4,
+  "ocr_profile": "configs/document-ai.json",
+  "scoring": {
+    "rule_version": "xbrl-grounding-score-1",
+    "box_recall": "visual-evidence-1 selection: an OCR span covers at least 35% of the fact box, or its centre lies inside it",
+    "acceptance": "confidence >= 0.90; no selected span more than 8 pt outside the box; exactly one span; no detached sign/digit fragment within 8 pt (word-evidence-1); strict amount grammar (table-lookup-1)",
+    "page_reading": "Reference-free from OCR only: nearest '(In thousands|millions|billions ...)' header above; nearest row of 2-6 year headers above, column bounds at header midpoints; rows whose label or heading (nearest label-only line above, skipping up to 4 amount rows) names shares, per share or par value abstain on scale",
+    "key": "magnitude from the fact's printed text and ixt format; scale attribute; column year = context end year, or for an instant that is the day before a duration on the same page starts, either its own year (closing balance) or that duration's end year (opening balance); sign = printed parentheses, with the XBRL sign attribute reported beside it",
+    "penalties": [
+      0,
+      10
+    ],
+    "frozen_before_heldout_run": "Rules changed only on the dev filings (Apple, Microsoft; run 42712316145): heading lookup and opening/closing balances. No held-out issuer had been fetched when they were committed."
+  },
+  "publish": {
+    "format": "WEBP greyscale with a provenance strip below the page",
+    "quality": 68,
+    "strip_px": 84,
+    "strip_font_px": 15,
+    "max_total_bytes": 15000000
+  },
+  "user_agent_note": "Declared on every request. SEC answers GitHub Actions runners with HTTP 403 'Undeclared Automated Tool' whatever the User-Agent or headers (runs 42709826308, 42710194611, diagnostics 42710474268 and 42710749950, 2026-11-09), so the benchmark makes no SEC requests: it reads existing Internet Archive captures of SEC files and checks each against its capture digest. The contact is the project's public GitHub noreply commit identity, not a personal address."
+}
