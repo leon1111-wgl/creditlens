@@ -8,7 +8,7 @@ from pathlib import Path
 import unittest
 
 from creditlens.xbrl_grounding import (
-    PageReading, candidate_order, header_year, key_entry, key_magnitude, latest_annual_report,
+    PageReading, candidate_order, header_year, key_entry, key_magnitude,
     score_fact, statement_pages, summarize, unit_header,
 )
 from scripts.xbrl_grounding import paginate
@@ -208,14 +208,6 @@ class SummaryAndRuleTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             explicit_candidates("320193")
         self.assertEqual(sha1_base32(b""), "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ")  # SHA-1 of empty input, base32
-
-    def test_latest_annual_report_window(self):
-        subs = {"filings": {"recent": {"form": ["10-Q", "10-K/A", "10-K", "10-K"], "filingDate": ["2026-05-01", "2026-03-01", "2026-02-20", "2025-02-20"],
-                                       "accessionNumber": ["a", "b", "c", "d"], "reportDate": ["", "", "2025-12-31", "2024-12-31"],
-                                       "primaryDocument": ["q.htm", "a.htm", "k.htm", "old.htm"], "isInlineXBRL": [1, 1, 1, 1], "size": [1, 1, 1, 1]}}}
-        window = {"form": "10-K", "filed_from": "2026-01-01", "filed_before": "2026-11-11"}
-        self.assertEqual(latest_annual_report(subs, window)["accession"], "c")
-        self.assertIsNone(latest_annual_report(subs, dict(window, filed_from="2026-03-01")))
 
     def test_statement_pages_and_pagination(self):
         def f(concept, page, dims=False):

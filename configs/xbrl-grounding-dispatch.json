@@ -1,6 +1,6 @@
 {
   "note": "Read by .github/workflows/xbrl-grounding.yml on pushes to xbrl-run/** branches (workflow_dispatch needs the file on main). filings = cik:accession:primary-document.",
-  "mode": "heldout",
-  "label": "heldout-first-run",
-  "filings": ""
+  "mode": "dev",
+  "label": "dev-check",
+  "filings": "320193:0000320193-25-000079:aapl-20250927.htm,789019:0000950170-25-100235:msft-20250630.htm"
 }

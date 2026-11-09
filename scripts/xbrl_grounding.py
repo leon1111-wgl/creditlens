@@ -648,8 +648,7 @@ def publish(report: dict, pages_dir: Path, site_dir: Path, config: dict) -> dict
         payload = {"id": issuer["id"], "facts": facts_out}
         (site_dir / issuer_file).write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
         index["issuers"].append({"id": issuer["id"], "name": issuer["name"], "cik": issuer["cik"], "role": issuer["role"],
-                                 "sic_description": issuer.get("sic_description"), "filing": {k: issuer["filing"][k] for k in
-                                 ("form", "accession", "filed", "report_date", "document_url", "index_url", "document_sha256", "retrieved_at")},
+                                 "filing": index_filing(issuer),
                                  "pages": pages, "facts_file": issuer_file,
                                  "facts_file_sha256": hashlib.sha256((site_dir / issuer_file).read_bytes()).hexdigest()})
     if total > settings["max_total_bytes"]:
@@ -657,6 +656,32 @@ def publish(report: dict, pages_dir: Path, site_dir: Path, config: dict) -> dict
     index["image_bytes"] = total
     (site_dir / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return index
+
+
+INDEX_FILING_FIELDS = ("form", "accession", "filed", "report_date", "document_url", "index_url", "document_sha256",
+                       "retrieved_at", "via", "capture_timestamp", "archive_url")
+
+
+def index_filing(issuer: dict) -> dict:
+    """Provenance shown on the page: SEC address and accession, plus the archive capture actually read."""
+    return {k: issuer["filing"][k] for k in INDEX_FILING_FIELDS if k in issuer["filing"]}
+
+
+def refresh_index(report_path: Path, site_dir: Path) -> None:
+    """Rewrite only the filing provenance blocks of a published index from its saved report.
+
+    Used once for the first held-out run, whose index was published before the capture fields
+    were added; images, fact files and outcomes are untouched and still checked by verify-saved.
+    """
+    raw = report_path.read_bytes()
+    report = json.loads(gzip.decompress(raw) if report_path.suffix == ".gz" else raw)
+    saved = {i["id"]: i for i in report["issuers"]}
+    path = site_dir / "index.json"
+    index = json.loads(path.read_text(encoding="utf-8"))
+    for issuer in index["issuers"]:
+        issuer.pop("sic_description", None)
+        issuer["filing"] = index_filing(saved[issuer["id"]])
+    path.write_text(json.dumps(index, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
 def markdown_summary(report: dict) -> str:
@@ -698,8 +723,10 @@ def verify_saved(report_path: Path, site_dir: Path | None) -> dict:
         saved = {i["id"]: i for i in report["issuers"]}
         for issuer in index["issuers"]:
             source = saved[issuer["id"]]
-            if issuer["filing"]["accession"] != source["filing"]["accession"] or not issuer["filing"]["document_url"].startswith("https://www.sec.gov/Archives/edgar/data/"):
+            if issuer["filing"] != index_filing(source) or not issuer["filing"]["document_url"].startswith("https://www.sec.gov/Archives/edgar/data/"):
                 raise SystemExit("Published filing provenance differs for " + issuer["id"])
+            if index["by_issuer"][issuer["id"]] != report["summary"]["by_issuer"][issuer["id"]]:
+                raise SystemExit("Published per-issuer totals differ for " + issuer["id"])
             facts_raw = (site_dir / issuer["facts_file"]).read_bytes()
             if hashlib.sha256(facts_raw).hexdigest() != issuer["facts_file_sha256"]:
                 raise SystemExit("Published facts file hash mismatch for " + issuer["id"])
@@ -733,11 +760,17 @@ def main(argv=None) -> int:
     v = sub.add_parser("verify-saved", help="Re-score a saved report; check published assets")
     v.add_argument("report", type=Path)
     v.add_argument("--site", type=Path, default=None)
+    f = sub.add_parser("refresh-index", help="Copy filing provenance from a saved report into its published index")
+    f.add_argument("report", type=Path)
+    f.add_argument("--site", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command == "run":
         if not os.getenv("GITHUB_ACTIONS"):
             raise SystemExit("The benchmark run fetches SEC filings, renders pages and runs OCR; it runs on GitHub Actions only.")
         return run(args)
+    if args.command == "refresh-index":
+        refresh_index(args.report, args.site)
+        return 0
     verify_saved(args.report, args.site)
     return 0
 

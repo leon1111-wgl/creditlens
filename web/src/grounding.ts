@@ -110,7 +110,12 @@ function renderSource() {
   p.append(`${issuer.name} · Form ${f.form} · 提交 ${f.filed} · accession ${f.accession} · 渲染页 ${page.page}。来源：`);
   const a = el('a', { href: f.document_url, rel: 'noopener' }, 'SEC EDGAR 原文件'); p.append(a, ' · ');
   p.append(el('a', { href: f.index_url, rel: 'noopener' }, '提交索引'));
-  p.append('。Chromium 渲染的 Inline XBRL 页面，不是发行人 PDF，也不是扫描件；图下方灰条印有同样的来源。');
+  if (f.archive_url && f.capture_timestamp) {
+    const t = f.capture_timestamp;
+    p.append(`。文件取自互联网档案馆 ${t.slice(0, 4)}-${t.slice(4, 6)}-${t.slice(6, 8)} 的抓取（`);
+    p.append(el('a', { href: f.archive_url, rel: 'noopener' }, '档案副本'), '，已按抓取摘要核对字节；SEC 拒绝 Actions 运行器的直接请求）');
+  }
+  p.append('。Chromium 渲染的 Inline XBRL 页面，不是发行人 PDF，也不是扫描件；图下方灰条印有 SEC 地址与 accession。');
 }
 
 function pageFacts(): Fact[] {
@@ -318,6 +323,7 @@ async function main() {
   $('grSummary').replaceChildren(summaryTable(index), reasonsList(index.summary));
   $('grRule').textContent = index.benchmark_version + ' · ' + index.score_rule_version;
   const issuer = index.issuers[0];
+  if (!issuer || !issuer.pages.length) { $('grSheet').replaceChildren(el('p', { class: 'gr-fallback' }, '保存的运行没有可显示的页面。')); return; }
   state = { index, issuer, page: issuer.pages[0], facts: [], filter: 'all', selected: null, hovering: false };
   wireSheet();
   await selectIssuer(issuer);

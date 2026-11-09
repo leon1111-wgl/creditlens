@@ -22,9 +22,10 @@ export interface PageInfo {
 export interface Filing {
   form: string; accession: string; filed: string; report_date: string | null; document_url: string; index_url: string;
   document_sha256: string; retrieved_at: string;
+  via?: string; capture_timestamp?: string; archive_url?: string;
 }
 export interface IssuerIndex {
-  id: string; name: string; cik: number; role: string; sic_description: string | null; filing: Filing;
+  id: string; name: string; cik: number; role: string; filing: Filing;
   pages: PageInfo[]; facts_file: string; facts_file_sha256: string;
 }
 export interface Totals {
@@ -58,7 +59,7 @@ export const REASON_TEXT: Record<string, string> = {
   detached_numeric_fragment_near_cell: '格旁有分离的括号、负号或数字碎片',
   unreadable_numeric_cell: '格内文字不是完整金额（如破折号、脚注号或粘连文字）',
   unit_missing: '上方没有可读的单位表头（如 “(In millions)”）',
-  share_or_per_share_row: '行名或小标题涉及股数、每股或面值，印刷单位没有写明其量级',
+  share_or_per_share_row: '行名或其上方最近的纯文字标题提到股数、每股或面值，规则不套用单位表头的量级（标题规则也会波及“普通股，面值 … 股”说明下方的权益金额行，是已知缺陷）',
   no_year_header: '上方没有可读的年份列表头',
   duplicate_header_year: '年份表头重复，列不唯一',
   outside_header_columns: '数字不在年份列范围内',

@@ -72,6 +72,8 @@ describe.skipIf(!existsSync(resolve(folder, 'index.json')))('published grounding
     for (const issuer of index.issuers) {
       expect(issuer.filing.accession).toMatch(/^\d{10}-\d{2}-\d{6}$/);
       expect(issuer.filing.document_url.startsWith('https://www.sec.gov/Archives/edgar/data/')).toBe(true);
+      // The bytes came from an Internet Archive capture of that SEC URL; the page shows when and where.
+      expect(issuer.filing.archive_url).toBe(`https://web.archive.org/web/${issuer.filing.capture_timestamp}id_/${issuer.filing.document_url}`);
       expect(issuer.pages.length).toBeGreaterThan(0);
       expect(issuer.pages.length).toBeLessThanOrEqual(4);
     }

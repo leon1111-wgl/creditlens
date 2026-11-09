@@ -450,24 +450,6 @@ def candidate_order(ciks, salt: str) -> list[int]:
     return sorted({int(c) for c in ciks}, key=lambda c: hashlib.sha256((salt + f"{c:010d}").encode()).hexdigest())
 
 
-def latest_annual_report(submissions: dict, rule: dict) -> dict | None:
-    """Most recent original 10-K inside the rule's filing window, or None."""
-    recent = (submissions.get("filings") or {}).get("recent") or {}
-    forms = recent.get("form") or []
-    for i, form in enumerate(forms):
-        if form != rule["form"]:
-            continue
-        filed = recent["filingDate"][i]
-        if not (rule["filed_from"] <= filed < rule["filed_before"]):
-            continue
-        return {"form": form, "accession": recent["accessionNumber"][i], "filed": filed,
-                "report_date": recent.get("reportDate", [None] * len(forms))[i],
-                "primary_document": recent["primaryDocument"][i],
-                "inline_xbrl": bool(recent.get("isInlineXBRL", [0] * len(forms))[i]),
-                "size": recent.get("size", [None] * len(forms))[i]}
-    return None
-
-
 def statement_pages(facts: list[dict], contexts: dict, anchors: dict, *, min_facts: int, max_pages: int) -> dict:
     """First page (document order) holding each statement's anchor concept, non-dimensional."""
     counts = Counter(f["page"] for f in facts if f.get("displayed"))
