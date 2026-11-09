@@ -179,6 +179,17 @@ class SummaryAndRuleTests(unittest.TestCase):
         self.assertEqual(set(config["heldout_rule"]["exclude"]["ciks"]), {789019, 320193, 2488, 1045810})
         self.assertLessEqual(config["max_pages_per_issuer"], 4)
 
+    def test_fsds_instance_names_the_primary_document(self):
+        from scripts.xbrl_grounding import explicit_candidates, filing_urls, primary_document, sha1_base32
+        self.assertEqual(primary_document("abc-20251231_htm.xml"), "abc-20251231.htm")
+        self.assertIsNone(primary_document("abc-20251231.xml"))
+        c = explicit_candidates("320193:0000320193-25-000079:aapl-20250927.htm")[0]
+        self.assertEqual(filing_urls(c["cik"], c["accession"], c["document"])["document_url"],
+                         "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm")
+        with self.assertRaises(SystemExit):
+            explicit_candidates("320193")
+        self.assertEqual(sha1_base32(b""), "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ")  # SHA-1 of empty input, base32
+
     def test_latest_annual_report_window(self):
         subs = {"filings": {"recent": {"form": ["10-Q", "10-K/A", "10-K", "10-K"], "filingDate": ["2026-05-01", "2026-03-01", "2026-02-20", "2025-02-20"],
                                        "accessionNumber": ["a", "b", "c", "d"], "reportDate": ["", "", "2025-12-31", "2024-12-31"],

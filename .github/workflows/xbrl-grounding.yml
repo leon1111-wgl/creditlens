@@ -1,7 +1,7 @@
 name: xbrl-grounding
-# Held-out grounding benchmark: fetch 10-K Inline XBRL from EDGAR, render statement pages with
-# Chromium, OCR the images with the pinned RapidOCR profile, score against the issuer's own tags.
-# SEC requests, rendering and OCR run only here, never on a developer machine.
+# Held-out grounding benchmark: read 10-K Inline XBRL (Internet Archive captures of SEC files, since SEC
+# refuses Actions runners), render statement pages with Chromium, OCR the images with the pinned RapidOCR
+# profile, score against the issuer's own tags. Fetching, rendering and OCR run only here.
 on:
   workflow_dispatch:
     inputs:
@@ -10,8 +10,8 @@ on:
         default: heldout
         type: choice
         options: [heldout, dev, added]
-      ciks:
-        description: "Comma-separated CIKs for dev/added"
+      filings:
+        description: "dev/added: cik:accession:primary-document, comma-separated (from the EDGAR filing index)"
         default: ""
       label:
         description: "Run label"
@@ -46,29 +46,29 @@ jobs:
         env:
           EVENT: ${{ github.event_name }}
           IN_MODE: ${{ inputs.mode }}
-          IN_CIKS: ${{ inputs.ciks }}
+          IN_FILINGS: ${{ inputs.filings }}
           IN_LABEL: ${{ inputs.label }}
         run: |
           set -euo pipefail
           if [ "$EVENT" = "push" ]; then
             MODE=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['mode'])")
-            CIKS=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['ciks'])")
+            FILINGS=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['filings'])")
             LABEL=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['label'])")
           else
-            MODE="$IN_MODE"; CIKS="$IN_CIKS"; LABEL="$IN_LABEL"
+            MODE="$IN_MODE"; FILINGS="$IN_FILINGS"; LABEL="$IN_LABEL"
           fi
           case "$MODE" in heldout|dev|added) ;; *) echo "bad mode"; exit 1;; esac
-          [[ "$CIKS" =~ ^[0-9,\ ]*$ ]] || { echo "bad ciks"; exit 1; }
+          [[ "$FILINGS" =~ ^[0-9A-Za-z:.,_\ -]*$ ]] || { echo "bad filings"; exit 1; }
           [[ "$LABEL" =~ ^[A-Za-z0-9._-]{1,60}$ ]] || { echo "bad label"; exit 1; }
-          { echo "mode=$MODE"; echo "ciks=$CIKS"; echo "label=$LABEL"; } >> "$GITHUB_OUTPUT"
+          { echo "mode=$MODE"; echo "filings=$FILINGS"; echo "label=$LABEL"; } >> "$GITHUB_OUTPUT"
       - name: Run benchmark
         env:
           MODE: ${{ steps.inputs.outputs.mode }}
-          CIKS: ${{ steps.inputs.outputs.ciks }}
+          FILINGS: ${{ steps.inputs.outputs.filings }}
           LABEL: ${{ steps.inputs.outputs.label }}
         run: |
           set -euo pipefail
-          python scripts/xbrl_grounding.py run --mode "$MODE" --ciks "$CIKS" --label "$LABEL" --out out 2>&1 | tee run-log.txt
+          python scripts/xbrl_grounding.py run --mode "$MODE" --filings "$FILINGS" --label "$LABEL" --out out 2>&1 | tee run-log.txt
           cp run-log.txt out/
           python scripts/xbrl_grounding.py verify-saved out/report.json --site out/site
           cat out/summary.md >> "$GITHUB_STEP_SUMMARY"

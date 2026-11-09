@@ -3,13 +3,21 @@
   "benchmark_version": "xbrl-grounding-1",
   "note": "Committed before the first held-out run. The held-out issuers are whatever this rule yields on Actions; nothing here names them.",
   "user_agent": "CreditLens public financial research (https://github.com/leon1111-wgl/creditlens) 205497500+leon1111-wgl@users.noreply.github.com",
-  "min_request_interval_seconds": 0.34,
+  "min_request_interval_seconds": 1.0,
   "heldout_rule": {
-    "rule_id": "heldout-2026-11-a",
+    "rule_id": "heldout-2026-11-b",
+    "revision_note": "Revision of heldout-2026-11-a (commit 0354141) made before any held-out run: SEC refuses Actions runners, and the frames/submissions APIs that rule a used have no Internet Archive captures. Same exclusions, salt and acceptance idea.",
     "population": {
-      "description": "US filers whose dei:EntityPublicFloat for the calendar 2025 Q2 instant is at least the large-accelerated-filer threshold",
-      "url": "https://data.sec.gov/api/xbrl/frames/dei/EntityPublicFloat/USD/CY2025Q2I.json",
-      "min_public_float_usd": 700000000
+      "description": "SEC Financial Statement Data Sets 2026q1, sub.txt: original 10-K filings of large accelerated filers with a December 31 fiscal year end and period 2025-12-31",
+      "dataset_url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2026q1.zip",
+      "filter": {
+        "form": "10-K",
+        "afs": "1-LAF",
+        "fye": "1231",
+        "period": "20251231",
+        "prevrpt": "0"
+      },
+      "primary_document": "FSDS instance '<doc>_htm.xml' names the Inline XBRL primary document '<doc>.htm'"
     },
     "exclude": {
       "ciks": [
@@ -23,25 +31,28 @@
       "ticker_map_url": "https://www.sec.gov/files/company_tickers.json"
     },
     "order": {
-      "description": "Ascending SHA-256 of salt + 10-digit zero-padded CIK; the salt is fixed here before any run",
+      "description": "Ascending SHA-256 of salt + 10-digit zero-padded CIK; the salt was fixed in rule a before any run",
       "salt": "creditlens-xbrl-heldout-2026-11-a:"
     },
+    "source": "Latest Internet Archive capture (HTTP 200) of each SEC URL, fetched as original bytes (id_) and checked against the CDX SHA-1 digest; the HTML's own dei:EntityCentralIndexKey and dei:DocumentType must match the candidate",
     "accept": {
-      "fiscal_year_end": "1231",
-      "form": "10-K",
-      "filed_from": "2026-01-01",
-      "filed_before": "2026-11-11",
-      "inline_xbrl": true,
       "max_document_bytes": 25000000,
       "min_page_breaks": 20,
       "statements_required": [
         "income",
         "balance",
         "cash_flow"
+      ],
+      "reject_reasons": [
+        "no_archive_capture",
+        "archive_fetch_failed",
+        "archived_copy_not_this_filing",
+        "too_few_page_breaks",
+        "statement_pages_not_found"
       ]
     },
     "take": 6,
-    "max_candidates": 80
+    "max_candidates": 60
   },
   "render": {
     "engine": "Playwright Chromium (headless), network blocked except the saved filing HTML",
@@ -97,5 +108,5 @@
     "strip_font_px": 15,
     "max_total_bytes": 15000000
   },
-  "user_agent_note": "SEC asks automated clients to declare a contact. The contact is the project's public GitHub noreply commit identity, not a personal address. A User-Agent without a contact got HTTP 403 from data.sec.gov on 2026-11-09 (Actions run 42709826308)."
+  "user_agent_note": "Declared on every request. SEC answers GitHub Actions runners with HTTP 403 'Undeclared Automated Tool' whatever the User-Agent or headers (runs 42709826308, 42710194611, diagnostics 42710474268 and 42710749950, 2026-11-09), so the benchmark makes no SEC requests: it reads existing Internet Archive captures of SEC files and checks each against its capture digest. The contact is the project's public GitHub noreply commit identity, not a personal address."
 }

@@ -15,6 +15,7 @@ pages to render and to build the answer key, never as extraction input.
 from __future__ import annotations
 
 import argparse
+import base64
 from collections import Counter
 from datetime import datetime, timezone
 import hashlib
@@ -27,14 +28,16 @@ import re
 import sys
 import time
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from creditlens.xbrl_grounding import (  # noqa: E402
     PageReading, SCORE_RULE_VERSION, ABSTAIN_REASONS, OUTCOME_LABELS, candidate_order, canonical_digest,
-    key_entry, latest_annual_report, score_fact, slice_summaries, statement_pages, summarize,
+    key_entry, score_fact, slice_summaries, statement_pages, summarize,
 )
 
 CONFIG = ROOT / "configs/xbrl-grounding.json"
@@ -50,10 +53,16 @@ def load_config() -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Polite SEC access: one declared User-Agent, a minimum interval, bounded sizes
+# Sources: Internet Archive captures of SEC files (SEC itself refuses Actions runners)
 # ---------------------------------------------------------------------------
 
+def sha1_base32(raw: bytes) -> str:
+    return base64.b32encode(hashlib.sha1(raw).digest()).decode()
+
+
 class Fetcher:
+    """One declared User-Agent, a minimum interval between requests, bounded sizes."""
+
     def __init__(self, user_agent: str, interval: float):
         self.user_agent, self.interval, self.last, self.log = user_agent, interval, 0.0, []
 
@@ -65,7 +74,7 @@ class Fetcher:
             self.last = time.monotonic()
             request = Request(url, headers={"User-Agent": self.user_agent, "Accept-Encoding": "identity"})
             try:
-                with urlopen(request, timeout=60) as response:
+                with urlopen(request, timeout=120) as response:
                     raw = response.read(max_bytes + 1)
                     status = response.status
             except HTTPError as error:
@@ -74,21 +83,33 @@ class Fetcher:
                 status, raw = None, str(error).encode()
             self.log.append({"url": url, "status": status, "bytes": len(raw),
                              "at": datetime.now(timezone.utc).isoformat()})
-            if status not in accept_status and status is not None and status not in (429, 500, 502, 503, 504):
-                body = re.sub(r"<[^>]+>|\s+", " ", raw.decode("utf-8", "replace"))[:300]
-                raise RuntimeError(f"HTTP {status} for {url}: {body}")
             if status in (429, 500, 502, 503, 504) or status is None:
-                time.sleep(2 * (attempt + 1))
+                time.sleep(3 * (attempt + 1))
                 continue
             if status not in accept_status:
-                raise RuntimeError(f"HTTP {status} for {url}")
+                body = re.sub(r"<[^>]+>|\s+", " ", raw.decode("utf-8", "replace"))[:300]
+                raise RuntimeError(f"HTTP {status} for {url}: {body}")
             if len(raw) > max_bytes:
                 raise RuntimeError(f"Response larger than {max_bytes} bytes: {url}")
             return raw
         raise RuntimeError(f"Gave up after retries: {url}")
 
-    def json(self, url: str, *, max_bytes: int):
-        return json.loads(self.get(url, max_bytes=max_bytes))
+    def archived(self, original: str, *, max_bytes: int, before: str | None = None) -> tuple[bytes, dict]:
+        """Latest 200 capture of an SEC URL in the Internet Archive; bytes checked against the CDX digest."""
+        params = {"url": original, "output": "json", "filter": "statuscode:200", "limit": "-1"}
+        if before:
+            params["to"] = before
+        rows = json.loads(self.get("https://web.archive.org/cdx/search/cdx?" + urlencode(params), max_bytes=2_000_000) or b"[]")
+        if len(rows) < 2:
+            raise LookupError("no_archive_capture")
+        capture = dict(zip(rows[0], rows[-1]))
+        archive_url = f"https://web.archive.org/web/{capture['timestamp']}id_/{capture['original']}"
+        raw = self.get(archive_url, max_bytes=max_bytes)
+        if sha1_base32(raw) != capture["digest"]:
+            raise RuntimeError("Archived bytes do not match the capture digest: " + original)
+        return raw, {"original_url": capture["original"], "capture_timestamp": capture["timestamp"],
+                     "archive_url": archive_url, "capture_sha1_base32": capture["digest"],
+                     "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
 
 
 # ---------------------------------------------------------------------------
@@ -112,39 +133,68 @@ def _ticker_key(ticker: str) -> str:
     return re.sub(r"[^A-Z0-9]", "", ticker.upper())
 
 
+def primary_document(instance: str) -> str | None:
+    """FSDS names the iXBRL instance '<doc>_htm.xml'; the primary document is '<doc>.htm'."""
+    match = re.fullmatch(r"([A-Za-z0-9._-]+)_htm\.xml", instance or "")
+    return match.group(1) + ".htm" if match else None
+
+
+def filing_urls(cik: int, accession: str, document: str) -> dict:
+    folder = accession.replace("-", "")
+    return {"document_url": f"https://www.sec.gov/Archives/edgar/data/{cik}/{folder}/{document}",
+            "index_url": f"https://www.sec.gov/Archives/edgar/data/{cik}/{folder}/{accession}-index.htm"}
+
+
 def heldout_candidates(fetcher: Fetcher, config: dict) -> tuple[list[dict], dict]:
     rule = config["heldout_rule"]
-    tickers_raw = fetcher.get(rule["exclude"]["ticker_map_url"], max_bytes=20_000_000)
-    ticker_map = json.loads(tickers_raw)
-    by_ticker = {_ticker_key(v["ticker"]): int(v["cik_str"]) for v in ticker_map.values()}
+    population = rule["population"]
+    zip_raw, zip_meta = fetcher.archived(population["dataset_url"], max_bytes=300_000_000)
+    with zipfile.ZipFile(BytesIO(zip_raw)) as archive:
+        lines = archive.read("sub.txt").decode("utf-8", "replace").splitlines()
+    header = lines[0].split("\t")
+    rows = [dict(zip(header, line.split("\t"))) for line in lines[1:] if line.strip()]
+    want = population["filter"]
+    eligible = {}
+    for row in rows:
+        if all(row.get(k) == v for k, v in want.items()) and primary_document(row.get("instance", "")):
+            cik = int(row["cik"])
+            if cik not in eligible or row["filed"] < eligible[cik]["filed"]:
+                eligible[cik] = row
+    tickers_raw, tickers_meta = fetcher.archived(rule["exclude"]["ticker_map_url"], max_bytes=20_000_000)
+    by_ticker = {_ticker_key(v["ticker"]): int(v["cik_str"]) for v in json.loads(tickers_raw).values()}
     finqa, finqa_meta = finqa_tickers(fetcher)
     finqa_ciks = {by_ticker[_ticker_key(t)] for t in finqa if _ticker_key(t) in by_ticker}
     excluded = {int(c) for c in rule["exclude"]["ciks"]} | finqa_ciks
-    frame_raw = fetcher.get(rule["population"]["url"], max_bytes=50_000_000)
-    frame = json.loads(frame_raw)
-    floats = {}
-    for row in frame["data"]:
-        if row.get("val") is not None and row["val"] >= rule["population"]["min_public_float_usd"]:
-            floats[int(row["cik"])] = {"entity": row.get("entityName"), "public_float_usd": row["val"], "accn": row.get("accn")}
-    population = sorted(set(floats) - excluded)
-    order = candidate_order(population, rule["order"]["salt"])
+    order = candidate_order(set(eligible) - excluded, rule["order"]["salt"])
     audit = {
-        "rule_id": rule["rule_id"], "population_url": rule["population"]["url"],
-        "population_sha256": hashlib.sha256(frame_raw).hexdigest(), "frame_rows": len(frame["data"]),
-        "eligible_by_float": len(floats), "ticker_map_sha256": hashlib.sha256(tickers_raw).hexdigest(),
+        "rule_id": rule["rule_id"], "population_dataset": zip_meta, "dataset_filings": len(rows),
+        "eligible": len(eligible), "ticker_map": tickers_meta,
         "excluded_project_ciks": sorted(int(c) for c in rule["exclude"]["ciks"]),
         "finqa": dict(finqa_meta, matched_ciks=len(finqa_ciks),
                       unmatched_tickers=sorted(t for t in finqa if _ticker_key(t) not in by_ticker)),
-        "excluded_in_population": sorted(excluded & set(floats)), "population_after_exclusion": len(population),
+        "excluded_in_population": sorted(excluded & set(eligible)), "population_after_exclusion": len(order),
     }
-    return [dict(cik=c, **floats[c]) for c in order], audit
+    candidates = []
+    for cik in order:
+        row = eligible[cik]
+        candidates.append({"cik": cik, "name": row["name"], "sic": row.get("sic"), "accession": row["adsh"],
+                           "document": primary_document(row["instance"]), "filed": row["filed"], "period": row["period"],
+                           "form": row["form"], "afs": row.get("afs"), "fye": row.get("fye")})
+    return candidates, audit
 
 
-def explicit_candidates(ciks: str) -> list[dict]:
-    values = [c.strip() for c in ciks.split(",") if c.strip()]
-    if not values or not all(re.fullmatch(r"[0-9]{1,10}", c) for c in values):
-        raise SystemExit("--ciks must be a comma-separated list of numeric CIKs")
-    return [{"cik": int(c), "entity": None} for c in values]
+def explicit_candidates(spec: str) -> list[dict]:
+    """'cik:accession:document' entries, comma-separated (documents named on the EDGAR filing index)."""
+    out = []
+    for item in [x.strip() for x in spec.split(",") if x.strip()]:
+        match = re.fullmatch(r"([0-9]{1,10}):([0-9]{10}-[0-9]{2}-[0-9]{6}):([A-Za-z0-9._-]+\.html?)", item)
+        if not match:
+            raise SystemExit("--filings entries must look like 320193:0000320193-25-000079:aapl-20250927.htm")
+        out.append({"cik": int(match.group(1)), "name": None, "accession": match.group(2), "document": match.group(3),
+                    "filed": None, "period": None, "form": "10-K"})
+    if not out:
+        raise SystemExit("--filings is required for dev/added runs")
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -253,9 +303,15 @@ EXTRACT_JS = r"""
       if (s.breakAfter === 'page' || s.pageBreakAfter === 'always') breaks.push(r.bottom + sy);
     }
   }
+  const dei = {};
+  for (const el of all) {
+    if (local(el) !== 'ix:nonnumeric') continue;
+    const name = (el.getAttribute('name') || '');
+    if (name.startsWith('dei:') && !(name.slice(4) in dei)) dei[name.slice(4)] = clean(el.textContent);
+  }
   const title = clean(document.title);
   return {facts, contexts, units, breaks, width: Math.max(document.documentElement.scrollWidth, cfg.width),
-          height: document.documentElement.scrollHeight, title};
+          height: document.documentElement.scrollHeight, title, dei};
 }
 """
 
@@ -329,7 +385,7 @@ def render_issuer(browser, html_path: Path, out_dir: Path, issuer_id: str, confi
                        "statements": sorted(s for s, p in choice["by_statement"].items() if p == n)})
     context.close()
     facts = data["facts"]
-    return {"title": data["title"], "pages_total": len(pages), "facts_total": len(facts),
+    return {"title": data["title"], "dei": data["dei"], "pages_total": len(pages), "facts_total": len(facts),
             "facts_in_header": sum(f["in_header"] for f in facts), "facts_in_hidden": sum(f["in_hidden"] and not f["via_hidden"] for f in facts),
             "facts_displayed": sum(bool(f["displayed"]) for f in facts),
             "blocked_requests": dict(blocked), "statement_pages": choice, "images": images,
@@ -426,12 +482,9 @@ def run(args) -> int:
     rule = config["heldout_rule"]
     if args.mode == "heldout":
         candidates, audit = heldout_candidates(fetcher, config)
-        window = {"form": rule["accept"]["form"], "filed_from": rule["accept"]["filed_from"],
-                  "filed_before": rule["accept"]["filed_before"]}
         take = rule["take"]
     else:
-        candidates, audit = explicit_candidates(args.ciks), {"rule_id": None, "explicit_ciks": args.ciks}
-        window = {"form": "10-K", "filed_from": "2000-01-01", "filed_before": "2100-01-01"}
+        candidates, audit = explicit_candidates(args.filings), {"rule_id": None, "explicit_filings": args.filings}
         take = len(candidates)
     from playwright.sync_api import sync_playwright
     issuers, rejected = [], []
@@ -441,52 +494,45 @@ def run(args) -> int:
             if len(issuers) >= take or examined > rule["max_candidates"]:
                 break
             cik = candidate["cik"]
-            submissions = fetcher.json(f"https://data.sec.gov/submissions/CIK{cik:010d}.json", max_bytes=30_000_000)
-            reasons = []
-            if args.mode == "heldout" and submissions.get("fiscalYearEnd") != rule["accept"]["fiscal_year_end"]:
-                reasons.append("fiscal_year_end")
-            filing = latest_annual_report(submissions, window)
-            if filing is None:
-                reasons.append("no_10k_in_window")
-            elif not filing["inline_xbrl"]:
-                reasons.append("not_inline_xbrl")
-            elif filing["size"] and filing["size"] > rule["accept"]["max_document_bytes"] * 3:
-                reasons.append("filing_too_large")
-            entry = {"cik": cik, "name": submissions.get("name"), "examined": examined}
-            if reasons:
-                rejected.append(dict(entry, reasons=reasons))
-                continue
-            folder = filing["accession"].replace("-", "")
-            doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{folder}/{filing['primary_document']}"
-            if not re.fullmatch(r"[A-Za-z0-9._-]+\.html?", filing["primary_document"]):
-                rejected.append(dict(entry, reasons=["primary_document_not_html"]))
-                continue
+            urls = filing_urls(cik, candidate["accession"], candidate["document"])
+            entry = {"cik": cik, "name": candidate.get("name"), "accession": candidate["accession"], "examined": examined}
             try:
-                raw = fetcher.get(doc_url, max_bytes=rule["accept"]["max_document_bytes"])
-            except RuntimeError as error:
-                rejected.append(dict(entry, reasons=["document_fetch_failed: " + str(error)]))
+                raw, capture = fetcher.archived(urls["document_url"], max_bytes=rule["accept"]["max_document_bytes"])
+            except LookupError as error:
+                rejected.append(dict(entry, reasons=[str(error)]))
                 continue
-            issuer_id = re.sub(r"[^a-z0-9]+", "-", (submissions.get("tickers") or [str(cik)])[0].lower()).strip("-") or str(cik)
+            except RuntimeError as error:
+                rejected.append(dict(entry, reasons=["archive_fetch_failed: " + str(error)[:200]]))
+                continue
+            issuer_id = re.sub(r"[^a-z0-9]+", "-", candidate["document"].split("-")[0].lower()).strip("-")[:20] or str(cik)
+            if any(i["id"] == issuer_id for i in issuers):
+                issuer_id = f"{issuer_id}-{cik}"
             html_path = out / "html" / f"{issuer_id}.htm"
             html_path.parent.mkdir(parents=True, exist_ok=True)
             html_path.write_bytes(raw)
             rendered = render_issuer(browser, html_path, out / "pages", issuer_id, config)
             if "rejected" in rendered:
-                rejected.append(dict(entry, reasons=[rendered["rejected"]], detail=rendered))
+                rejected.append(dict(entry, reasons=[rendered["rejected"]], detail={k: v for k, v in rendered.items() if k != "rejected"}))
+                continue
+            dei = rendered.pop("dei")
+            if dei.get("EntityCentralIndexKey", "").lstrip("0") != str(cik) or not dei.get("DocumentType", "").startswith("10-K"):
+                rejected.append(dict(entry, reasons=["archived_copy_not_this_filing"], detail=dei))
                 continue
             issuers.append({
-                "id": issuer_id, "cik": cik, "name": submissions.get("name"), "tickers": submissions.get("tickers"),
-                "sic": submissions.get("sic"), "sic_description": submissions.get("sicDescription"),
-                "fiscal_year_end": submissions.get("fiscalYearEnd"), "role": args.mode,
-                "public_float_usd": candidate.get("public_float_usd"), "examined_order": examined,
-                "filing": dict(filing, document_url=doc_url, index_url=f"https://www.sec.gov/Archives/edgar/data/{cik}/{folder}/{filing['accession']}-index.htm",
-                               document_sha256=hashlib.sha256(raw).hexdigest(), document_bytes=len(raw),
-                               retrieved_at=datetime.now(timezone.utc).isoformat()),
+                "id": issuer_id, "cik": cik, "name": dei.get("EntityRegistrantName") or candidate.get("name"),
+                "sic": candidate.get("sic"), "role": args.mode, "examined_order": examined,
+                "dei": dei, "filer_status": candidate.get("afs"), "fiscal_year_end": candidate.get("fye"),
+                "filing": {"form": dei.get("DocumentType") or candidate["form"], "accession": candidate["accession"],
+                           "filed": candidate.get("filed"), "report_date": dei.get("DocumentPeriodEndDate") or candidate.get("period"),
+                           **urls, "document_sha256": capture["sha256"], "document_bytes": capture["bytes"],
+                           "retrieved_at": datetime.now(timezone.utc).isoformat(), "via": "Internet Archive capture",
+                           "capture_timestamp": capture["capture_timestamp"], "archive_url": capture["archive_url"],
+                           "capture_sha1_base32": capture["capture_sha1_base32"]},
                 **{k: v for k, v in rendered.items() if k != "doc_facts_by_key"},
                 "repeated_in_document": sum(1 for f in rendered["facts"]
                                             if rendered["doc_facts_by_key"][(f["concept"], f["context_ref"], f["unit_ref"])] > 1),
             })
-            print(json.dumps({"accepted": issuer_id, "name": submissions.get("name"), "pages": [i["page"] for i in rendered["images"]],
+            print(json.dumps({"accepted": issuer_id, "name": issuers[-1]["name"], "pages": [i["page"] for i in rendered["images"]],
                               "facts": len(rendered["facts"])}), flush=True)
         browser.close()
     if not issuers:
@@ -661,7 +707,7 @@ def main(argv=None) -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     r = sub.add_parser("run", help="Actions only: select, fetch, render, OCR, score, publish")
     r.add_argument("--mode", choices=["heldout", "dev", "added"], required=True)
-    r.add_argument("--ciks", default="")
+    r.add_argument("--filings", default="", help="dev/added: cik:accession:document, comma-separated")
     r.add_argument("--label", default="manual")
     r.add_argument("--out", default=str(ROOT / ".run/xbrl-grounding"))
     r.add_argument("--model-cache", default=str(Path.home() / ".cache/creditlens-ocr"))
