@@ -5,7 +5,7 @@
 在项目从未用过的发行人上测量图像取数：GitHub Actions 渲染 10-K 报表页，OCR 只看图像，答案键是发行人自己在 Inline XBRL 里给每个数字打的标签。访客在 `XBRL 对照` 页逐页查看，每个事实一个框（绿 = 一致、琥珀 = 未作答、红 = 冲突），点选看概念、上下文、单位、scale、sign 与图像读数。结果是干净渲染页，不是扫描件。
 
 ### 新增
-- `XBRL 对照` 页（`/grounding`，静态演示 `grounding.html`）：6 家发行人、21 页报表页（每家至多 4 页、只含报表），每页标注 SEC 原地址与 accession；黄铜放大镜沿用介绍页的样式；按结果筛选、逐项上一项／下一项、标签列表可键盘操作。“证据”分区的首页改为本页，介绍页与 README 加入口；介绍页技术栈加 Inline XBRL。
+- `XBRL 对照` 页（`/grounding`，静态演示 `grounding.html`）：6 家发行人、21 页报表页（每家至多 4 页、只含报表），每页标注 SEC 原地址与 accession；黄铜放大镜沿用介绍页的样式；按结果筛选、逐项上一项／下一项、标签列表可键盘操作。“证据”分区的首页改为本页，介绍页与 README 加入口；介绍页技术栈改为 OCR · Inline XBRL · FastAPI · Decimal · TypeScript（加入 Inline XBRL，并为保持一行把 “Document AI / OCR” 缩为 “OCR”）。
 - 基准：`creditlens/xbrl_grounding.py`（答案键、只读 OCR 的页面读法、评分）、`scripts/xbrl_grounding.py`（Actions 上的选择、取文件、渲染、OCR、发布；`verify-saved` 不需要 OCR 和网络）、`configs/xbrl-grounding.json`（保留集规则与参数）、`.github/workflows/xbrl-grounding.yml`。评分沿用项目已有的 visual-evidence-1、word-evidence-1、table-lookup-1 规则。
 - 文档：[XBRL 对照](docs/45-xbrl-grounding.md)；[前沿调研](docs/FRONTIER_REVIEW.md)新增本轮候选与“大公司在生产中怎样用”。
 

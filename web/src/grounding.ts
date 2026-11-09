@@ -193,11 +193,15 @@ function renderList() {
   $('grCount').textContent = `${facts.length} 项`;
   for (const f of facts) {
     const li = el('li');
-    const b = el('button', { type: 'button', class: 'gr-item ' + f.outcome, 'aria-current': String(state.selected?.id === f.id) });
+    const b = el('button', { type: 'button', class: 'gr-item ' + f.outcome, 'aria-current': String(state.selected?.id === f.id), 'data-id': String(f.id) });
     b.append(el('span', { class: 'gr-dot', 'aria-hidden': 'true' }));
     b.append(el('span', { class: 'gr-item-concept' }, f.concept.split(':').pop() ?? f.concept));
     b.append(el('span', { class: 'gr-item-meta' }, `${f.year ?? '—'} · ${f.printed_negative ? '(' + f.text + ')' : f.text} · OCR ${f.ocr ? '“' + f.ocr.text + '”' : '无'} · ${OUTCOME_TEXT[f.outcome]}`));
-    b.addEventListener('click', () => select(f, true));
+    b.addEventListener('click', () => {
+      select(f, true);
+      // The list is rebuilt on every selection; keep keyboard focus on the chosen item.
+      (list.querySelector(`[data-id="${f.id}"]`) as HTMLElement | null)?.focus({ preventScroll: true });
+    });
     li.append(b); list.append(li);
   }
 }
