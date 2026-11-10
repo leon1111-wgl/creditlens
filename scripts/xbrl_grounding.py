@@ -37,7 +37,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from creditlens.xbrl_grounding import (  # noqa: E402
-    PageReading, SCORE_RULE_VERSION, ABSTAIN_REASONS, OUTCOME_LABELS, candidate_order, canonical_digest,
+    PageReading, SCORE_RULE_VERSION, SCORE_RULE_1, ABSTAIN_REASONS, OUTCOME_LABELS, candidate_order, canonical_digest,
     key_entry, page_period_starts, score_fact, slice_summaries, statement_pages, summarize,
 )
 
@@ -149,8 +149,21 @@ def filing_urls(cik: int, accession: str, document: str) -> dict:
             "index_url": f"https://www.sec.gov/Archives/edgar/data/{cik}/{folder}/{accession}-index.htm"}
 
 
-def heldout_candidates(fetcher: Fetcher, config: dict) -> tuple[list[dict], dict]:
+def heldout_rule(config: dict, name: str) -> dict:
+    """Rule b as committed, or rule c: rule b's population and acceptance with more exclusions and a new salt."""
     rule = config["heldout_rule"]
+    if name == "b":
+        return rule
+    c = config["heldout_rule_c"]
+    merged = json.loads(json.dumps(rule))
+    merged["rule_id"] = c["rule_id"]
+    merged["exclude"]["ciks"] = list(rule["exclude"]["ciks"]) + list(c["exclude_also"]["ciks"])
+    merged["order"] = c["order"]
+    return merged
+
+
+def heldout_candidates(fetcher: Fetcher, config: dict, rule_name: str = "b") -> tuple[list[dict], dict]:
+    rule = heldout_rule(config, rule_name)
     population = rule["population"]
     zip_raw, zip_meta = fetcher.archived(population["dataset_url"], max_bytes=300_000_000)
     with zipfile.ZipFile(BytesIO(zip_raw)) as archive:
@@ -452,11 +465,11 @@ def ocr_page(engine, png_path: Path, width: float, height: float) -> tuple[list[
 # Scoring and report
 # ---------------------------------------------------------------------------
 
-def score_issuer(issuer: dict) -> list[dict]:
+def score_issuer(issuer: dict, rule: str = SCORE_RULE_VERSION) -> list[dict]:
     records = []
     occurrences = Counter((f["concept"], f["context_ref"], f["unit_ref"]) for f in issuer["facts"])
     for page in issuer["images"]:
-        reading = PageReading(page["ocr"])
+        reading = PageReading(page["ocr"], rule)
         on_page = [f for f in issuer["facts"] if f["page"] == page["page"]]
         starts = page_period_starts(on_page, issuer["contexts"])
         for fact in on_page:
@@ -488,9 +501,9 @@ def run(args) -> int:
     out = Path(args.out).resolve()
     (out / "pages").mkdir(parents=True, exist_ok=True)
     fetcher = Fetcher(config["user_agent"], config["min_request_interval_seconds"])
-    rule = config["heldout_rule"]
+    rule = heldout_rule(config, args.rule)
     if args.mode == "heldout":
-        candidates, audit = heldout_candidates(fetcher, config)
+        candidates, audit = heldout_candidates(fetcher, config, args.rule)
         take = rule["take"]
     else:
         candidates, audit = explicit_candidates(args.filings), {"rule_id": None, "explicit_filings": args.filings}
@@ -558,7 +571,9 @@ def run(args) -> int:
             spans, elapsed = ocr_page(engine, out / "pages" / image["png"], image["width"], image["height"])
             image.update(ocr=spans, ocr_seconds=round(elapsed, 3), ocr_lines=len(spans))
             print(json.dumps({"ocr": image["png"], "lines": len(spans), "seconds": round(elapsed, 2)}), flush=True)
-    records = [r for issuer in issuers for r in score_issuer(issuer)]
+    records = [r for issuer in issuers for r in score_issuer(issuer, SCORE_RULE_VERSION)]
+    # Same OCR spans, previous rule: the paired comparison the rule-c protocol asks for.
+    comparison = {SCORE_RULE_1: build_summary([r for issuer in issuers for r in score_issuer(issuer, SCORE_RULE_1)])["all"]}
     from importlib.metadata import version
     report = {
         "schema_version": 1, "benchmark_version": config["benchmark_version"], "score_rule_version": SCORE_RULE_VERSION,
@@ -573,7 +588,7 @@ def run(args) -> int:
         "selection": {"audit": audit, "rejected": rejected, "examined": len(rejected) + len(issuers),
                       "requests": fetcher.log},
         "outcome_labels": OUTCOME_LABELS, "abstain_reasons": ABSTAIN_REASONS,
-        "issuers": issuers, "records": records, "summary": build_summary(records),
+        "issuers": issuers, "records": records, "summary": build_summary(records), "comparison": comparison,
     }
     (out / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     publish(report, out / "pages", out / "site", config)
@@ -695,7 +710,11 @@ def markdown_summary(report: dict) -> str:
         lines.append(f"| {issuer['id']} | {issuer['name']} | {','.join(str(i['page']) for i in issuer['images'])} | {t['facts_scored']} | "
                      f"{t['outcomes']['match']} | {t['outcomes']['conflict']} | {t['outcomes']['abstain']} | {t['box_recall']['rate']} | "
                      f"{t['exact_value']['rate_of_all']} | {t['period_column']['rate_of_all']} |")
-    lines += ["", f"All: {json.dumps(s, ensure_ascii=False)}", "",
+    lines += ["", f"Rule: {report['selection']['audit'].get('rule_id')} · score {report['score_rule_version']}",
+              "", f"All: {json.dumps(s, ensure_ascii=False)}", ""]
+    for other, saved in (report.get("comparison") or {}).items():
+        lines += [f"Same OCR under {other}: {json.dumps(saved, ensure_ascii=False)}", ""]
+    lines += [
               f"Rejected candidates: {len(report['selection']['rejected'])}; examined {report['selection']['examined']}"]
     return "\n".join(lines) + "\n"
 
@@ -709,12 +728,16 @@ def verify_saved(report_path: Path, site_dir: Path | None) -> dict:
     if report_path.suffix == ".gz":  # committed gzipped; decompresses to the run artifact's report.json
         report_raw = gzip.decompress(report_raw)
     report = json.loads(report_raw.decode("utf-8"))
-    rescored = [r for issuer in report["issuers"] for r in score_issuer(issuer)]
+    rule = report["score_rule_version"]
+    rescored = [r for issuer in report["issuers"] for r in score_issuer(issuer, rule)]
     if rescored != report["records"]:
         mismatch = next(i for i, (a, b) in enumerate(zip(rescored, report["records"])) if a != b) if len(rescored) == len(report["records"]) else "length"
         raise SystemExit(f"Saved records differ from a re-score of the saved key and OCR (first difference: {mismatch})")
     if build_summary(rescored) != report["summary"]:
         raise SystemExit("Saved summary differs from the re-scored records")
+    for other, saved in (report.get("comparison") or {}).items():
+        if build_summary([r for issuer in report["issuers"] for r in score_issuer(issuer, other)])["all"] != saved:
+            raise SystemExit("Saved comparison summary differs from a re-score under " + other)
     checked_images = 0
     if site_dir is not None:
         index = json.loads((site_dir / "index.json").read_text(encoding="utf-8"))
@@ -755,6 +778,7 @@ def main(argv=None) -> int:
     r.add_argument("--mode", choices=["heldout", "dev", "added"], required=True)
     r.add_argument("--filings", default="", help="dev/added: cik:accession:document, comma-separated")
     r.add_argument("--label", default="manual")
+    r.add_argument("--rule", choices=["b", "c"], default="c", help="heldout: issuer rule (b = v0.34.0 first run, c = v0.35.0)")
     r.add_argument("--out", default=str(ROOT / ".run/xbrl-grounding"))
     r.add_argument("--model-cache", default=str(Path.home() / ".cache/creditlens-ocr"))
     v = sub.add_parser("verify-saved", help="Re-score a saved report; check published assets")

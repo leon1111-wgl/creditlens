@@ -1,0 +1,319 @@
+{
+ "mode": "eval",
+ "commit": "83e8df5d72b14224a1d57636dc22cb42eb69c5b1",
+ "run_id": "42778951022",
+ "engine": "table-check-1",
+ "checks": [],
+ "init": {
+  "ok": true,
+  "initSeconds": 0.6462999999999883,
+  "downloadedBytes": 35654502,
+  "error": null
+ },
+ "split": "dev",
+ "pages": [
+  {
+   "id": "aapl-p31",
+   "variant": "webp_grey_q68",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.014100000000005821,
+    "det": 1.5007000000000117,
+    "rec": 9.9235,
+    "structure": 0.004799999999988359,
+    "total": 11.443600000000005,
+    "lines": 103,
+    "boxes": 104
+   },
+   "counts": {
+    "facts": 57,
+    "correct": 55,
+    "wrong": 0,
+    "missed": 2,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 9,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 9
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "aapl-p32",
+   "variant": "webp_grey_q68",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.011,
+    "det": 0.9531000000000058,
+    "rec": 7.783,
+    "structure": 0.0009000000000232831,
+    "total": 8.749800000000018,
+    "lines": 61,
+    "boxes": 62
+   },
+   "counts": {
+    "facts": 30,
+    "correct": 30,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 12,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "aapl-p33",
+   "variant": "webp_grey_q68",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.01639999999999418,
+    "det": 1.6624000000000232,
+    "rec": 11.321,
+    "structure": 0.0055,
+    "total": 13.005300000000018,
+    "lines": 107,
+    "boxes": 108
+   },
+   "counts": {
+    "facts": 54,
+    "correct": 54,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 16,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 16
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "aapl-p35",
+   "variant": "webp_grey_q68",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.01819999999998254,
+    "det": 1.6502000000000117,
+    "rec": 15.419899999999995,
+    "structure": 0.004700000000011642,
+    "total": 17.093100000000007,
+    "lines": 143,
+    "boxes": 143
+   },
+   "counts": {
+    "facts": 87,
+    "correct": 87,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 1,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "msft-p50",
+   "variant": "webp_grey_q68",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.012900000000023283,
+    "det": 1.1835999999999767,
+    "rec": 9.535200000000012,
+    "structure": 0.0016999999999825377,
+    "total": 10.7335,
+    "lines": 101,
+    "boxes": 105
+   },
+   "counts": {
+    "facts": 57,
+    "correct": 56,
+    "wrong": 0,
+    "missed": 1,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 6,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "msft-p51",
+   "variant": "webp_grey_q68",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.0063999999999941794,
+    "det": 0.6321999999999826,
+    "rec": 4.2916000000000345,
+    "structure": 0.0005,
+    "total": 4.930700000000011,
+    "lines": 41,
+    "boxes": 42
+   },
+   "counts": {
+    "facts": 18,
+    "correct": 18,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "msft-p52",
+   "variant": "webp_grey_q68",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.017199999999953433,
+    "det": 1.5643000000000467,
+    "rec": 13.404,
+    "structure": 0.002099999999976717,
+    "total": 14.987599999999977,
+    "lines": 125,
+    "boxes": 126
+   },
+   "counts": {
+    "facts": 68,
+    "correct": 68,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 14,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 14
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "msft-p53",
+   "variant": "webp_grey_q68",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.017599999999976718,
+    "det": 1.571600000000035,
+    "rec": 16.040299999999988,
+    "structure": 0.0027000000000116414,
+    "total": 17.63220000000001,
+    "lines": 156,
+    "boxes": 156
+   },
+   "counts": {
+    "facts": 102,
+    "correct": 100,
+    "wrong": 0,
+    "missed": 2,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 8,
+    "does_not_foot": 0,
+    "not_checked": 4,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  }
+ ],
+ "errors": [],
+ "aggregate": {
+  "webp_grey_q68": {
+   "pages": 8,
+   "facts": 473,
+   "correct": 468,
+   "wrong": 0,
+   "missed": 5,
+   "cell_value_accuracy": 0.9894291754756871,
+   "wrong_value_rate": 0,
+   "dash_facts": 1,
+   "dash_correct": 1,
+   "checks_performed": 65,
+   "foots": 65,
+   "does_not_foot": 0,
+   "not_checked": 4,
+   "false_alarm_rate": 0,
+   "alarm_causes": {},
+   "seconds_p50": 11.443600000000005,
+   "seconds_p95": 17.63220000000001,
+   "seconds_max": 17.63220000000001
+  }
+ },
+ "bar": {
+  "cell_value_accuracy": true,
+  "wrong_value_rate": true,
+  "checks_performed": true,
+  "false_alarm_rate": true,
+  "latency_p95": true,
+  "init": true,
+  "download": true,
+  "all": true,
+  "applies": "dev split: for development only"
+ },
+ "failed": []
+}

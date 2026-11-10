@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "engine_version": "table-check-1",
+  "note": "Committed before any evaluation run of the in-browser table screenshot check. Runtime and weights are pinned by version and SHA-256; the page refuses any file whose hash differs.",
+  "runtime": {
+    "name": "onnxruntime-web",
+    "version": "1.30.0",
+    "licence": "MIT",
+    "released": "2026-09-14",
+    "base_url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.30.0/dist/",
+    "files": {
+      "ort.wasm.min.js": {
+        "bytes": 50196,
+        "sha256_base64": "+uzgfoT6qQAfUQS75OXHCGHQbLI3ag3qH6CtM6Z63IE="
+      },
+      "ort-wasm-simd-threaded.mjs": {
+        "bytes": 24381,
+        "sha256_base64": "4T9/lPxRtMpysS+use6V9Kzm37yJObxxiqvcCifEKZs="
+      },
+      "ort-wasm-simd-threaded.wasm": {
+        "bytes": 14239897,
+        "sha256_base64": "M5jBDQfSKb2Rs2RUjhMODlGo5XBLiMfAg+u+t4hC3uI="
+      }
+    },
+    "execution": "WebAssembly SIMD, one thread (GitHub Pages is not cross-origin isolated). WebGPU is not used."
+  },
+  "weights": {
+    "model": "PP-OCRv5 mobile text detection + recognition (PaddlePaddle, Apache-2.0), ONNX conversion",
+    "original": [
+      "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_det",
+      "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec"
+    ],
+    "repo": "webnn/PP-OCRv5-ONNX",
+    "revision": "006b4419a415072fbb16a1d7d0d8548f789a8fae",
+    "licence": "apache-2.0 (model card tag)",
+    "base_url": "https://huggingface.co/webnn/PP-OCRv5-ONNX/resolve/006b4419a415072fbb16a1d7d0d8548f789a8fae/",
+    "files": {
+      "ch_PP-OCRv5_det.onnx": {
+        "bytes": 4748769,
+        "sha256_hex": "d7fe3ea74652890722c0f4d02458b7261d9f5ae6c92904d05707c9eb155c7924"
+      },
+      "ch_PP-OCRv5_rec.onnx": {
+        "bytes": 16517247,
+        "sha256_hex": "bf66820f48fa99f779974c4df78e5274a9d8e0458c4137e8c5357e40e2c3faf2"
+      },
+      "ch_PP-OCRv5_dict.txt": {
+        "bytes": 74012,
+        "sha256_hex": "d1979e9f794c464c0d2e0b70a7fe14dd978e9dc644c0e71f14158cdf8342af1b"
+      }
+    },
+    "served_from": {
+      "site_path": "models/pp-ocrv5/",
+      "note": "Added 2026-11-10 before any evaluation had scored a page (the first dev attempts never loaded the model). Same files and hashes. The page loads them from its own site: Hugging Face's WAF answers headless Chromium on Actions with a CAPTCHA (HTTP 405, x-amzn-waf-action: captcha; runs 42776613837, 42777096938), so a direct Hugging Face fetch could not be the tested path. scripts/fetch_table_models.py copies them from base_url at build time on Actions, checking size and SHA-256; the page checks SHA-256 again."
+    }
+  },
+  "evaluation": {
+    "protocol": "docs/46-table-check.md#评测协议",
+    "dev": {
+      "description": "Apple and Microsoft statement pages from the XBRL grounding dev run 42712316145 (artifact xbrl-grounding-dev-pipeline-check), converted in the page to greyscale WEBP quality 0.68 like the published pages. Also synthetic tables. Development may look at these as often as needed.",
+      "run": 42712316145
+    },
+    "test": {
+      "description": "The 21 published statement pages of held-out run 42712945764 (creditlens/grounding/*.webp, hashes in index.json), with each issuer's published fact boxes. Scored once, on a commit frozen before the run; no engine run on these pages before that.",
+      "run": 42712945764
+    },
+    "variants": {
+      "clean": "the page image as published",
+      "jpeg_q60": "SYNTHETIC: the clean image re-encoded by the browser canvas as JPEG quality 0.60",
+      "blur_1px": "SYNTHETIC: the clean image drawn through canvas filter blur(1px)"
+    },
+    "bar": {
+      "applies_to": "test split, clean variant, first run",
+      "cell_value_accuracy_min": 0.9,
+      "wrong_value_rate_max": 0.01,
+      "footing_checks_performed_min": 40,
+      "footing_false_alarm_rate_max": 0.05,
+      "latency_p95_seconds_per_page_max": 30.0,
+      "init_seconds_max": 15.0,
+      "download_bytes_max": 40000000,
+      "decision": "Ship (page linked, controls shown) only if every bar holds. Otherwise the page stays out of the navigation and the export, and the result is reported. JPEG and blur variants are reported, not gating."
+    }
+  }
+}

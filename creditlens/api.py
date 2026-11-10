@@ -207,6 +207,14 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
     def grounding_script():
         return FileResponse(ROOT / "creditlens/grounding.js", media_type="text/javascript")
 
+    @application.get("/table-check", include_in_schema=False)
+    def table_check_page():
+        return FileResponse(ROOT / "creditlens/table-check.html")
+
+    @application.get("/assets/table-check.js", include_in_schema=False)
+    def table_check_script():
+        return FileResponse(ROOT / "creditlens/table-check.js", media_type="text/javascript")
+
     @application.get("/assets/grounding/{name}", include_in_schema=False)
     def grounding_asset(name: str):
         import re

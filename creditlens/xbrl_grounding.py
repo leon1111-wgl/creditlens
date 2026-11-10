@@ -30,13 +30,17 @@ import unicodedata
 from .table_lookup import parse_lookup_amount, TableLookupError, HEADER_CENTER_TOLERANCE, MAX_YEAR_COLUMNS
 from .visual import MIN_CONFIDENCE
 
-SCORE_RULE_VERSION = "xbrl-grounding-score-1"
+SCORE_RULE_1 = "xbrl-grounding-score-1"   # v0.34.0, held-out run 42712945764
+SCORE_RULE_2 = "xbrl-grounding-score-2"   # v0.35.0: heading scope limited by indentation
+SCORE_RULES = (SCORE_RULE_1, SCORE_RULE_2)
+SCORE_RULE_VERSION = SCORE_RULE_2
 MISALIGNMENT_POINTS = 8.0      # visual.compare_region
 SIGN_GAP_POINTS = 8.0          # word_evidence.SIGN_GAP_POINTS
 ROW_CENTER_TOLERANCE = 4.0     # table_lookup.ROW_CENTER_TOLERANCE
 MIN_VERTICAL_OVERLAP = 0.50    # table_lookup.MIN_VERTICAL_OVERLAP
 PENALTIES = (0, 10)
 HEADING_ROWS = 4               # amount rows a heading may sit above (Basic, Diluted, ...)
+INDENT_POINTS = 3.0            # score-2: rows below the first must be indented this much under a heading
 
 # Formats whose printed text has a defined numeric value here. Others are kept
 # in the key but not scored for value (counted as unsupported_format).
@@ -48,6 +52,7 @@ _UNIT_SCALE = {"thousands": 3, "millions": 6, "billions": 9}
 _YEAR = re.compile(r"^(?:(?:fiscal\s+)?(?:years?|periods?)\s+ended\s+)?(?:as\s+of\s+)?"
                    r"(?:[a-z]{3,9}\.?\s+[0-9]{1,2},?\s+|fiscal\s+(?:year\s+)?)?((?:19|20)[0-9]{2})$")
 _SHARE_ROW = re.compile(r"per[\s-]*share|\bshares?\b|par\s+value")
+_PER_SHARE_SUBLABEL = re.compile(r"^(?:basic|diluted|basic\s+and\s+diluted)\b")
 _FRAGMENT = re.compile(r"[0-9()+\-−.,%]")
 
 OUTCOME_LABELS = {
@@ -213,7 +218,10 @@ def unit_header(text: str) -> dict | None:
 class PageReading:
     """Everything the extraction knows about one page, read from OCR spans only."""
 
-    def __init__(self, spans: list[dict]):
+    def __init__(self, spans: list[dict], rule: str = SCORE_RULE_VERSION):
+        if rule not in SCORE_RULES:
+            raise GroundingError("unknown score rule: " + str(rule))
+        self.rule = rule
         self.spans = spans
         self.amounts = {i: _amount(s["text"]) for i, s in enumerate(spans)}
         self.units = [(i, unit_header(s["text"])) for i, s in enumerate(spans)]
@@ -253,12 +261,23 @@ class PageReading:
                  and s["bbox"]["x1"] <= left_edge and _same_row(s["bbox"], box)]
         return " ".join(s["text"] for s in sorted(words, key=lambda s: s["bbox"]["x0"]))
 
+    def _label_x0(self, row):
+        """Left edge of a row's label: its leftmost span that is not an amount (None if it has none)."""
+        xs = [self.spans[j]["bbox"]["x0"] for j in row if self.amounts[j] is None]
+        return min(xs) if xs else None
+
     def _heading(self, index):
         """Nearest label-only line above (e.g. 'Earnings per share:' above 'Basic' and 'Diluted').
 
         Rows that carry amounts are skipped (at most HEADING_ROWS of them), so 'Diluted' finds the
         heading above 'Basic'. A year-header row ends the search. 'Above' compares centres, since
         OCR boxes of adjacent lines can overlap by a fraction of a point.
+
+        score-2: the first amount row under a label-only line keeps it (a real heading, or that row's
+        own wrapped label). A row further down keeps it only if it and every amount row between are
+        indented at least INDENT_POINTS under the line; a row back at the line's indent is a new item
+        (e.g. 'Additional paid-in capital' under the wrapped 'Common stock, $0.001 par value; ... shares'
+        label). Rows with no label of their own do not end the scope.
         """
         box = self.spans[index]["bbox"]
         above = [j for j, s in enumerate(self.spans) if _cy(s["bbox"]) < box["top"]]
@@ -268,14 +287,22 @@ class PageReading:
                 rows[-1].append(j)
             else:
                 rows.append([j])
-        skipped = 0
+        skipped: list[list[int]] = []
         for row in rows:
             if any(header_year(self.spans[j]["text"]) is not None for j in row):
                 return ""
             if all(self.amounts[j] is None for j in row):
+                if self.rule == SCORE_RULE_2 and skipped:
+                    heading_x0 = min(self.spans[j]["bbox"]["x0"] for j in row)
+                    own = [j for j, s in enumerate(self.spans) if j != index and s["bbox"]["x1"] <= box["x0"]
+                           and _same_row(s["bbox"], box)]
+                    for member in skipped + [own]:
+                        x0 = self._label_x0(member)
+                        if x0 is not None and x0 < heading_x0 + INDENT_POINTS:
+                            return ""
                 return " ".join(self.spans[j]["text"] for j in sorted(row, key=lambda k: self.spans[k]["bbox"]["x0"]))
-            skipped += 1
-            if skipped > HEADING_ROWS:
+            skipped.append(row)
+            if len(skipped) > HEADING_ROWS:
                 return ""
         return ""
 
@@ -292,7 +319,8 @@ class PageReading:
         unit = self._above(self.units, box["top"])
         if unit is None:
             result["reason"] = "unit_missing"
-        elif _SHARE_ROW.search(_norm((result["row_text"] or "") + " " + (result["heading"] or ""))):
+        elif _SHARE_ROW.search(_norm((result["row_text"] or "") + " " + (result["heading"] or ""))) or (
+                self.rule == SCORE_RULE_2 and unit[1]["qualified"] and _PER_SHARE_SUBLABEL.match(_norm(result["row_text"] or ""))):
             result["unit_span"] = unit[0]
             result["reason"] = "share_or_per_share_row"
         else:

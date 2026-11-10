@@ -1,0 +1,3225 @@
+{
+ "mode": "eval",
+ "commit": "83e8df5d72b14224a1d57636dc22cb42eb69c5b1",
+ "run_id": "42779616147",
+ "engine": "table-check-1",
+ "checks": [],
+ "init": {
+  "ok": true,
+  "initSeconds": 0.4295,
+  "downloadedBytes": 35654502,
+  "error": null
+ },
+ "split": "test",
+ "pages": [
+  {
+   "id": "pltr-p85",
+   "variant": "clean",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.01690000000000873,
+    "det": 0.9033999999999942,
+    "rec": 9.022199999999996,
+    "structure": 0.0095,
+    "total": 9.954400000000009,
+    "lines": 113,
+    "boxes": 114
+   },
+   "counts": {
+    "facts": 56,
+    "correct": 56,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 14,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 14
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p86",
+   "variant": "clean",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.009900000000008732,
+    "det": 0.587,
+    "rec": 7.568399999999994,
+    "structure": 0.0011000000000058207,
+    "total": 8.166600000000006,
+    "lines": 104,
+    "boxes": 104
+   },
+   "counts": {
+    "facts": 57,
+    "correct": 57,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 3,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 3
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p87",
+   "variant": "clean",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.00630000000000291,
+    "det": 0.39010000000000583,
+    "rec": 4.086099999999991,
+    "structure": 0.0023999999999941794,
+    "total": 4.485,
+    "lines": 42,
+    "boxes": 42
+   },
+   "counts": {
+    "facts": 18,
+    "correct": 16,
+    "wrong": 0,
+    "missed": 2,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p89",
+   "variant": "clean",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.01109999999999127,
+    "det": 0.7468000000000029,
+    "rec": 10.268800000000002,
+    "structure": 0.00860000000000582,
+    "total": 11.035399999999994,
+    "lines": 136,
+    "boxes": 137
+   },
+   "counts": {
+    "facts": 84,
+    "correct": 79,
+    "wrong": 0,
+    "missed": 5,
+    "dash_facts": 6,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 7,
+    "does_not_foot": 0,
+    "not_checked": 5,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "asts-p79",
+   "variant": "clean",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.013,
+    "det": 0.8539000000000088,
+    "rec": 10.300299999999988,
+    "structure": 0.004899999999994179,
+    "total": 11.172300000000003,
+    "lines": 131,
+    "boxes": 131
+   },
+   "counts": {
+    "facts": 68,
+    "correct": 65,
+    "wrong": 0,
+    "missed": 3,
+    "dash_facts": 4,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 9,
+    "does_not_foot": 0,
+    "not_checked": 3,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "asts-p80",
+   "variant": "clean",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.0135,
+    "det": 0.8782999999999883,
+    "rec": 8.971300000000017,
+    "structure": 0.0015999999999767168,
+    "total": 9.864699999999983,
+    "lines": 116,
+    "boxes": 116
+   },
+   "counts": {
+    "facts": 75,
+    "correct": 64,
+    "wrong": 0,
+    "missed": 11,
+    "dash_facts": 9,
+    "dash_correct": 2
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 8,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 8
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "asts-p81",
+   "variant": "clean",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.0065,
+    "det": 0.4101999999999825,
+    "rec": 4.226100000000006,
+    "structure": 0.0008999999999941792,
+    "total": 4.643799999999988,
+    "lines": 43,
+    "boxes": 44
+   },
+   "counts": {
+    "facts": 18,
+    "correct": 18,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 3,
+    "not_checked": 3,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total other comprehensive income (loss)",
+      "formula": "2,049",
+      "read": "2,049",
+      "computed": "2,049",
+      "cause": "reading"
+     },
+     {
+      "kind": "total",
+      "row": "Total other comprehensive income (loss)",
+      "formula": "(586)",
+      "read": "(586)",
+      "computed": "(586)",
+      "cause": "reading"
+     },
+     {
+      "kind": "total",
+      "row": "Total other comprehensive income (loss)",
+      "formula": "(6)",
+      "read": "(6)",
+      "computed": "(6)",
+      "cause": "reading"
+     }
+    ]
+   }
+  },
+  {
+   "id": "asts-p83",
+   "variant": "clean",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.01389999999999418,
+    "det": 0.9243000000000174,
+    "rec": 16.773,
+    "structure": 0.003099999999976717,
+    "total": 17.714299999999987,
+    "lines": 236,
+    "boxes": 237
+   },
+   "counts": {
+    "facts": 153,
+    "correct": 123,
+    "wrong": 26,
+    "missed": 4,
+    "dash_facts": 39,
+    "dash_correct": 31
+   },
+   "wrongs": [
+    {
+     "expected": "51,111",
+     "negative": false,
+     "read": [
+      "51,111",
+      "2,728"
+     ]
+    },
+    {
+     "expected": "63,340",
+     "negative": false,
+     "read": [
+      "63,340",
+      "3,734"
+     ]
+    },
+    {
+     "expected": "54,469",
+     "negative": false,
+     "read": [
+      "54,469",
+      "1,155"
+     ]
+    },
+    {
+     "expected": "5,483",
+     "negative": false,
+     "read": [
+      "5,483",
+      "2,221"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "-",
+      "110"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "(8.986)"
+     ]
+    },
+    {
+     "expected": "68,154",
+     "negative": false,
+     "read": [
+      "68,154",
+      "47,490"
+     ]
+    },
+    {
+     "expected": "8,986",
+     "negative": true,
+     "read": [
+      "(8.986)"
+     ]
+    },
+    {
+     "expected": "32,039",
+     "negative": false,
+     "read": [
+      "32,039",
+      "2,959"
+     ]
+    },
+    {
+     "expected": "1,361",
+     "negative": false,
+     "read": [
+      "1,361",
+      "(564)"
+     ]
+    },
+    {
+     "expected": "564",
+     "negative": true,
+     "read": [
+      "(564)",
+      "1,205"
+     ]
+    },
+    {
+     "expected": "36,326",
+     "negative": true,
+     "read": [
+      "(36,326)",
+      "(27,622)"
+     ]
+    },
+    {
+     "expected": "380",
+     "negative": false,
+     "read": [
+      "380",
+      "(13,334)"
+     ]
+    },
+    {
+     "expected": "10,945",
+     "negative": true,
+     "read": [
+      "(10,945)",
+      "32,251"
+     ]
+    },
+    {
+     "expected": "1,062",
+     "negative": true,
+     "read": [
+      "(1,062)",
+      "(6,257)"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "-",
+      "(149)"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "-",
+      "1,765"
+     ]
+    },
+    {
+     "expected": "420,000",
+     "negative": true,
+     "read": [
+      "(420,000)",
+      "(56,397)"
+     ]
+    },
+    {
+     "expected": "145,000",
+     "negative": false,
+     "read": [
+      "145,000",
+      "(48,752)"
+     ]
+    },
+    {
+     "expected": "12,151",
+     "negative": true,
+     "read": [
+      "(12,151)",
+      "153,618"
+     ]
+    },
+    {
+     "expected": "11,808",
+     "negative": false,
+     "read": [
+      "11,808",
+      "(23,018)"
+     ]
+    },
+    {
+     "expected": "225",
+     "negative": false,
+     "read": [
+      "225",
+      "(865)"
+     ]
+    },
+    {
+     "expected": "11,000",
+     "negative": true,
+     "read": [
+      "(11,000)",
+      "1,010,887"
+     ]
+    },
+    {
+     "expected": "1,010,887",
+     "negative": false,
+     "read": [
+      "1,010,887",
+      "(1,003,522)"
+     ]
+    },
+    {
+     "expected": "479,437",
+     "negative": false,
+     "read": [
+      "479,437",
+      "88,097"
+     ]
+    },
+    {
+     "expected": "151,159",
+     "negative": true,
+     "read": [
+      "(151,159)",
+      "239,256"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 9,
+    "does_not_foot": 0,
+    "not_checked": 3,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "stba-p57",
+   "variant": "clean",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.010799999999988359,
+    "det": 0.7257000000000117,
+    "rec": 8.518600000000006,
+    "structure": 0.0015,
+    "total": 9.256600000000006,
+    "lines": 120,
+    "boxes": 120
+   },
+   "counts": {
+    "facts": 62,
+    "correct": 61,
+    "wrong": 0,
+    "missed": 1,
+    "dash_facts": 1,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 8,
+    "does_not_foot": 0,
+    "not_checked": 2,
+    "by_kind": {
+     "total": 10
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "stba-p58",
+   "variant": "clean",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.01089999999999418,
+    "det": 0.7302999999999884,
+    "rec": 10.229899999999994,
+    "structure": 0.0021000000000058207,
+    "total": 10.973299999999988,
+    "lines": 164,
+    "boxes": 166
+   },
+   "counts": {
+    "facts": 99,
+    "correct": 98,
+    "wrong": 0,
+    "missed": 1,
+    "dash_facts": 1,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 12,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "stba-p59",
+   "variant": "clean",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.0085,
+    "det": 0.5247999999999884,
+    "rec": 7.362800000000018,
+    "structure": 0.0006999999999825377,
+    "total": 7.896799999999988,
+    "lines": 87,
+    "boxes": 87
+   },
+   "counts": {
+    "facts": 48,
+    "correct": 46,
+    "wrong": 0,
+    "missed": 2,
+    "dash_facts": 2,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "stba-p61",
+   "variant": "clean",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.014,
+    "det": 0.8730999999999767,
+    "rec": 12.693400000000024,
+    "structure": 0.0021999999999825375,
+    "total": 13.582699999999983,
+    "lines": 182,
+    "boxes": 182
+   },
+   "counts": {
+    "facts": 120,
+    "correct": 116,
+    "wrong": 0,
+    "missed": 4,
+    "dash_facts": 4,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 0,
+    "not_checked": 4,
+    "by_kind": {
+     "total": 9
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "arcc-p119",
+   "variant": "clean",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.01329999999998836,
+    "det": 0.9185,
+    "rec": 8.469100000000006,
+    "structure": 0.0013999999999941793,
+    "total": 9.402299999999988,
+    "lines": 113,
+    "boxes": 115
+   },
+   "counts": {
+    "facts": 56,
+    "correct": 56,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 1,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 10,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 10
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "arcc-p120",
+   "variant": "clean",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.013799999999988358,
+    "det": 0.9733999999999942,
+    "rec": 15.701200000000012,
+    "structure": 0.005299999999988358,
+    "total": 16.69379999999999,
+    "lines": 224,
+    "boxes": 227
+   },
+   "counts": {
+    "facts": 150,
+    "correct": 132,
+    "wrong": 6,
+    "missed": 12,
+    "dash_facts": 6,
+    "dash_correct": 2
+   },
+   "wrongs": [
+    {
+     "expected": "195",
+     "negative": false,
+     "read": [
+      "195",
+      "53"
+     ]
+    },
+    {
+     "expected": "18",
+     "negative": false,
+     "read": [
+      "$1fr$"
+     ]
+    },
+    {
+     "expected": "9",
+     "negative": false,
+     "read": [
+      "$1fr$"
+     ]
+    },
+    {
+     "expected": "323",
+     "negative": false,
+     "read": [
+      "323",
+      "328"
+     ]
+    },
+    {
+     "expected": "443",
+     "negative": false,
+     "read": [
+      "443",
+      "$34"
+     ]
+    },
+    {
+     "expected": "16",
+     "negative": false,
+     "read": [
+      "$34"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 6,
+    "does_not_foot": 0,
+    "not_checked": 9,
+    "by_kind": {
+     "total": 15
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "arcc-p273",
+   "variant": "clean",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.012700000000011641,
+    "det": 0.8531000000000059,
+    "rec": 13.069699999999983,
+    "structure": 0.0023999999999941794,
+    "total": 13.937899999999994,
+    "lines": 181,
+    "boxes": 182
+   },
+   "counts": {
+    "facts": 114,
+    "correct": 106,
+    "wrong": 0,
+    "missed": 8,
+    "dash_facts": 7,
+    "dash_correct": 2
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 1,
+    "does_not_foot": 0,
+    "not_checked": 5,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "spsc-p39",
+   "variant": "clean",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.01310000000000582,
+    "det": 0.9332999999999884,
+    "rec": 9.344,
+    "structure": 0.0018000000000174623,
+    "total": 10.292200000000012,
+    "lines": 133,
+    "boxes": 133
+   },
+   "counts": {
+    "facts": 68,
+    "correct": 65,
+    "wrong": 0,
+    "missed": 3,
+    "dash_facts": 2,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 1,
+    "not_checked": 6,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total current assets",
+      "formula": "241,017 + 56,214 + (4,179) + 52,035 + 65,342 + 23,513",
+      "read": "381,907",
+      "computed": "433,942",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "spsc-p40",
+   "variant": "clean",
+   "statements": [
+    "comprehensive_income",
+    "income"
+   ],
+   "timings": {
+    "decode": 0.011600000000005821,
+    "det": 0.7445,
+    "rec": 8.429599999999978,
+    "structure": 0.0012000000000116416,
+    "total": 9.187,
+    "lines": 119,
+    "boxes": 120
+   },
+   "counts": {
+    "facts": 66,
+    "correct": 60,
+    "wrong": 0,
+    "missed": 6,
+    "dash_facts": 2,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 0,
+    "not_checked": 1,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "spsc-p42",
+   "variant": "clean",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.0135,
+    "det": 0.8273999999999941,
+    "rec": 10.157899999999994,
+    "structure": 0.0036000000000349247,
+    "total": 11.0025,
+    "lines": 148,
+    "boxes": 148
+   },
+   "counts": {
+    "facts": 93,
+    "correct": 85,
+    "wrong": 0,
+    "missed": 8,
+    "dash_facts": 5,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 0,
+    "not_checked": 7,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "ufpt-p41",
+   "variant": "clean",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.015200000000011642,
+    "det": 0.8182999999999884,
+    "rec": 8.524799999999988,
+    "structure": 0.0012999999999883584,
+    "total": 9.35970000000001,
+    "lines": 128,
+    "boxes": 128
+   },
+   "counts": {
+    "facts": 70,
+    "correct": 65,
+    "wrong": 0,
+    "missed": 5,
+    "dash_facts": 3,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 7,
+    "does_not_foot": 0,
+    "not_checked": 5,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "ufpt-p42",
+   "variant": "clean",
+   "statements": [
+    "comprehensive_income",
+    "income"
+   ],
+   "timings": {
+    "decode": 0.010800000000046566,
+    "det": 0.7545,
+    "rec": 7.5195,
+    "structure": 0.0008999999999650754,
+    "total": 8.285700000000011,
+    "lines": 112,
+    "boxes": 113
+   },
+   "counts": {
+    "facts": 63,
+    "correct": 56,
+    "wrong": 0,
+    "missed": 7,
+    "dash_facts": 1,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "ufpt-p44",
+   "variant": "clean",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.013900000000023283,
+    "det": 0.8571999999999534,
+    "rec": 10.792800000000046,
+    "structure": 0.002,
+    "total": 11.665900000000024,
+    "lines": 161,
+    "boxes": 161
+   },
+   "counts": {
+    "facts": 111,
+    "correct": 100,
+    "wrong": 0,
+    "missed": 11,
+    "dash_facts": 10,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 3,
+    "does_not_foot": 1,
+    "not_checked": 5,
+    "by_kind": {
+     "total": 9
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Net cash provided by operating activities",
+      "formula": "1,217 + (4,686) + (545) + (3,404) + 629 + (1,142) + 85 + (1,948) + (6,541)",
+      "read": "66,593",
+      "computed": "(16,335)",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "pltr-p85",
+   "variant": "jpeg_q60",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.0075,
+    "det": 0.7232999999999884,
+    "rec": 8.241200000000012,
+    "structure": 0.0013999999999650754,
+    "total": 8.973399999999964,
+    "lines": 111,
+    "boxes": 111
+   },
+   "counts": {
+    "facts": 56,
+    "correct": 54,
+    "wrong": 1,
+    "missed": 1,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [
+    {
+     "expected": "1,423,796",
+     "negative": false,
+     "read": [
+      "1,423,796$"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 6,
+    "does_not_foot": 0,
+    "not_checked": 8,
+    "by_kind": {
+     "total": 14
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p86",
+   "variant": "jpeg_q60",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.0058999999999650755,
+    "det": 0.6182000000000116,
+    "rec": 7.5660999999999765,
+    "structure": 0.001,
+    "total": 8.191199999999954,
+    "lines": 103,
+    "boxes": 103
+   },
+   "counts": {
+    "facts": 57,
+    "correct": 57,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 3,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 3
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p87",
+   "variant": "jpeg_q60",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.0038999999999650755,
+    "det": 0.4035,
+    "rec": 3.980100000000035,
+    "structure": 0.002599999999976717,
+    "total": 4.390099999999976,
+    "lines": 42,
+    "boxes": 42
+   },
+   "counts": {
+    "facts": 18,
+    "correct": 16,
+    "wrong": 1,
+    "missed": 1,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [
+    {
+     "expected": "1,634,644",
+     "negative": false,
+     "read": [
+      "1,634,644$"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p89",
+   "variant": "jpeg_q60",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.007799999999988359,
+    "det": 0.746100000000035,
+    "rec": 10.193799999999989,
+    "structure": 0.0032999999999883583,
+    "total": 10.951099999999977,
+    "lines": 135,
+    "boxes": 138
+   },
+   "counts": {
+    "facts": 84,
+    "correct": 77,
+    "wrong": 1,
+    "missed": 6,
+    "dash_facts": 6,
+    "dash_correct": 0
+   },
+   "wrongs": [
+    {
+     "expected": "84,207",
+     "negative": false,
+     "read": [
+      "84,207$"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 9,
+    "does_not_foot": 0,
+    "not_checked": 3,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "asts-p79",
+   "variant": "jpeg_q60",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.009,
+    "det": 0.8585999999999767,
+    "rec": 10.471300000000017,
+    "structure": 0.0036999999999534337,
+    "total": 11.342599999999948,
+    "lines": 131,
+    "boxes": 131
+   },
+   "counts": {
+    "facts": 68,
+    "correct": 65,
+    "wrong": 0,
+    "missed": 3,
+    "dash_facts": 4,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 8,
+    "does_not_foot": 0,
+    "not_checked": 2,
+    "by_kind": {
+     "total": 10
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "asts-p80",
+   "variant": "jpeg_q60",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.008599999999976717,
+    "det": 0.8530999999999768,
+    "rec": 9.151900000000023,
+    "structure": 0.0015,
+    "total": 10.015099999999977,
+    "lines": 116,
+    "boxes": 116
+   },
+   "counts": {
+    "facts": 75,
+    "correct": 64,
+    "wrong": 0,
+    "missed": 11,
+    "dash_facts": 9,
+    "dash_correct": 2
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 8,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 8
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "asts-p81",
+   "variant": "jpeg_q60",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.004,
+    "det": 0.4115,
+    "rec": 4.42320000000007,
+    "structure": 0.0005999999999767169,
+    "total": 4.839300000000047,
+    "lines": 42,
+    "boxes": 42
+   },
+   "counts": {
+    "facts": 18,
+    "correct": 17,
+    "wrong": 0,
+    "missed": 1,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 2,
+    "not_checked": 4,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total other comprehensive income (loss)",
+      "formula": "(586)",
+      "read": "(586)",
+      "computed": "(586)",
+      "cause": "reading"
+     },
+     {
+      "kind": "total",
+      "row": "Total other comprehensive income (loss)",
+      "formula": "(6)",
+      "read": "(6)",
+      "computed": "(6)",
+      "cause": "reading"
+     }
+    ]
+   }
+  },
+  {
+   "id": "asts-p83",
+   "variant": "jpeg_q60",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.009,
+    "det": 0.941,
+    "rec": 17.55620000000007,
+    "structure": 0.0029000000000232833,
+    "total": 18.509100000000092,
+    "lines": 240,
+    "boxes": 241
+   },
+   "counts": {
+    "facts": 153,
+    "correct": 117,
+    "wrong": 34,
+    "missed": 2,
+    "dash_facts": 39,
+    "dash_correct": 34
+   },
+   "wrongs": [
+    {
+     "expected": "222,677",
+     "negative": true,
+     "read": [
+      "(22,677)"
+     ]
+    },
+    {
+     "expected": "51,111",
+     "negative": false,
+     "read": [
+      "51,111",
+      "2,728"
+     ]
+    },
+    {
+     "expected": "63,340",
+     "negative": false,
+     "read": [
+      "63,340",
+      "3,734"
+     ]
+    },
+    {
+     "expected": "2,728",
+     "negative": false,
+     "read": [
+      "2,728",
+      "4,033"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "-",
+      "4,605"
+     ]
+    },
+    {
+     "expected": "5,483",
+     "negative": false,
+     "read": [
+      "5,483",
+      "2,221"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "-",
+      "110"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "-",
+      "(8.986)"
+     ]
+    },
+    {
+     "expected": "8,986",
+     "negative": true,
+     "read": [
+      "(8.986)"
+     ]
+    },
+    {
+     "expected": "47,490",
+     "negative": false,
+     "read": [
+      "47,490",
+      "1,361"
+     ]
+    },
+    {
+     "expected": "32,039",
+     "negative": false,
+     "read": [
+      "32,039",
+      "2.959"
+     ]
+    },
+    {
+     "expected": "1,361",
+     "negative": false,
+     "read": [
+      "1,361",
+      "(564)"
+     ]
+    },
+    {
+     "expected": "2,959",
+     "negative": false,
+     "read": [
+      "2.959"
+     ]
+    },
+    {
+     "expected": "564",
+     "negative": true,
+     "read": [
+      "(564)",
+      "1,205"
+     ]
+    },
+    {
+     "expected": "36,326",
+     "negative": true,
+     "read": [
+      "(36,326)",
+      "(27,622)"
+     ]
+    },
+    {
+     "expected": "380",
+     "negative": false,
+     "read": [
+      "380",
+      "(13,334)"
+     ]
+    },
+    {
+     "expected": "10,945",
+     "negative": true,
+     "read": [
+      "(10,945)",
+      "32,251"
+     ]
+    },
+    {
+     "expected": "1,062",
+     "negative": true,
+     "read": [
+      "(1.062)",
+      "(6,257)"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "-",
+      "(149)"
+     ]
+    },
+    {
+     "expected": "32,251",
+     "negative": false,
+     "read": [
+      "32,251",
+      "161,516"
+     ]
+    },
+    {
+     "expected": "420,000",
+     "negative": true,
+     "read": [
+      "(420,000)",
+      "(56,397)"
+     ]
+    },
+    {
+     "expected": "118,807",
+     "negative": true,
+     "read": [
+      "(118.807)"
+     ]
+    },
+    {
+     "expected": "145,000",
+     "negative": false,
+     "read": [
+      "145,000",
+      "(48,752)"
+     ]
+    },
+    {
+     "expected": "63,500",
+     "negative": false,
+     "read": [
+      "63,500",
+      "(242)"
+     ]
+    },
+    {
+     "expected": "9,653",
+     "negative": true,
+     "read": [
+      "(9.653)"
+     ]
+    },
+    {
+     "expected": "11,808",
+     "negative": false,
+     "read": [
+      "11,808",
+      "(23,018)"
+     ]
+    },
+    {
+     "expected": "225",
+     "negative": false,
+     "read": [
+      "225",
+      "(865)"
+     ]
+    },
+    {
+     "expected": "98,578",
+     "negative": true,
+     "read": [
+      "(98,578)",
+      "74,522"
+     ]
+    },
+    {
+     "expected": "1,010,887",
+     "negative": false,
+     "read": [
+      "1,010,887",
+      "(1,003,522)"
+     ]
+    },
+    {
+     "expected": "479,437",
+     "negative": false,
+     "read": [
+      "479,437",
+      "88,097"
+     ]
+    },
+    {
+     "expected": "151,159",
+     "negative": true,
+     "read": [
+      "(151,159)",
+      "239,256"
+     ]
+    },
+    {
+     "expected": "121,156",
+     "negative": false,
+     "read": [
+      "121,156",
+      "67,540"
+     ]
+    },
+    {
+     "expected": "139,620",
+     "negative": false,
+     "read": [
+      "139,620",
+      "101,930"
+     ]
+    },
+    {
+     "expected": "101,930",
+     "negative": false,
+     "read": [
+      "101,930",
+      "23,497"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 4,
+    "does_not_foot": 2,
+    "not_checked": 6,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Net cash used in operating activities",
+      "formula": "380 + (13,334) + (1.062) + (6,257) + 41,968 + 89",
+      "read": "(126,143)",
+      "computed": "22,844.938",
+      "cause": "structure"
+     },
+     {
+      "kind": "total",
+      "row": "Net cash used in operating activities",
+      "formula": "(1,780) + 13,862 + 0 + (149) + 0 + 1,765",
+      "read": "(148,942)",
+      "computed": "13,698",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "stba-p57",
+   "variant": "jpeg_q60",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.007,
+    "det": 0.724,
+    "rec": 8.696800000000046,
+    "structure": 0.001400000000023283,
+    "total": 9.429300000000046,
+    "lines": 120,
+    "boxes": 120
+   },
+   "counts": {
+    "facts": 62,
+    "correct": 61,
+    "wrong": 0,
+    "missed": 1,
+    "dash_facts": 1,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 8,
+    "does_not_foot": 1,
+    "not_checked": 1,
+    "by_kind": {
+     "total": 10
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total Assets $",
+      "formula": "163,436 + 987,659 + 1,010 + 8,071,957 + (93,178) + 7,978,779 + 85,421 + 43,855 + 16,030 + 373,424 + 2,251 + 219,115",
+      "read": "9,870,980",
+      "computed": "17,849,759",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "stba-p58",
+   "variant": "jpeg_q60",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.007099999999976717,
+    "det": 0.7055999999999767,
+    "rec": 10.377300000000046,
+    "structure": 0.0015999999999767168,
+    "total": 11.091599999999977,
+    "lines": 164,
+    "boxes": 165
+   },
+   "counts": {
+    "facts": 99,
+    "correct": 98,
+    "wrong": 0,
+    "missed": 1,
+    "dash_facts": 1,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 12,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "stba-p59",
+   "variant": "jpeg_q60",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.005099999999976717,
+    "det": 0.5027999999999302,
+    "rec": 7.24820000000007,
+    "structure": 0.0007999999999301509,
+    "total": 7.756899999999907,
+    "lines": 87,
+    "boxes": 87
+   },
+   "counts": {
+    "facts": 48,
+    "correct": 46,
+    "wrong": 0,
+    "missed": 2,
+    "dash_facts": 2,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "stba-p61",
+   "variant": "jpeg_q60",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.0085,
+    "det": 0.8605999999999767,
+    "rec": 12.730800000000047,
+    "structure": 0.011099999999976717,
+    "total": 13.611,
+    "lines": 183,
+    "boxes": 183
+   },
+   "counts": {
+    "facts": 120,
+    "correct": 117,
+    "wrong": 0,
+    "missed": 3,
+    "dash_facts": 4,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 6,
+    "does_not_foot": 0,
+    "not_checked": 3,
+    "by_kind": {
+     "total": 9
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "arcc-p119",
+   "variant": "jpeg_q60",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.008400000000023283,
+    "det": 0.9097999999999301,
+    "rec": 8.6785,
+    "structure": 0.0015,
+    "total": 9.598199999999954,
+    "lines": 114,
+    "boxes": 115
+   },
+   "counts": {
+    "facts": 56,
+    "correct": 56,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 1,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 10,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 10
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "arcc-p120",
+   "variant": "jpeg_q60",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.008699999999953434,
+    "det": 0.9322000000000699,
+    "rec": 15.79929999999993,
+    "structure": 0.0061000000000931325,
+    "total": 16.746300000000048,
+    "lines": 225,
+    "boxes": 227
+   },
+   "counts": {
+    "facts": 150,
+    "correct": 132,
+    "wrong": 7,
+    "missed": 11,
+    "dash_facts": 6,
+    "dash_correct": 2
+   },
+   "wrongs": [
+    {
+     "expected": "143",
+     "negative": false,
+     "read": [
+      "143",
+      "83"
+     ]
+    },
+    {
+     "expected": "18",
+     "negative": false,
+     "read": [
+      "$1frac}$"
+     ]
+    },
+    {
+     "expected": "9",
+     "negative": false,
+     "read": [
+      "$1frac}$"
+     ]
+    },
+    {
+     "expected": "323",
+     "negative": false,
+     "read": [
+      "323",
+      "328"
+     ]
+    },
+    {
+     "expected": "443",
+     "negative": false,
+     "read": [
+      "443",
+      "$34"
+     ]
+    },
+    {
+     "expected": "16",
+     "negative": false,
+     "read": [
+      "$34"
+     ]
+    },
+    {
+     "expected": "6",
+     "negative": false,
+     "read": [
+      "$6$"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 7,
+    "does_not_foot": 0,
+    "not_checked": 8,
+    "by_kind": {
+     "total": 15
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "arcc-p273",
+   "variant": "jpeg_q60",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.008100000000093132,
+    "det": 0.8741999999999535,
+    "rec": 13.050900000000023,
+    "structure": 0.002,
+    "total": 13.93520000000007,
+    "lines": 179,
+    "boxes": 180
+   },
+   "counts": {
+    "facts": 114,
+    "correct": 103,
+    "wrong": 0,
+    "missed": 11,
+    "dash_facts": 7,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 1,
+    "does_not_foot": 0,
+    "not_checked": 5,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "spsc-p39",
+   "variant": "jpeg_q60",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.008899999999906868,
+    "det": 0.9154000000000233,
+    "rec": 9.29820000000007,
+    "structure": 0.0035,
+    "total": 10.226,
+    "lines": 131,
+    "boxes": 132
+   },
+   "counts": {
+    "facts": 68,
+    "correct": 64,
+    "wrong": 0,
+    "missed": 4,
+    "dash_facts": 2,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 1,
+    "not_checked": 6,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total current assets",
+      "formula": "241,017 + 56,214 + (4,179) + 52,035 + 65,342 + 23,513",
+      "read": "381,907",
+      "computed": "433,942",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "spsc-p40",
+   "variant": "jpeg_q60",
+   "statements": [
+    "comprehensive_income",
+    "income"
+   ],
+   "timings": {
+    "decode": 0.007199999999953434,
+    "det": 0.7201999999999534,
+    "rec": 8.37770000000007,
+    "structure": 0.0009000000000232831,
+    "total": 9.106,
+    "lines": 119,
+    "boxes": 119
+   },
+   "counts": {
+    "facts": 66,
+    "correct": 60,
+    "wrong": 0,
+    "missed": 6,
+    "dash_facts": 2,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 0,
+    "not_checked": 1,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "spsc-p42",
+   "variant": "jpeg_q60",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.008400000000023283,
+    "det": 0.8593000000000466,
+    "rec": 10.319599999999976,
+    "structure": 0.0015,
+    "total": 11.188800000000047,
+    "lines": 147,
+    "boxes": 147
+   },
+   "counts": {
+    "facts": 93,
+    "correct": 84,
+    "wrong": 0,
+    "missed": 9,
+    "dash_facts": 5,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 4,
+    "does_not_foot": 0,
+    "not_checked": 8,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "ufpt-p41",
+   "variant": "jpeg_q60",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.010299999999930151,
+    "det": 0.8514000000000232,
+    "rec": 9.020699999999954,
+    "structure": 0.0011999999999534338,
+    "total": 9.883699999999953,
+    "lines": 128,
+    "boxes": 128
+   },
+   "counts": {
+    "facts": 70,
+    "correct": 65,
+    "wrong": 0,
+    "missed": 5,
+    "dash_facts": 3,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 7,
+    "does_not_foot": 0,
+    "not_checked": 5,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "ufpt-p42",
+   "variant": "jpeg_q60",
+   "statements": [
+    "comprehensive_income",
+    "income"
+   ],
+   "timings": {
+    "decode": 0.007699999999953434,
+    "det": 0.7666000000000931,
+    "rec": 7.563399999999907,
+    "structure": 0.001,
+    "total": 8.338699999999953,
+    "lines": 112,
+    "boxes": 112
+   },
+   "counts": {
+    "facts": 63,
+    "correct": 56,
+    "wrong": 0,
+    "missed": 7,
+    "dash_facts": 1,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "ufpt-p44",
+   "variant": "jpeg_q60",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.009300000000046566,
+    "det": 0.8860999999999767,
+    "rec": 11.447599999999976,
+    "structure": 0.0018000000000465662,
+    "total": 12.344800000000047,
+    "lines": 162,
+    "boxes": 162
+   },
+   "counts": {
+    "facts": 111,
+    "correct": 97,
+    "wrong": 3,
+    "missed": 11,
+    "dash_facts": 10,
+    "dash_correct": 1
+   },
+   "wrongs": [
+    {
+     "expected": "4,686",
+     "negative": true,
+     "read": [
+      "(4.,686)"
+     ]
+    },
+    {
+     "expected": "28,000",
+     "negative": true,
+     "read": [
+      "(28.000)"
+     ]
+    },
+    {
+     "expected": "4,000",
+     "negative": true,
+     "read": [
+      "(4.000)"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 2,
+    "does_not_foot": 0,
+    "not_checked": 4,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p85",
+   "variant": "blur_1px",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.010099999999976716,
+    "det": 0.7442000000000698,
+    "rec": 8.381099999999977,
+    "structure": 0.0012999999999301509,
+    "total": 9.136699999999953,
+    "lines": 112,
+    "boxes": 112
+   },
+   "counts": {
+    "facts": 56,
+    "correct": 55,
+    "wrong": 1,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [
+    {
+     "expected": "1,423,796",
+     "negative": false,
+     "read": [
+      "1,423,796S"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 12,
+    "does_not_foot": 0,
+    "not_checked": 2,
+    "by_kind": {
+     "total": 14
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p86",
+   "variant": "blur_1px",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.009,
+    "det": 0.613,
+    "rec": 7.728300000000046,
+    "structure": 0.001,
+    "total": 8.351300000000046,
+    "lines": 104,
+    "boxes": 104
+   },
+   "counts": {
+    "facts": 57,
+    "correct": 57,
+    "wrong": 0,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 3,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 3
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p87",
+   "variant": "blur_1px",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.005900000000023283,
+    "det": 0.4135999999999767,
+    "rec": 4.132,
+    "structure": 0.0027000000000698492,
+    "total": 4.55420000000007,
+    "lines": 42,
+    "boxes": 42
+   },
+   "counts": {
+    "facts": 18,
+    "correct": 16,
+    "wrong": 2,
+    "missed": 0,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [
+    {
+     "expected": "1,634,644",
+     "negative": false,
+     "read": [
+      "1,634,644S"
+     ]
+    },
+    {
+     "expected": "467,918",
+     "negative": false,
+     "read": [
+      "467,918S"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "pltr-p89",
+   "variant": "blur_1px",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.01129999999993015,
+    "det": 0.7570999999999767,
+    "rec": 9.831600000000092,
+    "structure": 0.0035,
+    "total": 10.6035,
+    "lines": 135,
+    "boxes": 137
+   },
+   "counts": {
+    "facts": 84,
+    "correct": 76,
+    "wrong": 2,
+    "missed": 6,
+    "dash_facts": 6,
+    "dash_correct": 1
+   },
+   "wrongs": [
+    {
+     "expected": "7,477",
+     "negative": false,
+     "read": [
+      "7.477"
+     ]
+    },
+    {
+     "expected": "1,777,228",
+     "negative": true,
+     "read": [
+      "(1,777,28)"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 0,
+    "not_checked": 6,
+    "by_kind": {
+     "total": 11
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "asts-p79",
+   "variant": "blur_1px",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.024799999999930152,
+    "det": 0.8519000000000233,
+    "rec": 10.175099999999977,
+    "structure": 0.0015,
+    "total": 11.05329999999993,
+    "lines": 131,
+    "boxes": 131
+   },
+   "counts": {
+    "facts": 68,
+    "correct": 62,
+    "wrong": 2,
+    "missed": 4,
+    "dash_facts": 4,
+    "dash_correct": 0
+   },
+   "wrongs": [
+    {
+     "expected": "22,363",
+     "negative": false,
+     "read": [
+      "22.363"
+     ]
+    },
+    {
+     "expected": "2,919",
+     "negative": false,
+     "read": [
+      "2.919"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 7,
+    "does_not_foot": 1,
+    "not_checked": 4,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total current assets",
+      "formula": "1,400 + 1,062 + 7,887 + 22.363",
+      "read": "600,246",
+      "computed": "10,371.363",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "asts-p80",
+   "variant": "blur_1px",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.012199999999953434,
+    "det": 0.8503000000000466,
+    "rec": 8.831899999999907,
+    "structure": 0.001400000000023283,
+    "total": 9.695799999999931,
+    "lines": 116,
+    "boxes": 116
+   },
+   "counts": {
+    "facts": 75,
+    "correct": 62,
+    "wrong": 0,
+    "missed": 13,
+    "dash_facts": 9,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 8,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {
+     "total": 8
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "asts-p81",
+   "variant": "blur_1px",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.005900000000023283,
+    "det": 0.4225,
+    "rec": 4.339099999999977,
+    "structure": 0.0008000000000465661,
+    "total": 4.768300000000046,
+    "lines": 42,
+    "boxes": 43
+   },
+   "counts": {
+    "facts": 18,
+    "correct": 17,
+    "wrong": 0,
+    "missed": 1,
+    "dash_facts": 0,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 2,
+    "not_checked": 4,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total other comprehensive income (loss)",
+      "formula": "(586)",
+      "read": "(586)",
+      "computed": "(586)",
+      "cause": "reading"
+     },
+     {
+      "kind": "total",
+      "row": "Total other comprehensive income (loss)",
+      "formula": "(6)",
+      "read": "(6)",
+      "computed": "(6)",
+      "cause": "reading"
+     }
+    ]
+   }
+  },
+  {
+   "id": "asts-p83",
+   "variant": "blur_1px",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.013599999999976718,
+    "det": 0.9279000000000233,
+    "rec": 16.695099999999975,
+    "structure": 0.0026000000000931324,
+    "total": 17.639300000000045,
+    "lines": 238,
+    "boxes": 238
+   },
+   "counts": {
+    "facts": 153,
+    "correct": 106,
+    "wrong": 12,
+    "missed": 35,
+    "dash_facts": 39,
+    "dash_correct": 0
+   },
+   "wrongs": [
+    {
+     "expected": "63,340",
+     "negative": false,
+     "read": [
+      "63,340",
+      "3,734"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "5,483"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "4,605"
+     ]
+    },
+    {
+     "expected": "9,184",
+     "negative": true,
+     "read": [
+      "(9.184)"
+     ]
+    },
+    {
+     "expected": "420,000",
+     "negative": true,
+     "read": [
+      "(420,000)",
+      "(56.397)"
+     ]
+    },
+    {
+     "expected": "56,397",
+     "negative": true,
+     "read": [
+      "(56.397)"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "8"
+     ]
+    },
+    {
+     "expected": "11,588",
+     "negative": true,
+     "read": [
+      "(11,.588)"
+     ]
+    },
+    {
+     "expected": "1,003,522",
+     "negative": true,
+     "read": [
+      "(1.003,522)"
+     ]
+    },
+    {
+     "expected": "567,534",
+     "negative": false,
+     "read": [
+      "567.534"
+     ]
+    },
+    {
+     "expected": "567,534",
+     "negative": false,
+     "read": [
+      "567.534"
+     ]
+    },
+    {
+     "expected": "-",
+     "negative": false,
+     "read": [
+      "0"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 1,
+    "does_not_foot": 1,
+    "not_checked": 10,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Net cash used in operating activities",
+      "formula": "(36,326) + (27,622) + (10,945) + 32,251 + 161,516 + (9.184)",
+      "read": "(71,517)",
+      "computed": "118,864.816",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "stba-p57",
+   "variant": "blur_1px",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.010399999999906867,
+    "det": 0.7356000000000932,
+    "rec": 8.548099999999977,
+    "structure": 0.001400000000023283,
+    "total": 9.2955,
+    "lines": 121,
+    "boxes": 121
+   },
+   "counts": {
+    "facts": 62,
+    "correct": 61,
+    "wrong": 0,
+    "missed": 1,
+    "dash_facts": 1,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 8,
+    "does_not_foot": 1,
+    "not_checked": 1,
+    "by_kind": {
+     "total": 10
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total Assets",
+      "formula": "163,436 + 987,659 + 1,010 + 8,071,957 + (93,178) + 7,978,779 + 85,421 + 43,855 + 16,030 + 373,424 + 2,251 + 219,115",
+      "read": "9,870,980",
+      "computed": "17,849,759",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "stba-p58",
+   "variant": "blur_1px",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.01079999999993015,
+    "det": 0.7259000000000233,
+    "rec": 10.480900000000023,
+    "structure": 0.0016999999999534339,
+    "total": 11.219399999999906,
+    "lines": 162,
+    "boxes": 162
+   },
+   "counts": {
+    "facts": 99,
+    "correct": 98,
+    "wrong": 0,
+    "missed": 1,
+    "dash_facts": 1,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 11,
+    "does_not_foot": 0,
+    "not_checked": 1,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "stba-p59",
+   "variant": "blur_1px",
+   "statements": [
+    "comprehensive_income"
+   ],
+   "timings": {
+    "decode": 0.007399999999906867,
+    "det": 0.5194000000000233,
+    "rec": 7.272099999999977,
+    "structure": 0.0008000000000465661,
+    "total": 7.7996999999999534,
+    "lines": 88,
+    "boxes": 88
+   },
+   "counts": {
+    "facts": 48,
+    "correct": 46,
+    "wrong": 0,
+    "missed": 2,
+    "dash_facts": 2,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "stba-p61",
+   "variant": "blur_1px",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.013099999999976717,
+    "det": 0.8816000000000931,
+    "rec": 12.7985,
+    "structure": 0.009799999999930151,
+    "total": 13.703099999999976,
+    "lines": 184,
+    "boxes": 184
+   },
+   "counts": {
+    "facts": 120,
+    "correct": 116,
+    "wrong": 0,
+    "missed": 4,
+    "dash_facts": 4,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 0,
+    "not_checked": 4,
+    "by_kind": {
+     "total": 9
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "arcc-p119",
+   "variant": "blur_1px",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.012800000000046566,
+    "det": 0.9818000000000465,
+    "rec": 8.3065,
+    "structure": 0.0013999999999068677,
+    "total": 9.3025,
+    "lines": 111,
+    "boxes": 111
+   },
+   "counts": {
+    "facts": 56,
+    "correct": 53,
+    "wrong": 0,
+    "missed": 3,
+    "dash_facts": 1,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 6,
+    "does_not_foot": 0,
+    "not_checked": 4,
+    "by_kind": {
+     "total": 10
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "arcc-p120",
+   "variant": "blur_1px",
+   "statements": [
+    "income"
+   ],
+   "timings": {
+    "decode": 0.019699999999953435,
+    "det": 0.9698000000000465,
+    "rec": 15.384199999999954,
+    "structure": 0.0027000000000698492,
+    "total": 16.3765,
+    "lines": 228,
+    "boxes": 229
+   },
+   "counts": {
+    "facts": 150,
+    "correct": 136,
+    "wrong": 7,
+    "missed": 7,
+    "dash_facts": 6,
+    "dash_correct": 2
+   },
+   "wrongs": [
+    {
+     "expected": "143",
+     "negative": false,
+     "read": [
+      "143",
+      "83"
+     ]
+    },
+    {
+     "expected": "83",
+     "negative": false,
+     "read": [
+      "83",
+      "47"
+     ]
+    },
+    {
+     "expected": "2,535",
+     "negative": false,
+     "read": [
+      "2.535"
+     ]
+    },
+    {
+     "expected": "6",
+     "negative": false,
+     "read": [
+      "6",
+      "505"
+     ]
+    },
+    {
+     "expected": "2,990",
+     "negative": false,
+     "read": [
+      "2.990"
+     ]
+    },
+    {
+     "expected": "1,594",
+     "negative": false,
+     "read": [
+      "1.594"
+     ]
+    },
+    {
+     "expected": "1,514",
+     "negative": false,
+     "read": [
+      "1.514"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 2,
+    "not_checked": 5,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total investment income",
+      "formula": "187 + 18 + 13 + 286 + 4 + 5 + 513",
+      "read": "2.990",
+      "computed": "1,026",
+      "cause": "structure"
+     },
+     {
+      "kind": "total",
+      "row": "Total investment income",
+      "formula": "220 + 18 + 9 + 250 + 2 + 6 + 505",
+      "read": "2,614",
+      "computed": "1,010",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "arcc-p273",
+   "variant": "blur_1px",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.012,
+    "det": 0.8628999999999069,
+    "rec": 12.803600000000094,
+    "structure": 0.002099999999976717,
+    "total": 13.680599999999977,
+    "lines": 179,
+    "boxes": 179
+   },
+   "counts": {
+    "facts": 114,
+    "correct": 106,
+    "wrong": 0,
+    "missed": 8,
+    "dash_facts": 7,
+    "dash_correct": 4
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 3,
+    "does_not_foot": 0,
+    "not_checked": 3,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "spsc-p39",
+   "variant": "blur_1px",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.012800000000046566,
+    "det": 0.9125999999999768,
+    "rec": 8.832,
+    "structure": 0.001400000000023283,
+    "total": 9.758800000000047,
+    "lines": 131,
+    "boxes": 131
+   },
+   "counts": {
+    "facts": 68,
+    "correct": 64,
+    "wrong": 0,
+    "missed": 4,
+    "dash_facts": 2,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 1,
+    "not_checked": 6,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Total current assets",
+      "formula": "241,017 + 56,214 + (4,179) + 52,035 + 65,342 + 23,513",
+      "read": "381,907",
+      "computed": "433,942",
+      "cause": "structure"
+     }
+    ]
+   }
+  },
+  {
+   "id": "spsc-p40",
+   "variant": "blur_1px",
+   "statements": [
+    "comprehensive_income",
+    "income"
+   ],
+   "timings": {
+    "decode": 0.010699999999953434,
+    "det": 0.7349000000000233,
+    "rec": 8.138800000000046,
+    "structure": 0.0033999999999068677,
+    "total": 8.88779999999993,
+    "lines": 119,
+    "boxes": 119
+   },
+   "counts": {
+    "facts": 66,
+    "correct": 60,
+    "wrong": 0,
+    "missed": 6,
+    "dash_facts": 2,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 0,
+    "not_checked": 1,
+    "by_kind": {
+     "total": 6
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "spsc-p42",
+   "variant": "blur_1px",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.012599999999976717,
+    "det": 0.8482000000000699,
+    "rec": 10.41079999999993,
+    "structure": 0.0041000000000931324,
+    "total": 11.27570000000007,
+    "lines": 148,
+    "boxes": 150
+   },
+   "counts": {
+    "facts": 93,
+    "correct": 85,
+    "wrong": 0,
+    "missed": 8,
+    "dash_facts": 5,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 5,
+    "does_not_foot": 0,
+    "not_checked": 7,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "ufpt-p41",
+   "variant": "blur_1px",
+   "statements": [
+    "balance"
+   ],
+   "timings": {
+    "decode": 0.014199999999953434,
+    "det": 0.8198000000000466,
+    "rec": 8.89229999999993,
+    "structure": 0.001400000000023283,
+    "total": 9.727699999999954,
+    "lines": 129,
+    "boxes": 129
+   },
+   "counts": {
+    "facts": 70,
+    "correct": 66,
+    "wrong": 0,
+    "missed": 4,
+    "dash_facts": 3,
+    "dash_correct": 1
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 7,
+    "does_not_foot": 0,
+    "not_checked": 5,
+    "by_kind": {
+     "total": 12
+    },
+    "alarms": []
+   }
+  },
+  {
+   "id": "ufpt-p42",
+   "variant": "blur_1px",
+   "statements": [
+    "comprehensive_income",
+    "income"
+   ],
+   "timings": {
+    "decode": 0.010300000000046565,
+    "det": 0.7710999999999767,
+    "rec": 7.710900000000024,
+    "structure": 0.001,
+    "total": 8.493300000000046,
+    "lines": 111,
+    "boxes": 112
+   },
+   "counts": {
+    "facts": 63,
+    "correct": 54,
+    "wrong": 0,
+    "missed": 9,
+    "dash_facts": 1,
+    "dash_correct": 0
+   },
+   "wrongs": [],
+   "footing": {
+    "foots": 0,
+    "does_not_foot": 0,
+    "not_checked": 0,
+    "by_kind": {},
+    "alarms": []
+   }
+  },
+  {
+   "id": "ufpt-p44",
+   "variant": "blur_1px",
+   "statements": [
+    "cash_flow"
+   ],
+   "timings": {
+    "decode": 0.013,
+    "det": 0.9079000000000232,
+    "rec": 11.5515,
+    "structure": 0.01,
+    "total": 12.482400000000023,
+    "lines": 163,
+    "boxes": 166
+   },
+   "counts": {
+    "facts": 111,
+    "correct": 99,
+    "wrong": 1,
+    "missed": 11,
+    "dash_facts": 10,
+    "dash_correct": 1
+   },
+   "wrongs": [
+    {
+     "expected": "4,000",
+     "negative": true,
+     "read": [
+      "(4.000)"
+     ]
+    }
+   ],
+   "footing": {
+    "foots": 3,
+    "does_not_foot": 1,
+    "not_checked": 5,
+    "by_kind": {
+     "total": 9
+    },
+    "alarms": [
+     {
+      "kind": "total",
+      "row": "Net cash provided by operating activities",
+      "formula": "1,217 + (4,686) + (545) + (3,404) + 629 + (1,142) + 85 + (1,948) + (6,541)",
+      "read": "66,593",
+      "computed": "(16,335)",
+      "cause": "structure"
+     }
+    ]
+   }
+  }
+ ],
+ "errors": [],
+ "aggregate": {
+  "clean": {
+   "pages": 21,
+   "facts": 1649,
+   "correct": 1524,
+   "wrong": 32,
+   "missed": 93,
+   "cell_value_accuracy": 0.9241964827167981,
+   "wrong_value_rate": 0.019405700424499697,
+   "dash_facts": 103,
+   "dash_correct": 41,
+   "checks_performed": 122,
+   "foots": 117,
+   "does_not_foot": 5,
+   "not_checked": 58,
+   "false_alarm_rate": 0.040983606557377046,
+   "alarm_causes": {
+    "reading": 3,
+    "structure": 2
+   },
+   "seconds_p50": 9.954400000000009,
+   "seconds_p95": 16.69379999999999,
+   "seconds_max": 17.714299999999987
+  },
+  "jpeg_q60": {
+   "pages": 21,
+   "facts": 1649,
+   "correct": 1506,
+   "wrong": 47,
+   "missed": 96,
+   "cell_value_accuracy": 0.913280776228017,
+   "wrong_value_rate": 0.02850212249848393,
+   "dash_facts": 103,
+   "dash_correct": 44,
+   "checks_performed": 111,
+   "foots": 105,
+   "does_not_foot": 6,
+   "not_checked": 64,
+   "false_alarm_rate": 0.05405405405405406,
+   "alarm_causes": {
+    "reading": 2,
+    "structure": 4
+   },
+   "seconds_p50": 10.015099999999977,
+   "seconds_p95": 16.746300000000048,
+   "seconds_max": 18.509100000000092
+  },
+  "blur_1px": {
+   "pages": 21,
+   "facts": 1649,
+   "correct": 1495,
+   "wrong": 27,
+   "missed": 127,
+   "cell_value_accuracy": 0.9066100667070952,
+   "wrong_value_rate": 0.01637355973317162,
+   "dash_facts": 103,
+   "dash_correct": 9,
+   "checks_performed": 108,
+   "foots": 99,
+   "does_not_foot": 9,
+   "not_checked": 68,
+   "false_alarm_rate": 0.08333333333333333,
+   "alarm_causes": {
+    "structure": 7,
+    "reading": 2
+   },
+   "seconds_p50": 9.727699999999954,
+   "seconds_p95": 16.3765,
+   "seconds_max": 17.639300000000045
+  }
+ },
+ "bar": {
+  "cell_value_accuracy": true,
+  "wrong_value_rate": false,
+  "checks_performed": true,
+  "false_alarm_rate": true,
+  "latency_p95": true,
+  "init": true,
+  "download": true,
+  "all": false,
+  "applies": "test split, clean variant: the pre-registered decision"
+ },
+ "failed": []
+}

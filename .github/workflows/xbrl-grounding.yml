@@ -6,25 +6,77 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "heldout (committed rule) | dev | added (explicit CIKs, not held-out)"
+        description: "heldout (committed rule) | dev | added (explicit CIKs, not held-out) | table-eval | table-probe (截图核对)"
         default: heldout
         type: choice
-        options: [heldout, dev, added]
+        options: [heldout, dev, added, table-eval, table-probe]
       filings:
         description: "dev/added: cik:accession:primary-document, comma-separated (from the EDGAR filing index)"
         default: ""
       label:
         description: "Run label"
         default: manual
+      rule:
+        description: "heldout: issuer rule (b = v0.34.0 first run, c = v0.35.0 heading-fix set)"
+        default: c
+        type: choice
+        options: [c, b]
+      split:
+        description: "table-eval: dev (Apple/Microsoft pages of run 42712316145) | test (the 21 published held-out pages; once, on a frozen commit)"
+        default: dev
+        type: choice
+        options: [dev, test]
+      image_urls:
+        description: "table-probe: public https image URLs, space-separated (at most 12)"
+        default: ""
   push:
     branches: ["xbrl-run/**"]
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: xbrl-grounding-${{ github.ref }}
   cancel-in-progress: false
 jobs:
+  inputs:
+    runs-on: ubuntu-latest
+    outputs:
+      mode: ${{ steps.inputs.outputs.mode }}
+      filings: ${{ steps.inputs.outputs.filings }}
+      label: ${{ steps.inputs.outputs.label }}
+      rule: ${{ steps.inputs.outputs.rule }}
+      split: ${{ steps.inputs.outputs.split }}
+      urls: ${{ steps.inputs.outputs.urls }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve inputs
+        id: inputs
+        env:
+          EVENT: ${{ github.event_name }}
+          IN_MODE: ${{ inputs.mode }}
+          IN_FILINGS: ${{ inputs.filings }}
+          IN_LABEL: ${{ inputs.label }}
+          IN_RULE: ${{ inputs.rule }}
+          IN_SPLIT: ${{ inputs.split }}
+          IN_URLS: ${{ inputs.image_urls }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT" = "push" ]; then
+            get() { python3 -c "import json,sys;print(json.load(open('configs/xbrl-grounding-dispatch.json')).get(sys.argv[1], sys.argv[2]))" "$1" "$2"; }
+            MODE=$(get mode heldout); FILINGS=$(get filings ""); LABEL=$(get label manual); RULE=$(get rule c); SPLIT=$(get split dev); URLS=$(get image_urls "")
+          else
+            MODE="$IN_MODE"; FILINGS="$IN_FILINGS"; LABEL="$IN_LABEL"; RULE="$IN_RULE"; SPLIT="$IN_SPLIT"; URLS="$IN_URLS"
+          fi
+          case "$MODE" in heldout|dev|added|table-eval|table-probe) ;; *) echo "bad mode"; exit 1;; esac
+          case "$RULE" in b|c) ;; *) echo "bad rule"; exit 1;; esac
+          case "$SPLIT" in dev|test) ;; *) echo "bad split"; exit 1;; esac
+          [[ "$FILINGS" =~ ^[0-9A-Za-z:.,_\ -]*$ ]] || { echo "bad filings"; exit 1; }
+          [[ "$LABEL" =~ ^[A-Za-z0-9._-]{1,60}$ ]] || { echo "bad label"; exit 1; }
+          [[ "$URLS" =~ ^[A-Za-z0-9:/._~%?=\&+,@\ -]*$ ]] || { echo "bad image_urls"; exit 1; }
+          { echo "mode=$MODE"; echo "filings=$FILINGS"; echo "label=$LABEL"; echo "rule=$RULE"; echo "split=$SPLIT"; echo "urls=$URLS"; } >> "$GITHUB_OUTPUT"
   run:
+    needs: inputs
+    if: contains(fromJSON('["heldout","dev","added"]'), needs.inputs.outputs.mode)
     runs-on: ubuntu-latest
     timeout-minutes: 75
     steps:
@@ -41,41 +93,22 @@ jobs:
         with:
           path: ~/.cache/creditlens-ocr
           key: ocr-weights-${{ hashFiles('configs/document-ai.json') }}
-      - name: Resolve inputs
-        id: inputs
-        env:
-          EVENT: ${{ github.event_name }}
-          IN_MODE: ${{ inputs.mode }}
-          IN_FILINGS: ${{ inputs.filings }}
-          IN_LABEL: ${{ inputs.label }}
-        run: |
-          set -euo pipefail
-          if [ "$EVENT" = "push" ]; then
-            MODE=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['mode'])")
-            FILINGS=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['filings'])")
-            LABEL=$(python -c "import json;print(json.load(open('configs/xbrl-grounding-dispatch.json'))['label'])")
-          else
-            MODE="$IN_MODE"; FILINGS="$IN_FILINGS"; LABEL="$IN_LABEL"
-          fi
-          case "$MODE" in heldout|dev|added) ;; *) echo "bad mode"; exit 1;; esac
-          [[ "$FILINGS" =~ ^[0-9A-Za-z:.,_\ -]*$ ]] || { echo "bad filings"; exit 1; }
-          [[ "$LABEL" =~ ^[A-Za-z0-9._-]{1,60}$ ]] || { echo "bad label"; exit 1; }
-          { echo "mode=$MODE"; echo "filings=$FILINGS"; echo "label=$LABEL"; } >> "$GITHUB_OUTPUT"
       - name: Run benchmark
         env:
-          MODE: ${{ steps.inputs.outputs.mode }}
-          FILINGS: ${{ steps.inputs.outputs.filings }}
-          LABEL: ${{ steps.inputs.outputs.label }}
+          MODE: ${{ needs.inputs.outputs.mode }}
+          FILINGS: ${{ needs.inputs.outputs.filings }}
+          LABEL: ${{ needs.inputs.outputs.label }}
+          RULE: ${{ needs.inputs.outputs.rule }}
         run: |
           set -euo pipefail
-          python scripts/xbrl_grounding.py run --mode "$MODE" --filings "$FILINGS" --label "$LABEL" --out out 2>&1 | tee run-log.txt
+          python scripts/xbrl_grounding.py run --mode "$MODE" --rule "$RULE" --filings "$FILINGS" --label "$LABEL" --out out 2>&1 | tee run-log.txt
           cp run-log.txt out/
           python scripts/xbrl_grounding.py verify-saved out/report.json --site out/site
           cat out/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: xbrl-grounding-${{ steps.inputs.outputs.label }}
+          name: xbrl-grounding-${{ needs.inputs.outputs.label }}
           path: |
             out/report.json
             out/summary.md
@@ -83,4 +116,50 @@ jobs:
             out/site/
             out/pages/
           if-no-files-found: error
+          retention-days: 14
+  table:
+    needs: inputs
+    if: contains(fromJSON('["table-eval","table-probe"]'), needs.inputs.outputs.mode)
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.lock
+      - run: python scripts/export_static_demo.py --output site --with-table-check
+      - run: python scripts/fetch_table_models.py --into site/models/pp-ocrv5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        run: npm install --no-save --no-package-lock playwright@1.49.1 && npx playwright install --with-deps chromium
+      - name: Dev pages (Apple, Microsoft) from run 42712316145
+        if: needs.inputs.outputs.mode == 'table-eval' && needs.inputs.outputs.split == 'dev'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 42712316145 -R "$GITHUB_REPOSITORY" -n xbrl-grounding-dev-pipeline-check -D devart
+      - name: 截图核对 · real OCR in Chromium
+        env:
+          MODE: ${{ needs.inputs.outputs.mode }}
+          SPLIT: ${{ needs.inputs.outputs.split }}
+          URLS: ${{ needs.inputs.outputs.urls }}
+        run: |
+          set -o pipefail
+          if [ "$MODE" = "table-eval" ]; then
+            node scripts/table_check_actions.mjs --mode eval --split "$SPLIT" --dev-dir devart --site site --out table-out 2>&1 | tee table-out-log.txt
+          else
+            node scripts/table_check_actions.mjs --mode probe --urls "$URLS" --site site --out table-out 2>&1 | tee table-out-log.txt
+          fi
+      - if: always()
+        run: cat table-out/summary.md >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: table-${{ needs.inputs.outputs.mode }}-${{ needs.inputs.outputs.label }}-${{ github.run_id }}
+          path: |
+            table-out/
+            table-out-log.txt
           retention-days: 14
