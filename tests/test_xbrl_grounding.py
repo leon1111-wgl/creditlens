@@ -150,6 +150,41 @@ class ReadingTests(unittest.TestCase):
             r = score_fact(f, key_entry(f, CONTEXTS, UNITS), PageReading(page))
             self.assertEqual(r["reason"], "share_or_per_share_row", text)
 
+    def test_score2_heading_scope_ends_at_a_row_back_at_its_indent(self):
+        # A wrapped share-capital label above two USD equity rows at the same indent (round-2 defect).
+        page = statement_page([
+            span("Common stock, $0.001 par value; 110,000,000 shares authorized;", 20, 150, 330, 160),
+            span("40,048,410 shares issued and outstanding", 30, 162, 250, 172), span("40", 412, 162, 424, 172),
+            span("Additional paid-in capital", 20, 176, 160, 186), span("1,234", 400, 176, 426, 186),
+            span("Retained earnings", 20, 190, 120, 200), span("5,678", 400, 190, 426, 200)])
+        for text, b, rule2 in (("40", box(412, 162, 424, 172), "share_or_per_share_row"),
+                               ("1,234", box(400, 176, 426, 186), None), ("5,678", box(400, 190, 426, 200), None)):
+            f = fact(text, b, context="fy25")
+            k = key_entry(f, CONTEXTS, UNITS)
+            self.assertEqual(score_fact(f, k, PageReading(page))["reason"], "share_or_per_share_row", text)
+            r = score_fact(f, k, PageReading(page, "xbrl-grounding-score-2"))
+            self.assertEqual(r["reason"], rule2, text)
+            if rule2 is None:
+                self.assertEqual(r["outcome"], "match", text)
+
+    def test_score2_keeps_indented_and_basic_diluted_per_share_rows(self):
+        indented = statement_page([span("Earnings per share:", 6, 134, 87, 146.6), span("Basic", 22, 146.1, 50, 160.1),
+                                   span("7.49", 414, 146.1, 440, 160.1), span("Diluted", 22, 157.6, 56, 172.6),
+                                   span("7.46", 414, 158.1, 442, 172.1)])
+        flush = statement_page([span("Net income per share", 20, 134, 130, 146), span("Basic", 20, 148, 48, 160),
+                                span("7.49", 414, 148, 440, 160), span("Diluted", 20, 162, 54, 174),
+                                span("7.46", 414, 162, 442, 174)])
+        for page, cells in ((indented, (("7.49", box(414, 146.1, 440, 160.1)), ("7.46", box(414, 158.1, 442, 172.1)))),
+                            (flush, (("7.49", box(414, 148, 440, 160)), ("7.46", box(414, 162, 442, 174))))):
+            for text, b in cells:
+                f = fact(text, b, scale="0", unit="usdps")
+                r = score_fact(f, key_entry(f, CONTEXTS, UNITS), PageReading(page, "xbrl-grounding-score-2"))
+                self.assertEqual(r["reason"], "share_or_per_share_row", text)
+
+    def test_unknown_score_rule_is_refused(self):
+        with self.assertRaises(ValueError):
+            PageReading([], "xbrl-grounding-score-9")
+
     def test_opening_balance_belongs_to_the_column_it_opens(self):
         contexts = dict(CONTEXTS, open25={"period": {"instant": "2024-12-31"}, "dims": []})
         on_page = [{"context_ref": "fy25"}, {"context_ref": "fy24"}]
@@ -197,6 +232,17 @@ class SummaryAndRuleTests(unittest.TestCase):
         config = json.loads((ROOT / "configs/xbrl-grounding.json").read_text(encoding="utf-8"))
         self.assertEqual(set(config["heldout_rule"]["exclude"]["ciks"]), {789019, 320193, 2488, 1045810})
         self.assertLessEqual(config["max_pages_per_issuer"], 4)
+
+    def test_rule_c_adds_seen_issuers_and_a_new_salt(self):
+        from scripts.xbrl_grounding import heldout_rule
+        config = json.loads((ROOT / "configs/xbrl-grounding.json").read_text(encoding="utf-8"))
+        b, c = heldout_rule(config, "b"), heldout_rule(config, "c")
+        self.assertEqual(b, config["heldout_rule"])
+        seen = {1321655, 1780312, 719220, 1287750, 1092699, 914156, 1655050, 21344}
+        self.assertTrue(seen <= set(c["exclude"]["ciks"]) and set(b["exclude"]["ciks"]) <= set(c["exclude"]["ciks"]))
+        self.assertNotEqual(b["order"]["salt"], c["order"]["salt"])
+        self.assertEqual((c["population"], c["accept"], c["take"]), (b["population"], b["accept"], b["take"]))
+        self.assertEqual(c["rule_id"], "heldout-2026-11-c")
 
     def test_fsds_instance_names_the_primary_document(self):
         from scripts.xbrl_grounding import explicit_candidates, filing_urls, primary_document, sha1_base32
