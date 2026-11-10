@@ -45,17 +45,18 @@ PAGES = {
     "/intro": ("index.html", "intro.html"),
     "/ask": ("ask.html", "ask.html"),
     "/grounding": ("grounding.html", "grounding.html"),
+    "/table-check": ("table-check.html", "table-check.html"),
     "/table-lookup": ("table-lookup.html", "table-lookup.html"),
     "/margin": ("margin.html", "margin.html"),
     "/research": ("research.html", "research.html"),
     "/tasks": ("tasks.html", "tasks.html"),
     "/experiments": ("experiments.html", "experiments.html"),
 }
-APP_ROUTES = ("/", "/intro", "/ask", "/grounding", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
+APP_ROUTES = ("/", "/intro", "/ask", "/grounding", "/table-check", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
               "/explanation-reviews", "/reference-review", "/experiments", "/transfer", "/document-preparation",
               "/lab", "/docs")
 ASSETS = ("workspace.css", "workspace.js", "theme.js", "research-write-intent.js", "research-write-journal.js",
-          "ask.js", "ask-pack.json", "grounding.js")
+          "ask.js", "ask-pack.json", "grounding.js", "table-check.js")
 # Snapshot loaders re-validate frozen reports on every request. The export reads each once;
 # responses are unchanged because the files cannot change during one export.
 MEMOIZED_LOADERS = (
