@@ -44,12 +44,12 @@ function toBase64(bytes: Uint8Array): string { let s = ''; bytes.forEach((b) => 
 async function fetchChecked(url: string, name: string, spec: FileSpec, onBytes: (n: number) => void, signal: AbortSignal): Promise<ArrayBuffer> {
   let response: Response;
   try {
-    response = await fetch(url, { signal, mode: 'cors', credentials: 'omit', cache: 'force-cache' });
+    response = await fetch(url, { signal, credentials: 'omit' });
   } catch (error) {
     if (signal.aborted) throw new LoadError('cancelled', name);
     throw new LoadError('network', name, String(error));
   }
-  if (!response.ok || !response.body) throw new LoadError('http', name, String(response.status));
+  if (!response.ok || !response.body) throw new LoadError('http', name, `${response.status} ${response.url.split('?')[0]}`);
   const reader = response.body.getReader();
   const parts: Uint8Array[] = [];
   let size = 0;
