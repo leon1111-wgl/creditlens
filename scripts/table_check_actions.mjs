@@ -254,7 +254,16 @@ if (mode === 'probe') {
   const { context, page, log } = await open();
   await page.goto(PAGE);
   results.init = await page.evaluate(() => window.__tableCheck.load());
-  if (!results.init.ok) { console.log('load failed:', results.init.error, log.errors); process.exit(1); }
+  if (!results.init.ok) {
+    console.log('load failed:', results.init.error, log.errors);
+    const u = config.weights.base_url + 'ch_PP-OCRv5_det.onnx';
+    const b = await page.evaluate(async (x) => { const r = await fetch(x, { credentials: 'omit' }); return { status: r.status, url: r.url, headers: [...r.headers].slice(0, 30), body: (await r.text()).slice(0, 400) }; }, u);
+    console.log('browser fetch:', JSON.stringify(b));
+    const n = await fetch(u, { redirect: 'manual', headers: { 'user-agent': await page.evaluate(() => navigator.userAgent), origin: ORIGIN } });
+    console.log('node fetch:', n.status, JSON.stringify([...n.headers].slice(0, 30)), (await n.text()).slice(0, 300));
+    console.log('user agent:', await page.evaluate(() => navigator.userAgent));
+    process.exit(1);
+  }
   results.items = [];
   for (const [i, url] of urls.entries()) {
     const entry = { url };
