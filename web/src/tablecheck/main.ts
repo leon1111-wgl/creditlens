@@ -20,8 +20,8 @@ interface Result {
   width: number; height: number; table: Table; checks: Check[];
   timings: { decode: number; det: number; rec: number; structure: number; total: number; lines: number; boxes: number };
 }
-const state: { engine: Engine | null; loading: AbortController | null; result: Result | null; selected: number | null; imageUrl: string | null } =
-  { engine: null, loading: null, result: null, selected: null, imageUrl: null };
+const state: { engine: Engine | null; loading: AbortController | null; result: Result | null; selected: number | null; imageUrl: string | null; error: string | null } =
+  { engine: null, loading: null, result: null, selected: null, imageUrl: null, error: null };
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, props: Record<string, string> = {}, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -186,6 +186,7 @@ async function load() {
     $('tcLoadPanel').classList.add('done');
   } catch (error) {
     const code = error instanceof LoadError ? error.code : 'runtime';
+    state.error = String((error as Error)?.message ?? error).slice(0, 500);
     say(`${LOAD_TEXT[code]}${error instanceof LoadError && code !== 'cancelled' ? `：${error.file}` : ''}。可以重试。`);
     button.disabled = false;
   } finally {
@@ -233,7 +234,7 @@ function init() {
 
 // Test hook for the Actions evaluation, check and probe jobs (no network beyond the pinned files).
 (window as unknown as Record<string, unknown>).__tableCheck = {
-  canRun, load: () => load().then(() => ({ ok: Boolean(state.engine), initSeconds: state.engine?.initSeconds, downloadedBytes: state.engine?.downloadedBytes })),
+  canRun, load: () => load().then(() => ({ ok: Boolean(state.engine), initSeconds: state.engine?.initSeconds, downloadedBytes: state.engine?.downloadedBytes, error: state.error })),
   runBlob, variant, exampleBlob,
   runUrl: async (url: string, kind: 'clean' | 'webp_grey_q68' | 'jpeg_q60' | 'blur_1px' = 'clean', show = false) => {
     const blob = await variant(url, kind);

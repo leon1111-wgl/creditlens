@@ -44,7 +44,12 @@ async function open(options = {}) {
   page.on('request', (r) => log.hosts.add(new URL(r.url()).host));
   return { context, page, log };
 }
-const readyRun = (page) => page.waitForSelector('#tcRun:not([hidden])', { timeout: 600_000 });
+async function readyRun(page) {
+  await page.waitForFunction(() => !document.getElementById('tcRun').hidden || /失败|不符|中断|无法|取消/.test(document.getElementById('tcStatus')?.textContent ?? ''), null, { timeout: 900_000 });
+  const status = await page.textContent('#tcStatus');
+  if (await page.isHidden('#tcRun')) console.log('load did not finish:', status);
+  return status;
+}
 
 if (mode === 'check') {
   const { context, page, log } = await open();
@@ -54,7 +59,8 @@ if (mode === 'check') {
   ok('download size shown before download', /约 3\d\.\d MB/.test(await page.textContent('#tcLoad')), await page.textContent('#tcLoad'));
   const t0 = Date.now();
   await page.click('#tcLoad');
-  await readyRun(page);
+  const loadStatus = await readyRun(page);
+  if (await page.isHidden('#tcRun')) { console.log('page errors:', log.errors); }
   results.load_seconds = (Date.now() - t0) / 1000;
   ok('model loads and reports ready', /已就绪/.test(await page.textContent('#tcStatus')), await page.textContent('#tcStatus'));
   const allowed = new Set(['127.0.0.1:8765', 'cdn.jsdelivr.net', 'huggingface.co']);
@@ -199,6 +205,7 @@ if (mode === 'eval') {
   await page.goto(PAGE);
   const loaded = await page.evaluate(() => window.__tableCheck.load());
   results.init = loaded;
+  if (!loaded.ok) { console.log('load failed:', loaded.error, log.errors); process.exit(1); }
   results.split = split;
   results.pages = [];
   for (const variant of variants) {
@@ -247,6 +254,7 @@ if (mode === 'probe') {
   const { context, page, log } = await open();
   await page.goto(PAGE);
   results.init = await page.evaluate(() => window.__tableCheck.load());
+  if (!results.init.ok) { console.log('load failed:', results.init.error, log.errors); process.exit(1); }
   results.items = [];
   for (const [i, url] of urls.entries()) {
     const entry = { url };
