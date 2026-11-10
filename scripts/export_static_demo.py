@@ -45,18 +45,20 @@ PAGES = {
     "/intro": ("index.html", "intro.html"),
     "/ask": ("ask.html", "ask.html"),
     "/grounding": ("grounding.html", "grounding.html"),
-    "/table-check": ("table-check.html", "table-check.html"),
     "/table-lookup": ("table-lookup.html", "table-lookup.html"),
     "/margin": ("margin.html", "margin.html"),
     "/research": ("research.html", "research.html"),
     "/tasks": ("tasks.html", "tasks.html"),
     "/experiments": ("experiments.html", "experiments.html"),
 }
-APP_ROUTES = ("/", "/intro", "/ask", "/grounding", "/table-check", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
+APP_ROUTES = ("/", "/intro", "/ask", "/grounding", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
               "/explanation-reviews", "/reference-review", "/experiments", "/transfer", "/document-preparation",
               "/lab", "/docs")
 ASSETS = ("workspace.css", "workspace.js", "theme.js", "research-write-intent.js", "research-write-journal.js",
-          "ask.js", "ask-pack.json", "grounding.js", "table-check.js")
+          "ask.js", "ask-pack.json", "grounding.js")
+# 截图核对 is evaluated but not shipped (v0.35.0: it missed the pre-registered wrong-value bar, docs/46-table-check.md).
+# The public export leaves it out; the Actions check, evaluation and probe jobs export it with --with-table-check.
+HIDDEN_TABLE_CHECK = {"page": ("/table-check", ("table-check.html", "table-check.html")), "asset": "table-check.js"}
 # Snapshot loaders re-validate frozen reports on every request. The export reads each once;
 # responses are unchanged because the files cannot change during one export.
 MEMOIZED_LOADERS = (
@@ -412,7 +414,15 @@ def export(out: Path) -> dict:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--output", type=Path, default=ROOT/"site")
+    parser.add_argument("--with-table-check", action="store_true",
+                        help="Actions check/evaluation/probe only: include the hidden 截图核对 page (not part of the public site)")
     args = parser.parse_args(argv)
+    if args.with_table_check:
+        global APP_ROUTES, ASSETS
+        route, files = HIDDEN_TABLE_CHECK["page"]
+        PAGES[route] = files
+        APP_ROUTES = APP_ROUTES + (route,)
+        ASSETS = ASSETS + (HIDDEN_TABLE_CHECK["asset"],)
     manifest = export(args.output)
     files = {entry["file"] for entry in manifest["routes"].values()}
     size = sum((args.output/f).stat().st_size for f in files)

@@ -1,6 +1,30 @@
 # 前沿调研
 
-两轮调研按时间倒序排列：先是 2026-11-10 的 v0.34.0（XBRL 对照）与“大公司在生产中怎样用”，后面是 2026-11-07 的 v0.33.0（页内问证据）原文，未改动。
+调研按时间倒序排列：先是 v0.35.0（截图核对与标题规则修正），然后是 2026-11-10 的 v0.34.0（XBRL 对照）与“大公司在生产中怎样用”，最后是 2026-11-07 的 v0.33.0（页内问证据）原文，未改动。
+
+## v0.35.0 · 截图核对（核对日期 2026-11-10）
+
+本轮问题：v0.34.0 的候选 4（浏览器内 OCR + 勾稽校验）需要一组“答案已知”的页面来测误报率，XBRL 对照的已发布报表页正好是这样一组页面：数值和位置都由发行人的 XBRL 标签给出。
+
+| 候选 | 来源与日期 | 结论 |
+|---|---|---|
+| 1. 浏览器内 PP-OCRv5 mobile + 按读数加总核对 | PaddlePaddle PP-OCRv5 mobile（Apache-2.0）；ONNX 版 `webnn/PP-OCRv5-ONNX`（2025-12）；onnxruntime-web 1.30.0（MIT，2026-09-14） | **采用**，按预先登记的门槛决定是否上线，见[截图核对](46-table-check.md) |
+| 2. 过宽的股数／每股标题规则（v0.34.0 已知缺陷） | 本项目首轮记录 | **修正**为 score-2，在新的保留集（规则 c）上与 score-1 配对测量，见[XBRL 对照](45-xbrl-grounding.md) |
+| 3. 多线程 WASM（coi-serviceworker 提供跨源隔离） | coi-serviceworker（MIT）；ORT Web 文档 | 不采用：单线程每页耗时已在门槛内；服务工作线程会改变整个站点的请求行为，收益不值这一层复杂度 |
+| 4. WebGPU | ORT Web WebGPU EP | 不采用：Actions 运行器没有 GPU，无法验证；上线路径必须是测过的 WASM |
+| 5. 直接从 Hugging Face 取权重 | — | 不采用：Hugging Face 的 WAF 对 Actions 上的无头浏览器返回人机验证页（HTTP 405，`x-amzn-waf-action: captcha`），这条路径无法测试；构建时从固定修订复制到本站并核对哈希，页面再核对一次 |
+| 6. 表格结构模型（如 SLANet、TableFormer） | PaddleOCR 表格识别 | 不采用：额外下载与浏览器内后处理；本轮只处理干净的屏幕截图，行列可由框的几何关系重建，先测这条更简单的路径 |
+
+## 大公司在生产中怎样用（v0.35.0 补充）
+
+| 实践 | 来源（核对 2026-11-10） | 要点 |
+|---|---|---|
+| 审计中的重新计算（footing、cross-footing） | [IAASB ISA 500《审计证据》A19 段（IFAC 2013 手册版）](https://www.ifac.org/_flysystem/azure-private/publications/files/A022%202013%20IAASB%20Handbook%20ISA%20500.pdf) | “重新计算”是审计证据程序之一：核对文件或记录的数学准确性，可手工或电子执行。纵向加总（footing）与横向加总（cross-footing）是它最常见的形式 |
+| AWS Bedrock Data Automation 的文档输出 | [标准输出文档，核对 2026-11-10](https://docs.aws.amazon.com/bedrock/latest/userguide/bda-output-documents.html)；[发布公告，2024-12-04](https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-bedrock-data-automation-available-preview/) | 文档按所选粒度输出文本与表格，可选附带每个元素的定位框（bounding box）；公告称抽取附带视觉定位与置信度 |
+
+**本轮对照的做法。** 截图核对把两件事放在一起：抽取的每个数字都带框（同 BDA 的“字段 + 定位框”），再对读出的数字做审计式的重新计算（纵向与横向加总、同比重算）。核对结果只说明“按读数算不平”，不推断哪个数字是对的。
+
+**有意的不同。** 没有置信度阈值转人工的队列；OCR 分数只用来判断一格是否“读不出”。规则只认 Total／合计 等明确的合计行，不推断无标签的小计关系。只处理干净截图，手机照片、扫描件不在范围内。没有密钥、没有服务器：模型在访客浏览器里运行。
 
 ## v0.34.0 · XBRL 对照（核对日期 2026-11-10）
 

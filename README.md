@@ -105,6 +105,8 @@ python scripts/evaluate_unit_applicability.py --verify-saved
 | 表格取数 | 同一批42条登记记录、40组查询比较不同规则，保留取错与不足；详见[方法对照](docs/37-role-aware-table-lookup.md) |
 | 单位适用性 | 176次保存材料检查、20种合成场景的100次方法检查；详见[输入、结果与边界](docs/42-unit-applicability.md) |
 | XBRL 对照（保留集） | 6 家未用过的发行人、21 页干净渲染报表页、1,762 个 XBRL 事实，答案键为发行人自己的标签：首轮（`b7a16f7`）一致 1,370、冲突 0、未作答 392，定位召回 94.2%；不是扫描件，详见[基准说明](docs/45-xbrl-grounding.md) |
+| XBRL 对照（第二个保留集，v0.35.0） | 另 6 家按新规则选出的发行人、1,887 个事实，同一批 OCR 配对：修正后的 score-2 一致 1,406、冲突 16、未作答 465，原规则 1,388／20／479（运行 42773541603）；冲突集中在一家公司的每股数据块，详见[基准说明](docs/45-xbrl-grounding.md) |
+| 截图核对（浏览器内 OCR，未上线） | XBRL 对照已发布的 21 页上：格值准确率 92.4%，读错率 1.94%，高于预先登记的 1.0%，因此不上线；加总核对误报 4.1%，每页 P95 16.7 s（Actions 单线程 WASM），详见[截图核对](docs/46-table-check.md) |
 | 页内问证据 | 另一个模型编写的146道盲测题首轮（`a05f450`）正确114、错答2、弃答30，应拒答58/58；修复后同题（已看过）正确145、错答0；详见[评测](docs/44-browser-answers.md#评测) |
 
 软件测试、合成控制和真实材料实验分别解释。微软、苹果等材料属于开发样例；XBRL 对照是首个未参与调参的发行人评测，但只覆盖干净渲染页，独立人工参考与扫描件评测仍待完成。来源可追溯和计算一致不代表披露真实性或经营原因已获独立证实。
@@ -112,7 +114,7 @@ python scripts/evaluate_unit_applicability.py --verify-saved
 ## 技术文档
 
 - [项目用途与技术实现](docs/12-project-story-and-technology.md)
-- [XBRL 对照基准](docs/45-xbrl-grounding.md)、[页内问证据](docs/44-browser-answers.md)与[前沿调研](docs/FRONTIER_REVIEW.md)
+- [截图核对评测（未上线）](docs/46-table-check.md)、[XBRL 对照基准](docs/45-xbrl-grounding.md)、[页内问证据](docs/44-browser-answers.md)与[前沿调研](docs/FRONTIER_REVIEW.md)
 - [三类研究任务的验收标准](docs/24-research-task-acceptance.md)
 - [现金流分解](docs/21-cash-flow-bridge.md)、[毛利率分解](docs/35-gross-margin-bridge.md)与[公司说明核对](docs/36-margin-company-statements.md)
 - [同名行选择](docs/38-row-disambiguation.md)、[导出一致性核对](docs/39-row-selection-verification.md)与[独立参考流程](docs/34-reference-review.md)
