@@ -35,6 +35,8 @@ jobs:
       # Records the deterministic app; no OCR, model or network inference runs here.
       - run: python scripts/export_static_demo.py --output site
       - run: node scripts/check_static_demo.js site
+      # 截图核对: copy the pinned OCR weights into the site (size and SHA-256 checked; the page checks again).
+      - run: python scripts/fetch_table_models.py --into site/models/pp-ocrv5
       - uses: actions/configure-pages@v5
         if: github.event_name != 'pull_request'
       - uses: actions/upload-pages-artifact@v3

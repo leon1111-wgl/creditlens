@@ -78,7 +78,8 @@ export interface Engine { det: OrtSession; rec: OrtSession; chars: string[]; ort
 export async function loadEngine(onProgress: (loaded: number, total: number, file: string) => void, signal: AbortSignal): Promise<Engine> {
   let loaded = 0;
   const bump = (file: string) => (n: number) => { loaded += n; onProgress(loaded, DOWNLOAD_BYTES, file); };
-  const runtimeBase = config.runtime.base_url, weightBase = config.weights.base_url;
+  // Weights come from this site (copied from the pinned Hugging Face revision at build time; see configs/table-check.json).
+  const runtimeBase = config.runtime.base_url, weightBase = new URL(config.weights.served_from.site_path, location.href).href;
   const fetched: Record<string, ArrayBuffer> = {};
   // Runtime first (small JS, then the 14 MB wasm), then the weights.
   for (const [name, spec] of RUNTIME_FILES) fetched[name] = await fetchChecked(runtimeBase + name, name, spec, bump(name), signal);

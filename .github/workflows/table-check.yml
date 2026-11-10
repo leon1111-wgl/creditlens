@@ -4,9 +4,9 @@ name: table-check
 # runtime refused; cancel. Real OCR runs only here, never on a developer machine.
 on:
   push:
-    paths: ["web/src/tablecheck/**", "creditlens/table-check.*", "configs/table-check.json", "scripts/table_check_actions.mjs", "scripts/export_static_demo.py", ".github/workflows/table-check.yml"]
+    paths: ["web/src/tablecheck/**", "creditlens/table-check.*", "configs/table-check.json", "scripts/table_check_actions.mjs", "scripts/fetch_table_models.py", "scripts/export_static_demo.py", ".github/workflows/table-check.yml"]
   pull_request:
-    paths: ["web/src/tablecheck/**", "creditlens/table-check.*", "configs/table-check.json", "scripts/table_check_actions.mjs", "scripts/export_static_demo.py", ".github/workflows/table-check.yml"]
+    paths: ["web/src/tablecheck/**", "creditlens/table-check.*", "configs/table-check.json", "scripts/table_check_actions.mjs", "scripts/fetch_table_models.py", "scripts/export_static_demo.py", ".github/workflows/table-check.yml"]
 permissions:
   contents: read
 jobs:
@@ -21,6 +21,7 @@ jobs:
           cache: pip
       - run: python -m pip install -r requirements.lock
       - run: python scripts/export_static_demo.py --output site
+      - run: python scripts/fetch_table_models.py --into site/models/pp-ocrv5
       - uses: actions/setup-node@v4
         with:
           node-version: "22"

@@ -63,9 +63,9 @@ if (mode === 'check') {
   if (await page.isHidden('#tcRun')) { console.log('page errors:', log.errors); }
   results.load_seconds = (Date.now() - t0) / 1000;
   ok('model loads and reports ready', /已就绪/.test(await page.textContent('#tcStatus')), await page.textContent('#tcStatus'));
-  const allowed = new Set(['127.0.0.1:8765', 'cdn.jsdelivr.net', 'huggingface.co']);
-  const hosts = [...log.hosts].filter((h) => !allowed.has(h) && !/\.hf\.co$/.test(h));
-  ok('model requests only go to jsDelivr and Hugging Face', hosts.length === 0, [...log.hosts]);
+  const allowed = new Set(['127.0.0.1:8765', 'cdn.jsdelivr.net']);
+  const hosts = [...log.hosts].filter((h) => !allowed.has(h));
+  ok('requests go only to this site (weights) and jsDelivr (runtime)', hosts.length === 0, [...log.hosts]);
   await page.click('#tcExample');
   await page.waitForSelector('#tcResult:not([hidden])', { timeout: 300_000 });
   const checks = await page.$$eval('.tc-check', (b) => b.map((x) => ({ cls: x.className, text: x.textContent })));
