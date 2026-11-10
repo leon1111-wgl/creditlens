@@ -37,6 +37,8 @@ jobs:
       # XBRL grounding: re-score the saved held-out run from its saved key and OCR (no OCR, no network)
       # and check the published page images and fact files against it.
       - run: python scripts/xbrl_grounding.py verify-saved artifacts/xbrl-grounding/heldout-first-run.json.gz --site creditlens/grounding
+      # v0.35.0 rule-c held-out first run (score-2, with score-1 on the same OCR as the paired comparison).
+      - run: python scripts/xbrl_grounding.py verify-saved artifacts/xbrl-grounding/heldout-c-first-run.json.gz
       - run: python scripts/evaluate_controls.py
       - run: python scripts/verify_research_export.py artifacts/research-task-demo.json
       - run: python scripts/verify_research_export.py artifacts/research-cash-flow-demo.json

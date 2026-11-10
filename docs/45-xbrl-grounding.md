@@ -160,3 +160,21 @@ python scripts/xbrl_grounding.py verify-saved artifacts/xbrl-grounding/heldout-f
 - score-2 只在已见数据上修改：苹果、微软开发文件和首轮保存的 OCR。规则 c 首次运行之前冻结。
 - 同一次运行的同一批 OCR 片段同时按 score-1 和 score-2 评分。**保留 score-2 的条件**：规则 c 上一致数多于 score-1，且冲突数不多于 score-1；否则仍以 score-1 为发布规则，并报告结果。
 - 首轮（6 家，score-1）的数字保持原样，不重新标成盲测；首轮 OCR 按 score-2 重评的数字标为“已见”。
+
+### 结果：规则 c 首轮（score-2 冻结后第一次运行）
+
+运行 **42773541603**，提交 **`c0706a3`**（score-2 冻结提交，推送到 `xbrl-run/heldout-c` 触发），2026-11-10 07:11–07:39 UTC。报告 `artifacts/xbrl-grounding/heldout-c-first-run.json.gz`（解压即运行产物，SHA-256 `529c44b8…84c7`），CI 用保存的答案键与 OCR 按 score-2 重评，并按 score-1 重评核对配对比较。本轮不发布新的页面图片。
+
+- 考察 13 家，入选 6 家：Southern Company、Trulieve Cannabis、Xometry、SITE Centers、Tripadvisor、Kimbell Royalty Partners，共 21 页报表页。跳过 7 家：5 家互联网档案馆取文件多次重试失败（Reddit、Dow、Fidelity Ethereum Fund、Tandem Diabetes Care、CECO Environmental），Criteo 分页过少，abrdn Precious Metals Basket ETF Trust 找不到报表页。
+- 同一批 OCR 片段，两条规则并列（1,887 个计分事实）：
+
+| 规则 | 一致 | 冲突 | 未作答 | 其中股数／每股行 | 数值全对（全部事实） | RS(0) | RS(10) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| score-1（v0.34.0 规则） | 1,388 | 20 | 479 | 110 | 77.2% | 0.7356 | 0.6296 |
+| **score-2（本轮）** | **1,406** | **16** | **465** | **94** | **78.3%** | **0.7451** | **0.6603** |
+
+- **按预先登记的条件保留 score-2**：一致数多于 score-1（1,406 > 1,388），冲突不多于 score-1（16 ≤ 20）。
+- 逐项变化：30 个美元权益行由未作答变为一致（本轮要修的缺陷）；3 个美元行改由“跨列”未作答；4 个每股冲突改为未作答；另有 12 个原来一致的项（6 个美元、6 个股数）因“单位表头写 except per share、行名是 Basic／Diluted”的保护改为未作答。合计一致 +18、冲突 −4。
+- **16 个冲突**全部在 SITE Centers 利润表的每股数据块：表头 “(In thousands, except per share amounts)”，子标题是 “Basic:” 与 “Diluted:”，行名是 “Income from continuing operations”“Total” 等，都没有写 per share，于是 3.36 这类每股金额被套上千位量级。score-1 在同一页有 20 个同类冲突，这一类不是本轮引入的。“带小数的金额在 except per share 表头下不套量级”是显然的下一步，但它是看过本保留集之后才想到的，留给下一个保留集去测。
+- 其余：定位召回 92.5%；年份列 80.0%（读出的 1,509 项全部正确）；未作答主要是越出标签框 155、无片段 142、股数／每股行 94、跨列 71。
+- 与 v0.34.0 首轮（6 家其他发行人，score-1：1,370／0／392，数值全对 78.4%）比较时注意：两批发行人不同、页面不同，差异不能归因于规则；规则的作用只看上表同一批 OCR 的配对比较。v0.34.0 首轮按 score-2 重评的 1,410／0／352 用的是已见数据，不是盲测。
