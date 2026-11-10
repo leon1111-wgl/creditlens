@@ -252,6 +252,8 @@ export function runChecks(table: Table): Check[] {
   const checks: Check[] = [];
   const cell = (r: Row, c: number): Token[] => (r.cells[c] ?? []).map((i) => tokens[i]);
   const blockStart = new Map<string, number>(); // `${row}:${col}` -> first row of a total's matched block
+  // Columns that share a role with this one: year columns go with year columns, others with others.
+  const siblings = (col: Column): number[] => columns.filter((c) => c.index !== col.index && (c.year === null) === (col.year === null)).map((c) => c.index);
 
   for (const col of columns) {
     for (const r of rows) {
@@ -273,7 +275,12 @@ export function runChecks(table: Table): Check[] {
         if (above.kind === 'header') break;
         if (above.kind === 'label') continue;
         const here = cell(above, col.index);
-        if (!here.length) continue;
+        if (!here.length) {
+          // A row with readings in a sibling column of the same header group but none here: the needed
+          // cell was not read (a missed number), so the total cannot be checked rather than "does not foot".
+          if (siblings(col).some((c) => cell(above, c).some(numeric))) { status = 'not_checked'; reason = 'missing_cell'; break; }
+          continue;
+        }
         if (here.length > 1 || here[0].kind === 'garbled') { status = 'not_checked'; reason = 'unreadable_cell'; break; }
         const t = here[0];
         if (t.percent) { status = 'not_checked'; reason = 'percent_cell'; break; }

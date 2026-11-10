@@ -112,6 +112,15 @@ describe('table rebuild and footing', () => {
     expect(checks.find((c) => c.column === 1)?.status).toBe('foots');
   });
 
+  it('does not call a total wrong when a needed cell was not read', () => {
+    reset();
+    const { checks } = analyse(sheet([
+      header(['2025', '2024']), row('Cash', ['1,000', '900']), row('Receivables', [null, '400']), row('Total', ['1,500', '1,300']),
+    ]));
+    expect(checks.find((c) => c.column === 0)).toMatchObject({ status: 'not_checked', reason: 'missing_cell' });
+    expect(checks.find((c) => c.column === 1)?.status).toBe('foots');
+  });
+
   it('recomputes year-on-year change and percent columns', () => {
     reset();
     const lines = sheet([

@@ -41,7 +41,7 @@ async function open(options = {}) {
   const log = { errors: [], hosts: new Set(), early: [] };
   page.on('pageerror', (e) => log.errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error') log.errors.push(m.text()); });
-  page.on('request', (r) => log.hosts.add(new URL(r.url()).host));
+  page.on('request', (r) => { const u = new URL(r.url()); if (u.protocol === 'http:' || u.protocol === 'https:') log.hosts.add(u.host); });
   return { context, page, log };
 }
 async function readyRun(page) {
