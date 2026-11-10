@@ -109,5 +109,41 @@
     "strip_font_px": 15,
     "max_total_bytes": 15000000
   },
-  "user_agent_note": "Declared on every request. SEC answers GitHub Actions runners with HTTP 403 'Undeclared Automated Tool' whatever the User-Agent or headers (runs 42709826308, 42710194611, diagnostics 42710474268 and 42710749950, 2026-11-09), so the benchmark makes no SEC requests: it reads existing Internet Archive captures of SEC files and checks each against its capture digest. The contact is the project's public GitHub noreply commit identity, not a personal address."
+  "user_agent_note": "Declared on every request. SEC answers GitHub Actions runners with HTTP 403 'Undeclared Automated Tool' whatever the User-Agent or headers (runs 42709826308, 42710194611, diagnostics 42710474268 and 42710749950, 2026-11-09), so the benchmark makes no SEC requests: it reads existing Internet Archive captures of SEC files and checks each against its capture digest. The contact is the project's public GitHub noreply commit identity, not a personal address.",
+  "heldout_rule_c": {
+    "rule_id": "heldout-2026-11-c",
+    "purpose": "A new held-out issuer set for the share-row heading fix (score rule xbrl-grounding-score-2). Committed before any rule-c run; the issuers of rule b are now seen.",
+    "same_as_rule_b": [
+      "population",
+      "exclude",
+      "source",
+      "accept",
+      "take",
+      "max_candidates"
+    ],
+    "exclude_also": {
+      "ciks": [
+        1321655,
+        1780312,
+        719220,
+        1287750,
+        1092699,
+        914156,
+        1655050,
+        21344
+      ],
+      "note": "Every candidate examined by held-out run 42712945764 (six accepted issuers and Bain Capital Specialty Finance, rejected for size) and Coca-Cola, used in the added-issuer probe run 42718740819"
+    },
+    "order": {
+      "description": "Ascending SHA-256 of salt + 10-digit zero-padded CIK, with a new salt fixed in this commit",
+      "salt": "creditlens-xbrl-heldout-2026-11-c:"
+    },
+    "scoring": {
+      "primary": "xbrl-grounding-score-2",
+      "comparison": "xbrl-grounding-score-1 on the same saved OCR spans",
+      "development": "score-2 is changed only on seen data: the dev filings (Apple, Microsoft; run 42712316145) and the saved OCR of held-out run 42712945764. Its commit is frozen before the first rule-c run.",
+      "keep_score_2_if": "On the rule-c set, score-2 has more matches than score-1 and no more conflicts than score-1. Otherwise score-1 stays the published rule and the result is reported."
+    },
+    "publish": "Report only (gzipped report in artifacts/xbrl-grounding/, re-scored by CI); no new page images."
+  }
 }
