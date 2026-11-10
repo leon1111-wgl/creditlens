@@ -161,7 +161,7 @@ class ReadingTests(unittest.TestCase):
                                ("1,234", box(400, 176, 426, 186), None), ("5,678", box(400, 190, 426, 200), None)):
             f = fact(text, b, context="fy25")
             k = key_entry(f, CONTEXTS, UNITS)
-            self.assertEqual(score_fact(f, k, PageReading(page))["reason"], "share_or_per_share_row", text)
+            self.assertEqual(score_fact(f, k, PageReading(page, "xbrl-grounding-score-1"))["reason"], "share_or_per_share_row", text)
             r = score_fact(f, k, PageReading(page, "xbrl-grounding-score-2"))
             self.assertEqual(r["reason"], rule2, text)
             if rule2 is None:

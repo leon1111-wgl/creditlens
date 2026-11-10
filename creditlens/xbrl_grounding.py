@@ -218,7 +218,7 @@ def unit_header(text: str) -> dict | None:
 class PageReading:
     """Everything the extraction knows about one page, read from OCR spans only."""
 
-    def __init__(self, spans: list[dict], rule: str = SCORE_RULE_1):
+    def __init__(self, spans: list[dict], rule: str = SCORE_RULE_VERSION):
         if rule not in SCORE_RULES:
             raise GroundingError("unknown score rule: " + str(rule))
         self.rule = rule

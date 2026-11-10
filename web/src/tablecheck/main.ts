@@ -9,7 +9,7 @@ const MB = (n: number) => `${(n / 1e6).toFixed(1)} MB`;
 const STATUS_TEXT: Record<string, string> = { foots: '相符', does_not_foot: '不相符', not_checked: '未核对' };
 const KIND_TEXT: Record<string, string> = { total: '合计行', cross: '横向合计', change: '同比变动' };
 const REASON_TEXT: Record<string, string> = {
-  unreadable_cell: '所需的格没有读出完整数字', percent_cell: '所需的格是百分比', depends_on_unfooted_subtotal: '依赖的小计本身不相符',
+  unreadable_cell: '所需的格没有读出完整数字', percent_cell: '所需的格是百分比', depends_on_unfooted_subtotal: '依赖的小计未相符或未核对',
   fewer_than_two_terms: '上方可加总的行少于 2 行', missing_cell: '上方某行在本列没有读到数字（同行其他列有）', missing_year_cell: '年份列的格没有读出', prior_is_zero: '上年为零，不能算百分比',
 };
 const LOAD_TEXT: Record<string, string> = {

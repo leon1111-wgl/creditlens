@@ -85,7 +85,9 @@ export async function loadEngine(onProgress: (loaded: number, total: number, fil
   for (const [name, spec] of RUNTIME_FILES) fetched[name] = await fetchChecked(runtimeBase + name, name, spec, bump(name), signal);
   for (const [name, spec] of WEIGHT_FILES) fetched[name] = await fetchChecked(weightBase + name, name, spec, bump(name), signal);
   const started = performance.now();
-  const w = window as unknown as { ort?: Ort };
+  const w = window as unknown as { ort?: Ort; __tcOrtInjected?: boolean };
+  // Only the hash-checked runtime may run: refuse a global `ort` this module did not inject itself.
+  if (w.ort && !w.__tcOrtInjected) throw new LoadError('runtime', 'ort.wasm.min.js', 'unexpected global runtime');
   if (!w.ort) {
     const url = URL.createObjectURL(new Blob([fetched['ort.wasm.min.js']], { type: 'text/javascript' }));
     await new Promise<void>((resolve, reject) => {
@@ -93,6 +95,7 @@ export async function loadEngine(onProgress: (loaded: number, total: number, fil
       s.src = url; s.onload = () => resolve(); s.onerror = () => reject(new LoadError('runtime', 'ort.wasm.min.js'));
       document.head.append(s);
     });
+    w.__tcOrtInjected = true;
   }
   const ort = w.ort;
   if (!ort) throw new LoadError('runtime', 'ort.wasm.min.js', 'no global');
