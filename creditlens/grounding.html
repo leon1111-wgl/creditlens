@@ -110,6 +110,7 @@
 <p class="gr-practice">对照的做法：抽取字段附上定位框与置信度，低置信度交给人工，如 <a href="https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-bedrock-data-automation-available-preview/" rel="noopener">AWS Bedrock Data Automation 的视觉定位</a>（2024-12 预览）。本页规模小、不用密钥，取数是 CPU 上的 OCR 加确定性规则，不是大模型。</p>
 <section class="gr-results" aria-labelledby="grResultsTitle"><h2 id="grResultsTitle" class="gr-section-title" style="margin-top:0">首轮结果 · <span id="grRule"></span></h2>
 <p class="gr-headline" id="grHeadline"></p>
+<p class="gr-note"><strong>冲突 0 只代表这 6 家、21 页。</strong>在另外 6 家按新规则选出、项目从未用过的发行人上（运行 42773541603），读错的数值有 16 个（score-2；score-1 为 20 个），全部出在 SITE Centers 一家“以千为单位，每股金额除外”表头下的每股金额。见下方“方法、评分规则与边界”与仓库 docs/45。</p>
 <div id="grSummary"><p class="gr-fallback">正在载入…</p></div>
 <p class="gr-note">“定位召回”：标签框处有 OCR 片段的比例（项目原有的空间规则）。“数值全对”：数位、括号符号与量级都对；“年份列对”：数字所在列的年份与标签期间一致。两项都按全部计分事实计，括号里是规则实际读出的项数。未作答不算错；RS(10) 对每个冲突扣 10 分。数字聚集在少数几家公司的同一批页面里，彼此并不独立；没有人工复核。</p>
 </section>
