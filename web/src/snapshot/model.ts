@@ -2,7 +2,7 @@
    Pure data in, pure data out: facts from ixbrl.ts, no DOM. Amounts are exact decimals; ratios
    are computed from the exact amounts. Every input keeps the facts it came from, so each number
    can be traced to its tagged cell. This is a credit view, not a rating. */
-import { add, cmp, parse as parseDec, sub, type Dec } from '../decimal';
+import { add, cmp, parse as parseDec, quantize, sub, type Dec } from '../decimal';
 import { canon, type Context, type Fact, type Parsed } from './ixbrl';
 
 export const DEFINITIONS_VERSION = 'credit-snapshot-def-1';
@@ -33,7 +33,7 @@ export interface Snapshot {
   };
   inputs: Record<string, Input>; metrics: Record<string, Metric>; cues: Cue[];
   ladder: { next12: Input; years2to5: Input; after5: Input; next12_label: string; missing_years: number[] } | null;
-  balance_sheet: { tables: number[]; found: boolean };
+  balance_sheet: { found: boolean; assets?: number | null; end?: number | null; liabilities_current?: number | null; assets_current?: number | null; start?: number | null };
 }
 
 const MONETARY = /^iso4217:([A-Za-z]{3})$/;
@@ -47,7 +47,9 @@ const CASH = ['CashAndCashEquivalentsAtCarryingValue', 'Cash', 'CashAndDueFromBa
 const SHORT_INV = ['ShortTermInvestments', 'OtherShortTermInvestments', 'MarketableSecuritiesCurrent', 'MarketableSecurities', 'AvailableForSaleSecuritiesDebtSecuritiesCurrent', 'AvailableForSaleSecuritiesDebtSecurities', 'HeldToMaturitySecuritiesCurrent', 'ShortTermInvestmentsAndMarketableSecurities'];
 const LIQ_SUBTOTAL = 'CashCashEquivalentsAndShortTermInvestments';
 const LIQ_SET = new Set([...CASH, ...SHORT_INV, LIQ_SUBTOTAL]);
-const ANCHORS = ['AssetsCurrent', 'Assets', 'LiabilitiesCurrent', 'Liabilities', 'LiabilitiesAndStockholdersEquity'];
+// Company-specific (extension) concepts counted as debt when they sit on the liabilities side and their local name says so.
+const EXT_DEBT = /^(SeniorNotes|SeniorSecuredNotes|SeniorUnsecuredNotes|ConvertibleNotes|ConvertibleSeniorNotes|SecuredNotes|UnsecuredNotes|Notes|NotesPayable|LongTermDebt|Debt|TermLoan|Borrowings|CreditFacility|RevolvingCreditFacility|LineOfCredit)/;
+const EXT_NOT_DEBT = /Interest|Accrued|Receivable|Issuance|Discount|Premium|FairValue|Cost|Guarant|Held|Asset|Securities|Lease/;
 export const SUPPORTED_FORMS = new Set(['10-K', '10-K/A', '10-KT', '10-Q', '10-Q/A', '10-QT']);
 
 export const LABELS: Record<string, string> = {
@@ -109,8 +111,12 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     const values = new Set(list.map(f => f.value!));
     let chosen = list[0];
     if (values.size > 1) {
-      inconsistent.add(local);
       chosen = list.slice().sort((a, b) => decRank(b.decimals) - decRank(a.decimals) || a.i - b.i)[0];
+      // Duplicates that agree once rounded to the least precise one's decimals are consistent (XBRL); only real
+      // differences become cue Q13.
+      const coarsest = Math.min(...list.map(f => decRank(f.decimals)));
+      const rounded = new Set(list.map(f => Number.isFinite(coarsest) && Math.abs(coarsest) < 1e8 ? canon(quantize(dec(f.value!), -coarsest)) : f.value!));
+      if (rounded.size > 1) inconsistent.add(local);
     }
     const same = list.filter(f => f.value === chosen.value);
     const shown = same.find(f => f.display) || same[0];
@@ -139,7 +145,7 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   const cue = (id: string, text: string, fs: number[] = []) => cues.push({ id, text, facts: fs });
   const empty = (kind: Snapshot['template']['kind'], reason: string, fs: number[]): Snapshot => ({
     definitions: DEFINITIONS_VERSION, status: 'unsupported', template: { kind, reason, facts: fs }, meta, inputs: {}, metrics: {}, cues, ladder: null,
-    balance_sheet: { tables: [], found: false },
+    balance_sheet: { found: false },
   });
 
   // §3 template
@@ -150,7 +156,10 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     for (const [l, w, positive] of rules) { const p = pick(l, w); if (p && (!positive || cmp(dec(p.value), { int: 0n, exp: 0 }) > 0)) out.push(p.chosen.i); }
     return out;
   };
-  const bank = trigger([['Deposits', 'I', true], ['InterestAndDividendIncomeOperating', 'P']]);
+  const assetsValue = pick('Assets', 'I');
+  const deposits = pick('Deposits', 'I');
+  const bank = trigger([['InterestAndDividendIncomeOperating', 'P']]);
+  if (deposits && assetsValue && num(deposits.value) >= 0.2 * num(assetsValue.value)) bank.unshift(deposits.chosen.i);
   if (bank.length) return empty('bank', '这份文件按银行的报表模板编制（有存款负债或利息收入经营科目）。杠杆、EBITDA 与自由现金流不是衡量银行信用的口径，本页不支持银行模板。', bank);
   const insurer = trigger([['PremiumsEarnedNet', 'P'], ['PolicyholderBenefitsAndClaimsIncurredNet', 'P'], ['LiabilityForFuturePolicyBenefits', 'I'], ['LiabilityForUnpaidClaimsAndClaimsAdjustmentExpense', 'I']]);
   if (insurer.length) return empty('insurer', '这份文件按保险公司的报表模板编制（有已赚保费或保单负债）。本页不支持保险模板。', insurer);
@@ -158,19 +167,28 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   if (fund.length) return empty('investment_company', '这份文件按投资公司／BDC 的模板编制（有每股净资产或按公允价值计量的投资组合）。本页不支持这一模板。', fund);
 
   const inputs: Record<string, Input> = {};
-  const bsFacts = usgaap.filter(f => money(f) && inI(f) && f.table >= 0);
-  const anchorTables = new Map<number, Set<string>>();
-  for (const f of bsFacts) if (ANCHORS.includes(f.local)) (anchorTables.get(f.table) || anchorTables.set(f.table, new Set()).get(f.table)!).add(f.local);
-  const bsTables = new Set([...anchorTables.entries()].filter(([, s]) => s.size >= 2).map(([t]) => t));
-  const inBs = facts.filter(f => money(f) && inI(f) && bsTables.has(f.table));
-  const firstPos = (local: string) => inBs.find(f => nsClass(f.ns) === 'us-gaap' && f.local === local)?.i;
-  const posAC = firstPos('AssetsCurrent'), posA = firstPos('Assets'), posLC = firstPos('LiabilitiesCurrent'), posLSE = firstPos('LiabilitiesAndStockholdersEquity');
-  const liabSide = (f: Fact) => (posA === undefined || f.i > posA) && (posLSE === undefined || f.i < posLSE);
+  // §4: the balance sheet as a stretch of the document, bounded by its own total rows (works for table and
+  // absolutely positioned layouts alike). Positions are fact indices in document order.
+  const atI = facts.filter(f => money(f) && inI(f));
+  const usAt = (local: string, after = -1, before = Infinity) => atI.find(f => nsClass(f.ns) === 'us-gaap' && f.local === local && f.i > after && f.i < before)?.i;
+  const posA = usAt('Assets');
+  const posE = posA === undefined ? undefined : (usAt('LiabilitiesAndStockholdersEquity', posA) ?? usAt('StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest', posA) ?? usAt('StockholdersEquity', posA) ?? usAt('Liabilities', posA));
+  const found = posA !== undefined && posE !== undefined;
+  const posLC = found ? usAt('LiabilitiesCurrent', posA!, posE!) : undefined;
+  const lastBefore = (local: string, before: number) => [...atI].reverse().find(f => nsClass(f.ns) === 'us-gaap' && f.local === local && f.i < before)?.i;
+  const posAC = found ? lastBefore('AssetsCurrent', posA!) : undefined;
+  // The current-asset stretch starts after the nearest fact before it that has a duration context (the previous statement).
+  const stretchStart = (from: number) => { for (let k = from - 1; k >= 0; k--) { const c = contexts[facts[k].ctx]; if (c && c.start) return k; } return -1; };
+  const posS = found ? stretchStart(posAC ?? posA!) : undefined;
+  const liabSide = (f: Fact) => found && f.i > posA! && f.i < posE!;
+  const assetSide = (f: Fact) => found && f.i > posS! && f.i < (posAC ?? posA!);
+  const inBs = atI.filter(f => liabSide(f) || assetSide(f));
   const firstByConcept = (list: Fact[]) => { const seen = new Set<string>(); return list.filter(f => !seen.has(f.local) && seen.add(f.local)); };
 
   // §4 debt rows on the balance sheet
   interface Row { f: Fact; section: 'current' | 'noncurrent' }
-  const debtRows: Row[] = firstByConcept(inBs.filter(f => nsClass(f.ns) === 'us-gaap' && DEBT_SET.has(f.local) && liabSide(f)))
+  const isDebtRow = (f: Fact) => (nsClass(f.ns) === 'us-gaap' && DEBT_SET.has(f.local)) || (nsClass(f.ns) === 'ext' && EXT_DEBT.test(f.local) && !EXT_NOT_DEBT.test(f.local));
+  const debtRows: Row[] = firstByConcept(inBs.filter(f => isDebtRow(f) && liabSide(f)))
     .map(f => ({ f, section: posLC !== undefined ? (f.i < posLC ? 'current' : 'noncurrent') : (/Current/.test(f.local) || SHORT_TERM.has(f.local) ? 'current' : 'noncurrent') }));
   const subtotalNotes: number[] = [];
   function collapse(rows: Row[], wholeSide: boolean): { counted: Row[]; absorbed: Map<number, Row[]> } {
@@ -222,19 +240,22 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     else if (dc && ltdN) { rule = 'F2 · DebtCurrent + LongTermDebtNoncurrent'; terms = [term(dc.chosen), term(ltdN.chosen)]; }
     else if (ltdN) { rule = 'F3 · LongTermDebtNoncurrent + LongTermDebtCurrent + 短期借款'; terms = [term(ltdN.chosen), ...(ltdC ? [term(ltdC.chosen)] : []), ...stbFallback()]; }
     else if (lcl) { rule = 'F4 · LongTermDebtAndCapitalLeaseObligations (+ Current) + 短期借款'; terms = [term(lcl.chosen), ...(lclC ? [term(lclC.chosen)] : []), ...stbFallback()]; debtUsesFinanceLeases = true; }
-    inputs.debt = terms.length ? input('debt', rule, terms) : input('debt', '', [], bsTables.size ? '资产负债表上没有可识别的债务行，附注里也没有债务合计标签' : '没有找到资产负债表，也没有债务合计标签');
+    inputs.debt = terms.length ? input('debt', rule, terms) : input('debt', '', [], found ? '资产负债表上没有可识别的债务行，附注里也没有债务合计标签' : '没有找到资产负债表，也没有债务合计标签');
     inputs.current_debt = { key: 'current_debt', label: LABELS.current_debt, value: null, rule: '', terms: [], missing: 'F 规则下不计算流动债务' };
     if (terms.length) cue('Q12', `资产负债表上没有可识别的债务行，债务取自附注或其他位置的合计标签（${rule.split(' · ')[0]}）。核对资产负债表上的借款行。`, terms.map(t => t.fact));
   }
   if (inputs.debt.value === null) cue('Q12', '没有找到债务：资产负债表上没有可识别的债务行，也没有债务合计标签。若公司确实没有借款，债务为 0；请在资产负债表上核对。', []);
-  const strange = firstByConcept(inBs.filter(f => liabSide(f) && !(nsClass(f.ns) === 'us-gaap' && DEBT_SET.has(f.local))
-    && /Debt|Borrowing|NotesPayable|LoansPayable|CommercialPaper|Notes$|Loans$/i.test(f.local) && !/Interest|Receivable|Lease|Asset|Securities/i.test(f.local)));
-  if (strange.length) cue('Q12', `负债一侧有未计入债务的相关科目：${strange.map(f => f.name).join('、')}。核对它们是否是借款。`, strange.map(f => f.i));
+  const strange = firstByConcept(inBs.filter(f => liabSide(f) && !isDebtRow(f)
+    && /Debt|Borrowing|Notes|Loan|CommercialPaper|CreditFacility|LineOfCredit/i.test(f.local) && !/Interest|Receivable|Lease|Asset|Securities/i.test(f.local)));
+  if (strange.length) cue('Q12', `负债一侧有名称像借款、但未计入债务的科目：${strange.map(f => f.name).join('、')}。核对它们是否是借款。`, strange.map(f => f.i));
+  const extCounted = inputs.debt.terms.filter(t => !t.concept.startsWith('us-gaap:'));
+  if (extCounted.length && inputs.debt.rule.startsWith('B')) cue('Q12', `债务含发行人自定义概念（按名称规则计入）：${extCounted.map(t => t.concept).join('、')}。`, extCounted.map(t => t.fact));
   if (debtUsesFinanceLeases) cue('Q10', '债务行用了 LongTermDebtAndCapitalLeaseObligations：债务已含融资租赁负债。', inputs.debt.terms.filter(t => /CapitalLease/.test(t.concept)).map(t => t.fact));
 
   // Liquidity
-  const liqRows = firstByConcept(inBs.filter(f => nsClass(f.ns) === 'us-gaap' && LIQ_SET.has(f.local)
-    && (posAC !== undefined ? f.i < posAC : (CASH.includes(f.local) || /Current/.test(f.local)))));
+  let liqRows = firstByConcept(inBs.filter(f => nsClass(f.ns) === 'us-gaap' && LIQ_SET.has(f.local) && assetSide(f)
+    && (posAC !== undefined || CASH.includes(f.local) || /Current/.test(f.local))));
+  if (liqRows.some(f => f.local === 'CashAndCashEquivalentsAtCarryingValue')) liqRows = liqRows.filter(f => f.local !== 'CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents');
   if (liqRows.length) {
     const gone = new Set<number>(); const parts = new Map<number, Fact[]>();
     for (let k = 0; k < liqRows.length; k++) {
@@ -258,7 +279,17 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
 
   // §5 flows and other inputs
   inputs.revenue = firstOf('revenue', ['Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax', 'RevenueFromContractWithCustomerIncludingAssessedTax', 'SalesRevenueNet'], 'P');
-  inputs.interest = firstOf('interest', ['InterestExpense', 'InterestExpenseNonoperating', 'InterestAndDebtExpense', 'InterestExpenseDebt'], 'P');
+  inputs.interest = firstOf('interest', ['InterestExpense', 'InterestExpenseNonoperating', 'InterestAndDebtExpense', 'InterestExpenseDebt', 'InterestCostsIncurred'], 'P');
+  let interestIsNet = false;
+  if (inputs.interest.value === null) {
+    for (const l of ['InterestIncomeExpenseNonoperatingNet', 'InterestIncomeExpenseNet']) {
+      const p = pick(l, 'P');
+      if (p && num(p.value) < 0) { inputs.interest = input('interest', `${l}（净额，取负）`, [term(p.chosen, '−')]); interestIsNet = true; break; }
+      if (p) break;
+    }
+  }
+  if (inputs.interest.rule === 'InterestCostsIncurred') cue('Q20', '利息费用取自“利息成本发生额”（InterestCostsIncurred，含资本化利息），不是利润表上的利息费用。', inputs.interest.terms.map(t => t.fact));
+  if (interestIsNet) cue('Q20', `没有利息费用总额标签：利息费用取自利息收支净额（${inputs.interest.terms[0].concept}），已扣除利息收入。`, inputs.interest.terms.map(t => t.fact));
   const op = pick('OperatingIncomeLoss', 'P');
   if (op) inputs.ebit = input('ebit', 'E1 · OperatingIncomeLoss', [term(op.chosen)]);
   else {
@@ -343,17 +374,17 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   else if (fcf === null || debt === null) ratio('fcf_to_debt', 'FCF ÷ DEBT', ['fcf', 'debt'], null, [fcf === null ? 'FCF 未找到' : '', debt === null ? '债务未找到' : ''].filter(Boolean).join('；'));
   else if (num(debt) === 0) ratio('fcf_to_debt', 'FCF ÷ DEBT', ['fcf', 'debt'], null, '债务为 0');
   else ratio('fcf_to_debt', 'FCF ÷ DEBT', ['fcf', 'debt'], num(fcf) / num(debt));
-  if (debt !== null) {
-    const parts = [debt, v('operating_leases') ?? '0', debtUsesFinanceLeases ? '0' : (v('finance_leases') ?? '0')];
-    amount('debt_with_leases', debtUsesFinanceLeases ? 'DEBT + OL（债务已含融资租赁）' : 'DEBT + OL + FL', ['debt', 'operating_leases', 'finance_leases'], sumOf(parts));
-  } else amount('debt_with_leases', 'DEBT + OL + FL', ['debt', 'operating_leases', 'finance_leases'], null);
+  const leaseFormula = debtUsesFinanceLeases ? 'DEBT + OL（债务已含融资租赁）' : 'DEBT + OL + FL';
+  if (debt === null) amount('debt_with_leases', leaseFormula, ['debt', 'operating_leases', 'finance_leases'], null);
+  else if (v('operating_leases') === null && (debtUsesFinanceLeases || v('finance_leases') === null)) amount('debt_with_leases', leaseFormula, ['debt', 'operating_leases', 'finance_leases'], null, '租赁负债未找到');
+  else amount('debt_with_leases', leaseFormula, ['debt', 'operating_leases', 'finance_leases'], sumOf([debt, v('operating_leases') ?? '0', debtUsesFinanceLeases ? '0' : (v('finance_leases') ?? '0')]));
 
   // §7 cues (wording: where to look, never a verdict)
   if (!annual) cue('Q1', `这是 ${form}：流量是年初至今 ${months ?? '?'} 个月，未年化；杠杆倍数与 FCF／债务不计算。`, []);
   if (ebitda !== null && !ebitdaPositive) cue('Q3', 'EBITDA ≤ 0：杠杆倍数没有意义，看现金消耗与流动性。', [...(inputs.ebit.terms.map(t => t.fact)), ...inputs.da.terms.map(t => t.fact)]);
   if (intv === null) {
-    const net = ['InterestIncomeExpenseNonoperatingNet', 'InterestIncomeExpenseNet', 'InterestRevenueExpenseNet'].map(l => pick(l, 'P')).find((x): x is Pick => x !== null);
-    cue('Q4', net ? `没有利息费用（总额）标签，只有净利息（${net.chosen.local}）：利息覆盖不计算，到附注里找利息费用。` : '没有利息费用标签：利息覆盖不计算，到附注里找利息费用。', net ? [net.chosen.i] : []);
+    const net = ['InterestIncomeExpenseNonoperatingNet', 'InterestIncomeExpenseNet'].map(l => pick(l, 'P')).find((x): x is Pick => x !== null);
+    cue('Q4', net ? `没有利息费用标签，利息收支净额（${net.chosen.local}）为净收入：利息覆盖不计算，到附注里找利息费用。` : '没有利息费用标签：利息覆盖不计算，到附注里找利息费用。', net ? [net.chosen.i] : []);
   } else if (v('ebit') !== null && cmp(dec(v('ebit')!), dec(intv)) < 0) cue('Q5', 'EBIT 小于利息费用：营业利润不足以覆盖本期利息，看利率、再融资与契约条款的附注。', [...inputs.ebit.terms, ...inputs.interest.terms].map(t => t.fact));
   if (debt !== null && v('liquidity') !== null && cmp(dec(v('liquidity')!), dec(debt)) >= 0) cue('Q6', '现金与短期投资不少于总债务（净现金）。', [...inputs.liquidity.terms, ...inputs.debt.terms].map(t => t.fact));
   if (metrics.current_ratio.value !== null && (metrics.current_ratio.value as number) < 1) cue('Q7', '流动比率低于 1：流动负债大于流动资产，看营运资本构成与可用授信额度。', [...inputs.assets_current.terms, ...inputs.liabilities_current.terms].map(t => t.fact));
@@ -369,7 +400,7 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   if (has('PaymentsToDevelopSoftware', 'P')) cue('Q16', '有资本化软件支出（PaymentsToDevelopSoftware），未从自由现金流中扣除。', [pick('PaymentsToDevelopSoftware', 'P')!.chosen.i]);
   if (has('RealEstateInvestmentPropertyNet', 'I')) cue('Q17', '这是房地产类公司：实务中常用 FFO、NOI 等口径，本页不计算。', [pick('RealEstateInvestmentPropertyNet', 'I')!.chosen.i]);
   if (meta.amended) cue('Q18', '这是修订文件（/A），可能只含部分内容。', []);
-  const unread = facts.filter(f => f.value === null && !f.nil && !isDim(contexts[f.ctx]) && currencyOf(f) === currency);
+  const unread = facts.filter(f => f.value === null && !f.nil && f.text !== '' && !isDim(contexts[f.ctx]) && currencyOf(f) === currency);
   if (unread.length) cue('Q19', `有 ${unread.length} 个合并口径的金额标签格式本页不解析，未参与计算。`, unread.slice(0, 20).map(f => f.i));
   const order = (c: Cue) => Number(c.id.slice(1));
   cues.sort((a, b) => order(a) - order(b));
@@ -379,6 +410,6 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   meta.display_scale = [...scales.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0])[0]?.[0] ?? 0;
   return {
     definitions: DEFINITIONS_VERSION, status: 'ok', template: { kind: 'general', reason: '', facts: [] }, meta, inputs, metrics, cues, ladder,
-    balance_sheet: { tables: [...bsTables].sort((a, b) => a - b), found: bsTables.size > 0 },
+    balance_sheet: { found, assets: posA ?? null, end: posE ?? null, liabilities_current: posLC ?? null, assets_current: posAC ?? null, start: posS ?? null },
   };
 }

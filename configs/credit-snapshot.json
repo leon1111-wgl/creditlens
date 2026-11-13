@@ -74,7 +74,7 @@
       "order": "Sonnet's results are committed before the program runs on the held-out filings. The definitions freeze in a commit before Sonnet starts.",
       "compared": ["template status", "report period end and months", "total_debt", "current_debt", "liquidity", "net_debt", "ebit", "da", "ebitda", "interest_expense", "interest_coverage", "debt_to_ebitda", "net_debt_to_ebitda", "current_ratio", "cfo", "capex", "fcf", "fcf_to_debt", "operating_lease_liability", "finance_lease_liability", "maturity_next_12m", "maturity_years_2_5", "maturity_after_5"],
       "tolerance": "Amounts: exact to the dollar. Ratios: absolute difference at most 0.005 after both are computed from their own amounts. Not-computed states must agree (both not computed, either reason).",
-      "report": "First run with its commit: agreement per metric and per filing, and every disagreement assigned to one class: concept choice, period or context, table position, arithmetic, sign, scale, not-computed vs value, independent reader error. No pass bar; the classes are the result."
+      "report": "First run with its commit: agreement per metric and per filing, and every disagreement assigned to one class: concept choice, period or context, balance-sheet stretch position, arithmetic, sign, scale, not-computed vs value, independent reader error. No pass bar; the classes are the result."
     },
     "c_highlights": {
       "where": "GitHub Actions, Playwright Chromium 1.49.1, on the built site, every committed gallery filing",

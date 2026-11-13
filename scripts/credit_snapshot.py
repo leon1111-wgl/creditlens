@@ -20,6 +20,7 @@ from datetime import date, datetime, timedelta, timezone
 from decimal import ROUND_HALF_EVEN, Decimal
 import gzip
 import hashlib
+import html
 from io import BytesIO
 import json
 import os
@@ -93,7 +94,7 @@ def dei_values(html: str) -> dict:
     for attrs, body in _DEI.findall(html):
         name = re.search(r'\bname="dei:([A-Za-z]+)"', attrs)
         if name and name.group(1) not in out:
-            out[name.group(1)] = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", body)).replace("&#160;", " ").strip()
+            out[name.group(1)] = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", body))).strip()
     return out
 
 
@@ -178,10 +179,11 @@ def cmd_gallery(args) -> int:
         strata.append({"id": stratum["id"], "label": stratum["label"], "eligible": len(by_stratum[stratum["id"]]),
                        "examined": len(taken) + len(rejected), "taken": len(taken),
                        "rejected": dict(Counter(r["reason"].split(":")[0] for r in rejected)), "rejected_list": rejected})
-    index = {"schema_version": 1, "rule_id": rule["rule_id"], "definitions": config["definitions_version"], "config_sha256": config_sha256(),
-             **run_info(), "population": {"dataset": dataset, "filter": rule["population"]["filter"], "eligible": len(eligible)},
-             "source": config["source"], "strata": strata, "entries": entries}
-    (out / "gallery.json").write_text(json.dumps(index, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        index = {"schema_version": 1, "rule_id": rule["rule_id"], "definitions": config["definitions_version"], "config_sha256": config_sha256(),
+                 **run_info(), "population": {"dataset": dataset, "filter": rule["population"]["filter"], "eligible": len(eligible)},
+                 "source": config["source"], "complete": len(strata) == len(rule["strata"]), "strata": strata, "entries": entries}
+        # Written after every stratum, so a run that times out still leaves what it accepted.
+        (out / "gallery.json").write_text(json.dumps(index, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(json.dumps({"entries": len(entries), "gz_mb": round(sum(e["gz_bytes"] for e in entries) / 1e6, 1)}))
     return 0
 

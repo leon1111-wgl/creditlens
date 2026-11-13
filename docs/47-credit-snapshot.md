@@ -31,37 +31,40 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 
 - `dei:DocumentType` 为 10-K、10-K/A、10-KT、10-Q、10-Q/A、10-QT 之一；否则“不支持的文件类型”（20-F、40-F 等）。
 - 文件中须有 us-gaap 命名空间的事实；没有（如只用 ifrs-full）时“只支持美国公认会计准则（US GAAP）”。
-- **银行**：`Deposits` 在 I 的值大于 0，或 `InterestAndDividendIncomeOperating` 在 P 有值。
+- **银行**：`InterestAndDividendIncomeOperating` 在 P 有值，或 `Deposits` 在 I 的值不少于 `Assets` 在 I 的 20%（非银行公司也会用 `Deposits` 记押金，金额很小）。
 - **保险**：`PremiumsEarnedNet`（P）、`PolicyholderBenefitsAndClaimsIncurredNet`（P）、`LiabilityForFuturePolicyBenefits`（I）、`LiabilityForUnpaidClaimsAndClaimsAdjustmentExpense`（I）任一有值。
 - **投资公司／BDC**：`NetAssetValuePerShare`（I）有值，或 `InvestmentOwnedAtFairValue`（I）有值。
 - 命中以上任何一类：模板不支持，不计算下列指标，只列出触发判断的事实（可点回原格）。依次判断银行、保险、投资公司。
 
 ### 4. 资产负债表上的行
 
-债务与流动性按资产负债表上的行加总，因为发行人给同一笔债务用的概念各不相同（`LongTermDebt`、`LongTermDebtAndCapitalLeaseObligations`、`NotesAndLoansPayable`……），而报表上每一行只出现一次。
+债务与流动性按资产负债表上的行加总，因为发行人给同一笔债务用的概念各不相同（`LongTermDebt`、`LongTermDebtAndCapitalLeaseObligations`、`NotesAndLoansPayable`……），而报表上每一行只出现一次。资产负债表按**文档顺序**划定，不依赖 `<table>`（有的文件用绝对定位的 `<div>` 排版，没有表格）。
 
-- **资产负债表表格** = 含有下列“锚点”概念中至少两个不同概念（在 I、合并口径）的 `<table>` 元素：`AssetsCurrent`、`Assets`、`LiabilitiesCurrent`、`Liabilities`、`LiabilitiesAndStockholdersEquity`。一个事实属于某表格，是指它的元素在该表格内（最近的 `<table>` 祖先）。
-- **位置**按文档顺序。在资产负债表表格里：`AssetsCurrent` 在 I 的事实之前的行属于流动资产；`Assets` 在 I 的事实之后、`LiabilitiesAndStockholdersEquity` 在 I 的事实之前的行属于负债一侧（没有后者时到表格末尾）；负债一侧里 `LiabilitiesCurrent` 在 I 的事实之前的行属于流动负债。同一事实在表格里出现多次时取第一次。
-- **债务概念集合**（只在负债一侧计入）：
+- 只看在 I、合并口径、报告币种的金额事实；“位置”是事实在文档中的先后顺序。同一概念在区段内出现多次时取第一次。
+- **A** = 第一个 `Assets` 事实。**E** = A 之后第一个 `LiabilitiesAndStockholdersEquity`；没有则依次用 `StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest`、`StockholdersEquity`、`Liabilities`。没有 A 或 E：视为没有找到资产负债表。
+- **负债一侧** = 位置在 A 与 E 之间的事实。**LC** = 负债一侧第一个 `LiabilitiesCurrent`；位置在 LC 之前的负债一侧事实属于流动负债区段，之后的属于非流动负债区段。没有 LC：资产负债表不分流动／非流动。
+- **流动资产区段**：AC = A 之前最后一个 `AssetsCurrent`。从 AC（没有 AC 时从 A）往前找，遇到第一个期间型（有 startDate）上下文的事实就停（那是上一张报表的流量）；它与 AC（或 A）之间的事实属于流动资产区段。
+- **债务行** = 负债一侧中，概念属于下面的债务概念集合的事实；另外，发行人自定义概念（不在 us-gaap 等标准命名空间）的本地名以 `SeniorNotes`、`SeniorSecuredNotes`、`SeniorUnsecuredNotes`、`ConvertibleNotes`、`ConvertibleSeniorNotes`、`SecuredNotes`、`UnsecuredNotes`、`Notes`、`NotesPayable`、`LongTermDebt`、`Debt`、`TermLoan`、`Borrowings`、`CreditFacility`、`RevolvingCreditFacility`、`LineOfCredit` 开头，且不含 `Interest`、`Accrued`、`Receivable`、`Issuance`、`Discount`、`Premium`、`FairValue`、`Cost`、`Guarant`、`Held`、`Asset`、`Securities`、`Lease` 的，也是债务行（Q12 列出）。
+- **债务概念集合**：
 
   `ShortTermBorrowings`、`CommercialPaper`、`ShortTermBankLoansAndNotesPayable`、`ShortTermNonBankLoansAndNotesPayable`、`OtherShortTermBorrowings`、`BankOverdrafts`、`LinesOfCreditCurrent`、`NotesPayableCurrent`、`LoansPayableCurrent`、`NotesAndLoansPayableCurrent`、`NotesAndLoansPayable`、`DebtCurrent`、`LongTermDebtCurrent`、`LongTermDebtAndCapitalLeaseObligationsCurrent`、`ConvertibleNotesPayableCurrent`、`ConvertibleDebtCurrent`、`SecuredDebtCurrent`、`UnsecuredDebtCurrent`、`OtherLongTermDebtCurrent`、`SeniorNotesCurrent`、`LongTermNotesPayableCurrent`、`LongTermLoansPayableCurrent`、`NotesPayableRelatedPartiesClassifiedCurrent`、`LongTermDebtNoncurrent`、`LongTermDebt`、`LongTermDebtAndCapitalLeaseObligations`、`LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities`、`DebtLongtermAndShorttermCombinedAmount`、`LongTermNotesPayable`、`LongTermLoansPayable`、`ConvertibleNotesPayable`、`ConvertibleDebtNoncurrent`、`ConvertibleLongTermNotesPayable`、`SeniorNotes`、`SeniorLongTermNotes`、`SecuredLongTermDebt`、`UnsecuredLongTermDebt`、`SecuredDebt`、`UnsecuredDebt`、`LongTermLineOfCredit`、`LineOfCredit`、`OtherLongTermDebtNoncurrent`、`OtherLongTermDebt`、`NotesPayable`、`LoansPayable`、`DebtInstrumentCarryingAmount`、`SubordinatedDebt`、`JuniorSubordinatedNotes`、`NotesPayableRelatedPartiesClassifiedNoncurrent`。
 
-- **小计**：`DebtCurrent`、`ShortTermBorrowings`、`LongTermDebt`、`LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities`、`DebtLongtermAndShorttermCombinedAmount` 是小计概念（它们也常作为普通行出现）。按文档顺序处理每个小计 S：从 S 前一行起往前数同一区段内、尚未被别的小计吸收的债务行（`DebtCurrent`、`ShortTermBorrowings` 的区段是 S 所在的流动或非流动负债区段；另外三个的区段是整个负债一侧），取最短的、从 S 前一行开始的连续若干行，使其之和恰好等于 S：这几行是 S 的组成行，计入 S，不计组成行。找不到这样的行时，S 当作普通行计入，前面的行照常计入，并给出复核提示 Q14。
-- **流动性概念集合**：现金类 `CashAndCashEquivalentsAtCarryingValue`、`Cash`、`CashAndDueFromBanks`、`CashEquivalentsAtCarryingValue`、`CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents`（计入时给 Q11）；短期投资类 `ShortTermInvestments`、`OtherShortTermInvestments`、`MarketableSecuritiesCurrent`、`MarketableSecurities`、`AvailableForSaleSecuritiesDebtSecuritiesCurrent`、`AvailableForSaleSecuritiesDebtSecurities`、`HeldToMaturitySecuritiesCurrent`、`ShortTermInvestmentsAndMarketableSecurities`；小计 `CashCashEquivalentsAndShortTermInvestments`。只计流动资产区段（`AssetsCurrent` 之前）的行。小计 `CashCashEquivalentsAndShortTermInvestments` 吸收它之前的全部流动性行：计入小计，不计这些行；它们之和不等于小计时给出 Q14。没有 `AssetsCurrent`（不分流动／非流动的资产负债表）时，只计现金类与名称含 Current 的概念，位置不限。
+- **债务小计**：`DebtCurrent`、`ShortTermBorrowings`、`LongTermDebt`、`LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities`、`DebtLongtermAndShorttermCombinedAmount` 是小计概念（它们也常作为普通行出现）。按文档顺序处理每个小计 S：从 S 前一行起往前数同一区段内、尚未被别的小计吸收的债务行（`DebtCurrent`、`ShortTermBorrowings` 的区段是 S 所在的流动或非流动负债区段；另外三个的区段是整个负债一侧），取最短的、从 S 前一行开始的连续若干行，使其之和恰好等于 S：这几行是 S 的组成行，计入 S，不计组成行。找不到这样的行时，S 当作普通行计入，前面的行照常计入，并给出复核提示 Q14。
+- **流动性行** = 流动资产区段中，概念属于流动性概念集合的事实。现金类：`CashAndCashEquivalentsAtCarryingValue`、`Cash`、`CashAndDueFromBanks`、`CashEquivalentsAtCarryingValue`、`CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents`（同一区段已有 `CashAndCashEquivalentsAtCarryingValue` 时不计；计入时给 Q11）；短期投资类：`ShortTermInvestments`、`OtherShortTermInvestments`、`MarketableSecuritiesCurrent`、`MarketableSecurities`、`AvailableForSaleSecuritiesDebtSecuritiesCurrent`、`AvailableForSaleSecuritiesDebtSecurities`、`HeldToMaturitySecuritiesCurrent`、`ShortTermInvestmentsAndMarketableSecurities`；小计 `CashCashEquivalentsAndShortTermInvestments`。没有 AC（资产不分流动／非流动）时，只计现金类与名称含 Current 的概念。小计 `CashCashEquivalentsAndShortTermInvestments` 吸收它之前的全部流动性行：计入小计，不计这些行；它们之和不等于小计时给出 Q14。
 
 ### 5. 输入
 
 | 输入 | 期间 | 规则（按顺序取第一个可用的） |
 |---|---|---|
 | 收入（只作背景） | P | `Revenues` \| `RevenueFromContractWithCustomerExcludingAssessedTax` \| `RevenueFromContractWithCustomerIncludingAssessedTax` \| `SalesRevenueNet` |
-| 利息费用 INT | P | `InterestExpense` \| `InterestExpenseNonoperating` \| `InterestAndDebtExpense` \| `InterestExpenseDebt` |
+| 利息费用 INT | P | `InterestExpense` \| `InterestExpenseNonoperating` \| `InterestAndDebtExpense` \| `InterestExpenseDebt` \| `InterestCostsIncurred`（含资本化利息，Q20）；都没有时，`InterestIncomeExpenseNonoperatingNet` \| `InterestIncomeExpenseNet` 中第一个有值的，若为负（净支出）则 INT = 其相反数（Q20），为正或为 0 则 INT 未找到 |
 | EBIT | P | E1 `OperatingIncomeLoss`；E2（没有 E1 时）税前利润 + INT，税前利润 = `IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest` \| `IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments`，须有 INT（Q2） |
 | 折旧摊销 DA | P | `DepreciationDepletionAndAmortization` \| `DepreciationAmortizationAndAccretionNet` \| `DepreciationAndAmortization` \| `Depreciation` + `AmortizationOfIntangibleAssets`（两者都有）\| `Depreciation`（只有折旧，Q12 注明未含摊销） |
 | 经营现金流 CFO | P | `NetCashProvidedByUsedInOperatingActivities` \| `NetCashProvidedByUsedInOperatingActivitiesContinuingOperations` |
 | 资本开支 CAPEX | P | `PaymentsToAcquirePropertyPlantAndEquipment` \| `PaymentsToAcquireProductiveAssets` \| `PaymentsForCapitalImprovements` \| `PaymentsToAcquireOilAndGasPropertyAndEquipment` \| `PaymentsToAcquireOilAndGasProperty` \| `PaymentsToAcquireOtherPropertyPlantAndEquipment`（按标签值，不取绝对值） |
 | 流动资产、流动负债 | I | `AssetsCurrent`；`LiabilitiesCurrent` |
-| 债务 DEBT、流动债务 CD | I | B（首选）：资产负债表表格负债一侧的债务行之和（第 4 节），流动债务 CD 为其中流动负债区段的部分；没有 `LiabilitiesCurrent` 时 CD 只计名称含 Current 或属于短期借款类（`ShortTermBorrowings`、`CommercialPaper`、`ShortTermBankLoansAndNotesPayable`、`ShortTermNonBankLoansAndNotesPayable`、`OtherShortTermBorrowings`、`BankOverdrafts`）的行。F（没有资产负债表表格，或表格里没有债务行）：F1 `LongTermDebt` + STB；F2 `DebtCurrent` + `LongTermDebtNoncurrent`（两者都有时）；F3 `LongTermDebtNoncurrent` + `LongTermDebtCurrent`（可无）+ STB；F4 `LongTermDebtAndCapitalLeaseObligations` + `LongTermDebtAndCapitalLeaseObligationsCurrent`（可无）+ STB；其中 STB = `ShortTermBorrowings` \| （`CommercialPaper`、`ShortTermBankLoansAndNotesPayable`、`OtherShortTermBorrowings` 中有值者之和，没有则为 0）。F 规则下 CD 不计算。都没有：债务“未找到”（不是 0），Q12 |
-| 流动性 LIQ | I | 资产负债表表格流动资产区段的流动性行之和（第 4 节）；没有资产负债表表格时：（`CashAndCashEquivalentsAtCarryingValue` \| `CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents`）+（`ShortTermInvestments` \| `MarketableSecuritiesCurrent` \| `AvailableForSaleSecuritiesDebtSecuritiesCurrent` \| `OtherShortTermInvestments`，没有则 0） |
+| 债务 DEBT、流动债务 CD | I | B（首选）：资产负债表负债一侧的债务行之和（第 4 节，含小计规则）；流动债务 CD = 只在流动负债区段内按同样规则处理的债务行之和（区段内没有债务行时为 0）；没有 `LiabilitiesCurrent` 时 CD 只计名称含 Current 或属于短期借款类（`ShortTermBorrowings`、`CommercialPaper`、`ShortTermBankLoansAndNotesPayable`、`ShortTermNonBankLoansAndNotesPayable`、`OtherShortTermBorrowings`、`BankOverdrafts`）的行。F（没有找到资产负债表，或负债一侧没有债务行）：F1 `LongTermDebt` + STB；F2 `DebtCurrent` + `LongTermDebtNoncurrent`（两者都有时）；F3 `LongTermDebtNoncurrent` + `LongTermDebtCurrent`（可无）+ STB；F4 `LongTermDebtAndCapitalLeaseObligations` + `LongTermDebtAndCapitalLeaseObligationsCurrent`（可无）+ STB；其中 STB = `ShortTermBorrowings` \| （`CommercialPaper`、`ShortTermBankLoansAndNotesPayable`、`OtherShortTermBorrowings` 中有值者之和，没有则为 0）。F 规则下 CD 不计算。都没有：债务“未找到”（不是 0），Q12 |
+| 流动性 LIQ | I | 资产负债表流动资产区段的流动性行之和（第 4 节）；没有找到资产负债表或区段内没有流动性行时：（`CashAndCashEquivalentsAtCarryingValue` \| `CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents`）+（`ShortTermInvestments` \| `MarketableSecuritiesCurrent` \| `AvailableForSaleSecuritiesDebtSecuritiesCurrent` \| `OtherShortTermInvestments`，没有则 0） |
 | 经营租赁负债 OL | I | `OperatingLeaseLiability` \| `OperatingLeaseLiabilityNoncurrent` + `OperatingLeaseLiabilityCurrent`（可无） |
 | 融资租赁负债 FL | I | `FinanceLeaseLiability` \| `FinanceLeaseLiabilityNoncurrent` + `FinanceLeaseLiabilityCurrent`（可无） |
 | 到期：未来 12 个月 | I | `LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths` \| `LongTermDebtMaturitiesRepaymentsOfPrincipalInNextRollingTwelveMonths` \| `LongTermDebtMaturitiesRepaymentsOfPrincipalRemainderOfFiscalYear`（最后一项只用于 10-Q，标为“本财年剩余”） |
@@ -81,7 +84,7 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 | 流动比率 | AssetsCurrent ÷ LiabilitiesCurrent | 任一未找到（不分流动／非流动的资产负债表） |
 | 自由现金流 FCF | CFO − CAPEX | 任一未找到 |
 | FCF／债务 | FCF ÷ DEBT | P 少于 12 个月；DEBT 未找到或为 0 |
-| 含租赁的债务 | DEBT + OL + FL；债务行已含融资租赁（用了 `LongTermDebtAndCapitalLeaseObligations*`）时不再加 FL | 债务未找到 |
+| 含租赁的债务 | DEBT + OL + FL；债务行已含融资租赁（用了 `LongTermDebtAndCapitalLeaseObligations*`）时不再加 FL；只找到 OL、FL 中的一项时另一项按 0 | 债务未找到；需要加的租赁负债一项都没找到 |
 | 到期结构 | 未来 12 个月、第 2–5 年、5 年以后三段，对照 LIQ 与 LIQ + FCF（10-K） | 三段都未找到 |
 
 比率保留两位小数显示；比较与导出用未舍入的值。金额显示为原表量级（例如“12,345 百万美元”），不四舍五入。
@@ -101,14 +104,15 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 | Q9 | CD > LIQ（没有 CD 时用未来 12 个月到期额） | 一年内到期的债务超过现金与短期投资，看流动性来源（循环额度、商业票据备用额度） |
 | Q10 | 债务行用了 `LongTermDebtAndCapitalLeaseObligations*` | 债务已含融资租赁 |
 | Q11 | 流动性计入了含受限现金的概念 | 现金含受限现金 |
-| Q12 | 用了 F 规则、债务未找到、DA 只有折旧，或负债一侧有名称含 Debt／Borrowing／Notes／Loan 的发行人自定义概念未计入 | 列出相关事实，指向资产负债表或附注 |
-| Q13 | 同一概念同一期间数值不一致 | 列出概念 |
+| Q12 | 用了 F 规则；债务未找到；DA 只有折旧；债务含发行人自定义概念；或负债一侧有名称含 Debt／Borrowing／Notes／Loan／CommercialPaper／CreditFacility／LineOfCredit（且不含 Interest／Receivable／Lease／Asset／Securities）而未计入的概念 | 列出相关事实，指向资产负债表或附注 |
+| Q13 | 同一概念同一期间数值不一致，且按其中最低的 decimals 舍入后仍不一致（只是精度不同的重复不算） | 列出概念 |
 | Q14 | 小计与它前面的行对不上（债务小计因此按普通行计入；流动性小计仍吸收前面的行） | 可能有未识别的行，核对是否重复或遗漏 |
 | Q15 | 到期三段之和与 DEBT 相差超过 10% | 到期表是本金，资产负债表是账面值；也可能只覆盖部分债务 |
 | Q16 | `PaymentsToDevelopSoftware` 在 P 有值 | 资本化软件支出未从 FCF 中扣除 |
 | Q17 | `RealEstateInvestmentPropertyNet` 在 I 有值 | 房地产公司常用 FFO、NOI 等口径，本页不计算 |
 | Q18 | 文件类型带 /A | 修订文件，可能只含部分内容 |
-| Q19 | 有未解析格式的事实 | 列出数量 |
+| Q19 | 有合并口径、报告币种、文字非空、但格式本页不解析的金额事实 | 列出数量 |
+| Q20 | INT 取自 `InterestCostsIncurred` 或利息收支净额 | 写明口径不同于利润表上的利息费用总额 |
 
 ## 预先登记的检查（在任何运行之前提交）
 
@@ -130,7 +134,7 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 - 留出样本：SEC 2026q1 的 10-K（同画廊总体）8 份，加 2026q3 的 10-Q（2026-06-30 期末、大型加速申报人）2 份；排除画廊发行人与开发用发行人（苹果、微软、可口可乐），按另一个盐排序，取前几份可用的。选样运行只选样、取文件，不运行快照程序。
 - 定义在 Sonnet 开始之前冻结（单独提交）。Sonnet 作为独立代理，只拿到本文件“定义”一节和文件的档案地址，没有看过程序、测试或程序输出，自己读文件计算。它的结果先提交，程序再在这些文件上运行。
 - 比较：模板判断、D 与月数，以及第 6 节的全部指标和输入（见配置中的列表）。金额精确到美元；比率各自从自己的金额算出后相差不超过 0.005；“不计算”须双方一致。
-- 报告首轮（带提交号）：逐指标、逐文件一致率，每个分歧归入一类：概念选择、期间或上下文、表格位置、算术、符号、量级、不计算与有值、独立读者出错。不设通过线，分类本身就是结果。
+- 报告首轮（带提交号）：逐指标、逐文件一致率，每个分歧归入一类：概念选择、期间或上下文、报表区段位置、算术、符号、量级、不计算与有值、独立读者出错。不设通过线，分类本身就是结果。
 
 ### (c) 点击定位
 

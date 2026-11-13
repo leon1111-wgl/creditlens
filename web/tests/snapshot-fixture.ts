@@ -3,7 +3,7 @@
    tests/fixtures/snapshot-hostile.htm (used by the Actions visitor flow) must equal hostileFiling(). */
 
 export interface FixtureOptions {
-  form?: string; bank?: boolean; hostile?: boolean; noBalanceSheet?: boolean; ytdMonths?: number; extraBalanceRows?: string;
+  form?: string; bank?: boolean; hostile?: boolean; noBalanceSheet?: boolean; ytdMonths?: number; extraBalanceRows?: string; divLayout?: boolean; netInterest?: boolean;
 }
 
 const NS = 'xmlns="http://www.w3.org/1999/xhtml" xmlns:ix="http://www.xbrl.org/2013/inlineXBRL" xmlns:ixt="http://www.xbrl.org/inlineXBRL/transformation/2020-02-12" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:xbrldi="http://xbrl.org/2006/xbrldi" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:us-gaap="http://fasb.org/us-gaap/2025" xmlns:dei="http://xbrl.sec.gov/dei/2025" xmlns:srt="http://fasb.org/srt/2025" xmlns:lsi="http://leon-synthetic.example/20251231"';
@@ -19,7 +19,7 @@ export function syntheticFiling(o: FixtureOptions = {}): string {
   const row = (label: string, name: string, now: string, before: string, extra = '') =>
     `<tr><td>${label}</td><td>$</td><td style="text-align:right">${nf(name, 'c-i', now, extra)}</td><td style="text-align:right">${nf(name, 'c-p', before, extra)}</td></tr>`;
   const bank = o.bank ? row('Deposits', 'us-gaap:Deposits', '9,000', '8,500') : '';
-  const balance = o.noBalanceSheet ? '' : `
+  const balanceHtml = o.noBalanceSheet ? '' : `
 <p style="page-break-before:always"><b>LEON SYNTHETIC INDUSTRIES INC. — CONSOLIDATED BALANCE SHEETS (SYNTHETIC)</b> (In millions)</p>
 <table>
 <tr><td>Cash and cash equivalents</td><td>$</td><td>${nf('us-gaap:CashAndCashEquivalentsAtCarryingValue', 'c-i', '1,200')}</td><td>${nf('us-gaap:CashAndCashEquivalentsAtCarryingValue', 'c-p', '1,000')}</td></tr>
@@ -46,6 +46,8 @@ ${row('Total liabilities', 'us-gaap:Liabilities', '3,075', '2,840')}
 ${row('Total shareholders’ equity', 'us-gaap:StockholdersEquity', '3,525', '3,160')}
 ${row('Total liabilities and shareholders’ equity', 'us-gaap:LiabilitiesAndStockholdersEquity', '6,600', '6,000')}
 </table>`;
+  // Some filing agents lay statements out with absolutely positioned <div>s and no <table> at all.
+  const balance = o.divLayout ? balanceHtml.replace(/<table>/g, '<div class="page">').replace(/<\/table>/g, '</div>').replace(/<tr>/g, '<div>').replace(/<\/tr>/g, '</div>').replace(/<td[^>]*>/g, '<span>').replace(/<\/td>/g, '</span>') : balanceHtml;
   const hostile = o.hostile ? `
 <script>window.__pwned = 1; try { parent.__pwned = 1 } catch (e) {}</script>
 <img src="https://example.invalid/pixel.png" onerror="parent.__pwned = 1" alt="">
@@ -78,7 +80,7 @@ ${hostile}
 <tr><td>Widgets revenue</td><td>${nf('us-gaap:Revenues', 'c-seg', '4,000')}</td></tr>
 ${o.ytdMonths ? `<tr><td>Revenue, quarter</td><td>${nf('us-gaap:Revenues', 'c-q', '4,700')}</td></tr>` : ''}
 <tr><td>Operating income</td><td>${nf('us-gaap:OperatingIncomeLoss', 'c-d', '1,100')}</td></tr>
-<tr><td>Interest expense</td><td>(${nf('us-gaap:InterestExpenseNonoperating', 'c-d', '120')})</td></tr>
+<tr><td>Interest expense</td><td>(${o.netInterest ? nf('us-gaap:InterestIncomeExpenseNonoperatingNet', 'c-d', '120', 'sign="-"') : nf('us-gaap:InterestExpenseNonoperating', 'c-d', '120')})</td></tr>
 <tr><td>Income before income taxes</td><td>${nf('us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest', 'c-d', '1,000')}</td></tr>
 </table>
 ${balance}

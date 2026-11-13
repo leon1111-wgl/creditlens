@@ -47,13 +47,19 @@ async function newPage({ width = 1440, height = 900, scheme = 'light' } = {}) {
   page.on('console', m => { if (m.type() === 'error' && !/Blocked script execution in 'about:srcdoc'/.test(m.text())) errors.push(m.text()); });
   page.on('pageerror', e => errors.push(String(e)));
   await page.goto(PAGE);
-  await page.waitForSelector('#snGalleryNote:not(:empty)');
+  await until(page, () => !/正在载入/.test(document.getElementById('snGalleryNote')?.textContent || '正在载入'));
   return { page, context, errors };
 }
+// The page's CSP has no 'unsafe-eval', so Playwright's waitForFunction (string evaluation) is refused; poll with evaluate.
+async function until(page, fn, timeout = 120_000) {
+  const end = Date.now() + timeout;
+  while (Date.now() < end) { if (await page.evaluate(fn)) return; await page.waitForTimeout(100); }
+  throw new Error('timed out waiting for the page');
+}
 async function waitResult(page) {
-  await page.waitForFunction(() => { const s = document.getElementById('snStatus'); return s && !s.hidden && /\b(ok|error)\b/.test(s.className); }, null, { timeout: 120_000 });
+  await until(page, () => { const s = document.getElementById('snStatus'); return !!s && !s.hidden && /\b(ok|error)\b/.test(s.className); });
   const cls = await page.getAttribute('#snStatus', 'class');
-  if (/\bok\b/.test(cls)) await page.waitForFunction(() => document.getElementById('snFrame').dataset.ready === '1', null, { timeout: 120_000 });
+  if (/\bok\b/.test(cls)) await until(page, () => document.getElementById('snFrame').dataset.ready === '1');
   return { ok: /\bok\b/.test(cls), text: await page.innerText('#snStatus') };
 }
 async function chooseFile(page, name, buffer, mimeType = 'text/html') {
@@ -223,7 +229,7 @@ if (mode === 'check') {
     // exports
     const files = await saveExports(page, `flow-${label}`);
     const md = files.md.toString('utf8'), csv = files.csv.toString('utf8');
-    if (!md.includes(general.accession) || !/us-gaap:/.test(md) || !md.includes(general.document_url.split('/').pop()) && !/accession/.test(md)) fail(`${label}: memo lacks accession/concepts`);
+    if (!md.includes(general.accession) || !/`us-gaap:/.test(md) || !md.includes(general.document_url + '#')) fail(`${label}: memo lacks accession, concepts or cell links`);
     if (!csv.startsWith('﻿kind,key,label') || !csv.includes('input_term') || !csv.includes(general.accession)) fail(`${label}: csv header/rows`);
     if (files.docx.subarray(0, 2).toString() !== 'PK' || !files.docx.includes(Buffer.from('word/document.xml')) || !files.docx.includes(Buffer.from(general.accession))) fail(`${label}: docx package`);
     // bank filing from the gallery

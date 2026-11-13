@@ -120,6 +120,37 @@ describe('templates and fallbacks', () => {
   });
 });
 
+describe('rules revised on the gallery before the freeze', () => {
+  const row = (name: string, text: string) => `<tr><td>x</td><td><ix:nonFraction unitRef="usd" contextRef="c-i" decimals="-6" name="${name}" format="ixt:num-dot-decimal" scale="6">${text}</ix:nonFraction></td></tr>`;
+  test('a balance sheet laid out without <table> is found by document order', () => {
+    const s = snap(syntheticFiling({ divLayout: true }));
+    expect(s.balance_sheet.found).toBe(true);
+    expect(val(s, 'debt')).toBe('2250000000');
+    expect(val(s, 'liquidity')).toBe('1500000000');
+  });
+  test('a small Deposits line does not make a bank', () => {
+    expect(snap(syntheticFiling({ extraBalanceRows: row('us-gaap:Deposits', '5') })).template.kind).toBe('general');
+  });
+  test('net interest is used, negated, only when it is a net expense, with Q20', () => {
+    const s = snap(syntheticFiling({ netInterest: true }));
+    expect(val(s, 'interest')).toBe('120000000');
+    expect(s.cues.some(c => c.id === 'Q20')).toBe(true);
+    expect(s.metrics.interest_coverage.value as number).toBeCloseTo(1100 / 120, 10);
+  });
+  test('company-specific senior notes on the liabilities side count as debt, with a cue', () => {
+    const s = snap(syntheticFiling({ extraBalanceRows: row('lsi:SeniorNotesDue2030', '300') }));
+    expect(val(s, 'debt')).toBe('2550000000');
+    expect(s.cues.some(c => c.id === 'Q12' && /lsi:SeniorNotesDue2030/.test(c.text))).toBe(true);
+  });
+  test('duplicates that differ only by precision are consistent', () => {
+    const extra = `<p>${'<ix:nonFraction unitRef="usd" contextRef="c-d" decimals="-8" name="us-gaap:Revenues" format="ixt:num-dot-decimal" scale="9">9.0</ix:nonFraction>'}</p>`;
+    const s = snap(syntheticFiling().replace('</body>', extra + '</body>'));
+    expect(s.cues.some(c => c.id === 'Q13')).toBe(false);
+    const wrong = snap(syntheticFiling().replace('</body>', extra.replace('>9.0<', '>9.4<') + '</body>'));
+    expect(wrong.cues.some(c => c.id === 'Q13')).toBe(true);
+  });
+});
+
 describe('sandboxed view', () => {
   test('removes scripts, frames, handlers, external links and loads; keeps in-document links; puts a CSP first', () => {
     const p = parseFiling(hostileFiling());
