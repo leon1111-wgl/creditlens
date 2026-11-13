@@ -33,7 +33,7 @@ jobs:
         working-directory: web
       - name: Committed bundles match a fresh build
         working-directory: web
-        run: pnpm build && git diff --exit-code ../creditlens/ask.js ../creditlens/grounding.js ../creditlens/table-check.js
+        run: pnpm build && git diff --exit-code ../creditlens/ask.js ../creditlens/grounding.js ../creditlens/table-check.js ../creditlens/snapshot.js
       # XBRL grounding: re-score the saved held-out run from its saved key and OCR (no OCR, no network)
       # and check the published page images and fact files against it.
       - run: python scripts/xbrl_grounding.py verify-saved artifacts/xbrl-grounding/heldout-first-run.json.gz --site creditlens/grounding
@@ -98,6 +98,8 @@ jobs:
           node --check creditlens/ask.js
           node --check creditlens/grounding.js
           node --check creditlens/table-check.js
+          node --check creditlens/snapshot.js
+          node --check scripts/credit_snapshot_actions.mjs
           node --check creditlens/research-write-intent.js
           node --check creditlens/research-write-journal.js
           node --check artifacts/explanation-reviews-syntax.js

@@ -1,0 +1,40 @@
+name: credit-snapshot
+# 信用快照 visitor flow on the built site in Chromium, at 1440 and 375 px, light and dark: drop a filing, wrong
+# file types, an oversize file, a hostile file (scripts and handlers must not run), a bank filing, click-to-cell,
+# the three exports and the gallery. Then pre-registered check (c): every figure link on every committed gallery
+# filing must mark its own tagged cell, in view, with the displayed value. Filings come from the committed gallery.
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  visitor-flow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.lock
+      - run: python scripts/export_static_demo.py --output site
+      - run: node scripts/check_static_demo.js site
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        run: npm install --no-save --no-package-lock playwright@1.49.1 && npx playwright install --with-deps chromium
+      - name: Visitor flow and check (c)
+        run: node scripts/credit_snapshot_actions.mjs --mode check --site site --out snapshot-out 2>&1 | tee snapshot-out-log.txt; exit ${PIPESTATUS[0]}
+      - if: always()
+        run: cat snapshot-out/summary.md >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: credit-snapshot-check-${{ github.run_id }}
+          path: |
+            snapshot-out/
+            snapshot-out-log.txt
+          retention-days: 14

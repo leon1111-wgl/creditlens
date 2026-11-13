@@ -223,6 +223,23 @@ def create_app(dataset: Path | None = None, audit_db: Path | None = None, *,
             raise HTTPException(404, "Not a published benchmark file")
         return FileResponse(folder / name, media_type="image/webp" if name.endswith(".webp") else "application/json")
 
+    # 信用快照: the visitor's own EDGAR filing is read in the browser; the gallery is a committed Actions run.
+    @application.get("/snapshot", include_in_schema=False)
+    def snapshot_page():
+        return FileResponse(ROOT / "creditlens/snapshot.html")
+
+    @application.get("/assets/snapshot.js", include_in_schema=False)
+    def snapshot_script():
+        return FileResponse(ROOT / "creditlens/snapshot.js", media_type="text/javascript")
+
+    @application.get("/assets/snapshot/{name:path}", include_in_schema=False)
+    def snapshot_asset(name: str):
+        import re
+        folder = ROOT / "creditlens/snapshot"
+        if not re.fullmatch(r"gallery\.json|filings/[0-9]{1,10}-[0-9]{10}-[0-9]{2}-[0-9]{6}\.htm\.gz", name) or not (folder / name).is_file():
+            raise HTTPException(404, "Not a published gallery file")
+        return FileResponse(folder / name, media_type="application/json" if name.endswith(".json") else "application/gzip")
+
     @application.get("/intro", include_in_schema=False)
     def product_intro():
         return FileResponse(ROOT / "creditlens/intro.html")

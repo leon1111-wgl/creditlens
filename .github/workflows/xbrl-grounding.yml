@@ -6,12 +6,12 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "heldout (committed rule) | dev | added (explicit CIKs, not held-out) | table-eval | table-probe (截图核对)"
+        description: "heldout (committed rule) | dev | added (explicit CIKs, not held-out) | table-eval | table-probe (截图核对) | snapshot-* (信用快照, docs/47)"
         default: heldout
         type: choice
-        options: [heldout, dev, added, table-eval, table-probe]
+        options: [heldout, dev, added, table-eval, table-probe, snapshot-probe, snapshot-gallery, snapshot-parser-check, snapshot-heldout-select, snapshot-heldout-run]
       filings:
-        description: "dev/added: cik:accession:primary-document, comma-separated (from the EDGAR filing index)"
+        description: "dev/added/snapshot-probe: cik:accession:primary-document, comma-separated (from the EDGAR filing index)"
         default: ""
       label:
         description: "Run label"
@@ -67,7 +67,7 @@ jobs:
           else
             MODE="$IN_MODE"; FILINGS="$IN_FILINGS"; LABEL="$IN_LABEL"; RULE="$IN_RULE"; SPLIT="$IN_SPLIT"; URLS="$IN_URLS"
           fi
-          case "$MODE" in heldout|dev|added|table-eval|table-probe) ;; *) echo "bad mode"; exit 1;; esac
+          case "$MODE" in heldout|dev|added|table-eval|table-probe|snapshot-probe|snapshot-gallery|snapshot-parser-check|snapshot-heldout-select|snapshot-heldout-run) ;; *) echo "bad mode"; exit 1;; esac
           case "$RULE" in b|c) ;; *) echo "bad rule"; exit 1;; esac
           case "$SPLIT" in dev|test) ;; *) echo "bad split"; exit 1;; esac
           [[ "$FILINGS" =~ ^[0-9A-Za-z:.,_\ -]*$ ]] || { echo "bad filings"; exit 1; }
@@ -162,4 +162,61 @@ jobs:
           path: |
             table-out/
             table-out-log.txt
+          retention-days: 14
+  # 信用快照 (docs/47-credit-snapshot.md): filings come from Internet Archive captures of SEC files, checked
+  # against their CDX digests; the snapshot is computed by the page's own code in Chromium.
+  snapshot:
+    needs: inputs
+    if: startsWith(needs.inputs.outputs.mode, 'snapshot-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.lock
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        run: npm install --no-save --no-package-lock playwright@1.49.1 && npx playwright install --with-deps chromium
+      - name: Run
+        env:
+          MODE: ${{ needs.inputs.outputs.mode }}
+          FILINGS: ${{ needs.inputs.outputs.filings }}
+        run: |
+          set -euo pipefail
+          mkdir -p snap/out
+          compute() { python scripts/export_static_demo.py --output site > /dev/null; node scripts/credit_snapshot_actions.mjs --mode "$1" --site site --list "$2" --dir "$3" --out snap/out; }
+          case "$MODE" in
+            snapshot-gallery)
+              python scripts/credit_snapshot.py gallery --out snap/gallery 2>&1 | tee snap/gallery-log.txt
+              rm -rf creditlens/snapshot && mkdir -p creditlens/snapshot && cp -r snap/gallery/filings snap/gallery/gallery.json creditlens/snapshot/
+              compute compute creditlens/snapshot/gallery.json creditlens/snapshot
+              python scripts/credit_snapshot.py merge --index creditlens/snapshot/gallery.json --computed snap/out/computed
+              cp creditlens/snapshot/gallery.json snap/gallery/gallery.json ;;
+            snapshot-parser-check)
+              compute compute creditlens/snapshot/gallery.json creditlens/snapshot
+              python scripts/credit_snapshot.py fsds-check --index creditlens/snapshot/gallery.json --computed snap/out/computed --out snap/out
+              cp creditlens/snapshot/gallery.json snap/gallery.json && python scripts/credit_snapshot.py merge --index snap/gallery.json --computed snap/out/computed ;;
+            snapshot-heldout-select)
+              python scripts/credit_snapshot.py heldout-select --out snap/heldout 2>&1 | tee snap/heldout-log.txt ;;
+            snapshot-heldout-run)
+              python scripts/credit_snapshot.py fetch --listing artifacts/credit-snapshot/heldout.json --out snap/heldout
+              compute compute snap/heldout/fetched.json snap/heldout
+              python scripts/credit_snapshot.py heldout-compare --key artifacts/credit-snapshot/heldout-key.json --computed snap/out/computed --out snap/out ;;
+            snapshot-probe)
+              python scripts/credit_snapshot.py fetch --filings "$FILINGS" --out snap/probe
+              compute probe snap/probe/fetched.json snap/probe ;;
+          esac
+      - if: always()
+        run: cat snap/out/summary.md >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: snapshot-${{ needs.inputs.outputs.mode }}-${{ needs.inputs.outputs.label }}-${{ github.run_id }}
+          path: |
+            snap/
           retention-days: 14

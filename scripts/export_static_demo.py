@@ -44,6 +44,7 @@ ROLES = ("analyst", "reviewer", "viewer")
 PAGES = {
     "/intro": ("index.html", "intro.html"),
     "/ask": ("ask.html", "ask.html"),
+    "/snapshot": ("snapshot.html", "snapshot.html"),
     "/grounding": ("grounding.html", "grounding.html"),
     "/table-lookup": ("table-lookup.html", "table-lookup.html"),
     "/margin": ("margin.html", "margin.html"),
@@ -51,11 +52,11 @@ PAGES = {
     "/tasks": ("tasks.html", "tasks.html"),
     "/experiments": ("experiments.html", "experiments.html"),
 }
-APP_ROUTES = ("/", "/intro", "/ask", "/grounding", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
+APP_ROUTES = ("/", "/intro", "/ask", "/snapshot", "/grounding", "/tasks", "/table-lookup", "/margin", "/research", "/documents", "/cross-page",
               "/explanation-reviews", "/reference-review", "/experiments", "/transfer", "/document-preparation",
               "/lab", "/docs")
 ASSETS = ("workspace.css", "workspace.js", "theme.js", "research-write-intent.js", "research-write-journal.js",
-          "ask.js", "ask-pack.json", "grounding.js")
+          "ask.js", "ask-pack.json", "grounding.js", "snapshot.js")
 # 截图核对 is evaluated but not shipped (v0.35.0: it missed the pre-registered wrong-value bar, docs/46-table-check.md).
 # The public export leaves it out; the Actions check, evaluation and probe jobs export it with --with-table-check.
 HIDDEN_TABLE_CHECK = {"page": ("/table-check", ("table-check.html", "table-check.html")), "asset": "table-check.js"}
@@ -283,6 +284,22 @@ def _copy_grounding(target: Path) -> None:
             (target/name).write_bytes(raw)
 
 
+def _copy_snapshot_gallery(target: Path) -> None:
+    """Copy the committed credit-snapshot gallery: the index and each gzipped filing it lists, hash-checked."""
+    source = ROOT/"creditlens/snapshot"
+    index_path = source/"gallery.json"
+    if not index_path.is_file():
+        return
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    (target/"filings").mkdir(parents=True)
+    shutil.copyfile(index_path, target/"gallery.json")
+    for entry in index["entries"]:
+        raw = (source/entry["file"]).read_bytes()
+        if hashlib.sha256(raw).hexdigest() != entry["gz_sha256"]:
+            raise ValueError(f"Gallery filing does not match its saved index: {entry['file']}")
+        (target/entry["file"]).write_bytes(raw)
+
+
 def _source_commit() -> str | None:
     """The commit the export was built from; CI passes the tested SHA explicitly."""
     if os.getenv("CREDITLENS_SOURCE_COMMIT"):
@@ -395,6 +412,7 @@ def export(out: Path) -> dict:
         shutil.copyfile(ROOT/"creditlens"/name, out/"assets"/name)
     shutil.copyfile(ROOT/"scripts/static_demo_shim.js", out/"assets/static-demo.js")
     _copy_grounding(out/"assets/grounding")
+    _copy_snapshot_gallery(out/"assets/snapshot")
     for route, (target, source) in PAGES.items():
         (out/target).write_text(_rewrite_page((ROOT/"creditlens"/source).read_text(encoding="utf-8")), encoding="utf-8")
     (out/".nojekyll").write_text("", encoding="utf-8")
