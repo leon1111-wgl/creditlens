@@ -62,11 +62,15 @@ async function waitResult(page) {
   if (/\bok\b/.test(cls)) await until(page, () => document.getElementById('snFrame').dataset.ready === '1');
   return { ok: /\bok\b/.test(cls), text: await page.innerText('#snStatus') };
 }
+// Clear the previous result first, so waitResult cannot read the last file's status or frame.
+const resetResult = page => page.evaluate(() => { const s = document.getElementById('snStatus'); s.hidden = true; s.className = 'sn-status'; document.getElementById('snFrame').dataset.ready = '0'; });
 async function chooseFile(page, name, buffer, mimeType = 'text/html') {
+  await resetResult(page);
   await page.setInputFiles('#snFile', { name, mimeType, buffer });
   return waitResult(page);
 }
 async function dropFile(page, name) {
+  await resetResult(page);
   await page.evaluate(async (name) => {
     const blob = await (await fetch('/__fixture/' + encodeURIComponent(name))).blob();
     const dt = new DataTransfer(); dt.items.add(new File([blob], name, { type: 'text/html' }));
@@ -234,6 +238,7 @@ if (mode === 'check') {
     if (files.docx.subarray(0, 2).toString() !== 'PK' || !files.docx.includes(Buffer.from('word/document.xml')) || !files.docx.includes(Buffer.from(general.accession))) fail(`${label}: docx package`);
     // bank filing from the gallery
     if (bank) {
+      await resetResult(page);
       await page.click(`#snGalleryTable tr[data-gallery="${bank.id}"] button.sn-open`);
       const r = await waitResult(page);
       const text = await page.innerText('#snCues');
@@ -242,6 +247,7 @@ if (mode === 'check') {
       await page.screenshot({ path: path.join(out, `flow-${label}-bank.png`) });
     } else note(`${label}: no unsupported template in the gallery`);
     // open a gallery filing
+    await resetResult(page);
     await page.click(`#snGalleryTable tr[data-gallery="${general.id}"] button.sn-open`);
     const g = await waitResult(page);
     if (!g.ok || !page.url().includes('#g=')) fail(`${label}: gallery open → ${g.text} ${page.url()}`);
@@ -272,4 +278,5 @@ if (mode === 'check') {
 await browser.close();
 server.close();
 writeFileSync(path.join(out, 'summary.md'), `## Credit snapshot · ${mode}\n\n${summary.map(s => '- ' + s).join('\n')}\n\n${failures.length ? '### Failures\n\n' + failures.map(f => '- ' + f).join('\n') : 'No failures.'}\n`);
-if (failures.length) { console.error(`${failures.length} failures`); process.exit(1); }
+// compute/probe record click failures in their reports and summary; the pass/fail gate for check (c) is --mode check.
+if (failures.length && mode === 'check') { console.error(`${failures.length} failures`); process.exit(1); }

@@ -116,8 +116,7 @@ def fetch_filing(fetcher: Fetcher, candidate: dict, max_bytes: int, out: Path) -
     except RuntimeError as error:
         text = str(error)
         return None, "too_large" if "larger than" in text else "archive_fetch_failed: " + text[:160]
-    html = raw.decode("utf-8", "replace")
-    dei = dei_values(html)
+    dei = dei_values(raw.decode("utf-8", "replace"))
     form = re.sub(r"\s+", "", dei.get("DocumentType", "")).upper()
     if dei.get("EntityCentralIndexKey", "").lstrip("0") != str(cik) or form != candidate["form"].upper():
         return None, "archived_copy_not_this_filing"
