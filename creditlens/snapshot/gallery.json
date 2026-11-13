@@ -286,7 +286,8 @@
     "cues": [
      "Q7",
      "Q11",
-     "Q20"
+     "Q20",
+     "Q22"
     ]
    },
    "stratum": "mining",
@@ -318,15 +319,17 @@
    "snapshot": {
     "status": "ok",
     "template": "general",
-    "debt_to_ebitda": 0.01773905347182793,
+    "debt_to_ebitda": 0.35542086937644035,
     "interest_coverage": 22.849621873182084,
     "current_ratio": 2.474098549132125,
-    "fcf_to_debt": 39.16903977406449,
-    "debt": "16996000",
+    "fcf_to_debt": 1.95492654162739,
+    "debt": "340533000",
     "currency": "USD",
     "display_scale": 3,
     "cues": [
      "Q6",
+     "Q10",
+     "Q12",
      "Q19",
      "Q20"
     ]
@@ -455,8 +458,7 @@
     "display_scale": 6,
     "cues": [
      "Q6",
-     "Q12",
-     "Q14"
+     "Q12"
     ]
    },
    "stratum": "mining",
@@ -615,7 +617,9 @@
     "debt": "2846697000",
     "currency": "USD",
     "display_scale": 3,
-    "cues": []
+    "cues": [
+     "Q22"
+    ]
    },
    "stratum": "construction",
    "stratum_label": "建筑 (SIC 1500–1799)",
@@ -658,7 +662,8 @@
      "Q12",
      "Q12",
      "Q15",
-     "Q20"
+     "Q20",
+     "Q22"
     ]
    },
    "stratum": "construction",
@@ -779,7 +784,8 @@
     "currency": "USD",
     "display_scale": 6,
     "cues": [
-     "Q12"
+     "Q12",
+     "Q22"
     ]
    },
    "stratum": "manufacturing",
@@ -820,7 +826,8 @@
     "display_scale": 3,
     "cues": [
      "Q4",
-     "Q12"
+     "Q12",
+     "Q22"
     ]
    },
    "stratum": "manufacturing",
@@ -942,7 +949,8 @@
     "currency": "USD",
     "display_scale": 3,
     "cues": [
-     "Q6"
+     "Q6",
+     "Q22"
     ]
    },
    "stratum": "transport_utilities",
@@ -985,7 +993,8 @@
      "Q5",
      "Q7",
      "Q9",
-     "Q10"
+     "Q10",
+     "Q22"
     ]
    },
    "stratum": "transport_utilities",
@@ -1108,7 +1117,8 @@
     "currency": "USD",
     "display_scale": 3,
     "cues": [
-     "Q6"
+     "Q6",
+     "Q12"
     ]
    },
    "stratum": "wholesale",
@@ -1271,7 +1281,8 @@
     "display_scale": 6,
     "cues": [
      "Q9",
-     "Q10"
+     "Q10",
+     "Q22"
     ]
    },
    "stratum": "wholesale",
@@ -1672,7 +1683,8 @@
     "display_scale": 3,
     "cues": [
      "Q12",
-     "Q20"
+     "Q20",
+     "Q22"
     ]
    },
    "stratum": "finance",
@@ -1884,8 +1896,8 @@
  ],
  "computed_by": {
   "engine": "creditlens/snapshot.js in Playwright Chromium 1.49.1",
-  "run": "43498565370",
-  "commit": "a931ba9b6a124b0cf5e3956841c598f03f44d03a",
-  "generated_at": "2026-11-13T20:23:50+00:00"
+  "run": "43506192793",
+  "commit": "d3a00ba6e58e97230487ca235b61c73c77ed2c48",
+  "generated_at": "2026-11-13T21:00:08+00:00"
  }
 }
