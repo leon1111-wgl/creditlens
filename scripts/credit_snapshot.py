@@ -319,20 +319,32 @@ def q4(value: str) -> Decimal:
     return Decimal(value).quantize(Decimal("0.0001"), rounding=ROUND_HALF_EVEN)
 
 
-def compare_fsds(rows: list[dict], computed: dict) -> dict:
+def compare_fsds(rows: list[dict], computed: dict, rule: str = "registered") -> dict:
+    """rule "registered": the key as pre-registered. rule "corrected" (post hoc, after the first run): FSDS writes a
+    per-share unit as its numerator ("USD" for USD/shares), and a nil or empty tag in the filing counts as present
+    without a value (its own bucket, never as equal)."""
     keys: dict[tuple, set] = defaultdict(set)
+    valueless: set = set()
     contexts, units = computed["contexts"], computed["units"]
     for f in computed["facts"]:
-        if f["value"] is None:
+        unit = units.get(f["unit"], f["unit"])
+        if rule == "corrected" and unit.endswith(":shares") and "/" in unit:
+            unit = unit.split("/")[0]
+        key = fact_key(f["local"], unit, contexts.get(f["ctx"], {}))
+        if not key:
             continue
-        key = fact_key(f["local"], units.get(f["unit"], f["unit"]), contexts.get(f["ctx"], {}))
-        if key:
-            keys[key].add(q4(f["value"]))
-    found = agree = 0
+        if f["value"] is None:
+            valueless.add(key)
+            continue
+        keys[key].add(q4(f["value"]))
+    found = agree = without_value = 0
     missing, conflicts = [], []
     for r in rows:
         key = (r["tag"], r["uom"], r["ddate"], int(r["qtrs"]))
         if key not in keys:
+            if rule == "corrected" and key in valueless:
+                without_value += 1
+                continue
             missing.append(key)
             continue
         found += 1
@@ -340,7 +352,7 @@ def compare_fsds(rows: list[dict], computed: dict) -> dict:
             agree += 1
         else:
             conflicts.append({"key": key, "fsds": r["value"], "program": sorted(str(v) for v in keys[key])})
-    return {"rows": len(rows), "found": found, "agree": agree, "missing": missing, "conflicts": conflicts}
+    return {"rows": len(rows), "found": found, "agree": agree, "without_value": without_value, "missing": missing, "conflicts": conflicts}
 
 
 def cmd_fsds_check(args) -> int:
@@ -361,17 +373,22 @@ def cmd_fsds_check(args) -> int:
             if row.get("segments") or row.get("coreg"):
                 continue
             rows[row["adsh"]].append(row)
-    per_filing, totals = [], Counter()
+    per_filing, totals, corrected_totals = [], Counter(), Counter()
     for accession, entry in wanted.items():
         computed = json.loads((computed_dir / f"{entry['id']}.json").read_text(encoding="utf-8"))
         if computed.get("error"):  # the page could not read the filing: every FSDS row of it counts as not found
             computed = {"facts": [], "contexts": {}, "units": {}}
+        corrected = compare_fsds(rows.get(accession, []), computed, "corrected")
+        corrected_totals.update(rows=corrected["rows"], found=corrected["found"], agree=corrected["agree"], without_value=corrected["without_value"],
+                                missing=len(corrected["missing"]))
         result = compare_fsds(rows.get(accession, []), computed)
         totals.update(rows=result["rows"], found=result["found"], agree=result["agree"])
         per_filing.append({"id": entry["id"], "name": entry["name"], "accession": accession, "rows": result["rows"], "found": result["found"],
                            "agree": result["agree"], "recall": result["found"] / result["rows"] if result["rows"] else None,
                            "agreement": result["agree"] / result["found"] if result["found"] else None,
-                           "missing": [list(k) for k in result["missing"]], "conflicts": result["conflicts"]})
+                           "missing": [list(k) for k in result["missing"]], "conflicts": result["conflicts"],
+                           "corrected_key": {k: corrected[k] for k in ("found", "agree", "without_value")} | {"missing": [list(k) for k in corrected["missing"]], "conflicts": corrected["conflicts"]},
+                           "fsds_rows": rows.get(accession, [])})
     bar = check["pass_bar"]
     recall = totals["found"] / totals["rows"] if totals["rows"] else 0
     agreement = totals["agree"] / totals["found"] if totals["found"] else 0
@@ -379,12 +396,16 @@ def cmd_fsds_check(args) -> int:
               and all(f["recall"] is not None and f["recall"] >= bar["recall_each_filing"] for f in per_filing))
     report = {"schema_version": 1, "check": "a_parser", "definitions": config["definitions_version"], "config_sha256": config_sha256(), **run_info(),
               "reference": {"dataset": dataset, "rows": "num.txt rows of each gallery accession with empty segments and coreg"},
-              "totals": {**totals, "recall": recall, "agreement": agreement}, "pass_bar": bar, "passed": passed, "filings": per_filing}
+              "totals": {**totals, "recall": recall, "agreement": agreement}, "pass_bar": bar, "passed": passed,
+              "corrected_key_post_hoc": {"note": "Not pre-registered: key corrected after the first run (run 43498565370). Per-share units compared as FSDS writes them; nil or empty tags counted as present without a value.",
+                                         **corrected_totals, "agreement": corrected_totals["agree"] / corrected_totals["found"] if corrected_totals["found"] else 0},
+              "filings": per_filing}
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     (out / "check-a.json").write_text(json.dumps(report, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     lines = [f"## Check (a) · parser vs SEC FSDS num.txt — {'PASS' if passed else 'FAIL'}", "",
              f"Rows {totals['rows']}, found {totals['found']} ({recall:.4%}), equal {totals['agree']} ({agreement:.4%}). Bar: recall ≥ {bar['recall_all_filings']:.1%}, agreement ≥ {bar['agreement_all_filings']:.1%}, each filing recall ≥ {bar['recall_each_filing']:.0%}.", "",
+             f"Post-hoc corrected key (not pre-registered): found {corrected_totals['found']}, equal {corrected_totals['agree']}, present without a value {corrected_totals['without_value']}, missing {corrected_totals['missing']}.", "",
              "| filing | rows | found | equal | missing | conflicts |", "|---|---:|---:|---:|---:|---:|"]
     for f in per_filing:
         lines.append(f"| {f['name']} | {f['rows']} | {f['found']} | {f['agree']} | {len(f['missing'])} | {len(f['conflicts'])} |")

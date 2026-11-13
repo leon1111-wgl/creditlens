@@ -59,6 +59,18 @@ class CheckA(unittest.TestCase):
         self.assertEqual((result["rows"], result["found"], result["agree"]), (3, 2, 1))
         self.assertEqual(len(result["conflicts"]), 1)
 
+    def test_corrected_key_is_post_hoc_and_separate(self):
+        computed = {"contexts": {"d": {"start": "2025-01-01", "end": "2025-12-31", "dims": []}, "c": {"instant": "2025-12-31", "dims": []}},
+                    "units": {"eps": "iso4217:USD/xbrli:shares", "u": "iso4217:USD"},
+                    "facts": [{"local": "EarningsPerShareDiluted", "ctx": "d", "unit": "eps", "value": "3.36"},
+                              {"local": "CommitmentsAndContingencies", "ctx": "c", "unit": "u", "value": None}]}
+        rows = [{"tag": "EarningsPerShareDiluted", "uom": "USD", "ddate": "20251231", "qtrs": "4", "value": "3.3600"},
+                {"tag": "CommitmentsAndContingencies", "uom": "USD", "ddate": "20251231", "qtrs": "0", "value": ""}]
+        registered = cs.compare_fsds(rows, computed)
+        self.assertEqual((registered["found"], len(registered["missing"])), (0, 2))
+        corrected = cs.compare_fsds(rows, computed, "corrected")
+        self.assertEqual((corrected["found"], corrected["agree"], corrected["without_value"], len(corrected["missing"])), (1, 1, 1, 0))
+
 
 class CheckB(unittest.TestCase):
     def test_tolerances(self):

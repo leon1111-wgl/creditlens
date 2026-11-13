@@ -273,7 +273,22 @@
    "gz_bytes": 416137,
    "sha256": "d38b8514c5789de67a1e1d03f990570de6e9b447cff7fb90c8f705ef61761ea8",
    "gz_sha256": "26c929915e08e306105964c798b971e2c1718e97bc5380e476488f039d39b25f",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 0.8559101364642957,
+    "interest_coverage": 10.559570755957076,
+    "current_ratio": 0.5532979492627284,
+    "fcf_to_debt": 0.9855691370953436,
+    "debt": "1397976000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q7",
+     "Q11",
+     "Q20"
+    ]
+   },
    "stratum": "mining",
    "stratum_label": "采矿与能源开采 (SIC 1000–1499)",
    "examined_order": 2
@@ -300,7 +315,22 @@
    "gz_bytes": 239867,
    "sha256": "30fef0935221f28b9ad67f283b922567a10619b49f2d51f4f1377380b9e65bfe",
    "gz_sha256": "efa40f40b8ca2be159363f22bd88f21e1327bf1ec47130c5c795e3eb6c9c5316",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 0.01773905347182793,
+    "interest_coverage": 22.849621873182084,
+    "current_ratio": 2.474098549132125,
+    "fcf_to_debt": 39.16903977406449,
+    "debt": "16996000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q6",
+     "Q19",
+     "Q20"
+    ]
+   },
    "stratum": "mining",
    "stratum_label": "采矿与能源开采 (SIC 1000–1499)",
    "examined_order": 3
@@ -327,7 +357,23 @@
    "gz_bytes": 272371,
    "sha256": "01950fe872b04c8db51a04cc072d7071ff6809ff7091808c08f616453e2e7aec",
    "gz_sha256": "382943f0f625a5880f15c7d576dcdfa3d052ccb4a86962aa422a0690022afb72",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": null,
+    "interest_coverage": -2.6582491582491583,
+    "current_ratio": 1.9488188976377954,
+    "fcf_to_debt": -0.14104508479249966,
+    "debt": "7253000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q3",
+     "Q5",
+     "Q8",
+     "Q20"
+    ]
+   },
    "stratum": "mining",
    "stratum_label": "采矿与能源开采 (SIC 1000–1499)",
    "examined_order": 5
@@ -354,7 +400,23 @@
    "gz_bytes": 297907,
    "sha256": "9db1ff06ba9f8a1748fda926fb24d005fe346ed57145eba69befc8c0173c3b5b",
    "gz_sha256": "92938cf6b7775252a7daffc92f06cb74645b7bb6cbb487776854a49536eed987",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 1.1051248357424441,
+    "interest_coverage": -1.8246013667425969,
+    "current_ratio": 1.8508667774875327,
+    "fcf_to_debt": -0.23097502972651604,
+    "debt": "336400000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q5",
+     "Q6",
+     "Q8",
+     "Q10"
+    ]
+   },
    "stratum": "mining",
    "stratum_label": "采矿与能源开采 (SIC 1000–1499)",
    "examined_order": 6
@@ -381,7 +443,22 @@
    "gz_bytes": 230899,
    "sha256": "01a77cb180c5a69cc147bde403540bbc4c3182ab393e5d3b71b68f6bdeecd2d6",
    "gz_sha256": "10f5d1137f250bec8568d0850525e453e7aa5771a836144aedb4ddfdeb835d09",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 19.547420965058237,
+    "interest_coverage": 3.585714285714286,
+    "current_ratio": 5.59035004730369,
+    "fcf_to_debt": 0.026642832822608105,
+    "debt": "1174800000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q6",
+     "Q12",
+     "Q14"
+    ]
+   },
    "stratum": "mining",
    "stratum_label": "采矿与能源开采 (SIC 1000–1499)",
    "examined_order": 7
@@ -408,7 +485,21 @@
    "gz_bytes": 146537,
    "sha256": "a7c1a7001f3ce33f9595cd42817aa41c86d44a119450a94ff9e1f61cbd6ef0ef",
    "gz_sha256": "edc0420271beda113996e75ae3655e4db8a113d7d17b277ccdde14bf52adcf21",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": null,
+    "interest_coverage": null,
+    "current_ratio": null,
+    "fcf_to_debt": 1.0227067615520986,
+    "debt": "1709711000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q6",
+     "Q12"
+    ]
+   },
    "stratum": "construction",
    "stratum_label": "建筑 (SIC 1500–1799)",
    "examined_order": 2
@@ -435,7 +526,18 @@
    "gz_bytes": 255665,
    "sha256": "5e562096afbaf003fe520ab3b383d703cc3fcb5a909b2a2bb8869f64d007a48b",
    "gz_sha256": "317ddbf1fd43215a4e471944987ae851a7bebd045a9b42dbfd6cc9833fae30b0",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 2.7412882787750794,
+    "interest_coverage": 4.924050632911392,
+    "current_ratio": 1.2150473933649288,
+    "fcf_to_debt": 0.19838212634822805,
+    "debt": "2596000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": []
+   },
    "stratum": "construction",
    "stratum_label": "建筑 (SIC 1500–1799)",
    "examined_order": 4
@@ -462,7 +564,21 @@
    "gz_bytes": 273294,
    "sha256": "ff0234541b511ee9343bd9eac5bdf0b52394e578d73d9c0c6c71b64457495b04",
    "gz_sha256": "b667d4b170f30181c527f2b0ad3f98eb5c4ea7bf7bc934118c006551d15ffd4b",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 0.9334525228446563,
+    "interest_coverage": 14.337979094076655,
+    "current_ratio": 1.2624289964836355,
+    "fcf_to_debt": 0.7246222600553309,
+    "debt": "469900000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q6",
+     "Q20"
+    ]
+   },
    "stratum": "construction",
    "stratum_label": "建筑 (SIC 1500–1799)",
    "examined_order": 5
@@ -489,7 +605,18 @@
    "gz_bytes": 280745,
    "sha256": "980c65fef87ab3b424e3360c9458f7fc0725e527f09c600559542bb429c296da",
    "gz_sha256": "64b4d8fc27c14f2c153de2a6305aeb8a22d8c7839db9932b4922ebcedba3cd3c",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 2.9612838797259973,
+    "interest_coverage": 7.631765091357644,
+    "current_ratio": 1.9350900077650044,
+    "fcf_to_debt": 0.2448058223267176,
+    "debt": "2846697000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": []
+   },
    "stratum": "construction",
    "stratum_label": "建筑 (SIC 1500–1799)",
    "examined_order": 6
@@ -516,7 +643,24 @@
    "gz_bytes": 177183,
    "sha256": "7cb43dc8a80dbbd9498e71f727ffc44c93d88bd5d70cc202aea62475909cf141",
    "gz_sha256": "8705bf6dbf052d3332258ff2b56d72117ac9b8baa59d61706237694b92b0a644",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 1.3251473496101445,
+    "interest_coverage": 31.655605549306337,
+    "current_ratio": null,
+    "fcf_to_debt": 0.1834554071520896,
+    "debt": "696300000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q11",
+     "Q12",
+     "Q12",
+     "Q15",
+     "Q20"
+    ]
+   },
    "stratum": "construction",
    "stratum_label": "建筑 (SIC 1500–1799)",
    "examined_order": 7
@@ -543,7 +687,23 @@
    "gz_bytes": 194760,
    "sha256": "4603cd431aca13db5618bf72c465324e8011ef030cdd59da7d9342943eeb0269",
    "gz_sha256": "becb7d46be93a651c759dc75e569203bebee59fa763e174781797226d8b8c791",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 1.6013918109726493,
+    "interest_coverage": 21.46473029045643,
+    "current_ratio": 1.3185699039487726,
+    "fcf_to_debt": 0.35907023749368366,
+    "debt": "9895000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q2",
+     "Q9",
+     "Q10",
+     "Q15"
+    ]
+   },
    "stratum": "manufacturing",
    "stratum_label": "制造 (SIC 2000–3999)",
    "examined_order": 2
@@ -570,7 +730,18 @@
    "gz_bytes": 206689,
    "sha256": "4ee6de97045fbe02521a3062d9483f1c3c8e130243e3355e28f52e2ffc3cc6dd",
    "gz_sha256": "36738422084f34b55eba1db06781ee9273bdd29fcd7ebc6c6d82a66280a24573",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 0.6415893475286536,
+    "interest_coverage": 38.68248113998324,
+    "current_ratio": 1.8580396081263184,
+    "fcf_to_debt": 0.20097419433778674,
+    "debt": "171629000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": []
+   },
    "stratum": "manufacturing",
    "stratum_label": "制造 (SIC 2000–3999)",
    "examined_order": 3
@@ -597,7 +768,20 @@
    "gz_bytes": 130390,
    "sha256": "5bb496a5fae6d17d2475928204b41626e74851b368b2c8c2f8a041796d6e30aa",
    "gz_sha256": "4da5103cbf45f04a37a7d7c93c0a485c935651495059149137a47e29641652a1",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 1.769046719556731,
+    "interest_coverage": 11.09208103130755,
+    "current_ratio": 4.352643241532131,
+    "fcf_to_debt": 0.18529328018223234,
+    "debt": "14048000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q12"
+    ]
+   },
    "stratum": "manufacturing",
    "stratum_label": "制造 (SIC 2000–3999)",
    "examined_order": 4
@@ -624,7 +808,21 @@
    "gz_bytes": 172030,
    "sha256": "f61f37f58f3da8178d43cb77ffc6ad372bc080f5991456aff2c5b413f6c20681",
    "gz_sha256": "75e89a64725890d88557f10c64ee7762f5a060be52ac87288c5ac272d8b69182",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": null,
+    "interest_coverage": null,
+    "current_ratio": 2.3475521214947044,
+    "fcf_to_debt": null,
+    "debt": null,
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q4",
+     "Q12"
+    ]
+   },
    "stratum": "manufacturing",
    "stratum_label": "制造 (SIC 2000–3999)",
    "examined_order": 5
@@ -651,7 +849,21 @@
    "gz_bytes": 228252,
    "sha256": "9a44798a2e89dae0be8d5c7ec29c94300057bd1f99382ca0c1a415e15c4206a4",
    "gz_sha256": "47dc4be1c2d1788d8ec9aa87e1f8df852b19cf93a60422bb5629e2f7dc4b14d4",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 0.22897917887001437,
+    "interest_coverage": 17.642506142506143,
+    "current_ratio": 1.1282859933262799,
+    "fcf_to_debt": 3.366046511627907,
+    "debt": "430000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q6",
+     "Q15"
+    ]
+   },
    "stratum": "manufacturing",
    "stratum_label": "制造 (SIC 2000–3999)",
    "examined_order": 6
@@ -678,7 +890,21 @@
    "gz_bytes": 172555,
    "sha256": "4e6f37703057aa64b73e2c56cdeceb534bb2aad450ce8ad676dc989aa0bbd66c",
    "gz_sha256": "0d41a496a55b6d7615e12602abec634bcb03593f0f2f44ce65ac2a74dd44c4ec",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 0.6495395055744062,
+    "interest_coverage": 4.997041420118343,
+    "current_ratio": 2.125224901043541,
+    "fcf_to_debt": 0.7099502487562189,
+    "debt": "402000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q10",
+     "Q11"
+    ]
+   },
    "stratum": "transport_utilities",
    "stratum_label": "运输、通信与公用事业 (SIC 4000–4999)",
    "examined_order": 1
@@ -705,7 +931,20 @@
    "gz_bytes": 158802,
    "sha256": "b34694a152fb69625341c836796c0f1cb6bb04e24c347e93b3f5f0106115751b",
    "gz_sha256": "99af792d771dedfdaf0737cb9310f83aa12ed064d4055d12f0686dce32cef8f1",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 0.28618190084105777,
+    "interest_coverage": 27.13515932688865,
+    "current_ratio": 1.7479966659002069,
+    "fcf_to_debt": 3.7950012355703038,
+    "debt": "56654000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q6"
+    ]
+   },
    "stratum": "transport_utilities",
    "stratum_label": "运输、通信与公用事业 (SIC 4000–4999)",
    "examined_order": 2
@@ -732,7 +971,23 @@
    "gz_bytes": 217416,
    "sha256": "cfe0e6a993fc2cdcebe84dd22d43e4e3f29a4acdb90092d00c65c40842cace87",
    "gz_sha256": "91363d74d21bc2d189c1375512c51ea582b7beb8a73cc3a2cad617babee40398",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 24.345254701089235,
+    "interest_coverage": -1.5954511529849884,
+    "current_ratio": 0.40376045008454886,
+    "fcf_to_debt": 0.08706366801745938,
+    "debt": "3193927000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q5",
+     "Q7",
+     "Q9",
+     "Q10"
+    ]
+   },
    "stratum": "transport_utilities",
    "stratum_label": "运输、通信与公用事业 (SIC 4000–4999)",
    "examined_order": 3
@@ -759,7 +1014,20 @@
    "gz_bytes": 175100,
    "sha256": "9de5bea72eefdd9e61d5f174eb7e55193c765d5c64cca54ac7c9c5088d504478",
    "gz_sha256": "34cf4d59333a7c35f558a74d095084d9cb29871cf807e15f009e2873e6787d4f",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 3.811926605504587,
+    "interest_coverage": 3.813664596273292,
+    "current_ratio": 1.0743243243243243,
+    "fcf_to_debt": 0.13267148014440433,
+    "debt": "3324000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q15"
+    ]
+   },
    "stratum": "transport_utilities",
    "stratum_label": "运输、通信与公用事业 (SIC 4000–4999)",
    "examined_order": 5
@@ -786,7 +1054,23 @@
    "gz_bytes": 235708,
    "sha256": "d6109171f15c18325bf5093990a02126388e7c04a6847479abc6f70eaa065116",
    "gz_sha256": "66980362844df562b5e400ccc2cffb0ca75411b54f39d1e13be9215b5b3869b1",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 3.039853172522286,
+    "interest_coverage": 6.40296803652968,
+    "current_ratio": 0.4905691871140043,
+    "fcf_to_debt": 0.09517854062446093,
+    "debt": "23188000000",
+    "currency": "CAD",
+    "display_scale": 6,
+    "cues": [
+     "Q7",
+     "Q9",
+     "Q10",
+     "Q20"
+    ]
+   },
    "stratum": "transport_utilities",
    "stratum_label": "运输、通信与公用事业 (SIC 4000–4999)",
    "examined_order": 6
@@ -813,7 +1097,20 @@
    "gz_bytes": 167675,
    "sha256": "cca0dfc78a52885d1a1a437a41891b9fc5d91c0206b8bb2e70c4b7c0ebe0f40d",
    "gz_sha256": "56804b42d1f0a782960a32e33bc8f1a11072fb0be4c66d4436bf7607d985ce3a",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 1.304069682330552,
+    "interest_coverage": 8.391879520278312,
+    "current_ratio": 3.3553001971298544,
+    "fcf_to_debt": 0.02855154297773936,
+    "debt": "445405000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q6"
+    ]
+   },
    "stratum": "wholesale",
    "stratum_label": "批发 (SIC 5000–5199)",
    "examined_order": 2
@@ -821,7 +1118,7 @@
   {
    "id": "1286681-0001193125-26-062321",
    "cik": 1286681,
-   "name": "Domino&#8217;s Pizza, Inc.",
+   "name": "Domino’s Pizza, Inc.",
    "ticker": "DPZ",
    "sic": "5140",
    "form": "10-K",
@@ -840,7 +1137,20 @@
    "gz_bytes": 285354,
    "sha256": "b4a2a495c7e8b0f625943234fb86f6dc5e185a79cdad99dae0ba38800c66ea78",
    "gz_sha256": "8168d9ee99b6827ae06aa1b37bbd5e6ff301510ba53f80f6ba3e846b812eda68",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 4.619111412436314,
+    "interest_coverage": 4.867909701385912,
+    "current_ratio": 1.6509718050075606,
+    "fcf_to_debt": 0.13940833090088178,
+    "debt": "4816814000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q10"
+    ]
+   },
    "stratum": "wholesale",
    "stratum_label": "批发 (SIC 5000–5199)",
    "examined_order": 3
@@ -848,7 +1158,7 @@
   {
    "id": "1517175-0001517175-26-000005",
    "cik": 1517175,
-   "name": "THE CHEFS&#8217; WAREHOUSE, INC.",
+   "name": "THE CHEFS’ WAREHOUSE, INC.",
    "ticker": "CHEF",
    "sic": "5141",
    "form": "10-K",
@@ -867,7 +1177,20 @@
    "gz_bytes": 158395,
    "sha256": "9ca0f123277965b17a13da89148b50fb6491db3184b0e6c52db0a75fe5bf6151",
    "gz_sha256": "e0ef73d7b191bad0dc41bc9cbb065a2dd51921c2f1d8a0bac19c81da6e4b5b97",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 3.766037090330955,
+    "interest_coverage": 3.4911461841978637,
+    "current_ratio": 2.048517400661937,
+    "fcf_to_debt": 0.11728721627723672,
+    "debt": "748530000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q15"
+    ]
+   },
    "stratum": "wholesale",
    "stratum_label": "批发 (SIC 5000–5199)",
    "examined_order": 4
@@ -894,7 +1217,22 @@
    "gz_bytes": 172163,
    "sha256": "a10ef893775d5ac0baa16e767cac3380d680f144d03678b17c3ff787060851ee",
    "gz_sha256": "6c9d6dc716c8c73a754482fad6e6911b939132bc747b5ed2206c371e67f2fd32",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 6.362969469163337,
+    "interest_coverage": 1.3190586278179395,
+    "current_ratio": 1.0793882733490638,
+    "fcf_to_debt": 0.08777019490795081,
+    "debt": "4795751000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q2",
+     "Q9",
+     "Q11"
+    ]
+   },
    "stratum": "wholesale",
    "stratum_label": "批发 (SIC 5000–5199)",
    "examined_order": 6
@@ -921,7 +1259,21 @@
    "gz_bytes": 441873,
    "sha256": "237cf35bc27817d9410a43b4b5db65dafc448521bd9cbac652f8e683106770e9",
    "gz_sha256": "b125438133eae087362b6414f99f4c4a9c22b98cc809f2351327d1ea0c6ae376",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 3.2230290456431536,
+    "interest_coverage": 4.3533333333333335,
+    "current_ratio": 1.3828996282527881,
+    "fcf_to_debt": 0.18442227228838107,
+    "debt": "3107000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q9",
+     "Q10"
+    ]
+   },
    "stratum": "wholesale",
    "stratum_label": "批发 (SIC 5000–5199)",
    "examined_order": 7
@@ -948,7 +1300,18 @@
    "gz_bytes": 212595,
    "sha256": "7c1a16038bb7e6c05781d388deee2dec0c9d6028b08673f29026d76ffc14f0b4",
    "gz_sha256": "80753d9b18ca6f0a70d9116989799c59dcc940cf7f63d49d7df1d12c5bcc60ef",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": null,
+    "interest_coverage": 3.724752475247525,
+    "current_ratio": 4.311389071757735,
+    "fcf_to_debt": 0.17380254154447702,
+    "debt": "5115000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": []
+   },
    "stratum": "retail",
    "stratum_label": "零售 (SIC 5200–5999)",
    "examined_order": 1
@@ -975,7 +1338,24 @@
    "gz_bytes": 205822,
    "sha256": "c39215c6b2117d9a1abe628318a9ae39a87405fadabca57056c8ff7452a5da6f",
    "gz_sha256": "da14ff4126c95bb686e30c62d8456199e09e1cbb06d5aefba6edb79a548d138d",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 1.4903647625602203,
+    "interest_coverage": null,
+    "current_ratio": 0.9862241404022869,
+    "fcf_to_debt": 0.30039251904871855,
+    "debt": "2165500000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q4",
+     "Q7",
+     "Q9",
+     "Q12",
+     "Q12"
+    ]
+   },
    "stratum": "retail",
    "stratum_label": "零售 (SIC 5200–5999)",
    "examined_order": 3
@@ -1002,7 +1382,22 @@
    "gz_bytes": 234236,
    "sha256": "04646449425eb2476c75d7667be9ba02172fb49fccd797e3e1b3ae63a459fbb0",
    "gz_sha256": "f7955cab815213142f150ed7cb06e962fa47ad633a95d53b3fdd9db8d62b083c",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 14.899563318777293,
+    "interest_coverage": -0.30935251798561153,
+    "current_ratio": 1.7456896551724137,
+    "fcf_to_debt": -0.0873388042203986,
+    "debt": "3412000000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q5",
+     "Q8",
+     "Q20"
+    ]
+   },
    "stratum": "retail",
    "stratum_label": "零售 (SIC 5200–5999)",
    "examined_order": 5
@@ -1029,7 +1424,18 @@
    "gz_bytes": 153864,
    "sha256": "b491754c317e9e494e53a3c18e045df91519779328b446eeca61084aee85cc36",
    "gz_sha256": "4d8d917986b1bf6d4ceb5788180865cf16b34120891949d7a11f62a7d1390ec6",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 0.8998541857856633,
+    "interest_coverage": 21.222217401365267,
+    "current_ratio": 1.3416964721820928,
+    "fcf_to_debt": 0.41954669020620133,
+    "debt": "1764974000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": []
+   },
    "stratum": "retail",
    "stratum_label": "零售 (SIC 5200–5999)",
    "examined_order": 7
@@ -1056,7 +1462,21 @@
    "gz_bytes": 227837,
    "sha256": "f7c0ddd5fc5ec5b3bded15d14c7e20e54ac8cc39759b852f56a4876d7711b321",
    "gz_sha256": "35c8c2a38902ac954acf3caa395fed0924da82836be4d54c51f8cfde45f1533d",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 0.7244537897239725,
+    "interest_coverage": 5.694400282635577,
+    "current_ratio": 1.485985388712635,
+    "fcf_to_debt": 0.2718158020941571,
+    "debt": "200176000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q6",
+     "Q20"
+    ]
+   },
    "stratum": "retail",
    "stratum_label": "零售 (SIC 5200–5999)",
    "examined_order": 9
@@ -1064,7 +1484,7 @@
   {
    "id": "1578732-0001628280-26-012419",
    "cik": 1578732,
-   "name": "MARCUS &amp; MILLICHAP, INC.",
+   "name": "MARCUS & MILLICHAP, INC.",
    "ticker": "MMI",
    "sic": "6531",
    "form": "10-K",
@@ -1083,7 +1503,23 @@
    "gz_bytes": 174829,
    "sha256": "b01a5db22cff56f7bb16a38b024af43cb2cd756eebf407615040dec884d9df8a",
    "gz_sha256": "a55ca58a592116c6abc49942e333ba0a55c739da941d052ca14715a33c61b2a6",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": null,
+    "interest_coverage": -17.73738680465718,
+    "current_ratio": 2.546048893756124,
+    "fcf_to_debt": null,
+    "debt": null,
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q3",
+     "Q5",
+     "Q11",
+     "Q12"
+    ]
+   },
    "stratum": "finance",
    "stratum_label": "金融、保险与房地产 (SIC 6000–6799)",
    "examined_order": 1
@@ -1091,7 +1527,7 @@
   {
    "id": "2000046-0001193125-26-071486",
    "cik": 2000046,
-   "name": "Fidelity&#174; Ethereum Fund",
+   "name": "Fidelity® Ethereum Fund",
    "ticker": "FETH",
    "sic": "6199",
    "form": "10-K",
@@ -1110,7 +1546,18 @@
    "gz_bytes": 183831,
    "sha256": "31c8f69a6aadda8448af12c3d29e81f677df03514a5fd52a333509fa63ea09d1",
    "gz_sha256": "b2d962ff35dbd3e67b6661cb77f5d9ccdab5c4b1c0224d4e2a1c24d93d4fc0bf",
-   "snapshot": null,
+   "snapshot": {
+    "status": "unsupported",
+    "template": "investment_company",
+    "debt_to_ebitda": null,
+    "interest_coverage": null,
+    "current_ratio": null,
+    "fcf_to_debt": null,
+    "debt": null,
+    "currency": "USD",
+    "display_scale": 0,
+    "cues": []
+   },
    "stratum": "finance",
    "stratum_label": "金融、保险与房地产 (SIC 6000–6799)",
    "examined_order": 3
@@ -1137,7 +1584,18 @@
    "gz_bytes": 407920,
    "sha256": "fe273d14ce1232b82856f01b543a34616a435e60457699d1018c5be3b8281267",
    "gz_sha256": "a9a30ddd36ada857b9836e2136a435d714f4045878c692d6d654beb3f16dc1fe",
-   "snapshot": null,
+   "snapshot": {
+    "status": "unsupported",
+    "template": "insurer",
+    "debt_to_ebitda": null,
+    "interest_coverage": null,
+    "current_ratio": null,
+    "fcf_to_debt": null,
+    "debt": null,
+    "currency": "USD",
+    "display_scale": 0,
+    "cues": []
+   },
    "stratum": "finance",
    "stratum_label": "金融、保险与房地产 (SIC 6000–6799)",
    "examined_order": 4
@@ -1164,7 +1622,18 @@
    "gz_bytes": 236796,
    "sha256": "a3c2c16ecda5ba974aa339149863262a46e7bc3625022628bf571924c9634cef",
    "gz_sha256": "73bdf9478d1e63ef341097d8c443d745c64fc277979579e18874313ec918f3c8",
-   "snapshot": null,
+   "snapshot": {
+    "status": "unsupported",
+    "template": "bank",
+    "debt_to_ebitda": null,
+    "interest_coverage": null,
+    "current_ratio": null,
+    "fcf_to_debt": null,
+    "debt": null,
+    "currency": "USD",
+    "display_scale": 0,
+    "cues": []
+   },
    "stratum": "finance",
    "stratum_label": "金融、保险与房地产 (SIC 6000–6799)",
    "examined_order": 6
@@ -1191,7 +1660,21 @@
    "gz_bytes": 315063,
    "sha256": "5770566ce536b0ef2d0f7905a9869d141687e614dba7496ed9e1b4eebf3182a2",
    "gz_sha256": "236d41630f8dd5f463d446b281247625ef00f30feebea5d43b314351515e2d8b",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 1.6174763125895426,
+    "interest_coverage": 7.20405147466289,
+    "current_ratio": 1.0514640215427618,
+    "fcf_to_debt": 0.21232578980745698,
+    "debt": "671746000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q12",
+     "Q20"
+    ]
+   },
    "stratum": "finance",
    "stratum_label": "金融、保险与房地产 (SIC 6000–6799)",
    "examined_order": 7
@@ -1218,7 +1701,21 @@
    "gz_bytes": 242617,
    "sha256": "74a888cc508ba8a94f5fb73199600dd94eb915228351d7148c2e5a055db1fd4d",
    "gz_sha256": "c0ced9e715f1f33a9e2b9fe83aab8a90f81d95561f3eb0c6a191e4121d85bc02",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 1.7739477245210455,
+    "interest_coverage": 8.73538961038961,
+    "current_ratio": 1.083094213295074,
+    "fcf_to_debt": 0.17632889031636423,
+    "debt": "2490800000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": [
+     "Q2",
+     "Q10"
+    ]
+   },
    "stratum": "services",
    "stratum_label": "服务 (SIC 7000–8999)",
    "examined_order": 2
@@ -1245,7 +1742,21 @@
    "gz_bytes": 269456,
    "sha256": "b019431a025fa55f356517e75e389bc165cad675144408d583ac68cb47d16159",
    "gz_sha256": "c6a1485aeea16ef526616184cc8a27a11eeefb7f3e540006cc4bfa0cabd955a0",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": null,
+    "interest_coverage": -4.362096099936065,
+    "current_ratio": 3.5628160774842486,
+    "fcf_to_debt": 0.12361044313988603,
+    "debt": "3536829000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q3",
+     "Q5"
+    ]
+   },
    "stratum": "services",
    "stratum_label": "服务 (SIC 7000–8999)",
    "examined_order": 3
@@ -1253,7 +1764,7 @@
   {
    "id": "1773751-0001773751-26-000022",
    "cik": 1773751,
-   "name": "HIMS &amp; HERS HEALTH, INC.",
+   "name": "HIMS & HERS HEALTH, INC.",
    "ticker": "HIMS",
    "sic": "8011",
    "form": "10-K",
@@ -1272,7 +1783,20 @@
    "gz_bytes": 247063,
    "sha256": "3246c8a471d73829b0b2082054cb4c0d5830dc7b98e96a1373ef21f1df8c4c09",
    "gz_sha256": "926239035319b296906aeed6a5bef7db59b38ddb3bf61332eef031765a6b3256",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 6.074259126253006,
+    "interest_coverage": null,
+    "current_ratio": 1.8980691391114923,
+    "fcf_to_debt": 0.05902445043081289,
+    "debt": "972580000",
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q4"
+    ]
+   },
    "stratum": "services",
    "stratum_label": "服务 (SIC 7000–8999)",
    "examined_order": 6
@@ -1299,7 +1823,18 @@
    "gz_bytes": 188776,
    "sha256": "0034b18c69c5a87ff80f2c228ebb51cb4a47bcdef712b1112fde2a0188832af0",
    "gz_sha256": "efb752112a1fe1a226aa2cec6adc77f3a323c6b311be0df835f30deb9689fbb2",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": 2.065090240641711,
+    "interest_coverage": 3.723382045929019,
+    "current_ratio": 1.1030902348578493,
+    "fcf_to_debt": 0.2909973700182076,
+    "debt": "2471500000",
+    "currency": "USD",
+    "display_scale": 6,
+    "cues": []
+   },
    "stratum": "services",
    "stratum_label": "服务 (SIC 7000–8999)",
    "examined_order": 7
@@ -1326,10 +1861,31 @@
    "gz_bytes": 148989,
    "sha256": "8b0c9df0e3a1d7cef0ca2a064b478caf465b00e3f0e6baf9366b1e9a0371d19b",
    "gz_sha256": "cfb33846f6cf90a8bc1124c6c7feff96ba2d21d073c427dde405470306b9e540",
-   "snapshot": null,
+   "snapshot": {
+    "status": "ok",
+    "template": "general",
+    "debt_to_ebitda": null,
+    "interest_coverage": null,
+    "current_ratio": 0.7364654682276737,
+    "fcf_to_debt": null,
+    "debt": null,
+    "currency": "USD",
+    "display_scale": 3,
+    "cues": [
+     "Q4",
+     "Q7",
+     "Q12"
+    ]
+   },
    "stratum": "services",
    "stratum_label": "服务 (SIC 7000–8999)",
    "examined_order": 9
   }
- ]
+ ],
+ "computed_by": {
+  "engine": "creditlens/snapshot.js in Playwright Chromium 1.49.1",
+  "run": "43498565370",
+  "commit": "a931ba9b6a124b0cf5e3956841c598f03f44d03a",
+  "generated_at": "2026-11-13T20:23:50+00:00"
+ }
 }
