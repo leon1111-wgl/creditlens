@@ -1,0 +1,184 @@
+{
+ "schema_version": 1,
+ "check": "b_metrics",
+ "run": "43506206674",
+ "commit": "d3a00ba6e58e97230487ca235b61c73c77ed2c48",
+ "generated_at": "2026-11-13T21:09:10+00:00",
+ "key_sha256": "abc27834707acd2c5c0c975807b6fcb020ca0b22cfef42f6550896d31dba71d5",
+ "per_metric": {
+  "total_debt": {
+   "agree": 9,
+   "differ": 1
+  },
+  "current_debt": {
+   "agree": 10
+  },
+  "liquidity": {
+   "agree": 10
+  },
+  "net_debt": {
+   "agree": 9,
+   "differ": 1
+  },
+  "ebit": {
+   "agree": 10
+  },
+  "da": {
+   "agree": 10
+  },
+  "ebitda": {
+   "agree": 10
+  },
+  "interest_expense": {
+   "agree": 10
+  },
+  "cfo": {
+   "agree": 10
+  },
+  "capex": {
+   "agree": 10
+  },
+  "fcf": {
+   "agree": 10
+  },
+  "operating_lease_liability": {
+   "agree": 10
+  },
+  "finance_lease_liability": {
+   "agree": 10
+  },
+  "maturity_next_12m": {
+   "agree": 10
+  },
+  "maturity_years_2_5": {
+   "agree": 10
+  },
+  "maturity_after_5": {
+   "agree": 10
+  },
+  "interest_coverage": {
+   "agree": 10
+  },
+  "debt_to_ebitda": {
+   "agree": 9,
+   "differ": 1
+  },
+  "net_debt_to_ebitda": {
+   "agree": 9,
+   "differ": 1
+  },
+  "current_ratio": {
+   "agree": 10
+  },
+  "fcf_to_debt": {
+   "agree": 10
+  }
+ },
+ "filings": [
+  {
+   "id": "764622-0000764622-26-000011",
+   "name": "PINNACLE WEST CAPITAL CORPORATION",
+   "form": "10-K",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": []
+  },
+  {
+   "id": "1274494-0001274494-26-000021",
+   "name": "First Solar, Inc.",
+   "form": "10-K",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": []
+  },
+  {
+   "id": "798941-0000798941-26-000015",
+   "name": "FIRST CITIZENS BANCSHARES INC /DE/",
+   "form": "10-K",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": []
+  },
+  {
+   "id": "1620393-0001193125-26-077343",
+   "name": "NexPoint Residential Trust, Inc.",
+   "form": "10-K",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": [
+    {
+     "metric": "total_debt",
+     "program": "1557512000",
+     "independent": "88102000"
+    },
+    {
+     "metric": "net_debt",
+     "program": "1543808000",
+     "independent": "74398000"
+    },
+    {
+     "metric": "debt_to_ebitda",
+     "program": 12.592671647100676,
+     "independent": 0.7123152550046894
+    },
+    {
+     "metric": "net_debt_to_ebitda",
+     "program": 12.481873160635168,
+     "independent": 0.6015167685391805
+    }
+   ]
+  },
+  {
+   "id": "1783180-0001783180-26-000008",
+   "name": "CARRIER GLOBAL CORPORATION",
+   "form": "10-K",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": []
+  },
+  {
+   "id": "882095-0000882095-26-000006",
+   "name": "GILEAD SCIENCES, INC.",
+   "form": "10-K",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": []
+  },
+  {
+   "id": "851968-0000851968-26-000011",
+   "name": "MOHAWK INDUSTRIES, INC.",
+   "form": "10-K",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": []
+  },
+  {
+   "id": "1691421-0001691421-26-000016",
+   "name": "Lemonade, Inc.",
+   "form": "10-K",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": []
+  },
+  {
+   "id": "1673358-0001193125-26-341077",
+   "name": "Yum China Holdings, Inc.",
+   "form": "10-Q",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": []
+  },
+  {
+   "id": "2012383-0001193125-26-337177",
+   "name": "BlackRock, Inc.",
+   "form": "10-Q",
+   "template_agrees": true,
+   "period_agrees": true,
+   "differences": []
+  }
+ ],
+ "totals": {
+  "comparisons": 210,
+  "agree": 206
+ }
+}
