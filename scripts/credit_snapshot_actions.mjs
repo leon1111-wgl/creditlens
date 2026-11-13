@@ -157,7 +157,10 @@ async function computeList(entries, dir, { clicks = true, exports = false } = {}
   return results;
 }
 
+// On a phone the filing view is a bottom sheet; a visitor closes it before using buttons it covers.
+const closeSheet = page => page.evaluate(() => { if (document.querySelector('.sn-viewer')?.classList.contains('open')) document.getElementById('snSheet').click(); });
 async function saveExports(page, label) {
+  await closeSheet(page);
   const files = {};
   for (const [id, ext] of [['#snExportMd', 'md'], ['#snExportCsv', 'csv'], ['#snExportDocx', 'docx']]) {
     const [download] = await Promise.all([page.waitForEvent('download'), page.click(id)]);
@@ -240,6 +243,7 @@ if (mode === 'check') {
     // bank filing from the gallery
     if (bank) {
       await resetResult(page);
+      await closeSheet(page);
       await page.click(`#snGalleryTable tr[data-gallery="${bank.id}"] button.sn-open`);
       const r = await waitResult(page);
       const text = await page.innerText('#snCues');
@@ -249,6 +253,7 @@ if (mode === 'check') {
     } else note(`${label}: no unsupported template in the gallery`);
     // open a gallery filing
     await resetResult(page);
+    await closeSheet(page);
     await page.click(`#snGalleryTable tr[data-gallery="${general.id}"] button.sn-open`);
     const g = await waitResult(page);
     if (!g.ok || !page.url().includes('#g=')) fail(`${label}: gallery open → ${g.text} ${page.url()}`);
