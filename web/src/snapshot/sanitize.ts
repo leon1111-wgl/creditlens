@@ -18,6 +18,17 @@ const tagOf = (el: Element) => (el.tagName || el.nodeName || '').toLowerCase().s
 
 export interface SanitizeReport { removedElements: number; removedAttributes: number; neutralisedLinks: number }
 
+/** CSS with escapes decoded (\\75 rl( → url(), so escaped url()/@import/image-set() are found too. */
+function cssPlain(css: string): string {
+  return css.replace(/\\([0-9a-fA-F]{1,6})\s?/g, (_, hex) => String.fromCodePoint(parseInt(hex, 16))).replace(/\\(.)/g, '$1');
+}
+const CSS_FETCH = /url\s*\(|@import|image-set\s*\(|expression\s*\(|-webkit-image-set/i;
+function cleanCss(css: string): string {
+  if (!CSS_FETCH.test(cssPlain(css))) return css;
+  // Anything that could fetch is removed with its declaration; the frame CSP would block it anyway.
+  return cssPlain(css).replace(/@import[^;]*;?/gi, '').replace(/[^;{}]*(url\s*\(|image-set\s*\(|expression\s*\(|-webkit-image-set)[^;{}]*;?/gi, '');
+}
+
 export function sanitize(doc: Document): SanitizeReport {
   const report: SanitizeReport = { removedElements: 0, removedAttributes: 0, neutralisedLinks: 0 };
   for (const el of Array.from(doc.getElementsByTagName('*'))) {
@@ -34,7 +45,7 @@ export function sanitize(doc: Document): SanitizeReport {
       const value = attr.value.replace(/[\s\u0000-\u001f]+/g, '').toLowerCase();
       if (name.startsWith('on')) { el.removeAttribute(attr.name); report.removedAttributes++; continue; }
       if (!URL_ATTRS.includes(name)) {
-        if (name === 'style' && /url\(|expression\(|@import/i.test(attr.value)) { el.setAttribute('style', attr.value.replace(/url\([^)]*\)|expression\([^)]*\)|@import[^;]*;?/gi, '')); report.removedAttributes++; }
+        if (name === 'style' && CSS_FETCH.test(cssPlain(attr.value))) { el.setAttribute('style', cleanCss(attr.value)); report.removedAttributes++; }
         continue;
       }
       if ((name === 'href' || name === 'xlink:href') && value.startsWith('#')) continue; // in-document links stay
@@ -44,7 +55,8 @@ export function sanitize(doc: Document): SanitizeReport {
     }
   }
   for (const style of Array.from(doc.getElementsByTagName('style'))) {
-    if (/@import|url\(/i.test(style.textContent || '')) style.textContent = (style.textContent || '').replace(/@import[^;]*;?|url\([^)]*\)/gi, '');
+    const css = style.textContent || '';
+    if (CSS_FETCH.test(cssPlain(css))) style.textContent = cleanCss(css);
   }
   const head = doc.head || doc.documentElement.insertBefore(doc.createElement('head'), doc.body);
   const meta = doc.createElement('meta');

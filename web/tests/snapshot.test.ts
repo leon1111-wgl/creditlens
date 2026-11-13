@@ -151,6 +151,67 @@ describe('rules revised on the gallery before the freeze', () => {
   });
 });
 
+describe('review fixes (credit-snapshot-def-2)', () => {
+  const nfI = (name: string, text: string, ctx = 'c-i', extra = '') => `<ix:nonFraction unitRef="usd" contextRef="${ctx}" decimals="-6" name="${name}" format="ixt:num-dot-decimal" scale="6" ${extra}>${text}</ix:nonFraction>`;
+  const row = (name: string, text: string) => `<tr><td>x</td><td>${nfI(name, text)}</td></tr>`;
+  const noBsDebt = (html: string) => html.replace(/<tr><td>Commercial paper<\/td>.*?<\/tr>|<tr><td>Current portion of long-term debt<\/td>.*?<\/tr>|<tr><td>Total short-term debt<\/td>.*?<\/tr>|<tr><td>Long-term debt<\/td>.*?<\/tr>/gs, '');
+  test('a company debt-and-lease line counts as debt with Q10 (Coeur Mining case)', () => {
+    const s = snap(noBsDebt(syntheticFiling({ extraBalanceRows: row('lsi:LongTermDebtAndLeaseObligationNet', '323') })));
+    expect(val(s, 'debt')).toBe('323000000');
+    expect(s.cues.some(c => c.id === 'Q10')).toBe(true);
+  });
+  test('a company mortgage line counts as debt (NexPoint case); a larger debt total in the notes is Q21', () => {
+    expect(val(snap(syntheticFiling({ extraBalanceRows: row('lsi:MortgagePayablesNetDeferredFinancingCostsNet', '1,500') })), 'debt')).toBe('3750000000');
+    const s = snap(syntheticFiling({ extraBalanceRows: row('lsi:OtherSecuredBorrowingsFromTrust', '3,000') }).replace('</body>', `<p>${nfI('us-gaap:DebtInstrumentCarryingAmount', '5,250')}</p></body>`));
+    expect(s.cues.some(c => c.id === 'Q21')).toBe(true);
+    expect(s.cues.some(c => c.id === 'Q12' && /OtherSecuredBorrowingsFromTrust/.test(c.text))).toBe(true);
+  });
+  test('a stray trailing-twelve-month fact does not become a 10-Q period', () => {
+    const html = syntheticFiling({ form: '10-Q', ytdMonths: 6 }).replace('</ix:resources>', '<xbrli:context id="c-ttm"><xbrli:entity><xbrli:identifier scheme="http://www.sec.gov/CIK">0009999999</xbrli:identifier></xbrli:entity><xbrli:period><xbrli:startDate>2025-07-01</xbrli:startDate><xbrli:endDate>2026-06-30</xbrli:endDate></xbrli:period></xbrli:context></ix:resources>')
+      .replace('</body>', `<p>${nfI('us-gaap:Revenues', '17,000', 'c-ttm')}</p></body>`);
+    const s = snap(html);
+    expect(s.meta.months).toBe(6);
+    expect(val(s, 'cfo')).toBe('1400000000');
+  });
+  test('Cash and CashEquivalents are not added on top of their total', () => {
+    const html = syntheticFiling().replace('<tr><td>Cash and cash equivalents</td>', `${row('us-gaap:Cash', '700')}${row('us-gaap:CashEquivalentsAtCarryingValue', '500')}<tr><td>Cash and cash equivalents</td>`);
+    expect(val(snap(html), 'liquidity')).toBe('1500000000');
+  });
+  test('one row from another section equal to a whole-side subtotal is not its breakdown', () => {
+    const html = noBsDebt(syntheticFiling()).replace('<tr><td>Total current liabilities</td>', `${row('us-gaap:LongTermDebtCurrent', '500')}<tr><td>Total current liabilities</td>`)
+      .replace('<tr><td>Total liabilities</td>', `${row('us-gaap:LongTermDebt', '500')}<tr><td>Total liabilities</td>`);
+    const s = snap(html);
+    expect(val(s, 'debt')).toBe('1000000000');
+    expect(s.cues.some(c => c.id === 'Q14')).toBe(true);
+  });
+  test('a zero subtotal is ignored, not a Q14', () => {
+    const s = snap(syntheticFiling().replace('<tr><td>Total current liabilities</td>', `${row('us-gaap:ShortTermBorrowings', '0')}<tr><td>Total current liabilities</td>`));
+    expect(s.cues.some(c => c.id === 'Q14')).toBe(false);
+  });
+  test('impairments inside EBIT are cue Q22', () => {
+    const s = snap(syntheticFiling().replace('</body>', `<p>${nfI('us-gaap:GoodwillImpairmentLoss', '300', 'c-d')}</p></body>`));
+    expect(s.cues.some(c => c.id === 'Q22')).toBe(true);
+  });
+  test('planted data-clf attributes cannot steal the highlight', () => {
+    const p = parseFiling(syntheticFiling().replace('<body>', '<body><p data-clf="3">decoy</p>'));
+    expect(p.doc.querySelectorAll('[data-clf="3"]').length).toBe(1);
+    expect(p.doc.querySelector('[data-clf="3"]')?.tagName.toLowerCase()).toBe('ix:nonfraction');
+  });
+  test('escaped CSS fetches are removed too', () => {
+    const p = parseFiling(syntheticFiling().replace('<p>Form', '<p style="background:u\\72l(https://example.invalid/a.png)">Form').replace('td { padding: 2px 6px }', 'td { padding: 2px 6px } @\\69mport "https://example.invalid/b.css"; p { background: image-set("https://example.invalid/c.png" 1x) }'));
+    sanitize(p.doc);
+    const html = serialize(p.doc);
+    expect(html).not.toMatch(/example\.invalid/);
+  });
+  const s = snap(syntheticFiling().replace('Leon Synthetic Industries Inc.', '[click](https://evil.example) Inc.').replace(/contextRef="c-i"/, 'contextRef="=HYPERLINK(1)"').replace('<xbrli:context id="c-i">', '<xbrli:context id="c-i"></xbrli:context><xbrli:context id="=HYPERLINK(1)">'));
+  const ctx = { snapshot: s, source: { kind: 'file' as const, fileName: 'x.htm', sha256: 'ab', bytes: 1, accession: null, documentUrl: null }, generatedAt: 't', appVersion: 'test' };
+  test('exports neutralise Markdown links and spreadsheet formulas from the filing', () => {
+    expect(memoMarkdown(ctx)).not.toContain('[click](https://evil.example)');
+    expect(snapshotCsv(ctx).split('\r\n').some(l => l.includes(",'=HYPERLINK(1),"))).toBe(true);
+    expect(snapshotCsv(ctx).split('\r\n').some(l => /,=HYPERLINK/.test(l))).toBe(false);
+  });
+});
+
 describe('sandboxed view', () => {
   test('removes scripts, frames, handlers, external links and loads; keeps in-document links; puts a CSP first', () => {
     const p = parseFiling(hostileFiling());

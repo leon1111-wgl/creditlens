@@ -5,7 +5,7 @@
 import { add, cmp, parse as parseDec, quantize, sub, type Dec } from '../decimal';
 import { canon, type Context, type Fact, type Parsed } from './ixbrl';
 
-export const DEFINITIONS_VERSION = 'credit-snapshot-def-1';
+export const DEFINITIONS_VERSION = 'credit-snapshot-def-2';
 const DAY = 86_400_000;
 
 export type NsClass = 'us-gaap' | 'dei' | 'srt' | 'ifrs' | 'ext';
@@ -48,8 +48,14 @@ const SHORT_INV = ['ShortTermInvestments', 'OtherShortTermInvestments', 'Marketa
 const LIQ_SUBTOTAL = 'CashCashEquivalentsAndShortTermInvestments';
 const LIQ_SET = new Set([...CASH, ...SHORT_INV, LIQ_SUBTOTAL]);
 // Company-specific (extension) concepts counted as debt when they sit on the liabilities side and their local name says so.
-const EXT_DEBT = /^(SeniorNotes|SeniorSecuredNotes|SeniorUnsecuredNotes|ConvertibleNotes|ConvertibleSeniorNotes|SecuredNotes|UnsecuredNotes|Notes|NotesPayable|LongTermDebt|Debt|TermLoan|Borrowings|CreditFacility|RevolvingCreditFacility|LineOfCredit)/;
-const EXT_NOT_DEBT = /Interest|Accrued|Receivable|Issuance|Discount|Premium|FairValue|Cost|Guarant|Held|Asset|Securities|Lease/;
+const EXT_DEBT = /^(SeniorNotes|SeniorSecuredNotes|SeniorUnsecuredNotes|ConvertibleNotes|ConvertibleSeniorNotes|SecuredNotes|UnsecuredNotes|Notes|NotesPayable|LongTermDebt|Debt|TermLoan|Borrowings|CreditFacility|RevolvingCreditFacility|LineOfCredit|Mortgage)/;
+const EXT_NOT_DEBT = /Interest|Accrued|Receivable|Issuance|Discount|Premium|FairValue|Cost|Guarant|Held|Asset|Securities/;
+// def-2: a name that also mentions leases ("LongTermDebtAndLeaseObligationNet") is still debt; it is flagged like the
+// us-gaap debt-and-lease concepts (Q10).
+const LEASE_IN_NAME = /Lease/;
+// "…NetOfUnamortizedDiscount", "…NetDeferredFinancingCostsNet" describe how a debt line is measured, not what it is.
+const NET_OF = /Net(Of)?(Unamortized|Deferred|Debt|Financing|Issuance|Original|Issue)*(Costs?|Discounts?|Premiums?|Fees)(Net)?/g;
+const extIsDebt = (local: string) => EXT_DEBT.test(local) && !EXT_NOT_DEBT.test(local.replace(NET_OF, ''));
 export const SUPPORTED_FORMS = new Set(['10-K', '10-K/A', '10-KT', '10-Q', '10-Q/A', '10-QT']);
 
 export const LABELS: Record<string, string> = {
@@ -88,14 +94,20 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   }
   const money = (f: Fact) => consolidated(f) && currencyOf(f) === currency;
 
-  // P: longest consolidated duration ending at D (≤ 400 days) carrying a report-currency amount.
+  // P (def-2): the consolidated duration ending at D (≤ 400 days) that carries the most report-currency amounts;
+  // ties go to the longer one. One stray trailing-twelve-month fact in a 10-Q no longer becomes the period.
   let P: { start: string; end: string; days: number } | null = null;
+  const perPeriod = new Map<string, number>();
   for (const f of facts) {
     if (!money(f)) continue;
     const c = contexts[f.ctx];
-    if (!c.start || c.end !== D) continue;
-    const n = days(c.start, c.end);
-    if (n <= 400 && (!P || n > P.days)) P = { start: c.start, end: c.end, days: n };
+    if (!c.start || c.end !== D || days(c.start, c.end) > 400) continue;
+    perPeriod.set(c.start, (perPeriod.get(c.start) || 0) + 1);
+  }
+  for (const [start, count] of perPeriod) {
+    const n = days(start, D);
+    const best = P ? perPeriod.get(P.start)! : -1;
+    if (count > best || (count === best && n > P!.days)) P = { start, end: D, days: n };
   }
   const months = P ? Math.round(P.days / 30.44) : null;
   const annual = months !== null && months >= 12;
@@ -187,9 +199,10 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
 
   // §4 debt rows on the balance sheet
   interface Row { f: Fact; section: 'current' | 'noncurrent' }
-  const isDebtRow = (f: Fact) => (nsClass(f.ns) === 'us-gaap' && DEBT_SET.has(f.local)) || (nsClass(f.ns) === 'ext' && EXT_DEBT.test(f.local) && !EXT_NOT_DEBT.test(f.local));
+  const isDebtRow = (f: Fact) => (nsClass(f.ns) === 'us-gaap' && DEBT_SET.has(f.local)) || (nsClass(f.ns) === 'ext' && extIsDebt(f.local));
+  const nameIsCurrent = (local: string) => /Current$/.test(local) || SHORT_TERM.has(local);
   const debtRows: Row[] = firstByConcept(inBs.filter(f => isDebtRow(f) && liabSide(f)))
-    .map(f => ({ f, section: posLC !== undefined ? (f.i < posLC ? 'current' : 'noncurrent') : (/Current/.test(f.local) || SHORT_TERM.has(f.local) ? 'current' : 'noncurrent') }));
+    .map(f => ({ f, section: posLC !== undefined ? (f.i < posLC ? 'current' : 'noncurrent') : (nameIsCurrent(f.local) ? 'current' : 'noncurrent') }));
   const subtotalNotes: number[] = [];
   function collapse(rows: Row[], wholeSide: boolean): { counted: Row[]; absorbed: Map<number, Row[]> } {
     const absorbedBy = new Map<number, Row[]>();
@@ -197,17 +210,19 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     for (let k = 0; k < rows.length; k++) {
       const s = rows[k];
       const isSub = SECTION_SUBTOTALS.has(s.f.local) || SIDE_SUBTOTALS.has(s.f.local);
-      if (!isSub) continue;
+      if (!isSub || cmp(dec(s.f.value!), { int: 0n, exp: 0 }) === 0) continue;
       const region = (r: Row) => wholeSide || SIDE_SUBTOTALS.has(s.f.local) || r.section === s.section;
       let acc: Dec = { int: 0n, exp: 0 };
       const taken: Row[] = [];
       let found = false;
       for (let j = k - 1; j >= 0; j--) {
         const r = rows[j];
-        if (gone.has(r.f.i) || !region(r)) continue;
+        if (gone.has(r.f.i) || !region(r) || cmp(dec(r.f.value!), { int: 0n, exp: 0 }) === 0) continue;
         acc = add(acc, dec(r.f.value!)); taken.push(r);
         if (cmp(acc, dec(s.f.value!)) === 0) { found = true; break; }
       }
+      // def-2: one row from another section that happens to equal a whole-side subtotal is not its breakdown.
+      if (found && taken.length === 1 && taken[0].section !== s.section) found = false;
       if (found) { taken.forEach(r => gone.add(r.f.i)); absorbedBy.set(s.f.i, taken.reverse()); }
       else if (taken.length) subtotalNotes.push(s.f.i);
     }
@@ -229,7 +244,8 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     const cur = collapse(debtRows.filter(r => r.section === 'current'), true);
     inputs.current_debt = cur.counted.length ? input('current_debt', 'B · 流动负债区段', rowTerms(cur.counted, cur.absorbed))
       : { key: 'current_debt', label: LABELS.current_debt, value: '0', rule: 'B · 流动负债区段没有债务行', terms: [] };
-    debtUsesFinanceLeases = all.counted.some(r => WITH_FINANCE_LEASES.has(r.f.local));
+    // Absorbed rows count too: a debt-and-lease line inside a subtotal still puts finance leases in the total.
+    debtUsesFinanceLeases = debtRows.some(r => WITH_FINANCE_LEASES.has(r.f.local) || (nsClass(r.f.ns) === 'ext' && LEASE_IN_NAME.test(r.f.local)));
   } else {
     const p = (l: string) => pick(l, 'I');
     const ltd = p('LongTermDebt'), ltdN = p('LongTermDebtNoncurrent'), ltdC = p('LongTermDebtCurrent');
@@ -246,16 +262,27 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   }
   if (inputs.debt.value === null) cue('Q12', '没有找到债务：资产负债表上没有可识别的债务行，也没有债务合计标签。若公司确实没有借款，债务为 0；请在资产负债表上核对。', []);
   const strange = firstByConcept(inBs.filter(f => liabSide(f) && !isDebtRow(f)
-    && /Debt|Borrowing|Notes|Loan|CommercialPaper|CreditFacility|LineOfCredit/i.test(f.local) && !/Interest|Receivable|Lease|Asset|Securities/i.test(f.local)));
+    && /Debt|Borrowing|Notes|Loan|CommercialPaper|CreditFacility|LineOfCredit|Mortgage/i.test(f.local) && !/Interest|Receivable|Asset|Securities|^(Operating|Finance|Capital)Lease/i.test(f.local)));
   if (strange.length) cue('Q12', `负债一侧有名称像借款、但未计入债务的科目：${strange.map(f => f.name).join('、')}。核对它们是否是借款。`, strange.map(f => f.i));
+  // Q21 (def-2): a debt total tagged elsewhere (notes) that is well above the balance-sheet debt.
+  if (inputs.debt.value !== null && inputs.debt.rule.startsWith('B')) {
+    const totals = ['LongTermDebt', 'DebtInstrumentCarryingAmount', 'DebtLongtermAndShorttermCombinedAmount', 'LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities']
+      .map(l => pick(l, 'I')).filter((x): x is Pick => x !== null).sort((a, b) => num(b.value) - num(a.value));
+    if (totals.length && num(totals[0].value) > 1.1 * num(inputs.debt.value)) {
+      const top = totals[0];
+      cue('Q21', `附注或其他位置的债务合计（${top.chosen.name}）比资产负债表上计入的债务多 ${Math.round((num(top.value) / Math.max(num(inputs.debt.value), 1) - 1) * 100)}%：资产负债表上可能有未识别的借款行，依赖债务的倍数可能偏低。`, [top.chosen.i]);
+    }
+  }
   const extCounted = inputs.debt.terms.filter(t => !t.concept.startsWith('us-gaap:'));
   if (extCounted.length && inputs.debt.rule.startsWith('B')) cue('Q12', `债务含发行人自定义概念（按名称规则计入）：${extCounted.map(t => t.concept).join('、')}。`, extCounted.map(t => t.fact));
-  if (debtUsesFinanceLeases) cue('Q10', '债务行用了 LongTermDebtAndCapitalLeaseObligations：债务已含融资租赁负债。', inputs.debt.terms.filter(t => /CapitalLease/.test(t.concept)).map(t => t.fact));
+  if (debtUsesFinanceLeases) cue('Q10', '债务行包含租赁（LongTermDebtAndCapitalLeaseObligations 或名称含 Lease 的债务科目）：债务已含融资租赁负债。', debtRows.filter(r => WITH_FINANCE_LEASES.has(r.f.local) || LEASE_IN_NAME.test(r.f.local)).map(r => r.f.i));
 
   // Liquidity
   let liqRows = firstByConcept(inBs.filter(f => nsClass(f.ns) === 'us-gaap' && LIQ_SET.has(f.local) && assetSide(f)
-    && (posAC !== undefined || CASH.includes(f.local) || /Current/.test(f.local))));
-  if (liqRows.some(f => f.local === 'CashAndCashEquivalentsAtCarryingValue')) liqRows = liqRows.filter(f => f.local !== 'CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents');
+    && (posAC !== undefined || CASH.includes(f.local) || nameIsCurrent(f.local))));
+  // def-2: cash and cash equivalents is the total of Cash and CashEquivalents; with it present, its parts and the
+  // restricted-cash total are not added again.
+  if (liqRows.some(f => f.local === 'CashAndCashEquivalentsAtCarryingValue')) liqRows = liqRows.filter(f => !['CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents', 'Cash', 'CashEquivalentsAtCarryingValue'].includes(f.local));
   if (liqRows.length) {
     const gone = new Set<number>(); const parts = new Map<number, Fact[]>();
     for (let k = 0; k < liqRows.length; k++) {
@@ -402,6 +429,9 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   if (meta.amended) cue('Q18', '这是修订文件（/A），可能只含部分内容。', []);
   const unread = facts.filter(f => f.value === null && !f.nil && f.text !== '' && !isDim(contexts[f.ctx]) && currencyOf(f) === currency);
   if (unread.length) cue('Q19', `有 ${unread.length} 个合并口径的金额标签格式本页不解析，未参与计算。`, unread.slice(0, 20).map(f => f.i));
+  const impairments = ['GoodwillImpairmentLoss', 'AssetImpairmentCharges', 'ImpairmentOfLongLivedAssetsHeldForUse', 'ImpairmentOfIntangibleAssetsExcludingGoodwill', 'GoodwillAndIntangibleAssetImpairment']
+    .map(l => pick(l, 'P')).filter((x): x is Pick => x !== null && num(x.value) > 0);
+  if (impairments.length && inputs.ebit.value !== null) cue('Q22', `本期有减值（${impairments.map(p => p.chosen.local).join('、')}），通常计入营业利润：EBIT、EBITDA 与覆盖倍数含这些一次性项目。`, impairments.map(p => p.chosen.i));
   const order = (c: Cue) => Number(c.id.slice(1));
   cues.sort((a, b) => order(a) - order(b));
 

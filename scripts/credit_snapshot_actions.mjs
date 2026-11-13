@@ -44,11 +44,13 @@ async function newPage({ width = 1440, height = 900, scheme = 'light' } = {}) {
   const context = await browser.newContext({ viewport: { width, height }, colorScheme: scheme, acceptDownloads: true });
   const page = await context.newPage();
   const errors = [];
+  const offsite = [];
+  page.on('request', r => { if (!r.url().startsWith(`http://127.0.0.1:${server.address().port}/`) && !r.url().startsWith('blob:') && !r.url().startsWith('data:') && r.url() !== 'about:srcdoc') offsite.push(r.url()); });
   page.on('console', m => { if (m.type() === 'error' && !/Blocked script execution in 'about:srcdoc'/.test(m.text())) errors.push(m.text()); });
   page.on('pageerror', e => errors.push(String(e)));
   await page.goto(PAGE);
   await until(page, () => !/正在载入/.test(document.getElementById('snGalleryNote')?.textContent || '正在载入'));
-  return { page, context, errors };
+  return { page, context, errors, offsite };
 }
 // The page's CSP has no 'unsafe-eval', so Playwright's waitForFunction (string evaluation) is refused; poll with evaluate.
 async function until(page, fn, timeout = 120_000) {
@@ -196,7 +198,7 @@ if (mode === 'check') {
   const evil = readFileSync(path.resolve('tests/fixtures/snapshot-hostile.htm'));
   for (const [width, scheme] of [[1440, 'light'], [1440, 'dark'], [375, 'light'], [375, 'dark']]) {
     const label = `${width}-${scheme}`;
-    const { page, context, errors } = await newPage({ width, height: width > 500 ? 900 : 812, scheme });
+    const { page, context, errors, offsite } = await newPage({ width, height: width > 500 ? 900 : 812, scheme });
     const rows = await page.$$eval('#snGalleryTable tbody tr', t => t.length);
     if (rows !== gallery.entries.length) fail(`${label}: gallery shows ${rows} rows, index has ${gallery.entries.length}`);
     // wrong file types
@@ -223,6 +225,8 @@ if (mode === 'check') {
         external: [...d.querySelectorAll('[href],[src]')].filter(e => !/^#|^data:image\/(png|jpe?g|gif)/i.test(e.getAttribute('href') || e.getAttribute('src') || '')).length,
         csp: d.querySelector('meta[http-equiv="Content-Security-Policy"]')?.getAttribute('content'), sandbox: document.getElementById('snFrame').getAttribute('sandbox') };
     });
+    await page.waitForTimeout(500);
+    if (offsite.length) fail(`${label}: the page or the filing view made off-site requests: ${offsite.slice(0, 3).join(' ')}`);
     if (sandbox.pwned || sandbox.scripts || sandbox.handlers || sandbox.external || !/default-src 'none'/.test(sandbox.csp || '') || sandbox.sandbox !== 'allow-same-origin') fail(`${label}: sandbox ${JSON.stringify(sandbox)}`);
     // drop a real filing (the drag-and-drop path), with its EDGAR address typed in as a visitor would
     await page.fill('#snUrl', general.document_url);
@@ -257,8 +261,12 @@ if (mode === 'check') {
     await page.click(`#snGalleryTable tr[data-gallery="${general.id}"] button.sn-open`);
     const g = await waitResult(page);
     if (!g.ok || !page.url().includes('#g=')) fail(`${label}: gallery open → ${g.text} ${page.url()}`);
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
-    if (overflow > 1) fail(`${label}: horizontal overflow ${overflow}px`);
+    const overflow = await page.evaluate(() => {
+      const iw = document.documentElement.clientWidth;
+      const leaves = [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > iw + 1 && ![...e.children].some(c => c.getBoundingClientRect().right > iw + 1));
+      return { px: document.documentElement.scrollWidth - iw, culprits: leaves.slice(0, 4).map(e => `${e.tagName}.${e.className} right=${Math.round(e.getBoundingClientRect().right)} "${(e.textContent || '').slice(0, 40)}"`) };
+    });
+    if (overflow.px > 1) fail(`${label}: horizontal overflow ${overflow.px}px: ${overflow.culprits.join(' | ')}`);
     await page.screenshot({ path: path.join(out, `flow-${label}-gallery.png`), fullPage: true });
     if (errors.length) fail(`${label}: console errors ${errors.slice(0, 3).join(' | ')}`);
     note(`${label}: flow done (gallery rows ${rows}, drop clicks ${c.ok}/${c.clicks})`);

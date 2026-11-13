@@ -118,6 +118,8 @@ export function parseFiling(text: string, Parser: { new(): DOMParser } = DOMPars
   const contexts: Record<string, Context> = {};
   const units: Record<string, string> = {};
   const all = Array.from(doc.getElementsByTagName('*'));
+  // A file must not be able to plant its own anchors: drop any data-clf / data-clh it already carries.
+  for (const el of all) { el.removeAttribute('data-clf'); el.removeAttribute('data-clh'); }
   for (const el of all) {
     const name = lname(el);
     if (!name.includes(':')) continue;

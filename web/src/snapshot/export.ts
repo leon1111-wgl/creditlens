@@ -9,6 +9,8 @@ import { amountText, multiple, percentText, ratioText } from './format';
 export interface SourceInfo {
   kind: 'file' | 'gallery'; fileName: string; sha256: string; bytes: number;
   accession: string | null; documentUrl: string | null; archiveUrl?: string | null; captured?: string | null;
+  /** Where the accession came from: the gallery index, the visitor's own entry, or a "saved from" note inside the file (unverified). */
+  accessionFrom?: 'gallery' | 'typed' | 'file-note' | null;
 }
 export interface ExportContext { snapshot: Snapshot; source: SourceInfo; generatedAt: string; appVersion: string }
 
@@ -31,16 +33,17 @@ const allInputs = (s: Snapshot): Input[] => {
   if (s.ladder) list.push(s.ladder.next12, s.ladder.years2to5, s.ladder.after5);
   return list;
 };
-const md = (x: string) => x.replace(/\|/g, '\\|').replace(/\n/g, ' ');
+// Text from the filing is data: escape Markdown so a registrant name cannot become a link, image or HTML.
+const md = (x: string) => x.replace(/[\\`*_{}\[\]()<>#!|]/g, c => '\\' + c).replace(/\n/g, ' ');
 
 function header(ctx: ExportContext): string[] {
   const { snapshot: s, source } = ctx;
   return [
-    `- 公司：${s.meta.registrant || '（未标注）'}，CIK ${s.meta.cik || '—'}${s.meta.ticker ? `，代码 ${s.meta.ticker}` : ''}`,
+    `- 公司：${md(s.meta.registrant || '（未标注）')}，CIK ${md(s.meta.cik || '—')}${s.meta.ticker ? `，代码 ${md(s.meta.ticker)}` : ''}`,
     `- 文件：${s.meta.form}，期末 ${s.meta.period_end}${s.meta.period_start ? `；流量期间 ${s.meta.period_start} 至 ${s.meta.period_end}（${s.meta.months} 个月）` : ''}`,
-    `- Accession：${source.accession || '未提供（拖入的文件本身不含 accession；可在页面上填写 EDGAR 地址）'}`,
+    `- Accession：${source.accession ? md(source.accession) + (source.accessionFrom === 'file-note' ? '（取自文件内的保存地址注释，未核实）' : source.accessionFrom === 'typed' ? '（访客填写）' : '') : '未提供（拖入的文件本身不含 accession；可在页面上填写 EDGAR 地址）'}`,
     `- SEC 地址：${source.documentUrl || '未提供'}${source.archiveUrl ? `；取自互联网档案馆抓取 ${source.archiveUrl}` : ''}`,
-    `- 文件：${source.fileName}，${source.bytes.toLocaleString('en-US')} 字节，SHA-256 ${source.sha256}`,
+    `- 文件：${md(source.fileName)}，${source.bytes.toLocaleString('en-US')} 字节，SHA-256 ${source.sha256}`,
     `- 口径：${s.definitions}；合并口径（无维度）上下文；币种 ${s.meta.currency}`,
     `- 生成：${ctx.generatedAt}，CreditLens ${ctx.appVersion}`,
   ];
@@ -49,7 +52,7 @@ function header(ctx: ExportContext): string[] {
 export function memoMarkdown(ctx: ExportContext): string {
   const { snapshot: s, source } = ctx;
   const out: string[] = [];
-  out.push(`# 信用快照备忘录（草稿）· ${s.meta.registrant || s.meta.cik} · ${s.meta.form} · ${s.meta.period_end}`, '');
+  out.push(`# 信用快照备忘录（草稿）· ${md(s.meta.registrant || s.meta.cik)} · ${md(s.meta.form)} · ${s.meta.period_end}`, '');
   out.push('> 由 CreditLens 信用快照根据发行人自己的 Inline XBRL 标签计算。这是信用视角的整理，不是评级，也不是投资建议；复核提示只指出需要查看的地方。每个数字都给出 XBRL 概念、期间、上下文与原文锚点。', '');
   out.push(...header(ctx), '');
   if (s.status !== 'ok') {
@@ -67,20 +70,25 @@ export function memoMarkdown(ctx: ExportContext): string {
   }
   out.push('', '## 复核提示', '');
   if (!s.cues.length) out.push('- （无）');
-  for (const c of s.cues) out.push(`- **${c.id}** ${c.text}`);
+  for (const c of s.cues) out.push(`- **${c.id}** ${md(c.text)}`);
   out.push('', '## 输入与来源', '', '| 输入 | 规则 | 数值 | 概念 | 期间 | 上下文 | scale | sign | 原文文字 | 锚点 |', '|---|---|---:|---|---|---|---:|---|---:|---|');
   for (const input of allInputs(s)) {
     if (!input.terms.length) { out.push(`| ${md(input.label)} | ${md(input.missing || input.rule || '')} | 未找到 | | | | | | | |`); continue; }
     for (const t of input.terms) {
       const a = anchorOf(t, source);
-      out.push(`| ${md(input.label)} | ${md(input.rule)}${t.note ? '；' + md(t.note) : ''} | ${md(termAmount(t, s))} | \`${t.concept}\` | ${t.period} | ${md(t.context)} | ${t.scale} | ${t.sign || '+'} | ${md(t.text)} | ${a.url ? `[${md(a.label)}](${a.url})` : md(a.label)} |`);
+      out.push(`| ${md(input.label)} | ${md(input.rule)}${t.note ? '；' + md(t.note) : ''} | ${md(termAmount(t, s))} | \`${t.concept.replace(/`/g, '')}\` | ${md(t.period)} | ${md(t.context)} | ${t.scale} | ${t.sign || '+'} | ${md(t.text)} | ${a.url ? `[${md(a.label)}](${encodeURI(a.url)})` : md(a.label)} |`);
     }
   }
   out.push('', '## 口径', '', '定义见 CreditLens 仓库 docs/47-credit-snapshot.md（credit-snapshot-def-1）。债务与现金按资产负债表上的行加总；租赁负债单列，不计入总债务；10-Q 的流量为年初至今，不计算杠杆倍数。', '');
   return out.join('\n');
 }
 
-const csvCell = (x: string | number | null | undefined) => { const s = x === null || x === undefined ? '' : String(x); return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+// Spreadsheet formula injection: a text cell starting with = + - @ (or a tab/CR) is prefixed with ' unless it is a number.
+const csvCell = (x: string | number | null | undefined) => {
+  let s = x === null || x === undefined ? '' : String(x);
+  if (/^[=+\-@\t\r]/.test(s) && !/^-?\d+(\.\d+)?$/.test(s)) s = "'" + s;
+  return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+};
 export function snapshotCsv(ctx: ExportContext): string {
   const { snapshot: s, source } = ctx;
   const head = ['kind', 'key', 'label', 'value', 'display', 'unit', 'formula_or_rule', 'concept', 'period', 'context', 'decimals', 'scale', 'sign', 'printed_text', 'accession', 'anchor', 'anchor_url', 'fact_index', 'cik', 'form', 'period_end', 'file_sha256'];
@@ -133,7 +141,9 @@ const run = (text: string, opts: { bold?: boolean; size?: number; mono?: boolean
 const para = (text: string, opts: { bold?: boolean; size?: number; mono?: boolean } = {}) => `<w:p>${run(text, opts)}</w:p>`;
 function table(rows: string[][]): string {
   const cell = (t: string, head: boolean) => `<w:tc><w:tcPr><w:tcW w:w="0" w:type="auto"/></w:tcPr><w:p>${run(t, { bold: head, size: 16 })}</w:p></w:tc>`;
+  const cols = rows[0]?.length || 1;
   return `<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="pct"/><w:tblBorders>${['top', 'left', 'bottom', 'right', 'insideH', 'insideV'].map(b => `<w:${b} w:val="single" w:sz="4" w:space="0" w:color="BBBBBB"/>`).join('')}</w:tblBorders></w:tblPr>`
+    + `<w:tblGrid>${Array.from({ length: cols }, () => `<w:gridCol w:w="${Math.floor(9638 / cols)}"/>`).join('')}</w:tblGrid>`
     + rows.map((r, i) => `<w:tr>${r.map(c => cell(c, i === 0)).join('')}</w:tr>`).join('') + '</w:tbl>';
 }
 export function memoDocx(ctx: ExportContext): Uint8Array {

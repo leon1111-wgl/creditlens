@@ -52,7 +52,8 @@ function status(kind: 'busy' | 'error' | 'ok' | 'none', text = '', detail = '') 
   box.append(el('strong', {}, text));
   if (detail) box.append(el('span', {}, detail));
 }
-const nextPaint = () => new Promise<void>(r => requestAnimationFrame(() => setTimeout(r, 0)));
+// A timer, not requestAnimationFrame: rAF never fires in a background tab, which would stall the load there.
+const nextPaint = () => new Promise<void>(r => setTimeout(r, 20));
 
 async function sha256hex(bytes: Uint8Array): Promise<string> {
   if (!crypto?.subtle) return '（浏览器不支持 SHA-256）';
@@ -88,6 +89,7 @@ async function openBytes(bytes: Uint8Array, source: Omit<SourceInfo, 'sha256' | 
       ...source, sha256, bytes: bytes.length,
       accession: source.accession || typed.accession || saved.accession,
       documentUrl: source.documentUrl || typed.documentUrl || saved.documentUrl,
+      accessionFrom: source.accession ? 'gallery' : typed.accession ? 'typed' : saved.accession ? 'file-note' : null,
     };
     sanitize(parsed.doc);
     const html = serialize(parsed.doc);
@@ -163,6 +165,9 @@ function metricRow(m: Metric, s: Snapshot, opts: { big?: boolean } = {}): HTMLEl
   row.append(value);
   row.append(el('code', { class: 'sn-formula' }, m.formula));
   if (m.reason) row.append(el('span', { class: 'sn-reason' }, m.reason));
+  // A debt total elsewhere in the filing well above the balance-sheet debt (Q21) makes every debt-based figure suspect.
+  if (m.value !== null && ['debt', 'net_debt', 'debt_to_ebitda', 'net_debt_to_ebitda', 'fcf_to_debt', 'debt_with_leases'].includes(m.key) && s.cues.some(c => c.id === 'Q21'))
+    row.append(el('span', { class: 'sn-reason' }, '可能偏低：见复核提示 Q21'));
   return row;
 }
 
@@ -287,6 +292,7 @@ function render(parsed: Parsed, s: Snapshot, source: SourceInfo, html: string) {
   frame.onload = () => {
     if (!state || state.frame !== frame) return;
     state.frameDoc = frame.contentDocument;
+    fitFrame();
     note.textContent = '已载入 · 点数字定位，或直接点原文中带下划线的数字';
     state.frameDoc?.addEventListener('click', event => {
       const target = (event.target as Element | null)?.closest?.('[data-clf],[data-clh]');
@@ -341,6 +347,15 @@ function select(i: number, button: HTMLElement | null, scroll = true) {
 }
 
 const narrow = matchMedia('(max-width: 1080px)');
+/** On a narrow screen, zoom the filing to the frame's width so a highlighted figure is seen with its row label. */
+function fitFrame() {
+  const doc = state?.frame.contentDocument;
+  if (!doc?.documentElement) return;
+  doc.documentElement.style.removeProperty('zoom');
+  const width = state!.frame.clientWidth, content = doc.documentElement.scrollWidth;
+  if (narrow.matches && content > width + 4) doc.documentElement.style.setProperty('zoom', String(Math.max(0.4, width / content)));
+}
+addEventListener('resize', () => fitFrame());
 function sheet(open: boolean) {
   const viewer = document.querySelector('.sn-viewer');
   viewer?.classList.toggle('open', open);
@@ -409,7 +424,8 @@ function galleryTable(g: Gallery): HTMLElement {
   const fmt = (x: number | null, kind: 'x' | 'r' | 'p') => x === null ? '—' : kind === 'x' ? `${x.toFixed(2)}×` : kind === 'p' ? `${(x * 100).toFixed(1)}%` : x.toFixed(2);
   for (const e of g.entries) {
     const tr = el('tr', { 'data-gallery': e.id });
-    const th = el('th', { scope: 'row' }); th.append(el('span', {}, e.name)); th.append(el('small', {}, `${e.ticker ? e.ticker + ' · ' : ''}${e.form} · ${e.period}`));
+    const period = /^\d{8}$/.test(e.period) ? `${e.period.slice(0, 4)}-${e.period.slice(4, 6)}-${e.period.slice(6)}` : e.period;
+    const th = el('th', { scope: 'row' }); th.append(el('span', {}, e.name)); th.append(el('small', {}, `${e.ticker ? e.ticker + ' · ' : ''}${e.form} · ${period}`));
     tr.append(th);
     tr.append(el('td', { 'data-label': '行业层' }, e.stratum_label.replace(/\s*\(.*\)$/, '')));
     if (!e.snapshot) {
@@ -422,7 +438,7 @@ function galleryTable(g: Gallery): HTMLElement {
       tr.append(el('td', { 'data-label': '利息覆盖' }, fmt(e.snapshot.interest_coverage, 'x')));
       tr.append(el('td', { 'data-label': '流动比率' }, fmt(e.snapshot.current_ratio, 'r')));
       tr.append(el('td', { 'data-label': 'FCF／债务' }, fmt(e.snapshot.fcf_to_debt, 'p')));
-      tr.append(el('td', { 'data-label': '提示', class: 'cues' }, e.snapshot.cues.join(' ') || '—'));
+      tr.append(el('td', { 'data-label': '提示', class: 'cues', title: '复核提示编号，打开后看全文' }, [...new Set(e.snapshot.cues)].join(' ') || '—'));
     }
     const td = el('td', { class: 'open' });
     const b = el('button', { type: 'button', class: 'sn-open' }, '打开');
