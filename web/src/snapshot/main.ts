@@ -344,6 +344,7 @@ const narrow = matchMedia('(max-width: 1080px)');
 function sheet(open: boolean) {
   const viewer = document.querySelector('.sn-viewer');
   viewer?.classList.toggle('open', open);
+  document.body.classList.toggle('sn-sheet-open', open);
   const toggle = $('snSheet');
   toggle.setAttribute('aria-expanded', String(open));
   toggle.textContent = open ? '收起' : '展开';

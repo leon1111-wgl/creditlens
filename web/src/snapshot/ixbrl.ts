@@ -104,7 +104,8 @@ export function parseFiling(text: string, Parser: { new(): DOMParser } = DOMPars
     if (VIEWER.test(text.slice(0, 20000))) throw new FilingError('viewer', '这是 EDGAR 的 iXBRL 查看器页面，不是申报文件本身。请在查看器菜单里打开 “Open as HTML”，或打开 Archives 下的 .htm 主文件，再另存。');
     throw new FilingError('not_ixbrl', '没有找到 Inline XBRL 标签（ix:header／ix:nonFraction）。本页只读 2019 年以后 SEC 要求的 Inline XBRL 10-K／10-Q 主文件。');
   }
-  const doc = new Parser().parseFromString(text, 'text/html');
+  // <base> would retarget relative URLs while parsing (and the page CSP refuses it); it is dropped anyway.
+  const doc = new Parser().parseFromString(text.replace(/<base\b[^>]*>/gi, ''), 'text/html');
   const root = doc.documentElement;
   const namespaces: Record<string, string> = {};
   for (const el of [root, doc.body, ...Array.from(doc.getElementsByTagName('*')).filter(e => tail(e) === 'header' || tail(e) === 'xbrl')]) {

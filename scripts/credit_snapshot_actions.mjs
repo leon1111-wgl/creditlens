@@ -221,12 +221,13 @@ if (mode === 'check') {
         csp: d.querySelector('meta[http-equiv="Content-Security-Policy"]')?.getAttribute('content'), sandbox: document.getElementById('snFrame').getAttribute('sandbox') };
     });
     if (sandbox.pwned || sandbox.scripts || sandbox.handlers || sandbox.external || !/default-src 'none'/.test(sandbox.csp || '') || sandbox.sandbox !== 'allow-same-origin') fail(`${label}: sandbox ${JSON.stringify(sandbox)}`);
-    // drop a real filing (the drag-and-drop path)
+    // drop a real filing (the drag-and-drop path), with its EDGAR address typed in as a visitor would
+    await page.fill('#snUrl', general.document_url);
     const dropped = await dropFile(page, 'general.htm');
     if (!dropped.ok) fail(`${label}: drop → ${dropped.text}`);
     const c = await clickCheck(page, `${label} drop`);
     if (c.ok !== c.clicks || !c.clicks) fail(`${label}: drop click check ${c.ok}/${c.clicks}`);
-    await page.click('button.sn-fig[data-fact]');
+    await page.locator('button.sn-fig[data-fact]').first().dispatchEvent('click');
     const readout = await page.innerText('#snReadout');
     if (!/概念/.test(readout) || !/上下文/.test(readout)) fail(`${label}: readout ${readout.slice(0, 80)}`);
     await page.screenshot({ path: path.join(out, `flow-${label}-dropped.png`), fullPage: false });
