@@ -3,7 +3,8 @@
   "release": "0.36.0",
   "definitions_version": "credit-snapshot-def-1",
   "note": "Pre-registration for the 0.36.0 credit snapshot (docs/47-credit-snapshot.md). Committed before any gallery, parser-check or held-out run. Nothing here names the gallery or held-out issuers: they are whatever these rules yield on Actions.",
-  "user_agent": "CreditLens public financial research (https://github.com/leon1111-wgl/creditlens) 205497500+leon1111-wgl@users.noreply.github.com",
+  "user_agent": "CreditLens public financial research (https://github.com/leon1111-wgl/creditlens)",
+  "user_agent_note": "No email address in committed files, workflow env or logs. Only Internet Archive is contacted; a contact address for SEC would have to come from a repository secret that only the owner can create.",
   "min_request_interval_seconds": 1.0,
   "source": "Latest Internet Archive capture (HTTP 200) of each SEC URL, fetched as original bytes (id_) and checked against the CDX SHA-1 digest. SEC answers this project's declared user agent with HTTP 403 from GitHub Actions and from the developer machine (probe run 43477784386, 2026-11-14), so no request goes to SEC. The HTML's own dei:EntityCentralIndexKey and dei:DocumentType must match the candidate.",
   "dev_filings": {
