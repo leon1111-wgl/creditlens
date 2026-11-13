@@ -171,12 +171,12 @@ function metricRow(m: Metric, s: Snapshot, opts: { big?: boolean } = {}): HTMLEl
   return row;
 }
 
-function inputBlock(input: Input | undefined, s: Snapshot, title?: string): HTMLElement {
+function inputBlock(input: Input | undefined, s: Snapshot, title?: string, missingText = '未找到'): HTMLElement {
   const box = el('div', { class: 'sn-input', 'data-input': input?.key || '' });
   if (!input) return box;
   const head = el('div', { class: 'sn-ihead' });
   head.append(el('span', {}, title || input.label));
-  head.append(el('strong', {}, input.value === null ? '未找到' : amountText(input.value, s.meta.display_scale, s.meta.currency)));
+  head.append(el('strong', {}, input.value === null ? missingText : amountText(input.value, s.meta.display_scale, s.meta.currency)));
   box.append(head, termList(input, s));
   return box;
 }
@@ -216,7 +216,7 @@ function ladderChart(s: Snapshot): HTMLElement {
   box.append(chart);
   const legend = el('div', { class: 'sn-ladder-rows' });
   for (const [title, input] of [[l.next12_label, l.next12], ['第 2–5 年' + (l.missing_years.length ? `（缺第 ${l.missing_years.join('、')} 年）` : ''), l.years2to5], ['5 年以后', l.after5]] as [string, Input][]) {
-    legend.append(inputBlock(input, s, title));
+    legend.append(inputBlock(input, s, title, '未标注'));
   }
   box.append(legend);
   box.append(el('p', { class: 'sn-note' }, '到期表是本金（附注），资产负债表债务是账面值，两者可能不同。参考线：现金与短期投资' + (annual ? '，以及再加一年自由现金流' : '') + '。'));

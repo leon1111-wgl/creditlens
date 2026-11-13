@@ -6,9 +6,9 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 
 本文件先写定义与预先登记的三项检查（在任何运行之前提交），结果在运行后追加到文末。
 
-## 定义（credit-snapshot-def-2）
+## 定义（credit-snapshot-def-3）
 
-本节是完整的计算口径，写成可以照着做的步骤。检查 (b) 的独立答案按 **def-1**（冻结于 `56286e6`，见该提交中的本文件）计算；def-2 是 Fable 复核之后的修订，与 def-1 的差别列在本节末尾，程序现在按 def-2 计算。
+本节是完整的计算口径，写成可以照着做的步骤。检查 (b) 的独立答案按 **def-1**（冻结于 `56286e6`，见该提交中的本文件）计算；def-2 是 Fable 复核之后的修订，def-3 是主会话用自选文件探测之后的修订，差别都列在本节末尾，程序现在按 def-3 计算。
 
 ### 1. 事实
 
@@ -44,7 +44,7 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 - **A** = 第一个 `Assets` 事实。**E** = A 之后第一个 `LiabilitiesAndStockholdersEquity`；没有则依次用 `StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest`、`StockholdersEquity`、`Liabilities`。没有 A 或 E：视为没有找到资产负债表。
 - **负债一侧** = 位置在 A 与 E 之间的事实。**LC** = 负债一侧第一个 `LiabilitiesCurrent`；位置在 LC 之前的负债一侧事实属于流动负债区段，之后的属于非流动负债区段。没有 LC：资产负债表不分流动／非流动。
 - **流动资产区段**：AC = A 之前最后一个 `AssetsCurrent`。从 AC（没有 AC 时从 A）往前找，遇到第一个期间型（有 startDate）上下文的事实就停（那是上一张报表的流量）；它与 AC（或 A）之间的事实属于流动资产区段。
-- **债务行** = 负债一侧中，概念属于下面的债务概念集合的事实；另外，发行人自定义概念（不在 us-gaap 等标准命名空间）的本地名以 `SeniorNotes`、`SeniorSecuredNotes`、`SeniorUnsecuredNotes`、`ConvertibleNotes`、`ConvertibleSeniorNotes`、`SecuredNotes`、`UnsecuredNotes`、`Notes`、`NotesPayable`、`LongTermDebt`、`Debt`、`TermLoan`、`Borrowings`、`CreditFacility`、`RevolvingCreditFacility`、`LineOfCredit`、`Mortgage` 开头，且去掉表示计量方式的后缀（`Net` 后接 `Of`、`Unamortized`、`Deferred`、`Debt`、`Financing`、`Issuance`、`Original`、`Issue` 与 `Cost(s)`／`Discount(s)`／`Premium(s)`／`Fees`，例如 `NetDeferredFinancingCostsNet`）之后不含 `Interest`、`Accrued`、`Receivable`、`Issuance`、`Discount`、`Premium`、`FairValue`、`Cost`、`Guarant`、`Held`、`Asset`、`Securities` 的，也是债务行（Q12 列出）；名称含 `Lease` 的这类行同时给出 Q10。
+- **债务行** = 负债一侧中，概念属于下面的债务概念集合的事实，或（def-3）us-gaap 概念的本地名含 Notes、Loan、Debt、Borrowing、CommercialPaper、LinesOfCredit、LineOfCredit、Debenture、Bond，且去掉计量后缀后不含下文的排除词、也不是以 Operating／Finance／Capital Lease 开头的事实（例如 `LongTermNotesAndLoans`）；另外，发行人自定义概念（不在 us-gaap 等标准命名空间）的本地名以 `SeniorNotes`、`SeniorSecuredNotes`、`SeniorUnsecuredNotes`、`ConvertibleNotes`、`ConvertibleSeniorNotes`、`SecuredNotes`、`UnsecuredNotes`、`Notes`、`NotesPayable`、`LongTermDebt`、`Debt`、`TermLoan`、`Borrowings`、`CreditFacility`、`RevolvingCreditFacility`、`LineOfCredit`、`Mortgage` 开头，且去掉表示计量方式的后缀（`Net` 后接 `Of`、`Unamortized`、`Deferred`、`Debt`、`Financing`、`Issuance`、`Original`、`Issue` 与 `Cost(s)`／`Discount(s)`／`Premium(s)`／`Fees`，例如 `NetDeferredFinancingCostsNet`）之后不含 `Interest`、`Accrued`、`Receivable`、`Issuance`、`Discount`、`Premium`、`FairValue`、`Cost`、`Guarant`、`Held`、`Asset`、`Securities` 的，也是债务行（Q12 列出）；名称含 `Lease` 的这类行同时给出 Q10。
 - **债务概念集合**：
 
   `ShortTermBorrowings`、`CommercialPaper`、`ShortTermBankLoansAndNotesPayable`、`ShortTermNonBankLoansAndNotesPayable`、`OtherShortTermBorrowings`、`BankOverdrafts`、`LinesOfCreditCurrent`、`NotesPayableCurrent`、`LoansPayableCurrent`、`NotesAndLoansPayableCurrent`、`NotesAndLoansPayable`、`DebtCurrent`、`LongTermDebtCurrent`、`LongTermDebtAndCapitalLeaseObligationsCurrent`、`ConvertibleNotesPayableCurrent`、`ConvertibleDebtCurrent`、`SecuredDebtCurrent`、`UnsecuredDebtCurrent`、`OtherLongTermDebtCurrent`、`SeniorNotesCurrent`、`LongTermNotesPayableCurrent`、`LongTermLoansPayableCurrent`、`NotesPayableRelatedPartiesClassifiedCurrent`、`LongTermDebtNoncurrent`、`LongTermDebt`、`LongTermDebtAndCapitalLeaseObligations`、`LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities`、`DebtLongtermAndShorttermCombinedAmount`、`LongTermNotesPayable`、`LongTermLoansPayable`、`ConvertibleNotesPayable`、`ConvertibleDebtNoncurrent`、`ConvertibleLongTermNotesPayable`、`SeniorNotes`、`SeniorLongTermNotes`、`SecuredLongTermDebt`、`UnsecuredLongTermDebt`、`SecuredDebt`、`UnsecuredDebt`、`LongTermLineOfCredit`、`LineOfCredit`、`OtherLongTermDebtNoncurrent`、`OtherLongTermDebt`、`NotesPayable`、`LoansPayable`、`DebtInstrumentCarryingAmount`、`SubordinatedDebt`、`JuniorSubordinatedNotes`、`NotesPayableRelatedPartiesClassifiedNoncurrent`。
@@ -61,7 +61,7 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 | EBIT | P | E1 `OperatingIncomeLoss`；E2（没有 E1 时）税前利润 + INT，税前利润 = `IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest` \| `IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments`，须有 INT（Q2） |
 | 折旧摊销 DA | P | `DepreciationDepletionAndAmortization` \| `DepreciationAmortizationAndAccretionNet` \| `DepreciationAndAmortization` \| `Depreciation` + `AmortizationOfIntangibleAssets`（两者都有）\| `Depreciation`（只有折旧，Q12 注明未含摊销） |
 | 经营现金流 CFO | P | `NetCashProvidedByUsedInOperatingActivities` \| `NetCashProvidedByUsedInOperatingActivitiesContinuingOperations` |
-| 资本开支 CAPEX | P | `PaymentsToAcquirePropertyPlantAndEquipment` \| `PaymentsToAcquireProductiveAssets` \| `PaymentsForCapitalImprovements` \| `PaymentsToAcquireOilAndGasPropertyAndEquipment` \| `PaymentsToAcquireOilAndGasProperty` \| `PaymentsToAcquireOtherPropertyPlantAndEquipment`（按标签值，不取绝对值） |
+| 资本开支 CAPEX | P | `PaymentsToAcquirePropertyPlantAndEquipment` \| `PaymentsToAcquireProductiveAssets` \| `PaymentsToAcquireOtherProductiveAssets` \| `PaymentsForCapitalImprovements` \| `PaymentsToAcquireOilAndGasPropertyAndEquipment` \| `PaymentsToAcquireOilAndGasProperty` \| `PaymentsToAcquireOtherPropertyPlantAndEquipment`（按标签值，不取绝对值） |
 | 流动资产、流动负债 | I | `AssetsCurrent`；`LiabilitiesCurrent` |
 | 债务 DEBT、流动债务 CD | I | B（首选）：资产负债表负债一侧的债务行之和（第 4 节，含小计规则）；流动债务 CD = 只在流动负债区段内按同样规则处理的债务行之和（区段内没有债务行时为 0）；没有 `LiabilitiesCurrent` 时 CD 只计名称以 Current 结尾或属于短期借款类（`ShortTermBorrowings`、`CommercialPaper`、`ShortTermBankLoansAndNotesPayable`、`ShortTermNonBankLoansAndNotesPayable`、`OtherShortTermBorrowings`、`BankOverdrafts`）的行。F（没有找到资产负债表，或负债一侧没有债务行）：F1 `LongTermDebt` + STB；F2 `DebtCurrent` + `LongTermDebtNoncurrent`（两者都有时）；F3 `LongTermDebtNoncurrent` + `LongTermDebtCurrent`（可无）+ STB；F4 `LongTermDebtAndCapitalLeaseObligations` + `LongTermDebtAndCapitalLeaseObligationsCurrent`（可无）+ STB；其中 STB = `ShortTermBorrowings` \| （`CommercialPaper`、`ShortTermBankLoansAndNotesPayable`、`OtherShortTermBorrowings` 中有值者之和，没有则为 0）。F 规则下 CD 不计算。都没有：债务“未找到”（不是 0），Q12 |
 | 流动性 LIQ | I | 资产负债表流动资产区段的流动性行之和（第 4 节）；没有找到资产负债表或区段内没有流动性行时：（`CashAndCashEquivalentsAtCarryingValue` \| `CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents`）+（`ShortTermInvestments` \| `MarketableSecuritiesCurrent` \| `AvailableForSaleSecuritiesDebtSecuritiesCurrent` \| `OtherShortTermInvestments`，没有则 0） |
@@ -114,6 +114,8 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 | Q19 | 有合并口径、报告币种、文字非空、但格式本页不解析的金额事实 | 列出数量 |
 | Q20 | INT 取自 `InterestCostsIncurred` 或利息收支净额 | 写明口径不同于利润表上的利息费用总额 |
 | Q21 | 债务按 B 规则得出，而 `LongTermDebt`、`DebtInstrumentCarryingAmount`、`DebtLongtermAndShorttermCombinedAmount`、`LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities` 中在 I 的最大值超过 DEBT 的 110% | 资产负债表上可能有未识别的借款行，依赖债务的数字旁标“可能偏低” |
+| Q23 | 债务可能不完整：负债一侧未计入的借款类科目合计不少于已计入债务的 10%（或已计入为 0）；或 Q21 的条件；或到期表三段合计超过 DEBT 的 125% | 净债务、债务／EBITDA、净债务／EBITDA、FCF／债务、含租赁的债务都不计算，总债务标为“可能不完整”，不给 Q6 |
+| Q24 | 没有合并口径的债务，但有带维度（分部、法人等）的债务事实 | 列出各部分，不相加，不提示“债务为 0” |
 | Q22 | `GoodwillImpairmentLoss`、`AssetImpairmentCharges`、`ImpairmentOfLongLivedAssetsHeldForUse`、`ImpairmentOfIntangibleAssetsExcludingGoodwill`、`GoodwillAndIntangibleAssetImpairment` 在 P 有正值 | EBIT、EBITDA 与覆盖倍数含这些一次性项目 |
 
 ### def-2 相对 def-1 的修改（Fable 复核之后，2026-11-14）
@@ -125,6 +127,15 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 5. 不分流动／非流动时，“名称含 Current”改为“名称以 Current 结尾”（`…IncludingCurrentMaturities` 不再被当成流动）。
 6. 现金：有现金及现金等价物合计时，不再另加 `Cash` 与 `CashEquivalentsAtCarryingValue`。
 7. 文字补全：`numwordsen` 实际读英文整数词；`numcommadot`、`numdotcomma`、`numdash` 与报告币种的后备规则写入本节。
+
+### def-3 相对 def-2 的修改（主会话自选文件探测之后，2026-11-14）
+
+1. us-gaap 中名称表示借款的概念在负债一侧都计入债务，不只限于列出的集合（甲骨文的 `LongTermNotesAndLoans` 852.97 亿美元在 def-2 下漏计，页面只计 72.7 亿并给出“净现金”提示）。
+2. 债务完整性保护 Q23：有理由认为债务不完整时，净债务与依赖债务的倍数不计算，Q6（净现金）不出现。
+3. 只有按分部标注的债务时给 Q24 并列出各部分，不再提示“债务为 0”（福特把全部债务按 Ford Credit 与其余公司分部标注）。
+4. 资本开支加上 `PaymentsToAcquireOtherProductiveAssets`（Verizon）。
+5. 房地产公司（有 `RealEstateInvestmentPropertyNet`）：FCF 旁注明物业收购不在资本开支标签里，FCF／债务不计算。
+6. 到期表某一段没有标签时显示“未标注”。
 
 ## 预先登记的检查（在任何运行之前提交）
 

@@ -212,6 +212,50 @@ describe('review fixes (credit-snapshot-def-2)', () => {
   });
 });
 
+describe('main-session probe fixes (credit-snapshot-def-3)', () => {
+  const nfI = (name: string, text: string, ctx = 'c-i') => `<ix:nonFraction unitRef="usd" contextRef="${ctx}" decimals="-6" name="${name}" format="ixt:num-dot-decimal" scale="6">${text}</ix:nonFraction>`;
+  const row = (name: string, text: string, ctx = 'c-i') => `<tr><td>x</td><td>${nfI(name, text, ctx)}</td></tr>`;
+  const withoutBsDebt = (html: string) => html.replace(/<tr><td>Commercial paper<\/td>.*?<\/tr>|<tr><td>Current portion of long-term debt<\/td>.*?<\/tr>|<tr><td>Total short-term debt<\/td>.*?<\/tr>|<tr><td>Long-term debt<\/td>.*?<\/tr>/gs, '');
+  test('a us-gaap non-current notes line (LongTermNotesAndLoans, Oracle case) counts as debt', () => {
+    const s = snap(syntheticFiling({ extraBalanceRows: row('us-gaap:LongTermNotesAndLoans', '8,000') }));
+    expect(val(s, 'debt')).toBe('10250000000');
+  });
+  test('an uncounted borrowing-like line that is material withholds net debt and the multiples, and never says net cash', () => {
+    const html = withoutBsDebt(syntheticFiling({ extraBalanceRows: row('lsi:OtherBorrowingsUnderFacilities', '9,000') }))
+      .replace('<tr><td>Total current liabilities</td>', `${row('us-gaap:NotesPayableCurrent', '100')}<tr><td>Total current liabilities</td>`);
+    const s = snap(html);
+    expect(val(s, 'debt')).toBe('100000000');
+    expect(s.cues.some(c => c.id === 'Q23')).toBe(true);
+    expect(s.cues.some(c => c.id === 'Q6')).toBe(false);
+    for (const k of ['net_debt', 'debt_to_ebitda', 'net_debt_to_ebitda', 'fcf_to_debt']) expect(s.metrics[k].value).toBeNull();
+  });
+  test('a ladder or a carrying-amount total well above the stated debt also withholds them', () => {
+    const s = snap(syntheticFiling().replace('</body>', `<p>${nfI('us-gaap:DebtInstrumentCarryingAmount', '9,000')}</p></body>`));
+    expect(s.cues.some(c => c.id === 'Q23')).toBe(true);
+    expect(s.metrics.debt_to_ebitda.value).toBeNull();
+  });
+  test('debt tagged only by segment is shown as parts and never hinted to be zero (Ford case)', () => {
+    const seg = '<xbrli:context id="c-i-seg"><xbrli:entity><xbrli:identifier scheme="http://www.sec.gov/CIK">0009999999</xbrli:identifier><xbrli:segment><xbrldi:explicitMember dimension="us-gaap:StatementBusinessSegmentsAxis">lsi:CreditMember</xbrldi:explicitMember></xbrli:segment></xbrli:entity><xbrli:period><xbrli:instant>2025-12-31</xbrli:instant></xbrli:period></xbrli:context>';
+    const html = withoutBsDebt(syntheticFiling().replace('</ix:resources>', seg + '</ix:resources>'))
+      .replace(/<tr><td>Total debt, carrying amount<\/td>.*?<\/tr>/s, '')
+      .replace('<tr><td>Total liabilities</td>', `${row('us-gaap:DebtLongtermAndShorttermCombinedAmount', '137,868', 'c-i-seg')}<tr><td>Total liabilities</td>`);
+    const s = snap(html);
+    expect(val(s, 'debt')).toBeNull();
+    expect(s.cues.some(c => c.id === 'Q24' && c.facts.length === 1)).toBe(true);
+    expect(s.cues.some(c => /债务为 0/.test(c.text))).toBe(false);
+  });
+  test('capex tagged as other productive assets (Verizon case) is used, and named', () => {
+    const s = snap(syntheticFiling().replace('us-gaap:PaymentsToAcquirePropertyPlantAndEquipment', 'us-gaap:PaymentsToAcquireOtherProductiveAssets'));
+    expect(val(s, 'capex')).toBe('600000000');
+    expect(s.inputs.capex.rule).toMatch(/PaymentsToAcquireOtherProductiveAssets/);
+  });
+  test('a real-estate company: FCF is flagged and FCF/debt withheld', () => {
+    const s = snap(syntheticFiling({ extraBalanceRows: '' }).replace('</body>', `<p>${nfI('us-gaap:RealEstateInvestmentPropertyNet', '4,000')}</p></body>`));
+    expect(s.metrics.fcf_to_debt.value).toBeNull();
+    expect(s.metrics.fcf.reason).toMatch(/物业/);
+  });
+});
+
 describe('sandboxed view', () => {
   test('removes scripts, frames, handlers, external links and loads; keeps in-document links; puts a CSP first', () => {
     const p = parseFiling(hostileFiling());

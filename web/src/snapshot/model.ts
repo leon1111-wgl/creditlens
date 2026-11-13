@@ -5,7 +5,7 @@
 import { add, cmp, parse as parseDec, quantize, sub, type Dec } from '../decimal';
 import { canon, type Context, type Fact, type Parsed } from './ixbrl';
 
-export const DEFINITIONS_VERSION = 'credit-snapshot-def-2';
+export const DEFINITIONS_VERSION = 'credit-snapshot-def-3';
 const DAY = 86_400_000;
 
 export type NsClass = 'us-gaap' | 'dei' | 'srt' | 'ifrs' | 'ext';
@@ -56,6 +56,10 @@ const LEASE_IN_NAME = /Lease/;
 // "…NetOfUnamortizedDiscount", "…NetDeferredFinancingCostsNet" describe how a debt line is measured, not what it is.
 const NET_OF = /Net(Of)?(Unamortized|Deferred|Debt|Financing|Issuance|Original|Issue)*(Costs?|Discounts?|Premiums?|Fees)(Net)?/g;
 const extIsDebt = (local: string) => EXT_DEBT.test(local) && !EXT_NOT_DEBT.test(local.replace(NET_OF, ''));
+// def-3: a us-gaap concept on the liabilities side whose standard name says borrowing is debt, listed or not
+// (Oracle's LongTermNotesAndLoans was missing from the list).
+const BORROWING_WORD = /Notes|Loan|Debt|Borrowing|CommercialPaper|LinesOfCredit|LineOfCredit|Debenture|Bond/;
+const usIsDebt = (local: string) => BORROWING_WORD.test(local) && !EXT_NOT_DEBT.test(local.replace(NET_OF, '')) && !/^(Operating|Finance|Capital)Lease/.test(local);
 export const SUPPORTED_FORMS = new Set(['10-K', '10-K/A', '10-KT', '10-Q', '10-Q/A', '10-QT']);
 
 export const LABELS: Record<string, string> = {
@@ -196,10 +200,11 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   const assetSide = (f: Fact) => found && f.i > posS! && f.i < (posAC ?? posA!);
   const inBs = atI.filter(f => liabSide(f) || assetSide(f));
   const firstByConcept = (list: Fact[]) => { const seen = new Set<string>(); return list.filter(f => !seen.has(f.local) && seen.add(f.local)); };
+  const firstByKey = (list: Fact[]) => { const seen = new Set<string>(); return list.filter(f => { const k = f.name + '|' + JSON.stringify(contexts[f.ctx]?.dims); return !seen.has(k) && !!seen.add(k); }); };
 
   // §4 debt rows on the balance sheet
   interface Row { f: Fact; section: 'current' | 'noncurrent' }
-  const isDebtRow = (f: Fact) => (nsClass(f.ns) === 'us-gaap' && DEBT_SET.has(f.local)) || (nsClass(f.ns) === 'ext' && extIsDebt(f.local));
+  const isDebtRow = (f: Fact) => (nsClass(f.ns) === 'us-gaap' && (DEBT_SET.has(f.local) || usIsDebt(f.local))) || (nsClass(f.ns) === 'ext' && extIsDebt(f.local));
   const nameIsCurrent = (local: string) => /Current$/.test(local) || SHORT_TERM.has(local);
   const debtRows: Row[] = firstByConcept(inBs.filter(f => isDebtRow(f) && liabSide(f)))
     .map(f => ({ f, section: posLC !== undefined ? (f.i < posLC ? 'current' : 'noncurrent') : (nameIsCurrent(f.local) ? 'current' : 'noncurrent') }));
@@ -260,16 +265,32 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     inputs.current_debt = { key: 'current_debt', label: LABELS.current_debt, value: null, rule: '', terms: [], missing: 'F 规则下不计算流动债务' };
     if (terms.length) cue('Q12', `资产负债表上没有可识别的债务行，债务取自附注或其他位置的合计标签（${rule.split(' · ')[0]}）。核对资产负债表上的借款行。`, terms.map(t => t.fact));
   }
-  if (inputs.debt.value === null) cue('Q12', '没有找到债务：资产负债表上没有可识别的债务行，也没有债务合计标签。若公司确实没有借款，债务为 0；请在资产负债表上核对。', []);
+  // def-3: debt that exists only with dimensions (by segment, by legal entity) is shown as parts, never hinted to be zero.
+  const dimDebt = inputs.debt.value === null ? facts.filter(f => f.value !== null && isDim(contexts[f.ctx]) && contexts[f.ctx]?.instant === D && currencyOf(f) === currency
+    && ((nsClass(f.ns) === 'us-gaap' && (DEBT_SET.has(f.local) || usIsDebt(f.local))) || (nsClass(f.ns) === 'ext' && extIsDebt(f.local)))) : [];
+  if (dimDebt.length) {
+    const shown = firstByKey(dimDebt).slice(0, 8);
+    inputs.debt = { ...inputs.debt, missing: '只有按分部或其他维度标注的债务，没有合并口径的合计（见 Q24）' };
+    cue('Q24', `债务只按分部或其他维度标注（${dimDebt.length} 个事实，如 ${shown[0].name}），没有合并口径的合计：本页不把各部分相加，也不当作没有借款。点下面的数字查看各部分。`, shown.map(f => f.i));
+  } else if (inputs.debt.value === null) cue('Q12', '没有找到债务：资产负债表上没有可识别的债务行，也没有债务合计标签，也没有按分部标注的债务。若公司确实没有借款，债务为 0；请在资产负债表上核对。', []);
   const strange = firstByConcept(inBs.filter(f => liabSide(f) && !isDebtRow(f)
     && /Debt|Borrowing|Notes|Loan|CommercialPaper|CreditFacility|LineOfCredit|Mortgage/i.test(f.local) && !/Interest|Receivable|Asset|Securities|^(Operating|Finance|Capital)Lease/i.test(f.local)));
   if (strange.length) cue('Q12', `负债一侧有名称像借款、但未计入债务的科目：${strange.map(f => f.name).join('、')}。核对它们是否是借款。`, strange.map(f => f.i));
+  // def-3 guard: reasons to think the stated debt is incomplete. With any of them, net debt and every debt-based
+  // multiple are withheld (Q23) and "net cash" (Q6) is never stated.
+  const incomplete: string[] = [];
+  const counted = inputs.debt.value === null ? 0 : num(inputs.debt.value);
+  if (strange.length) {
+    const uncounted = strange.reduce((n, f) => n + Math.abs(num(f.value!)), 0);
+    if (counted === 0 || uncounted >= 0.1 * counted) incomplete.push(`负债一侧未计入的借款类科目合计约为已计入债务的 ${counted ? Math.round(uncounted / counted * 100) + '%' : '全部'}`);
+  }
   // Q21 (def-2): a debt total tagged elsewhere (notes) that is well above the balance-sheet debt.
   if (inputs.debt.value !== null && inputs.debt.rule.startsWith('B')) {
     const totals = ['LongTermDebt', 'DebtInstrumentCarryingAmount', 'DebtLongtermAndShorttermCombinedAmount', 'LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities']
       .map(l => pick(l, 'I')).filter((x): x is Pick => x !== null).sort((a, b) => num(b.value) - num(a.value));
     if (totals.length && num(totals[0].value) > 1.1 * num(inputs.debt.value)) {
       const top = totals[0];
+      incomplete.push(`${top.chosen.local} 比资产负债表债务多 ${Math.round((num(top.value) / Math.max(num(inputs.debt.value), 1) - 1) * 100)}%`);
       cue('Q21', `附注或其他位置的债务合计（${top.chosen.name}）比资产负债表上计入的债务多 ${Math.round((num(top.value) / Math.max(num(inputs.debt.value), 1) - 1) * 100)}%：资产负债表上可能有未识别的借款行，依赖债务的倍数可能偏低。`, [top.chosen.i]);
     }
   }
@@ -338,7 +359,7 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     }
   }
   inputs.cfo = firstOf('cfo', ['NetCashProvidedByUsedInOperatingActivities', 'NetCashProvidedByUsedInOperatingActivitiesContinuingOperations'], 'P');
-  inputs.capex = firstOf('capex', ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets', 'PaymentsForCapitalImprovements', 'PaymentsToAcquireOilAndGasPropertyAndEquipment', 'PaymentsToAcquireOilAndGasProperty', 'PaymentsToAcquireOtherPropertyPlantAndEquipment'], 'P');
+  inputs.capex = firstOf('capex', ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets', 'PaymentsToAcquireOtherProductiveAssets', 'PaymentsForCapitalImprovements', 'PaymentsToAcquireOilAndGasPropertyAndEquipment', 'PaymentsToAcquireOilAndGasProperty', 'PaymentsToAcquireOtherPropertyPlantAndEquipment'], 'P');
   inputs.assets_current = firstOf('assets_current', ['AssetsCurrent'], 'I');
   inputs.liabilities_current = firstOf('liabilities_current', ['LiabilitiesCurrent'], 'I');
   const pair = (key: string, whole: string, nonCurrent: string, current: string): Input => {
@@ -406,6 +427,23 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
   else if (v('operating_leases') === null && (debtUsesFinanceLeases || v('finance_leases') === null)) amount('debt_with_leases', leaseFormula, ['debt', 'operating_leases', 'finance_leases'], null, '租赁负债未找到');
   else amount('debt_with_leases', leaseFormula, ['debt', 'operating_leases', 'finance_leases'], sumOf([debt, v('operating_leases') ?? '0', debtUsesFinanceLeases ? '0' : (v('finance_leases') ?? '0')]));
 
+  if (ladder && debt !== null) {
+    const ladderTotal = [next12.value, years.value, after5.value].filter((x): x is string => x !== null).reduce((n, x) => n + num(x), 0);
+    if (ladderTotal > 1.25 * Math.max(num(debt), 1)) incomplete.push(`到期表本金合计比资产负债表债务多 ${Math.round((ladderTotal / Math.max(num(debt), 1) - 1) * 100)}%`);
+  }
+  if (incomplete.length && debt !== null) {
+    for (const k of ['net_debt', 'debt_to_ebitda', 'net_debt_to_ebitda', 'fcf_to_debt', 'debt_with_leases']) {
+      metrics[k] = { ...metrics[k], value: null, reason: '债务可能不完整（见 Q23），不计算' };
+    }
+    metrics.debt = { ...metrics.debt, reason: '可能不完整，只是已识别的部分（见 Q23）' };
+    cue('Q23', `债务可能不完整：${incomplete.join('；')}。净债务与依赖债务的倍数不计算，也不判断是否净现金；到资产负债表与债务附注核对。`, []);
+  }
+  // def-3: for a real-estate company, property acquisitions are not in the capex tags, so FCF overstates free cash.
+  if (has('RealEstateInvestmentPropertyNet', 'I')) {
+    if (metrics.fcf.value !== null) metrics.fcf = { ...metrics.fcf, reason: '房地产公司：物业收购不在资本开支标签里，这个 FCF 偏高' };
+    metrics.fcf_to_debt = { ...metrics.fcf_to_debt, value: null, reason: '房地产公司：物业收购不在资本开支标签里，不计算' };
+  }
+
   // §7 cues (wording: where to look, never a verdict)
   if (!annual) cue('Q1', `这是 ${form}：流量是年初至今 ${months ?? '?'} 个月，未年化；杠杆倍数与 FCF／债务不计算。`, []);
   if (ebitda !== null && !ebitdaPositive) cue('Q3', 'EBITDA ≤ 0：杠杆倍数没有意义，看现金消耗与流动性。', [...(inputs.ebit.terms.map(t => t.fact)), ...inputs.da.terms.map(t => t.fact)]);
@@ -413,7 +451,7 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     const net = ['InterestIncomeExpenseNonoperatingNet', 'InterestIncomeExpenseNet'].map(l => pick(l, 'P')).find((x): x is Pick => x !== null);
     cue('Q4', net ? `没有利息费用标签，利息收支净额（${net.chosen.local}）为净收入：利息覆盖不计算，到附注里找利息费用。` : '没有利息费用标签：利息覆盖不计算，到附注里找利息费用。', net ? [net.chosen.i] : []);
   } else if (v('ebit') !== null && cmp(dec(v('ebit')!), dec(intv)) < 0) cue('Q5', 'EBIT 小于利息费用：营业利润不足以覆盖本期利息，看利率、再融资与契约条款的附注。', [...inputs.ebit.terms, ...inputs.interest.terms].map(t => t.fact));
-  if (debt !== null && v('liquidity') !== null && cmp(dec(v('liquidity')!), dec(debt)) >= 0) cue('Q6', '现金与短期投资不少于总债务（净现金）。', [...inputs.liquidity.terms, ...inputs.debt.terms].map(t => t.fact));
+  if (debt !== null && !incomplete.length && v('liquidity') !== null && cmp(dec(v('liquidity')!), dec(debt)) >= 0) cue('Q6', '现金与短期投资不少于总债务（净现金）。', [...inputs.liquidity.terms, ...inputs.debt.terms].map(t => t.fact));
   if (metrics.current_ratio.value !== null && (metrics.current_ratio.value as number) < 1) cue('Q7', '流动比率低于 1：流动负债大于流动资产，看营运资本构成与可用授信额度。', [...inputs.assets_current.terms, ...inputs.liabilities_current.terms].map(t => t.fact));
   if (fcf !== null && num(fcf) < 0) cue('Q8', '本期自由现金流为负。', [...inputs.cfo.terms, ...inputs.capex.terms].map(t => t.fact));
   const due = inputs.current_debt.value !== null ? { value: inputs.current_debt.value, terms: inputs.current_debt.terms, what: '流动负债里的债务' } : next12.value !== null ? { value: next12.value, terms: next12.terms, what: next12Label + '到期的本金' } : null;

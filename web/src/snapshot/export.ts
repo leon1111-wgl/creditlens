@@ -64,9 +64,9 @@ export function memoMarkdown(ctx: ExportContext): string {
   if (s.ladder) {
     out.push('', '## 债务到期结构（本金）', '', '| 区间 | 金额 |', '|---|---:|');
     const l = s.ladder;
-    out.push(`| ${l.next12_label} | ${l.next12.value === null ? '未找到' : amountText(l.next12.value, s.meta.display_scale, s.meta.currency)} |`);
-    out.push(`| 第 2–5 年${l.missing_years.length ? `（缺第 ${l.missing_years.join('、')} 年）` : ''} | ${l.years2to5.value === null ? '未找到' : amountText(l.years2to5.value, s.meta.display_scale, s.meta.currency)} |`);
-    out.push(`| 5 年以后 | ${l.after5.value === null ? '未找到' : amountText(l.after5.value, s.meta.display_scale, s.meta.currency)} |`);
+    out.push(`| ${l.next12_label} | ${l.next12.value === null ? '未标注' : amountText(l.next12.value, s.meta.display_scale, s.meta.currency)} |`);
+    out.push(`| 第 2–5 年${l.missing_years.length ? `（缺第 ${l.missing_years.join('、')} 年）` : ''} | ${l.years2to5.value === null ? '未标注' : amountText(l.years2to5.value, s.meta.display_scale, s.meta.currency)} |`);
+    out.push(`| 5 年以后 | ${l.after5.value === null ? '未标注' : amountText(l.after5.value, s.meta.display_scale, s.meta.currency)} |`);
   }
   out.push('', '## 复核提示', '');
   if (!s.cues.length) out.push('- （无）');
@@ -99,7 +99,7 @@ export function snapshotCsv(ctx: ExportContext): string {
     rows.push(['metric', m.key, m.label, m.value === null ? '' : m.value, metricText(m, s), m.kind === 'amount' ? s.meta.currency : 'ratio', m.formula + (m.reason ? ` — ${m.reason}` : ''), null, null, null, null, null, null, null, ...common]);
   }
   for (const input of allInputs(s)) {
-    if (!input.terms.length) { rows.push(['input', input.key, input.label, '', '未找到', s.meta.currency, input.missing || input.rule, null, null, null, null, null, null, null, ...common]); continue; }
+    if (!input.terms.length) { rows.push(['input', input.key, input.label, '', ['next12', 'years2to5', 'after5'].includes(input.key) ? '未标注' : '未找到', s.meta.currency, input.missing || input.rule, null, null, null, null, null, null, null, ...common]); continue; }
     for (const t of input.terms) {
       const a = anchorOf(t, source);
       rows.push(['input_term', input.key, input.label, (t.op === '−' ? '-' : '') + t.value, termAmount(t, s), t.unit, input.rule + (t.note ? `; ${t.note}` : ''), t.concept, t.period, t.context, t.decimals, t.scale, t.sign || '+', t.text,
@@ -158,7 +158,7 @@ export function memoDocx(ctx: ExportContext): Uint8Array {
     body.push(para('指标', { bold: true, size: 26 }));
     body.push(table([['指标', '数值', '公式', '说明'], ...METRIC_ORDER.filter(k => s.metrics[k]).map(k => { const m = s.metrics[k]; return [m.label, metricText(m, s), m.formula, m.reason || '']; })]));
     if (s.ladder) {
-      const l = s.ladder; const a = (x: string | null) => x === null ? '未找到' : amountText(x, s.meta.display_scale, s.meta.currency);
+      const l = s.ladder; const a = (x: string | null) => x === null ? '未标注' : amountText(x, s.meta.display_scale, s.meta.currency);
       body.push(para('债务到期结构（本金）', { bold: true, size: 26 }));
       body.push(table([['区间', '金额'], [l.next12_label, a(l.next12.value)], ['第 2–5 年' + (l.missing_years.length ? `（缺第 ${l.missing_years.join('、')} 年）` : ''), a(l.years2to5.value)], ['5 年以后', a(l.after5.value)]]));
     }
