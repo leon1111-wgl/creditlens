@@ -29,6 +29,12 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 .intro-stack { margin: -6px 0 18px; font: 15px/1.6 var(--cl-mono); letter-spacing: .02em; color: var(--cl-iris); }
 .intro-lede { margin: 0 0 26px; color: var(--cl-muted); font-size: 15px; max-width: 34em; }
 .intro-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.intro-snap { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 4px 12px; align-items: start; margin: 18px 0 0; max-width: 560px; padding: 12px 14px; border: 1px solid var(--cl-line); border-left: 3px solid var(--cl-brass-bright); border-radius: 0 8px 8px 0; background: var(--cl-surface); color: var(--cl-ink); text-decoration: none; }
+.intro-snap:hover { border-color: var(--cl-brass-bright); }
+.intro-snap i { grid-row: span 2; width: 22px; height: 22px; margin: 4px 0 0 2px; border: 3px solid var(--cl-brass-bright); border-radius: 50%; position: relative; }
+.intro-snap i::after { content: ""; position: absolute; right: -9px; bottom: -6px; width: 10px; height: 3px; background: var(--cl-brass-bright); border-radius: 2px; transform: rotate(45deg); }
+.intro-snap b { font-size: 14.5px; }
+.intro-snap span { font-size: 12.5px; color: var(--cl-muted); }
 .intro-ask { margin: 22px 0 0; max-width: 560px; }
 .intro-ask label { display: block; margin: 0 0 6px; font-size: 13px; font-weight: 600; color: var(--cl-ink-2); }
 .intro-ask-row { display: flex; gap: 8px; }
@@ -135,8 +141,9 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 <h1 id="intro-title">CreditLens</h1><p class="intro-stack">OCR · Inline XBRL · FastAPI · Decimal · TypeScript</p>
 <p class="intro-lede">CreditLens 面向投研和风险分析中的财报核查：查到指标时一并保留页码、定位框和单位原文；先核对口径与可比性，再计算毛利率与现金流变化，最后把固定的研究底稿交给另一位同事复核。</p>
 <div class="intro-actions"><a class="intro-enter" href="/table-lookup">进入工作台 <span aria-hidden="true">→</span></a><a class="intro-ghost" href="https://github.com/leon1111-wgl/creditlens">查看代码</a></div>
+<a class="intro-snap" href="/snapshot"><i aria-hidden="true"></i><b>信用快照：拖入任意 SEC 10-K／10-Q →</b><span>浏览器内读发行人自己的 XBRL 标签，算杠杆、利息覆盖、流动性、自由现金流与到期结构；每个数字一键回到申报文件里的那一格，可导出备忘录与 CSV。不上传、无模型、不是评级。</span></a>
 <form class="intro-ask" action="/ask" method="get" role="search"><label for="intro-q">问一个关于这两份年报的问题</label><div class="intro-ask-row"><input id="intro-q" name="q" type="text" maxlength="200" autocomplete="off" placeholder="例如：苹果 FY2025 服务毛利率是多少"><button type="submit">提问</button></div><p>在本页浏览器内按登记数字作答，给出页码、定位框、单位与核对结果；不是模型，也没有服务器。</p></form>
-<p class="intro-source-note">当前材料以微软、苹果的官方历史年报为主，文档实验另有 AMD、NVIDIA 案例；<a href="/grounding">XBRL 对照</a>另用按预先提交的规则选出、项目从未用过的发行人。页面展示仓库中保存的识别与计算结果，不重新运行 OCR。</p></div>
+<p class="intro-source-note">当前材料以微软、苹果的官方历史年报为主，文档实验另有 AMD、NVIDIA 案例；<a href="/grounding">XBRL 对照</a>另用按预先提交的规则选出、项目从未用过的发行人；<a href="/snapshot">信用快照</a>读访客自己拖入的任意 SEC 申报文件，画廊为按规则选出的 40 家。页面展示仓库中保存的识别与计算结果，不重新运行 OCR。</p></div>
 <section class="stage" aria-labelledby="stage-title"><h2 id="stage-title" hidden>取数读数演示</h2>
 <div class="stage-head"><div class="stage-tabs" id="stageTabs" role="group" aria-label="选择页面"></div><div class="stage-controls"><button type="button" id="prevTarget" aria-label="上一项">‹</button><button type="button" id="pauseTarget" aria-pressed="false">暂停</button><button type="button" id="nextTarget" aria-label="下一项">›</button></div></div>
 <div id="sheet" class="sheet" aria-hidden="true"><div class="stage-fallback">正在读取保存的识别记录…</div></div>
@@ -153,7 +160,7 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 <li><h3>毛利率变化</h3><p class="where">研究 · 毛利率变化</p><p>以各公司自身两期数据分解毛利率变化，公式和输入同屏；公司说明与会计计算分开列示。</p><a href="/margin">打开毛利率变化 →</a></li>
 <li><h3>研究交接</h3><p class="where">研究 · 研究任务</p><p>记录采用理由，固定版本快照，交给另一身份复核或退回；修订后原快照仍可导出。</p><a href="/tasks">打开研究任务 →</a></li>
 </ol>
-<p class="side-routes"><span><a href="/research">季度研究</a>按研究截止日查看微软 FY2025 季度变化与原始依据。</span><span><a href="/experiments">文档实验</a>比较定位方法与图像退化下保存的识别结果。</span><span><a href="/grounding">XBRL 对照</a>未用过的发行人 10-K 报表页上，只用图像取数，再与发行人自己的 XBRL 标签逐项对照。</span></p>
+<p class="side-routes"><span><a href="/research">季度研究</a>按研究截止日查看微软 FY2025 季度变化与原始依据。</span><span><a href="/experiments">文档实验</a>比较定位方法与图像退化下保存的识别结果。</span><span><a href="/snapshot">信用快照</a>任意 SEC 10-K／10-Q 的杠杆、覆盖、流动性与到期结构，每个数字点回原文那一格。</span><span><a href="/grounding">XBRL 对照</a>未用过的发行人 10-K 报表页上，只用图像取数，再与发行人自己的 XBRL 标签逐项对照。</span></p>
 </div></section>
 
 <section class="intro-section" id="scope" aria-labelledby="scope-title"><div class="intro-wrap">
@@ -166,6 +173,7 @@ body.cl-intro { margin: 0; background: var(--cl-bg); color: var(--cl-ink); font:
 <li>文档实验：保存的 CPU OCR 结果、方法对照和图像退化结果</li>
 <li>问证据：在浏览器内把问题读成公司、指标、财年、单位与口径，按登记数字作答或说明缺什么；读不懂的词会被指出</li>
 <li>XBRL 对照：GitHub Actions 上渲染未用过的发行人 10-K 报表页，图像 OCR 取数与发行人自己的 XBRL 标签逐项对照，保存首轮结果</li>
+<li>信用快照：访客拖入任意 SEC 10-K／10-Q（Inline XBRL），浏览器内按公开定义计算信用指标，每个数字点回申报文件中的标签单元格；导出备忘录（Markdown、Word）与 CSV；银行、保险与投资公司模板不支持</li>
 </ul></section><section class="pending"><h3>开发中 · 尚未实现</h3><ul>
 <li>预测模型与组合实验</li>
 <li>通用多模态问答与自动公告更新</li>

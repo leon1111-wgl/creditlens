@@ -92,7 +92,7 @@ async function openBytes(bytes: Uint8Array, source: Omit<SourceInfo, 'sha256' | 
     sanitize(parsed.doc);
     const html = serialize(parsed.doc);
     render(parsed, snapshot, full, html);
-    status('ok', snapshot.status === 'ok' ? '已计算。点任一数字，右侧申报文件会滚到那一格。' : '已读取，但这一模板不计算信用指标。', `${snapshot.meta.registrant} · ${snapshot.meta.form} · ${parsed.facts.length.toLocaleString('en-US')} 个数字标签`);
+    status('ok', snapshot.status === 'ok' ? '已计算。点任一数字，申报文件视图会滚到那一格。' : '已读取，但这一模板不计算信用指标。', `${snapshot.meta.registrant} · ${snapshot.meta.form} · ${parsed.facts.length.toLocaleString('en-US')} 个数字标签`);
   } catch (error) {
     if (ticket !== loading) return;
     const e = error as Error;
@@ -321,9 +321,14 @@ function select(i: number, button: HTMLElement | null, scroll = true) {
     if (target) {
       target.classList.add('cl-hit');
       if (scroll) {
-        const frameBox = state.frame.getBoundingClientRect();
-        if (frameBox.top < 0 || frameBox.bottom > innerHeight) state.frame.scrollIntoView({ block: 'nearest' });
-        target.scrollIntoView({ block: 'center', inline: 'nearest' });
+        if (narrow.matches) sheet(true);
+        else {
+          const frameBox = state.frame.getBoundingClientRect();
+          if (frameBox.top < 0 || frameBox.bottom > innerHeight) state.frame.scrollIntoView({ block: 'nearest' });
+        }
+        // Scroll only the frame's own document, so the page itself does not jump.
+        const win = doc.defaultView, r = target.getBoundingClientRect();
+        if (win) win.scrollBy({ top: r.top - win.innerHeight / 2 + r.height / 2, left: r.left < 0 || r.right > win.innerWidth ? r.left - 24 : 0, behavior: 'instant' as ScrollBehavior });
       }
     }
   }
@@ -331,6 +336,15 @@ function select(i: number, button: HTMLElement | null, scroll = true) {
   const st = $('snSr');
   st.textContent = `已定位 ${f.name}，${amountText(f.value ?? '0', f.scale, state.snapshot.meta.currency)}`;
   if (button) button.focus();
+}
+
+const narrow = matchMedia('(max-width: 1080px)');
+function sheet(open: boolean) {
+  const viewer = document.querySelector('.sn-viewer');
+  viewer?.classList.toggle('open', open);
+  const toggle = $('snSheet');
+  toggle.setAttribute('aria-expanded', String(open));
+  toggle.textContent = open ? '收起' : '展开';
 }
 
 function readout(f: Fact) {
@@ -451,6 +465,7 @@ function init() {
   // A file dropped outside the drop zone must not navigate away from the page.
   window.addEventListener('dragover', e => e.preventDefault());
   window.addEventListener('drop', e => { if (!(e.target as HTMLElement).closest?.('#snDrop')) e.preventDefault(); });
+  $('snSheet').addEventListener('click', () => sheet(!document.querySelector('.sn-viewer')?.classList.contains('open')));
   $('snExportMd').addEventListener('click', () => exportAs('md'));
   $('snExportCsv').addEventListener('click', () => exportAs('csv'));
   $('snExportDocx').addEventListener('click', () => exportAs('docx'));

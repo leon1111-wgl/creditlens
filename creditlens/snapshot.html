@@ -119,11 +119,18 @@
 .sn-method ul { padding-left: 18px; margin: 4px 0; }
 .sn-method code { font-family: var(--cl-mono); font-size: 12px; }
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.sn-sheet-toggle { display: none; }
 @media (max-width: 1080px) {
   .sn-stage { grid-template-columns: minmax(0, 1fr); }
-  .sn-viewer { position: static; }
-  .sn-frame { height: 64vh; }
+  .sn-result { padding-bottom: 60px; }
+  .sn-viewer { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; top: auto; box-shadow: 0 -10px 28px #0b102655; transform: translateY(calc(100% - 46px)); transition: transform .22s ease; }
+  .sn-viewer.open { transform: none; }
+  .sn-frame-head { min-height: 46px; border-radius: 12px 12px 0 0; }
+  .sn-sheet-toggle { display: inline-flex; align-items: center; min-height: 32px; padding: 2px 12px; border: 1px solid var(--cl-brass-bright); border-radius: 6px; background: transparent; color: var(--cl-night-ink); font: 600 12.5px var(--cl-font); cursor: pointer; }
+  .sn-frame { height: 46vh; }
+  .sn-drawer { max-height: 20vh; overflow: auto; border-radius: 0; }
 }
+@media (prefers-reduced-motion: reduce) { .sn-viewer { transition: none; } }
 @media (max-width: 760px) {
   .sn-main { padding: 18px 16px 48px; }
   .sn-intake { grid-template-columns: minmax(0, 1fr); }
@@ -146,9 +153,9 @@
 </head>
 <body class="cl-workspace cl-page-snapshot"><a class="cl-skip" href="#main-content">跳至内容</a><div class="cl-app"><header class="cl-masthead"><a class="cl-wordmark" href="/intro" aria-label="CreditLens 介绍页"><span class="cl-loupe" aria-hidden="true"></span><span>Credit</span><span class="cl-lens">Lens</span></a><nav class="cl-primary-nav" aria-label="工作区"><a href="/tasks" data-section="research">研究</a><a href="/snapshot" data-section="evidence" class="is-current" aria-current="true">证据</a><a href="/" data-section="review">复核</a><a href="/experiments" data-section="lab">材料与实验</a></nav><div class="cl-masthead-meta"><span class="cl-meta-text">金融证据工作台</span><span class="cl-dev-flag">开发中</span><a href="/docs">API 文档</a><button type="button" class="cl-theme" data-theme-toggle aria-label="切换主题"><span class="cl-theme-mark" aria-hidden="true"></span><span class="cl-theme-label">跟随系统</span></button></div></header><nav class="cl-section-nav" aria-label="证据页面" data-section-label="证据"><a href="/snapshot" aria-current="page">信用快照</a><a href="/grounding">XBRL 对照</a><a href="/documents">原页核对</a><a href="/cross-page">跨页证据</a></nav><div class="cl-main"><main id="main-content" tabindex="-1" class="sn-main">
 <section class="cl-page-heading"><h1>信用快照</h1>
-<p class="sn-lede">拖入任意美国上市公司在 EDGAR 上的 10-K 或 10-Q（Inline XBRL 主文件），浏览器内读取发行人自己打的标签，算出杠杆、利息覆盖、流动性、自由现金流、债务到期结构与租赁负债。每个数字都附公式与输入；点任一数字，右侧的申报文件滚到那一格并高亮。</p></section>
+<p class="sn-lede">拖入任意美国上市公司在 EDGAR 上的 10-K 或 10-Q（Inline XBRL 主文件），浏览器内读取发行人自己打的标签，算出杠杆、利息覆盖、流动性、自由现金流、债务到期结构与租赁负债。每个数字都附公式与输入；点任一数字，申报文件视图（宽屏在右侧，手机在底部）滚到那一格并高亮。</p></section>
 <p class="sn-key" role="note"><b>数字 = 发行人自己的 XBRL 标签</b><span>位置来自标签本身，不经 OCR</span><span>文件只在本页内处理，不上传，无服务器、无模型</span><span>信用视角的整理，不是评级或投资建议</span></p>
-<p class="sn-practice">对照的做法：评级机构按公开方法从报表计算债务、EBITDA 与覆盖倍数，如 <a href="https://disclosure.spglobal.com/ratings/en/regulatory/article/-/view/sourceId/10906456" rel="noopener">S&amp;P 的 Corporate Methodology: Ratios And Adjustments</a>；数据终端把数字链接到申报原文。本页只用发行人自己的标签、不做调整，银行与保险模板不支持。</p>
+<p class="sn-practice">对照的做法：评级机构按公开方法以债务／EBITDA 等比率衡量杠杆，如 <a href="https://www.maalot.co.il/Publications/MT20190402125127.PDF" rel="noopener noreferrer">S&amp;P《Corporate Methodology: Ratios And Adjustments》（2019-04）</a>；数据商把数字链接回申报原文。本页按发行人报告的标签计算、不做评级机构的调整，银行与保险模板不支持。</p>
 <section class="sn-intake" aria-label="选择文件">
 <div class="sn-drop" id="snDrop" tabindex="0" role="button" aria-describedby="snDropHelp" aria-label="拖入或选择 10-K／10-Q 的 .htm 文件">
 <strong>拖入 10-K／10-Q 的 .htm 文件</strong>
@@ -170,7 +177,7 @@
 <div class="sn-stage">
 <div id="snPanels" class="sn-panels"></div>
 <aside class="sn-viewer" aria-label="申报文件与读数">
-<div class="sn-frame-head"><strong>申报文件 · 隔离视图</strong><span id="snFrameNote"></span></div>
+<div class="sn-frame-head"><strong>申报文件 · 隔离视图</strong><span id="snFrameNote"></span><button type="button" id="snSheet" class="sn-sheet-toggle" aria-expanded="false" aria-controls="snFrame">展开</button></div>
 <iframe id="snFrame" class="sn-frame" sandbox="allow-same-origin" referrerpolicy="no-referrer" title="申报文件（隔离视图，脚本不会运行）"></iframe>
 <div class="sn-drawer"><dl id="snReadout" class="sn-readout"></dl></div>
 </aside>
