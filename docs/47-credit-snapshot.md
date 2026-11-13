@@ -190,6 +190,7 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 
 - **同 12 份文件复跑**（运行 43517870713，`b2d3bf1`）：甲骨文总债务 925.7 亿美元（`NotesPayableCurrent` 72.7 亿 + `LongTermNotesAndLoans` 853.0 亿），净债务 813.6 亿，债务／EBITDA 3.88×，不再出现净现金提示；福特显示 Q24 并列出 13 个按分部标注的债务事实，不再暗示“债务为 0”；Verizon 资本开支取 `PaymentsToAcquireOtherProductiveAssets`，FCF 198.2 亿美元；Boeing 到期表缺“5 年以后”显示“未标注”；其余 9 份数字不变。点击定位 12 份全部通过。
 - **画廊重算**（运行 43521053993，`b2d3bf1`，点击 720/720）：M/I Homes 与 Newmark 的仓单借款（`WarehouseAgreementBorrowings`）按 us-gaap 借款名称规则计入，债务分别为 9.83 亿与 15.64 亿美元；Penske（地板计划应付票据）、PulteGroup（金融服务债务）、Boise Cascade 有未计入的借款类科目超过已计入债务的 10%，触发 Q23，依赖债务的倍数不计算，PulteGroup 与 Boise Cascade 不再显示“净现金”。其余 33 家不变。
+- **Boise Cascade 修正后**（运行 43529092291，`05bd3aa`，点击 724/724）：Boise Cascade 不再误触发 Q23，恢复债务／EBITDA 1.30×、FCF／债务 0.03 与净现金提示 Q6；Penske、PulteGroup 仍是 Q23；其余不变。留出样本复跑（运行 43529775041）仍为 206/210。
 - **留出样本复跑**（运行 43524333273，`64fbb5b`，已看过）：10 份文件 206/210 与独立答案一致，与 def-2 相同（4 个不同仍是 NexPoint 的抵押贷款按 def-2 起计入）；def-3 没有改变留出样本上的任何数字。前一次复跑（运行 43522364830）有 3 份文件从互联网档案馆取不到，其余 7 份 147/147 一致；报告 `artifacts/credit-snapshot/check-b-def3-seen.json`。
 
 ### (a) 解析器对照 SEC Financial Statement Data Set

@@ -1107,16 +1107,15 @@
    "snapshot": {
     "status": "ok",
     "template": "general",
-    "debt_to_ebitda": null,
+    "debt_to_ebitda": 1.304069682330552,
     "interest_coverage": 8.391879520278312,
     "current_ratio": 3.3553001971298544,
-    "fcf_to_debt": null,
+    "fcf_to_debt": 0.02855154297773936,
     "debt": "445405000",
     "currency": "USD",
     "display_scale": 3,
     "cues": [
-     "Q12",
-     "Q23"
+     "Q6"
     ]
    },
    "stratum": "wholesale",
@@ -1895,8 +1894,8 @@
  ],
  "computed_by": {
   "engine": "creditlens/snapshot.js in Playwright Chromium 1.49.1",
-  "run": "43521053993",
-  "commit": "b2d3bf158f739a63aad274ede876ee1f0c9003ab",
-  "generated_at": "2026-11-13T22:47:56+00:00"
+  "run": "43529092291",
+  "commit": "05bd3aa0629927557271db2ab99235e71dae7949",
+  "generated_at": "2026-11-13T23:47:36+00:00"
  }
 }
