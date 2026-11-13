@@ -244,6 +244,14 @@ describe('main-session probe fixes (credit-snapshot-def-3)', () => {
     expect(s.cues.some(c => c.id === 'Q24' && c.facts.length === 1)).toBe(true);
     expect(s.cues.some(c => /债务为 0/.test(c.text))).toBe(false);
   });
+  test('instrument-level or zero debt facts are not "debt by segment" (Medpace, Marcus & Millichap cases)', () => {
+    const inst = '<xbrli:context id="c-i-inst"><xbrli:entity><xbrli:identifier scheme="http://www.sec.gov/CIK">0009999999</xbrli:identifier><xbrli:segment><xbrldi:explicitMember dimension="us-gaap:LongtermDebtTypeAxis">lsi:CreditFacilityMember</xbrldi:explicitMember></xbrli:segment></xbrli:entity><xbrli:period><xbrli:instant>2025-12-31</xbrli:instant></xbrli:period></xbrli:context>';
+    const html = withoutBsDebt(syntheticFiling().replace('</ix:resources>', inst + '</ix:resources>')).replace(/<tr><td>Total debt, carrying amount<\/td>.*?<\/tr>/s, '')
+      .replace('</body>', `<p>${nfI('us-gaap:DebtInstrumentCarryingAmount', '0', 'c-i-inst')}${nfI('us-gaap:LongTermDebt', '40', 'c-i-inst')}</p></body>`);
+    const s = snap(html);
+    expect(s.cues.some(c => c.id === 'Q24')).toBe(false);
+    expect(s.cues.some(c => c.id === 'Q12' && /债务为 0/.test(c.text))).toBe(true);
+  });
   test('capex tagged as other productive assets (Verizon case) is used, and named', () => {
     const s = snap(syntheticFiling().replace('us-gaap:PaymentsToAcquirePropertyPlantAndEquipment', 'us-gaap:PaymentsToAcquireOtherProductiveAssets'));
     expect(val(s, 'capex')).toBe('600000000');

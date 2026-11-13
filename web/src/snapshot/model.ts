@@ -59,7 +59,10 @@ const extIsDebt = (local: string) => EXT_DEBT.test(local) && !EXT_NOT_DEBT.test(
 // def-3: a us-gaap concept on the liabilities side whose standard name says borrowing is debt, listed or not
 // (Oracle's LongTermNotesAndLoans was missing from the list).
 const BORROWING_WORD = /Notes|Loan|Debt|Borrowing|CommercialPaper|LinesOfCredit|LineOfCredit|Debenture|Bond/;
-const usIsDebt = (local: string) => BORROWING_WORD.test(local) && !EXT_NOT_DEBT.test(local.replace(NET_OF, '')) && !/^(Operating|Finance|Capital)Lease/.test(local);
+const usIsDebt = (local: string) => BORROWING_WORD.test(local) && !EXT_NOT_DEBT.test(local.replace(NET_OF, '')) && !/^(Operating|Finance|Capital)Lease/.test(local)
+  && !/Covenant|Capacity|Maximum|Minimum|Remaining|Percentage|Rate|Weighted/.test(local);
+// Axes that split a whole company into parts (segments, legal entities); instrument-level axes do not.
+const PART_AXIS = /Segment|LegalEntity|ConsolidationItems|ConsolidatedEntities|Subsidiar/;
 export const SUPPORTED_FORMS = new Set(['10-K', '10-K/A', '10-KT', '10-Q', '10-Q/A', '10-QT']);
 
 export const LABELS: Record<string, string> = {
@@ -266,8 +269,9 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     if (terms.length) cue('Q12', `资产负债表上没有可识别的债务行，债务取自附注或其他位置的合计标签（${rule.split(' · ')[0]}）。核对资产负债表上的借款行。`, terms.map(t => t.fact));
   }
   // def-3: debt that exists only with dimensions (by segment, by legal entity) is shown as parts, never hinted to be zero.
-  const dimDebt = inputs.debt.value === null ? facts.filter(f => f.value !== null && isDim(contexts[f.ctx]) && contexts[f.ctx]?.instant === D && currencyOf(f) === currency
-    && ((nsClass(f.ns) === 'us-gaap' && (DEBT_SET.has(f.local) || usIsDebt(f.local))) || (nsClass(f.ns) === 'ext' && extIsDebt(f.local)))) : [];
+  const dimDebt = inputs.debt.value === null ? facts.filter(f => f.value !== null && num(f.value) !== 0 && isDim(contexts[f.ctx]) && contexts[f.ctx]?.instant === D && currencyOf(f) === currency
+    && contexts[f.ctx].dims.every(([axis]) => PART_AXIS.test(axis))
+    && ((nsClass(f.ns) === 'us-gaap' && DEBT_SET.has(f.local)) || (nsClass(f.ns) === 'ext' && extIsDebt(f.local)))) : [];
   if (dimDebt.length) {
     const shown = firstByKey(dimDebt).slice(0, 8);
     inputs.debt = { ...inputs.debt, missing: '只有按分部或其他维度标注的债务，没有合并口径的合计（见 Q24）' };

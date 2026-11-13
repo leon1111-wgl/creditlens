@@ -115,7 +115,7 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 | Q20 | INT 取自 `InterestCostsIncurred` 或利息收支净额 | 写明口径不同于利润表上的利息费用总额 |
 | Q21 | 债务按 B 规则得出，而 `LongTermDebt`、`DebtInstrumentCarryingAmount`、`DebtLongtermAndShorttermCombinedAmount`、`LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities` 中在 I 的最大值超过 DEBT 的 110% | 资产负债表上可能有未识别的借款行，依赖债务的数字旁标“可能偏低” |
 | Q23 | 债务可能不完整：负债一侧未计入的借款类科目合计不少于已计入债务的 10%（或已计入为 0）；或 Q21 的条件；或到期表三段合计超过 DEBT 的 125% | 净债务、债务／EBITDA、净债务／EBITDA、FCF／债务、含租赁的债务都不计算，总债务标为“可能不完整”，不给 Q6 |
-| Q24 | 没有合并口径的债务，但有带维度（分部、法人等）的债务事实 | 列出各部分，不相加，不提示“债务为 0” |
+| Q24 | 没有合并口径的债务，但有只按分部或法人维度标注、非零的债务概念事实 | 列出各部分，不相加，不提示“债务为 0” |
 | Q22 | `GoodwillImpairmentLoss`、`AssetImpairmentCharges`、`ImpairmentOfLongLivedAssetsHeldForUse`、`ImpairmentOfIntangibleAssetsExcludingGoodwill`、`GoodwillAndIntangibleAssetImpairment` 在 P 有正值 | EBIT、EBITDA 与覆盖倍数含这些一次性项目 |
 
 ### def-2 相对 def-1 的修改（Fable 复核之后，2026-11-14）
@@ -132,7 +132,7 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 
 1. us-gaap 中名称表示借款的概念在负债一侧都计入债务，不只限于列出的集合（甲骨文的 `LongTermNotesAndLoans` 852.97 亿美元在 def-2 下漏计，页面只计 72.7 亿并给出“净现金”提示）。
 2. 债务完整性保护 Q23：有理由认为债务不完整时，净债务与依赖债务的倍数不计算，Q6（净现金）不出现。
-3. 只有按分部标注的债务时给 Q24 并列出各部分，不再提示“债务为 0”（福特把全部债务按 Ford Credit 与其余公司分部标注）。
+3. 只有按分部或法人（只看这类维度、非零、列出的债务概念）标注的债务时给 Q24 并列出各部分，不再提示“债务为 0”（福特把全部债务按 Ford Credit 与其余公司分部标注）；按债务工具拆分或为 0 的维度事实不算。usIsDebt 排除契约、额度与利率类名称。
 4. 资本开支加上 `PaymentsToAcquireOtherProductiveAssets`（Verizon）。
 5. 房地产公司（有 `RealEstateInvestmentPropertyNet`）：FCF 旁注明物业收购不在资本开支标签里，FCF／债务不计算。
 6. 到期表某一段没有标签时显示“未标注”。
