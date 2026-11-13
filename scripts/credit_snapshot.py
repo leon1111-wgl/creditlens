@@ -89,9 +89,9 @@ def stratum_of(sic: str, strata: list[dict]) -> dict | None:
 _DEI = re.compile(r'<ix:nonNumeric\b([^>]*)>(.*?)</ix:nonNumeric>', re.I | re.S)
 
 
-def dei_values(html: str) -> dict:
+def dei_values(text: str) -> dict:
     out: dict[str, str] = {}
-    for attrs, body in _DEI.findall(html):
+    for attrs, body in _DEI.findall(text):
         name = re.search(r'\bname="dei:([A-Za-z]+)"', attrs)
         if name and name.group(1) not in out:
             out[name.group(1)] = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", body))).strip()
