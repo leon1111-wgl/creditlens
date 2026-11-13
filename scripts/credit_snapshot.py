@@ -452,7 +452,11 @@ def cmd_heldout_compare(args) -> int:
     computed_dir = Path(args.computed)
     rows, per_metric = [], defaultdict(Counter)
     for answer in key["filings"]:
-        computed = json.loads((computed_dir / f"{answer['id']}.json").read_text(encoding="utf-8"))
+        path = computed_dir / f"{answer['id']}.json"
+        if not path.is_file():  # the archive fetch failed in this run: report it, do not count it as agreement
+            rows.append({"id": answer["id"], "name": answer.get("name"), "form": answer.get("form"), "not_run": True, "differences": []})
+            continue
+        computed = json.loads(path.read_text(encoding="utf-8"))
         snapshot = computed["snapshot"]
         template_ok = (snapshot["template"]["kind"] == answer["template"])
         period_ok = snapshot["meta"]["period_end"] == answer.get("period_end") and snapshot["meta"].get("months") == answer.get("months")
@@ -475,6 +479,9 @@ def cmd_heldout_compare(args) -> int:
     lines = [f"## Check (b) · program vs independent model — {t['agree']}/{t['comparisons']} values agree", "",
              "| filing | form | template | period | differences |", "|---|---|---|---|---:|"]
     for r in rows:
+        if r.get("not_run"):
+            lines.append(f"| {r['name']} | {r['form']} | not run (archive fetch failed) | | |")
+            continue
         lines.append(f"| {r['name']} | {r['form']} | {'=' if r['template_agrees'] else '≠'} | {'=' if r['period_agrees'] else '≠'} | {len(r['differences'])} |")
     (out / "summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))

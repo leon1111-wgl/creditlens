@@ -493,13 +493,13 @@
     "debt_to_ebitda": null,
     "interest_coverage": null,
     "current_ratio": null,
-    "fcf_to_debt": 1.0227067615520986,
+    "fcf_to_debt": null,
     "debt": "1709711000",
     "currency": "USD",
     "display_scale": 3,
     "cues": [
-     "Q6",
-     "Q12"
+     "Q12",
+     "Q23"
     ]
    },
    "stratum": "construction",
@@ -650,18 +650,16 @@
    "snapshot": {
     "status": "ok",
     "template": "general",
-    "debt_to_ebitda": 1.3251473496101445,
+    "debt_to_ebitda": 1.8714685099086308,
     "interest_coverage": 31.655605549306337,
     "current_ratio": null,
-    "fcf_to_debt": 0.1834554071520896,
-    "debt": "696300000",
+    "fcf_to_debt": 0.1299009014963925,
+    "debt": "983365000",
     "currency": "USD",
     "display_scale": 3,
     "cues": [
      "Q11",
      "Q12",
-     "Q12",
-     "Q15",
      "Q20",
      "Q22"
     ]
@@ -1109,16 +1107,16 @@
    "snapshot": {
     "status": "ok",
     "template": "general",
-    "debt_to_ebitda": 1.304069682330552,
+    "debt_to_ebitda": null,
     "interest_coverage": 8.391879520278312,
     "current_ratio": 3.3553001971298544,
-    "fcf_to_debt": 0.02855154297773936,
+    "fcf_to_debt": null,
     "debt": "445405000",
     "currency": "USD",
     "display_scale": 3,
     "cues": [
-     "Q6",
-     "Q12"
+     "Q12",
+     "Q23"
     ]
    },
    "stratum": "wholesale",
@@ -1352,10 +1350,10 @@
    "snapshot": {
     "status": "ok",
     "template": "general",
-    "debt_to_ebitda": 1.4903647625602203,
+    "debt_to_ebitda": null,
     "interest_coverage": null,
     "current_ratio": 0.9862241404022869,
-    "fcf_to_debt": 0.30039251904871855,
+    "fcf_to_debt": null,
     "debt": "2165500000",
     "currency": "USD",
     "display_scale": 6,
@@ -1364,7 +1362,8 @@
      "Q7",
      "Q9",
      "Q12",
-     "Q12"
+     "Q12",
+     "Q23"
     ]
    },
    "stratum": "retail",
@@ -1674,15 +1673,15 @@
    "snapshot": {
     "status": "ok",
     "template": "general",
-    "debt_to_ebitda": 1.6174763125895426,
+    "debt_to_ebitda": 3.7663524397731787,
     "interest_coverage": 7.20405147466289,
     "current_ratio": 1.0514640215427618,
-    "fcf_to_debt": 0.21232578980745698,
-    "debt": "671746000",
+    "fcf_to_debt": 0.09118422692967904,
+    "debt": "1564185000",
     "currency": "USD",
     "display_scale": 3,
     "cues": [
-     "Q12",
+     "Q9",
      "Q20",
      "Q22"
     ]
@@ -1896,8 +1895,8 @@
  ],
  "computed_by": {
   "engine": "creditlens/snapshot.js in Playwright Chromium 1.49.1",
-  "run": "43506192793",
-  "commit": "d3a00ba6e58e97230487ca235b61c73c77ed2c48",
-  "generated_at": "2026-11-13T21:00:08+00:00"
+  "run": "43521053993",
+  "commit": "b2d3bf158f739a63aad274ede876ee1f0c9003ab",
+  "generated_at": "2026-11-13T22:47:56+00:00"
  }
 }
