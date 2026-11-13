@@ -1,0 +1,637 @@
+{
+ "checker": "claude-sonnet (independent agent)",
+ "definitions": "credit-snapshot-def-1",
+ "filings": [
+  {
+   "id": "764622-0000764622-26-000011",
+   "name": "PINNACLE WEST CAPITAL CORPORATION",
+   "form": "10-K",
+   "template": "general",
+   "period_end": "2025-12-31",
+   "months": 12,
+   "metrics": {
+    "total_debt": "10562681000",
+    "current_debt": "1357005000",
+    "liquidity": "6604000",
+    "net_debt": "10556077000",
+    "ebit": "1067630000",
+    "da": "969615000",
+    "ebitda": "2037245000",
+    "interest_expense": "421968000",
+    "interest_coverage": 2.5301207674515602,
+    "debt_to_ebitda": 5.184786807674089,
+    "net_debt_to_ebitda": 5.181545174978955,
+    "current_ratio": 0.5389734219206043,
+    "cfo": "1805095000",
+    "capex": "2624618000",
+    "fcf": "-819523000",
+    "fcf_to_debt": -0.07758664679923591,
+    "operating_lease_liability": "3736951000",
+    "finance_lease_liability": null,
+    "maturity_next_12m": null,
+    "maturity_years_2_5": null,
+    "maturity_after_5": null
+   },
+   "inputs_used": {
+    "total_debt": [
+     "us-gaap:ShortTermBorrowings [c] = 757005000",
+     "us-gaap:LongTermDebtCurrent [c] = 600000000",
+     "us-gaap:LongTermDebtNoncurrent [n] = 9205676000"
+    ],
+    "current_debt": [
+     "us-gaap:ShortTermBorrowings = 757005000",
+     "us-gaap:LongTermDebtCurrent = 600000000"
+    ],
+    "liquidity": [
+     "us-gaap:CashAndCashEquivalentsAtCarryingValue = 6604000"
+    ],
+    "interest_expense": [
+     "InterestExpenseNonoperating = 421968000"
+    ],
+    "ebit": [
+     "OperatingIncomeLoss = 1067630000"
+    ],
+    "da": [
+     "DepreciationDepletionAndAmortization = 969615000"
+    ],
+    "cfo": [
+     "NetCashProvidedByUsedInOperatingActivities = 1805095000"
+    ],
+    "capex": [
+     "PaymentsToAcquireProductiveAssets = 2624618000"
+    ],
+    "operating_lease_liability": [
+     "OperatingLeaseLiability = 3736951000"
+    ],
+    "current_ratio": [
+     "AssetsCurrent=1703709000",
+     "LiabilitiesCurrent=3161026000"
+    ]
+   },
+   "notes": "ShortTermBorrowings/LongTermDebtCurrent/LongTermDebtNoncurrent rows; Q14 on ShortTermBorrowings is trivial (no preceding debt row). CAPEX taken from PaymentsToAcquireProductiveAssets (first available in list). No maturity ladder facts under the listed us-gaap names. Liquidity is cash only. Auto flags: Q14 debt subtotal did not match preceding rows: us-gaap:ShortTermBorrowings=757005000"
+  },
+  {
+   "id": "1274494-0001274494-26-000021",
+   "name": "First Solar, Inc.",
+   "form": "10-K",
+   "template": "general",
+   "period_end": "2025-12-31",
+   "months": 12,
+   "metrics": {
+    "total_debt": "498572000",
+    "current_debt": "215979000",
+    "liquidity": "2855363000",
+    "net_debt": "-2356791000",
+    "ebit": "1596864000",
+    "da": "529216000",
+    "ebitda": "2126080000",
+    "interest_expense": "44131000",
+    "interest_coverage": 36.18463211801228,
+    "debt_to_ebitda": 0.23450293497892835,
+    "net_debt_to_ebitda": -1.1085147313365442,
+    "current_ratio": 2.6746047871835437,
+    "cfo": "2057105000",
+    "capex": "869875000",
+    "fcf": "1187230000",
+    "fcf_to_debt": 2.3812608810763543,
+    "operating_lease_liability": "118936000",
+    "finance_lease_liability": "37827000",
+    "maturity_next_12m": "90899000",
+    "maturity_years_2_5": "282752000",
+    "maturity_after_5": null
+   },
+   "inputs_used": {
+    "total_debt": [
+     "us-gaap:DebtCurrent [c] = 215979000",
+     "us-gaap:LongTermDebtNoncurrent [n] = 282593000"
+    ],
+    "current_debt": [
+     "us-gaap:DebtCurrent = 215979000"
+    ],
+    "liquidity": [
+     "us-gaap:CashAndCashEquivalentsAtCarryingValue = 2803514000",
+     "us-gaap:AvailableForSaleSecuritiesDebtSecuritiesCurrent = 51849000"
+    ],
+    "interest_expense": [
+     "InterestExpenseNonoperating = 44131000"
+    ],
+    "ebit": [
+     "OperatingIncomeLoss = 1596864000"
+    ],
+    "da": [
+     "DepreciationAmortizationAndAccretionNet = 529216000"
+    ],
+    "cfo": [
+     "NetCashProvidedByUsedInOperatingActivities = 2057105000"
+    ],
+    "capex": [
+     "PaymentsToAcquirePropertyPlantAndEquipment = 869875000"
+    ],
+    "operating_lease_liability": [
+     "OperatingLeaseLiability = 118936000"
+    ],
+    "finance_lease_liability": [
+     "FinanceLeaseLiability = 37827000"
+    ],
+    "maturity_next_12m": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths = 90899000"
+    ],
+    "maturity_years_2_5": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo = 90950000",
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree = 91000000",
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour = 100802000"
+    ],
+    "current_ratio": [
+     "AssetsCurrent=6028832000",
+     "LiabilitiesCurrent=2254102000"
+    ]
+   },
+   "notes": "DebtCurrent is the first debt row (trivial Q14). Maturity ladder: year five and after-five facts not found under the listed names (only years 2-4 summed). DA from DepreciationAmortizationAndAccretionNet (2nd in list; first one absent). Auto flags: Q14 debt subtotal did not match preceding rows: us-gaap:DebtCurrent=215979000; maturity years 2-5 missing years: [5]"
+  },
+  {
+   "id": "798941-0000798941-26-000015",
+   "name": "FIRST CITIZENS BANCSHARES INC /DE/",
+   "form": "10-K",
+   "template": "bank",
+   "period_end": "2025-12-31",
+   "months": 12,
+   "metrics": {
+    "total_debt": null,
+    "current_debt": null,
+    "liquidity": null,
+    "net_debt": null,
+    "ebit": null,
+    "da": null,
+    "ebitda": null,
+    "interest_expense": null,
+    "interest_coverage": null,
+    "debt_to_ebitda": null,
+    "net_debt_to_ebitda": null,
+    "current_ratio": null,
+    "cfo": null,
+    "capex": null,
+    "fcf": null,
+    "fcf_to_debt": null,
+    "operating_lease_liability": null,
+    "finance_lease_liability": null,
+    "maturity_next_12m": null,
+    "maturity_years_2_5": null,
+    "maturity_after_5": null
+   },
+   "inputs_used": {},
+   "notes": "Template bank: InterestAndDividendIncomeOperating (P 2025-01-01..2025-12-31) = 11,778 million, and Deposits at I = 161,578 million >= 20% of Assets 229,698 million. All metrics null."
+  },
+  {
+   "id": "1620393-0001193125-26-077343",
+   "name": "NexPoint Residential Trust, Inc.",
+   "form": "10-K",
+   "template": "general",
+   "period_end": "2025-12-31",
+   "months": 12,
+   "metrics": {
+    "total_debt": "88102000",
+    "current_debt": "0",
+    "liquidity": "13704000",
+    "net_debt": "74398000",
+    "ebit": "27932000",
+    "da": "95752000",
+    "ebitda": "123684000",
+    "interest_expense": "60735000",
+    "interest_coverage": 0.45989956367827445,
+    "debt_to_ebitda": 0.7123152550046894,
+    "net_debt_to_ebitda": 0.6015167685391805,
+    "current_ratio": null,
+    "cfo": "83589000",
+    "capex": null,
+    "fcf": null,
+    "fcf_to_debt": null,
+    "operating_lease_liability": null,
+    "finance_lease_liability": null,
+    "maturity_next_12m": null,
+    "maturity_years_2_5": "123817000",
+    "maturity_after_5": "1469425000"
+   },
+   "inputs_used": {
+    "total_debt": [
+     "us-gaap:LineOfCredit [x] = 88102000"
+    ],
+    "current_debt": [],
+    "liquidity": [
+     "us-gaap:CashAndCashEquivalentsAtCarryingValue = 13704000"
+    ],
+    "interest_expense": [
+     "InterestExpense = 60735000"
+    ],
+    "ebit": [
+     "OperatingIncomeLoss = 27932000"
+    ],
+    "da": [
+     "DepreciationAndAmortization = 95752000"
+    ],
+    "cfo": [
+     "NetCashProvidedByUsedInOperatingActivities = 83589000"
+    ],
+    "maturity_years_2_5": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree = 123817000"
+    ],
+    "maturity_after_5": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive = 1469425000"
+    ],
+    "current_ratio": [
+     "AssetsCurrent=None",
+     "LiabilitiesCurrent=None"
+    ]
+   },
+   "notes": "Unclassified balance sheet (no AssetsCurrent/LiabilitiesCurrent), so current_ratio null, CD counts only Current-named/short-term-borrowing rows (none = 0). Literal DEBT is only the us-gaap:LineOfCredit row (88,102k); the mortgage line is the custom concept nxrt:MortgagePayablesNetDeferredFinancingCostsNet = 1,469,410k, whose local name starts with none of the custom debt prefixes, so it is NOT counted (the definitions are silent; read literally). LongTermDebt 1,593,242k appears only in a note (outside balance-sheet span). Liquidity = cash only (restricted cash not in the concept set). CAPEX concepts absent so capex/fcf/fcf_to_debt null; OL/FL not found. Q17 applies. Auto flags: maturity years 2-5 missing years: [2, 4, 5]; Q17 RealEstateInvestmentPropertyNet present"
+  },
+  {
+   "id": "1783180-0001783180-26-000008",
+   "name": "CARRIER GLOBAL CORPORATION",
+   "form": "10-K",
+   "template": "general",
+   "period_end": "2025-12-31",
+   "months": 12,
+   "metrics": {
+    "total_debt": "11833000000",
+    "current_debt": "468000000",
+    "liquidity": "1555000000",
+    "net_debt": "10278000000",
+    "ebit": "2172000000",
+    "da": "1274000000",
+    "ebitda": "3446000000",
+    "interest_expense": "458000000",
+    "interest_coverage": 4.74235807860262,
+    "debt_to_ebitda": 3.4338363319791063,
+    "net_debt_to_ebitda": 2.9825885084155543,
+    "current_ratio": 1.1994658420016868,
+    "cfo": "2513000000",
+    "capex": "392000000",
+    "fcf": "2121000000",
+    "fcf_to_debt": 0.17924448576016225,
+    "operating_lease_liability": "560000000",
+    "finance_lease_liability": null,
+    "maturity_next_12m": "108000000",
+    "maturity_years_2_5": "4274000000",
+    "maturity_after_5": "7169000000"
+   },
+   "inputs_used": {
+    "total_debt": [
+     "us-gaap:DebtCurrent [c] = 468000000",
+     "us-gaap:LongTermDebtNoncurrent [n] = 11365000000"
+    ],
+    "current_debt": [
+     "us-gaap:DebtCurrent = 468000000"
+    ],
+    "liquidity": [
+     "us-gaap:CashAndCashEquivalentsAtCarryingValue = 1555000000"
+    ],
+    "interest_expense": [
+     "InterestExpenseDebt = 458000000"
+    ],
+    "ebit": [
+     "OperatingIncomeLoss = 2172000000"
+    ],
+    "da": [
+     "DepreciationDepletionAndAmortization = 1274000000"
+    ],
+    "cfo": [
+     "NetCashProvidedByUsedInOperatingActivities = 2513000000"
+    ],
+    "capex": [
+     "PaymentsToAcquireProductiveAssets = 392000000"
+    ],
+    "operating_lease_liability": [
+     "OperatingLeaseLiability = 560000000"
+    ],
+    "maturity_next_12m": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths = 108000000"
+    ],
+    "maturity_years_2_5": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo = 1309000000",
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree = 903000000",
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour = 43000000",
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive = 2019000000"
+    ],
+    "maturity_after_5": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive = 7169000000"
+    ],
+    "current_ratio": [
+     "AssetsCurrent=8533000000",
+     "LiabilitiesCurrent=7114000000"
+    ]
+   },
+   "notes": "DebtCurrent first debt row (trivial Q14). INT from InterestExpenseDebt; CAPEX from PaymentsToAcquireProductiveAssets. Auto flags: Q14 debt subtotal did not match preceding rows: us-gaap:DebtCurrent=468000000"
+  },
+  {
+   "id": "882095-0000882095-26-000006",
+   "name": "GILEAD SCIENCES, INC.",
+   "form": "10-K",
+   "template": "general",
+   "period_end": "2025-12-31",
+   "months": 12,
+   "metrics": {
+    "total_debt": "24936000000",
+    "current_debt": "2807000000",
+    "liquidity": "7632000000",
+    "net_debt": "17304000000",
+    "ebit": "10022000000",
+    "da": "2770000000",
+    "ebitda": "12792000000",
+    "interest_expense": "1024000000",
+    "interest_coverage": 9.787109375,
+    "debt_to_ebitda": 1.949343339587242,
+    "net_debt_to_ebitda": 1.3527204502814258,
+    "current_ratio": 1.5526961821721832,
+    "cfo": "10019000000",
+    "capex": "563000000",
+    "fcf": "9456000000",
+    "fcf_to_debt": 0.37921077959576516,
+    "operating_lease_liability": "605000000",
+    "finance_lease_liability": null,
+    "maturity_next_12m": null,
+    "maturity_years_2_5": null,
+    "maturity_after_5": null
+   },
+   "inputs_used": {
+    "total_debt": [
+     "us-gaap:DebtCurrent [c] = 2807000000",
+     "us-gaap:LongTermDebtNoncurrent [n] = 22129000000"
+    ],
+    "current_debt": [
+     "us-gaap:DebtCurrent = 2807000000"
+    ],
+    "liquidity": [
+     "us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents = 7564000000",
+     "us-gaap:MarketableSecuritiesCurrent = 68000000"
+    ],
+    "interest_expense": [
+     "InterestExpenseNonoperating = 1024000000"
+    ],
+    "ebit": [
+     "OperatingIncomeLoss = 10022000000"
+    ],
+    "da": [
+     "Depreciation = 370000000",
+     "AmortizationOfIntangibleAssets = 2400000000"
+    ],
+    "cfo": [
+     "NetCashProvidedByUsedInOperatingActivities = 10019000000"
+    ],
+    "capex": [
+     "PaymentsToAcquirePropertyPlantAndEquipment = 563000000"
+    ],
+    "operating_lease_liability": [
+     "OperatingLeaseLiability = 605000000"
+    ],
+    "current_ratio": [
+     "AssetsCurrent=18342000000",
+     "LiabilitiesCurrent=11813000000"
+    ]
+   },
+   "notes": "Liquidity uses CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents (balance-sheet cash line, Q11) + MarketableSecuritiesCurrent. DebtCurrent first debt row (trivial Q14). No maturity ladder facts under listed names. DA = Depreciation + AmortizationOfIntangibleAssets. Auto flags: Q14 debt subtotal did not match preceding rows: us-gaap:DebtCurrent=2807000000; Q11 liquidity includes restricted cash concept"
+  },
+  {
+   "id": "851968-0000851968-26-000011",
+   "name": "MOHAWK INDUSTRIES, INC.",
+   "form": "10-K",
+   "template": "general",
+   "period_end": "2025-12-31",
+   "months": 12,
+   "metrics": {
+    "total_debt": "2030500000",
+    "current_debt": "289300000",
+    "liquidity": "856100000",
+    "net_debt": "1174400000",
+    "ebit": "489800000",
+    "da": "652600000",
+    "ebitda": "1142400000",
+    "interest_expense": "17800000",
+    "interest_coverage": 27.51685393258427,
+    "debt_to_ebitda": 1.7773984593837535,
+    "net_debt_to_ebitda": 1.0280112044817926,
+    "current_ratio": 2.192094338929503,
+    "cfo": "1056200000",
+    "capex": "440000000",
+    "fcf": "616200000",
+    "fcf_to_debt": 0.3034720512189116,
+    "operating_lease_liability": "426800000",
+    "finance_lease_liability": "82800000",
+    "maturity_next_12m": "289300000",
+    "maturity_years_2_5": "1738900000",
+    "maturity_after_5": "8600000"
+   },
+   "inputs_used": {
+    "total_debt": [
+     "us-gaap:LongTermDebtCurrent [c] = 289300000",
+     "us-gaap:LongTermDebtNoncurrent [n] = 1741200000"
+    ],
+    "current_debt": [
+     "us-gaap:LongTermDebtCurrent = 289300000"
+    ],
+    "liquidity": [
+     "us-gaap:CashAndCashEquivalentsAtCarryingValue = 856100000"
+    ],
+    "interest_expense": [
+     "InterestExpenseNonoperating = 17800000"
+    ],
+    "ebit": [
+     "OperatingIncomeLoss = 489800000"
+    ],
+    "da": [
+     "DepreciationDepletionAndAmortization = 652600000"
+    ],
+    "cfo": [
+     "NetCashProvidedByUsedInOperatingActivities = 1056200000"
+    ],
+    "capex": [
+     "PaymentsToAcquirePropertyPlantAndEquipment = 440000000"
+    ],
+    "operating_lease_liability": [
+     "OperatingLeaseLiability = 426800000"
+    ],
+    "finance_lease_liability": [
+     "FinanceLeaseLiability = 82800000"
+    ],
+    "maturity_next_12m": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInNextTwelveMonths = 289300000"
+    ],
+    "maturity_years_2_5": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearTwo = 607300000",
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearThree = 615800000",
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFour = 10300000",
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalInYearFive = 505500000"
+    ],
+    "maturity_after_5": [
+     "LongTermDebtMaturitiesRepaymentsOfPrincipalAfterYearFive = 8600000"
+    ],
+    "current_ratio": [
+     "AssetsCurrent=5967100000",
+     "LiabilitiesCurrent=2722100000"
+    ]
+   },
+   "notes": "No ambiguities; LongTermDebtCurrent + LongTermDebtNoncurrent."
+  },
+  {
+   "id": "1691421-0001691421-26-000016",
+   "name": "Lemonade, Inc.",
+   "form": "10-K",
+   "template": "insurer",
+   "period_end": "2025-12-31",
+   "months": 12,
+   "metrics": {
+    "total_debt": null,
+    "current_debt": null,
+    "liquidity": null,
+    "net_debt": null,
+    "ebit": null,
+    "da": null,
+    "ebitda": null,
+    "interest_expense": null,
+    "interest_coverage": null,
+    "debt_to_ebitda": null,
+    "net_debt_to_ebitda": null,
+    "current_ratio": null,
+    "cfo": null,
+    "capex": null,
+    "fcf": null,
+    "fcf_to_debt": null,
+    "operating_lease_liability": null,
+    "finance_lease_liability": null,
+    "maturity_next_12m": null,
+    "maturity_years_2_5": null,
+    "maturity_after_5": null
+   },
+   "inputs_used": {},
+   "notes": "Template insurer: PremiumsEarnedNet P = 536.3 million; PolicyholderBenefitsAndClaimsIncurredNet P = 347.0 million (triggers). All metrics null."
+  },
+  {
+   "id": "1673358-0001193125-26-341077",
+   "name": "Yum China Holdings, Inc.",
+   "form": "10-Q",
+   "template": "general",
+   "period_end": "2026-06-30",
+   "months": 6,
+   "metrics": {
+    "total_debt": "66000000",
+    "current_debt": "66000000",
+    "liquidity": "1386000000",
+    "net_debt": "-1320000000",
+    "ebit": "795000000",
+    "da": "237000000",
+    "ebitda": "1032000000",
+    "interest_expense": null,
+    "interest_coverage": null,
+    "debt_to_ebitda": null,
+    "net_debt_to_ebitda": null,
+    "current_ratio": 0.964696223316913,
+    "cfo": "976000000",
+    "capex": "271000000",
+    "fcf": "705000000",
+    "fcf_to_debt": null,
+    "operating_lease_liability": "2180000000",
+    "finance_lease_liability": "56000000",
+    "maturity_next_12m": null,
+    "maturity_years_2_5": null,
+    "maturity_after_5": null
+   },
+   "inputs_used": {
+    "total_debt": [
+     "us-gaap:ShortTermBorrowings [c] = 66000000"
+    ],
+    "current_debt": [
+     "us-gaap:ShortTermBorrowings = 66000000"
+    ],
+    "liquidity": [
+     "us-gaap:CashAndCashEquivalentsAtCarryingValue = 485000000",
+     "us-gaap:ShortTermInvestments = 901000000"
+    ],
+    "ebit": [
+     "OperatingIncomeLoss = 795000000"
+    ],
+    "da": [
+     "DepreciationDepletionAndAmortization = 237000000"
+    ],
+    "cfo": [
+     "NetCashProvidedByUsedInOperatingActivities = 976000000"
+    ],
+    "capex": [
+     "PaymentsToAcquirePropertyPlantAndEquipment = 271000000"
+    ],
+    "operating_lease_liability": [
+     "OperatingLeaseLiability = 2180000000"
+    ],
+    "finance_lease_liability": [
+     "FinanceLeaseLiability = 56000000"
+    ],
+    "current_ratio": [
+     "AssetsCurrent=2350000000",
+     "LiabilitiesCurrent=2436000000"
+    ]
+   },
+   "notes": "10-Q, YTD 6 months. INT not found: only InterestIncomeExpenseNet = +28M (net income) so interest_expense/coverage null. Debt = ShortTermBorrowings 66M only (trivial Q14, no preceding rows). Leverage and FCF/debt not computed (<12 months). No maturity ladder facts. Auto flags: Q14 debt subtotal did not match preceding rows: us-gaap:ShortTermBorrowings=66000000; Q4 only net interest InterestIncomeExpenseNet=28000000 (non-negative): INT not found; Q1 YTD flows, not annualized"
+  },
+  {
+   "id": "2012383-0001193125-26-337177",
+   "name": "BlackRock, Inc.",
+   "form": "10-Q",
+   "template": "general",
+   "period_end": "2026-06-30",
+   "months": 6,
+   "metrics": {
+    "total_debt": "12744000000",
+    "current_debt": "0",
+    "liquidity": "10492000000",
+    "net_debt": "2252000000",
+    "ebit": "5275000000",
+    "da": "765000000",
+    "ebitda": "6040000000",
+    "interest_expense": "268000000",
+    "interest_coverage": 19.682835820895523,
+    "debt_to_ebitda": null,
+    "net_debt_to_ebitda": null,
+    "current_ratio": null,
+    "cfo": "247000000",
+    "capex": "215000000",
+    "fcf": "32000000",
+    "fcf_to_debt": null,
+    "operating_lease_liability": "2224000000",
+    "finance_lease_liability": null,
+    "maturity_next_12m": null,
+    "maturity_years_2_5": null,
+    "maturity_after_5": null
+   },
+   "inputs_used": {
+    "total_debt": [
+     "us-gaap:LongTermDebt [x] = 12744000000"
+    ],
+    "current_debt": [],
+    "liquidity": [
+     "us-gaap:CashAndCashEquivalentsAtCarryingValue = 10492000000"
+    ],
+    "interest_expense": [
+     "InterestExpenseNonoperating = 268000000"
+    ],
+    "ebit": [
+     "OperatingIncomeLoss = 5275000000"
+    ],
+    "da": [
+     "DepreciationAmortizationAndAccretionNet = 765000000"
+    ],
+    "cfo": [
+     "NetCashProvidedByUsedInOperatingActivities = 247000000"
+    ],
+    "capex": [
+     "PaymentsToAcquirePropertyPlantAndEquipment = 215000000"
+    ],
+    "operating_lease_liability": [
+     "OperatingLeaseLiability = 2224000000"
+    ],
+    "current_ratio": [
+     "AssetsCurrent=None",
+     "LiabilitiesCurrent=None"
+    ]
+   },
+   "notes": "10-Q, YTD 6 months (Q1). Balance sheet unclassified: no AssetsCurrent so current_ratio null; liquidity cash-only per no-AC rule; LongTermDebt is the only debt row (12,744M, no preceding rows, so Q14 is trivial). Leverage and FCF/debt not computed (<12 months). No maturity ladder facts in a 10-Q. Auto flags: Q14 debt subtotal did not match preceding rows: us-gaap:LongTermDebt=12744000000; Q1 YTD flows, not annualized"
+  }
+ ]
+}
