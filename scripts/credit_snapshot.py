@@ -364,6 +364,8 @@ def cmd_fsds_check(args) -> int:
     per_filing, totals = [], Counter()
     for accession, entry in wanted.items():
         computed = json.loads((computed_dir / f"{entry['id']}.json").read_text(encoding="utf-8"))
+        if computed.get("error"):  # the page could not read the filing: every FSDS row of it counts as not found
+            computed = {"facts": [], "contexts": {}, "units": {}}
         result = compare_fsds(rows.get(accession, []), computed)
         totals.update(rows=result["rows"], found=result["found"], agree=result["agree"])
         per_filing.append({"id": entry["id"], "name": entry["name"], "accession": accession, "rows": result["rows"], "found": result["found"],

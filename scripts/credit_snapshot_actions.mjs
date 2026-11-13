@@ -102,7 +102,7 @@ function displayed(text) {
   return canonical(m[2], 'num-dot-decimal', scale, m[1] ? '-' : '');
 }
 async function clickCheck(page, label) {
-  const buttons = await page.$$eval('button.sn-fig[data-fact]', bs => bs.map((b, k) => ({ k, fact: b.dataset.fact, value: b.dataset.value, text: b.textContent })));
+  const buttons = await page.$$eval('button.sn-fig[data-fact]', bs => bs.map((b, k) => ({ k, fact: b.dataset.fact, value: b.dataset.value, text: b.textContent }))).then(list => list.filter(b => b.value !== undefined));
   const hiddenSpans = await page.$$eval('span.sn-fig.is-hidden', s => s.length);
   let ok = 0;
   for (const b of buttons) {

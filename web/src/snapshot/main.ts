@@ -127,12 +127,14 @@ function factButton(t: Term | Fact, s: Snapshot, label?: string): HTMLElement {
   const index = 'fact' in t ? t.fact : t.i;
   const f = state?.byIndex.get(index);
   const display = f ? f.display : ('display' in t ? t.display : false);
-  const text = label ?? amountText(t.value!, t.scale, s.meta.currency);
+  // A tag whose text this page does not parse (cue Q19) has no value: show its printed text, never format null.
+  const parsed = t.value !== null && t.value !== undefined;
+  const text = label ?? (parsed ? amountText(t.value!, t.scale, s.meta.currency) : `“${('text' in t && t.text) || '（空）'}”（未解析）`);
   if (!display) {
     const span = el('span', { class: 'sn-fig is-hidden', title: '这个标签在 ix:hidden 中，正文没有可见的单元格' }, text);
     return span;
   }
-  const b = el('button', { type: 'button', class: 'sn-fig', 'data-fact': String(index), 'data-value': t.value!, 'data-scale': String(t.scale), 'aria-label': `${text}，定位到原文` }, text);
+  const b = el('button', { type: 'button', class: 'sn-fig' + (parsed ? '' : ' is-raw'), 'data-fact': String(index), ...(parsed ? { 'data-value': t.value! } : {}), 'data-scale': String(t.scale), 'aria-label': `${text}，定位到原文` }, text);
   b.addEventListener('click', () => select(index, b));
   return b;
 }
