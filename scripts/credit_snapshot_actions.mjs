@@ -177,6 +177,8 @@ async function saveExports(page, label) {
 // ---------- modes ----------
 if (mode === 'compute' || mode === 'probe') {
   const listing = JSON.parse(readFileSync(args.list, 'utf8'));
+  // A partial probe must not read as clean: every filing the fetch step could not get is listed as a failure.
+  for (const f of listing.failures || []) fail(`not fetched: ${f.cik ?? ''}:${f.accession ?? ''}:${f.document ?? ''} ${f.name ?? ''} — ${f.reason}`);
   const results = await computeList(listing.entries, args.dir, { clicks: true, exports: mode === 'probe' });
   if (mode === 'probe') {
     const { page } = await newPage();

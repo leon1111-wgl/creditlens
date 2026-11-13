@@ -55,12 +55,15 @@ const EXT_NOT_DEBT = /Interest|Accrued|Receivable|Issuance|Discount|Premium|Fair
 const LEASE_IN_NAME = /Lease/;
 // "…NetOfUnamortizedDiscount", "…NetDeferredFinancingCostsNet" describe how a debt line is measured, not what it is.
 const NET_OF = /Net(Of)?(Unamortized|Deferred|Debt|Financing|Issuance|Original|Issue)*(Costs?|Discounts?|Premiums?|Fees)(Net)?/g;
-const extIsDebt = (local: string) => EXT_DEBT.test(local) && !EXT_NOT_DEBT.test(local.replace(NET_OF, ''));
+// def-3: a name that says the line excludes debt ("LiabilitiesOtherThanLongTermDebt…", "…ExcludingDebt"), or a generic
+// liabilities subtotal, is never borrowing-like (Boise Cascade's other-liabilities line was taken for a borrowing).
+const SAYS_NOT_DEBT = (local: string) => /OtherThan|Excluding|Excluded|Except/.test(local) || /^Liabilities/.test(local);
+const extIsDebt = (local: string) => EXT_DEBT.test(local) && !EXT_NOT_DEBT.test(local.replace(NET_OF, '')) && !SAYS_NOT_DEBT(local);
 // def-3: a us-gaap concept on the liabilities side whose standard name says borrowing is debt, listed or not
 // (Oracle's LongTermNotesAndLoans was missing from the list).
 const BORROWING_WORD = /Notes|Loan|Debt|Borrowing|CommercialPaper|LinesOfCredit|LineOfCredit|Debenture|Bond/;
 const usIsDebt = (local: string) => BORROWING_WORD.test(local) && !EXT_NOT_DEBT.test(local.replace(NET_OF, '')) && !/^(Operating|Finance|Capital)Lease/.test(local)
-  && !/Covenant|Capacity|Maximum|Minimum|Remaining|Percentage|Rate|Weighted/.test(local);
+  && !/Covenant|Capacity|Maximum|Minimum|Remaining|Percentage|Rate|Weighted/.test(local) && !SAYS_NOT_DEBT(local);
 // Axes that split a whole company into parts (segments, legal entities); instrument-level axes do not.
 const PART_AXIS = /Segment|LegalEntity|ConsolidationItems|ConsolidatedEntities|Subsidiar/;
 export const SUPPORTED_FORMS = new Set(['10-K', '10-K/A', '10-KT', '10-Q', '10-Q/A', '10-QT']);
@@ -278,15 +281,16 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     cue('Q24', `债务只按分部或其他维度标注（${dimDebt.length} 个事实，如 ${shown[0].name}），没有合并口径的合计：本页不把各部分相加，也不当作没有借款。点下面的数字查看各部分。`, shown.map(f => f.i));
   } else if (inputs.debt.value === null) cue('Q12', '没有找到债务：资产负债表上没有可识别的债务行，也没有债务合计标签，也没有按分部标注的债务。若公司确实没有借款，债务为 0；请在资产负债表上核对。', []);
   const strange = firstByConcept(inBs.filter(f => liabSide(f) && !isDebtRow(f)
-    && /Debt|Borrowing|Notes|Loan|CommercialPaper|CreditFacility|LineOfCredit|Mortgage/i.test(f.local) && !/Interest|Receivable|Asset|Securities|^(Operating|Finance|Capital)Lease/i.test(f.local)));
+    && /Debt|Borrowing|Notes|Loan|CommercialPaper|CreditFacility|LineOfCredit|Mortgage/i.test(f.local) && !/Interest|Receivable|Asset|Securities|^(Operating|Finance|Capital)Lease/i.test(f.local) && !SAYS_NOT_DEBT(f.local)));
   if (strange.length) cue('Q12', `负债一侧有名称像借款、但未计入债务的科目：${strange.map(f => f.name).join('、')}。核对它们是否是借款。`, strange.map(f => f.i));
   // def-3 guard: reasons to think the stated debt is incomplete. With any of them, net debt and every debt-based
   // multiple are withheld (Q23) and "net cash" (Q6) is never stated.
   const incomplete: string[] = [];
+  const incompleteFacts: number[] = [];
   const counted = inputs.debt.value === null ? 0 : num(inputs.debt.value);
   if (strange.length) {
     const uncounted = strange.reduce((n, f) => n + Math.abs(num(f.value!)), 0);
-    if (counted === 0 || uncounted >= 0.1 * counted) incomplete.push(`负债一侧未计入的借款类科目合计约为已计入债务的 ${counted ? Math.round(uncounted / counted * 100) + '%' : '全部'}`);
+    if (counted === 0 || uncounted >= 0.1 * counted) incompleteFacts.push(...strange.map(f => f.i)), incomplete.push(`负债一侧未计入的借款类科目合计约为已计入债务的 ${counted ? Math.round(uncounted / counted * 100) + '%' : '全部'}`);
   }
   // Q21 (def-2): a debt total tagged elsewhere (notes) that is well above the balance-sheet debt.
   if (inputs.debt.value !== null && inputs.debt.rule.startsWith('B')) {
@@ -294,6 +298,7 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
       .map(l => pick(l, 'I')).filter((x): x is Pick => x !== null).sort((a, b) => num(b.value) - num(a.value));
     if (totals.length && num(totals[0].value) > 1.1 * num(inputs.debt.value)) {
       const top = totals[0];
+      incompleteFacts.push(top.chosen.i);
       incomplete.push(`${top.chosen.local} 比资产负债表债务多 ${Math.round((num(top.value) / Math.max(num(inputs.debt.value), 1) - 1) * 100)}%`);
       cue('Q21', `附注或其他位置的债务合计（${top.chosen.name}）比资产负债表上计入的债务多 ${Math.round((num(top.value) / Math.max(num(inputs.debt.value), 1) - 1) * 100)}%：资产负债表上可能有未识别的借款行，依赖债务的倍数可能偏低。`, [top.chosen.i]);
     }
@@ -433,14 +438,14 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
 
   if (ladder && debt !== null) {
     const ladderTotal = [next12.value, years.value, after5.value].filter((x): x is string => x !== null).reduce((n, x) => n + num(x), 0);
-    if (ladderTotal > 1.25 * Math.max(num(debt), 1)) incomplete.push(`到期表本金合计比资产负债表债务多 ${Math.round((ladderTotal / Math.max(num(debt), 1) - 1) * 100)}%`);
+    if (ladderTotal > 1.25 * Math.max(num(debt), 1)) incompleteFacts.push(...[...next12.terms, ...years.terms, ...after5.terms].map(t => t.fact)), incomplete.push(`到期表本金合计比资产负债表债务多 ${Math.round((ladderTotal / Math.max(num(debt), 1) - 1) * 100)}%`);
   }
   if (incomplete.length && debt !== null) {
     for (const k of ['net_debt', 'debt_to_ebitda', 'net_debt_to_ebitda', 'fcf_to_debt', 'debt_with_leases']) {
       metrics[k] = { ...metrics[k], value: null, reason: '债务可能不完整（见 Q23），不计算' };
     }
     metrics.debt = { ...metrics.debt, reason: '可能不完整，只是已识别的部分（见 Q23）' };
-    cue('Q23', `债务可能不完整：${incomplete.join('；')}。净债务与依赖债务的倍数不计算，也不判断是否净现金；到资产负债表与债务附注核对。`, []);
+    cue('Q23', `债务可能不完整：${incomplete.join('；')}。净债务与依赖债务的倍数不计算，也不判断是否净现金；到资产负债表与债务附注核对。`, [...new Set(incompleteFacts)]);
   }
   // def-3: for a real-estate company, property acquisitions are not in the capex tags, so FCF overstates free cash.
   if (has('RealEstateInvestmentPropertyNet', 'I')) {

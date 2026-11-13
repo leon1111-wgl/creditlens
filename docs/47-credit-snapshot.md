@@ -136,6 +136,7 @@ v0.36.0（2026-11）。访客把 EDGAR 上的 10-K 或 10-Q（Inline XBRL `.htm`
 4. 资本开支加上 `PaymentsToAcquireOtherProductiveAssets`（Verizon）。
 5. 房地产公司（有 `RealEstateInvestmentPropertyNet`）：FCF 旁注明物业收购不在资本开支标签里，FCF／债务不计算。
 6. 到期表某一段没有标签时显示“未标注”。
+7. 名称表明不含债务的科目（含 `OtherThan`、`Excluding`、`Excluded`、`Except`，或以 `Liabilities` 开头的负债合计）在计入债务、Q12 扫描与 Q23 中都不算借款类（Boise Cascade 的 `bcc:LiabilitiesOtherThanLongTermDebtNoncurrentAndFinanceLeaseLiabilityNoncurrent` 曾被当作未计入的借款，误触发 Q23 并压掉了真实的净现金提示）。Q23 现在列出触发它的事实（未计入的行、附注合计或到期表各段），可点回原文。
 
 ## 预先登记的检查（在任何运行之前提交）
 

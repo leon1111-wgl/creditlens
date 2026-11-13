@@ -252,6 +252,24 @@ describe('main-session probe fixes (credit-snapshot-def-3)', () => {
     expect(s.cues.some(c => c.id === 'Q24')).toBe(false);
     expect(s.cues.some(c => c.id === 'Q12' && /债务为 0/.test(c.text))).toBe(true);
   });
+  test('a liability line that says it excludes debt is not borrowing-like (Boise Cascade case)', () => {
+    const s = snap(syntheticFiling({ extraBalanceRows: row('lsi:LiabilitiesOtherThanLongTermDebtNoncurrentAndFinanceLeaseLiabilityNoncurrent', '2,000') + row('us-gaap:LiabilitiesNoncurrentExcludingDebt', '1,000') }));
+    expect(s.cues.some(c => c.id === 'Q23')).toBe(false);
+    expect(s.cues.some(c => c.id === 'Q12' && /OtherThanLongTermDebt|ExcludingDebt/.test(c.text))).toBe(false);
+    expect(val(s, 'debt')).toBe('2250000000');
+  });
+  test('Q23 always points at the facts behind it', () => {
+    const cases = [
+      snap(withoutBsDebt(syntheticFiling({ extraBalanceRows: row('lsi:OtherBorrowingsUnderFacilities', '9,000') })).replace('<tr><td>Total current liabilities</td>', `${row('us-gaap:NotesPayableCurrent', '100')}<tr><td>Total current liabilities</td>`)),
+      snap(syntheticFiling().replace('</body>', `<p>${nfI('us-gaap:DebtInstrumentCarryingAmount', '9,000')}</p></body>`)),
+      snap(syntheticFiling().replace('>1,100</ix:nonFraction></td></tr>\n<tr><td>Total operating', '>1,100</ix:nonFraction></td></tr>\n<tr><td>Total operating').replace(/(AfterYearFive" format="ixt:num-dot-decimal" scale="6" >)1,100/, '$19,100')),
+    ];
+    for (const s of cases) {
+      const q23 = s.cues.find(c => c.id === 'Q23');
+      expect(q23).toBeDefined();
+      expect(q23!.facts.length).toBeGreaterThan(0);
+    }
+  });
   test('capex tagged as other productive assets (Verizon case) is used, and named', () => {
     const s = snap(syntheticFiling().replace('us-gaap:PaymentsToAcquirePropertyPlantAndEquipment', 'us-gaap:PaymentsToAcquireOtherProductiveAssets'));
     expect(val(s, 'capex')).toBe('600000000');
