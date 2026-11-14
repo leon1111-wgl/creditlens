@@ -254,7 +254,8 @@ export function computeSnapshot(parsed: Parsed): Snapshot {
     inputs.debt = input('debt', 'B · 资产负债表债务行', rowTerms(all.counted, all.absorbed));
     const cur = collapse(debtRows.filter(r => r.section === 'current'), true);
     inputs.current_debt = cur.counted.length ? input('current_debt', 'B · 流动负债区段', rowTerms(cur.counted, cur.absorbed))
-      : { key: 'current_debt', label: LABELS.current_debt, value: '0', rule: 'B · 流动负债区段没有债务行', terms: [] };
+      // Shown as "no current-debt line", not as an amount; the value stays 0 for cue Q9, as before.
+      : { key: 'current_debt', label: LABELS.current_debt, value: '0', rule: 'B · 流动负债区段没有债务行', terms: [], missing: '资产负债表的流动负债区段没有债务行' };
     // Absorbed rows count too: a debt-and-lease line inside a subtotal still puts finance leases in the total.
     debtUsesFinanceLeases = debtRows.some(r => WITH_FINANCE_LEASES.has(r.f.local) || (nsClass(r.f.ns) === 'ext' && LEASE_IN_NAME.test(r.f.local)));
   } else {

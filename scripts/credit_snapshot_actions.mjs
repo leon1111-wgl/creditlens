@@ -263,6 +263,13 @@ if (mode === 'check') {
     await page.click(`#snGalleryTable tr[data-gallery="${general.id}"] button.sn-open`);
     const g = await waitResult(page);
     if (!g.ok || !page.url().includes('#g=')) fail(`${label}: gallery open → ${g.text} ${page.url()}`);
+    // Changing the hash in place must load that gallery filing (0.36.1).
+    const other = gallery.entries.find(e => e.snapshot?.status === 'ok' && e.id !== general.id);
+    await resetResult(page);
+    await page.evaluate(id => { location.hash = '#g=' + encodeURIComponent(id); }, other.id);
+    const h = await waitResult(page);
+    const shown = await page.innerText('#snCompany h2');
+    if (!h.ok || shown.trim().toUpperCase() !== other.name.trim().toUpperCase()) fail(`${label}: hash change to ${other.id} shows ${JSON.stringify(shown)}`);
     const overflow = await page.evaluate(() => {
       const iw = document.documentElement.clientWidth;
       const leaves = [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > iw + 1 && ![...e.children].some(c => c.getBoundingClientRect().right > iw + 1));
