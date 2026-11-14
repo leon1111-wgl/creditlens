@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "release": "0.36.0",
+  "definitions_version": "credit-snapshot-def-1",
+  "note": "Pre-registration for the 0.36.0 credit snapshot (docs/47-credit-snapshot.md). Committed before any gallery, parser-check or held-out run. Nothing here names the gallery or held-out issuers: they are whatever these rules yield on Actions.",
+  "user_agent": "CreditLens public financial research (https://github.com/leon1111-wgl/creditlens)",
+  "user_agent_note": "No email address in committed files, workflow env or logs. Only Internet Archive is contacted; a contact address for SEC would have to come from a repository secret that only the owner can create.",
+  "min_request_interval_seconds": 1.0,
+  "source": "Latest Internet Archive capture (HTTP 200) of each SEC URL, fetched as original bytes (id_) and checked against the CDX SHA-1 digest. SEC answers this project's declared user agent with HTTP 403 from GitHub Actions and from the developer machine (probe run 43477784386, 2026-11-14), so no request goes to SEC. The HTML's own dei:EntityCentralIndexKey and dei:DocumentType must match the candidate.",
+  "dev_filings": {
+    "note": "Filings the definitions were developed on. Excluded from the held-out sample.",
+    "ciks": [320193, 789019, 21344],
+    "names": ["Apple (aapl-20250927.htm)", "Microsoft", "Coca-Cola (ko-20251231.htm)"]
+  },
+  "budget": {
+    "max_document_bytes": 25000000,
+    "visitor_file_limit_bytes": 31457280,
+    "page_load_kb_excluding_filing": 300,
+    "per_filing_download_note": "A gallery filing is fetched only when the visitor opens it, gzip-compressed; the gallery run reports each size",
+    "site_total_mb": 300
+  },
+  "gallery": {
+    "rule_id": "snapshot-gallery-2026-11",
+    "population": {
+      "description": "SEC Financial Statement Data Sets 2026q1, sub.txt: original 10-K filings of large accelerated filers with a December 31 fiscal year end and period 2025-12-31 (the population of XBRL 对照 rule b)",
+      "dataset_url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2026q1.zip",
+      "filter": {"form": "10-K", "afs": "1-LAF", "fye": "1231", "period": "20251231", "prevrpt": "0"}
+    },
+    "strata": [
+      {"id": "mining", "label": "采矿与能源开采 (SIC 1000–1499)", "sic": [1000, 1499]},
+      {"id": "construction", "label": "建筑 (SIC 1500–1799)", "sic": [1500, 1799]},
+      {"id": "manufacturing", "label": "制造 (SIC 2000–3999)", "sic": [2000, 3999]},
+      {"id": "transport_utilities", "label": "运输、通信与公用事业 (SIC 4000–4999)", "sic": [4000, 4999]},
+      {"id": "wholesale", "label": "批发 (SIC 5000–5199)", "sic": [5000, 5199]},
+      {"id": "retail", "label": "零售 (SIC 5200–5999)", "sic": [5200, 5999]},
+      {"id": "finance", "label": "金融、保险与房地产 (SIC 6000–6799)", "sic": [6000, 6799]},
+      {"id": "services", "label": "服务 (SIC 7000–8999)", "sic": [7000, 8999]}
+    ],
+    "take_per_stratum": 5,
+    "max_candidates_per_stratum": 25,
+    "exclude_ciks": [],
+    "order": {"description": "Within each stratum, ascending SHA-256 of salt + 10-digit zero-padded CIK", "salt": "creditlens-snapshot-gallery-2026-11:"},
+    "accept": {
+      "max_document_bytes": 25000000,
+      "requires": ["Internet Archive capture of the primary document", "bytes match the CDX digest", "dei:EntityCentralIndexKey equals the candidate CIK", "dei:DocumentType equals the form"],
+      "reject_reasons": ["no_archive_capture", "archive_fetch_failed", "archived_copy_not_this_filing", "too_large"]
+    },
+    "note": "Banks, insurers and investment companies are kept when the rule draws them: the page then shows that the template does not support them. Coverage is reported per stratum."
+  },
+  "heldout_b": {
+    "rule_id": "snapshot-heldout-2026-11",
+    "purpose": "Check (b): an independent model computes the snapshot metrics from the filings under docs/47 before the program runs on them.",
+    "samples": [
+      {"form": "10-K", "take": 8, "dataset_url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2026q1.zip",
+       "filter": {"form": "10-K", "afs": "1-LAF", "fye": "1231", "period": "20251231", "prevrpt": "0"}},
+      {"form": "10-Q", "take": 2, "dataset_url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2026q3.zip",
+       "filter": {"form": "10-Q", "afs": "1-LAF", "fye": "1231", "period": "20260630", "prevrpt": "0"}}
+    ],
+    "exclude": "every CIK in the committed gallery (creditlens/snapshot/gallery.json at the time of the selection run) and the dev_filings CIKs",
+    "order": {"description": "Ascending SHA-256 of salt + 10-digit zero-padded CIK, over the whole sample population (no strata)", "salt": "creditlens-snapshot-heldout-2026-11:"},
+    "accept": "Same acceptance as the gallery. The selection run only selects and fetches; it does not run the snapshot program.",
+    "max_candidates": 40
+  },
+  "checks": {
+    "a_parser": {
+      "reference": "SEC Financial Statement Data Sets num.txt rows of the same accession (adsh), from the digest-checked Internet Archive capture of the quarter's zip. SEC CompanyFacts is the reference the brief asked for, but SEC refuses this project's user agent (run 43477784386); FSDS num.txt is SEC's own per-accession extract of the same XBRL submission. It covers the face financial statements only, not the notes.",
+      "rows_compared": "num.txt rows with empty segments and empty coreg (consolidated, no dimensions), every tag (standard and company extension)",
+      "match_key": "tag local name; uom (measure local names, divide as a/b); ddate (the context end date or instant rounded to the nearest month end, as FSDS does); qtrs (0 for instants, else round(days / 91.3125))",
+      "value_rule": "Exact decimal equality after the program's scale and sign. FSDS keeps at most 4 decimal places, so program values are rounded half-even to 4 places before comparing.",
+      "measures": ["recall: FSDS rows for which the program has at least one consolidated fact with the same key", "agreement: of those rows, the share whose value equals one of the program's facts for the key", "conflicts: rows found with no equal value"],
+      "pass_bar": {"recall_all_filings": 0.995, "agreement_all_filings": 0.999, "recall_each_filing": 0.98, "note": "Every disagreement is listed with its class; the bar is judged on the first run and not re-tuned."}
+    },
+    "b_metrics": {
+      "independent_model": "Claude Sonnet (separate agent, not shown the program, its tests or its outputs), given only docs/47 section 'Definitions' and the filings' archive URLs",
+      "order": "Sonnet's results are committed before the program runs on the held-out filings. The definitions freeze in a commit before Sonnet starts.",
+      "compared": ["template status", "report period end and months", "total_debt", "current_debt", "liquidity", "net_debt", "ebit", "da", "ebitda", "interest_expense", "interest_coverage", "debt_to_ebitda", "net_debt_to_ebitda", "current_ratio", "cfo", "capex", "fcf", "fcf_to_debt", "operating_lease_liability", "finance_lease_liability", "maturity_next_12m", "maturity_years_2_5", "maturity_after_5"],
+      "tolerance": "Amounts: exact to the dollar. Ratios: absolute difference at most 0.005 after both are computed from their own amounts. Not-computed states must agree (both not computed, either reason).",
+      "report": "First run with its commit: agreement per metric and per filing, and every disagreement assigned to one class: concept choice, period or context, balance-sheet stretch position, arithmetic, sign, scale, not-computed vs value, independent reader error. No pass bar; the classes are the result."
+    },
+    "c_highlights": {
+      "where": "GitHub Actions, Playwright Chromium 1.49.1, on the built site, every committed gallery filing",
+      "test": "Click every figure link the snapshot shows. The click must mark exactly one element in the sandboxed filing view; that element must be the fact's anchor, inside the frame's viewport, and its text parsed by the fact's ixt format, times 10^scale, negated when sign is '-', must equal the displayed value (which is also parsed from the visible text with its stated unit).",
+      "pass_bar": "100% of clicks. Figures whose fact has no visible cell (ix:hidden without a -sec-ix-hidden display) are not links and are counted separately."
+    }
+  }
+}

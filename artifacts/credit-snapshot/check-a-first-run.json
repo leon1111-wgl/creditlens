@@ -1,0 +1,4205 @@
+{
+ "schema_version": 1,
+ "check": "a_parser",
+ "definitions": "credit-snapshot-def-1",
+ "config_sha256": "05a4e21192ea4485ca3978d7b6b41aa9068a155eaa093a4349fb226e1380a9ed",
+ "run": "43498565370",
+ "commit": "a931ba9b6a124b0cf5e3956841c598f03f44d03a",
+ "generated_at": "2026-11-13T20:23:50+00:00",
+ "reference": {
+  "dataset": {
+   "stored_gzip": false,
+   "original_url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2026q1.zip",
+   "capture_timestamp": "20261005001837",
+   "archive_url": "https://web.archive.org/web/20261005001837id_/https://www.sec.gov/files/dera/data/financial-statement-data-sets/2026q1.zip",
+   "capture_sha1_base32": "Z6KRF7K2ZGKBLU5R3VRSADQJMR2CDEE5",
+   "sha256": "d18c01c615da8f5cd46273b0dacaeee5b1163f4089171da0f84153a5f3c362f6",
+   "bytes": 85259424
+  },
+  "rows": "num.txt rows of each gallery accession with empty segments and coreg"
+ },
+ "totals": {
+  "rows": 11329,
+  "found": 10721,
+  "agree": 10721,
+  "recall": 0.9463324212198782,
+  "agreement": 1.0
+ },
+ "pass_bar": {
+  "recall_all_filings": 0.995,
+  "agreement_all_filings": 0.999,
+  "recall_each_filing": 0.98,
+  "note": "Every disagreement is listed with its class; the bar is judged on the first run and not re-tuned."
+ },
+ "passed": false,
+ "filings": [
+  {
+   "id": "1433270-0001104659-26-013386",
+   "name": "ANTERO RESOURCES CORPORATION",
+   "accession": "0001104659-26-013386",
+   "rows": 305,
+   "found": 291,
+   "agree": 291,
+   "recall": 0.9540983606557377,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "PreferredStockValue",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "PreferredStockValue",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "215466-0000215466-26-000004",
+   "name": "COEUR MINING, INC.",
+   "accession": "0000215466-26-000004",
+   "rows": 228,
+   "found": 220,
+   "agree": 220,
+   "recall": 0.9649122807017544,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "764065-0000764065-26-000025",
+   "name": "CLEVELAND-CLIFFS INC.",
+   "accession": "0000764065-26-000025",
+   "rows": 282,
+   "found": 260,
+   "agree": 260,
+   "recall": 0.9219858156028369,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1064728-0001064728-26-000006",
+   "name": "PEABODY ENERGY CORP",
+   "accession": "0001064728-26-000006",
+   "rows": 327,
+   "found": 313,
+   "agree": 313,
+   "recall": 0.9571865443425076,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20241231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1065059-0001628280-26-007117",
+   "name": "Centrus Energy Corp.",
+   "accession": "0001628280-26-007117",
+   "rows": 241,
+   "found": 235,
+   "agree": 235,
+   "recall": 0.975103734439834,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "822416-0000822416-26-000007",
+   "name": "PULTEGROUP, INC.",
+   "accession": "0000822416-26-000007",
+   "rows": 211,
+   "found": 200,
+   "agree": 200,
+   "recall": 0.9478672985781991,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1357615-0001357615-26-000051",
+   "name": "KBR, Inc.",
+   "accession": "0001357615-26-000051",
+   "rows": 394,
+   "found": 367,
+   "agree": 367,
+   "recall": 0.9314720812182741,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "DiscontinuedOperationIncomeLossFromDiscontinuedOperationNetOfTaxPerBasicShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "DiscontinuedOperationIncomeLossFromDiscontinuedOperationNetOfTaxPerBasicShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "DiscontinuedOperationIncomeLossFromDiscontinuedOperationNetOfTaxPerDilutedShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "DiscontinuedOperationIncomeLossFromDiscontinuedOperationNetOfTaxPerDilutedShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "DiscontinuedOperationIncomeLossFromDiscontinuedOperationNetOfTaxPerBasicShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "DiscontinuedOperationIncomeLossFromDiscontinuedOperationNetOfTaxPerDilutedShare",
+     "USD",
+     "20241231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1361538-0001104659-26-018677",
+   "name": "Primoris Services Corporation",
+   "accession": "0001104659-26-018677",
+   "rows": 301,
+   "found": 272,
+   "agree": 272,
+   "recall": 0.9036544850498339,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20250930",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20240630",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20250630",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20250331",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20250630",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20250930",
+     1
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20240630",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20240331",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20240331",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20240930",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20240930",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20250331",
+     1
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1633931-0001104659-26-020481",
+   "name": "TopBuild Corp",
+   "accession": "0001104659-26-020481",
+   "rows": 279,
+   "found": 265,
+   "agree": 265,
+   "recall": 0.9498207885304659,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "PreferredStockValue",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "PreferredStockValue",
+     "USD",
+     "20251231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "799292-0000799292-26-000006",
+   "name": "M/I HOMES, INC",
+   "accession": "0000799292-26-000006",
+   "rows": 241,
+   "found": 233,
+   "agree": 233,
+   "recall": 0.966804979253112,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1551182-0001551182-26-000007",
+   "name": "EATON CORPORATION plc",
+   "accession": "0001551182-26-000007",
+   "rows": 274,
+   "found": 262,
+   "agree": 262,
+   "recall": 0.9562043795620438,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncreaseDecreaseInOtherOperatingCapitalNet",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncreaseDecreaseInOtherOperatingCapitalNet",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncreaseDecreaseInOtherOperatingCapitalNet",
+     "USD",
+     "20251231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1534675-0001493152-26-008465",
+   "name": "TECNOGLASS INC.",
+   "accession": "0001493152-26-008465",
+   "rows": 316,
+   "found": 274,
+   "agree": 274,
+   "recall": 0.8670886075949367,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "SharePrice",
+     "USD",
+     "20231231",
+     0
+    ],
+    [
+     "LossOnExtinguishmentOfDebt",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "ComprehensiveIncomeNetOfTaxAttributableToNoncontrollingInterest",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "DerivativeGainOnDerivative",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "DerivativeGainOnDerivative",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "OtherOperatingIncomeLoss",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "OtherOperatingIncomeLoss",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PaymentsOfNonControllingInterestExpense",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "ProceedsFromSaleOfPropertyPlantAndEquipment",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "ProceedsFromSaleOfPropertyPlantAndEquipment",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "GainsLossesOnExtinguishmentOfDebt",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "NetIncomeLossAttributableToNoncontrollingInterest",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PaymentsOfFinancingCosts",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "PaymentsToAcquireBusinessesNetOfCashAcquired",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "RepaymentsOfDebt",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "AccountPayableForBusinessAcquisition",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "AccountPayableForBusinessAcquisition",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "NetIncomeLossAttributableToNoncontrollingInterest",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockValue",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "SharePrice",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "UnpaidPortionOfNoncontrollingInterestPurchase",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "ContractWithCustomerLiabilityNoncurrent",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "UnpaidPortionOfNoncontrollingInterestPurchase",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "GainsLossesOnExtinguishmentOfDebt",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "LossOnExtinguishmentOfDebt",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PaymentsOfFinancingCosts",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockValue",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "SharePrice",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "TreasuryStockValue",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "AccountsReceivableNetNoncurrent",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "ComprehensiveIncomeNetOfTaxAttributableToNoncontrollingInterest",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PaymentsToAcquireBusinessesNetOfCashAcquired",
+     "USD",
+     "20241231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "97476-0000097476-26-000059",
+   "name": "TEXAS INSTRUMENTS INCORPORATED",
+   "accession": "0000097476-26-000059",
+   "rows": 268,
+   "found": 252,
+   "agree": 252,
+   "recall": 0.9402985074626866,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1504776-0001504776-26-000006",
+   "name": "Warby Parker Inc.",
+   "accession": "0001504776-26-000006",
+   "rows": 212,
+   "found": 202,
+   "agree": 202,
+   "recall": 0.9528301886792453,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1681459-0001681459-26-000010",
+   "name": "TechnipFMC plc",
+   "accession": "0001681459-26-000010",
+   "rows": 329,
+   "found": 319,
+   "agree": 319,
+   "recall": 0.9696048632218845,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1692063-0001692063-26-000013",
+   "name": "Schneider National, Inc.",
+   "accession": "0001692063-26-000013",
+   "rows": 294,
+   "found": 285,
+   "agree": 285,
+   "recall": 0.9693877551020408,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "853816-0001193125-26-064756",
+   "name": "Landstar System, Inc.",
+   "accession": "0001193125-26-064756",
+   "rows": 255,
+   "found": 244,
+   "agree": 244,
+   "recall": 0.9568627450980393,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1632127-0001632127-26-000005",
+   "name": "Cable One, Inc.",
+   "accession": "0001632127-26-000005",
+   "rows": 270,
+   "found": 255,
+   "agree": 255,
+   "recall": 0.9444444444444444,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1842022-0001842022-26-000003",
+   "name": "DT Midstream, Inc.",
+   "accession": "0001842022-26-000003",
+   "rows": 307,
+   "found": 280,
+   "agree": 280,
+   "recall": 0.9120521172638436,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20230930",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     1
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240930",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20230331",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250630",
+     1
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240331",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240630",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250930",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20230630",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250331",
+     1
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "16875-0000016875-26-000008",
+   "name": "CANADIAN PACIFIC KANSAS CITY LTD/CN",
+   "accession": "0000016875-26-000008",
+   "rows": 291,
+   "found": 282,
+   "agree": 282,
+   "recall": 0.9690721649484536,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "CAD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "CAD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "CAD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "CAD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "CAD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "CAD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "CAD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "CAD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "CAD",
+     "20251231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1328581-0001328581-26-000006",
+   "name": "Boise Cascade Company",
+   "accession": "0001328581-26-000006",
+   "rows": 294,
+   "found": 267,
+   "agree": 267,
+   "recall": 0.9081632653061225,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250630",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     1
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240930",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20230331",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20230930",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250930",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20230630",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240331",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240630",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250331",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1286681-0001193125-26-062321",
+   "name": "Domino&#8217;s Pizza, Inc.",
+   "accession": "0001193125-26-062321",
+   "rows": 275,
+   "found": 260,
+   "agree": 260,
+   "recall": 0.9454545454545454,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1517175-0001517175-26-000005",
+   "name": "THE CHEFS&#8217; WAREHOUSE, INC.",
+   "accession": "0001517175-26-000005",
+   "rows": 234,
+   "found": 222,
+   "agree": 222,
+   "recall": 0.9487179487179487,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "40987-0000040987-26-000003",
+   "name": "GENUINE PARTS CO",
+   "accession": "0000040987-26-000003",
+   "rows": 278,
+   "found": 271,
+   "agree": 271,
+   "recall": 0.9748201438848921,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1000228-0001000228-26-000013",
+   "name": "HENRY SCHEIN, INC.",
+   "accession": "0001000228-26-000013",
+   "rows": 335,
+   "found": 323,
+   "agree": 323,
+   "recall": 0.9641791044776119,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1690820-0001690820-26-000009",
+   "name": "CARVANA CO.",
+   "accession": "0001690820-26-000009",
+   "rows": 279,
+   "found": 269,
+   "agree": 269,
+   "recall": 0.96415770609319,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1019849-0001628280-26-012830",
+   "name": "Penske Automotive Group, Inc.",
+   "accession": "0001628280-26-012830",
+   "rows": 351,
+   "found": 324,
+   "agree": 324,
+   "recall": 0.9230769230769231,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20240930",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20250331",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20250331",
+     1
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20250630",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20250930",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20240331",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20240630",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20250630",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20250930",
+     1
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1158449-0001193125-26-051305",
+   "name": "ADVANCE AUTO PARTS, INC.",
+   "accession": "0001193125-26-051305",
+   "rows": 290,
+   "found": 261,
+   "agree": 261,
+   "recall": 0.9,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockValue",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "PreferredStockValue",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "916365-0000916365-26-000014",
+   "name": "TRACTOR SUPPLY CO /DE/",
+   "accession": "0000916365-26-000014",
+   "rows": 258,
+   "found": 237,
+   "agree": 237,
+   "recall": 0.9186046511627907,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240930",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250630",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250930",
+     1
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240630",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250331",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     1
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240331",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     1
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1866581-0001866581-26-000006",
+   "name": "DUTCH BROS INC.",
+   "accession": "0001866581-26-000006",
+   "rows": 278,
+   "found": 268,
+   "agree": 268,
+   "recall": 0.9640287769784173,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1578732-0001628280-26-012419",
+   "name": "MARCUS &amp; MILLICHAP, INC.",
+   "accession": "0001628280-26-012419",
+   "rows": 314,
+   "found": 304,
+   "agree": 304,
+   "recall": 0.9681528662420382,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "2000046-0001193125-26-071486",
+   "name": "Fidelity&#174; Ethereum Fund",
+   "accession": "0001193125-26-071486",
+   "rows": 107,
+   "found": 100,
+   "agree": 100,
+   "recall": 0.9345794392523364,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "NetAssetValuePerShare",
+     "USD",
+     "20240731",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "NetAssetValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "NetAssetValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "776867-0001628280-26-012603",
+   "name": "WHITE MOUNTAINS INSURANCE GROUP, LTD.",
+   "accession": "0001628280-26-012603",
+   "rows": 284,
+   "found": 270,
+   "agree": 270,
+   "recall": 0.9507042253521126,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "726854-0000726854-26-000062",
+   "name": "CITY HOLDING COMPANY",
+   "accession": "0000726854-26-000062",
+   "rows": 383,
+   "found": 370,
+   "agree": 370,
+   "recall": 0.9660574412532638,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1690680-0001628280-26-013160",
+   "name": "NEWMARK GROUP, INC.",
+   "accession": "0001628280-26-013160",
+   "rows": 332,
+   "found": 318,
+   "agree": 318,
+   "recall": 0.9578313253012049,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareCashPaid",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "785161-0000785161-26-000081",
+   "name": "Encompass Health Corporation",
+   "accession": "0000785161-26-000081",
+   "rows": 338,
+   "found": 308,
+   "agree": 308,
+   "recall": 0.9112426035502958,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20220930",
+     1
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240930",
+     1
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250930",
+     1
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerBasicShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20240731",
+     8
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "IncomeLossFromContinuingOperationsPerDilutedShare",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20250731",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "CommonStockDividendsPerShareDeclared",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerBasicShare",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "IncomeLossFromDiscontinuedOperationsNetOfTaxPerDilutedShare",
+     "USD",
+     "20231231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1564408-0001564408-26-000013",
+   "name": "SNAP INC",
+   "accession": "0001564408-26-000013",
+   "rows": 239,
+   "found": 231,
+   "agree": 231,
+   "recall": 0.9665271966527197,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1773751-0001773751-26-000022",
+   "name": "HIMS &amp; HERS HEALTH, INC.",
+   "accession": "0001773751-26-000022",
+   "rows": 302,
+   "found": 294,
+   "agree": 294,
+   "recall": 0.9735099337748344,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1046102-0001628280-26-011682",
+   "name": "RB Global, Inc",
+   "accession": "0001628280-26-011682",
+   "rows": 304,
+   "found": 296,
+   "agree": 296,
+   "recall": 0.9736842105263158,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "CommonStockNoParValue",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommonStockNoParValue",
+     "USD",
+     "20241231",
+     0
+    ]
+   ],
+   "conflicts": []
+  },
+  {
+   "id": "1668397-0001668397-26-000006",
+   "name": "Medpace Holdings, Inc.",
+   "accession": "0001668397-26-000006",
+   "rows": 229,
+   "found": 217,
+   "agree": 217,
+   "recall": 0.9475982532751092,
+   "agreement": 1.0,
+   "missing": [
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20231231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20241231",
+     4
+    ],
+    [
+     "PreferredStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20251231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "EarningsPerShareDiluted",
+     "USD",
+     "20251231",
+     4
+    ],
+    [
+     "CommitmentsAndContingencies",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "CommonStockParOrStatedValuePerShare",
+     "USD",
+     "20241231",
+     0
+    ],
+    [
+     "EarningsPerShareBasic",
+     "USD",
+     "20231231",
+     4
+    ]
+   ],
+   "conflicts": []
+  }
+ ]
+}

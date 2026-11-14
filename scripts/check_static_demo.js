@@ -109,5 +109,29 @@ function shuffledBody(value) {
     assert(bytes < 20 * 1024 * 1024, 'Published page images must stay well under 20 MB');
   }
   for (const file of imageFiles) assert(listed.has(file), 'Unlisted image or PDF in the site: ' + file);
+  // 信用快照 gallery: every gzipped filing is listed in gallery.json with its hash, an SEC address and an accession.
+  const snapshotDir = path.join(site, 'assets/snapshot');
+  if (fs.existsSync(path.join(snapshotDir, 'gallery.json'))) {
+    const gallery = JSON.parse(fs.readFileSync(path.join(snapshotDir, 'gallery.json'), 'utf8'));
+    const listedFilings = new Set();
+    let gzBytes = 0;
+    for (const entry of gallery.entries) {
+      assert.match(entry.accession, /^\d{10}-\d{2}-\d{6}$/, entry.id + ' accession');
+      assert(entry.document_url.startsWith('https://www.sec.gov/Archives/edgar/data/'), entry.id + ' SEC address');
+      assert(entry.archive_url.startsWith('https://web.archive.org/web/'), entry.id + ' archive address');
+      const raw = fs.readFileSync(path.join(snapshotDir, entry.file));
+      assert.equal(require('node:crypto').createHash('sha256').update(raw).digest('hex'), entry.gz_sha256, entry.file);
+      assert.equal(require('node:crypto').createHash('sha256').update(require('node:zlib').gunzipSync(raw)).digest('hex'), entry.sha256, entry.file + ' content');
+      assert(entry.snapshot && entry.snapshot.status, entry.id + ' has no computed snapshot');
+      gzBytes += raw.length;
+      listedFilings.add(entry.file);
+    }
+    for (const name of fs.readdirSync(path.join(snapshotDir, 'filings'))) assert(listedFilings.has('filings/' + name), 'Unlisted gallery file: ' + name);
+    assert(gzBytes < 80 * 1024 * 1024, 'Gallery filings must stay under 80 MB compressed');
+  }
+  let siteBytes = 0;
+  const size = dir => { for (const entry of fs.readdirSync(dir, {withFileTypes: true})) { const p = path.join(dir, entry.name); if (entry.isDirectory()) size(p); else siteBytes += fs.statSync(p).size; } };
+  size(site);
+  assert(siteBytes < 300 * 1024 * 1024, 'The Pages site must stay under 300 MB');
   console.log(JSON.stringify({status: 'ok', routes: checked, pages: Object.keys(manifest.pages).length}));
 })().catch(error => { console.error(error); process.exit(1); });

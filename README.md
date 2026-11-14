@@ -7,9 +7,9 @@ Financial figures checked back to the source page.
 
 By [Leon Wang](https://leon1111-wgl.github.io/)
 
-**[在线演示](https://leon1111-wgl.github.io/creditlens/)** · [问证据](https://leon1111-wgl.github.io/creditlens/ask.html) · [XBRL 对照](https://leon1111-wgl.github.io/creditlens/grounding.html) · [代码](https://github.com/leon1111-wgl/creditlens) · [技术文档](#技术文档) · [更新记录](CHANGELOG.md) · 静态页面回放仓库中保存的结果，写入不会保存；“问证据”页在浏览器内按登记数字作答；“XBRL 对照”页展示一次 GitHub Actions 基准运行的保存结果。完整服务请按[本地运行](#本地运行)启动。项目仍在开发中。
+**[在线演示](https://leon1111-wgl.github.io/creditlens/)** · [信用快照](https://leon1111-wgl.github.io/creditlens/snapshot.html) · [问证据](https://leon1111-wgl.github.io/creditlens/ask.html) · [XBRL 对照](https://leon1111-wgl.github.io/creditlens/grounding.html) · [代码](https://github.com/leon1111-wgl/creditlens) · [技术文档](#技术文档) · [更新记录](CHANGELOG.md) · 静态页面回放仓库中保存的结果，写入不会保存；“信用快照”页在浏览器内读取访客自己拖入的 SEC 申报文件；“问证据”页在浏览器内按登记数字作答；“XBRL 对照”页展示一次 GitHub Actions 基准运行的保存结果。完整服务请按[本地运行](#本地运行)启动。项目仍在开发中。
 
-**关键词 / Keywords**：财报核查 · 表格取数 table lookup · OCR / Document AI · Inline XBRL grounding benchmark · 单位与口径可比性检查 · 原文页码与定位证据 provenance · 毛利率与现金流分解 · 研究底稿复核 · FastAPI · Decimal
+**关键词 / Keywords**：财报核查 · 信用快照 credit snapshot（杠杆、利息覆盖、流动性、到期结构）· click-to-source · 表格取数 table lookup · OCR / Document AI · Inline XBRL grounding benchmark · 单位与口径可比性检查 · 原文页码与定位证据 provenance · 毛利率与现金流分解 · 研究底稿复核 · FastAPI · Decimal
 
 CreditLens 面向投研和风险分析中的财报核查：查到指标并回到原文，检查数字是否可比，整理经营变化的依据。数字、计算、公司解释和待验证假设分别保存，研究底稿可以修订、复核和导出。
 
@@ -17,6 +17,7 @@ CreditLens 面向投研和风险分析中的财报核查：查到指标并回到
 
 | 任务 | 工作台提供的内容 |
 |---|---|
+| 信用快照 | 拖入任意 SEC 10-K／10-Q（Inline XBRL），浏览器内算债务／EBITDA、利息覆盖、流动性、自由现金流、到期结构与租赁负债，每个数字附公式与输入，点击即在隔离的申报文件视图中高亮那一格；导出备忘录（Markdown、Word）与 CSV；40 家画廊按预先提交的规则选出；银行、保险模板不支持 |
 | 问证据 | 输入问题，浏览器内读成公司、指标、财年、单位与口径，按登记数字作答并给出页码、定位框、单位和核对结果；读不懂或未登记时说明缺什么 |
 | XBRL 对照 | 项目未用过的发行人 10-K 报表页只用图像 OCR 取数，与发行人自己的 Inline XBRL 标签逐项对照；绿／琥珀／红框标出一致、未作答、冲突，点选看概念与上下文 |
 | 查指标与原文 | 按行名和年份寻找金额，保留文字、页码及定位证据；同名行可明确选择 |
@@ -26,7 +27,7 @@ CreditLens 面向投研和风险分析中的财报核查：查到指标并回到
 | 研究交接 | 记录采用理由、固定提交版本、独立复核或退回；保存不确定时按原请求恢复 |
 | 比较文档方法 | 并排查看整行、词级和按证据用途取数，检查失败原因并导出结果 |
 
-当前运行材料以微软、苹果的历史披露为主，文档实验另有 AMD、NVIDIA 案例；XBRL 对照另用按预先提交的规则选出、项目从未用过的 6 家发行人。OCR 已在 CPU 上运行；页面展示保存的实验结果。问答使用封闭词表与确定性规则，不是模型；通用多模态问答、自动公告更新和预测模型尚未实现。
+当前运行材料以微软、苹果的历史披露为主，文档实验另有 AMD、NVIDIA 案例；XBRL 对照另用按预先提交的规则选出、项目从未用过的 6 家发行人；信用快照读访客自己的文件，画廊为按规则从 8 个行业层选出的 40 家。OCR 已在 CPU 上运行；页面展示保存的实验结果。问答使用封闭词表与确定性规则，不是模型；通用多模态问答、自动公告更新和预测模型尚未实现。
 
 <details>
 <summary>查看工作台</summary>
@@ -59,6 +60,7 @@ python -m venv .venv
 macOS / Linux 使用 `.venv/bin/python`。工作台使用仓库内的小型财务事实包，当前功能无需 GPU 或模型密钥。
 
 - [介绍页](http://127.0.0.1:8765/intro)：工作台概览与核查路线。
+- [信用快照](http://127.0.0.1:8765/snapshot)：拖入 10-K／10-Q 的 .htm，计算信用指标并点回原格。
 - [问证据](http://127.0.0.1:8765/ask)：输入问题，按登记数字作答。
 - [研究任务](http://127.0.0.1:8765/tasks)：建立任务、核对材料、记录理由、提交与复核。
 - [表格取数](http://127.0.0.1:8765/table-lookup)：选择实验和样例，查看金额、原文位置与单位。
@@ -114,6 +116,7 @@ python scripts/evaluate_unit_applicability.py --verify-saved
 ## 技术文档
 
 - [项目用途与技术实现](docs/12-project-story-and-technology.md)
+- [信用快照：定义、预先登记的检查与结果](docs/47-credit-snapshot.md)
 - [截图核对评测（未上线）](docs/46-table-check.md)、[XBRL 对照基准](docs/45-xbrl-grounding.md)、[页内问证据](docs/44-browser-answers.md)与[前沿调研](docs/FRONTIER_REVIEW.md)
 - [三类研究任务的验收标准](docs/24-research-task-acceptance.md)
 - [现金流分解](docs/21-cash-flow-bridge.md)、[毛利率分解](docs/35-gross-margin-bridge.md)与[公司说明核对](docs/36-margin-company-statements.md)
