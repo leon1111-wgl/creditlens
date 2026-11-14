@@ -270,6 +270,12 @@ describe('main-session probe fixes (credit-snapshot-def-3)', () => {
       expect(q23!.facts.length).toBeGreaterThan(0);
     }
   });
+  test('no current-debt line is shown as not found, not as 0 (Boise Cascade display)', () => {
+    const html = syntheticFiling().replace(/<tr><td>Commercial paper<\/td>.*?<\/tr>|<tr><td>Current portion of long-term debt<\/td>.*?<\/tr>|<tr><td>Total short-term debt<\/td>.*?<\/tr>/gs, '');
+    const s = snap(html);
+    expect(s.inputs.current_debt.terms).toHaveLength(0);
+    expect(s.inputs.current_debt.missing).toMatch(/没有债务行/);
+  });
   test('capex tagged as other productive assets (Verizon case) is used, and named', () => {
     const s = snap(syntheticFiling().replace('us-gaap:PaymentsToAcquirePropertyPlantAndEquipment', 'us-gaap:PaymentsToAcquireOtherProductiveAssets'));
     expect(val(s, 'capex')).toBe('600000000');

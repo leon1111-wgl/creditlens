@@ -7,6 +7,7 @@ import { computeSnapshot, type Input, type Metric, type Snapshot, type Term } fr
 import { sanitize, serialize } from './sanitize';
 import { amountText, inScale, unitWord } from './format';
 import { anchorOf, exportBaseName, memoDocx, memoMarkdown, metricText, snapshotCsv, type SourceInfo } from './export';
+import { galleryNote, type GalleryIndex } from './gallery';
 
 declare const __APP_VERSION__: string;
 const APP_VERSION = typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : 'dev';
@@ -176,7 +177,7 @@ function inputBlock(input: Input | undefined, s: Snapshot, title?: string, missi
   if (!input) return box;
   const head = el('div', { class: 'sn-ihead' });
   head.append(el('span', {}, title || input.label));
-  head.append(el('strong', {}, input.value === null ? missingText : amountText(input.value, s.meta.display_scale, s.meta.currency)));
+  head.append(el('strong', {}, input.value === null ? missingText : !input.terms.length && input.missing ? '无此行' : amountText(input.value, s.meta.display_scale, s.meta.currency)));
   box.append(head, termList(input, s));
   return box;
 }
@@ -450,6 +451,15 @@ function galleryTable(g: Gallery): HTMLElement {
   return wrap;
 }
 
+/** #g=<id> opens that gallery filing, on load and whenever the hash changes in place. */
+function openFromHash() {
+  const want = /#g=([^&]+)/.exec(location.hash);
+  if (!want || !gallery) return;
+  const e = gallery.entries.find(x => x.id === decodeURIComponent(want[1]));
+  if (e && state?.source.sha256 !== e.sha256) openGallery(e);
+}
+addEventListener('hashchange', openFromHash);
+
 async function loadGallery() {
   const box = $('snGalleryTable');
   try {
@@ -457,10 +467,8 @@ async function loadGallery() {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     gallery = await r.json() as Gallery;
     box.replaceChildren(galleryTable(gallery));
-    const supported = gallery.entries.filter(e => e.snapshot?.status === 'ok').length;
-    $('snGalleryNote').textContent = `${gallery.entries.length} 家，按预先提交的规则（${gallery.rule_id}）从 8 个行业层各取 5 家；${supported} 家可计算，${gallery.entries.length - supported} 家为不支持的模板。表中数字是同一程序在 GitHub Actions 上对这些文件的计算结果（运行 ${gallery.run}），打开后在你的浏览器里重新计算。`;
-    const want = /#g=([^&]+)/.exec(location.hash);
-    if (want) { const e = gallery.entries.find(x => x.id === decodeURIComponent(want[1])); if (e) openGallery(e); }
+    $('snGalleryNote').textContent = galleryNote(gallery as unknown as GalleryIndex);
+    openFromHash();
   } catch (error) {
     box.replaceChildren(el('p', { class: 'sn-missing' }, '画廊暂不可用（' + (error as Error).message + '）。拖入文件的功能不受影响。'));
   }

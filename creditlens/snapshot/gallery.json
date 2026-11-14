@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "rule_id": "snapshot-gallery-2026-11",
- "definitions": "credit-snapshot-def-1",
+ "definitions": "credit-snapshot-def-3",
  "config_sha256": "8671507f5de8e6d2ae0dfa43a0bb800f072ef2a8cd7f1d7ca2dd710be496c303",
  "run": "43483808334",
  "commit": "6e5c795ae8624dfa4e78dea082db4a724b97ab33",
@@ -1894,8 +1894,10 @@
  ],
  "computed_by": {
   "engine": "creditlens/snapshot.js in Playwright Chromium 1.49.1",
+  "definitions": "credit-snapshot-def-3",
   "run": "43529092291",
   "commit": "05bd3aa0629927557271db2ab99235e71dae7949",
   "generated_at": "2026-11-13T23:47:36+00:00"
- }
+ },
+ "definitions_at_selection": "credit-snapshot-def-1"
 }

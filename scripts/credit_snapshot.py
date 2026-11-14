@@ -282,7 +282,13 @@ def cmd_merge(args) -> int:
         entry["snapshot"] = summary_of(result["snapshot"])
         entry["name"] = result["snapshot"]["meta"]["registrant"] or entry["name"]
         entry["ticker"] = result["snapshot"]["meta"]["ticker"] or entry.get("ticker")
-    index["computed_by"] = {"engine": "creditlens/snapshot.js in Playwright Chromium 1.49.1", **run_info()}
+    versions = {json.loads((computed / f"{e['id']}.json").read_text(encoding="utf-8"))["snapshot"]["definitions"] for e in index["entries"]}
+    if len(versions) != 1:
+        raise SystemExit(f"gallery computed under mixed definitions: {sorted(versions)}")
+    if index.get("definitions") and "definitions_at_selection" not in index:
+        index["definitions_at_selection"] = index["definitions"]
+    index["definitions"] = versions.pop()
+    index["computed_by"] = {"engine": "creditlens/snapshot.js in Playwright Chromium 1.49.1", "definitions": index["definitions"], **run_info()}
     index_path.write_text(json.dumps(index, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return 0
 
